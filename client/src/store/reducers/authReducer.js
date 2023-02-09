@@ -1,5 +1,5 @@
 const initState = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     token: null
 }
 
