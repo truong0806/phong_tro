@@ -10,12 +10,15 @@ const Button = ({
   IcBeforSize,
   IcAfterSize,
   ColorIcon,
-  onClick
+  onClick,
+  width,
+  height,
+  margin
 }) => {
   return (
     <button
       type="button"
-      className={`py-2 px-2 ${bgcolor} ${textColor} ${fontW} outline-none rounded-md hover:underline flex items-center justify-center gap-1`}
+      className={`py-2 px-2 ${margin} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md hover:underline flex items-center justify-center gap-1`}
       onClick={onClick}
     >
       <span>{IcBefor && <IcBefor size={IcBeforSize} />}</span>
