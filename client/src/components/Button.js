@@ -1,14 +1,28 @@
-import React from "react";
+import React, { memo } from "react";
 
-const Button = ({ text, bgcolor, textColor }) => {
+const Button = ({
+  text,
+  bgcolor,
+  textColor,
+  IcBefor,
+  IcAfter,
+  fontW,
+  IcBeforSize,
+  IcAfterSize,
+  ColorIcon,
+  onClick
+}) => {
   return (
     <button
       type="button"
-      className={`py-2 px-4 ${bgcolor} ${textColor} outline-none rounded-md justify-between hover:underline`}
+      className={`py-2 px-2 ${bgcolor} ${textColor} ${fontW} outline-none rounded-md hover:underline flex items-center justify-center gap-1`}
+      onClick={onClick}
     >
-      {text}
+      <span>{IcBefor && <IcBefor size={IcBeforSize} />}</span>
+      <span>{text}</span>
+      <span>{IcAfter && <IcAfter size={IcAfterSize} color={ColorIcon} />}</span>
     </button>
   );
 };
 
-export default Button;
+export default memo(Button);
