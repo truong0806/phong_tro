@@ -18,6 +18,9 @@ module.exports = {
         600: "600px",
       },
     },
+    fontFamily: {
+      sans: ["Helvetica", "Arial", "sans-serif"],
+    },
   },
   plugins: [],
 };

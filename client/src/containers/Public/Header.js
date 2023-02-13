@@ -29,7 +29,7 @@ const Header = () => {
       />
       <div className="flex items-center gap-1">
         <Button
-          fontW={"font-normal"}
+          fontW={"font-normal text-[14px] h-[40px]"}
           IcBefor={AiOutlineHeart}
           text={"Yêu thích"}
           textColor="text-black"
@@ -37,7 +37,7 @@ const Header = () => {
           IcBeforSize="20"
         />
         <Button
-          fontW={"font-normal"}
+          fontW={"font-normal text-[14px] h-[40px]"}
           IcBefor={BiLogIn}
           text={"Đăng nhập"}
           textColor="text-black"
@@ -46,7 +46,7 @@ const Header = () => {
           onClick={goLogin}
         />
         <Button
-          fontW={"font-normal"}
+          fontW={"font-normal text-[14px] h-[40px]"}
           IcBefor={AiOutlineUserAdd}
           text={"Đăng ký"}
           textColor="text-black"
@@ -55,6 +55,7 @@ const Header = () => {
           onClick={goRegister}
         />
         <Button
+          width={"w-[125px] text-[14px] h-[40px]"}
           text={"Đăng tin mới"}
           textColor="text-white"
           bgcolor="bg-secondary2"
