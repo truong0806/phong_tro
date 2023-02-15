@@ -17,6 +17,9 @@ module.exports = {
       MaxWidth: {
         600: "600px",
       },
+      backgroundImage: {
+        "support-bg": "url('/src/assets/support-bg.jpg')",
+      },
     },
     fontFamily: {
       sans: ["Helvetica", "Arial", "sans-serif"],

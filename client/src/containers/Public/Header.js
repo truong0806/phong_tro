@@ -20,14 +20,14 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="w-1100 h-70 flex items-center justify-between">
+    <div className="w-1100 h-70 flex items-center justify-between ">
       <img
-        className="w-[240px] h-[70px] object-contain"
+        className="cursor-pointer  w-[240px] h-[70px] object-contain"
         src={logo}
         alt="logo"
         onClick={goHome}
       />
-      <div className="flex items-center gap-1">
+      <div className="cursor-pointer  flex items-center gap-1">
         <Button
           fontW={"font-normal text-[14px] h-[40px]"}
           IcBefor={AiOutlineHeart}
@@ -55,7 +55,7 @@ const Header = () => {
           onClick={goRegister}
         />
         <Button
-          width={"w-[125px] text-[14px] h-[40px]"}
+          width={"w-auto text-[14px] h-[40px] "}
           text={"Đăng tin mới"}
           textColor="text-white"
           bgcolor="bg-secondary2"

@@ -65,7 +65,9 @@ const WhyUs = () => {
         </p>
         <div className="justify-center items-center flex">
           <Button
-            fontW={"font-normal text-[14px] h-[40px] font-[700] flex center justify-center items-center"}
+            fontW={
+              "py-[10px] px-[30px] font-normal text-[14px] h-[40px] font-[700] flex center justify-center items-center"
+            }
             text={"Đăng tin ngay"}
             textColor="text-white"
             bgcolor="bg-[#f73859]"

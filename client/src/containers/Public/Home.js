@@ -1,15 +1,16 @@
 import React from "react";
-import Header from "./Header";
-import WhyUs from "./WhyUs";
+import { Header, Navigation, WhyUs, Support } from "./";
 import { Outlet } from "react-router-dom";
 const Home = () => {
   return (
-    <div className="w-1100 h-full mx-[72px] ">
+    <div className="w-full flex flex-col items-center h-full border">
       <Header />
-      <div className="w-full flex flex-col items-center ">
+      <Navigation />
+      <div className="mt-[7px] w-1100 flex flex-col items-center ">
         <Outlet />
       </div>
       <WhyUs />
+      <Support />
     </div>
   );
 };
