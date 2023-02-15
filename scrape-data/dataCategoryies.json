@@ -1,0 +1,27 @@
+[
+  { "category": "Trang chủ", "link": "https://phongtro123.com" },
+  {
+    "category": "Cho thuê phòng trọ",
+    "link": "https://phongtro123.com/cho-thue-phong-tro"
+  },
+  {
+    "category": "Nhà cho thuê",
+    "link": "https://phongtro123.com/nha-cho-thue"
+  },
+  {
+    "category": "Cho thuê căn hộ",
+    "link": "https://phongtro123.com/cho-thue-can-ho"
+  },
+  {
+    "category": "Cho thuê mặt bằng",
+    "link": "https://phongtro123.com/cho-thue-mat-bang"
+  },
+  {
+    "category": "Tìm người ở ghép",
+    "link": "https://phongtro123.com/tim-nguoi-o-ghep"
+  },
+  { "category": "Blog", "link": "/blog.html" },
+  { "category": "Hướng dẫn", "link": "/huong-dan-su-dung" },
+  { "category": "Nạp tiền", "link": "/nap-tien-vao-tai-khoan" },
+  { "category": "Bảng giá", "link": "/bang-gia-dich-vu" }
+]
