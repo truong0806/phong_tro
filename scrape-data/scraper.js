@@ -67,36 +67,43 @@ const scraper = (browser, url) =>
           return detailLinks;
         }
       );
-      //console.log(detailLinks);
+      console.log(detailLinks);
 
-      const scraperDetails = async (link) =>
+      const scraperDetail = async (link) =>
         new Promise(async (resolve, reject) => {
           try {
             let pageDetail = await browser.newPage();
+            console.log("Opening browser get link detail... ");
             await pageDetail.goto(link);
-            console.log("Loading:" + link + "...");
+            console.log("Opening link... " + link);
             await pageDetail.waitForSelector("#main");
+            console.log("Loading complete website...");
 
             //Scape Data
             //Image
             const detailData = {};
             const images = await pageDetail.$$eval(
-              "#left-col > article > div > div > div.swiper-wrapper > div.swiper-slide",
+              "#left-col > article > div.post-images > div > div.swiper-wrapper > div.swiper-slide",
               (els) => {
-                image = els.map((el) => {
-                  return el.querySelector("img").src;
+                images = els.map((el) => {
+                  return el.querySelector("img").getAttribute("src");
                 });
-                return image;
+                return images;
               }
             );
+
+            //console.log(detailData);
             detailData.images = images;
+
             //Header
-            const header = await pageDetail.$$eval(
-              "#left-col > article > header.page-header",
+            const header = await pageDetail.$eval(
+              "header.page-header",
               (el) => {
                 return {
                   title: el.querySelector("h1 > a").innerText,
-                  star: el.querySelector("h1.page-h1 > span.star").className,
+                  star: el
+                    .querySelector("h1.page-h1 > span.star")
+                    .className.slice(-1),
                   class: {
                     content: el.querySelector("p").innerText,
                     classType: el.querySelector("p > a > strong").innerText,
@@ -107,7 +114,7 @@ const scraper = (browser, url) =>
                       "div.post-attributes > .price > span"
                     ).innerText,
                     creage: el.querySelector(
-                      "div.post-attributes > .creage > span"
+                      "div.post-attributes > .acreage > span"
                     ).innerText,
                     published: el.querySelector(
                       "div.post-attributes > .published > span"
@@ -119,8 +126,22 @@ const scraper = (browser, url) =>
                 };
               }
             );
+            //post main content
+            const mainContent = {};
+            const postMainContentHeader = await pageDetail.$eval(
+              "#left-col > article.the-post > section.post-main-content",
+              (el) => el.querySelector("div.section-header > h2").innerText
+            );
+            const postmainContent = await pageDetail.$$eval(
+              "#left-col > article.the-post >section.post-main-content > div.section-content > p",
+              (els) => els.map((el) => el.innerText)
+            );
+            console.log(postMainContentHeader);
+            console.log(postmainContent);
+            //console.log(header);
+            detailData.header = header;
 
-            console.log(header);
+            //console.log(detailData);
 
             await pageDetail.close();
             console.log("Closed browser...");
@@ -130,8 +151,16 @@ const scraper = (browser, url) =>
             reject(error);
           }
         });
-      for (let link of detailLinks) {
-        await scraperDetails(link);
+      linkLinkHaveVideo = [
+        "https://phongtro123.com/chung-cu-mini-moi-ngo-245-dinh-cong-pr616067.html",
+        "https://phongtro123.com/phong-tro-gia-re-quan-3-ngay-cau-le-van-sy-ngay-cho-pr615952.html",
+        "https://phongtro123.com/cho-thue-nha-tro-cao-cap-nhat-quang-0888992345-pr310132.html",
+        "https://phongtro123.com/phong-thue-rieng-chung-cu-era-town-quan-7-pr609404.html",
+      ];
+      for (let link of detailLinks.filter(
+        (value) => !linkLinkHaveVideo.includes(value)
+      )) {
+        await scraperDetail(link);
       }
 
       await browser.close();
