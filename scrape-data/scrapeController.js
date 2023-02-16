@@ -6,7 +6,6 @@ const scrapeController = async (browserInstance) => {
   try {
     let browser = await browserInstance;
     const categories = await scrapers.scrapeCategory(browser, url);
-    const scrapeData = {};
     const selectedCategories = categories.filter((category, index) =>
       indexs.some((i) => i === index)
     );
