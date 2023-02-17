@@ -1,4 +1,4 @@
-var fs = require("fs");
+
 
 const scrapeCategory = (browser, url) =>
   new Promise(async (resolve, reject) => {
@@ -22,14 +22,7 @@ const scrapeCategory = (browser, url) =>
           return dataCategories;
         }
       );
-      //console.log("Write categories to file...");
-      // const data = JSON.stringify(dataCategories);
-      // await page.close();
-      // fs.writeFile("dataCategoryies.json", data, function (err) {
-      //   if (err) {
-      //     console.log(err);
-      //   }
-      // });
+
       resolve(dataCategories);
     } catch (error) {
       console.log("Error in scaper.js: " + error);
@@ -86,9 +79,9 @@ const scraper = (browser, url) =>
               "#left-col > article > div.post-images > div > div.swiper-wrapper > div.swiper-slide",
               (els) => {
                 images = els.map((el) => {
-                  return el.querySelector("img").getAttribute("src");
+                  return el.querySelector("img")?.src;
                 });
-                return images;
+                return images.filter(i => !i === false);
               }
             );
 
@@ -102,8 +95,7 @@ const scraper = (browser, url) =>
                 return {
                   title: el.querySelector("h1 > a").innerText,
                   star: el
-                    .querySelector("h1.page-h1 > span.star")
-                    .className.slice(-1),
+                    .querySelector("h1.page-h1 > span")?.className?.slice(-1),
                   class: {
                     content: el.querySelector("p").innerText,
                     classType: el.querySelector("p > a > strong").innerText,
@@ -173,10 +165,10 @@ const scraper = (browser, url) =>
               header: contactHeader,
               content: contactContentValue,
             };
-            console.log(detailData.overview);
+            //console.log(detailData.overview);
 
             await pageDetail.close();
-            resolve();
+            resolve(detailData);
           } catch (error) {
             console.log("Error in scraperDetails: " + error);
             reject(error);
@@ -188,18 +180,15 @@ const scraper = (browser, url) =>
         "https://phongtro123.com/cho-thue-nha-tro-cao-cap-nhat-quang-0888992345-pr310132.html",
         "https://phongtro123.com/phong-thue-rieng-chung-cu-era-town-quan-7-pr609404.html",
         "https://phongtro123.com/phong-cho-thue-du-moi-tien-nghi-gio-giac-tu-do-ngay-cong-vien-hoang-van-thu-quan-tan-binh-pr314706.html",
+        "https://phongtro123.com/can-ho-mini-co-ban-cong-o-222-pham-van-dong-pr616486.html", "https://phongtro123.com/ky-tuc-xa-sach-se-trung-tam-binh-thanh-pr611480.html"
       ];
       const details = []
-      for (let link of detailLinks.filter(
-        (value) => !linkLinkHaveVideo.includes(value)
-      )) {
+      for (let link of detailLinks) {
         const detail = await scraperDetail(link);
         details.push(detail)
       }
       scrapeData.body = details
-      await browser.close();
-      console.log("Closed browser...");
-      resolve();
+      resolve(scrapeData);
     } catch (error) {
       console.log("Error in scaper.js: " + error);
       reject(error);
