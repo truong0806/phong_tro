@@ -9,7 +9,7 @@ const scrapeController = async (browserInstance) => {
     const selectedCategories = categories.filter((category, index) =>
       indexs.some((i) => i === index)
     );
-    await scrapers.scraper(browser, selectedCategories[0].link);
+    let result = await scrapers.scraper(browser, selectedCategories[0].link);
   } catch (error) {
     console.log("Error in controller: " + error);
   }

@@ -67,7 +67,7 @@ const scraper = (browser, url) =>
           return detailLinks;
         }
       );
-      console.log(detailLinks);
+      //console.log(detailLinks);
 
       const scraperDetail = async (link) =>
         new Promise(async (resolve, reject) => {
@@ -127,7 +127,6 @@ const scraper = (browser, url) =>
               }
             );
             //post main content
-            const mainContent = {};
             const postMainContentHeader = await pageDetail.$eval(
               "#left-col > article.the-post > section.post-main-content",
               (el) => el.querySelector("div.section-header > h2").innerText
@@ -136,15 +135,47 @@ const scraper = (browser, url) =>
               "#left-col > article.the-post >section.post-main-content > div.section-content > p",
               (els) => els.map((el) => el.innerText)
             );
-            console.log(postMainContentHeader);
-            console.log(postmainContent);
             //console.log(header);
-            detailData.header = header;
+            detailData.mainContent = {
+              header: postMainContentHeader,
+              content: postmainContent,
+            };
+            //Đặc điểm tin đăng
+            const postOverviewHeader = await pageDetail.$eval(
+              "#left-col > article.the-post > section.post-overview",
+              (el) => el.querySelector("div.section-header > h3").innerText
+            );
+            const postOverviewContentValue = await pageDetail.$$eval(
+              "#left-col > article.the-post >section.post-overview > div.section-content > table > tbody > tr ",
+              (els) => els.map((el) => ({
+                name: el.querySelector("td:first-child").innerText,
+                value: el.querySelector("td:last-child").innerText
+              }))
+            );
+            detailData.overview = {
+              header: postOverviewHeader,
+              content: postOverviewContentValue,
+            };
 
-            //console.log(detailData);
+            //Thông tin liên hệ
+            const contactHeader = await pageDetail.$eval(
+              "#left-col > article.the-post > section.post-contact",
+              (el) => el.querySelector("div.section-header > h3").innerText
+            );
+            const contactContentValue = await pageDetail.$$eval(
+              "#left-col > article.the-post >section.post-contact > div.section-content > table > tbody > tr ",
+              (els) => els.map((el) => ({
+                name: el.querySelector("td:first-child").innerText,
+                value: el.querySelector("td:last-child").innerText
+              }))
+            );
+            detailData.contact = {
+              header: contactHeader,
+              content: contactContentValue,
+            };
+            console.log(detailData.overview);
 
             await pageDetail.close();
-            console.log("Closed browser...");
             resolve();
           } catch (error) {
             console.log("Error in scraperDetails: " + error);
@@ -156,13 +187,16 @@ const scraper = (browser, url) =>
         "https://phongtro123.com/phong-tro-gia-re-quan-3-ngay-cau-le-van-sy-ngay-cho-pr615952.html",
         "https://phongtro123.com/cho-thue-nha-tro-cao-cap-nhat-quang-0888992345-pr310132.html",
         "https://phongtro123.com/phong-thue-rieng-chung-cu-era-town-quan-7-pr609404.html",
+        "https://phongtro123.com/phong-cho-thue-du-moi-tien-nghi-gio-giac-tu-do-ngay-cong-vien-hoang-van-thu-quan-tan-binh-pr314706.html",
       ];
+      const details = []
       for (let link of detailLinks.filter(
         (value) => !linkLinkHaveVideo.includes(value)
       )) {
-        await scraperDetail(link);
+        const detail = await scraperDetail(link);
+        details.push(detail)
       }
-
+      scrapeData.body = details
       await browser.close();
       console.log("Closed browser...");
       resolve();
