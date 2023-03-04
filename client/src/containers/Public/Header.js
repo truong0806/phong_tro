@@ -9,11 +9,8 @@ const { AiOutlineHeart, BiLogIn, AiOutlineUserAdd, AiOutlinePlusCircle } =
 
 const Header = () => {
   const navigate = useNavigate();
-  const goLogin = useCallback(() => {
-    navigate(path.LOGIN);
-  }, []);
-  const goRegister = useCallback(() => {
-    navigate(path.REGISTER);
+  const goAuth = useCallback((flag) => {
+    navigate(path.AUTH, { state: { flag } });
   }, []);
   const goHome = useCallback(() => {
     navigate(path.HOME);
@@ -43,7 +40,7 @@ const Header = () => {
           textColor="text-black"
           bgcolor="bg-[#f5f5f5]"
           IcBeforSize="20"
-          onClick={goLogin}
+          onClick={() => { goAuth(false) }}
         />
         <Button
           fontW={"font-normal text-[14px] h-[40px]"}
@@ -52,7 +49,7 @@ const Header = () => {
           textColor="text-black"
           bgcolor="bg-[#f5f5f5]"
           IcBeforSize="20"
-          onClick={goRegister}
+          onClick={() => { goAuth(true) }}
         />
         <Button
           width={"w-auto text-[14px] h-[40px] "}

@@ -13,13 +13,14 @@ const Button = ({
   onClick,
   width,
   height,
-  margin
+  margin,
 }) => {
   return (
     <button
       type="button"
-      className={`py-2 px-2 ${margin} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md hover:underline flex items-center justify-center gap-1`}
+      className={`py-[20px] px-2 ${margin} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md hover:underline flex items-center justify-center gap-1`}
       onClick={onClick}
+
     >
       <span>{IcBefor && <IcBefor size={IcBeforSize} />}</span>
       <span>{text}</span>
