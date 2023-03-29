@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import star5 from "../../assets/5star.png";
 import { Button } from "../../components";

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback } from "react";
 import logo from "../../assets/logoWithoutBg.png";
 import { Button } from "../../components";

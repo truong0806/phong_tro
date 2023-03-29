@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Router, Route, Routes } from "react-router-dom";
 import { Header, Home, Auth, Register } from "./containers/Public";
 import { path } from "./ultils/constains";
