@@ -1,14 +1,14 @@
-/* eslint-disable default-case */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/style-prop-object */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { InputForm, Button } from '../../components'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import * as actions from '../../store/action'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 const Auth = () => {
   const location = useLocation()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { isLoggedIn } = useSelector((state) => state.auth)
   const [isRegister, setIsRegister] = useState(location.state?.flag)
   const [invalidFields, setInvalidFields] = useState([])
   const [payload, setPayload] = useState({
@@ -16,21 +16,27 @@ const Auth = () => {
     password: '',
     name: '',
   })
+
   useEffect(() => {
     setIsRegister(location.state?.flag)
   }, [location.state?.flag])
+  useEffect(() => {
+    isLoggedIn && navigate('/')
+  }, [isLoggedIn])
   const handleSubmit = async () => {
-    // console.log(payload)
-    // isRegister
-    //   ? dispatch(actions.register(payload))
-    //   : dispatch(actions.login(payload))
-    let invalids = validate(payload)
-    console.log(invalids)
-    //const response = apiRegister(payload)
-    //console.log(response)
-  }
+    let finalinvalids = isRegister
+      ? payload
+      : {
+          phone: payload.phone,
+          password: payload.password,
+        }
 
-  console.log(invalidFields)
+    let invalids = validate(finalinvalids)
+    if (invalids === 0)
+      isRegister
+        ? dispatch(actions.register(payload))
+        : dispatch(actions.login(payload))
+  }
   const validate = (payload) => {
     let invalids = 0
     let fields = Object.entries(payload)
@@ -201,12 +207,8 @@ const Auth = () => {
                   của chúng tôi
                 </p>
                 <p className="py-[5px] my-[14px]">
-                
-                <span
-                    
-                    className="text-black-500 hover:underline cursor-pointer"
-                  >
-                     Bạn đã có tài khoản ?
+                  <span className="text-black-500 hover:underline cursor-pointer">
+                    Bạn đã có tài khoản ?
                   </span>
                   <span
                     onClick={() => {
@@ -220,7 +222,7 @@ const Auth = () => {
                     }}
                     className="text-blue-500 hover:underline cursor-pointer ml-[5px]"
                   >
-                     Đăng nhập ngay
+                    Đăng nhập ngay
                   </span>
                 </p>
               </>
