@@ -201,14 +201,26 @@ const Auth = () => {
                   của chúng tôi
                 </p>
                 <p className="py-[5px] my-[14px]">
-                  Bạn đã có tài khoản?
+                
+                <span
+                    
+                    className="text-black-500 hover:underline cursor-pointer"
+                  >
+                     Bạn đã có tài khoản ?
+                  </span>
                   <span
                     onClick={() => {
                       setIsRegister(false)
+                      setPayload({
+                        phone: '',
+                        password: '',
+                        name: '',
+                      })
+                      setInvalidFields([])
                     }}
-                    className="text-blue-500 hover:underline cursor-pointer ml-5px"
+                    className="text-blue-500 hover:underline cursor-pointer ml-[5px]"
                   >
-                    Đăng nhập ngay
+                     Đăng nhập ngay
                   </span>
                 </p>
               </>
@@ -220,13 +232,19 @@ const Auth = () => {
                       onClick={() => {
                         setIsRegister(true)
                       }}
-                      className="hover:text-[red]  cursor-pointer "
+                      className="hover:text-[red]  cursor-pointer"
                     >
                       Bạn quên mật khẩu?
                     </span>
                     <span
                       onClick={() => {
                         setIsRegister(true)
+                        setPayload({
+                          phone: '',
+                          password: '',
+                          name: '',
+                        })
+                        setInvalidFields([])
                       }}
                       className="hover:text-[red]  cursor-pointer "
                     >
