@@ -1,37 +1,77 @@
 import axios from 'axios'
 import db from '../models'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import { v4 as uuidv4 } from 'uuid'
-import chothuephongtro from '../../data/data_Chothuephongtro.json'
-import chothuecanho from '../../data/data_Chothuecanho.json'
-import chothuematbang from '../../data/data_Chothuematbang.json'
-import nhachothue from '../../data/data_Nhachothue.json'
-import Header from './../../../client/src/containers/Public/Header';
-const dataBody = chothuephongtro.body
+import { v4 as uuidv4, v4 } from 'uuid'
+import chothuecanho from '../../data/chothuecanho.json'
+const dataBody = chothuecanho.body
+import genarateCode from '../ultils/generateCode'
 require('dotenv').config()
 
 const hashPassword = (password) =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(12))
 
-export const insert = () =>
+export const insertService = () =>
   new Promise(async (resolve, reject) => {
     try {
       dataBody.forEach(async (item) => {
+        let postId = v4()
+        let attributesId = v4()
+        let userId = v4()
+        let overviewId = v4()
+        let imagesId = v4()
+        let labelCode = genarateCode(4)
+        let desc = JSON.stringify(item?.mainContent?.content)
         await db.Post.create({
-            title: item.mainContent.header.title,
-            star: item.mainContent.header.star,
-            labelCode: DataTypes.STRING,
-            address: DataTypes.STRING,
-            attributesId: DataTypes.STRING,
-            categoryCode: DataTypes.STRING,
-            description: DataTypes.TEXT,
-            userId: DataTypes.STRING,
-            overviewId: DataTypes.STRING,
-            imagesId: DataTypes.STRING
+          id: postId,
+          title: item?.header?.title,
+          star: item?.header?.star,
+          labelCode,
+          address: item?.header?.address,
+          attributesId,
+          categoryCode: 'CTCH',
+          description: desc,
+          userId,
+          overviewId,
+          imagesId,
+        })
+        await db.Attribute.create({
+          id: attributesId,
+          price: item?.header?.attributes?.price,
+          acreage: item?.header?.attributes?.acreage,
+          published: item?.header?.attributes?.published,
+          hashtag: item?.header?.attributes?.hashtag,
+        })
+        await db.Images.create({
+          id: imagesId,
+          image: JSON.stringify(item?.images),
+        })
+        await db.Label.create({
+          code: labelCode,
+          value: item?.header.class.classType,
+        })
+        await db.Overview.create({
+          id: overviewId,
+          code: item?.overview?.content.find((i) => i === 'Mã tin:').content,
+          area: item?.overview?.content.find((i) => i === 'Khu vực').content,
+          type: item?.overview?.content.find((i) => i === 'Loại tin rao:')
+            .content,
+          target: item?.overview?.content.find((i) => i === 'Đối tượng thuê:')
+            .content,
+          bonus: item?.overview?.content.find((i) => i === 'Gói tin:').content,
+          create: item?.overview?.content.find((i) => i === 'Ngày đăng:')
+            .content,
+          expire: item?.overview?.content.find((i) => i === 'Ngày hết hạn:')
+            .content,
+        })
+        await db.User.create({
+          name: item?.contact?.content.find((i) => i === 'Liên hệ:').content,
+          password: hashPassword('truong911'),
+          phone: item?.contact?.content.find((i) => i === 'Điện thoại:')
+            .content,
+          zalo: item?.contact?.content.find((i) => i === 'Zalo'),
         })
       })
-      resolve()
+      resolve('Add data to database Done')
     } catch (error) {
       reject(error)
     }
