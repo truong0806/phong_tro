@@ -5,13 +5,13 @@ import { Button } from '../../components'
 import icons from '../../ultils/icons'
 import { useNavigate } from 'react-router-dom'
 import { path } from '../../ultils/constains'
-
 import { useSelector, useDispatch } from 'react-redux'
-import * as actions from '../../store/actions'
+import * as actions from '../../store/action'
 const { AiOutlineHeart, BiLogIn, AiOutlineUserAdd, AiOutlinePlusCircle } = icons
 
 const Header = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { isLoggedIn } = useSelector((state) => state.auth)
   const goAuth = useCallback((flag) => {
     navigate(path.AUTH, { state: { flag } })
@@ -29,37 +29,56 @@ const Header = () => {
         onClick={goHome}
       />
       <div className="cursor-pointer  flex items-center gap-1">
-        <Button
-          fontW={'font-normal text-[14px] h-[40px]'}
-          IcBefor={AiOutlineHeart}
-          text={'Yêu thích'}
-          textColor="text-black"
-          bgcolor="bg-[#f5f5f5]"
-          IcBeforSize="20"
-        />
-        <Button
-          fontW={'font-normal text-[14px] h-[40px]'}
-          IcBefor={BiLogIn}
-          text={'Đăng nhập'}
-          textColor="text-black"
-          bgcolor="bg-[#f5f5f5]"
-          IcBeforSize="20"
-          onClick={() => {
-            goAuth(false)
-          }}
-        />
-        <Button
-          fontW={'font-normal text-[14px] h-[40px]'}
-          IcBefor={AiOutlineUserAdd}
-          text={'Đăng ký'}
-          textColor="text-black"
-          bgcolor="bg-[#f5f5f5]"
-          IcBeforSize="20"
-          onClick={() => {
-            goAuth(true)
-          }}
-        />
-        
+        {!isLoggedIn && (
+          <div className="cursor-pointer  flex items-center gap-1">
+            <Button
+              fontW={'font-normal text-[14px] h-[40px]'}
+              IcBefor={AiOutlineHeart}
+              text={'Yêu thích'}
+              textColor="text-black"
+              bgcolor="bg-[#f5f5f5]"
+              IcBeforSize="20"
+            />
+            <Button
+              fontW={'font-normal text-[14px] h-[40px]'}
+              IcBefor={BiLogIn}
+              text={'Đăng nhập'}
+              textColor="text-black"
+              bgcolor="bg-[#f5f5f5]"
+              IcBeforSize="20"
+              onClick={() => {
+                goAuth(false)
+              }}
+            />
+            <Button
+              fontW={'font-normal text-[14px] h-[40px]'}
+              IcBefor={AiOutlineUserAdd}
+              text={'Đăng ký'}
+              textColor="text-black"
+              bgcolor="bg-[#f5f5f5]"
+              IcBeforSize="20"
+              onClick={() => {
+                goAuth(true)
+              }}
+            />
+          </div>
+        )}
+        {isLoggedIn && (
+          <div className="cursor-pointer  flex items-center gap-1">
+            <span>Ten !</span>
+            <Button
+              fontW={'font-normal text-[14px] h-[40px]'}
+              IcBefor={BiLogIn}
+              text={'Đăng xuất'}
+              textColor="text-black"
+              bgcolor="bg-white"
+              IcBeforSize="20"
+              onClick={() => {
+                dispatch(actions.logout())
+              }}
+            />
+          </div>
+        )}
         <Button
           width={'w-auto text-[14px] h-[40px] '}
           text={'Đăng tin mới'}
