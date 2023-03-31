@@ -22,9 +22,11 @@ module.exports = {
       },
       create: {
         type: Sequelize.DATE,
+        allowNull: false,
       },
       expire: {
         type: Sequelize.DATE,
+        allowNull: false,
       },
       bonus: {
         type: Sequelize.STRING,

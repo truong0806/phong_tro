@@ -104,7 +104,7 @@ const scraper = (browser, url) =>
                     price: el.querySelector(
                       'div.post-attributes > .price > span',
                     ).innerText,
-                    creage: el.querySelector(
+                    acreage: el.querySelector(
                       'div.post-attributes > .acreage > span',
                     ).innerText,
                     published: el.querySelector(
@@ -127,7 +127,7 @@ const scraper = (browser, url) =>
               '#left-col > article.the-post >section.post-main-content > div.section-content > p',
               (els) => els.map((el) => el.innerText),
             )
-            console.log(header);
+            console.log(header)
             detailData.mainContent = {
               header: postMainContentHeader,
               content: postmainContent,
@@ -191,7 +191,7 @@ const scraper = (browser, url) =>
         details.push(detail)
       }
       scrapeData.body = details
-      console.log("Scrape complete: "+ url)
+      console.log('Scrape complete: ' + url)
       resolve(scrapeData)
     } catch (error) {
       console.log('Error in scaper.js: ' + error)

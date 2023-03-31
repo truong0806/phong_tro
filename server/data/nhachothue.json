@@ -23,7 +23,7 @@
                 "address": "Địa chỉ: 21 Lê Thanh Nghị, Phường Hải Châu I, Quận Hải Châu, Đà Nẵng",
                 "attributes": {
                     "price": "26 triệu/tháng",
-                    "creage": "300m2",
+                    "acreage": "300m2",
                     "published": "Hôm nay",
                     "hashtag": "619508"
                 }
@@ -129,7 +129,7 @@
                 "address": "Địa chỉ: 144a Đường Ông Ích Khiêm, Phường 5, Quận 11, Hồ Chí Minh",
                 "attributes": {
                     "price": "15 triệu/tháng",
-                    "creage": "200m2",
+                    "acreage": "200m2",
                     "published": "Hôm nay",
                     "hashtag": "615012"
                 }
@@ -221,7 +221,7 @@
                 "address": "Địa chỉ: 29 tổ dân phố 3 Phố Hàng, Phường Phú Thịnh, Thị Xã Sơn Tây, Hà Nội",
                 "attributes": {
                     "price": "30 triệu/tháng",
-                    "creage": "50m2",
+                    "acreage": "50m2",
                     "published": "Hôm nay",
                     "hashtag": "620686"
                 }
@@ -312,7 +312,7 @@
                 "address": "Địa chỉ: Đường Mai Chí Thọ, Phường An Phú, Quận 2, Hồ Chí Minh",
                 "attributes": {
                     "price": "9 triệu/tháng",
-                    "creage": "60m2",
+                    "acreage": "60m2",
                     "published": "Hôm nay",
                     "hashtag": "620602"
                 }
@@ -398,7 +398,7 @@
                 "address": "Địa chỉ: 6/2 Phố 49, Phường Hiệp Bình Chánh, Quận Thủ Đức, Hồ Chí Minh",
                 "attributes": {
                     "price": "9 triệu/tháng",
-                    "creage": "90m2",
+                    "acreage": "90m2",
                     "published": "Hôm nay",
                     "hashtag": "270139"
                 }
@@ -484,7 +484,7 @@
                 "address": "Địa chỉ: 526/27 Đường Phạm Văn Đồng, Phường Linh Đông, Quận Thủ Đức, Hồ Chí Minh",
                 "attributes": {
                     "price": "3.2 triệu/tháng",
-                    "creage": "30m2",
+                    "acreage": "30m2",
                     "published": "Hôm nay",
                     "hashtag": "599068"
                 }
@@ -572,7 +572,363 @@
             }
         },
         {
-            "images": [],
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/8_1678946036.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/1_1678946004.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/2_1678946033.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/3_1678946033.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/4_1678946034.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/5_1678946034.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/61_1678946035.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/71_1678946035.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/8_1678946036.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/1_1678946004.jpg"
+            ],
+            "header": {
+                "title": "Nhà giá rẻ Phạm Hùng, Nhà mới đẹp,1 trệt ,1 lầu, đường 8m, 3 phòng ngủ",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê nhà Quận 8",
+                    "classType": "Cho thuê nhà Quận 8"
+                },
+                "address": "Địa chỉ: c4 Đường Phạm Hùng, Phường 5, Quận 8, Hồ Chí Minh",
+                "attributes": {
+                    "price": "7.5 triệu/tháng",
+                    "acreage": "75m2",
+                    "published": "20 phút trước",
+                    "hashtag": "619295"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "Nhà giá rẻ Phạm Hùng , Nhà mới đẹp,1 trệt ,1 lầu , đường 8 m ,3 phòng ngủ , 2 toilet , phòng khách , nhà bếp , ban công thoáng mát,khu yên tỉnh , mất 5 phút đi các quận 1,4,5,7 , gần nhiều siêu thị , ngân hàng , trường học Đh công nghệ SG, công viên , b.viện Q8 , chợ, hồ bơi LH 0903189069"
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#619295"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê nhà Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Nhà thuê nguyên căn"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin thường"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 6, 15:57 31/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 4, 15:57 05/04/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "mocle"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0903189069"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0903189069"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/338515859-3691084927825982-5240722031946452803-n_1680244515.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/338696692-535247708772669-8395508837964004088-n_1680244513.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/339107528-774156214251645-6739453269673514436-n_1680244514.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/338859592-741482494376805-8387717420596600524-n_1680244514.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/338723347-593039919419465-5011475959402650270-n_1680244514.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/339112498-526163472804376-5165723496682686396-n_1680244515.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/338515859-3691084927825982-5240722031946452803-n_1680244515.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/338696692-535247708772669-8395508837964004088-n_1680244513.jpg"
+            ],
+            "header": {
+                "title": "Cho thuê nhà nguyên căn có thể mở tạp hoá được",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê nhà Quận Thủ Đức",
+                    "classType": "Cho thuê nhà Quận Thủ Đức"
+                },
+                "address": "Địa chỉ: Đường Tỉnh lộ 43, Phường Bình Chiểu, Quận Thủ Đức, Hồ Chí Minh",
+                "attributes": {
+                    "price": "5.5 triệu/tháng",
+                    "acreage": "85m2",
+                    "published": "2 giờ trước",
+                    "hashtag": "620933"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "CHO THUÊ NHÀ - CÓ THỂ MỞ TẠP HOÁ ĐƯỢC",
+                    "CHỦ NHÀ XINH ĐẸP - DỄ TÍNH",
+                    "- Nguyên căn 5 phòng ngủ - 4 toilet riêng giá 5tr5/tháng",
+                    "(nhận nhà 18/4)",
+                    "- Hoặc thuê phòng đơn 1tr2 tháng (nhận phòng liền nếu muốn)",
+                    "Tiện ích:",
+                    "Ngay chợ , Bách Hoá Xanh, Siêu Thị, Chợ đêm sầm uất",
+                    "Gần Uỷ ban, Trường học",
+                    "Khu vực cư dân đông đúc, nhộn nhịp",
+                    "️ Liên hệ : O988O77962 C THẢO",
+                    "- 1056/2/12 tỉnh lộ 43 phường Bình Chiểu Thủ Đức Tphcm."
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#620933"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê nhà Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Nhà thuê nguyên căn"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin miễn phí"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 6, 13:36 31/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 4, 13:36 05/04/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "Huỳnh"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0834557870"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0834557870"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/13/hinh3_1678674143.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/13/hinh1_1678674139.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/13/hinh2_1678674141.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/13/hinh3_1678674143.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/13/hinh1_1678674139.jpg"
+            ],
+            "header": {
+                "title": "Cho gia đình hoặc nữ thuê nhà. Ấp 4, Đông Thạnh, Hóc Môn (Gần Cầu Dừa Lê Văn Khương - Giáp Q.12)",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê nhà Huyện Hóc Môn",
+                    "classType": "Cho thuê nhà Huyện Hóc Môn"
+                },
+                "address": "Địa chỉ: Tổ 25 Ấp 4 Đông Thạnh 8, Xã Đông Thạnh, Huyện Hóc Môn, Hồ Chí Minh",
+                "attributes": {
+                    "price": "3.8 triệu/tháng",
+                    "acreage": "80m2",
+                    "published": "4 giờ trước",
+                    "hashtag": "618818"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "Cho gia đình hoặc nữ thuê nhà.",
+                    "Tổ 25, Ấp 4, Đông Thạnh, Hóc Môn (gần Cầu Dừa Lê Văn Khương - Giáp Q.12). Nhà 1 trệt, một lầu DT 80m2 (2Ngủ, 1khách, 1bếp, 2Toilet, sân 8m2).",
+                    "Cách cầu dừa Lê Văn Khương 500m, Cách Metro Q.12 chỉ 3.5km. Giá: 3.8 triệu, Chỉ cho gia đình hoặc nữ thuê.",
+                    "Liên hệ: A.Tình 0906.772979"
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#618818"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê nhà Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Nhà thuê nguyên căn"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin thường"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 6, 11:29 31/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 2, 11:29 10/04/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "Nguyễn Trọng Tình"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0906772979"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0906772979"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/330147605-582790473398899-7085629506140116591-n_1680106820.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/327170247-946679836519465-9075242450993429333-n_1680106816.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/327173999-5982573185142105-7625256219328955337-n_1680106817.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/328916817-5621894957939700-8785033264678464306-n_1680106819.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/329038517-973494143812998-461088522690151977-n_1680106819.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/328236497-2128991997300267-726512911509085141-n_1680106818.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/326944886-936102494430477-983640778093976220-n_1680106816.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/330147605-582790473398899-7085629506140116591-n_1680106820.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/327170247-946679836519465-9075242450993429333-n_1680106816.jpg"
+            ],
+            "header": {
+                "title": "Cho thuê nhà 2 tầng Ngô Tất Tố - 4m x 16m – 2 phòng ngủ master – Hẻm 5m – Chỉ 15tr/tháng",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê nhà Quận Bình Thạnh",
+                    "classType": "Cho thuê nhà Quận Bình Thạnh"
+                },
+                "address": "Địa chỉ: Đường Ngô Tất Tố, Phường 22, Quận Bình Thạnh, Hồ Chí Minh",
+                "attributes": {
+                    "price": "15 triệu/tháng",
+                    "acreage": "128m2",
+                    "published": "5 giờ trước",
+                    "hashtag": "620798"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "Nhà 1 trệt, 1 lầu nhà mới ở ngay",
+                    "Tính năng: ở, văn phòng, kinh doanh ( trừ ăn uống ), Studio",
+                    "2pn 2wc",
+                    "Cách mặt tiền 10m",
+                    "Thông số: 4m x 16m",
+                    "Hẻm 5m sạch sẽ, thoáng mát, an ninh cao, gần chợ, trường học, siêu thị, nhà sách,...",
+                    "Nhà 1/ ngô Tất Tố vài bước qua quận 1, ngay chân cầu Thủ Thiêm",
+                    "Miễn trung gian",
+                    "Liên hệ Quốc ( 0822141489 ) để xem nhà"
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#620798"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê nhà Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Nhà thuê nguyên căn"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin thường"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 6, 11:01 31/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 4, 23:20 05/04/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "Trương Quang Cường Quốc"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0822141489"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0822141489"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/20230304-091321_1680230134.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/20230304-091344_1680230126.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/20230304-091357_1680230125.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/20230304-091257_1680230134.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/20230304-091321_1680230134.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/31/20230304-091344_1680230126.jpg"
+            ],
             "header": {
                 "title": "Cho thuê nhà nguyên căn cách chợ Phú Lâm 100m",
                 "class": {
@@ -582,8 +938,8 @@
                 "address": "Địa chỉ: Đường Tân Hòa Đông, Phường 14, Quận 6, Hồ Chí Minh",
                 "attributes": {
                     "price": "4.8 triệu/tháng",
-                    "creage": "38m2",
-                    "published": "2 giờ trước",
+                    "acreage": "38m2",
+                    "published": "19 giờ trước",
                     "hashtag": "620890"
                 }
             },
@@ -663,8 +1019,8 @@
                 "address": "Địa chỉ: Đường Trường Sơn, Phường 15, Quận 10, Hồ Chí Minh",
                 "attributes": {
                     "price": "200 triệu/tháng",
-                    "creage": "500m2",
-                    "published": "4 giờ trước",
+                    "acreage": "500m2",
+                    "published": "21 giờ trước",
                     "hashtag": "620886"
                 }
             },
@@ -753,8 +1109,8 @@
                 "address": "Địa chỉ: 20/22/24 Đường 160, Phường Tăng Nhơn Phú A, Quận 9, Hồ Chí Minh",
                 "attributes": {
                     "price": "3.5 triệu/tháng",
-                    "creage": "35m2",
-                    "published": "5 giờ trước",
+                    "acreage": "35m2",
+                    "published": "21 giờ trước",
                     "hashtag": "284629"
                 }
             },
@@ -826,8 +1182,8 @@
                 "address": "Địa chỉ: Phùng Hưng, Phường Cửa Nam, Quận Hoàn Kiếm, Hà Nội",
                 "attributes": {
                     "price": "50 triệu/tháng",
-                    "creage": "70m2",
-                    "published": "9 giờ trước",
+                    "acreage": "70m2",
+                    "published": "1 ngày trước",
                     "hashtag": "620840"
                 }
             },
@@ -914,8 +1270,8 @@
                 "address": "Địa chỉ: Đường Võ Chí Công, Phường Phú Hữu, Quận 9, Hồ Chí Minh",
                 "attributes": {
                     "price": "15.5 triệu/tháng",
-                    "creage": "130m2",
-                    "published": "12 giờ trước",
+                    "acreage": "130m2",
+                    "published": "1 ngày trước",
                     "hashtag": "620536"
                 }
             },
@@ -984,175 +1340,6 @@
         },
         {
             "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/330147605-582790473398899-7085629506140116591-n_1680106820.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/327170247-946679836519465-9075242450993429333-n_1680106816.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/327173999-5982573185142105-7625256219328955337-n_1680106817.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/328916817-5621894957939700-8785033264678464306-n_1680106819.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/329038517-973494143812998-461088522690151977-n_1680106819.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/328236497-2128991997300267-726512911509085141-n_1680106818.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/326944886-936102494430477-983640778093976220-n_1680106816.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/330147605-582790473398899-7085629506140116591-n_1680106820.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/327170247-946679836519465-9075242450993429333-n_1680106816.jpg"
-            ],
-            "header": {
-                "title": "Cho thuê nhà 2 tầng Ngô Tất Tố - 4m x 16m – 2 phòng ngủ master – Hẻm 5m – Chỉ 15tr/tháng",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê nhà Quận Bình Thạnh",
-                    "classType": "Cho thuê nhà Quận Bình Thạnh"
-                },
-                "address": "Địa chỉ: Đường Ngô Tất Tố, Phường 22, Quận Bình Thạnh, Hồ Chí Minh",
-                "attributes": {
-                    "price": "15 triệu/tháng",
-                    "creage": "128m2",
-                    "published": "1 ngày trước",
-                    "hashtag": "620798"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "Nhà 1 trệt, 1 lầu nhà mới ở ngay",
-                    "Tính năng: ở, văn phòng, kinh doanh ( trừ ăn uống ), Studio",
-                    "2pn 2wc",
-                    "Cách mặt tiền 10m",
-                    "Thông số: 4m x 16m",
-                    "Hẻm 5m sạch sẽ, thoáng mát, an ninh cao, gần chợ, trường học, siêu thị, nhà sách,...",
-                    "Nhà 1/ ngô Tất Tố vài bước qua quận 1, ngay chân cầu Thủ Thiêm",
-                    "Miễn trung gian",
-                    "Liên hệ Quốc ( 0822141489 ) để xem nhà"
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#620798"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê nhà Hồ Chí Minh"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Nhà thuê nguyên căn"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin thường"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Thứ 4, 23:20 29/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Thứ 4, 23:20 05/04/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "Trương Quang Cường Quốc"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0822141489"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0822141489"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/cb8f6802-e3f8-4d12-825b-5056420c751d_1680104642.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/2d4b83da-4faf-4d2b-ac5c-fbeadaa47a0c_1680104642.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/cb8f6802-e3f8-4d12-825b-5056420c751d_1680104642.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/2d4b83da-4faf-4d2b-ac5c-fbeadaa47a0c_1680104642.jpg"
-            ],
-            "header": {
-                "title": "Cho thuê phòng trong căn nhà nguyên căn",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê nhà Quận Thanh Xuân",
-                    "classType": "Cho thuê nhà Quận Thanh Xuân"
-                },
-                "address": "Địa chỉ: 303G4 Nguyễn Trãi, Phường Thanh Xuân Nam, Quận Thanh Xuân, Hà Nội",
-                "attributes": {
-                    "price": "3.75 triệu/tháng",
-                    "creage": "20m2",
-                    "published": "1 ngày trước",
-                    "hashtag": "620792"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "Mình còn 1 phòng trống trong căn nhà nguyên căn ngõ 477 Nguyễn Trãi. Phù hợp ở 2-3 người điện nước giá dân, không mất phí dịch vụ."
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#620792"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê nhà Hà Nội"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Nhà thuê nguyên căn"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin miễn phí"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Thứ 4, 22:44 29/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Thứ 2, 22:44 03/04/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "Vũ Khánh Linh"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0779139215"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0779139215"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/7_1680076844.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/2_1680076780.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/3_1680076824.jpg",
@@ -1170,8 +1357,8 @@
                 "address": "Địa chỉ: 503 Phố Trần Xuân Soạn, Phường Tân Kiểng, Quận 7, Hồ Chí Minh",
                 "attributes": {
                     "price": "4 triệu/tháng",
-                    "creage": "41m2",
-                    "published": "1 ngày trước",
+                    "acreage": "41m2",
+                    "published": "2 ngày trước",
                     "hashtag": "620743"
                 }
             },
@@ -1254,8 +1441,8 @@
                 "address": "Địa chỉ: 1745 Đường Huỳnh Tấn Phát, Thị trấn Nhà Bè, Huyện Nhà Bè, Hồ Chí Minh",
                 "attributes": {
                     "price": "5 triệu/tháng",
-                    "creage": "70m2",
-                    "published": "1 ngày trước",
+                    "acreage": "70m2",
+                    "published": "2 ngày trước",
                     "hashtag": "271580"
                 }
             },
@@ -1338,8 +1525,8 @@
                 "address": "Địa chỉ: 33 Tả Thanh Oai, Xã Tả Thanh Oai, Huyện Thanh Trì, Hà Nội",
                 "attributes": {
                     "price": "4.7 triệu/tháng",
-                    "creage": "120m2",
-                    "published": "1 ngày trước",
+                    "acreage": "120m2",
+                    "published": "2 ngày trước",
                     "hashtag": "620712"
                 }
             },
@@ -1421,8 +1608,8 @@
                 "address": "Địa chỉ: Phường Tương Mai, Quận Hoàng Mai, Hà Nội",
                 "attributes": {
                     "price": "7 triệu/tháng",
-                    "creage": "50m2",
-                    "published": "1 ngày trước",
+                    "acreage": "50m2",
+                    "published": "2 ngày trước",
                     "hashtag": "620710"
                 }
             },
@@ -1509,8 +1696,8 @@
                 "address": "Địa chỉ: Đường Tập Đoàn 6B, Phường Tân Tạo A, Quận Bình Tân, Hồ Chí Minh",
                 "attributes": {
                     "price": "5.2 triệu/tháng",
-                    "creage": "80m2",
-                    "published": "1 ngày trước",
+                    "acreage": "80m2",
+                    "published": "2 ngày trước",
                     "hashtag": "620708"
                 }
             },
@@ -1567,181 +1754,6 @@
                     {
                         "name": "Zalo",
                         "value": "0938454791"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/28/5_1680018444.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/28/3_1680018439.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/28/1_1680018441.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/28/4_1680018442.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/28/5_1680018444.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/28/3_1680018439.jpg"
-            ],
-            "header": {
-                "title": "Khu Liên Đoàn Địa Chất Xạ Hiếm - Đường Phương Canh Chính chủ cho thuê nhà 50m X 5 tầng. mặt tiền 4.5",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê nhà Quận Nam Từ Liêm",
-                    "classType": "Cho thuê nhà Quận Nam Từ Liêm"
-                },
-                "address": "Địa chỉ: Khu Liên Đoàn Địa Chất Xạ Hiếm Đường Phương Canh, Phường Phương Canh, Quận Nam Từ Liêm, Hà Nội",
-                "attributes": {
-                    "price": "12 triệu/tháng",
-                    "creage": "40m2",
-                    "published": "2 ngày trước",
-                    "hashtag": "620674"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "Khu Liên Đoàn Địa Chất Xạ Hiếm - Đường Phương Canh",
-                    "Chính chủ cho thuê nhà 50m X 5 tầng. mặt tiền 4.5m",
-                    "Nhà phân lô , đường rộng rãi , oto đậu trước cửa , 3 sân chơi , thoáng mát yên tính, Khu dân trí cao.",
-                    "- Tầng 1 : Phòng bếp , để xe",
-                    "- Tầng 2 : Phòng khách",
-                    "- Tầng 3,4 : Phòng ngủ",
-                    "-Tầng 5 : Ban thờ và phơi quần áo",
-                    " "
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#620674"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê nhà Hà Nội"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Nhà thuê nguyên căn"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin miễn phí"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Thứ 3, 22:47 28/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Chủ Nhật, 22:47 02/04/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "Lê Minh Đức"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0868216599"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0868216599"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151910_1677740384.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151906_1677740301.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151907_1677740312.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151909_1677740321.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151910_1677740327.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151911_1677740334.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151916_1677740346.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151909_1677740362.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151910_1677740384.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/02/img-20230206-151906_1677740301.jpg"
-            ],
-            "header": {
-                "title": "NHÀ CHO THUÊ - HỖ TRỢ MÙA DỊCH GIÁ CHỈ 2.800.000 RỘNG 28 M",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê nhà Quận Gò Vấp",
-                    "classType": "Cho thuê nhà Quận Gò Vấp"
-                },
-                "address": "Địa chỉ: Đường số 20, Phường 5, Quận Gò Vấp, Hồ Chí Minh",
-                "attributes": {
-                    "price": "2.8 triệu/tháng",
-                    "creage": "28m2",
-                    "published": "2 ngày trước",
-                    "hashtag": "617673"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "CHO THUÊ NHÀ NHỎ NGUYÊN CĂN DIỆN TÍCH TỔNG CỘNG 28M.",
-                    "ĐÚC LỬNG.ĐIỆN 4.000 K, NƯỚC 70.000K/NGƯỜI, RÁC 30.000K. 10H30 ĐÓNG CỔNG",
-                    " LƯU Ý TRONG KHU NÀY CÓ NHIỀU NHÀ Ở .KHÔNG PHẢI MẶT TIỀN. NÊN 10H30 ĐÓNG CỔNG CÓ BÃI GIỮ XE RIÊNG.",
-                    "NHÀ CHỈ CHO ANH CHỊ EM THUÊ ĐỂ Ở ,AN DƯỠNG ,NGHĨ NGƠI , KHÔNG BUÔN BÁN, TỤ TẬP BẠN NHẬU..KHU VỰC AN NINH CẦN NHỮNG ANH CHỊ EM VỀ NGHỈ NGƠI. NÊN KHU VỰC YÊN TĨNH,AN NINH.",
-                    "LIÊN HỆ: 0908866704"
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#617673"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê nhà Hồ Chí Minh"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Nhà thuê nguyên căn"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin thường"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Thứ 3, 16:06 28/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Chủ Nhật, 16:06 02/04/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "thao"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0908866704"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0908866704"
                     }
                 ]
             }

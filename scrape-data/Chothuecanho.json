@@ -28,8 +28,8 @@
                 },
                 "address": "Địa chỉ: 26 Đường số 77, Phường Tân Quy, Quận 7, Hồ Chí Minh",
                 "attributes": {
-                    "price": "5.9 triệu/tháng",
-                    "creage": "40m2",
+                    "price": "5.8 triệu/tháng",
+                    "acreage": "40m2",
                     "published": "Hôm nay",
                     "hashtag": "617811"
                 }
@@ -119,7 +119,7 @@
                 "address": "Địa chỉ: Phó Đức Chính, Phường Nguyễn Thái Bình, Quận 1, Hồ Chí Minh",
                 "attributes": {
                     "price": "10.5 triệu/tháng",
-                    "creage": "38m2",
+                    "acreage": "38m2",
                     "published": "Hôm nay",
                     "hashtag": "620667"
                 }
@@ -213,7 +213,7 @@
                 "address": "Địa chỉ: 128/07 Trần Bình Trọng, Phường 1, Quận Gò Vấp, Hồ Chí Minh",
                 "attributes": {
                     "price": "4.8 triệu/tháng",
-                    "creage": "25m2",
+                    "acreage": "25m2",
                     "published": "Hôm nay",
                     "hashtag": "311143"
                 }
@@ -328,8 +328,8 @@
                 "address": "Địa chỉ: 31 Đường Tân Hải, Phường 13, Quận Tân Bình, Hồ Chí Minh",
                 "attributes": {
                     "price": "5.9 triệu/tháng",
-                    "creage": "22m2",
-                    "published": "Hôm nay",
+                    "acreage": "22m2",
+                    "published": "7 giờ trước",
                     "hashtag": "608732"
                 }
             },
@@ -374,7 +374,7 @@
                     },
                     {
                         "name": "Ngày đăng:",
-                        "value": "Thứ 4, 07:45 29/03/2023"
+                        "value": "Thứ 6, 08:27 31/03/2023"
                     },
                     {
                         "name": "Ngày hết hạn:",
@@ -425,7 +425,7 @@
                 "address": "Địa chỉ: Đường Lê Văn Sỹ, Phường 10, Quận Phú Nhuận, Hồ Chí Minh",
                 "attributes": {
                     "price": "7.5 triệu/tháng",
-                    "creage": "26m2",
+                    "acreage": "26m2",
                     "published": "Hôm nay",
                     "hashtag": "620668"
                 }
@@ -532,7 +532,7 @@
                 "address": "Địa chỉ: Đường Võ Văn Tần, Phường 5, Quận 3, Hồ Chí Minh",
                 "attributes": {
                     "price": "6.5 triệu/tháng",
-                    "creage": "25m2",
+                    "acreage": "25m2",
                     "published": "Hôm nay",
                     "hashtag": "620666"
                 }
@@ -633,7 +633,7 @@
                 "address": "Địa chỉ: 21/20 Đường Trần Đình Xu, Phường Cầu Kho, Quận 1, Hồ Chí Minh",
                 "attributes": {
                     "price": "5.5 triệu/tháng",
-                    "creage": "30m2",
+                    "acreage": "30m2",
                     "published": "Hôm nay",
                     "hashtag": "316689"
                 }
@@ -739,7 +739,7 @@
                 "address": "Địa chỉ: Đường Nguyễn Thị Thập, Phường Tân Quy, Quận 7, Hồ Chí Minh",
                 "attributes": {
                     "price": "5 triệu/tháng",
-                    "creage": "30m2",
+                    "acreage": "30m2",
                     "published": "Hôm nay",
                     "hashtag": "612354"
                 }
@@ -816,213 +816,6 @@
         },
         {
             "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/view-san-thuong_1679630634.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039330375854-a549619c0a99e90f1ecba747c10c318a_1679628455.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039330380552-603616728961dc67909be20ec08a344a_1679628457.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039330347503-612322157d9a01069032f6a22f137557_1679628449.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039330353504-94255ddcb3b06e120c8cba875b1edfce_1679628451.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039330341673-2eef93dc54f7561e630679a7f3e43c33_1679628449.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039330365962-dd4f8a2e94fa1cba0daa18dcd1d844b9-1_1679628452.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039330365967-714995eac7753aa4725d5d8e1a2a08d8-1_1679628454.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039328842880-3a7868fc43732b5590f20d060be6c0b6_1679628477.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039328842888-f607a0f2778f13cb07649e354384d8d6_1679628477.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039328842895-791defe703f1f7a3a29ba88ad678a469_1679628479.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039328888880-41b5d8de6e959c1d7211e07c8f76ca7e_1679628479.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039328888906-40437118167f455a619d36d998d4f005_1679628480.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039328898508-b8c85688f64b4ac701cfdee45f9f456f_1679628480.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039328898714-cc710c3b68db758b89523d2b23d54b21_1679628482.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039328925769-1641e38406fb9784417eb9400e29da41_1679628482.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039328953972-4efc8018d0417f3ae9dea4bbdf9bb783_1679628483.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/view-ho-boi-3_1679628528.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/view-ho-boi-2_1679628548.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/view-san-thuong_1679630634.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/24/z3039330375854-a549619c0a99e90f1ecba747c10c318a_1679628455.jpg"
-            ],
-            "header": {
-                "title": "Cho thuê căn hộ dịch vụ tại trung tâm quận 7",
-                "star": "3",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê căn hộ dịch vụ Quận 7",
-                    "classType": "Cho thuê căn hộ dịch vụ Quận 7"
-                },
-                "address": "Địa chỉ: 320 Đường Nguyễn Văn Linh, Phường Bình Thuận, Quận 7, Hồ Chí Minh",
-                "attributes": {
-                    "price": "9.3 triệu/tháng",
-                    "creage": "30m2",
-                    "published": "Hôm nay",
-                    "hashtag": "620170"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "Xin chào các bạn,",
-                    "Bạn đang tìm kiếm một căn hộ cho thuê với đầy đủ tiện nghi và thuận tiện đi lại? Chúng tôi cung cấp các căn hộ đẹp và sang trọng tại trung tâm thành phố, với đầy đủ tiện nghi để bạn có thể sống thoải mái.",
-                    "Các căn hộ của chúng tôi được trang bị đầy đủ tiện nghi như máy lạnh, tủ lạnh, bếp, tủ quần áo, giường, tivi, wifi, v.v. Đặc biệt, chúng tôi cũng cung cấp dịch vụ giặt ủi và vệ sinh hàng tuần để bạn có thể tập trung vào công việc và cuộc sống của mình. Về tiện ích, căn hộ có khu vực GYM, Hồ bơi, nhà hàng, coffee shop, v.v.v",
-                    "Ngoài ra, các căn hộ của chúng tôi đều nằm trong các tòa nhà an ninh, có bảo vệ 24/7 và thang máy, để bạn có thể di chuyển dễ dàng và an toàn. Với mức giá cho thuê hợp lý và linh hoạt, chúng tôi hy vọng sẽ đáp ứng được nhu cầu của bạn về một căn hộ đẹp và tiện nghi để bạn có thể tận hưởng cuộc sống tuyệt vời tại thành phố.",
-                    "Hãy liên hệ với chúng tôi để biết thêm chi tiết và lựa chọn cho mình một căn hộ phù hợp nhé.",
-                    "-------------------------------------",
-                    "SKYHOME - Chuyên tư vấn, cho thuê và kí gửi căn hộ dịch vụ tại TP. Hồ Chí Minh",
-                    "Trụ sở tại: A94 Đường số 5, KDC Kim Sơn, Tân Phong, Quận 7 ( Đối diện đại học Tôn Đức Thắng)",
-                    " "
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#620170"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê căn hộ dịch vụ Hồ Chí Minh"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Cho thuê căn hộ dịch vụ"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin VIP 2"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Chủ Nhật, 11:07 26/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Thứ 6, 11:05 31/03/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "Ngô Tuấn"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0823056916"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0823056916"
-                    },
-                    {
-                        "name": "Facebook",
-                        "value": "https://www.facebook.com/tgngotuan"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/5f7b7940fac7189941d6_1679361472.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/z4160227219487-d21ea0c93cd685c23e6b080f0e8ce85c_1678955416.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/z4149348461812-7dae9e337a2669aac5608b47f756e41b_1678955415.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/z4149348462574-ed39d2cb571addede1f9dfa6732e3efd_1678955415.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/z4149348476580-12ac0ec487d46d8fd243c1d2999f4fcf_1678955416.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/z4160227247813-d280d8f2e811cdc22504e421bac0de00_1678955417.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/z4149348461511-2ffce17207b5e359f7aadb295b028b37_1678955418.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/024c73c6f541171f4e50_1678955420.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/5f7b7940fac7189941d6_1679361472.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/16/z4160227219487-d21ea0c93cd685c23e6b080f0e8ce85c_1678955416.jpg"
-            ],
-            "header": {
-                "title": "CHO THUÊ CĂN HỘ STUDIO, FULL NỘI THẤT, QUẬN 7",
-                "star": "3",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê căn hộ Quận 7",
-                    "classType": "Cho thuê căn hộ Quận 7"
-                },
-                "address": "Địa chỉ: 793/54/10 Phố Trần Xuân Soạn, Phường Tân Hưng, Quận 7, Hồ Chí Minh",
-                "attributes": {
-                    "price": "7.5 triệu/tháng",
-                    "creage": "30m2",
-                    "published": "Hôm nay",
-                    "hashtag": "619312"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "CHO THUÊ CĂN HỘ STUDIO, FULL NỘI THẤT, QUẬN 7",
-                    "LH: 0983 957 247 Mr Trọng",
-                    "Địa chỉ : 793/54/10 Trần Xuân Soạn, Phường Tân Hưng, Quận 7, HCM.",
-                    "Ngay khu Biệt thự Kiều Đàm, kế bên Lotte mart Q7, Sunrise City.",
-                    "Cách TT Quận 1 là 2.5km, cách Phú Mỹ Hưng 2km, cách Trung Sơn 1km",
-                    "- Căn hộ 30m2+ban công, thoáng mát, giếng trời, thang máy, chỗ giữ xe rộng rãi, giờ giấc tự do, không chung chủ, ra vào khóa vân tay,…",
-                    "- Căn hộ full nội thất (xách vali vào ở ngay): Tủ quần áo, Tủ bếp, Giường, Nệm, Máy lạnh, Tủ lạnh, Máy giặt, Tivi, Bàn ăn + 02 ghế,…",
-                    "- Môi trường sống hiện đại - văn minh lịch sự.",
-                    "- Xem hình ảnh thật đính kèm.",
-                    "- Giá thuê: 7.500.000 đồng/tháng",
-                    "- Hoa hồng phù hợp cho người giới thiệu."
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#619312"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê căn hộ Hồ Chí Minh"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Cho thuê căn hộ"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin VIP 2"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Thứ 3, 08:14 21/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Thứ 6, 08:14 31/03/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "CĂN HỘ VINAHOME"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0983957247"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0983957247"
-                    },
-                    {
-                        "name": "Facebook",
-                        "value": "facebook.com/VINAHOMEAPRTMENT"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/15/268304762-1711102369084441-243992983080921684-n_1678866593.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/15/1-545464_1678866590.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/15/2-6546464_1678866590.jpg",
@@ -1042,7 +835,7 @@
                 "address": "Địa chỉ: 1165 Đường Huỳnh Tấn Phát, Phường Phú Thuận, Quận 7, Hồ Chí Minh",
                 "attributes": {
                     "price": "6 triệu/tháng",
-                    "creage": "40m2",
+                    "acreage": "40m2",
                     "published": "Hôm nay",
                     "hashtag": "619182"
                 }
@@ -1113,6 +906,448 @@
         },
         {
             "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/05/z4075931166913-f110ffb6a7c4bdc538ab88ab23f33b13_1675611582.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/05/z4075931166913-f110ffb6a7c4bdc538ab88ab23f33b13_1675611348.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/05/z4075931201529-47815fd3f97452b51fd76b14d5fb7ab9_1675611348.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/05/z4075931233891-791437ef4d7fa655bdbbe5447b41e166_1675611570.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/05/z4075931166913-f110ffb6a7c4bdc538ab88ab23f33b13_1675611582.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/05/z4075931166913-f110ffb6a7c4bdc538ab88ab23f33b13_1675611348.jpg"
+            ],
+            "header": {
+                "title": "Cho thuê căn hộ chung cư Diyas Sky - Diện tích 33m2",
+                "star": "2",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê căn hộ Quận Tân Bình",
+                    "classType": "Cho thuê căn hộ Quận Tân Bình"
+                },
+                "address": "Địa chỉ: 16 Đường Nguyễn Đức Thuận, Phường 13, Quận Tân Bình, Hồ Chí Minh",
+                "attributes": {
+                    "price": "6.5 triệu/tháng",
+                    "acreage": "33m2",
+                    "published": "38 phút trước",
+                    "hashtag": "615352"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "- Vị trí mặt tiền đường Nguyễn Đức Thuận, đối diện Etown Cộng Hòa, thuận tiện di chuyển các quận 1, quận 3, quận Gò Vấp, quận Phú Nhuận, quận Tân Phú,…",
+                    "- Khu vực dân cư đông đúc, gần chợ, gần siêu thị,…",
+                    "- Diện tích 33m2 phù hợp gia đình trẻ hoặc nhân viên văn phòng.",
+                    "- Nhà có sẵn, dọn vào ở ngay.",
+                    "Liên hệ: 070 324 0696 - 097 174 9381."
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#615352"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê căn hộ Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Cho thuê căn hộ"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin VIP 3"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 6, 15:40 31/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 4, 15:40 05/04/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "Nguyen Huynh"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0704760316"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0704760316"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/27/7e44d6e7-15b8-482f-92e9-df4ae2bd53d4_1679912898.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/27/6c5ef290-0f2c-42c1-9fa7-5a395679be7a_1679912891.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/27/b1c6fbb1-6b6f-4ff3-8afa-23ca6b97631b_1679912891.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/27/9ffdc42d-0ee7-42b5-a51a-a29b6578ecf8_1679912893.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/27/efd5afe9-6d23-42c0-8dde-3917157e2549_1679912893.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/27/2080730d-7310-4f16-a00b-8b717c99aaab_1679912896.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/27/a942e6d9-e41e-41ca-baf5-35b5af2ec2c0_1679912896.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/27/7e44d6e7-15b8-482f-92e9-df4ae2bd53d4_1679912898.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/27/6c5ef290-0f2c-42c1-9fa7-5a395679be7a_1679912891.jpg"
+            ],
+            "header": {
+                "title": "DUPLEX GÁC CAO 1.8M - NỘI THẤT CƠ BẢN - PHÒNG TRỐNG Ở NGAY",
+                "star": "2",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê căn hộ mini Quận Tân Bình",
+                    "classType": "Cho thuê căn hộ mini Quận Tân Bình"
+                },
+                "address": "Địa chỉ: Đường Cộng Hòa, Phường 13, Quận Tân Bình, Hồ Chí Minh",
+                "attributes": {
+                    "price": "3.8 triệu/tháng",
+                    "acreage": "30m2",
+                    "published": "2 giờ trước",
+                    "hashtag": "620543"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "VỊ TRÍ NGAY KHU ETOW CỘNG HOÀ - TOÀ NHÀ LOTTE - TOÀ NHÀ FE - HOÀNG HOA THÁM",
+                    "---",
+                    "Căn hộ gác cao 1.8m",
+                    "Nội thất cơ bản",
+                    "Điện 3.5k số - Nước 100k/ng - Dv 100k/ph - Xe 100k/xe",
+                    "Bảo vệ 24/24",
+                    "---",
+                    "Liên hệ A Tài chủ nhà."
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#620543"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê căn hộ mini Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Cho thuê căn hộ mini"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin VIP 3"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 6, 14:12 31/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Chủ Nhật, 17:29 02/04/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "Tai Duong"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0906683369"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0906683369"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/76881695-ede1-4ab0-9006-246e141ad5d5_1679844712.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/6134986f-337a-4774-9187-6211d07de80b_1679844709.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/62c19368-be32-4221-87c0-35fa134554a6_1679844709.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/fb785acd-c54e-449f-bcf3-82e9607ac572_1679844711.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/740805a1-1f53-444f-99fc-8062844ca813_1679844711.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/d77a0eb0-a991-4e48-abd1-57f827a16e5b_1679844712.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/76881695-ede1-4ab0-9006-246e141ad5d5_1679844712.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/6134986f-337a-4774-9187-6211d07de80b_1679844709.jpg"
+            ],
+            "header": {
+                "title": "Căn hộ 30m2 - nội thất cao cấp - cách etown 100m",
+                "star": "2",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê căn hộ dịch vụ Quận Tân Bình",
+                    "classType": "Cho thuê căn hộ dịch vụ Quận Tân Bình"
+                },
+                "address": "Địa chỉ: Đường Cộng Hòa, Phường 13, Quận Tân Bình, Hồ Chí Minh",
+                "attributes": {
+                    "price": "6.3 triệu/tháng",
+                    "acreage": "30m2",
+                    "published": "2 giờ trước",
+                    "hashtag": "620455"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "Căn hộ cao cấp - Căn hộ mini - Căn hộ dịch vụ",
+                    "---",
+                    "Cách Etow Cộng Hoà 100m có thể đi bộ",
+                    "Nội thất Full như ảnh",
+                    "Điện 4k Số - Dịch Vụ 200k/phòng",
+                    "---",
+                    "Liên hệ 0906683369 Mr Tài",
+                    "Chuyên căn hộ mini - Dịch vụ",
+                    " "
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#620455"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê căn hộ dịch vụ Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Cho thuê căn hộ dịch vụ"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin VIP 3"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 6, 14:12 31/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 7, 22:32 01/04/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "Tai Duong"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0906683369"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0906683369"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/6a07be4d-528e-4ebb-a822-76fde6bce6b8_1680023069.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/a9a11d3a-e3dd-455a-b0c6-3700af0f4c93_1680023064.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/61b1054e-0117-403c-8248-72ace3dad110_1680023063.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/1e2d77f2-a192-4f04-82d8-2d058848e519_1680023066.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/63297f9a-9c93-4265-b7db-67c6ea67a4b3_1680023068.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/6a07be4d-528e-4ebb-a822-76fde6bce6b8_1680023069.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/a9a11d3a-e3dd-455a-b0c6-3700af0f4c93_1680023064.jpg"
+            ],
+            "header": {
+                "title": "CĂN HỘ 1 PHÒNG NGỦ - FULL NỘI THẤT - 40M2 - CÁCH ETOW 100M",
+                "star": "2",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê căn hộ Quận Tân Bình",
+                    "classType": "Cho thuê căn hộ Quận Tân Bình"
+                },
+                "address": "Địa chỉ: Đường Cộng Hòa, Phường 13, Quận Tân Bình, Hồ Chí Minh",
+                "attributes": {
+                    "price": "6.5 triệu/tháng",
+                    "acreage": "40m2",
+                    "published": "2 giờ trước",
+                    "hashtag": "302319"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "Vị trí ngay sát Cộng Hoà - ETOW 2 - Tân Hải",
+                    "---",
+                    "Căn Hộ 1PN Siêu Rộng",
+                    "---",
+                    "Diện tích 40m2 - Đủ nội thất",
+                    "---",
+                    "Thang máy - Hầm xe - Khoá Vân Tay",
+                    "---",
+                    "Điện 4k - Dịch vụ 200k/ người - Free xe máy",
+                    "---",
+                    "LH 0906683369 Mr Tài"
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#302319"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê căn hộ Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Cho thuê căn hộ"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin VIP 3"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 6, 14:12 31/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 6, 22:40 31/03/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "Tai Duong"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0906683369"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0906683369"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/03/09/img-20200904-153451_1646823007.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/03/09/img-20201207-144434_1646822470.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/03/09/img-20201207-144431_1646822471.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/03/09/img-20201207-144410_1646822473.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/03/09/img-20200904-153451_1646823007.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/03/09/img-20201207-144434_1646822470.jpg"
+            ],
+            "header": {
+                "title": "Cho thuê CHDV đường Lam sơn gần sân bay",
+                "star": "2",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê căn hộ Quận Tân Bình",
+                    "classType": "Cho thuê căn hộ Quận Tân Bình"
+                },
+                "address": "Địa chỉ: Đường Lam Sơn, Phường 2, Quận Tân Bình, Hồ Chí Minh",
+                "attributes": {
+                    "price": "4.5 triệu/tháng",
+                    "acreage": "30m2",
+                    "published": "7 giờ trước",
+                    "hashtag": "597278"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "Cho thuê phòng CHDV gần sân bay .",
+                    "Phòng mới làm . Nội thất đầy đủ .giường ,tủ quần áo .máy giặt ,máy lạnh , tủ lạnh ,giờ giấc tự do ,khu dân cư an ninh yên tĩnh.",
+                    "Đia chỉ : 7B Lam sơn .p2 Tân bình"
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#597278"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê căn hộ Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Cho thuê căn hộ"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin VIP 3"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 6, 08:53 31/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 2, 08:59 03/04/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "HỒ TUẤN SÁNG"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0974131709"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0974131709"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/img-1661331524893-1679926482575_1680054093.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/img-1661331307434-1680019869141_1680054084.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/img-1661331307409-1680019869029_1680054086.jpg",
@@ -1138,8 +1373,8 @@
                 "address": "Địa chỉ: Phường Bến Thành, Quận 1, Hồ Chí Minh",
                 "attributes": {
                     "price": "5.3 triệu/tháng",
-                    "creage": "30m2",
-                    "published": "6 giờ trước",
+                    "acreage": "30m2",
+                    "published": "Hôm nay",
                     "hashtag": "616738"
                 }
             },
@@ -1216,189 +1451,6 @@
         },
         {
             "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/76881695-ede1-4ab0-9006-246e141ad5d5_1679844712.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/6134986f-337a-4774-9187-6211d07de80b_1679844709.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/62c19368-be32-4221-87c0-35fa134554a6_1679844709.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/fb785acd-c54e-449f-bcf3-82e9607ac572_1679844711.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/740805a1-1f53-444f-99fc-8062844ca813_1679844711.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/d77a0eb0-a991-4e48-abd1-57f827a16e5b_1679844712.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/76881695-ede1-4ab0-9006-246e141ad5d5_1679844712.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/6134986f-337a-4774-9187-6211d07de80b_1679844709.jpg"
-            ],
-            "header": {
-                "title": "Căn hộ 30m2 - nội thất cao cấp - cách etown 100m",
-                "star": "2",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê căn hộ dịch vụ Quận Tân Bình",
-                    "classType": "Cho thuê căn hộ dịch vụ Quận Tân Bình"
-                },
-                "address": "Địa chỉ: Đường Cộng Hòa, Phường 13, Quận Tân Bình, Hồ Chí Minh",
-                "attributes": {
-                    "price": "6.3 triệu/tháng",
-                    "creage": "30m2",
-                    "published": "7 giờ trước",
-                    "hashtag": "620455"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "Căn hộ cao cấp - Căn hộ mini - Căn hộ dịch vụ",
-                    "---",
-                    "Cách Etow Cộng Hoà 100m có thể đi bộ",
-                    "Nội thất Full như ảnh",
-                    "Điện 4k Số - Dịch Vụ 200k/phòng",
-                    "---",
-                    "Liên hệ 0906683369 Mr Tài",
-                    "Chuyên căn hộ mini - Dịch vụ",
-                    " "
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#620455"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê căn hộ dịch vụ Hồ Chí Minh"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Cho thuê căn hộ dịch vụ"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin VIP 3"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Thứ 5, 15:59 30/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Thứ 7, 22:32 01/04/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "Tai Duong"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0906683369"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0906683369"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/6a07be4d-528e-4ebb-a822-76fde6bce6b8_1680023069.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/a9a11d3a-e3dd-455a-b0c6-3700af0f4c93_1680023064.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/61b1054e-0117-403c-8248-72ace3dad110_1680023063.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/1e2d77f2-a192-4f04-82d8-2d058848e519_1680023066.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/63297f9a-9c93-4265-b7db-67c6ea67a4b3_1680023068.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/6a07be4d-528e-4ebb-a822-76fde6bce6b8_1680023069.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/29/a9a11d3a-e3dd-455a-b0c6-3700af0f4c93_1680023064.jpg"
-            ],
-            "header": {
-                "title": "CĂN HỘ 1 PHÒNG NGỦ - FULL NỘI THẤT - 40M2 - CÁCH ETOW 100M",
-                "star": "2",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê căn hộ Quận Tân Bình",
-                    "classType": "Cho thuê căn hộ Quận Tân Bình"
-                },
-                "address": "Địa chỉ: Đường Cộng Hòa, Phường 13, Quận Tân Bình, Hồ Chí Minh",
-                "attributes": {
-                    "price": "6.5 triệu/tháng",
-                    "creage": "40m2",
-                    "published": "7 giờ trước",
-                    "hashtag": "302319"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "Vị trí ngay sát Cộng Hoà - ETOW 2 - Tân Hải",
-                    "---",
-                    "Căn Hộ 1PN Siêu Rộng",
-                    "---",
-                    "Diện tích 40m2 - Đủ nội thất",
-                    "---",
-                    "Thang máy - Hầm xe - Khoá Vân Tay",
-                    "---",
-                    "Điện 4k - Dịch vụ 200k/ người - Free xe máy",
-                    "---",
-                    "LH 0906683369 Mr Tài"
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#302319"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê căn hộ Hồ Chí Minh"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Cho thuê căn hộ"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin VIP 3"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Thứ 5, 15:59 30/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Thứ 6, 22:40 31/03/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "Tai Duong"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0906683369"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0906683369"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/22/2023-03-21-14-54-img-6601_1679486325.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/22/2023-03-21-14-48-img-6589_1679486309.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/22/2023-03-21-14-48-img-6590_1679486309.jpg",
@@ -1423,8 +1475,8 @@
                 "address": "Địa chỉ: Đường Nguyễn Thị Thập, Phường Tân Quy, Quận 7, Hồ Chí Minh",
                 "attributes": {
                     "price": "7.5 triệu/tháng",
-                    "creage": "30m2",
-                    "published": "8 giờ trước",
+                    "acreage": "30m2",
+                    "published": "Hôm nay",
                     "hashtag": "620018"
                 }
             },
@@ -1528,8 +1580,8 @@
                 "address": "Địa chỉ: Đường Nguyễn Thị Thập, Phường Tân Quy, Quận 7, Hồ Chí Minh",
                 "attributes": {
                     "price": "7.5 triệu/tháng",
-                    "creage": "30m2",
-                    "published": "8 giờ trước",
+                    "acreage": "30m2",
+                    "published": "Hôm nay",
                     "hashtag": "620023"
                 }
             },
@@ -1632,8 +1684,8 @@
                 "address": "Địa chỉ: 79 Đường Nguyễn Thượng Hiền, Phường 5, Quận Bình Thạnh, Hồ Chí Minh",
                 "attributes": {
                     "price": "8.5 triệu/tháng",
-                    "creage": "35m2",
-                    "published": "11 giờ trước",
+                    "acreage": "35m2",
+                    "published": "Hôm nay",
                     "hashtag": "606083"
                 }
             },
@@ -1736,8 +1788,8 @@
                 "address": "Địa chỉ: Đường Trường Sơn, Phường 4, Quận Tân Bình, Hồ Chí Minh",
                 "attributes": {
                     "price": "8 triệu/tháng",
-                    "creage": "45m2",
-                    "published": "11 giờ trước",
+                    "acreage": "45m2",
+                    "published": "Hôm nay",
                     "hashtag": "620831"
                 }
             },
@@ -1822,8 +1874,8 @@
                 "address": "Địa chỉ: 122 Đường Bàu Cát 3, Phường 14, Quận Tân Bình, Hồ Chí Minh",
                 "attributes": {
                     "price": "3.7 triệu/tháng",
-                    "creage": "16m2",
-                    "published": "11 giờ trước",
+                    "acreage": "16m2",
+                    "published": "Hôm nay",
                     "hashtag": "620749"
                 }
             },
@@ -1866,94 +1918,6 @@
                     {
                         "name": "Ngày hết hạn:",
                         "value": "Thứ 3, 11:40 04/04/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "Nguyễn Thị Thanh Mai"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0902955968"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0902955968"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/z4222317552069-e47e5e5979a6b715eda7b5cb28160fe9_1680150415.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/bia_1680150353.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/z4222317317996-b0866057738fe6978c7ea9cf7cde93a4_1680150360.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/z4222317595817-f79df5d2849c8f6e9498a387e9169b46_1680150360.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/z4222317380133-83231fa79c3fe27ddf526484932f5736_1680150414.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/z4222317388615-0ffedcb1cc320ca48ca6480effda9a4d_1680150414.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/z4222317408346-fcdfe3d3dbae970ddb0390aefbd65a9d_1680150415.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/z4222317552069-e47e5e5979a6b715eda7b5cb28160fe9_1680150415.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/bia_1680150353.jpg"
-            ],
-            "header": {
-                "title": "Chính chủ cho thuê CHDV 55m2 - full nội thất - sàn gỗ xịn - thang máy - hệ thống bếp",
-                "star": "2",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê căn hộ dịch vụ Quận Bình Tân",
-                    "classType": "Cho thuê căn hộ dịch vụ Quận Bình Tân"
-                },
-                "address": "Địa chỉ: 381/13 Tân Hòa Đông, Phường Bình Trị Đông, Quận Bình Tân, Hồ Chí Minh",
-                "attributes": {
-                    "price": "6.7 triệu/tháng",
-                    "creage": "55m2",
-                    "published": "12 giờ trước",
-                    "hashtag": "613002"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "Nội thất - full nội thất: Tủ, gường, nệm, bàn, ghế, tủ lạnh, kệ bếp, máy lạnh inverter",
-                    "Nhà vệ sinh sử dụng trang thiết bị cao cấp - nước nóng (thêm máy giặt riêng trong phòng 300k/tháng)",
-                    "Tòa nhà có thang máy - khóa vân tay - camera phủ khắp nhà - tòa nhà chỉ có 08 phòng nên rất ổn định và an ninh, yên tĩnh",
-                    "Phí dịch vụ: nước 100k/người, Wifi, rác. vệ sinh hành lang, máy giặt....: 200k/phòngtháng, điện 3.5k/kwh",
-                    "Chính chủ cho thuê - miễn tiếp môi giới, công ty quảng cáo."
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#613002"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê căn hộ dịch vụ Hồ Chí Minh"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Cho thuê căn hộ dịch vụ"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin VIP 3"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Thứ 5, 11:27 30/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Thứ 3, 11:27 04/04/2023"
                     }
                 ]
             },

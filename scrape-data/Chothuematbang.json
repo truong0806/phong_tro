@@ -22,7 +22,7 @@
                 "address": "Địa chỉ: TK 11 Bến Chương Dương, Phường Cầu Kho, Quận 1, Hồ Chí Minh",
                 "attributes": {
                     "price": "7.2 triệu/tháng",
-                    "creage": "20m2",
+                    "acreage": "20m2",
                     "published": "Hôm nay",
                     "hashtag": "619645"
                 }
@@ -103,7 +103,7 @@
                 "address": "Địa chỉ: 345 Đường Bình Lợi, Phường 13, Quận Bình Thạnh, Hồ Chí Minh",
                 "attributes": {
                     "price": "6 triệu/tháng",
-                    "creage": "20m2",
+                    "acreage": "20m2",
                     "published": "Hôm nay",
                     "hashtag": "619909"
                 }
@@ -191,8 +191,8 @@
                 "address": "Địa chỉ: Libré Hàng Cháo, Phường Cát Linh, Quận Đống Đa, Hà Nội",
                 "attributes": {
                     "price": "12 triệu/tháng",
-                    "creage": "40m2",
-                    "published": "37 phút trước",
+                    "acreage": "40m2",
+                    "published": "17 giờ trước",
                     "hashtag": "609615"
                 }
             },
@@ -265,84 +265,6 @@
         },
         {
             "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/01/img-20230201-214147_1675262546.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/01/img-20230201-214102_1675262574.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/01/img-20230201-214147_1675262546.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/01/img-20230201-214102_1675262574.jpg"
-            ],
-            "header": {
-                "title": "Mặt bằng khu trọ 40/35 đường 147",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê mặt bằng Quận 9",
-                    "classType": "Cho thuê mặt bằng Quận 9"
-                },
-                "address": "Địa chỉ: Đường số 147, Phường Phước Long B, Quận 9, Hồ Chí Minh",
-                "attributes": {
-                    "price": "2.8 triệu/tháng",
-                    "creage": "20m2",
-                    "published": "2 giờ trước",
-                    "hashtag": "615040"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "KIOS mặt tiền khu trọ 40/35 đường 147, gần chợ Hoa Cau, CDCT..Diện tích 20m, có gác 8m, mặt đường 6m, máy lạnh, điện 2k5, nước 10k. Ở hoặc kinh doanh"
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#615040"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê mặt bằng Hồ Chí Minh"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Cho thuê mặt bằng"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin thường"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Thứ 5, 20:51 30/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Thứ 7, 10:51 01/04/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "Phạm Toàn Sinh"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0918462202"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0918462202"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/img-2545_1680165936.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/c_1680166567.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/30/e_1680166691.jpg",
@@ -361,9 +283,9 @@
                 },
                 "address": "Địa chỉ: Đường Quang Trung, Phường 10, Quận Gò Vấp, Hồ Chí Minh",
                 "attributes": {
-                    "price": "8.5 triệu/tháng",
-                    "creage": "35m2",
-                    "published": "8 giờ trước",
+                    "price": "8 triệu/tháng",
+                    "acreage": "35m2",
+                    "published": "1 ngày trước",
                     "hashtag": "620859"
                 }
             },
@@ -385,8 +307,7 @@
                     "* Địa chỉ: 417/6/2 QUANG TRUNG, P10, GÒ VẤP (Hẻm 417, Vô 3 căn nhà, hẻm đầu tiên tay phải quẹo phải là đến)",
                     "* Không nhận khách sản xuất đồ ăn uống tại chỗ để kinh doanh online",
                     "* Không nuôi thú cưng",
-                    "*Không nhận khách có người già, trẻ con",
-                    " "
+                    "*Không nhận khách có người già, trẻ con"
                 ]
             },
             "overview": {
@@ -461,8 +382,8 @@
                 "address": "Địa chỉ: 25 Nguyễn Minh Châu, Phường Phú Trung, Quận Tân Phú, Hồ Chí Minh",
                 "attributes": {
                     "price": "7 triệu/tháng",
-                    "creage": "40m2",
-                    "published": "8 giờ trước",
+                    "acreage": "40m2",
+                    "published": "1 ngày trước",
                     "hashtag": "620855"
                 }
             },
@@ -546,8 +467,8 @@
                 "address": "Địa chỉ: 42 Bình Đường, Phường An Bình, Huyện Dĩ An, Bình Dương",
                 "attributes": {
                     "price": "5.5 triệu/tháng",
-                    "creage": "40m2",
-                    "published": "9 giờ trước",
+                    "acreage": "40m2",
+                    "published": "1 ngày trước",
                     "hashtag": "620846"
                 }
             },
@@ -639,8 +560,8 @@
                 "address": "Địa chỉ: Đường Nguyễn Sáng, Phường Tây Thạnh, Quận Tân Phú, Hồ Chí Minh",
                 "attributes": {
                     "price": "7 triệu/tháng",
-                    "creage": "100m2",
-                    "published": "9 giờ trước",
+                    "acreage": "100m2",
+                    "published": "1 ngày trước",
                     "hashtag": "592797"
                 }
             },
@@ -726,8 +647,8 @@
                 "address": "Địa chỉ: 132 Nguyễn Xiển, Phường Hạ Đình, Quận Thanh Xuân, Hà Nội",
                 "attributes": {
                     "price": "5.5 triệu/tháng",
-                    "creage": "30m2",
-                    "published": "15 giờ trước",
+                    "acreage": "30m2",
+                    "published": "1 ngày trước",
                     "hashtag": "599377"
                 }
             },
@@ -819,7 +740,7 @@
                 "address": "Địa chỉ: 17 Nguyễn Hữu Cảnh, Phường Đông Hòa, Huyện Dĩ An, Bình Dương",
                 "attributes": {
                     "price": "65 triệu/tháng",
-                    "creage": "1000m2",
+                    "acreage": "1000m2",
                     "published": "1 ngày trước",
                     "hashtag": "620767"
                 }
@@ -907,7 +828,7 @@
                 "address": "Địa chỉ: KP 2 Đường Hắc Dịch, Xã Sông Xoài, Huyện Tân Thành, Bà Rịa - Vũng Tàu",
                 "attributes": {
                     "price": "5 triệu/tháng",
-                    "creage": "210m2",
+                    "acreage": "210m2",
                     "published": "1 ngày trước",
                     "hashtag": "620762"
                 }
@@ -993,8 +914,8 @@
                 "address": "Địa chỉ: 201/15 Đường Lê Văn Việt, Phường Hiệp Phú, Quận 9, Hồ Chí Minh",
                 "attributes": {
                     "price": "7 triệu/tháng",
-                    "creage": "40m2",
-                    "published": "2 ngày trước",
+                    "acreage": "40m2",
+                    "published": "3 ngày trước",
                     "hashtag": "305300"
                 }
             },
@@ -1085,8 +1006,8 @@
                 "address": "Địa chỉ: 106 Trưng Trắc, Phường Hiệp Bình Chánh, Quận Thủ Đức, Hồ Chí Minh",
                 "attributes": {
                     "price": "12 triệu/tháng",
-                    "creage": "40m2",
-                    "published": "2 ngày trước",
+                    "acreage": "40m2",
+                    "published": "3 ngày trước",
                     "hashtag": "620595"
                 }
             },
@@ -1176,8 +1097,8 @@
                 "address": "Địa chỉ: 375A Đường Nguyễn Sơn, Phường Phú Thạnh, Quận Tân Phú, Hồ Chí Minh",
                 "attributes": {
                     "price": "13 triệu/tháng",
-                    "creage": "47m2",
-                    "published": "2 ngày trước",
+                    "acreage": "47m2",
+                    "published": "3 ngày trước",
                     "hashtag": "619964"
                 }
             },
@@ -1265,8 +1186,8 @@
                 "address": "Địa chỉ: Võ Văn Kiệt, Phường 10, Quận 5, Hồ Chí Minh",
                 "attributes": {
                     "price": "13 triệu/tháng",
-                    "creage": "80m2",
-                    "published": "3 ngày trước",
+                    "acreage": "80m2",
+                    "published": "27/03/2023",
                     "hashtag": "615834"
                 }
             },
@@ -1344,106 +1265,6 @@
         },
         {
             "images": [
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509880-69010d358204eb50e6f1f8d18d83c32b_1677903466.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509827-3e882d78dbde32a7ac96ab4e006158df_1677903460.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509822-6ce6a18228fa039399b0ee5a110e48c5_1677903458.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948508057-5ef949089d2db0ebbf8bcf918b04ede6_1677903458.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509842-99316f483ca288fd7ab47f1b461c3c8a_1677903461.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509858-c931b0b9b14bccdd4345ce6a869f0022_1677903463.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509863-b45854d72e9c33583036db59806b227b_1677903463.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509864-a71e622026fa33732264854ac34bb971_1677903466.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509880-69010d358204eb50e6f1f8d18d83c32b_1677903466.jpg",
-                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509827-3e882d78dbde32a7ac96ab4e006158df_1677903460.jpg"
-            ],
-            "header": {
-                "title": "Sang nhượng KTX mặt tiền Nguyễn Cửu Vân hiện đã full khách, LH : 0936 166 578",
-                "class": {
-                    "content": "Chuyên mục: Cho thuê mặt bằng Quận Bình Thạnh",
-                    "classType": "Cho thuê mặt bằng Quận Bình Thạnh"
-                },
-                "address": "Địa chỉ: Phường 17, Quận Bình Thạnh, Hồ Chí Minh",
-                "attributes": {
-                    "price": "35 triệu/tháng",
-                    "creage": "100m2",
-                    "published": "26/03/2023",
-                    "hashtag": "617893"
-                }
-            },
-            "mainContent": {
-                "header": "Thông tin mô tả",
-                "content": [
-                    "Sang nhượng lại kí túc xá mặt tiền đường Nguyễn Cửu Vân, P17, Bình Thạnh.",
-                    "Nhà ngang 5x20, 1 hầm, 1 trệt, 3 lầu, 1 sân thượng.",
-                    "Hiện tại có 36 giường KTX, 1 mặt bằng, và 1 penhouse có thiết kế chưa làm.",
-                    "Giá thuê 35tr/tháng.",
-                    "Lợi nhuận full: 38tr, hiện tại full khách.",
-                    "Hợp đồng với chủ còn 5 năm, 2 năm tăng 10%.",
-                    "Giá sang 430tr bao gồm 70tr tiền cọc chủ và toàn bộ nội thất đầu tư, ko bao gồm 42tr cọc khách.",
-                    "Địa chỉ: 70 Nguyễn Cửu Vân, Phường 17, Quận Bình Thạnh.",
-                    "Thuận tiện đi qua các quận trung tâm 1,2, 3, 10 Thủ Đức... Cực nhanh chóng không sợ kẹt xe. Nằm giữa trục đường lớn Điện Biên Phủ Và Xô Viết Nghệ Tĩnh. Gần trạm bus.",
-                    "Gần các trường đại học: Hutech, Đại Học Quốc Tế Hồng Bàng, Đại Học Kinh Tế Đối Ngoại - Uef, Đại Học Thủy Lợi, Ngoại Thương,...",
-                    "Nội thất: Nệm, drap, tủ lạnh, bàn ghế ăn, tủ đồ cá nhân, nhà bếp riêng, nước nóng lạnh năng lượng mặt trời, máy giặt, Nhà mới xây xong.",
-                    "Máy lạnh riêng từng phòng. Có thang máy.",
-                    "Cửa khoá vân tay, giờ giấc tự do.",
-                    "Khu vực an ninh tốt, camera 24/24.",
-                    "Liên hệ ngay: Vũ 0936 166 578 Zalo, Call, SMS) để trao đổi thêm thông tin.",
-                    "Cho thuê ký túc xá, sleepbox, phòng trọ, Căn hộ dịch Vụ trên địa bàn toàn Thành phố Hồ Chí Minh (Bình Thạnh, Gò Vấp, Quận 7, Quận 1, Quận 3, Quận 4, Quận 5, Tân Bình, Tân Phú, Phú Nhuận).",
-                    "Ngoài ra em còn nhận sales phòng trọ, ký túc xá, sleepbox, căn hộ dịch vụ anh chị chủ nhà có nhu cầu ra phòng nhanh liện hệ em: Vũ 0936 166 578zalo, Call, Sms)."
-                ]
-            },
-            "overview": {
-                "header": "Đặc điểm tin đăng",
-                "content": [
-                    {
-                        "name": "Mã tin:",
-                        "value": "#617893"
-                    },
-                    {
-                        "name": "Khu vực",
-                        "value": "Cho thuê mặt bằng Hồ Chí Minh"
-                    },
-                    {
-                        "name": "Loại tin rao:",
-                        "value": "Cho thuê mặt bằng"
-                    },
-                    {
-                        "name": "Đối tượng thuê:",
-                        "value": "Tất cả"
-                    },
-                    {
-                        "name": "Gói tin:",
-                        "value": "Tin thường"
-                    },
-                    {
-                        "name": "Ngày đăng:",
-                        "value": "Chủ Nhật, 10:26 26/03/2023"
-                    },
-                    {
-                        "name": "Ngày hết hạn:",
-                        "value": "Thứ 6, 10:26 31/03/2023"
-                    }
-                ]
-            },
-            "contact": {
-                "header": "Thông tin liên hệ",
-                "content": [
-                    {
-                        "name": "Liên hệ:",
-                        "value": "Nguyễn Đức Vũ"
-                    },
-                    {
-                        "name": "Điện thoại:",
-                        "value": "0936166578"
-                    },
-                    {
-                        "name": "Zalo",
-                        "value": "0936166578"
-                    }
-                ]
-            }
-        },
-        {
-            "images": [
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/z4209439793048-87e134586b145eaf3440865002c33464_1679797310.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/z4209439769455-b438daa8d04c925c1ae73f13dbda892a_1679797308.jpg",
                 "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/26/z4209439775817-d9257cbf719c82610c92310d19d732d8_1679797308.jpg",
@@ -1464,7 +1285,7 @@
                 "address": "Địa chỉ: 15A Nguyên Hồng, Phường 11, Quận Bình Thạnh, Hồ Chí Minh",
                 "attributes": {
                     "price": "18 triệu/tháng",
-                    "creage": "48m2",
+                    "acreage": "48m2",
                     "published": "26/03/2023",
                     "hashtag": "620384"
                 }
@@ -1549,7 +1370,7 @@
                 "address": "Địa chỉ: 396 Đường Bình Mỹ, Xã Bình Mỹ, Huyện Củ Chi, Hồ Chí Minh",
                 "attributes": {
                     "price": "8 triệu/tháng",
-                    "creage": "250m2",
+                    "acreage": "250m2",
                     "published": "18/03/2023",
                     "hashtag": "619563"
                 }
@@ -1636,8 +1457,8 @@
                 "address": "Địa chỉ: 02 Đường Tây Sơn, Phường Quang Trung, Quận Đống Đa, Hà Nội",
                 "attributes": {
                     "price": "5.5 triệu/tháng",
-                    "creage": "25m2",
-                    "published": "15 giờ trước",
+                    "acreage": "25m2",
+                    "published": "1 ngày trước",
                     "hashtag": "617343"
                 }
             },
@@ -1727,8 +1548,8 @@
                 "address": "Địa chỉ: Đường Duy Tân, Phường Hòa Thuận Tây, Quận Hải Châu, Đà Nẵng",
                 "attributes": {
                     "price": "8 triệu/tháng",
-                    "creage": "60m2",
-                    "published": "1 ngày trước",
+                    "acreage": "60m2",
+                    "published": "2 ngày trước",
                     "hashtag": "316380"
                 }
             },
@@ -1785,6 +1606,195 @@
                     {
                         "name": "Zalo",
                         "value": "0888880132"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/01/07/f3dc6c011b67ef39b6766_1673077537.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/01/07/9d2d4850d9ce019058df4_1673077528.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/01/07/a5f1ea927b0ca352fa1d1_1673077528.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/01/07/af21735ce2c23a9c63d33_1673077528.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/01/07/db18207fb1e169bf30f02_1673077529.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/01/07/0c00391d4d7bb925e06a5_1673077537.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/01/07/f3dc6c011b67ef39b6766_1673077537.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/01/07/9d2d4850d9ce019058df4_1673077528.jpg"
+            ],
+            "header": {
+                "title": "C.Chủ cho thuê mặt bằng KD, VP, KD online 6tr/tháng tại số 11/18 Nguyễn Khuyến, Văn Quán, Hà Đông",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê mặt bằng Quận Hà Đông",
+                    "classType": "Cho thuê mặt bằng Quận Hà Đông"
+                },
+                "address": "Địa chỉ: 11/18 Nguyễn Khuyến, Phường Văn Quán, Quận Hà Đông, Hà Nội",
+                "attributes": {
+                    "price": "6 triệu/tháng",
+                    "acreage": "30m2",
+                    "published": "3 ngày trước",
+                    "hashtag": "588818"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "Mình chính chủ cho thuê mặt bằng kinh doanh, văn phòng, bán hàng online tại số 11/18 Nguyễn Khuyến, văn Quán, hà đông, hà nội",
+                    "- Vị trí: trung tâm KĐT văn quán, gần BigC Hà Đông, hồ văn quán, gần cụm văn phòng ngân hàng, trường học, chợ, chung cư",
+                    "- Đường xá to đẹp, oto đỗ cửa, khu nhà phân lô dân trí cao",
+                    "- Mặt tiền: 5m, dài 6m, nhà đẹp vuông vắn, mát mẻ,",
+                    "- Có điều hoà 18000BTU, cửa kính, cửa cuốn an toàn, nhà ngõ thông, có wc riêng biệt tầng 1",
+                    "- Cho thuê lâu dài, hình thức cọc 1.5 đóng 3",
+                    "Chính chủ miễn môi giới, quảng cáo, đăng tin",
+                    "Lh mình 0877 828 666"
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#588818"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê mặt bằng Hà Nội"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Cho thuê mặt bằng"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin thường"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Thứ 3, 10:24 28/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 5, 09:28 30/03/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "Sam Sam"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0877828666"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0877828666"
+                    }
+                ]
+            }
+        },
+        {
+            "images": [
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509880-69010d358204eb50e6f1f8d18d83c32b_1677903466.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509827-3e882d78dbde32a7ac96ab4e006158df_1677903460.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509822-6ce6a18228fa039399b0ee5a110e48c5_1677903458.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948508057-5ef949089d2db0ebbf8bcf918b04ede6_1677903458.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509842-99316f483ca288fd7ab47f1b461c3c8a_1677903461.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509858-c931b0b9b14bccdd4345ce6a869f0022_1677903463.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509863-b45854d72e9c33583036db59806b227b_1677903463.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509864-a71e622026fa33732264854ac34bb971_1677903466.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509880-69010d358204eb50e6f1f8d18d83c32b_1677903466.jpg",
+                "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/04/z4128948509827-3e882d78dbde32a7ac96ab4e006158df_1677903460.jpg"
+            ],
+            "header": {
+                "title": "Sang nhượng KTX mặt tiền Nguyễn Cửu Vân hiện đã full khách, LH : 0936 166 578",
+                "class": {
+                    "content": "Chuyên mục: Cho thuê mặt bằng Quận Bình Thạnh",
+                    "classType": "Cho thuê mặt bằng Quận Bình Thạnh"
+                },
+                "address": "Địa chỉ: Phường 17, Quận Bình Thạnh, Hồ Chí Minh",
+                "attributes": {
+                    "price": "35 triệu/tháng",
+                    "acreage": "100m2",
+                    "published": "26/03/2023",
+                    "hashtag": "617893"
+                }
+            },
+            "mainContent": {
+                "header": "Thông tin mô tả",
+                "content": [
+                    "Sang nhượng lại kí túc xá mặt tiền đường Nguyễn Cửu Vân, P17, Bình Thạnh.",
+                    "Nhà ngang 5x20, 1 hầm, 1 trệt, 3 lầu, 1 sân thượng.",
+                    "Hiện tại có 36 giường KTX, 1 mặt bằng, và 1 penhouse có thiết kế chưa làm.",
+                    "Giá thuê 35tr/tháng.",
+                    "Lợi nhuận full: 38tr, hiện tại full khách.",
+                    "Hợp đồng với chủ còn 5 năm, 2 năm tăng 10%.",
+                    "Giá sang 430tr bao gồm 70tr tiền cọc chủ và toàn bộ nội thất đầu tư, ko bao gồm 42tr cọc khách.",
+                    "Địa chỉ: 70 Nguyễn Cửu Vân, Phường 17, Quận Bình Thạnh.",
+                    "Thuận tiện đi qua các quận trung tâm 1,2, 3, 10 Thủ Đức... Cực nhanh chóng không sợ kẹt xe. Nằm giữa trục đường lớn Điện Biên Phủ Và Xô Viết Nghệ Tĩnh. Gần trạm bus.",
+                    "Gần các trường đại học: Hutech, Đại Học Quốc Tế Hồng Bàng, Đại Học Kinh Tế Đối Ngoại - Uef, Đại Học Thủy Lợi, Ngoại Thương,...",
+                    "Nội thất: Nệm, drap, tủ lạnh, bàn ghế ăn, tủ đồ cá nhân, nhà bếp riêng, nước nóng lạnh năng lượng mặt trời, máy giặt, Nhà mới xây xong.",
+                    "Máy lạnh riêng từng phòng. Có thang máy.",
+                    "Cửa khoá vân tay, giờ giấc tự do.",
+                    "Khu vực an ninh tốt, camera 24/24.",
+                    "Liên hệ ngay: Vũ 0936 166 578 Zalo, Call, SMS) để trao đổi thêm thông tin.",
+                    "Cho thuê ký túc xá, sleepbox, phòng trọ, Căn hộ dịch Vụ trên địa bàn toàn Thành phố Hồ Chí Minh (Bình Thạnh, Gò Vấp, Quận 7, Quận 1, Quận 3, Quận 4, Quận 5, Tân Bình, Tân Phú, Phú Nhuận).",
+                    "Ngoài ra em còn nhận sales phòng trọ, ký túc xá, sleepbox, căn hộ dịch vụ anh chị chủ nhà có nhu cầu ra phòng nhanh liện hệ em: Vũ 0936 166 578zalo, Call, Sms)."
+                ]
+            },
+            "overview": {
+                "header": "Đặc điểm tin đăng",
+                "content": [
+                    {
+                        "name": "Mã tin:",
+                        "value": "#617893"
+                    },
+                    {
+                        "name": "Khu vực",
+                        "value": "Cho thuê mặt bằng Hồ Chí Minh"
+                    },
+                    {
+                        "name": "Loại tin rao:",
+                        "value": "Cho thuê mặt bằng"
+                    },
+                    {
+                        "name": "Đối tượng thuê:",
+                        "value": "Tất cả"
+                    },
+                    {
+                        "name": "Gói tin:",
+                        "value": "Tin thường"
+                    },
+                    {
+                        "name": "Ngày đăng:",
+                        "value": "Chủ Nhật, 10:26 26/03/2023"
+                    },
+                    {
+                        "name": "Ngày hết hạn:",
+                        "value": "Thứ 6, 10:26 31/03/2023"
+                    }
+                ]
+            },
+            "contact": {
+                "header": "Thông tin liên hệ",
+                "content": [
+                    {
+                        "name": "Liên hệ:",
+                        "value": "Nguyễn Đức Vũ"
+                    },
+                    {
+                        "name": "Điện thoại:",
+                        "value": "0936166578"
+                    },
+                    {
+                        "name": "Zalo",
+                        "value": "0936166578"
                     }
                 ]
             }
