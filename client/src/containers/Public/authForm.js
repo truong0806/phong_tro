@@ -4,25 +4,40 @@ import { InputForm, Button } from '../../components'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as actions from '../../store/action'
 import { useDispatch, useSelector } from 'react-redux'
+import { validate } from '../../ultils/validate'
+import Swal from 'sweetalert2'
+
 const Auth = () => {
   const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { isLoggedIn } = useSelector((state) => state.auth)
+  const { isLoggedIn, msg, update } = useSelector((state) => state.auth)
   const [isRegister, setIsRegister] = useState(location.state?.flag)
   const [invalidFields, setInvalidFields] = useState([])
   const [payload, setPayload] = useState({
     phone: '',
     password: '',
     name: '',
+    comfirmPassword: '',
   })
-
   useEffect(() => {
     setIsRegister(location.state?.flag)
   }, [location.state?.flag])
   useEffect(() => {
-    isLoggedIn && navigate('/')
-  }, [isLoggedIn])
+    msg && Swal.fire('Lỗi', msg, 'error')
+  }, [msg])
+  useEffect(() => {
+    msg && Swal.fire('Oops !', msg, 'error')
+}, [msg, update])
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setPayload((prevPayload) => ({
+      ...prevPayload,
+      [name]: value,
+    }))
+  }
+
   const handleSubmit = async () => {
     let finalinvalids = isRegister
       ? payload
@@ -30,157 +45,74 @@ const Auth = () => {
           phone: payload.phone,
           password: payload.password,
         }
-
-    let invalids = validate(finalinvalids)
+    let invalids = validate(finalinvalids, setInvalidFields)
     if (invalids === 0)
       isRegister
         ? dispatch(actions.register(payload))
         : dispatch(actions.login(payload))
   }
-  const validate = (payload) => {
-    let invalids = 0
-    let fields = Object.entries(payload)
-    fields.forEach((item) => {
-      switch (item[0]) {
-        case 'password':
-          if (item[1] === '') {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                msg: 'Vui lòng nhập mật khẩu',
-              },
-            ])
-            invalids++
-          }
-          break
-        case 'phone':
-          if (item[1] === '') {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                msg: 'Vui lòng nhập số điện thoại',
-              },
-            ])
-            invalids++
-          }
-          break
-        case 'name':
-          if (item[1] === '') {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                msg: 'Vui lòng nhập tên',
-              },
-            ])
-            invalids++
-          }
-          break
-        default:
-          break
-      }
-    })
-    fields.forEach((item) => {
-      switch (item[0]) {
-        case 'password':
-          if (item[1] > 6) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                msg: 'Vui lòng nhập mật khẩu tối thiểu 6 ký tự',
-              },
-            ])
-            invalids++
-          }
-          break
-        case 'phone':
-          if (!+item[1]) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                msg: 'Vui lòng đúng định dạng số điện thoại',
-              },
-            ])
-            invalids++
-          } else {
-            if (item[1].length > 10 || item[1].length < 10) {
-              setInvalidFields((prev) => [
-                ...prev,
-                {
-                  name: item[0],
-                  msg: 'Vui lòng đúng số điện thoại với 10 số',
-                },
-              ])
-            }
-          }
-          break
-        case 'name':
-          if (item[1] === '') {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                msg: 'Vui lòng nhập tên',
-              },
-            ])
-            invalids++
-          }
-          break
-        default:
-          break
-      }
-    })
-    return invalids
-  }
+
   return (
     <div>
       <div className="bg-white border-[#dedede] border w-[600px] m-auto pt-[30px] px-[30px] pb-[100px] rounded-md shadow-sm ">
         <h3 className="font-bold text-3xl mb-[10px]">
           {isRegister ? 'Đăng ký tài khoản' : 'Đăng nhập'}
         </h3>
-
         <div className="w-full">
           {isRegister && (
             <InputForm
+              name={'name'}
               stylleGroup={'mt-[15px]'}
               setInvalidFields={setInvalidFields}
               invalidFields={invalidFields}
               value={payload.name}
-              setValue={setPayload}
-              type={'name'}
+              onChange={handleChange}
+              keyPayload={'name'}
               label={'Họ tên'}
               styleLabel="text-sm uppercase text-xs font-normal "
               styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[10px] mb-[5px]"
-              typeInput="text"
             />
           )}
           <InputForm
+            name={'phone'}
             stylleGroup={'mt-[15px]'}
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             value={payload.phone}
-            setValue={setPayload}
-            type={'phone'}
+            onChange={handleChange}
+            keyPayload={'phone'}
             label={'Số điện thoại'}
             styleLabel="text-sm uppercase text-xs font-normal "
             styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[10px] mb-[5px]"
-            typeInput="text"
           />
           <InputForm
+            name={'password'}
             stylleGroup={'mt-[15px]'}
             setInvalidFields={setInvalidFields}
             invalidFields={invalidFields}
             value={payload.password}
-            setValue={setPayload}
-            type={'password'}
+            onChange={handleChange}
+            keyPayload={'password'}
             label={'Mật khẩu'}
             styleLabel="text-sm uppercase text-xs  font-normal "
             styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[5px] mb-[5px]"
+            type={'password'}
           />
+          {isRegister && (
+            <InputForm
+              name={'comfirmPassword'}
+              stylleGroup={'mt-[15px]'}
+              setInvalidFields={setInvalidFields}
+              invalidFields={invalidFields}
+              value={payload.comfirmPassword}
+              onChange={handleChange}
+              keyPayload={'comfirmPassword'}
+              label={'Mật khẩu'}
+              styleLabel="text-sm uppercase text-xs  font-normal "
+              styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[5px] mb-[5px]"
+              type={'password'}
+            />
+          )}
           <Button
             text={isRegister ? 'Đăng ký' : 'Đăng nhập'}
             bgcolor="bg-[#3961fb]"
