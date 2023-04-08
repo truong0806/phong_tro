@@ -28,7 +28,7 @@ const Auth = () => {
   }, [msg])
   useEffect(() => {
     msg && Swal.fire('Oops !', msg, 'error')
-}, [msg, update])
+  }, [msg, update])
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -54,7 +54,7 @@ const Auth = () => {
 
   return (
     <div>
-      <div className="bg-white border-[#dedede] border w-[600px] m-auto pt-[30px] px-[30px] pb-[100px] rounded-md shadow-sm ">
+      <div className="bg-white border-[#704f4f] border w-[600px] m-auto pt-[30px] px-[30px] pb-[100px] rounded-md shadow-sm ">
         <h3 className="font-bold text-3xl mb-[10px]">
           {isRegister ? 'Đăng ký tài khoản' : 'Đăng nhập'}
         </h3>

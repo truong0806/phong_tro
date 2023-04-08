@@ -1,6 +1,6 @@
-import React from "react";
-import { Header, Navigation, WhyUs, Support } from "./";
-import { Outlet } from "react-router-dom";
+import React from 'react'
+import { Header, Navigation, WhyUs, Support } from './'
+import { Outlet } from 'react-router-dom'
 const Home = () => {
   return (
     <div className="w-full flex flex-col items-center h-full border">
@@ -12,7 +12,7 @@ const Home = () => {
       <WhyUs />
       <Support />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

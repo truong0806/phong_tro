@@ -1,6 +1,12 @@
-export { default as Home } from "./Home";
-export { default as Auth } from "./authForm";
-export { default as Header } from "./Header";
-export { default as WhyUs } from "./WhyUs";
-export { default as Navigation } from "./Navigation";
-export { default as Support } from "./Support";
+export { default as Home } from './Home'
+export { default as Auth } from './authForm'
+export { default as Header } from './Header'
+export { default as WhyUs } from './WhyUs'
+export { default as Navigation } from './Navigation'
+export { default as Support } from './Support'
+
+export { default as HomePage } from './page/homePage'
+export { default as RentalHouse } from './page/rentalHouse'
+export { default as RentalRoom } from './page/rentalRoom'
+export { default as RentalSpace } from './page/rentalSpace'
+export { default as RentalApartment } from './page/rentalApartment'
