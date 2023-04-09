@@ -1,9 +1,10 @@
 import React from 'react'
-
+import { Search } from '../index'
 const homePage = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="border border-red-500 w-full flex flex-col gap-3">
+      <Search />
+      homePage
     </div>
   )
 }
