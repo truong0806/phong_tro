@@ -7,16 +7,16 @@ const {
   TbReportMoney,
   RiCrop2Line,
   MdOutlineHouseSiding,
-  RiDeleteBack2Fill,
+  RiDeleteBack2Line,
+  FiSearch,
 } = icons
-
 const Search = () => {
   return (
-    <div className="h-[55px] p-[10px] bg-[#febb02] rounded-lg flex items-center justify-around gap-2">
+    <div className="my-3  w-[85%] p-[10px] bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2">
       <SearchItem
         fontWeight
         IconBefore={<MdOutlineHouseSiding />}
-        IconAfter={<RiDeleteBack2Fill />}
+        IconAfter={<RiDeleteBack2Line />}
         text="Phòng trọ, nhà trọ"
       />
       <SearchItem
@@ -34,7 +34,13 @@ const Search = () => {
         IconAfter={<GrNext />}
         text="Chọn diện tích"
       />
-      Search
+      <button
+        type="button"
+        className="outline-none py-2 px-4 w-full rounded-md font-medium max-w-[210px] bg-secondary1 text-[13px] flex items-center justify-center gap-2 text-white"
+      >
+        <FiSearch />
+        Tìm kiếm
+      </button>
     </div>
   )
 }

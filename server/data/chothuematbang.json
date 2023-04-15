@@ -1,8 +1,12 @@
 {
-    "header": {
-        "title": "Cho Thuê Mặt Bằng, Cửa Hàng + Kiot Giá Rẻ, Mới Nhất 2023",
-        "discription": "Cho thuê mặt bằng - Kênh thông tin mặt bằng giá rẻ, cửa hàng, kiot số 1 Việt Nam. Tìm mặt bằng kinh doanh, buôn bán nhỏ, gần chợ tất cả có tại web phongtro123.com"
-    },
+    "header": [
+        {
+            "code": "CTMB",
+            "value": "Cho thuê mặt bằng",
+            "header": "Cho Thuê Mặt Bằng, Cửa Hàng + Kiot Giá Rẻ, Mới Nhất 2023",
+            "subheader": "Cho thuê mặt bằng - Kênh thông tin mặt bằng giá rẻ, cửa hàng, kiot số 1 Việt Nam. Tìm mặt bằng kinh doanh, buôn bán nhỏ, gần chợ tất cả có tại web phongtro123.com"
+        }
+    ],
     "body": [
         {
             "images": [

@@ -12,3 +12,7 @@ export { default as RentalSpace } from './page/rentalSpace'
 export { default as RentalApartment } from './page/rentalApartment'
 
 export { default as Search } from './components/Search'
+export { default as ProvinceBtn } from './components/ProvinceBtn'
+export { default as Province } from './components/Province'
+export { default as ListPost } from './components/ListPost'
+export { default as ListPostItem } from './components/ListPostItem'

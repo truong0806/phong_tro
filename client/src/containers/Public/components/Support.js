@@ -5,15 +5,15 @@ import { Button } from '../../../components'
 const Support = () => {
   return (
     <div>
-      <section className="border-dashed  border-[7px]  bg-white border-[#e8eefc] p-[30px] mt-[30px] mb-[20px] rounded-lg w-1100 h-auto">
+      <section className="  m-auto border-dashed max-w-1100 border-[7px]  bg-white border-[#e8eefc] p-[30px] mt-[30px] mb-[20px] rounded-lg w-1100 h-auto">
         <div className="">
           <div className="h-[150px] bg-support-bg bg-contain bg-no-repeat bg-center w-full"></div>
           <div className="mt-[30px] px-[10px]  text-center">
             <div className="mb-[20px] text-[17px] text-[#233762]">
               Liên hệ với chúng tôi nếu bạn cần hỗ trợ:
             </div>
-            <div className="flex justify-around items-center">
-              <div className="text-center">
+            <div className="flex-col lg:flex-row grap-6 flex justify-around items-center">
+              <div className="text-center  mb-[20px]">
                 <span className="text-[#f60] font-bold text-[14px] uppercase mb-[10px]">
                   Hỗ trợ thanh toán
                 </span>
@@ -26,7 +26,7 @@ const Support = () => {
                   Zalo: 0917686101
                 </a>
               </div>
-              <div className="text-center">
+              <div className="text-center  mb-[20px]">
                 <span className="text-[#f60] font-bold text-[14px] uppercase mb-[10px]">
                   Hỗ trợ đăng tin
                 </span>
@@ -40,7 +40,7 @@ const Support = () => {
                 </a>
                 <br />
               </div>
-              <div className="text-center">
+              <div className="text-center  mb-[20px]">
                 <span className="text-[#f60] font-bold text-[14px] uppercase mb-[10px]">
                   Hotline 24/7
                 </span>

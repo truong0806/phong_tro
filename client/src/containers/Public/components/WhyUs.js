@@ -5,7 +5,7 @@ import { Button } from '../../../components'
 const WhyUs = () => {
   return (
     <div className="">
-      <div className="border-[#dedede] border max-w-1100 bg-white m-auto pt-[20px] px-[50px] pb-[50px]  rounded-md shadow-sm ">
+      <div className="border-[#dedede] border max-w-1100 text-center bg-white m-auto pt-[20px] px-[50px] pb-[50px]  rounded-md shadow-sm ">
         <h4 className="font-[700] text-[18px] mb-[5px] justify-center items-center flex">
           Tại sao lại chọn PhongTro123.com?
         </h4>
@@ -16,26 +16,30 @@ const WhyUs = () => {
           mặt bằng...Vì vậy tin của bạn đăng trên website sẽ tiếp cận được với
           nhiều khách hàng hơn, do đó giao dịch nhanh hơn, tiết kiệm chi phí hơn
         </p>
-        <div className="flex justify-center items-center content-around text-center">
+        <div className="flex-col lg:flex-row gap-4 flex justify-center items-center content-around ">
           <div className="w-1/4 flex-col">
             <span className="font-[700] text-[21px] mb-[5px]">116.998+</span>
             <br />
-            <span className="text-[14px] font-thin">Thành viên</span>
+            <span className="text-[14px] font-thin mb-[5px]">Thành viên</span>
           </div>
           <div className="w-1/4">
             <span className="font-[700] text-[21px] mb-[5px]">103.348+</span>
             <br />
-            <span className="text-[14px] font-thin">Tin đăng</span>
+            <span className="text-[14px] font-thin mb-[5px]">Tin đăng</span>
           </div>
           <div className="w-1/4">
             <span className="font-[700] text-[21px] mb-[5px]">300.000+</span>
             <br />
-            <span className="text-[14px] font-thin">Lượt truy cập/tháng</span>
+            <span className="text-[14px] font-thin mb-[5px]">
+              Lượt truy cập/tháng
+            </span>
           </div>
           <div className="w-1/4">
             <span className="font-[700] text-[21px] mb-[5px]">2.500.000+</span>
             <br />
-            <span className="text-[14px] font-thin">Lượt xem/tháng</span>
+            <span className="text-[14px] font-thin mb-[5px]">
+              Lượt xem/tháng
+            </span>
           </div>
         </div>
         <br></br>
@@ -61,7 +65,7 @@ const WhyUs = () => {
         <h6 className=" justify-center items-center flex">
           Bạn đang có phòng trọ / căn hộ cho thuê?
         </h6>
-        <p className=" justify-center items-center flex my-[14px]">
+        <p className=" justify-center items-center flex my-[14px] ">
           Không phải lo tìm người cho thuê, phòng trống kéo dài
         </p>
         <div className="justify-center items-center flex">

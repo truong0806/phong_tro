@@ -32,6 +32,7 @@ const Header = () => {
         {!isLoggedIn && (
           <div className="cursor-pointer  flex items-center gap-1">
             <Button
+              margin={'py-[20px]'}
               fontW={'font-normal text-[14px] h-[40px]'}
               IcBefor={AiOutlineHeart}
               text={'Yêu thích'}
@@ -40,6 +41,7 @@ const Header = () => {
               IcBeforSize="20"
             />
             <Button
+              margin={'py-[20px]'}
               fontW={'font-normal text-[14px] h-[40px]'}
               IcBefor={BiLogIn}
               text={'Đăng nhập'}
@@ -51,6 +53,7 @@ const Header = () => {
               }}
             />
             <Button
+              margin={'py-[20px]'}
               fontW={'font-normal text-[14px] h-[40px]'}
               IcBefor={AiOutlineUserAdd}
               text={'Đăng ký'}
@@ -67,6 +70,7 @@ const Header = () => {
           <div className="cursor-pointer  flex items-center gap-1">
             <span>Ten !</span>
             <Button
+              margin={'py-[20px]'}
               fontW={'font-normal text-[14px] h-[40px]'}
               IcBefor={BiLogIn}
               text={'Đăng xuất'}
@@ -80,6 +84,7 @@ const Header = () => {
           </div>
         )}
         <Button
+          margin={'py-[20px]'}
           width={'w-auto text-[14px] h-[40px] '}
           text={'Đăng tin mới'}
           textColor="text-white"

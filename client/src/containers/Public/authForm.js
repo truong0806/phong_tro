@@ -53,8 +53,8 @@ const Auth = () => {
   }
 
   return (
-    <div>
-      <div className="bg-white border-[#704f4f] border w-[600px] m-auto pt-[30px] px-[30px] pb-[100px] rounded-md shadow-sm ">
+    <div className="items-center justify-center">
+      <div className="bg-white  border-[#704f4f] border w-[600px] m-auto pt-[30px] px-[30px] pb-[100px] rounded-md shadow-sm ">
         <h3 className="font-bold text-3xl mb-[10px]">
           {isRegister ? 'Đăng ký tài khoản' : 'Đăng nhập'}
         </h3>
@@ -120,7 +120,7 @@ const Auth = () => {
             textColor={'text-white'}
             height={'h-[45px]'}
             fontW={'font-bold'}
-            margin={'mt-[20px]'}
+            margin={'mt-[20px] py-[20px]'}
             onClick={handleSubmit}
           />
           <div className="text-sm text-black text-[14px] ">

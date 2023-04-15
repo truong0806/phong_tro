@@ -25,6 +25,14 @@ module.exports = {
     fontFamily: {
       sans: ['Helvetica', 'Arial', 'sans-serif'],
     },
+    screens: {
+      s:'0',
+      xs: '480px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
   },
   plugins: [],
 }

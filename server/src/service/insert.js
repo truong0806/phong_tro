@@ -13,18 +13,22 @@ const hashPassword = (password) =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(12))
 const dataBody = [
   {
+    header: chothuephongtro.header,
     body: chothuephongtro.body,
     code: 'CTPT',
   },
   {
+    header: chothuematbang.header,
     body: chothuematbang.body,
     code: 'CTMB',
   },
   {
+    header: chothuecanho.header,
     body: chothuecanho.body,
     code: 'CTCH',
   },
   {
+    header: nhachothue.header,
     body: nhachothue.body,
     code: 'NCT',
   },
@@ -33,14 +37,28 @@ export const insertService = () =>
   new Promise(async (resolve, reject) => {
     try {
       dataBody.forEach((cate) => {
+        cate.header.forEach(async (category) => {
+          await db.Category.findOrCreate({
+            where: { code: category?.code },
+            defaults: {
+              code: category?.code,
+              value: category?.value,
+              header: category?.header,
+              subheader: category?.subheader,
+            },
+          })
+        })
+      })
+      dataBody.forEach((cate) => {
         cate.body.forEach(async (item) => {
           let postId = v4()
           let attributesId = v4()
           let userId = v4()
           let overviewId = v4()
           let imagesId = v4()
-          let labelCode = genarateCode(4)
+          let labelCode = genarateCode(item?.header?.class?.classType).trim()
           let desc = JSON.stringify(item?.mainContent?.content)
+          
           const dateString = item?.overview?.content.find(
             (i) => i.name === 'Ngày đăng:',
           ).value
@@ -73,10 +91,14 @@ export const insertService = () =>
             id: imagesId,
             image: JSON.stringify(item?.images),
           })
-          await db.Label.create({
-            code: labelCode,
-            value: item?.header.class.classType,
+          await db.Label.findOrCreate({
+            where: { code: labelCode },
+            defaults: {
+              code: labelCode,
+              value: item?.header.class.classType,
+            },
           })
+
           await db.Overview.create({
             id: overviewId,
             code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
@@ -106,9 +128,7 @@ export const insertService = () =>
           })
         })
       })
-      labelCodes?.forEach(async (item) => {
-        await db.Label.create(item)
-      })
+
       resolve('Add data to database Done')
     } catch (error) {
       reject(error)

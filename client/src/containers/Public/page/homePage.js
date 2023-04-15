@@ -1,10 +1,56 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { Search } from '../index'
+import { ListPost } from '../index'
+import Search from './../components/Search'
+import { Province } from './../components/Province'
+import icons from '../../../ultils/icons'
+const { BsChevronRight } = icons
 const homePage = () => {
   return (
-    <div className="border border-red-500 w-full flex flex-col gap-3">
-      <Search />
-      homePage
+    <div className=" w-full flex gap-4 mb-5 p-5">
+      <div className="w-[100%] lg:w-[70%] md:w-full border border-[#dedede] shadow-md rounded-md border-solid bg-white">
+        <ListPost />
+      </div>
+      <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
+        <div className=" border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5">
+          <section>
+            <div className="mb-4 w-full ">
+              <span className=" text-[18.2px] font-bold">
+                Danh mục cho thuê
+              </span>
+            </div>
+            <ul>
+              <li className="flex items-center justify-between border-dashed border-b-[1px]">
+                <h2 className="">
+                  <a
+                    href="#"
+                    className="flex items-center justify-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm"
+                  >
+                    <BsChevronRight size={14} style={{ opacity: 0.3 }} />
+                    Cho thuê phòng trọ
+                  </a>
+                </h2>
+                <span className="text-xs text-[#aaa]">(49.212)</span>
+              </li>
+              <li className="flex items-center justify-between py-[5px] border-dashed border-b-[1px]">
+                <h2>
+                  <a
+                    href="#"
+                    className="flex items-center justify-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm "
+                  >
+                    <BsChevronRight size={14} style={{ opacity: 0.3 }} />
+                    Cho thuê nhà nguyên căn
+                  </a>
+                </h2>
+                <span className="text-xs text-[#aaa]">(49.212)</span>
+              </li>
+            </ul>
+          </section>
+        </div>
+        <div className=" border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5">
+          Silde Bar 2
+        </div>
+      </div>
     </div>
   )
 }

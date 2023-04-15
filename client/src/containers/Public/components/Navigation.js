@@ -7,6 +7,24 @@ const notActive =
 const active =
   'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary2'
 
+const nav = [
+  {
+    code: 'CTPT',
+    value: 'Cho thuê phòng trọ',
+  },
+  {
+    code: 'NCT',
+    value: 'Nhà cho thuê',
+  },
+  {
+    code: 'CTCH',
+    value: 'Cho thuế căn hộ',
+  },
+  {
+    code: 'CTMB',
+    value: 'Cho thuê mặt bằng',
+  },
+]
 const Navigation = () => {
   const [categories, setCategories] = useState([])
   useEffect(() => {
@@ -14,13 +32,16 @@ const Navigation = () => {
       const response = await apiCategories()
       if (response?.data.err === 0) {
         setCategories(response.data.response)
+        //console.log(response.data.response)
+      } else {
+        setCategories(nav)
       }
     }
     fetchCategories()
   }, [])
   return (
     <div className="w-screen flex items-center justify-center h-[40px] bg-secondary1 text-white">
-      <div className="w-[84%] flex h-full items-center text-[13.3px] font-bold  cursor-pointer ">
+      <div className="w-[84%]  flex h-full items-center text-[13.3px] font-bold  cursor-pointer ">
         <NavLink
           to={'/'}
           className={({ isActive }) => (isActive ? active : notActive)}
