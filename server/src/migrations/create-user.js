@@ -21,7 +21,7 @@ module.exports = {
       zalo: {
         type: Sequelize.STRING,
       },
-      fbUrrl: {
+      fbUrl: {
         type: Sequelize.STRING,
       },
       avatar: {

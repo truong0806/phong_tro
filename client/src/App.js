@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Router, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import {
   Home,
   Auth,
@@ -8,20 +8,25 @@ import {
   RentalSpace,
   RentalApartment,
   HomePage,
+  Register,
+  Login,
 } from './containers/Public'
 import { path } from './ultils/constains'
 
 function App() {
   return (
-    <div className="h-full max-w-1100 bg-primary">
+    <div className="h-full max-w-1100 bg-primary text-base">
       <Routes>
         <Route path={path.HOME} element={<Home />}>
-          <Route path={path.AUTH} element={<Auth />} />
           <Route path="*" element={<HomePage />} />
           <Route path={path.CHO_THUE_CAN_HO} element={<RentalApartment />} />
           <Route path={path.CHO_THUE_MAT_BANG} element={<RentalSpace />} />
           <Route path={path.CHO_THUE_PHONG_TRO} element={<RentalRoom />} />
           <Route path={path.NHA_CHO_THUE} element={<RentalHouse />} />
+        </Route>
+        <Route path={path.AUTH} element={<Auth />}>
+          <Route path={path.REGISTER} element={<Register />} />
+          <Route path={path.LOGIN} element={<Login />} />
         </Route>
       </Routes>
     </div>

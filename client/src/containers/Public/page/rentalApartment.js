@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Loading } from '../../../components'
 
-const rentalApartment = () => {
+const RentalApartment = () => {
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false)
+    }, 3000)
+
+    return () => clearTimeout(timeout)
+  }, [])
+
   return (
-    <div>rentalApartment</div>
+    <>
+      {loading ? (
+        <div className="overlay">
+          <Loading loading={loading} />
+        </div>
+      ) : (
+        <div className={!loading ? 'opacity-100' : 'opacity-25'}>
+          rentalApartment
+        </div>
+      )}
+    </>
   )
 }
 
-export default rentalApartment
+export default RentalApartment

@@ -13,15 +13,18 @@ const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { isLoggedIn } = useSelector((state) => state.auth)
-  const goAuth = useCallback((flag) => {
-    navigate(path.AUTH, { state: { flag } })
+  const goRegister = useCallback(() => {
+    navigate(`${path.AUTH}/${path.REGISTER}`)
+  }, [])
+  const goLogin = useCallback(() => {
+    navigate(`${path.AUTH}/${path.LOGIN}`)
   }, [])
   const goHome = useCallback(() => {
     navigate(path.HOME)
   }, [])
 
   return (
-    <div className="w-[80%] h-70 flex items-center justify-between ">
+    <div className=" md:w-[80%] h-70 flex items-center justify-between ">
       <img
         className="cursor-pointer  w-[240px] h-[70px] object-contain"
         src={logo}
@@ -48,9 +51,7 @@ const Header = () => {
               textColor="text-black"
               bgcolor="bg-[#f5f5f5]"
               IcBeforSize="20"
-              onClick={() => {
-                goAuth(false)
-              }}
+              onClick={goLogin}
             />
             <Button
               margin={'py-[20px]'}
@@ -60,9 +61,7 @@ const Header = () => {
               textColor="text-black"
               bgcolor="bg-[#f5f5f5]"
               IcBeforSize="20"
-              onClick={() => {
-                goAuth(true)
-              }}
+              onClick={goRegister}
             />
           </div>
         )}

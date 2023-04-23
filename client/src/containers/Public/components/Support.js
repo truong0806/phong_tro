@@ -5,7 +5,7 @@ import { Button } from '../../../components'
 const Support = () => {
   return (
     <div>
-      <section className="  m-auto border-dashed max-w-1100 border-[7px]  bg-white border-[#e8eefc] p-[30px] mt-[30px] mb-[20px] rounded-lg w-1100 h-auto">
+      <section className=" m-auto border-dashed w-full min-w-[320px] border-[7px]  bg-white border-[#e8eefc] p-[30px] mt-[30px] mb-[20px] rounded-lg  h-auto">
         <div className="">
           <div className="h-[150px] bg-support-bg bg-contain bg-no-repeat bg-center w-full"></div>
           <div className="mt-[30px] px-[10px]  text-center">

@@ -20,13 +20,15 @@ module.exports = {
       },
       backgroundImage: {
         'support-bg': "url('/src/assets/support-bg.jpg')",
+        'star-bg': "url('/src/assets/star2.png')",
+        
       },
     },
     fontFamily: {
       sans: ['Helvetica', 'Arial', 'sans-serif'],
     },
     screens: {
-      s:'0',
+      s: '0',
       xs: '480px',
       sm: '640px',
       md: '768px',

@@ -6,10 +6,10 @@ export const Province = () => {
   //const locations = useLocation()
   //const [isRegister, setIsRegister] = useState(locations.state?.flag)
   return (
-    <div className="w-[85%] ">
-      <div className="w-full">
-        <h1 className="text-[28px] font-bold">{text.HOME_TITLE}</h1>
-        <p className="text-[14px] font-normal text-justify text-[#65676b]">
+    <div className="w-full min-w-[320px] md:w-[85%]  items-center">
+      <div className="w-full my-[20px] mx-[10px] md:my-[0px] md:mx-[0px] bg-[#225aff] md:bg-primary text-white md:text-black p-4 rounded-lg">
+        <h1 className="text-[28px] font-bold mt-3">{text.HOME_TITLE}</h1>
+        <p className="text-[14px] font-normal  mt-3 text-justify text-[#65676b]">
           {text.PAGE_DESCRIPTION}
         </p>
       </div>

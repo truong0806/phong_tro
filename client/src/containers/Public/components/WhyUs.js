@@ -5,7 +5,7 @@ import { Button } from '../../../components'
 const WhyUs = () => {
   return (
     <div className="">
-      <div className="border-[#dedede] border max-w-1100 text-center bg-white m-auto pt-[20px] px-[50px] pb-[50px]  rounded-md shadow-sm ">
+      <div className="border-[#dedede] border w-full min-w-[320px] text-center bg-white m-auto pt-[20px] px-[50px] pb-[50px]  rounded-md shadow-sm ">
         <h4 className="font-[700] text-[18px] mb-[5px] justify-center items-center flex">
           Tại sao lại chọn PhongTro123.com?
         </h4>

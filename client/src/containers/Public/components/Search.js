@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SearchItem } from './../../../components'
+import { PopupSearch } from '../'
 import icons from '../../../ultils/icons'
 const {
   GrNext,
@@ -11,8 +12,13 @@ const {
   FiSearch,
 } = icons
 const Search = () => {
+  const [showPopup, setShowPopup] = useState(false)
+
+  const handleClick = () => {
+    setShowPopup(true)
+  }
   return (
-    <div className="my-3  w-[85%] p-[10px] bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2">
+    <div className="my-3 w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2">
       <SearchItem
         fontWeight
         IconBefore={<MdOutlineHouseSiding />}
@@ -36,7 +42,7 @@ const Search = () => {
       />
       <button
         type="button"
-        className="outline-none py-2 px-4 w-full rounded-md font-medium max-w-[210px] bg-secondary1 text-[13px] flex items-center justify-center gap-2 text-white"
+        className="outline-none py-2 px-4 rounded-md w-full bg-[#ffba00] font-bold md:bg-secondary1 text-[13px] flex items-center justify-center gap-2 text-black md:text-white"
       >
         <FiSearch />
         Tìm kiếm

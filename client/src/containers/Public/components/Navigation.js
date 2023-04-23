@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { apiCategories } from '../../../service/category'
+import { Loading } from '../../../components'
+
 var slug = require('slug')
 const notActive =
   'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary1'
@@ -26,21 +28,38 @@ const nav = [
   },
 ]
 const Navigation = () => {
+  const [loading, setLoading] = useState(false)
   const [categories, setCategories] = useState([])
+  const [isPinned, setIsPinned] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsPinned(window.scrollY > 0)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   useEffect(() => {
     const fetchCategories = async () => {
       const response = await apiCategories()
       if (response?.data.err === 0) {
         setCategories(response.data.response)
-        //console.log(response.data.response)
       } else {
         setCategories(nav)
       }
+      setLoading(false)
     }
     fetchCategories()
   }, [])
+
+  const navClass = isPinned
+    ? 'sticky top-0 z-10 bg-secondary1 text-white'
+    : 'bg-secondary1 text-white'
   return (
-    <div className="w-screen flex items-center justify-center h-[40px] bg-secondary1 text-white">
+    <div
+      className={`w-screen flex items-center justify-center h-12 ${navClass}`}
+    >
       <div className="w-[84%]  flex h-full items-center text-[13.3px] font-bold  cursor-pointer ">
         <NavLink
           to={'/'}
@@ -56,7 +75,7 @@ const Navigation = () => {
                 className="h-full flex justify-center  items-center"
               >
                 <NavLink
-                  to={slug(item.value)}
+                  to={`/${slug(item.value)}`}
                   className={({ isActive }) => (isActive ? active : notActive)}
                 >
                   {item.value}
@@ -64,6 +83,7 @@ const Navigation = () => {
               </div>
             )
           })}
+        {loading && <Loading />}
       </div>
     </div>
   )

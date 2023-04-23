@@ -24,7 +24,7 @@ const homePage = () => {
                 <h2 className="">
                   <a
                     href="#"
-                    className="flex items-center justify-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm"
+                    className=" flex items-center justify-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm"
                   >
                     <BsChevronRight size={14} style={{ opacity: 0.3 }} />
                     Cho thuê phòng trọ
