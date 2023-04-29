@@ -58,9 +58,9 @@ const Navigation = () => {
     : 'bg-secondary1 text-white'
   return (
     <div
-      className={`w-screen flex items-center justify-center h-12 ${navClass}`}
+      className={`w-full lg:flex lg:justify-center items-center h-12 hidden ${navClass}`}
     >
-      <div className="w-[84%]  flex h-full items-center text-[13.3px] font-bold  cursor-pointer ">
+      <div className="lg:w-[1100px] lg:justify-start flex h-full items-center text-[13.3px] font-bold  cursor-pointer ">
         <NavLink
           to={'/'}
           className={({ isActive }) => (isActive ? active : notActive)}

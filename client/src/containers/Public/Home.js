@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index'
 import { Outlet, useLocation } from 'react-router-dom'
-import { Province } from '../Public/components/Province'
+import { Province } from './components/Province'
 import { Loading } from '../../components'
 
 //import {  useSelector } from 'react-redux'
@@ -23,17 +23,17 @@ const Home = () => {
       {loading ? (
         <Loading loading={loading} />
       ) : (
-        <div className="md:w-full flex flex-col items-center ">
+        <div className="w-full flex-col items-center ">
           <Header />
           <Navigation />
-          <Search />
-          <Province />
-          <div className="w-[84%] flex flex-col  mt-3">
+          <div className="w-full flex flex-col justify-center items-center my-[10px] mx-auto">
+            <Search />
+            <Province />
             <Outlet />
+            <WhyUs />
+            <Support />
+            <ScrollTop />
           </div>
-          <WhyUs />
-          <Support />
-          <ScrollTop />
         </div>
       )}
     </>

@@ -24,19 +24,23 @@ const Header = () => {
   }, [])
 
   return (
-    <div className=" md:w-[80%] h-70 flex items-center justify-between ">
+    <div className="w-full  flex items-center lg:justify-between lg:w-[1100px] mx-auto my-0">
       <img
-        className="cursor-pointer  w-[240px] h-[70px] object-contain"
+        className="cursor-pointer ml-[10px] bg-contain  w-[200px] h-[50px]  lg:w-[240px] lg:h-[70px] object-contain "
         src={logo}
         alt="logo"
         onClick={goHome}
       />
-      <div className="cursor-pointer  flex items-center gap-1">
+      <div className=" flex items-center  right-[10px] lg:hidden absolute">
+        <div className="bg-menu h-[25px] w-[25px] bg-contain mr-[8px]"></div>
+        <span className="">Danh Mục</span>
+      </div>
+      <div className="cursor-pointer  flex items-center gap-1 ">
         {!isLoggedIn && (
-          <div className="cursor-pointer  flex items-center gap-1">
+          <div className="cursor-pointer  flex items-center gap-1 ">
             <Button
               margin={'py-[20px]'}
-              fontW={'font-normal text-[14px] h-[40px]'}
+              fontW={'font-normal text-[14px] h-[40px] hidden'}
               IcBefor={AiOutlineHeart}
               text={'Yêu thích'}
               textColor="text-black"
@@ -45,7 +49,7 @@ const Header = () => {
             />
             <Button
               margin={'py-[20px]'}
-              fontW={'font-normal text-[14px] h-[40px]'}
+              fontW={'font-normal text-[14px] h-[40px] hidden'}
               IcBefor={BiLogIn}
               text={'Đăng nhập'}
               textColor="text-black"
@@ -55,7 +59,7 @@ const Header = () => {
             />
             <Button
               margin={'py-[20px]'}
-              fontW={'font-normal text-[14px] h-[40px]'}
+              fontW={'font-normal text-[14px] h-[40px] hidden'}
               IcBefor={AiOutlineUserAdd}
               text={'Đăng ký'}
               textColor="text-black"
@@ -84,7 +88,7 @@ const Header = () => {
         )}
         <Button
           margin={'py-[20px]'}
-          width={'w-auto text-[14px] h-[40px] '}
+          width={'w-auto text-[14px] h-[40px] hidden'}
           text={'Đăng tin mới'}
           textColor="text-white"
           bgcolor="bg-secondary2"

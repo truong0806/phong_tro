@@ -40,7 +40,7 @@ const ListPostItem = (props) => {
     <div className="w-full flex">
       <div className="w-2/5 flex flex-wrap gap-[1%] xl:w-[280px] lg:w-[350px] min-w-[150px] lg:h-[220px] justify-start relative">
         {item?.images.image.length > 0 &&
-          item.images.image.nmap((image) => {
+          item.images.image.map((image) => {
             return (
               <div>
                 <img

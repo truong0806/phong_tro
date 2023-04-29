@@ -15,7 +15,7 @@ import { path } from './ultils/constains'
 
 function App() {
   return (
-    <div className="h-full max-w-1100 bg-primary text-base">
+    <div className="h-full lg:w-full justify-center items-center bg-primary bg-auto text-base">
       <Routes>
         <Route path={path.HOME} element={<Home />}>
           <Route path="*" element={<HomePage />} />
