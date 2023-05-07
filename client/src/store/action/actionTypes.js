@@ -15,6 +15,9 @@ const actionTypes = {
   GET_AREAS: 'GET_AREAS',
   GET_PROVINCES: 'GET_PROVINCES',
 
+  //POST
+  GET_POSTS: 'GET_POSTS',
+
   // USER
   GET_CURRENT: 'GET_CURRENT',
 }

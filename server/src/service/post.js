@@ -1,6 +1,6 @@
 import db from '../models'
 
-//Get all categories
+//Get all post
 export const postService = () =>
   new Promise(async (resolve, reject) => {
     try {
@@ -19,13 +19,14 @@ export const postService = () =>
             as: 'users',
             attributes: ['name', 'phone', 'zalo'],
           },
-          {
-            model: db.Label,
-            as: 'label',
-            attributes: ['code', 'value'],
-          },
+          // {
+          //   model: db.Label,
+          //   as: 'label',
+          //   attributes: ['code', 'value'],
+          // },
         ],
         attributes: ['id', 'title', 'star', 'address', 'description'],
+        distinct: true,
       })
       resolve({
         err: response ? 0 : 1,

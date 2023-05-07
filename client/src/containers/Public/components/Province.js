@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { location, text } from '../../../ultils/constains'
 import { ProvinceBtn } from '.././index'
 //import { useLocation } from 'react-router-dom'
@@ -14,7 +14,7 @@ export const Province = () => {
         <p className="text-[.9rem] leading-6 font-normal  mt-[10px]  text-white text-justify">
           {text.PAGE_DESCRIPTION}
         </p>
-        <p class="page-description lg:hidden mb-0 mt-[10px] text-[.9rem] leading-6">
+        <p className="page-description lg:hidden mb-0 mt-[10px] text-[.9rem] leading-6">
           <a rel="nofollow" href="https://phongtro123.com/dang-nhap-tai-khoan">
             Đăng nhập
           </a>{' '}

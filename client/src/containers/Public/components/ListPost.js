@@ -1,22 +1,15 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Button } from '../../../components/index'
 import { ListPostItem } from '../index'
-import { apiPost } from '../../../service/post'
+import { getPosts } from '../../../store/action/post'
+import { useDispatch, useSelector } from 'react-redux'
 const ListPost = () => {
-  const [post, setPost] = useState([])
-  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+  const { posts } = useSelector((state) => state.post)
   useEffect(() => {
-    const fetchPost = async () => {
-      const response = await apiPost()
-      if (response?.data.err === 0) {
-        setPost(response.data.response)
-      } else {
-        setPost(null)
-      }
-      setLoading(false)
-    }
-    fetchPost()
+    dispatch(getPosts())
   }, [])
+  console.log(posts)
   return (
     <div className="m-[20px] ">
       <section className=" flex justify-between">
@@ -46,16 +39,23 @@ const ListPost = () => {
           text="Có video"
         />
       </div>
-      {post?.length > 0 &&
-        post.map((item) => {
-          return (
-            <div>
-              <div className=" border-[#E13427] border-t px-5 mx-[-20px] py-4">
-                <ListPostItem item={item} />
-              </div>
-            </div>
-          )
-        })}
+      <div className=" px-5 mx-[-20px] py-4">
+        {posts?.length > 0 &&
+          posts.map((item) => {
+            return (
+              <ListPostItem
+                key={item?.id}
+                attributes={item?.attributes}
+                description={JSON.parse(item?.description)}
+                users={item?.users}
+                images={JSON.parse(item?.images.image)}
+                title={item?.title}
+                label={item?.label}
+                address={item?.address}
+              />
+            )
+          })}
+      </div>
     </div>
   )
 }

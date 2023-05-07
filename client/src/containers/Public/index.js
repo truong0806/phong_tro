@@ -1,4 +1,4 @@
-export { default as Home } from './home'
+export { default as Home } from './Home'
 export { default as Auth } from './auth'
 export { default as Header } from './components/Header'
 export { default as WhyUs } from './components/WhyUs'

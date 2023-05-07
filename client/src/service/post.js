@@ -1,5 +1,5 @@
 import axiosConfig from '../axiosConfig'
-export const apiPost = () =>
+export const apiGetPosts = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axiosConfig({
