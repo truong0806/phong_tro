@@ -1,16 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { ListPost } from '../index'
-import Search from './../components/Search'
-import { Province } from './../components/Province'
+import { ListPost, Pagination } from '../index'
 import icons from '../../../ultils/icons'
+import { useSearchParams } from 'react-router-dom'
 const { BsChevronRight } = icons
-const homePage = () => {
+const HomePage = () => {
+  const [params] = useSearchParams()
   return (
     <div className="w-[85%] justify-center flex gap-4 mb-5">
-      <div className="w-[100%] lg:w-[70%] md:w-full border border-[#dedede] shadow-md rounded-md border-solid bg-white">
+      <div className="w-[100%] lg:w-[70%] md:w-full ">
         <ListPost />
+        <Pagination number={params.get('page')} />
       </div>
+
       <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
         <div className=" border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5">
           <section>
@@ -55,4 +57,4 @@ const homePage = () => {
   )
 }
 
-export default homePage
+export default HomePage

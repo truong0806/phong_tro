@@ -17,6 +17,7 @@ const actionTypes = {
 
   //POST
   GET_POSTS: 'GET_POSTS',
+  GET_POSTS_LIMIT: 'GET_POSTS_LIMIT',
 
   // USER
   GET_CURRENT: 'GET_CURRENT',

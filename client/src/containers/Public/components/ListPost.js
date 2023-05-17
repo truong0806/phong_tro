@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
 import { Button } from '../../../components/index'
 import { ListPostItem } from '../index'
-import { getPosts } from '../../../store/action/post'
+import { getPosts, GetPostsLimit } from '../../../store/action/post'
 import { useDispatch, useSelector } from 'react-redux'
 const ListPost = () => {
   const dispatch = useDispatch()
-  const { posts } = useSelector((state) => state.post)
+  const { posts, count } = useSelector((state) => state.post)
   useEffect(() => {
-    dispatch(getPosts())
+    dispatch(GetPostsLimit(0))
   }, [])
-  console.log(posts)
+  //console.log(count)
   return (
-    <div className="m-[20px] ">
+    <div className="m-[20px] border border-[#dedede] bg-white shadow-md rounded-md border-solid  ">
       <section className=" flex justify-between">
         <div className="">
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>
