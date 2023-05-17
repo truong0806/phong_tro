@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import icons from '../../../ultils/icons'
-
+import 'lazysizes'
+import { path } from './../../../ultils/constains'
 const { BsBookmarkStarFill, RiHeartLine, RiHeartFill } = icons
 const indexs = [0, 1, 2, 3]
 const ListPostItem = ({
@@ -14,40 +15,77 @@ const ListPostItem = ({
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false)
   return (
-    <div className="w-full flex border-t border-red-500 p-4">
-      <div className="w-2/5 flex flex-wrap gap-[2px] items-center  justify-center relative cursor-pointer">
-        {images.length > 4 &&
-          images
+    <div className="w-full flex border-t border-red-500 p-4 pb-1">
+      {images.length > 4 ? (
+        <div className="w-[245px] h-[245px] grid grid-cols-2  grid-rows-1 gap-1 relative cursor-pointer">
+          {images
             .filter((i, index) => indexs.some((i) => i === index))
             ?.map((i, index) => {
               return (
                 <img
+                  src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
+                  data-src={i}
                   key={index}
-                  className="w-[130px] h-[120px] object-cover"
-                  src={i}
+                  className="lazyload lazy w-[130px] h-[120px] object-cover"
+                  loading="lazy"
                 />
               )
             })}
 
-        <span className="absolute bottom-2 left-4 bg-[rgba(0,0,0,.5)] text-white py-[3px] px-[5px] rounded-[3px] text-[.9rem]">
-          {`${images.length}`} ảnh
-        </span>
-        <span
-          className="absolute bottom-2 right-4 text-white "
-          onMouseEnter={() => {
-            setIsHoverHeart(true)
-          }}
-          onMouseLeave={() => {
-            setIsHoverHeart(false)
-          }}
-        >
-          {isHoverHeart ? (
-            <RiHeartFill size={20} color="red" />
-          ) : (
-            <RiHeartLine size={20} />
-          )}
-        </span>
-      </div>
+          <span className="absolute bottom-2 left-4 bg-[rgba(0,0,0,.5)] text-white py-[3px] px-[5px] rounded-[3px] text-[.9rem]">
+            {`${images.length}`} ảnh
+          </span>
+          <span
+            className="absolute bottom-2 right-4 text-white "
+            onMouseEnter={() => {
+              setIsHoverHeart(true)
+            }}
+            onMouseLeave={() => {
+              setIsHoverHeart(false)
+            }}
+          >
+            {isHoverHeart ? (
+              <RiHeartFill size={20} color="red" />
+            ) : (
+              <RiHeartLine size={20} />
+            )}
+          </span>
+        </div>
+      ) : images.length > 0 ? (
+        <div className="w-[245px] h-[245px] relative cursor-pointer">
+          {images
+            .filter((j, index) => indexs.some((j) => j - 3 === index))
+            ?.map((j, index) => {
+              return <img src={j} className="w-full h-full object-cover" />
+            })}
+
+          <span className="absolute bottom-2 left-4 bg-[rgba(0,0,0,.5)] text-white py-[3px] px-[5px] rounded-[3px] text-[.9rem]">
+            {`${images.length}`} ảnh
+          </span>
+          <span
+            className="absolute bottom-2 right-4 text-white "
+            onMouseEnter={() => {
+              setIsHoverHeart(true)
+            }}
+            onMouseLeave={() => {
+              setIsHoverHeart(false)
+            }}
+          >
+            {isHoverHeart ? (
+              <RiHeartFill size={20} color="red" />
+            ) : (
+              <RiHeartLine size={20} />
+            )}
+          </span>
+        </div>
+      ) : (
+        <div className="w-[245px] h-[245px] relative cursor-pointer">
+          <img
+            src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
       <div className="w-3/5 ml-[15px]">
         <h3 className="flex justify-between gap-4 text-base font-bold whitespace-normal mb-[5px] md:mb-[10px]">
           <a
@@ -77,15 +115,11 @@ const ListPostItem = ({
               href="https://phongtro123.com/tinh-thanh/ho-chi-minh/quan-go-vap"
               title={address}
             >
-              {address}
+              {`${address.split(',')[address.split(',').length - 2]},${
+                address.split(',')[address.split(',').length - 1]
+              }`}
             </a>
           </span>
-          {/* <time
-            className="float-right items-end justify-end"
-            title="Thứ 6, 09:10 21/04/2023"
-          >
-            Hôm nay
-          </time> */}
         </div>
         <p className="text-gray-500  w-full h-[100px] text-ellipsis overflow-hidden text-justify">
           {description}

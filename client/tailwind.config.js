@@ -21,7 +21,7 @@ module.exports = {
       backgroundImage: {
         'support-bg': "url('/src/assets/support-bg.jpg')",
         'star-bg': "url('/src/assets/star2.png')",
-        'menu': "url('/src/assets/menu.svg')",
+        menu: "url('/src/assets/menu.svg')",
       },
     },
     fontFamily: {
