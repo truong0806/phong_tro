@@ -1,17 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Button } from '../../../components/index'
 import { ListPostItem } from '../index'
 import { getPosts, GetPostsLimit } from '../../../store/action/post'
 import { useDispatch, useSelector } from 'react-redux'
-const ListPost = () => {
+import ScrollTop from './scroll_Top'
+const ListPost = ({ page }) => {
   const dispatch = useDispatch()
+  const linkRef = useRef()
   const { posts, count } = useSelector((state) => state.post)
   useEffect(() => {
-    dispatch(GetPostsLimit(0))
-  }, [])
-  //console.log(count)
+    let offset = page ? +page - 1 : 0
+    dispatch(GetPostsLimit(offset))
+    linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' })
+  }, [page])
+  console.log(posts)
+
   return (
-    <div className="m-[20px] border border-[#dedede] bg-white shadow-md rounded-md border-solid  ">
+    <div
+      ref={linkRef}
+      className="m-[20px] "
+    >
       <section className=" flex justify-between">
         <div className="">
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>
