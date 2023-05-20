@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import icons from '../../../ultils/icons'
 import 'lazysizes'
-import { path } from './../../../ultils/constains'
 const { BsBookmarkStarFill, RiHeartLine, RiHeartFill } = icons
 const indexs = [0, 1, 2, 3]
 const ListPostItem = ({
@@ -10,7 +9,6 @@ const ListPostItem = ({
   description,
   users,
   title,
-  label,
   address,
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false)

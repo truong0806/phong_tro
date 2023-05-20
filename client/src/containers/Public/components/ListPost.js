@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from 'react'
 import { Button } from '../../../components/index'
 import { ListPostItem } from '../index'
-import { getPosts, GetPostsLimit } from '../../../store/action/post'
+import {  GetPostsLimit } from '../../../store/action/post'
 import { useDispatch, useSelector } from 'react-redux'
-import ScrollTop from './scroll_Top'
 const ListPost = ({ page }) => {
   const dispatch = useDispatch()
   const linkRef = useRef()
-  const { posts, count } = useSelector((state) => state.post)
+  const { posts } = useSelector((state) => state.post)
   useEffect(() => {
     let offset = page ? +page - 1 : 0
     dispatch(GetPostsLimit(offset))
