@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { Button } from '../../../components/index'
 import { ListPostItem } from '../index'
-import {  GetPostsLimit } from '../../../store/action/post'
+import { GetPostsLimit } from '../../../store/action/post'
 import { useDispatch, useSelector } from 'react-redux'
 const ListPost = ({ page }) => {
   const dispatch = useDispatch()
@@ -15,10 +15,7 @@ const ListPost = ({ page }) => {
   console.log(posts)
 
   return (
-    <div
-      ref={linkRef}
-      className="m-[20px] "
-    >
+    <div ref={linkRef} className="m-[20px] ">
       <section className=" flex justify-between">
         <div className="">
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>
@@ -59,6 +56,8 @@ const ListPost = ({ page }) => {
                 title={item?.title}
                 label={item?.label}
                 address={item?.address}
+                star={item?.star}
+                id={item?.id}
               />
             )
           })}

@@ -5,7 +5,7 @@ import { ListNumber } from '../../../components'
 const Pagination = ({ page }) => {
   const { count, posts } = useSelector((state) => state.post)
   const [arrpage, setArrPage] = useState([])
-  const [currentPage, setCurrentPage] = useState(+page)
+  const [currentPage, setCurrentPage] = useState(+page || 1)
   const [inHideEnd, isInHideEnd] = useState(false)
   const [inHideStart, isInHideStart] = useState(false)
   useState(() => {
@@ -14,7 +14,7 @@ const Pagination = ({ page }) => {
   useEffect(() => {
     let maxPage = Math.floor(count / posts.length)
     let end = currentPage + 1 > maxPage ? maxPage : currentPage + 1
-    let start = currentPage - 2 <= 0 ? 1 : currentPage - 2
+    let start = currentPage - 1 <= 0 ? 1 : currentPage - 1
     let temp = []
     for (let i = start; i <= end; i++) temp.push(i)
     setArrPage(temp)

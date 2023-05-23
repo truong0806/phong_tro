@@ -4,10 +4,10 @@ export { default as Header } from './components/Header'
 export { default as WhyUs } from './components/WhyUs'
 export { default as Navigation } from './components/Navigation'
 export { default as Support } from './components/Support'
-
+export { default as DetailPost } from './components/DetailPost'
 export { default as Register } from './auth/register'
 export { default as Login } from './auth/login'
-
+//Page
 export { default as HomePage } from './page/HomePage'
 export { default as RentalHouse } from './page/rentalHouse'
 export { default as RentalRoom } from './page/rentalRoom'

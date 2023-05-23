@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import icons from '../../../ultils/icons'
 import 'lazysizes'
+var slug = require('slug')
 const { BsBookmarkStarFill, RiHeartLine, RiHeartFill } = icons
 const indexs = [0, 1, 2, 3]
 const ListPostItem = ({
@@ -10,12 +12,27 @@ const ListPostItem = ({
   users,
   title,
   address,
+  star,
+  id,
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false)
+  const navigate = useNavigate()
+  const handleStar = (star) => {
+    const stars = []
+    for (let i = 1; i < +star; i++) {
+      stars.push(
+        <div className="w-[14px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>,
+      )
+    }
+    return stars
+  }
   return (
     <div className="w-full flex border-t border-red-500 p-4 pb-1">
       {images.length > 4 ? (
-        <div className="w-[245px] h-[245px] grid grid-cols-2  grid-rows-1 gap-1 relative cursor-pointer">
+        <Link
+          to={`chi-tiet/${slug(title)}/${id}`}
+          className="w-[245px] h-[245px] grid grid-cols-2  grid-rows-1 gap-1 relative cursor-pointer"
+        >
           {images
             .filter((i, index) => indexs.some((i) => i === index))
             ?.map((i, index) => {
@@ -48,9 +65,12 @@ const ListPostItem = ({
               <RiHeartLine size={20} />
             )}
           </span>
-        </div>
+        </Link>
       ) : images.length > 0 ? (
-        <div className="w-[245px] h-[245px] relative cursor-pointer">
+        <Link
+          to={`chi-tiet/${slug(title)}/${id}`}
+          className="w-[245px] h-[245px] relative cursor-pointer"
+        >
           {images
             .filter((j, index) => indexs.some((j) => j - 3 === index))
             ?.map((j, index) => {
@@ -75,28 +95,31 @@ const ListPostItem = ({
               <RiHeartLine size={20} />
             )}
           </span>
-        </div>
+        </Link>
       ) : (
-        <div className="w-[245px] h-[245px] relative cursor-pointer">
+        <Link
+          to={`chi-tiet/${slug(title)}/${id}`}
+          className="w-[245px] h-[245px] relative cursor-pointer"
+        >
           <img
             src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
             className="w-full h-full object-cover"
           />
-        </div>
+        </Link>
       )}
       <div className="w-3/5 ml-[15px]">
         <h3 className="flex justify-between gap-4 text-base font-bold whitespace-normal mb-[5px] md:mb-[10px]">
-          <a
+          <Link
+            to={`chi-tiet/${slug(title)}/${id}`}
             href="#"
             className="font-bold gap-1 text-[#E13427] hover:underline	"
           >
-            <div className="w-[14px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>
-            <div className="w-[14px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>
-            <div className="w-[14px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>
-            <div className="w-[14px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>
-            <div className="w-[14px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>
+            {handleStar(+star).length > 0 &&
+              handleStar(+star).map((star, num) => {
+                return <span key={num}>{star}</span>
+              })}
             <span className="ml-[4px] text-justify">{title}</span>
-          </a>
+          </Link>
           <div className="w-[10%] flex justify-end">
             <BsBookmarkStarFill size={20} color="orange" />
           </div>

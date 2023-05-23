@@ -20,7 +20,7 @@ const Header = () => {
     navigate(`${path.AUTH}/${path.LOGIN}`)
   }, [])
   const goHome = useCallback(() => {
-    navigate(path.HOME)
+    navigate('/')
   }, [])
 
   return (
