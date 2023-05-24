@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { apiCategories } from '../../../service/category'
 import { Loading } from '../../../components'
-
+import * as actions from '../../../store/action'
+import { useDispatch, useSelector } from 'react-redux'
 var slug = require('slug')
 const notActive =
   'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary1'
 const active =
   'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary2'
 
-const nav = [
+const categories = [
   {
     code: 'CTPT',
     value: 'Cho thuê phòng trọ',
@@ -29,9 +29,10 @@ const nav = [
 ]
 const Navigation = () => {
   const [loading, setLoading] = useState(false)
-  const [categories, setCategories] = useState([])
+  //const [categories, setCategories] = useState([])
   const [isPinned, setIsPinned] = useState(false)
-
+  const { categories } = useSelector((state) => state.app)
+  const dispatch = useDispatch()
   useEffect(() => {
     const handleScroll = () => {
       setIsPinned(window.scrollY > 0)
@@ -41,16 +42,8 @@ const Navigation = () => {
   }, [])
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const response = await apiCategories()
-      if (response?.data.err === 0) {
-        setCategories(response.data.response)
-      } else {
-        setCategories(nav)
-      }
-      setLoading(false)
-    }
-    fetchCategories()
+    setLoading(false)
+    dispatch(actions.getCategories())
   }, [])
 
   const navClass = isPinned

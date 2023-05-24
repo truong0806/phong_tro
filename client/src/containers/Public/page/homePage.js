@@ -4,8 +4,10 @@ import { ListPost, Pagination } from '../index'
 
 import { useSearchParams } from 'react-router-dom'
 import { ItemSidebar } from '../../../components'
+import { useSelector } from 'react-redux'
 
 const HomePage = () => {
+  const { categories } = useSelector((state) => state.app)
   const [params] = useSearchParams()
   return (
     <div className="w-[85%] justify-center flex gap-4 mb-5">
@@ -15,7 +17,7 @@ const HomePage = () => {
       </div>
 
       <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
-        <ItemSidebar header={'Danh mục cho thuê'} />
+        <ItemSidebar header={'Danh mục cho thuê'} content={categories} />
         <ItemSidebar header={'Xem theo giá'} />
         <ItemSidebar header={'Xem theo diện tích'} />
         <div className=" border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5">
