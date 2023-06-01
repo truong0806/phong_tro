@@ -85,38 +85,45 @@ const scraper = (browser, url) =>
 
             //console.log(detailData);
             detailData.images = images
-
             //Header
-            const header = await pageDetail.$eval(
-              'header.page-header',
-              (el) => {
-                return {
-                  title: el.querySelector('h1 > a').innerText,
-                  star: el
-                    .querySelector('h1.page-h1 > span')
-                    ?.className?.slice(-1),
-                  class: {
-                    content: el.querySelector('p').innerText,
-                    classType: el.querySelector('p > a > strong').innerText,
-                  },
-                  address: el.querySelector('address').innerText,
-                  attributes: {
-                    price: el.querySelector(
-                      'div.post-attributes > .price > span',
-                    ).innerText,
-                    acreage: el.querySelector(
-                      'div.post-attributes > .acreage > span',
-                    ).innerText,
-                    published: el.querySelector(
-                      'div.post-attributes > .published > span',
-                    ).innerText,
-                    hashtag: el.querySelector(
-                      'div.post-attributes > .hashtag > span',
-                    ).innerText,
-                  },
-                }
-              },
-            )
+            const header = await pageDetail?.$eval('#left-col', (el) => {
+              return {
+                tag:
+                  el
+                    .querySelector('article')
+                    ?.className?.match(/the-post\s+(\w+)/)[1] == 'normal'
+                    ? 'normal'
+                    : el
+                        .querySelector('article')
+                        ?.className?.match(/tin-vip\s+(\w+)/)[1] == 'vipnoibat'
+                    ? 'vipnoibat'
+                    : el
+                        .querySelector('article')
+                        ?.className?.match(/tin-vip\s+(\w+)/)[1],
+                title: el.querySelector('h1 > a').innerText,
+                star: el
+                  .querySelector('h1.page-h1 > span')
+                  ?.className?.slice(-1),
+                class: {
+                  content: el.querySelector('p').innerText,
+                  classType: el.querySelector('p > a > strong').innerText,
+                },
+                address: el.querySelector('address').innerText,
+                attributes: {
+                  price: el.querySelector('div.post-attributes > .price > span')
+                    .innerText,
+                  acreage: el.querySelector(
+                    'div.post-attributes > .acreage > span',
+                  ).innerText,
+                  published: el.querySelector(
+                    'div.post-attributes > .published > span',
+                  ).innerText,
+                  hashtag: el.querySelector(
+                    'div.post-attributes > .hashtag > span',
+                  ).innerText,
+                },
+              }
+            })
             detailData.header = header
             //post main content
             const postMainContentHeader = await pageDetail.$eval(
@@ -184,6 +191,7 @@ const scraper = (browser, url) =>
         'https://phongtro123.com/phong-cho-thue-du-moi-tien-nghi-gio-giac-tu-do-ngay-cong-vien-hoang-van-thu-quan-tan-binh-pr314706.html',
         'https://phongtro123.com/can-ho-mini-co-ban-cong-o-222-pham-van-dong-pr616486.html',
         'https://phongtro123.com/ky-tuc-xa-sach-se-trung-tam-binh-thanh-pr611480.html',
+        'https://phongtro123.com/cho-thue-nha-moi-xay-so-639-mat-duong-nguyen-khoai-pr601583.html',
       ]
       const details = []
       for (let link of detailLinks) {

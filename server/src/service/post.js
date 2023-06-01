@@ -73,7 +73,24 @@ export const postLimitService = (page) =>
         msg: response ? 'OK' : 'Failed to find post',
         response,
       })
-      console.timeEnd('requestTime')
+    } catch (error) {
+      reject(error)
+    }
+  })
+
+export const getPostsByCategoryService = (category) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await db.Post.findAndCountAll({
+        where: {
+          categoryCode: category,
+        },
+      })
+      resolve({
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to find post',
+        response,
+      })
     } catch (error) {
       reject(error)
     }

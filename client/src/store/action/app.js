@@ -4,7 +4,7 @@ import { apiCategories } from '../../service/category'
 export const getCategories = () => async (dispatch) => {
   try {
     const response = await apiCategories()
-    console.log(response)
+    //console.log('app: ',response)
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_CATEGORIES,

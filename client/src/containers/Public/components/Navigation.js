@@ -9,29 +9,30 @@ const notActive =
 const active =
   'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary2'
 
-const categories = [
-  {
-    code: 'CTPT',
-    value: 'Cho thuê phòng trọ',
-  },
-  {
-    code: 'NCT',
-    value: 'Nhà cho thuê',
-  },
-  {
-    code: 'CTCH',
-    value: 'Cho thuế căn hộ',
-  },
-  {
-    code: 'CTMB',
-    value: 'Cho thuê mặt bằng',
-  },
-]
+// const categories = [
+//   {
+//     code: 'CTPT',
+//     value: 'Cho thuê phòng trọ',
+//   },
+//   {
+//     code: 'NCT',
+//     value: 'Nhà cho thuê',
+//   },
+//   {
+//     code: 'CTCH',
+//     value: 'Cho thuế căn hộ',
+//   },
+//   {
+//     code: 'CTMB',
+//     value: 'Cho thuê mặt bằng',
+//   },
+// ]
 const Navigation = () => {
   const [loading, setLoading] = useState(false)
   //const [categories, setCategories] = useState([])
   const [isPinned, setIsPinned] = useState(false)
   const { categories } = useSelector((state) => state.app)
+
   const dispatch = useDispatch()
   useEffect(() => {
     const handleScroll = () => {
@@ -40,11 +41,10 @@ const Navigation = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
   useEffect(() => {
     setLoading(false)
     dispatch(actions.getCategories())
-  }, [])
+  }, [dispatch])
 
   const navClass = isPinned
     ? 'sticky top-0 z-10 bg-secondary1 text-white'

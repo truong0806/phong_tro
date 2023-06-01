@@ -23,3 +23,15 @@ export const apiGetPostsLimit = (page) =>
       reject(error)
     }
   })
+export const apiGetPostsByCategory = (categoryCode) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: 'get',
+        url: `/api/v1/post/category?code=${categoryCode}`,
+      })
+      resolve(response)
+    } catch (error) {
+      reject(error)
+    }
+  })

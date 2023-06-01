@@ -7,12 +7,14 @@ const ListPost = ({ page }) => {
   const dispatch = useDispatch()
   const linkRef = useRef()
   const { posts } = useSelector((state) => state.post)
+
   useEffect(() => {
     let offset = page ? +page - 1 : 0
     dispatch(GetPostsLimit(offset))
     linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' })
-  }, [page])
-  console.log(posts)
+  }, [dispatch, page])
+  //console.log(posts)
+  //console.log('category: ')
 
   return (
     <div ref={linkRef} className="m-[20px] ">

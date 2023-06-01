@@ -8,6 +8,8 @@ const swaggerUI = require('swagger-ui-express')
 const docs = require('./doc')
 
 import initRoutes from './src/routes'
+import { dataArea, dataPrice } from './src/ultils/data'
+
 
 app.use(
   cors({
@@ -22,7 +24,6 @@ initRoutes(app)
 app.use('/', (req, res) => {
   res.send('Server is up and running')
 })
-
 
 // app.listen(portApi, () => {
 //   console.log(`Server swaggerUi running on http://localhost:${portApi}`)

@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { memo } from 'react'
-
 import icons from '../../src/ultils/icons'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../store/action'
 const { BsChevronRight } = icons
 const ItemSidebar = ({ header, content }) => {
-  const { posts } = useSelector((state) => state.post)
-  console.log(content)
-  
+  const { count, posts } = useSelector((state) => state.post)
+  const dispatch = useDispatch()
+
+  console.log('a:', actions.getPostsByCategory('nct'))
   return (
     <div className=" border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5">
       <section>
@@ -21,6 +22,7 @@ const ItemSidebar = ({ header, content }) => {
                 <li className="flex items-center justify-between border-dashed border-b-[1px]">
                   <h2 className="">
                     <a
+                      key={item}
                       href="#"
                       className=" flex items-center justify-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm"
                     >
@@ -28,7 +30,7 @@ const ItemSidebar = ({ header, content }) => {
                       {item.value}
                     </a>
                   </h2>
-                  <span className="text-xs text-[#aaa]">(49.212)</span>
+                  <span className="text-xs text-[#aaa]">({item.code})</span>
                 </li>
               )
             })}

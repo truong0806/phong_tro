@@ -7,6 +7,8 @@ import chothuecanho from '../../data/chothuecanho.json'
 import nhachothue from '../../data/nhachothue.json'
 import chothuephongtro from '../../data/chothuephongtro.json'
 import genarateCode from '../ultils/generateCode'
+import { dataArea, dataPrice } from '../ultils/data'
+import { getNumberFormString } from '../ultils/common'
 require('dotenv').config()
 
 const hashPassword = (password) =>
@@ -58,7 +60,12 @@ export const insertService = () =>
           let imagesId = v4()
           let labelCode = genarateCode(item?.header?.class?.classType).trim()
           let desc = JSON.stringify(item?.mainContent?.content)
-          
+          let currentArea = getNumberFormString(
+            item?.header?.attributes?.acreage,
+          )
+          let currentPrice = getNumberFormString(
+            item?.header?.attributes?.price,
+          )
           const dateString = item?.overview?.content.find(
             (i) => i.name === 'Ngày đăng:',
           ).value
@@ -79,6 +86,12 @@ export const insertService = () =>
             userId,
             overviewId,
             imagesId,
+            areaCode: dataArea.find(
+              (area) => area.max > currentArea && area.min <= currentArea,
+            )?.code,
+            priceCode: dataPrice.find(
+              (price) => price.max > currentPrice && price.min <= currentPrice,
+            )?.code,
           })
           await db.Attribute.create({
             id: attributesId,
