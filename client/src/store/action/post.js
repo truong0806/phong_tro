@@ -64,14 +64,14 @@ export const getPostsByCategory = (categoryCode) => async (dispatch) => {
       dispatch({
         type: actionTypes.GET_POSTS_BY_CATEGORY,
         msg: response.data.msg,
-        posts: null,
+        posts_by_categories: null,
         count: null,
       })
     }
   } catch (error) {
     dispatch({
       type: actionTypes.GET_POSTS_BY_CATEGORY,
-      posts: null,
+      posts_by_categories: null,
     })
   }
 }

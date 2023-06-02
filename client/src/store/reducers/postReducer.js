@@ -3,6 +3,7 @@ const initState = {
   posts: [],
   msg: '',
   count: 0,
+  posts_by_categories: [],
 }
 const postReducer = (state = initState, action) => {
   switch (action.type) {
