@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import icons from '../../../ultils/icons'
@@ -34,16 +35,17 @@ const ListPostItem = ({
           className="w-[245px] h-[245px] grid grid-cols-2  grid-rows-1 gap-1 relative cursor-pointer"
         >
           {images
-            .filter((i, index) => indexs.some((i) => i === index))
+            ?.filter((i, index) => indexs.some((i) => i === index))
             ?.map((i, index) => {
               return (
-                <img
-                  src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
-                  data-src={i}
-                  key={index}
-                  className="lazyload lazy w-[130px] h-[120px] object-cover"
-                  loading="lazy"
-                />
+                <div key={i}>
+                  <img
+                    src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
+                    data-src={i}
+                    className="lazyload lazy w-[130px] h-[120px] object-cover"
+                    loading="lazy"
+                  />
+                </div>
               )
             })}
 

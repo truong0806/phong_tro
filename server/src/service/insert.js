@@ -93,6 +93,7 @@ export const insertService = () =>
               (price) => price.max > currentPrice && price.min <= currentPrice,
             )?.code,
           })
+
           await db.Attribute.create({
             id: attributesId,
             price: item?.header?.attributes?.price,
@@ -100,6 +101,7 @@ export const insertService = () =>
             published: item?.header?.attributes?.published,
             hashtag: item?.header?.attributes?.hashtag,
           })
+
           await db.Images.create({
             id: imagesId,
             image: JSON.stringify(item?.images),
@@ -141,8 +143,29 @@ export const insertService = () =>
           })
         })
       })
-
+      await createPriceAndArea()
       resolve('Add data to database Done')
+    } catch (error) {
+      reject(error)
+    }
+  })
+
+export const createPriceAndArea = () =>
+  new Promise(async (resolve, reject) => {
+    try {
+      for (const item of dataPrice) {
+        await db.Price.create({
+          code: item.code,
+          value: item.value,
+        })
+      }
+      for (const item2 of dataArea) {
+        await db.Area.create({
+          code: item2.code,
+          value: item2.value,
+        })
+      }
+      resolve('Ok')
     } catch (error) {
       reject(error)
     }
