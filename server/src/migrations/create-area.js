@@ -5,8 +5,8 @@ module.exports = {
     await queryInterface.createTable('Areas', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
         type: Sequelize.INTEGER,
       },
       code: {
