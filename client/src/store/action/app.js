@@ -1,6 +1,5 @@
 import actionTypes from './actionTypes'
 import * as apis from '../../service'
-import { apiPrices } from './../../service/price'
 
 export const getCategories = () => async (dispatch) => {
   try {
@@ -32,7 +31,7 @@ export const getPrices = () => async (dispatch) => {
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_PRICES,
-        prices: response.data.response.sort((a,b)=> +a.id - +b.id),
+        prices: response.data.response.sort((a, b) => +a.id - +b.id),
       })
     } else {
       dispatch({
@@ -45,6 +44,29 @@ export const getPrices = () => async (dispatch) => {
     dispatch({
       type: actionTypes.GET_PRICES,
       prices: null,
+    })
+  }
+}
+export const getAreas = () => async (dispatch) => {
+  try {
+    const response = await apis.apiAreas()
+    //console.log('app: ', response)
+    if (response?.data.err === 0) {
+      dispatch({
+        type: actionTypes.GET_AREAS,
+        areas: response.data.response.sort((a, b) => +b.id - +a.id),
+      })
+    } else {
+      dispatch({
+        type: actionTypes.GET_AREAS,
+        msg: response.data.msg,
+        areas: null,
+      })
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_AREAS,
+      areas: null,
     })
   }
 }

@@ -8,7 +8,7 @@ export { default as DetailPost } from './components/DetailPost'
 export { default as Register } from './auth/register'
 export { default as Login } from './auth/login'
 //Page
-export { default as HomePage } from './page/HomePage'
+export { default as HomePage } from './page/homePage'
 export { default as RentalHouse } from './page/rentalHouse'
 export { default as RentalRoom } from './page/rentalRoom'
 export { default as RentalSpace } from './page/rentalSpace'
