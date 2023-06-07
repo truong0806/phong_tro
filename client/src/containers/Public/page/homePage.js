@@ -7,13 +7,14 @@ import { ItemSidebar } from '../../../components'
 import { useSelector, useDispatch } from 'react-redux'
 
 const HomePage = () => {
-  const { categories, prices } = useSelector((state) => state.app)
+  const { categories, prices, areas } = useSelector((state) => state.app)
   const [params] = useSearchParams()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(actions.getPrices())
+    dispatch(actions.getAreas())
   }, [dispatch])
-  console.log(prices)
+  console.log(areas)
   return (
     <div className="w-[85%] justify-center flex gap-4 mb-5">
       <div className="w-[100%] lg:w-[70%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
@@ -24,7 +25,16 @@ const HomePage = () => {
       <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
         <ItemSidebar header={'Danh mục cho thuê'} content={categories} />
         <ItemSidebar header={'Xem theo giá'} content={prices} isDouble={true} />
-        <ItemSidebar header={'Xem theo diện tích'} />
+        <ItemSidebar
+          header={'Xem theo diện tích'}
+          content={areas}
+          isDouble={true}
+        />
+        <ItemSidebar
+          header={'Tin mới đăng'}
+          content={areas}
+          isListPost={true}
+        />
         <div className=" border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5">
           Silde Bar 2
         </div>
