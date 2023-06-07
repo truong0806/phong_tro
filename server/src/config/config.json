@@ -1,19 +1,21 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "truong911",
     "database": "phongtro123",
-    "host": "127.0.0.1",
+    "host": "rds-mysql-phongtro123.cfaydlkzipx5.ap-southeast-1.rds.amazonaws.com",
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "truong911",
     "database": "phongtro123",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "rds-mysql-phongtro123.cfaydlkzipx5.ap-southeast-1.rds.amazonaws.com",
+    "dialect": "mysql",
+    "logging": false,
+    "timezone": "+07:00"
   },
   "production": {
     "username": "root",

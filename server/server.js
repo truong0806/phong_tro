@@ -4,8 +4,12 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 const app = express()
 const port = process.env.PORT || 8888
+const swaggerUI = require('swagger-ui-express')
+const docs = require('./doc')
+
 import initRoutes from './src/routes'
-import connectDB from './src/config/condb'
+import { dataArea, dataPrice } from './src/ultils/data'
+
 
 app.use(
   cors({
@@ -17,10 +21,14 @@ app.use(
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 initRoutes(app)
-connectDB()
 app.use('/', (req, res) => {
   res.send('Server is up and running')
 })
+
+// app.listen(portApi, () => {
+//   console.log(`Server swaggerUi running on http://localhost:${portApi}`)
+// })
+
 app.listen(port, () => {
   console.log('Server is up and running in port: http://localhost:' + port)
 })
