@@ -4,14 +4,20 @@ const initState = {
   msg: '',
   count: 0,
   posts_by_categories: [],
+  posts_limit: [],
 }
 const postReducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.GET_POSTS:
-    case actionTypes.GET_POSTS_LIMIT:
       return {
         ...state,
         posts: action.posts || [],
+        msg: action.msg || '',
+      }
+    case actionTypes.GET_POSTS_LIMIT:
+      return {
+        ...state,
+        posts_limit: action.posts_limit || [],
         msg: action.msg || '',
         count: action.count || 0,
       }

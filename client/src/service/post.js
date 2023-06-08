@@ -4,7 +4,7 @@ export const apiGetPosts = () =>
     try {
       const response = await axiosConfig({
         method: 'get',
-        url: '/api/v1/post/all',
+        url: '/post/all',
       })
       resolve(response)
     } catch (error) {
@@ -16,7 +16,7 @@ export const apiGetPostsLimit = (page) =>
     try {
       const response = await axiosConfig({
         method: 'get',
-        url: `/api/v1/post/limit?page=${page}`,
+        url: `/post/limit?page=${page}`,
       })
       resolve(response)
     } catch (error) {
@@ -28,7 +28,7 @@ export const apiGetPostsByCategory = (categoryCode) =>
     try {
       const response = await axiosConfig({
         method: 'get',
-        url: `/api/v1/post/category?code=${categoryCode}`,
+        url: `/post/category?code=${categoryCode}`,
       })
       resolve(response)
     } catch (error) {

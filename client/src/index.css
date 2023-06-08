@@ -5,6 +5,5 @@ html {
   /* width: 480px; */
   scroll-behavior: smooth;
   font-size: 14px;
-  line-height: 1.15;
+  font-family: Arial, Helvetica, sans-serif;
 }
-

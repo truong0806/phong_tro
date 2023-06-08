@@ -12,11 +12,13 @@ export const getPosts = () => async (dispatch) => {
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_POSTS,
-        posts: response.data.response,
+        posts: response.data.response.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt)
+        }),
       })
     } else {
       dispatch({
-        type: actionTypes.REGISTER_FAIL,
+        type: actionTypes.GET_POSTS,
         msg: response.data.msg,
       })
     }
@@ -30,11 +32,10 @@ export const getPosts = () => async (dispatch) => {
 export const GetPostsLimit = (page) => async (dispatch) => {
   try {
     const response = await apiGetPostsLimit(page)
-    //console.log(response)
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_POSTS_LIMIT,
-        posts: response.data.response?.rows,
+        posts_limit: response.data.response?.rows,
         count: response.data.response?.count,
       })
     } else {
@@ -46,7 +47,7 @@ export const GetPostsLimit = (page) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actionTypes.GET_POSTS_LIMIT,
-      posts: null,
+      posts_limit: null,
     })
   }
 }

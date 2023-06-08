@@ -5,16 +5,20 @@ import * as actions from '../../../store/action'
 import { useSearchParams } from 'react-router-dom'
 import { ItemSidebar } from '../../../components'
 import { useSelector, useDispatch } from 'react-redux'
+import { getPosts } from '../../../store/action/post'
 
 const HomePage = () => {
   const { categories, prices, areas } = useSelector((state) => state.app)
+  const { posts } = useSelector((state) => state.post)
   const [params] = useSearchParams()
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(actions.getPrices())
     dispatch(actions.getAreas())
+    dispatch(getPosts())
   }, [dispatch])
-  console.log(areas)
+  //console.log(areas)
+  //console.log('post: ', posts)
   return (
     <div className="w-[85%] justify-center flex gap-4 mb-5">
       <div className="w-[100%] lg:w-[70%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
@@ -32,7 +36,7 @@ const HomePage = () => {
         />
         <ItemSidebar
           header={'Tin mới đăng'}
-          content={areas}
+          content={posts}
           isListPost={true}
         />
         <div className=" border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5">

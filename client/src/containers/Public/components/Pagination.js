@@ -3,16 +3,17 @@ import { useSelector } from 'react-redux'
 import { ListNumber } from '../../../components'
 
 const Pagination = ({ page }) => {
-  const { count, posts } = useSelector((state) => state.post)
+  const { count, posts_limit } = useSelector((state) => state.post)
   const [arrpage, setArrPage] = useState([])
   const [currentPage, setCurrentPage] = useState(+page || 1)
   const [inHideEnd, isInHideEnd] = useState(false)
   const [inHideStart, isInHideStart] = useState(false)
+  console.log(count)
   useState(() => {
     setCurrentPage(1)
   })
   useEffect(() => {
-    let maxPage = Math.floor(count / posts.length)
+    let maxPage = Math.floor(count / posts_limit.length)
     let end = currentPage + 1 > maxPage ? maxPage : currentPage + 1
     let start = currentPage - 1 <= 0 ? 1 : currentPage - 1
     let temp = []
@@ -21,7 +22,7 @@ const Pagination = ({ page }) => {
     //console.log(arrpage)
     currentPage >= maxPage - 1 ? isInHideEnd(true) : isInHideEnd(false)
     currentPage <= 3 ? isInHideStart(true) : isInHideStart(false)
-  }, [count, posts, currentPage])
+  }, [count, posts_limit, currentPage])
   //console.log(handlePageNumber())
   return (
     <div className="flex items-center justify-center mt-[20px] mb-[50px]">
@@ -44,7 +45,7 @@ const Pagination = ({ page }) => {
       {!inHideEnd && (
         <ListNumber
           text={'»»'}
-          number={Math.floor(count / posts.length)}
+          number={Math.floor(count / posts_limit.length)}
           setCurrentPage={setCurrentPage}
           type={'end'}
         />

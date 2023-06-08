@@ -4,7 +4,7 @@ export const apiAreas = () =>
     try {
       const response = await axiosConfig({
         method: 'get',
-        url: '/api/v1/area/all',
+        url: '/area/all',
       })
       resolve(response)
     } catch (error) {
