@@ -5,7 +5,7 @@ export const apiRegister = (payload) =>
     try {
       const response = await axiosConfig({
         method: 'post',
-        url: '/api/v1/auth/register',
+        url: '/auth/register',
         data: payload,
       })
       resolve(response)
@@ -18,7 +18,7 @@ export const apiLogin = (payload) =>
     try {
       const response = await axiosConfig({
         method: 'post',
-        url: '/api/v1/auth/login',
+        url: '/auth/login',
         data: payload,
       })
       resolve(response)

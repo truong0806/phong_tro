@@ -26,7 +26,14 @@ export const postService = () =>
           //   attributes: ['code', 'value'],
           // },
         ],
-        attributes: ['id', 'title', 'star', 'address', 'description'],
+        attributes: [
+          'id',
+          'title',
+          'star',
+          'address',
+          'description',
+          'createdAt',
+        ],
         distinct: true,
       })
       resolve({

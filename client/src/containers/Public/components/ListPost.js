@@ -1,19 +1,20 @@
 import React, { useEffect, useRef } from 'react'
 import { Button } from '../../../components/index'
 import { ListPostItem } from '../index'
-import { GetPostsLimit } from '../../../store/action/post'
+import { GetPostsLimit, getPosts } from '../../../store/action/post'
 import { useDispatch, useSelector } from 'react-redux'
 const ListPost = ({ page }) => {
   const dispatch = useDispatch()
   const linkRef = useRef()
-  const { posts } = useSelector((state) => state.post)
-
+  const { posts_limit } = useSelector((state) => state.post)
   useEffect(() => {
-    let offset = page ? +page - 1 : 0
+    let offset = page ? page - 1 : 0
     dispatch(GetPostsLimit(offset))
+    //dispatch(getPosts())
     linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' })
   }, [dispatch, page])
-  //console.log(posts)
+  console.log('post limit', posts_limit.length)
+  console.log('page', page)
   //console.log('category: ')
 
   return (
@@ -46,15 +47,15 @@ const ListPost = ({ page }) => {
         />
       </div>
       <div className=" px-5 mx-[-20px] py-4">
-        {posts?.length > 0 &&
-          posts.map((item) => {
+        {posts_limit?.length > 0 &&
+          posts_limit.map((item) => {
             return (
               <ListPostItem
-                key={item?.id}
+                key={item.id}
                 attributes={item?.attributes}
                 description={JSON.parse(item?.description)}
                 users={item?.users}
-                images={JSON.parse(item?.images.image)}
+                images={JSON.parse(item?.images?.image)}
                 title={item?.title}
                 label={item?.label}
                 address={item?.address}

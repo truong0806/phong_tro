@@ -4,7 +4,7 @@ export const apiPrices = () =>
     try {
       const response = await axiosConfig({
         method: 'get',
-        url: '/api/v1/price/all',
+        url: '/price/all',
       })
       resolve(response)
     } catch (error) {
