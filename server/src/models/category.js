@@ -17,10 +17,13 @@ module.exports = (sequelize, DataTypes) => {
       value: DataTypes.STRING,
       header: DataTypes.STRING,
       subheader: DataTypes.STRING,
+<<<<<<< Updated upstream
       count: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
+=======
+>>>>>>> Stashed changes
     },
     {
       sequelize,

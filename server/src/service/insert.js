@@ -74,11 +74,13 @@ export const insertService = () =>
           const dateString = item?.overview?.content.find(
             (i) => i.name === 'Ngày đăng:',
           ).value
+          let categoryCode = cate.code
           const dateCreate = moment(
             dateString,
             'dddd, HH:mm DD/MM/YYYY',
             'vi',
           ).toDate()
+<<<<<<< Updated upstream
           await db.Post.findOrCreate({
             where: {
               id: postId,
@@ -116,6 +118,33 @@ export const insertService = () =>
               published: item?.header?.attributes?.published,
               hashtag: item?.header?.attributes?.hashtag,
             },
+=======
+          await db.Post.create({
+            id: postId,
+            title: item?.header?.title,
+            star: item?.header?.star,
+            labelCode,
+            address: item?.header?.address,
+            attributesId,
+            categoryCode: categoryCode,
+            description: desc,
+            userId,
+            overviewId,
+            imagesId,
+            areaCode: dataArea.find(
+              (area) => area.max > currentArea && area.min <= currentArea,
+            )?.code,
+            priceCode: dataPrice.find(
+              (price) => price.max > currentPrice && price.min <= currentPrice,
+            )?.code,
+          })
+          await db.Attribute.create({
+            id: attributesId,
+            price: item?.header?.attributes?.price,
+            acreage: item?.header?.attributes?.acreage,
+            published: item?.header?.attributes?.published,
+            hashtag: item?.header?.attributes?.hashtag,
+>>>>>>> Stashed changes
           })
 
           await db.Images.findOrCreate({
