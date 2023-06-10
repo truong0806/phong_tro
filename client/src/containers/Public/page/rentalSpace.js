@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const rentalSpace = () => {
-  return (
-    <div>rentalSpace</div>
-  )
-}
+const rentalSpace = () => (
+  <div>rentalSpace</div>
+);
 
-export default rentalSpace
+export default rentalSpace;

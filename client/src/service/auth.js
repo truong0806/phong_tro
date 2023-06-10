@@ -1,4 +1,4 @@
-import axiosConfig from '../axiosConfig'
+import axiosConfig from '../axiosConfig';
 
 export const apiRegister = (payload) =>
   new Promise(async (resolve, reject) => {
@@ -7,12 +7,12 @@ export const apiRegister = (payload) =>
         method: 'post',
         url: '/auth/register',
         data: payload,
-      })
-      resolve(response)
+      });
+      resolve(response);
     } catch (error) {
-      reject(error)
+      reject(error);
     }
-  })
+  });
 export const apiLogin = (payload) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -20,9 +20,9 @@ export const apiLogin = (payload) =>
         method: 'post',
         url: '/auth/login',
         data: payload,
-      })
-      resolve(response)
+      });
+      resolve(response);
     } catch (error) {
-      reject(error)
+      reject(error);
     }
-  })
+  });

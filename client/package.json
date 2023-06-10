@@ -32,6 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "eslint": "eslint .",
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject"
@@ -58,6 +59,7 @@
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "autoprefixer": "^10.4.8",
+    "babel-eslint": "^10.1.0",
     "babel-jest": "^29.5.0",
     "jest": "^27.5.1",
     "postcss": "^8.4.14",

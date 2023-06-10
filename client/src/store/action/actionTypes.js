@@ -18,6 +18,6 @@ const actionTypes = {
 
   // USER
   GET_CURRENT: 'GET_CURRENT',
-}
+};
 
-export default actionTypes
+export default actionTypes;

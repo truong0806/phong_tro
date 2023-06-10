@@ -1,13 +1,14 @@
-import axiosConfig from '../axiosConfig'
+import axiosConfig from '../axiosConfig';
+
 export const apiAreas = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axiosConfig({
         method: 'get',
         url: '/area/all',
-      })
-      resolve(response)
+      });
+      resolve(response);
     } catch (error) {
-      reject(error)
+      reject(error);
     }
-  })
+  });

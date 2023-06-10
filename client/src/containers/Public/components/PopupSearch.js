@@ -1,15 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-const PopupSearch = () => {
+function PopupSearch() {
   return (
     <div>
       <div className="filter-popup js-filter-popup js-filter-popup-estate-type">
         <div className="filter-popup-header">
-          <span className="header-label">Chọn loại bất động sản</span>{' '}
+          <span className="header-label">Chọn loại bất động sản</span>
+          {' '}
           <div className="popup-close js-filter-popup-close">Đóng</div>
-        </div>{' '}
+        </div>
+        {' '}
         <div className="filter-popup-content">
-          <div id="filter-popup-estate-type-option" class="filter-list-option">
+          <div id="filter-popup-estate-type-option" className="filter-list-option">
             <ul>
               <li className="selected">Phòng trọ, nhà trọ</li>
               <li className="">Nhà thuê nguyên căn</li>
@@ -23,7 +25,7 @@ const PopupSearch = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default PopupSearch
+export default PopupSearch;

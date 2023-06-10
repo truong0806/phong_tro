@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom';
 import {
   Home,
   Auth,
@@ -11,8 +10,8 @@ import {
   Register,
   Login,
   DetailPost,
-} from './containers/Public'
-import { path } from './ultils/constains'
+} from './containers/Public';
+import { path } from './ultils/constains';
 
 function App() {
   return (
@@ -37,7 +36,7 @@ function App() {
         </Route>
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

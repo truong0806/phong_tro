@@ -46,10 +46,11 @@ export const postService = () =>
       reject(error)
     }
   })
-export const postLimitService = (page) =>
+export const postLimitService = (page, query) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.Post.findAndCountAll({
+        where: query,
         raw: true,
         nest: true,
         offset: page * +process.env.LIMIT || 0,

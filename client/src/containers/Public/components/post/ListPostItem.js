@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import icons from '../../../ultils/icons'
+import icons from '../../../../ultils/icons'
 import 'lazysizes'
 var slug = require('slug')
 const { BsBookmarkStarFill, RiHeartLine, RiHeartFill } = icons
@@ -16,6 +16,7 @@ const ListPostItem = ({
   star,
   id,
 }) => {
+ 
   const [isHoverHeart, setIsHoverHeart] = useState(false)
   //const navigate = useNavigate()
   const handleStar = (star) => {
