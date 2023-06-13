@@ -1,31 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Button, Loading } from '../../../../components/index';
+import React from 'react';
+import { Button } from '../../../../components/index';
 import { ListPostItem } from '../../index';
-import { GetPostsLimit } from '../../../../store/action/post';
-import { useDispatch, useSelector } from 'react-redux';
+import getDate from '../../../../ultils/getDate';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const ListPost = ({ page }) => {
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
-  const linkRef = useRef();
-  const { posts_limit } = useSelector((state) => state.post);
-  var date = new Date();
-  var hour = date.getHours();
-  var minute = date.getMinutes();
-  var day = String(date.getDate()).padStart(2, '0');
-  var month = String(date.getMonth() + 1).padStart(2, '0');
-  var year = date.getFullYear();
-
-  useEffect(() => {
-    let offset = page ? page - 1 : 0;
-    setLoading(true);
-    setTimeout(() => {
-      dispatch(GetPostsLimit(offset));
-      setLoading(false);
-    }, 1000);
-    linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
-  }, [dispatch, page]);
-
+const ListPost = ({ linkRef, posts_limit, loading }) => {
   return (
     <div ref={linkRef} className="m-[20px] ">
       <section className=" flex justify-between">
@@ -33,10 +12,7 @@ const ListPost = ({ page }) => {
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>
         </div>
         <span className="text-[14px] ">
-          Cập nhật:{' '}
-          <time title="Thứ 7, 12:25 15/04/2023">
-            {hour}:{minute} {day}/{month}/{year}
-          </time>
+          Cập nhật: <time title="Thứ 7, 12:25 15/04/2023">{getDate()}</time>
         </span>
       </section>
       <div className="flex items-center text-[.95rem] gap-2 my-[10px] ">
@@ -59,7 +35,9 @@ const ListPost = ({ page }) => {
       </div>
       <div className="px-5 mx-[-20px] py-4">
         {loading ? (
-          <Loading loading={loading} />
+          <div className="flex my-10 w-full items-center justify-center">
+            <CircularProgress />
+          </div>
         ) : posts_limit && posts_limit?.length > 0 ? (
           posts_limit.map((item) => (
             <ListPostItem

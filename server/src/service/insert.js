@@ -6,18 +6,13 @@ import chothuematbang from '../../data/chothuematbang.json'
 import chothuecanho from '../../data/chothuecanho.json'
 import nhachothue from '../../data/nhachothue.json'
 import chothuephongtro from '../../data/chothuephongtro.json'
-import categoriesData from '../../data/categorie.json'
 import genarateCode from '../ultils/generateCode'
 import { dataArea, dataPrice } from '../ultils/data'
 import { getNumberFormString } from '../ultils/common'
 require('dotenv').config()
+
 const hashPassword = (password) =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(12))
-const cateData = [
-  {
-    body: categoriesData.categories,
-  },
-]
 const dataBody = [
   {
     header: chothuephongtro.header,
@@ -43,8 +38,8 @@ const dataBody = [
 export const insertService = () =>
   new Promise(async (resolve, reject) => {
     try {
-      cateData.forEach((cate1) => {
-        cate1.body.forEach(async (category) => {
+      dataBody.forEach((cate) => {
+        cate.header.forEach(async (category) => {
           await db.Category.findOrCreate({
             where: { code: category?.code },
             defaults: {
@@ -74,13 +69,11 @@ export const insertService = () =>
           const dateString = item?.overview?.content.find(
             (i) => i.name === 'Ngày đăng:',
           ).value
-          let categoryCode = cate.code
           const dateCreate = moment(
             dateString,
             'dddd, HH:mm DD/MM/YYYY',
             'vi',
           ).toDate()
-<<<<<<< Updated upstream
           await db.Post.findOrCreate({
             where: {
               id: postId,
@@ -118,49 +111,14 @@ export const insertService = () =>
               published: item?.header?.attributes?.published,
               hashtag: item?.header?.attributes?.hashtag,
             },
-=======
-          await db.Post.create({
-            id: postId,
-            title: item?.header?.title,
-            star: item?.header?.star,
-            labelCode,
-            address: item?.header?.address,
-            attributesId,
-            categoryCode: categoryCode,
-            description: desc,
-            userId,
-            overviewId,
-            imagesId,
-            areaCode: dataArea.find(
-              (area) => area.max > currentArea && area.min <= currentArea,
-            )?.code,
-            priceCode: dataPrice.find(
-              (price) => price.max > currentPrice && price.min <= currentPrice,
-            )?.code,
-          })
-          await db.Attribute.create({
-            id: attributesId,
-            price: item?.header?.attributes?.price,
-            acreage: item?.header?.attributes?.acreage,
-            published: item?.header?.attributes?.published,
-            hashtag: item?.header?.attributes?.hashtag,
->>>>>>> Stashed changes
-          })
-
-          await db.Images.findOrCreate({
-            where: { id: imagesId },
-            defaults: {
-              id: imagesId,
-              image: JSON.stringify(item?.images),
-            },
-          })
-          await db.Label.findOrCreate({
-            where: { code: labelCode },
-            defaults: {
-              code: labelCode,
-              value: item?.header.class.classType,
-            },
-          })
+          }),
+            await db.Label.findOrCreate({
+              where: { code: labelCode },
+              defaults: {
+                code: labelCode,
+                value: item?.header.class.classType,
+              },
+            })
 
           await db.Overview.findOrCreate({
             where: {
@@ -217,21 +175,15 @@ export const createPriceAndArea = () =>
   new Promise(async (resolve, reject) => {
     try {
       for (const item of dataPrice) {
-        await db.Price.findOrCreate({
-          where: { code: item?.code },
-          defaults: {
-            code: item.code,
-            value: item.value,
-          },
+        await db.Price.create({
+          code: item.code,
+          value: item.value,
         })
       }
       for (const item2 of dataArea) {
-        await db.Area.findOrCreate({
-          where: { code: item2?.code },
-          defaults: {
-            code: item2.code,
-            value: item2.value,
-          },
+        await db.Area.create({
+          code: item2.code,
+          value: item2.value,
         })
       }
       resolve('Ok')

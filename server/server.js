@@ -10,7 +10,6 @@ const docs = require('./doc')
 import initRoutes from './src/routes'
 import { dataArea, dataPrice } from './src/ultils/data'
 
-
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -31,4 +30,8 @@ app.use('/', (req, res) => {
 
 app.listen(port, () => {
   console.log('Server is up and running in port: http://localhost:' + port)
+  console.log(
+    'Client is up and running in port: ' +
+      process.env.CLIENT_URL,
+  )
 })

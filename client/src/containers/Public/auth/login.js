@@ -6,7 +6,6 @@ import { InputForm, Button } from '../../../components';
 import * as actions from '../../../store/action';
 import validate from '../../../ultils/validate';
 import { path } from '../../../ultils/constains';
-// import { Loading } from '../../../components'
 import { Header, Navigation, WhyUs, Support } from '../index';
 
 function Login() {

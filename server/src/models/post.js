@@ -1,6 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
-module.exports = async (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     /**
      * Helper method for defining associations.
@@ -44,10 +44,7 @@ module.exports = async (sequelize, DataTypes) => {
       userId: DataTypes.STRING,
       overviewId: DataTypes.STRING,
       imagesId: DataTypes.STRING,
-<<<<<<< Updated upstream
-=======
       createdAt: DataTypes.DATE,
->>>>>>> Stashed changes
     },
     {
       sequelize,

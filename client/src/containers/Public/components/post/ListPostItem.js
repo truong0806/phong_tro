@@ -18,7 +18,6 @@ const ListPostItem = ({
 }) => {
  
   const [isHoverHeart, setIsHoverHeart] = useState(false)
-  //const navigate = useNavigate()
   const handleStar = (star) => {
     const stars = []
     for (let i = 1; i < +star; i++) {

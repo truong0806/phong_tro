@@ -24,4 +24,4 @@ export { default as ListPostItem } from './components/post/ListPostItem';
 export { default as ListPost } from './components/post/ListPost';
 export { default as ItemSidebar } from './components/sidebar/ItemSidebar';
 export { default as SlideBar } from './components/sidebar/SlideBar';
-export { default as Pagination } from './components/Pagination';
+export { default as Pagination } from './components/Pagination/Pagination';

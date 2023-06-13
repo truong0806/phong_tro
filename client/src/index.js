@@ -6,9 +6,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import reduxStore from './redux';
 import App from './App';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const { store, persistor } = reduxStore();
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
@@ -17,5 +18,5 @@ root.render(
         <App />
       </Router>
     </PersistGate>
-  </Provider>,
+  </Provider>
 );

@@ -23,6 +23,7 @@ const postReducer = (state = initState, action) => {
         msg: action.msg || '',
         count: action.count || 0,
       };
+
     case actionTypes.GET_POSTS_BY_CATEGORY:
       return {
         ...state,
