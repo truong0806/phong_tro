@@ -1,8 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{html,js}', 'public/index.html'],
-  
+
   theme: {
+    backgroundSize: {
+      '50%': '50%',
+      '35px': '35px',
+    },
     extend: {
       width: {
         1100: '1100px',
@@ -38,4 +42,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};

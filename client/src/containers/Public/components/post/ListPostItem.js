@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import icons from '../../../ultils/icons'
+import { Link } from 'react-router-dom'
+import icons from '../../../../ultils/icons'
 import 'lazysizes'
 var slug = require('slug')
 const { BsBookmarkStarFill, RiHeartLine, RiHeartFill } = icons
@@ -16,8 +16,8 @@ const ListPostItem = ({
   star,
   id,
 }) => {
+ 
   const [isHoverHeart, setIsHoverHeart] = useState(false)
-  const navigate = useNavigate()
   const handleStar = (star) => {
     const stars = []
     for (let i = 1; i < +star; i++) {
@@ -29,7 +29,7 @@ const ListPostItem = ({
   }
   return (
     <div className="w-full flex border-t border-red-500 p-4 pb-1">
-      {images.length > 4 ? (
+      {images?.length > 4 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
           className="w-[245px] h-[245px] grid grid-cols-2  grid-rows-1 gap-1 relative cursor-pointer"
@@ -38,19 +38,18 @@ const ListPostItem = ({
             ?.filter((i, index) => indexs.some((i) => i === index))
             ?.map((i, index) => {
               return (
-                <div key={i}>
-                  <img
-                    src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
-                    data-src={i}
-                    className="lazyload lazy w-[130px] h-[120px] object-cover"
-                    loading="lazy"
-                  />
-                </div>
+                <img
+                  key={index}
+                  src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
+                  data-src={i}
+                  className="lazyload lazy w-[130px] h-[120px] object-cover"
+                  loading="lazy"
+                />
               )
             })}
 
           <span className="absolute bottom-2 left-4 bg-[rgba(0,0,0,.5)] text-white py-[3px] px-[5px] rounded-[3px] text-[.9rem]">
-            {`${images.length}`} ảnh
+            {`${images?.length}`} ảnh
           </span>
           <span
             className="absolute bottom-2 right-4 text-white "
@@ -68,19 +67,19 @@ const ListPostItem = ({
             )}
           </span>
         </Link>
-      ) : images.length > 0 ? (
+      ) : images?.length > 0 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
           className="w-[245px] h-[245px] relative cursor-pointer"
         >
           {images
-            .filter((j, index) => indexs.some((j) => j - 3 === index))
+            ?.filter((j, index) => indexs.some((j) => j - 3 === index))
             ?.map((j, index) => {
               return <img src={j} className="w-full h-full object-cover" />
             })}
 
           <span className="absolute bottom-2 left-4 bg-[rgba(0,0,0,.5)] text-white py-[3px] px-[5px] rounded-[3px] text-[.9rem]">
-            {`${images.length}`} ảnh
+            {`${images?.length}`} ảnh
           </span>
           <span
             className="absolute bottom-2 right-4 text-white "
@@ -117,7 +116,7 @@ const ListPostItem = ({
             className="font-bold gap-1 text-[#E13427] hover:underline	"
           >
             {handleStar(+star).length > 0 &&
-              handleStar(+star).map((star, num) => {
+              handleStar(+star)?.map((star, num) => {
                 return <span key={num}>{star}</span>
               })}
             <span className="ml-[4px] text-justify">{title}</span>

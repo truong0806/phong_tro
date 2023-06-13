@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react'
-import star5 from '../../../assets/5star.png'
-import { Button } from '../../../components'
-const WhyUs = () => {
+import React from 'react';
+import star5 from '../../../assets/5star.png';
+import { Button } from '../../../components';
+
+function WhyUs() {
   return (
     <div className="">
       <div className="border-[#dedede] border w-full min-w-[320px] text-center bg-white m-auto pt-[20px] px-[50px] pb-[50px]  rounded-md shadow-sm ">
@@ -42,13 +43,13 @@ const WhyUs = () => {
             </span>
           </div>
         </div>
-        <br></br>
-        <br></br>
+        <br />
+        <br />
         <h5 className="font-[700] text-[18px] mb-[5px] justify-center items-center flex">
           Chi phí thấp, hiệu quả tối đa
         </h5>
         <div className="justify-center items-center flex">
-          <img className="w-[100px] h-[20px]" src={star5}></img>
+          <img className="w-[100px] h-[20px]" src={star5} />
         </div>
         <p className="italic my-[10px] text-center line-height text-[14px]">
           "Trước khi biết website phongtro123, mình phải tốn nhiều công sức và
@@ -57,7 +58,7 @@ const WhyUs = () => {
           website phongtro123.com, mình đã thử đăng tin lên và đánh giá hiệu quả
           khá cao trong khi chi phí khá thấp, không còn tình trạng phòng trống
           kéo dài."
-          <br></br>
+          <br />
           <span className="mt-[10px] justify-center items-center flex text-center line-height text-[14px]">
             Anh Khánh (chủ hệ thống phòng trọ tại Tp.HCM)
           </span>
@@ -70,10 +71,8 @@ const WhyUs = () => {
         </p>
         <div className="justify-center items-center flex">
           <Button
-            fontW={
-              'py-[10px] px-[30px] font-normal text-[14px] h-[40px] font-[700] flex center justify-center items-center'
-            }
-            text={'Đăng tin ngay'}
+            fontW="py-[10px] px-[30px] font-normal text-[14px] h-[40px] font-[700] flex center justify-center items-center"
+            text="Đăng tin ngay"
             textColor="text-white"
             bgcolor="bg-[#f73859]"
             IcBeforSize="20"
@@ -81,7 +80,7 @@ const WhyUs = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default WhyUs
+export default WhyUs;

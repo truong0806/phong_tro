@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { Loading } from '../../../components'
+import React, { useState, useEffect } from 'react';
+import { Loading } from '../../../components';
 
-const RentalApartment = () => {
-  const [loading, setLoading] = useState(true)
+function RentalApartment() {
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setLoading(false)
-    }, 3000)
+      setLoading(false);
+    }, 3000);
 
-    return () => clearTimeout(timeout)
-  }, [])
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <>
@@ -23,7 +23,7 @@ const RentalApartment = () => {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default RentalApartment
+export default RentalApartment;

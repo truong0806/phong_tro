@@ -1,8 +1,8 @@
-import React, { memo } from 'react'
+import React, { memo } from 'react';
 
-const Loading = ({ loading }) => {
+function Loading({ loading }) {
   if (!loading) {
-    return null
+    return null;
   }
 
   return (
@@ -28,7 +28,7 @@ const Loading = ({ loading }) => {
       </svg>
       <span className="sr-only">Loading...</span>
     </div>
-  )
+  );
 }
 
-export default memo(Loading)
+export default memo(Loading);

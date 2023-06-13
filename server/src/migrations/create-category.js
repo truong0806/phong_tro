@@ -21,6 +21,9 @@ module.exports = {
       subheader: {
         type: Sequelize.STRING,
       },
+      count: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: true,
         type: Sequelize.DATE,
