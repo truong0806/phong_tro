@@ -20,8 +20,8 @@ function Pagination({ page }) {
   }, [count, posts_limit, currentPage]);
 
   const postLimitEmpty =
-    posts_limit === 0 || Math.round(count / 5) === 1 ? 'hidden' : '';
-  console.log('arrpage', arrpage);
+    posts_limit === 0 || Math.round(count / 5) === 1 ? '' : '';
+  //console.log('arrpage', arrpage);
 
   return (
     <div

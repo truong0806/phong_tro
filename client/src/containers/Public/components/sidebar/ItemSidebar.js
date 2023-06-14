@@ -2,14 +2,15 @@
 import React, { useState } from 'react';
 import icons from '../../../../ultils/icons';
 import 'lazysizes';
+import * as actions from '../../../../store/action';
 import {
   Link,
   createSearchParams,
   useLocation,
   useNavigate,
+  useSearchParams,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import newPostSideBar from './NewPostSideBar';
 import NewPostSideBar from './NewPostSideBar';
 const { BsChevronRight } = icons;
 var slug = require('slug');
@@ -21,12 +22,12 @@ const ItemSidebar = ({
   isListPost,
   type,
   setLoading,
+  loading,
 }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loaction = useLocation();
-
-
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
   const formatContent = () => {
     const odd = content?.filter((item, index) => index % 2 !== 0);
     const even = content?.filter((item, index) => index % 2 === 0);
@@ -40,9 +41,10 @@ const ItemSidebar = ({
   };
 
   const handleFilterPost = (code) => {
+    dispatch(actions.ClearPostsLimit());
     setLoading(true);
     navigate({
-      pathname: loaction.pathname,
+      pathname: location.pathname,
       search: createSearchParams({ [type]: code }).toString(),
     });
   };

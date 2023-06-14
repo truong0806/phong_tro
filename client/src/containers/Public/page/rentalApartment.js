@@ -1,28 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import { Loading } from '../../../components';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect, useRef, useState } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { ListPost, Pagination, SlideBar } from '../index';
+import * as actions from '../../../store/action';
+import convertToAcronym from '../../../ultils/convertToAcronym';
 
 function RentalApartment() {
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [params] = useSearchParams();
+  const dispatch = useDispatch();
+  const { posts_limit } = useSelector((state) => state.post);
+  const [searchParams] = useSearchParams();
+  const linkRef = useRef();
 
-    return () => clearTimeout(timeout);
-  }, []);
+  useState(() => {
+    setLoading(false);
+  });
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      const path = location.pathname;
+      const category = path.substring(1);
+      let params = [];
+      for (let entry of searchParams.entries()) {
+        params.push(entry);
+      }
+      let searchParamsObject = {};
+      searchParamsObject = {
+        ...searchParamsObject,
+        ['categoryCode']: convertToAcronym(category),
+      };
+      params?.map((i) => {
+        searchParamsObject = { ...searchParamsObject, [i[0]]: i[1] };
+      });
+      dispatch(actions.GetPostsLimit(searchParamsObject));
+      setLoading(false);
+    }, 1000);
+
+    linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
+  }, [searchParams]);
+
+  useEffect(() => {
+    dispatch(actions.getPrices());
+    dispatch(actions.getAreas());
+  }, [dispatch]);
 
   return (
-    <>
-      {loading ? (
-        <div className="overlay">
-          <Loading loading={loading} />
-        </div>
-      ) : (
-        <div className={!loading ? 'opacity-100' : 'opacity-25'}>
-          rentalApartment
-        </div>
-      )}
-    </>
+    <div className="w-[85%] justify-center flex gap-4 mb-5">
+      <div className="w-[100%] lg:w-[65%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
+        <ListPost
+          loading={loading}
+          linkRef={linkRef}
+          posts_limit={posts_limit}
+        />
+        <Pagination page={params.get('page')} />
+      </div>
+      <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
+        <SlideBar setLoading={setLoading} />
+      </div>
+    </div>
   );
 }
 

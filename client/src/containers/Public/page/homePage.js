@@ -28,17 +28,17 @@ function HomePage() {
       params?.map((i) => {
         searchParamsObject = { ...searchParamsObject, [i[0]]: i[1] };
       });
-      dispatch(actions.GetPostsLimit(searchParamsObject));
       setLoading(false);
+      dispatch(actions.GetPostsLimit(searchParamsObject));
     }, 1000);
-
     linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
-  }, [searchParams]);
+  }, [searchParams, dispatch]);
 
   useEffect(() => {
     dispatch(actions.getPrices());
     dispatch(actions.getAreas());
   }, [dispatch]);
+
   return (
     <div className="w-[85%] justify-center flex gap-4 mb-5">
       <div className="w-[100%] lg:w-[65%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
@@ -50,7 +50,7 @@ function HomePage() {
         <Pagination page={params.get('page')} />
       </div>
       <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
-        <SlideBar setLoading={setLoading} />
+        <SlideBar loading={loading} setLoading={setLoading} />
       </div>
     </div>
   );

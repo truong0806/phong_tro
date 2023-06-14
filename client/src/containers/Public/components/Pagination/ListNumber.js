@@ -3,10 +3,12 @@ import {
   createSearchParams,
   useNavigate,
   useSearchParams,
+  useLocation,
 } from 'react-router-dom';
 
 function ListNumber({ text, number, currentPage, setCurrentPage, type }) {
   const [paramsSearch] = useSearchParams();
+  const location = useLocation();
   const navigate = useNavigate();
   let entries = paramsSearch.entries();
   const active =
@@ -29,7 +31,7 @@ function ListNumber({ text, number, currentPage, setCurrentPage, type }) {
     if (!(number === '...')) {
       setCurrentPage(+number);
       navigate({
-        pathname: '/',
+        pathname: location.pathname,
         search: createSearchParams(append(entries)).toString(),
       });
     }

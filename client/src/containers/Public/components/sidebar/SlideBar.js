@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../../store/action';
 import ItemSidebar from './ItemSidebar';
 
-function SlideBar({ setLoading }) {
+function SlideBar({ setLoading, loading }) {
   const { categories, prices, areas } = useSelector((state) => state.app);
   const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
@@ -11,13 +11,13 @@ function SlideBar({ setLoading }) {
     dispatch(actions.getPrices());
     dispatch(actions.getAreas());
     dispatch(actions.getCategories());
-    dispatch(actions.getPosts());
   }, [dispatch]);
   return (
     <div>
       <ItemSidebar header="Danh mục cho thuê" content={categories} />
       <ItemSidebar
         setLoading={setLoading}
+        loading={loading}
         header="Xem theo giá"
         type="priceCode"
         content={prices}

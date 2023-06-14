@@ -23,6 +23,13 @@ const postReducer = (state = initState, action) => {
         msg: action.msg || '',
         count: action.count || 0,
       };
+    case actionTypes.CLEAR_POST:
+      return {
+        ...state,
+        posts_limit: [],
+        msg: '',
+        count: 0,
+      };
 
     case actionTypes.GET_POSTS_BY_CATEGORY:
       return {

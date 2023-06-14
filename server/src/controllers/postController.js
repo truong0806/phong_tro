@@ -7,7 +7,7 @@ export const getPost = async (req, res) => {
     await updateCategoryCount()
     return res.status(200).json(response)
   } catch (error) {
-    return res.stats(500).json({
+    return res.status(500).json({
       err: -1,
       msg: 'Fail at post controller' + error,
     })
