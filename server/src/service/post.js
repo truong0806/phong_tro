@@ -49,7 +49,6 @@ export const postService = () =>
 export const postLimitService = (page, query) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log(query)
       let offset = !page || +page <= 1 ? 0 : +page - 1
       const response = await db.Post.findAndCountAll({
         where: query,

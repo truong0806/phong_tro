@@ -1,10 +1,8 @@
 import React from 'react';
 import { location, text } from '../../../ultils/constains';
 import { ProvinceBtn } from '../index';
-// import { useLocation } from 'react-router-dom'
+
 export function Province() {
-  // const locations = useLocation()
-  // const [isRegister, setIsRegister] = useState(locations.state?.flag)
   return (
     <div className="flex flex-col w-full items-center">
       <div className="items-center justify-center  my-[20px] mx-[10px]  bg-[#225aff]  text-white p-[15px] rounded-lg">
@@ -17,24 +15,17 @@ export function Province() {
         <p className="page-description lg:hidden mb-0 mt-[10px] text-[.9rem] leading-6">
           <a rel="nofollow" href="https://phongtro123.com/dang-nhap-tai-khoan">
             Đăng nhập
-          </a>
-          {' '}
-          hoặc
-          {' '}
+          </a>{' '}
+          hoặc{' '}
           <a rel="nofollow" href="https://phongtro123.com/dang-ky-tai-khoan">
             Đăng ký
-          </a>
-          {' '}
+          </a>{' '}
           để bắt đầu
         </p>
       </div>
       <div className="flex cursor-pointer gap-5  mb-3 justify-center items-center mt-2 ">
         {location.map((item) => (
-          <ProvinceBtn
-            key={item.id}
-            name={item.name}
-            image={item.image}
-          />
+          <ProvinceBtn key={item.id} name={item.name} image={item.image} />
         ))}
       </div>
     </div>

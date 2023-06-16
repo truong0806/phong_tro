@@ -9,7 +9,7 @@ function Pagination({ page }) {
   const [inHideEnd, isInHideEnd] = useState(false);
   const [inHideStart, isInHideStart] = useState(false);
   useEffect(() => {
-    const maxPage = Math.round(count / 5);
+    const maxPage = Math.ceil(count / 5);
     const end = currentPage + 1 > maxPage ? maxPage : currentPage + 1;
     const start = currentPage - 1 <= 0 ? 1 : currentPage - 1;
     const temp = [];
@@ -25,7 +25,7 @@ function Pagination({ page }) {
 
   return (
     <div
-      className={`flex items-center justify-center mt-[20px] mb-[50px] ${postLimitEmpty}`}
+      className={`flex items-center gap-1 justify-center mt-[20px] mb-[50px] ${postLimitEmpty}`}
     >
       {!inHideStart && (
         <ListNumber number={1} setCurrentPage={setCurrentPage} />

@@ -11,9 +11,10 @@ function SlideBar({ setLoading, loading }) {
     dispatch(actions.getPrices());
     dispatch(actions.getAreas());
     dispatch(actions.getCategories());
+    dispatch(actions.getPosts());
   }, [dispatch]);
   return (
-    <div>
+    <div className="w-[85%]">
       <ItemSidebar header="Danh mục cho thuê" content={categories} />
       <ItemSidebar
         setLoading={setLoading}

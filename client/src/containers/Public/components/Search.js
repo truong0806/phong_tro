@@ -19,7 +19,7 @@ function Search() {
     setShowPopup(true);
   };
   return (
-    <div className="lg:w-[1100px] w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2">
+    <div className="lg:w-full w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2">
       <SearchItem
         fontWeight
         IconBefore={<MdOutlineHouseSiding />}

@@ -49,21 +49,13 @@ export const GetPostsLimit = (query) => async (dispatch) => {
     });
   }
 };
-export const ClearPostsLimit = (query) => async (dispatch) => {
+export const ClearPostsLimit = () => async (dispatch) => {
   try {
-    const response = await apiGetPostsLimit(query);
-    if (response?.data.err === 0) {
-      dispatch({
-        type: actionTypes.CLEAR_POST,
-        posts_limit: [],
-        count: 0,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.CLEAR_POST,
-        msg: '',
-      });
-    }
+    dispatch({
+      type: actionTypes.CLEAR_POST,
+      posts_limit: [],
+      count: 0,
+    });
   } catch (error) {
     dispatch({
       type: actionTypes.GET_POSTS_LIMIT,

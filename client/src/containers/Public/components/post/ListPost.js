@@ -38,7 +38,7 @@ const ListPost = ({ linkRef, posts_limit, loading }) => {
           <div className="flex my-10 w-full items-center justify-center">
             <CircularProgress />
           </div>
-        ) : posts_limit && posts_limit?.length > 0 ? (
+        ) : posts_limit?.length > 0 ? (
           posts_limit.map((item) => (
             <ListPostItem
               key={item.id}

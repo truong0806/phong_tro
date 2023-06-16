@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import {
-  Header, Navigation, WhyUs, Support, Search, ScrollTop,
-} from './index';
+import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index';
 import { Province } from './components/Province';
 import { Loading } from '../../components';
 
@@ -24,7 +22,7 @@ function Home() {
         <div className="w-full flex-col items-center ">
           <Header />
           <Navigation />
-          <div className="w-full flex flex-col justify-center items-center my-[10px] mx-auto">
+          <div className="w-4/5 flex flex-col justify-center items-center my-[10px] mx-auto">
             <Search />
             <Province />
             <Outlet />

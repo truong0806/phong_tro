@@ -40,16 +40,18 @@ function HomePage() {
   }, [dispatch]);
 
   return (
-    <div className="w-[85%] justify-center flex gap-4 mb-5">
-      <div className="w-[100%] lg:w-[65%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
-        <ListPost
-          loading={loading}
-          linkRef={linkRef}
-          posts_limit={posts_limit}
-        />
+    <div className="w-full justify-center flex gap-2 mb-3">
+      <div className="w-4/5 h-full  md:w-full bg-[#f5f5f5] lg:w-[70%]">
+        <div className="h-full bg-white  top-0 border border-[#dedede]  shadow-md rounded-md border-solid  ">
+          <ListPost
+            loading={loading}
+            linkRef={linkRef}
+            posts_limit={posts_limit}
+          />
+        </div>
         <Pagination page={params.get('page')} />
       </div>
-      <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
+      <div className="w-1/5 flex-col hidde  sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
         <SlideBar loading={loading} setLoading={setLoading} />
       </div>
     </div>
