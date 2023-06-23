@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../../store/action';
 import ItemSidebar from './ItemSidebar';
 
 function SlideBar({ setLoading, loading }) {
   const { categories, prices, areas } = useSelector((state) => state.app);
+  const location = useLocation();
   const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actions.getPrices());
-    dispatch(actions.getAreas());
     dispatch(actions.getCategories());
     dispatch(actions.getPosts());
   }, [dispatch]);
   return (
-    <div className="w-[85%]">
+    <div className="w-full">
       <ItemSidebar header="Danh mục cho thuê" content={categories} />
       <ItemSidebar
         setLoading={setLoading}

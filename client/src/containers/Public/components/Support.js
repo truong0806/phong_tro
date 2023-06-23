@@ -12,9 +12,9 @@ function Support() {
         className="w-full h-48 object-contain"
       />
       <div className="mt-[30px] px-[10px]  text-center">
-        <div className="mb-[20px] text-[1.2rem] text-[#233762]">
+        <p className="mb-[20px] text-[1.2rem] text-[#233762]">
           {support.support_title}
-        </div>
+        </p>
         <div className="flex-col lg:flex-row grap-8 flex justify-around items-center">
           {support.statistic.map((item, index) => {
             return (

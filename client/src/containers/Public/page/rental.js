@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import { ListPost, Pagination, Province, SlideBar } from '../index';
 import slug from 'slug';
 
-function HomePage() {
+function RentalApartment() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const [categoryCurrent, setCategoryCurrent] = useState({});
   const [categoryCode, setcategoryCode] = useState('none');
+  const [categoryCurrent, setCategoryCurrent] = useState({});
   const { categories, prices, areas } = useSelector((state) => state.app);
   const linkRef = useRef();
 
@@ -18,6 +18,7 @@ function HomePage() {
 
   useEffect(() => {
     setLoading(true);
+
     const category = categories?.find((item) => {
       return `/${slug(item.value)}` === location.pathname;
     });
@@ -25,10 +26,12 @@ function HomePage() {
     if (category) {
       setcategoryCode(category.code);
     }
+    console.log('prices', prices);
+    console.log('areas', areas);
     setLoading(false);
 
     linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
-  }, [location, categories]);
+  }, [location, categories, prices, areas]);
 
   return (
     <div>
@@ -50,4 +53,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default RentalApartment;

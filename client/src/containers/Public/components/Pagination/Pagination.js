@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ListNumber } from '../../../../components';
+import { useSearchParams } from 'react-router-dom';
 
-function Pagination({ page }) {
+function Pagination() {
+  const [page] = useSearchParams('page');
   const { count, posts_limit } = useSelector((state) => state.post);
   const [arrpage, setArrPage] = useState([]);
   const [currentPage, setCurrentPage] = useState(+page || 1);

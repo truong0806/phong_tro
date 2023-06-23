@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { location, text } from '../../../ultils/constains';
 import { ProvinceBtn } from '../index';
+import { useSelector } from 'react-redux';
 
-export function Province() {
+export function Province({ categoryCurrent }) {
+  console.log(categoryCurrent);
   return (
     <div className="flex flex-col w-full items-center">
-      <div className="items-center justify-center  my-[20px] mx-[10px]  bg-[#225aff]  text-white p-[15px] rounded-lg">
+      <div className="items-center justify-center  my-[20px] mx-[10px]  xs:bg-[#225aff]  text-white p-[15px] rounded-lg">
         <h1 className="text-[1.8rem] m-0 h-full text-left leading-9 font-bold ">
-          {text.HOME_TITLE}
+          {categoryCurrent !== undefined
+            ? categoryCurrent?.header
+            : text.HOME_TITLE}
         </h1>
         <p className="text-[.9rem] leading-6 font-normal  mt-[10px]  text-white text-justify">
-          {text.PAGE_DESCRIPTION}
+          {categoryCurrent !== undefined
+            ? categoryCurrent?.header
+            : text.PAGE_DESCRIPTION}
         </p>
         <p className="page-description lg:hidden mb-0 mt-[10px] text-[.9rem] leading-6">
           <a rel="nofollow" href="https://phongtro123.com/dang-nhap-tai-khoan">

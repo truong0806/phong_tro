@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '../../../../components/index';
+import { useSearchParams } from 'react-router-dom';
 import { ListPostItem } from '../../index';
 import getDate from '../../../../ultils/getDate';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../../../store/action';
 
-const ListPost = ({ linkRef, posts_limit, loading }) => {
+const ListPost = ({ linkRef, categoryCode, loading }) => {
+  const dispatch = useDispatch();
+  const { posts_limit } = useSelector((state) => state.post);
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    let params = [];
+    for (let entry of searchParams.entries()) {
+      params.push(entry);
+    }
+    let searchParamsObject = {};
+    params?.map((i) => {
+      searchParamsObject = { ...searchParamsObject, [i[0]]: i[1] };
+    });
+    if (categoryCode && categoryCode !== 'none') {
+      searchParamsObject.categoryCode = categoryCode;
+      dispatch(actions.GetPostsLimit(searchParamsObject));
+    } else {
+      dispatch(actions.GetPostsLimit(searchParamsObject));
+    }
+  }, [searchParams, categoryCode]);
   return (
     <div ref={linkRef} className="m-[20px] ">
       <section className=" flex justify-between">
@@ -39,20 +61,22 @@ const ListPost = ({ linkRef, posts_limit, loading }) => {
             <CircularProgress />
           </div>
         ) : posts_limit?.length > 0 ? (
-          posts_limit.map((item) => (
-            <ListPostItem
-              key={item.id}
-              attributes={item?.attributes}
-              description={JSON.parse(item?.description)}
-              users={item?.users}
-              images={JSON.parse(item?.images?.image)}
-              title={item?.title}
-              label={item?.label}
-              address={item?.address}
-              star={item?.star}
-              id={item?.id}
-            />
-          ))
+          posts_limit?.map((item) => {
+            return (
+              <ListPostItem
+                key={item.id}
+                attributes={item?.attributes}
+                description={JSON.parse(item?.description)}
+                users={item?.users}
+                images={JSON.parse(item?.images?.image)}
+                title={item?.title}
+                label={item?.label}
+                address={item?.address}
+                star={item?.star}
+                id={item?.id}
+              />
+            );
+          })
         ) : (
           <div className="w-full items-center justify-center">
             <p className="text-center">Không có dữ liệu</p>

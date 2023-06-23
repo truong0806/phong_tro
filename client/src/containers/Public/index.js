@@ -9,10 +9,7 @@ export { default as Register } from './auth/register';
 export { default as Login } from './auth/login';
 // Page
 export { default as HomePage } from './page/homePage';
-export { default as RentalHouse } from './page/rentalHouse';
-export { default as RentalRoom } from './page/rentalRoom';
-export { default as RentalSpace } from './page/rentalSpace';
-export { default as RentalApartment } from './page/rentalApartment';
+export { default as Retal } from './page/rental';
 
 // component
 export { default as ProvinceBtn } from './components/ProvinceBtn';

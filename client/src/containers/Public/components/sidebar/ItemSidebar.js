@@ -11,7 +11,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import NewPostSideBar from './NewPostSideBar';
+import RelatePostSideBar from './RelatePostSideBar';
 const { BsChevronRight } = icons;
 var slug = require('slug');
 
@@ -131,7 +131,7 @@ const ItemSidebar = ({
               )}
             </div>
           )}
-          {isListPost && <NewPostSideBar content={content} />}
+          {isListPost && <RelatePostSideBar content={content} />}
         </ul>
       </section>
     </div>

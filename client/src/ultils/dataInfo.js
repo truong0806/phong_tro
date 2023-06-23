@@ -1,6 +1,6 @@
 export const whyus = {
   whyus_title: 'Tại sao lại chọn PhongTro123.com?',
-  whyus_des: ` Chúng tôi biết bạn có rất nhiều lựa chọn, <a href="https://www.phongtro123.com">Phongtro123.com</a> nhưng Phongtro123.com tự hào
+  whyus_des: ` Chúng tôi biết bạn có rất nhiều lựa chọn, nhưng Phongtro123.com tự hào
     là trang web đứng top google về các từ khóa: nhà
     trọ, thuê nhà nguyên căn, cho thuê căn hộ, tìm người ở ghép, cho thuê
     mặt bằng...Vì vậy tin của bạn đăng trên website sẽ tiếp cận được với
