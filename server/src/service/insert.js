@@ -1,7 +1,7 @@
 import db from '../models'
 const moment = require('moment')
 import bcrypt from 'bcrypt'
-import { v4 as uuidv4, v4 } from 'uuid'
+import { v4 as v4 } from 'uuid'
 import chothuematbang from '../../data/chothuematbang.json'
 import chothuecanho from '../../data/chothuecanho.json'
 import nhachothue from '../../data/nhachothue.json'
@@ -9,6 +9,7 @@ import chothuephongtro from '../../data/chothuephongtro.json'
 import genarateCode from '../ultils/generateCode'
 import { dataArea, dataPrice } from '../ultils/data'
 import { getNumberFormString } from '../ultils/common'
+import { where } from 'sequelize'
 require('dotenv').config()
 
 const hashPassword = (password) =>
@@ -51,6 +52,8 @@ export const insertService = () =>
           })
         })
       })
+      const provinceCodes = []
+      const labelCodes = []
       dataBody.forEach((cate) => {
         cate.body.forEach(async (item) => {
           let postId = v4()
@@ -58,7 +61,20 @@ export const insertService = () =>
           let userId = v4()
           let overviewId = v4()
           let imagesId = v4()
+          let provinceCode = genarateCode(
+            item?.header?.address?.split(',')?.slice(-1)[0].trim(),
+          )
+          provinceCodes?.every((item) => item?.code !== provinceCode) &&
+            provinceCodes?.push({
+              code: provinceCode,
+              value: item?.header?.address?.split(',')?.slice(-1)[0].trim(),
+            })
           let labelCode = genarateCode(item?.header?.class?.classType).trim()
+          labelCodes?.every((item) => item?.code !== labelCode) &&
+            labelCodes?.push({
+              code: labelCode,
+              value: item?.header?.class?.classType?.trim(),
+            })
           let desc = JSON.stringify(item?.mainContent?.content)
           let currentArea = getNumberFormString(
             item?.header?.attributes?.acreage,
@@ -86,7 +102,7 @@ export const insertService = () =>
               star: item?.header?.star,
               labelCode,
               address: item?.header?.address,
-              attributesId,
+              attributesId: attributesId,
               categoryCode: cate.code,
               description: desc,
               userId,
@@ -99,52 +115,51 @@ export const insertService = () =>
                 (price) =>
                   price.max > currentPrice && price.min <= currentPrice,
               )?.code,
+              provinceCode,
             },
           })
-
-          await db.Attribute.findOrCreate({
-            where: { id: attributesId },
-            defaults: {
-              id: attributesId,
-              price: item?.header?.attributes?.price,
-              acreage: item?.header?.attributes?.acreage,
-              published: item?.header?.attributes?.published,
-              hashtag: item?.header?.attributes?.hashtag,
-            },
+          await db.Attribute.create({
+            id: attributesId,
+            price: item?.header?.attributes?.price,
+            acreage: item?.header?.attributes?.acreage,
+            published: item?.header?.attributes?.published,
+            hashtag: item?.header?.attributes?.hashtag,
           }),
-            await db.Label.findOrCreate({
-              where: { code: labelCode },
+            // await db.Label.findOrCreate({
+            //   where: { code: labelCode },
+            //   defaults: {
+            //     code: labelCode,
+            //     value: item?.header.class.classType,
+            //   },
+            // })
+
+            await db.Overview.findOrCreate({
+              where: {
+                id: item?.overview?.content.find((i) => i.name === 'Mã tin:')
+                  ?.value,
+              },
               defaults: {
-                code: labelCode,
-                value: item?.header.class.classType,
+                id: overviewId,
+                code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
+                  ?.value,
+                area: item?.overview?.content.find((i) => i.name === 'Khu vực')
+                  ?.value,
+                type: item?.overview?.content.find(
+                  (i) => i.name === 'Loại tin rao:',
+                )?.value,
+                target: item?.overview?.content.find(
+                  (i) => i.name === 'Đối tượng thuê:',
+                )?.value,
+                bonus: item?.overview?.content.find(
+                  (i) => i.name === 'Gói tin:',
+                )?.value,
+                created: dateCreate,
+                expired: item?.overview?.content.find(
+                  (i) => i.name === 'Ngày hết hạn:',
+                ).value,
               },
             })
 
-          await db.Overview.findOrCreate({
-            where: {
-              id: item?.overview?.content.find((i) => i.name === 'Mã tin:')
-                ?.value,
-            },
-            defaults: {
-              id: overviewId,
-              code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
-                ?.value,
-              area: item?.overview?.content.find((i) => i.name === 'Khu vực')
-                ?.value,
-              type: item?.overview?.content.find(
-                (i) => i.name === 'Loại tin rao:',
-              )?.value,
-              target: item?.overview?.content.find(
-                (i) => i.name === 'Đối tượng thuê:',
-              )?.value,
-              bonus: item?.overview?.content.find((i) => i.name === 'Gói tin:')
-                ?.value,
-              created: dateCreate,
-              expired: item?.overview?.content.find(
-                (i) => i.name === 'Ngày hết hạn:',
-              ).value,
-            },
-          })
           await db.User.findOrCreate({
             where: {
               phone: item?.contact?.content.find(
@@ -164,7 +179,20 @@ export const insertService = () =>
           })
         })
       })
+      provinceCodes?.forEach(async (item) => {
+        await db.Province.findOrCreate({
+          where: { code: item.code },
+          defaults: item,
+        })
+      })
+      labelCodes?.forEach(async (item) => {
+        await db.Label.findOrCreate({
+          where: { code: item.code },
+          defaults: item,
+        })
+      })
       await createPriceAndArea()
+
       resolve('Add data to database Done')
     } catch (error) {
       reject(error)
