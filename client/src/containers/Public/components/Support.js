@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '../../../components';
 import { support } from '../../../ultils/dataInfo';
 import supportImg from '../../../assets/support-bg.jpg';
+import { Link } from 'react-router-dom';
 
 function Support() {
   return (
@@ -18,18 +19,18 @@ function Support() {
         <div className="flex-col lg:flex-row grap-8 flex justify-around items-center">
           {support.statistic.map((item, index) => {
             return (
-              <div className="text-center  mb-[20px]">
+              <div className="text-center  mb-[20px]" key={index}>
                 <span className="text-[#f60] font-bold  uppercase mb-[10px]">
                   {item.name}
                 </span>
                 <br />
-                <a className="text-[1.3rem] text-[#233762] font-bold my-[5px]">
+                <Link className="text-[1.3rem] text-[#233762] font-bold my-[5px]">
                   {item.value}
-                </a>
+                </Link>
                 <br />
-                <a className="text-[1.3rem] text-[#233762] font-bold my-[5px]">
+                <Link className="text-[1.3rem] text-[#233762] font-bold my-[5px]">
                   {item.zalo}
-                </a>
+                </Link>
                 <br />
               </div>
             );

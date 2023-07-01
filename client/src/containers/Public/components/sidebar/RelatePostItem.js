@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 const RelatePostItem = ({ item }) => {
   const formatTime = () => {
     moment.locale('vn');
@@ -8,7 +9,7 @@ const RelatePostItem = ({ item }) => {
   const images = JSON.parse(item?.images?.image)?.shift();
   return (
     <div>
-      <a
+      <Link
         href="#"
         className="flex w-full border-solid border-b-[1px] py-[10px] relative"
       >
@@ -33,7 +34,7 @@ const RelatePostItem = ({ item }) => {
             <time className="font-[.9rem] text-[#aaa]">{formatTime()}</time>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };

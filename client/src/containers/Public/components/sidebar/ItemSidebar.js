@@ -64,16 +64,16 @@ const ItemSidebar = ({
                     <Link
                       to={slug(item.value)}
                       className="flex items-center justify-between border-dashed border-b-[1px]"
-                      key={item.code}
+                      key={item.id}
                     >
                       <h2>
-                        <a
+                        <Link
                           href="#"
                           className="flex items-center justify-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm"
                         >
                           <BsChevronRight size={14} style={{ opacity: 0.3 }} />
                           {item.value}
-                        </a>
+                        </Link>
                       </h2>
 
                       <span className="text-xs text-[#aaa]">
@@ -91,7 +91,7 @@ const ItemSidebar = ({
                           <div className="flex items-center justify-around">
                             <li className="flex cursor-pointer flex-1 items-center border-dashed border-b-[1px]">
                               <h2>
-                                <a
+                                <Link
                                   onClick={() =>
                                     handleFilterPost(item.left.code)
                                   }
@@ -103,12 +103,12 @@ const ItemSidebar = ({
                                     style={{ opacity: 0.3 }}
                                   />
                                   {item.left.value}
-                                </a>
+                                </Link>
                               </h2>
                             </li>
                             <li className="flex flex-1 cursor-pointer items-center justify-between border-dashed border-b-[1px]">
                               <h2>
-                                <a
+                                <Link
                                   href="#"
                                   onClick={() =>
                                     handleFilterPost(item.right.code)
@@ -120,7 +120,7 @@ const ItemSidebar = ({
                                     style={{ opacity: 0.3 }}
                                   />
                                   {item.right.value}
-                                </a>
+                                </Link>
                               </h2>
                             </li>
                           </div>

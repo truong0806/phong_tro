@@ -9,7 +9,7 @@ function HomePage() {
   const [loading, setLoading] = useState(false);
   const [categoryCurrent, setCategoryCurrent] = useState({});
   const [categoryCode, setcategoryCode] = useState('none');
-  const { categories, prices, areas } = useSelector((state) => state.app);
+  const { categories } = useSelector((state) => state.app);
   const linkRef = useRef();
 
   useState(() => {

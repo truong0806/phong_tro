@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+//import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../../store/action';
 import ItemSidebar from './ItemSidebar';
 
 function SlideBar({ setLoading, loading }) {
   const { categories, prices, areas } = useSelector((state) => state.app);
-  const location = useLocation();
+  //const location = useLocation();
   const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {

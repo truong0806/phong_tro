@@ -9,12 +9,12 @@ const RelatePostSideBar = ({ content }) => {
         key={'a'}
       >
         {content.length > 0 &&
-          content.slice(0, 10).map((item) => {
+          content.slice(0, 10).map((item, index) => {
             // const has_video_Class =
             //   ? 'sticky top-0 z-10 bg-secondary1 text-white'
             //   : 'bg-secondary1 text-white'
 
-            return <RelatePostItem item={item} />;
+            return <RelatePostItem item={item} key={index}/>;
           })}
       </li>
     </div>

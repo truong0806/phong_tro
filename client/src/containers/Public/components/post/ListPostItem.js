@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import icons from '../../../../ultils/icons'
-import 'lazysizes'
-var slug = require('slug')
-const { BsBookmarkStarFill, RiHeartLine, RiHeartFill } = icons
-const indexs = [0, 1, 2, 3]
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import icons from '../../../../ultils/icons';
+import 'lazysizes';
+var slug = require('slug');
+const { BsBookmarkStarFill, RiHeartLine, RiHeartFill } = icons;
+const indexs = [0, 1, 2, 3];
 const ListPostItem = ({
   images,
   attributes,
@@ -16,17 +16,16 @@ const ListPostItem = ({
   star,
   id,
 }) => {
- 
-  const [isHoverHeart, setIsHoverHeart] = useState(false)
+  const [isHoverHeart, setIsHoverHeart] = useState(false);
   const handleStar = (star) => {
-    const stars = []
+    const stars = [];
     for (let i = 1; i < +star; i++) {
       stars.push(
-        <div className="w-[14px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>,
-      )
+        <div className="w-[14px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>
+      );
     }
-    return stars
-  }
+    return stars;
+  };
   return (
     <div className="w-full flex border-t border-red-500 p-4 pb-1">
       {images?.length > 4 ? (
@@ -43,9 +42,9 @@ const ListPostItem = ({
                   src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
                   data-src={i}
                   className="lazyload lazy w-[130px] h-[120px] object-cover"
-                  loading="lazy"
+                  //loading="lazy"
                 />
-              )
+              );
             })}
 
           <span className="absolute bottom-2 left-4 bg-[rgba(0,0,0,.5)] text-white py-[3px] px-[5px] rounded-[3px] text-[.9rem]">
@@ -54,10 +53,10 @@ const ListPostItem = ({
           <span
             className="absolute bottom-2 right-4 text-white "
             onMouseEnter={() => {
-              setIsHoverHeart(true)
+              setIsHoverHeart(true);
             }}
             onMouseLeave={() => {
-              setIsHoverHeart(false)
+              setIsHoverHeart(false);
             }}
           >
             {isHoverHeart ? (
@@ -75,7 +74,7 @@ const ListPostItem = ({
           {images
             ?.filter((j, index) => indexs.some((j) => j - 3 === index))
             ?.map((j, index) => {
-              return <img src={j} className="w-full h-full object-cover" />
+              return <img src={j} className="w-full h-full object-cover" />;
             })}
 
           <span className="absolute bottom-2 left-4 bg-[rgba(0,0,0,.5)] text-white py-[3px] px-[5px] rounded-[3px] text-[.9rem]">
@@ -84,10 +83,10 @@ const ListPostItem = ({
           <span
             className="absolute bottom-2 right-4 text-white "
             onMouseEnter={() => {
-              setIsHoverHeart(true)
+              setIsHoverHeart(true);
             }}
             onMouseLeave={() => {
-              setIsHoverHeart(false)
+              setIsHoverHeart(false);
             }}
           >
             {isHoverHeart ? (
@@ -117,7 +116,7 @@ const ListPostItem = ({
           >
             {handleStar(+star).length > 0 &&
               handleStar(+star)?.map((star, num) => {
-                return <span key={num}>{star}</span>
+                return <span key={num}>{star}</span>;
               })}
             <span className="ml-[4px] text-justify">{title}</span>
           </Link>
@@ -133,14 +132,14 @@ const ListPostItem = ({
             {attributes.acreage}
           </span>
           <span className="">
-            <a
+            <Link
               href="https://phongtro123.com/tinh-thanh/ho-chi-minh/quan-go-vap"
               title={address}
             >
               {`${address.split(',')[address.split(',').length - 2]},${
                 address.split(',')[address.split(',').length - 1]
               }`}
-            </a>
+            </Link>
           </span>
         </div>
         <p className="text-gray-500  w-full h-[100px] text-ellipsis overflow-hidden text-justify">
@@ -176,7 +175,7 @@ const ListPostItem = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ListPostItem
+export default ListPostItem;

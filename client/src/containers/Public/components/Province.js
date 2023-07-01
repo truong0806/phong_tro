@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { location, text } from '../../../ultils/constains';
 import { ProvinceBtn } from '../index';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export function Province({ categoryCurrent }) {
   console.log(categoryCurrent);
@@ -19,13 +20,13 @@ export function Province({ categoryCurrent }) {
             : text.PAGE_DESCRIPTION}
         </p>
         <p className="page-description lg:hidden mb-0 mt-[10px] text-[.9rem] leading-6">
-          <a rel="nofollow" href="https://phongtro123.com/dang-nhap-tai-khoan">
+          <Link rel="nofollow" href="https://phongtro123.com/dang-nhap-tai-khoan">
             Đăng nhập
-          </a>{' '}
+          </Link>{' '}
           hoặc{' '}
-          <a rel="nofollow" href="https://phongtro123.com/dang-ky-tai-khoan">
+          <Link rel="nofollow" href="https://phongtro123.com/dang-ky-tai-khoan">
             Đăng ký
-          </a>{' '}
+          </Link>{' '}
           để bắt đầu
         </p>
       </div>

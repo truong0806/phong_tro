@@ -18,7 +18,7 @@ function WhyUs() {
           {whyus.statistic &&
             whyus.statistic.map((item, index) => {
               return (
-                <div className="w-1/4 flex-col">
+                <div className="w-1/4 flex-col" key={item.value}>
                   <span className="font-[700] text-[21px] mb-[5px]">
                     {item.value}
                   </span>

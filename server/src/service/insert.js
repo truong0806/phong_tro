@@ -125,40 +125,46 @@ export const insertService = () =>
             published: item?.header?.attributes?.published,
             hashtag: item?.header?.attributes?.hashtag,
           }),
-            // await db.Label.findOrCreate({
-            //   where: { code: labelCode },
-            //   defaults: {
-            //     code: labelCode,
-            //     value: item?.header.class.classType,
-            //   },
-            // })
-
-            await db.Overview.findOrCreate({
-              where: {
-                id: item?.overview?.content.find((i) => i.name === 'Mã tin:')
-                  ?.value,
-              },
+            await db.Images.findOrCreate({
+              where: { id: imagesId },
               defaults: {
-                id: overviewId,
-                code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
-                  ?.value,
-                area: item?.overview?.content.find((i) => i.name === 'Khu vực')
-                  ?.value,
-                type: item?.overview?.content.find(
-                  (i) => i.name === 'Loại tin rao:',
-                )?.value,
-                target: item?.overview?.content.find(
-                  (i) => i.name === 'Đối tượng thuê:',
-                )?.value,
-                bonus: item?.overview?.content.find(
-                  (i) => i.name === 'Gói tin:',
-                )?.value,
-                created: dateCreate,
-                expired: item?.overview?.content.find(
-                  (i) => i.name === 'Ngày hết hạn:',
-                ).value,
+                id: imagesId,
+                image: JSON.stringify(item?.images),
               },
             })
+          await db.Label.findOrCreate({
+            where: { code: labelCode },
+            defaults: {
+              code: labelCode,
+              value: item?.header.class.classType,
+            },
+          })
+
+          await db.Overview.findOrCreate({
+            where: {
+              id: item?.overview?.content.find((i) => i.name === 'Mã tin:')
+                ?.value,
+            },
+            defaults: {
+              id: overviewId,
+              code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
+                ?.value,
+              area: item?.overview?.content.find((i) => i.name === 'Khu vực')
+                ?.value,
+              type: item?.overview?.content.find(
+                (i) => i.name === 'Loại tin rao:',
+              )?.value,
+              target: item?.overview?.content.find(
+                (i) => i.name === 'Đối tượng thuê:',
+              )?.value,
+              bonus: item?.overview?.content.find((i) => i.name === 'Gói tin:')
+                ?.value,
+              created: dateCreate,
+              expired: item?.overview?.content.find(
+                (i) => i.name === 'Ngày hết hạn:',
+              ).value,
+            },
+          })
 
           await db.User.findOrCreate({
             where: {
@@ -203,15 +209,21 @@ export const createPriceAndArea = () =>
   new Promise(async (resolve, reject) => {
     try {
       for (const item of dataPrice) {
-        await db.Price.create({
-          code: item.code,
-          value: item.value,
+        await db.Price.findOrCreate({
+          where: { code: item.code },
+          defaults: {
+            code: item.code,
+            value: item.value,
+          },
         })
       }
       for (const item2 of dataArea) {
-        await db.Area.create({
-          code: item2.code,
-          value: item2.value,
+        await db.Area.findOrCreate({
+          where: { code: item2.code },
+          defaults: {
+            code: item2.code,
+            value: item2.value,
+          },
         })
       }
       resolve('Ok')
