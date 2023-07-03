@@ -70,3 +70,26 @@ export const getAreas = () => async (dispatch) => {
     });
   }
 };
+export const getProvince = () => async (dispatch) => {
+  try {
+    const response = await apis.apiProvince();
+    // console.log('app: ', response)
+    if (response?.data.err === 0) {
+      dispatch({
+        type: actionTypes.GET_PROVINCES,
+        provinces: response.data.response.sort((a, b) => +b.id - +a.id),
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_PROVINCES,
+        msg: response.data.msg,
+        provinces: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_PROVINCES,
+      provinces: null,
+    });
+  }
+};

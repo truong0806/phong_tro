@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { Loading } from '../../../components'
-import * as actions from '../../../store/action'
-import { useDispatch, useSelector } from 'react-redux'
-var slug = require('slug')
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Loading } from '../../../components';
+import * as actions from '../../../store/action';
+import { useDispatch, useSelector } from 'react-redux';
+var slug = require('slug');
 const notActive =
-  'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary1'
+  'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary1';
 const active =
-  'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary2'
+  'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary2';
 
 // const categories = [
 //   {
@@ -28,32 +28,32 @@ const active =
 //   },
 // ]
 const Navigation = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   //const [categories, setCategories] = useState([])
-  const [isPinned, setIsPinned] = useState(false)
-  const { categories } = useSelector((state) => state.app)
+  const [isPinned, setIsPinned] = useState(false);
+  const { categories } = useSelector((state) => state.app);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     const handleScroll = () => {
-      setIsPinned(window.scrollY > 0)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsPinned(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   useEffect(() => {
-    setLoading(false)
-    dispatch(actions.getCategories())
-  }, [dispatch])
+    setLoading(false);
+    dispatch(actions.getCategories());
+  }, [dispatch]);
 
   const navClass = isPinned
-    ? 'sticky top-0 z-10 bg-secondary1 text-white'
-    : 'bg-secondary1 text-white'
+    ? 'fixed top-0 z-30 bg-secondary1 text-white'
+    : 'bg-secondary1 text-white';
   return (
     <div
-      className={`w-full lg:flex lg:justify-center items-center h-12 hidden ${navClass}`}
+      className={`w-full lg:flex lg:justify-start  items-center h-12 hidden ${navClass}`}
     >
-      <div className="lg:w-[1100px] lg:justify-start flex h-full items-center text-[13.3px] font-bold  cursor-pointer ">
+      <div className=" lg:justify-start flex h-full ml-[110px] items-center text-[13.3px] font-bold  cursor-pointer ">
         <NavLink
           to={'/'}
           className={({ isActive }) => (isActive ? active : notActive)}
@@ -74,12 +74,12 @@ const Navigation = () => {
                   {item.value}
                 </NavLink>
               </div>
-            )
+            );
           })}
         {loading && <Loading />}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;

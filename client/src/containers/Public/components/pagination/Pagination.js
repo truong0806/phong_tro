@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { ListNumber } from '../../../../components';
+import { ListNumber } from '../../index';
 import { useSearchParams } from 'react-router-dom';
 
 function Pagination() {

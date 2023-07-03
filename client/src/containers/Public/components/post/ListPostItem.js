@@ -27,11 +27,11 @@ const ListPostItem = ({
     return stars;
   };
   return (
-    <div className="w-full flex border-t border-red-500 p-4 pb-1">
+    <div className="w-full flex border-t border-red-500 py-4 ">
       {images?.length > 4 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
-          className="w-[245px] h-[245px] grid grid-cols-2  grid-rows-1 gap-1 relative cursor-pointer"
+          className="w-[45%] flex flex-wrap gap-[2px] items-center relative cursor-pointerv"
         >
           {images
             ?.filter((i, index) => indexs.some((i) => i === index))
@@ -41,17 +41,17 @@ const ListPostItem = ({
                   key={index}
                   src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
                   data-src={i}
-                  className="lazyload lazy w-[130px] h-[120px] object-cover"
+                  className="lazyload  lazy w-[130px] h-[120px] object-cover"
                   //loading="lazy"
                 />
               );
             })}
 
-          <span className="absolute bottom-2 left-4 bg-[rgba(0,0,0,.5)] text-white py-[3px] px-[5px] rounded-[3px] text-[.9rem]">
+          <span className="bg-overlay-70 text-white px-2 rounded-md absolute left-3 bottom-1">
             {`${images?.length}`} ảnh
           </span>
           <span
-            className="absolute bottom-2 right-4 text-white "
+            className="text-white absolute right-5 bottom-1"
             onMouseEnter={() => {
               setIsHoverHeart(true);
             }}

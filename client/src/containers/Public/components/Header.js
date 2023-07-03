@@ -8,9 +8,8 @@ import icons from '../../../ultils/icons';
 import { path } from '../../../ultils/constains';
 import * as actions from '../../../store/action';
 
-const {
-  AiOutlineHeart, BiLogIn, AiOutlineUserAdd, AiOutlinePlusCircle,
-} = icons;
+const { AiOutlineHeart, BiLogIn, AiOutlineUserAdd, AiOutlinePlusCircle } =
+  icons;
 
 function Header() {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ function Header() {
   }, []);
 
   return (
-    <div className="w-full  flex items-center lg:justify-between lg:w-[1100px] mx-auto my-0">
+    <div className="w-full flex items-center lg:justify-between lg:w-[1100px] mx-auto my-0">
       <img
         className="cursor-pointer ml-[10px] bg-contain  w-[200px] h-[50px]  lg:w-[240px] lg:h-[70px] object-contain "
         src={logo}

@@ -18,7 +18,7 @@ const ListPost = ({ linkRef, categoryCode, loading }) => {
     }
     let searchParamsObject = {};
     params?.map((i) => {
-      searchParamsObject = { ...searchParamsObject, [i[0]]: i[1] };
+      return (searchParamsObject = { ...searchParamsObject, [i[0]]: i[1] });
     });
     if (categoryCode && categoryCode !== 'none') {
       searchParamsObject.categoryCode = categoryCode;
@@ -26,9 +26,10 @@ const ListPost = ({ linkRef, categoryCode, loading }) => {
     } else {
       dispatch(actions.GetPostsLimit(searchParamsObject));
     }
-  }, [searchParams, categoryCode]);
+    // dispatch(actions.GetPostsLimit(searchParamsObject));
+  }, [searchParams, categoryCode, dispatch]);
   return (
-    <div ref={linkRef} className="m-[20px] ">
+    <div className="m-[20px] ">
       <section className=" flex justify-between">
         <div className="">
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>
@@ -55,7 +56,7 @@ const ListPost = ({ linkRef, categoryCode, loading }) => {
           text="Có video"
         />
       </div>
-      <div className="px-5 mx-[-20px] py-4">
+      <div className="px-5 mx-[-20px] py-4 ">
         {loading ? (
           <div className="flex my-10 w-full items-center justify-center">
             <CircularProgress />

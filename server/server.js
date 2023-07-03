@@ -8,6 +8,7 @@ const swaggerUI = require('swagger-ui-express')
 const docs = require('./doc')
 import initRoutes from './src/routes'
 import requireToken from './src/middleware/requireToken'
+import updateCategoryCount from './src/ultils/updateCategoryCount'
 
 //app.use(requireToken)
 app.use(
@@ -16,7 +17,7 @@ app.use(
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }),
 )
-
+updateCategoryCount()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 initRoutes(app)
@@ -29,6 +30,6 @@ app.use('/', (req, res) => {
 // })
 
 app.listen(port, () => {
-  console.log('Server is up and running in port: http://localhost:' + port)
-  console.log('Client is up and running in port: ' + process.env.CLIENT_URL)
+  console.log('Server: http://localhost:' + port)
+  console.log('Client: ' + process.env.CLIENT_URL)
 })

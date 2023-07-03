@@ -10,7 +10,7 @@ export const areasService = () =>
       })
       resolve({
         err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to find category',
+        msg: response ? 'OK' : 'Failed to find areas',
         response,
       })
     } catch (error) {

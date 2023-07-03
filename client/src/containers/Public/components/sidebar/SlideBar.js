@@ -10,7 +10,6 @@ function SlideBar({ setLoading, loading }) {
   const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actions.getCategories());
     dispatch(actions.getPosts());
   }, [dispatch]);
   return (

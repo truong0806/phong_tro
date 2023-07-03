@@ -7,7 +7,7 @@ import * as actions from '../../../store/action';
 import validate from '../../../ultils/validate';
 import { path } from '../../../ultils/constains';
 // import { Loading } from '../../../components'
-import { Header, Navigation, WhyUs, Support } from '../index';
+import { WhyUs, Support } from '../index';
 
 function Register() {
   const navigate = useNavigate();

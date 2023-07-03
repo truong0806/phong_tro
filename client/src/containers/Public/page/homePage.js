@@ -27,7 +27,7 @@ function HomePage() {
     }
     setLoading(false);
 
-    linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
+    // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [location, categories]);
 
   return (
@@ -35,11 +35,7 @@ function HomePage() {
       <Province categoryCurrent={categoryCurrent} />
       <div className="w-full justify-center  flex flex-row gap-2 mb-3">
         <div className="w-[100%] lg:w-[65%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
-          <ListPost
-            loading={loading}
-            linkRef={linkRef}
-            categoryCode={categoryCode}
-          />
+          <ListPost loading={loading} categoryCode={categoryCode} />
           <Pagination />
         </div>
         <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">

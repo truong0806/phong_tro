@@ -1,10 +1,8 @@
 import * as service from '../service/post'
-import updateCategoryCount from '../ultils/updateCategoryCount'
 
 export const getPost = async (req, res) => {
   try {
     const response = await service.postService()
-    await updateCategoryCount()
     return res.status(200).json(response)
   } catch (error) {
     return res.status(500).json({

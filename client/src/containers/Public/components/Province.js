@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { location, text } from '../../../ultils/constains';
 import { ProvinceBtn } from '../index';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export function Province({ categoryCurrent }) {
-  console.log(categoryCurrent);
+export function Province({ linkRef, categoryCurrent }) {
   return (
-    <div className="flex flex-col w-full items-center">
+    <div ref={linkRef} className="flex flex-col w-full items-center">
       <div className="items-center justify-center  my-[20px] mx-[10px]  xs:bg-[#225aff]  text-white p-[15px] rounded-lg">
         <h1 className="text-[1.8rem] m-0 h-full text-left leading-9 font-bold ">
           {categoryCurrent !== undefined
@@ -20,7 +18,10 @@ export function Province({ categoryCurrent }) {
             : text.PAGE_DESCRIPTION}
         </p>
         <p className="page-description lg:hidden mb-0 mt-[10px] text-[.9rem] leading-6">
-          <Link rel="nofollow" href="https://phongtro123.com/dang-nhap-tai-khoan">
+          <Link
+            rel="nofollow"
+            href="https://phongtro123.com/dang-nhap-tai-khoan"
+          >
             Đăng nhập
           </Link>{' '}
           hoặc{' '}

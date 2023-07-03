@@ -30,7 +30,7 @@ function RentalApartment() {
     console.log('areas', areas);
     setLoading(false);
 
-    linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
+    // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [location, categories, prices, areas]);
 
   return (

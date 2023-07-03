@@ -1,16 +1,15 @@
 import db from '../models'
 
 //Get all categories
-export const pricesService = () =>
+export const provinceService = () =>
   new Promise(async (resolve, reject) => {
     try {
-      const response = await db.Price.findAll({
+      const response = await db.Province.findAll({
         raw: true,
-        attributes: ['code', 'value'],
       })
       resolve({
         err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to find prices',
+        msg: response ? 'OK' : 'Failed to find province',
         response,
       })
     } catch (error) {

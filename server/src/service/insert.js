@@ -9,7 +9,6 @@ import chothuephongtro from '../../data/chothuephongtro.json'
 import genarateCode from '../ultils/generateCode'
 import { dataArea, dataPrice } from '../ultils/data'
 import { getNumberFormString } from '../ultils/common'
-import { where } from 'sequelize'
 require('dotenv').config()
 
 const hashPassword = (password) =>
@@ -48,6 +47,7 @@ export const insertService = () =>
               value: category?.value,
               header: category?.header,
               subheader: category?.subheader,
+              count: 0,
             },
           })
         })

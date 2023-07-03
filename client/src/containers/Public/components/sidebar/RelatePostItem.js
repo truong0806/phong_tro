@@ -8,14 +8,14 @@ const RelatePostItem = ({ item }) => {
   };
   const images = JSON.parse(item?.images?.image)?.shift();
   return (
-    <div>
+    <div className="">
       <Link
         href="#"
         className="flex w-full border-solid border-b-[1px] py-[10px] relative"
       >
-        <div className="w-[65px] relative  h-[65px]">
+        <div className="w-[65px] relative z-10 h-[65px]">
           <img
-            className="lazyload lazy  w-full h-full object-cover absolute left-0 rounded block"
+            className="lazyload lazy  w-full h-full object-cover absolute  left-0 rounded block"
             data-src={images}
             src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
             alt={item.title}

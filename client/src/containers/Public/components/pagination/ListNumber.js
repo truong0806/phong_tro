@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import {
   createSearchParams,
   useNavigate,
@@ -6,7 +6,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-function ListNumber({ text, number, currentPage, setCurrentPage, type }) {
+function ListNumber({ text, number, currentPage, setCurrentPage }) {
   const [paramsSearch] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -46,4 +46,4 @@ function ListNumber({ text, number, currentPage, setCurrentPage, type }) {
   );
 }
 
-export default memo(ListNumber);
+export default ListNumber;
