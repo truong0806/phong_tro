@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { SearchItem } from '../../../../components';
 import { SearchPopup } from '../../index';
 import icons from '../../../../ultils/icons';
@@ -14,9 +14,15 @@ const {
   FiSearch,
 } = icons;
 function Search() {
+  const [selectedValue, setSelectedValue] = useState({
+    categories: { name: 'Phòng trọ, nhà trọ', code: 'abc' },
+    provinces: { name: 'Toàn quốc', code: 'abc' },
+    prices: { name: 'Chọn giá', code: 'abc' },
+    areas: { name: 'Chọn diện tích', code: 'abc' },
+  });
   const [showPopup, setShowPopup] = useState(false);
   const [content, setContent] = useState([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState([]);
   const { provinces, areas, prices, categories } = useSelector(
     (state) => state.app
   );
@@ -36,7 +42,7 @@ function Search() {
             fontWeight
             IconBefore={<MdOutlineHouseSiding />}
             IconAfter={<RiDeleteBack2Line />}
-            text="Phòng trọ, nhà trọ"
+            text={selectedValue.categories.name}
           />
         </span>
         <span
@@ -46,7 +52,7 @@ function Search() {
           <SearchItem
             IconBefore={<HiOutlineLocationMarker />}
             IconAfter={<GrNext />}
-            text="Toàn quốc"
+            text={selectedValue.provinces.name}
           />
         </span>
         <span
@@ -56,7 +62,7 @@ function Search() {
           <SearchItem
             IconBefore={<TbReportMoney />}
             IconAfter={<GrNext />}
-            text="Chọn giá"
+            text={selectedValue.prices.name}
           />
         </span>
         <span
@@ -66,7 +72,7 @@ function Search() {
           <SearchItem
             IconBefore={<RiCrop2Line />}
             IconAfter={<GrNext />}
-            text="Chọn diện tích"
+            text={selectedValue.areas.name}
           />
         </span>
         <button
@@ -79,9 +85,11 @@ function Search() {
       </div>
       {showPopup && (
         <SearchPopup
+          selectedValue={selectedValue}
           content={content}
           name={name}
           setShowPopup={setShowPopup}
+          setSelectedValue={setSelectedValue}
         />
       )}
     </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ListPost, Pagination, Province, SlideBar } from '../index';
@@ -10,7 +10,6 @@ function HomePage() {
   const [categoryCurrent, setCategoryCurrent] = useState({});
   const [categoryCode, setcategoryCode] = useState('none');
   const { categories } = useSelector((state) => state.app);
-  const linkRef = useRef();
 
   useState(() => {
     setLoading(false);

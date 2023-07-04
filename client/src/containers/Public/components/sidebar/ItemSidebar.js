@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React from 'react';
 import icons from '../../../../ultils/icons';
 import 'lazysizes';
 import * as actions from '../../../../store/action';
@@ -8,7 +8,6 @@ import {
   createSearchParams,
   useLocation,
   useNavigate,
-  useSearchParams,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import RelatePostSideBar from './RelatePostSideBar';
@@ -22,12 +21,10 @@ const ItemSidebar = ({
   isListPost,
   type,
   setLoading,
-  loading,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const [searchParams] = useSearchParams();
   const formatContent = () => {
     const odd = content?.filter((item, index) => index % 2 !== 0);
     const even = content?.filter((item, index) => index % 2 === 0);
