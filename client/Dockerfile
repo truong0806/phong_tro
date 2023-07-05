@@ -1,20 +1,15 @@
 # Use an official Node.js runtime as the base image
 FROM node:18.15.0-alpine
 
-# Set the working directory in the container
-WORKDIR /app
+# Set the working directory
+WORKDIR /app/client
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install project dependencies
-RUN yarn install --force
-
-# Copy project files to the working directory
+# Copy package.json and package-lock.json to the working directory
+COPY client/package.json ./
+COPY client/package-lock.json ./
+RUN npm install
 COPY . .
+# Install dependencies
 
-# Build the React app
-RUN yarn run build
 
-# Set the command to run when the container starts
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
