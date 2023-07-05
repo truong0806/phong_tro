@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DOCKER_REPOSITORY: phong_tro # name of Docker Hub ID
+      DOCKER_REPOSITORY: thanhtruong869 # name of Docker Hub ID
       IMAGE_NAME: client-app
       IMAGE_TAG: v1
     
