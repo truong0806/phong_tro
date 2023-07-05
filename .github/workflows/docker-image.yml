@@ -12,7 +12,7 @@ jobs:
     env:
       DOCKER_REPOSITORY: phong_tro # name of Docker Hub ID
       IMAGE_NAME: client-app
-      IMAGE_TAG: ${{ v1 }}
+      IMAGE_TAG: ${{ github.run_number }}
     
     steps:
       - name: Checkout repository
