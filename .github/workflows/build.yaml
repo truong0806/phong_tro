@@ -1,10 +1,11 @@
 name: flask-phongtro123
 on:
   pull_request:
-    branches: -releases
+    types:
+      - closed
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-        name: Checkout
-        uses: actions/checkout@v2
+      name: Checkout
+      uses: actions/checkout@v2
