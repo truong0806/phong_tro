@@ -1,6 +1,6 @@
-import React, { memo } from "react";
+import { memo } from 'react';
 
-const Button = ({
+function Button({
   text,
   bgcolor,
   textColor,
@@ -14,20 +14,19 @@ const Button = ({
   width,
   height,
   margin,
-  padding
-}) => {
+  padding,
+}) {
   return (
     <button
       type="button"
       className={` px-2 ${margin}  ${padding} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md hover:underline  lg:flex items-center justify-center gap-1`}
       onClick={onClick}
-
     >
       <span>{IcBefor && <IcBefor size={IcBeforSize} />}</span>
       <span>{text}</span>
       <span>{IcAfter && <IcAfter size={IcAfterSize} color={ColorIcon} />}</span>
     </button>
   );
-};
+}
 
 export default memo(Button);

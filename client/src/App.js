@@ -1,18 +1,14 @@
-/* eslint-disable no-unused-vars */
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom';
 import {
   Home,
   Auth,
-  RentalHouse,
-  RentalRoom,
-  RentalSpace,
-  RentalApartment,
   HomePage,
   Register,
   Login,
   DetailPost,
-} from './containers/Public'
-import { path } from './ultils/constains'
+  Retal,
+} from './containers/Public';
+import { path } from './ultils/constains';
 
 function App() {
   return (
@@ -20,11 +16,10 @@ function App() {
       <Routes>
         <Route path={path.HOME} element={<Home />}>
           <Route path="*" element={<HomePage />} />
-          <Route path={path.HOME__PAGE} element={<HomePage />} />
-          <Route path={path.CHO_THUE_CAN_HO} element={<RentalApartment />} />
-          <Route path={path.CHO_THUE_MAT_BANG} element={<RentalSpace />} />
-          <Route path={path.CHO_THUE_PHONG_TRO} element={<RentalRoom />} />
-          <Route path={path.NHA_CHO_THUE} element={<RentalHouse />} />
+          <Route path={path.CHO_THUE_CAN_HO} element={<Retal />} />
+          <Route path={path.CHO_THUE_MAT_BANG} element={<Retal />} />
+          <Route path={path.CHO_THUE_PHONG_TRO} element={<Retal />} />
+          <Route path={path.NHA_CHO_THUE} element={<Retal />} />
           <Route
             path={path.DETAIL_POST_TITLE__POSTID}
             element={<DetailPost />}
@@ -37,7 +32,7 @@ function App() {
         </Route>
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

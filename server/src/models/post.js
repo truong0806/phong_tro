@@ -40,10 +40,12 @@ module.exports = (sequelize, DataTypes) => {
       categoryCode: DataTypes.STRING,
       priceCode: DataTypes.STRING,
       areaCode: DataTypes.STRING,
+      provinceCode: DataTypes.STRING,
       description: DataTypes.TEXT,
       userId: DataTypes.STRING,
       overviewId: DataTypes.STRING,
       imagesId: DataTypes.STRING,
+      createdAt: DataTypes.DATE,
     },
     {
       sequelize,

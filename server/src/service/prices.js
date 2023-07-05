@@ -10,7 +10,7 @@ export const pricesService = () =>
       })
       resolve({
         err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to find category',
+        msg: response ? 'OK' : 'Failed to find prices',
         response,
       })
     } catch (error) {

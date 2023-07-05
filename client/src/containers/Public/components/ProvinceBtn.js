@@ -1,6 +1,6 @@
-import React, { memo } from 'react'
+import React, { memo } from 'react';
 
-const ProvinceBtn = ({ name, image, onlick }) => {
+function ProvinceBtn({ name, image, onlick }) {
   return (
     <div className="shadow-md" onClick={onlick}>
       <img
@@ -12,6 +12,6 @@ const ProvinceBtn = ({ name, image, onlick }) => {
         {name}
       </div>
     </div>
-  )
+  );
 }
-export default memo(ProvinceBtn)
+export default memo(ProvinceBtn);

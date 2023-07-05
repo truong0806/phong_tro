@@ -1,11 +1,11 @@
-import actionTypes from '../action/actionTypes'
+import actionTypes from '../action/actionTypes';
 
 const initState = {
   isLoggedIn: false,
   token: null,
   msg: '',
   update: false,
-}
+};
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
@@ -15,7 +15,7 @@ const authReducer = (state = initState, action) => {
         ...state,
         isLoggedIn: true,
         token: action.data,
-      }
+      };
     case actionTypes.REGISTER_FAIL:
     case actionTypes.LOGIN_FAIL:
       return {
@@ -24,18 +24,18 @@ const authReducer = (state = initState, action) => {
         msg: action.data,
         token: null,
         update: !state.update,
-      }
+      };
     case actionTypes.LOGOUT:
       return {
         ...state,
         isLoggedIn: false,
         msg: '',
         token: null,
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default authReducer
+export default authReducer;
