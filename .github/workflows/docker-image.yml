@@ -9,10 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DOCKER_REPOSITORY: thanhtruong869 # name of Docker Hub ID
-      IMAGE_NAME: client-app
-      IMAGE_TAG: v1
     
     steps:
       - name: Checkout repository
