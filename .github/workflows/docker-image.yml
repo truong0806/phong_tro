@@ -39,7 +39,7 @@ jobs:
           file: /Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKERHUB_USER }}/Docker-Image-CI
+          tags: ${{ secrets.DOCKERHUB_USER }}/v1
 
       - name: Verify
         run: echo ${{ steps.docker_build.outputs.digest}}
