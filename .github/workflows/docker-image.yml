@@ -36,6 +36,6 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
       - name: Push Image to Docker Hub
-        run: docker push thanhtruong869/client:v1
+        run: docker push thanhtruong869/client-app:v1
         
       
