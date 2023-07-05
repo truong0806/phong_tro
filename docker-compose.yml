@@ -3,7 +3,6 @@ services:
   app:
     build:
       context: .
-      image: client-app
       dockerfile: client/Dockerfile
     ports:
       - '3000:3000'
