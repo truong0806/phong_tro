@@ -36,8 +36,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./
-          file: /client/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/v1
 
