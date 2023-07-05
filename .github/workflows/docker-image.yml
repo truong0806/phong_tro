@@ -35,11 +35,11 @@ jobs:
       - name: List files in context
         run: ls
 
-      - name: Build and Push Docker Images docker compose
+      - name: Build and Push Docker Images
         uses: docker/build-push-action@v4
         with:
-          context: .
-          run: docker-compose up
+          context: client
+          file: /Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/v1
