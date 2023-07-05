@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { Header, Navigation, WhyUs, Support, ScrollTop } from './index'
-import { Outlet } from 'react-router-dom'
-import { Loading } from '../../components'
+import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import {
+  Header, Navigation, WhyUs, Support, ScrollTop,
+} from './index';
+import { Loading } from '../../components';
 
-//import {  useSelector } from 'react-redux'
-const Auth = () => {
-  const [loading, setLoading] = useState(true)
+// import {  useSelector } from 'react-redux'
+function Auth() {
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setLoading(false)
-    }, 2000)
+      setLoading(false);
+    }, 2000);
 
-    return () => clearTimeout(timeout)
-  }, [])
+    return () => clearTimeout(timeout);
+  }, []);
   return (
     <>
       {loading ? (
@@ -31,7 +33,7 @@ const Auth = () => {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default Auth
+export default Auth;

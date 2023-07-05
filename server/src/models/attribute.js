@@ -1,5 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
+import Post from './post'
 module.exports = (sequelize, DataTypes) => {
   class Attribute extends Model {
     /**
@@ -8,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Attribute.hasOne(models.Post, {
+      Attribute.hasOne(models.Attribute, {
         foreignKey: 'attributesId',
         as: 'attributes',
       })

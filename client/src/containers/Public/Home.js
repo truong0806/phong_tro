@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from 'react'
-import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index'
-import { Outlet, useLocation } from 'react-router-dom'
-import { Province } from './components/Province'
-import { Loading } from '../../components'
+import React, { useState, useEffect, useRef } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index';
+import { Loading } from '../../components';
+import * as actions from '../../store/action';
+import { useDispatch } from 'react-redux';
 
-//import {  useSelector } from 'react-redux'
-const Home = () => {
-  //const { isLoggedIn } = useSelector(state => state.auth)
-  ///const location = useLocation()
-  //const [isRegister, setIsRegister] = useState(location.state?.flag)\
-  const [loading, setLoading] = useState(true)
-
+function Home() {
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const linkRef = useRef();
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-
-    return () => clearTimeout(timeout)
-  }, [])
+    setTimeout(() => {
+      dispatch(actions.getPrices());
+      dispatch(actions.getAreas());
+      dispatch(actions.getProvince());
+      setLoading(false);
+    }, 1000);
+    // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
+  }, [dispatch]);
   return (
     <>
       {loading ? (
         <Loading loading={loading} />
       ) : (
-        <div className="w-full flex-col items-center ">
-          <Header />
+        <div className="w-full flex-col items-left  ">
+          <Header linkRef={linkRef} />
           <Navigation />
-          <div className="w-full flex flex-col justify-center items-center my-[10px] mx-auto">
+          <div className="w-5/6 flex flex-col justify-center items-center my-[10px] mx-auto">
             <Search />
-            <Province />
             <Outlet />
             <WhyUs />
             <Support />
@@ -37,7 +36,7 @@ const Home = () => {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

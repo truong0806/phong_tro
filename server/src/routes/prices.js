@@ -1,7 +1,7 @@
-import * as prricesController from '../controllers/pricesController'
+import * as pricesController from '../controllers/pricesController'
 import express from 'express'
 
 const router = express.Router()
-router.get('/all', prricesController.getPrice)
+router.get('/all', pricesController.getPrice)
 
 export default router
