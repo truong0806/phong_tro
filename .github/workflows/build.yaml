@@ -1,13 +1,11 @@
 name: flask-phongtro123
 on:
-    pull_request:
-      types:
-        - closed
-  
-  jobs:
-    if_merged:
-      if: github.event.pull_request.merged == true
-      runs-on: ubuntu-latest
-      steps:
-      - run: |
-          echo The PR was merged
+  pull_request:
+    types:
+      - closed
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      name: Checkout
+      uses: actions/checkout@v2
