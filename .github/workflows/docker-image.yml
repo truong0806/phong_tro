@@ -36,7 +36,7 @@ jobs:
         run: ls
 
       - name: List files in context
-        run: cd client
+        run: cd ./client
 
       - name: List files in context
         run: ls
@@ -44,7 +44,7 @@ jobs:
       - name: Build and Push Docker Images
         uses: docker/build-push-action@v4
         with:
-          context: client
+          context: ./client
           file: /Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
