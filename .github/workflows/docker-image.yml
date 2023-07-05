@@ -33,13 +33,13 @@ jobs:
         id: buildx
 
       - name: List files in context
-        run: ls 
+        run: ls
 
-      - name: Build and Push Docker Images
+      - name: Build and Push Docker Images docker compose
         uses: docker/build-push-action@v4
         with:
-          context: ../phong_tro/client
-          file: /Dockerfile
+          context: .
+          run: docker-compose up
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/v1
