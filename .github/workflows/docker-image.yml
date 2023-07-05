@@ -33,12 +33,12 @@ jobs:
         id: buildx
 
       - name: List files in context
-        run: ls -R ..
+        run: ls 
 
       - name: Build and Push Docker Images
         uses: docker/build-push-action@v4
         with:
-          context: ../.
+          context: ../phong_tro/client
           file: /Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
