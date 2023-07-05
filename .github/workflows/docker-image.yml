@@ -35,7 +35,9 @@ jobs:
       - name: Build and Push Docker Images
         uses: docker/build-push-action@v4
         with:
-          context: ./
+          context: ./client
+          file: /Dockerfile
+          builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/v1
 
