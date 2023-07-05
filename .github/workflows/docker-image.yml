@@ -35,6 +35,12 @@ jobs:
       - name: List files in context
         run: ls
 
+      - name: List files in context
+        run: cd client
+
+      - name: List files in context
+        run: ls
+
       - name: Build and Push Docker Images
         uses: docker/build-push-action@v4
         with:
