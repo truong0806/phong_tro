@@ -36,7 +36,7 @@ jobs:
         run: ls
 
       - name: List files in context
-        run: cd client
+        run: cd client/
 
       - name: List files in context
         run: ls
