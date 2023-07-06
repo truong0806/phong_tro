@@ -1,15 +1,10 @@
-# Use an official Node.js runtime as the base image
 FROM node:18.15.0-alpine
-
-# Set the working directory
-WORKDIR /app/client
-
-# Copy package.json and package-lock.json to the working directory
-COPY client/package.json ./
-COPY client/package-lock.json ./
-RUN npm install
+WORKDIR /app
+COPY package.json ./
+COPY package-lock.json ./
+RUN yarn install
 COPY . .
-# Install dependencies
-
-
+RUN yarn build
+EXPOSE 3000
+LABEL image.name="client-app-docker"
 CMD ["npm", "run", "start"]
