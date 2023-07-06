@@ -1,10 +1,14 @@
 FROM node:18.15.0-alpine
-WORKDIR /app
-COPY package.json ./
-COPY package-lock.json ./
-RUN yarn install
+
+# Set the working directory
+WORKDIR /app/client
+
+# Copy package.json and package-lock.json to the working directory
+COPY client/package.json ./
+COPY client/package-lock.json ./
+RUN npm install
 COPY . .
-RUN yarn build
-EXPOSE 3000
-LABEL image.name="client-app-docker"
+# Install dependencies
+
+
 CMD ["npm", "run", "start"]
