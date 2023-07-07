@@ -25,7 +25,6 @@ function HomePage() {
       setcategoryCode(category.code);
     }
     setLoading(false);
-
     // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [location, categories]);
 

@@ -27,7 +27,7 @@ function ListNumber({ text, number, currentPage, setCurrentPage }) {
     return a;
   };
 
-  const handLeChangePage = () => {
+  const handleChangePage = () => {
     if (!(number === '...')) {
       setCurrentPage(+number);
       navigate({
@@ -38,8 +38,12 @@ function ListNumber({ text, number, currentPage, setCurrentPage }) {
   };
   return (
     <div
-      className={+number === +currentPage ? active : notActive}
-      onClick={handLeChangePage}
+      className={
+        +number === +currentPage
+          ? `${active} ${number === '...' ? 'cursor-text' : 'cursor-pointer'}`
+          : `${notActive} ${number === '...' ? 'cursor-text' : 'cursor-pointer'}`
+      }
+      onClick={handleChangePage}
     >
       {text || number}
     </div>

@@ -19,7 +19,7 @@ function Button({
   return (
     <button
       type="button"
-      className={` px-2 ${margin}  ${padding} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md hover:underline  lg:flex items-center justify-center gap-1`}
+      className={` px-2 ${margin}  ${padding} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md  lg:flex items-center justify-center gap-1`}
       onClick={onClick}
     >
       <span>{IcBefor && <IcBefor size={IcBeforSize} />}</span>

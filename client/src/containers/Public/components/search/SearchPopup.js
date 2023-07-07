@@ -10,22 +10,23 @@ const SearchPopup = ({
   selectedValue,
   setSelectedValue,
 }) => {
-  const [persent1, setPersent1] = useState(0);
-  const [persent2, setPersent2] = useState(100);
+  const [percent1, setPercent1] = useState(0);
+  const [percent2, setPercent2] = useState(100);
   const [activedEl, setActivedEl] = useState('');
 
   useEffect(() => {
+    console.log('activedEl: ', activedEl);
     const activedTrackEl = document.getElementById('track-active');
     if (activedTrackEl) {
-      if (persent2 <= persent1) {
-        activedTrackEl.style.left = `${persent2}%`;
-        activedTrackEl.style.right = `${100 - persent1}%`;
+      if (percent2 <= percent1) {
+        activedTrackEl.style.left = `${percent2}%`;
+        activedTrackEl.style.right = `${100 - percent1}%`;
       } else {
-        activedTrackEl.style.left = `${persent1}%`;
-        activedTrackEl.style.right = `${100 - persent2}%`;
+        activedTrackEl.style.left = `${percent1}%`;
+        activedTrackEl.style.right = `${100 - percent2}%`;
       }
     }
-  }, [persent1, persent2]);
+  }, [percent1, percent2]);
 
   const handleItemClick = (item, event) => {
     setSelectedValue((prevState) => ({
@@ -34,57 +35,82 @@ const SearchPopup = ({
     }));
     setShowPopup(false);
   };
-  console.log(selectedValue);
+
   const handleCloseClick = () => {
     setShowPopup(false);
   };
+
   const handleClickTrack = (e, value) => {
     const stackEl = document.getElementById('track');
     const stackRect = stackEl.getBoundingClientRect();
     let percent = value
       ? value
       : Math.round(((e.clientX - stackRect.left) * 100) / stackRect.width, 0);
-    if (Math.abs(percent - persent1) <= Math.abs(percent - persent2)) {
-      setPersent1(percent);
+    if (Math.abs(percent - percent1) <= Math.abs(percent - percent2)) {
+      setPercent1(percent);
     } else {
-      setPersent2(percent);
+      setPercent2(percent);
     }
   };
   const convert100toTarget = (percent) => {
-    return name === 'price'
+    return name === 'prices'
       ? (Math.ceil(Math.round(percent * 1.5) / 5) * 5) / 10
-      : name === 'area'
+      : name === 'areas'
       ? Math.ceil(Math.round(percent * 0.9) / 5) * 5
       : 0;
   };
   const convertto100 = (percent) => {
-    let target = name === 'price' ? 15 : name === 'area' ? 90 : 1;
+    let target = name === 'prices' ? 15 : name === 'areas' ? 90 : 1;
     return Math.floor((percent / target) * 100);
   };
   const handleActive = (code, value) => {
     setActivedEl(code);
     let arrMaxMin =
-      name === 'price' ? getNumbersPrice(value) : getNumbersArea(value);
-    console.log(arrMaxMin);
+      name === 'prices' ? getNumbersPrice(value) : getNumbersArea(value);
     if (arrMaxMin.length === 1) {
       if (arrMaxMin[0] === 1) {
-        setPersent1(0);
-        setPersent2(convertto100(1));
+        setPercent1(0);
+        setPercent2(convertto100(1));
       }
       if (arrMaxMin[0] === 20) {
-        setPersent1(0);
-        setPersent2(convertto100(20));
+        setPercent1(0);
+        setPercent2(convertto100(20));
       }
       if (arrMaxMin[0] === 15 || arrMaxMin[0] === 90) {
-        setPersent1(100);
-        setPersent2(100);
+        setPercent1(100);
+        setPercent2(100);
       }
     }
     if (arrMaxMin.length === 2) {
-      setPersent1(convertto100(arrMaxMin[0]));
-      setPersent2(convertto100(arrMaxMin[1]));
+      setPercent1(convertto100(arrMaxMin[0]));
+      setPercent2(convertto100(arrMaxMin[1]));
     }
   };
+  const handleBeforeSubmit = (e, item) => {
+    let min = percent1 <= percent2 ? percent1 : percent2;
+    let max = percent1 <= percent2 ? percent2 : percent1;
+    let arrMinMax = [convert100toTarget(min), convert100toTarget(max)];
+    setSelectedValue((prevState) => ({
+      ...prevState,
+      [name]: { name: activedEl, value: arrMinMax },
+    }));
+    // const gaps = name === 'price'
+    //     ? getCodes(arrMinMax, content)
+    //     : name === 'area' ? getCodesArea(arrMinMax, content) : []
+    // handleSubmit(
+    //   e,
+    //   {
+    //     [`${name}Number`]: arrMinMax,
+    //     [name]: `Từ ${convert100toTarget(min)} - ${convert100toTarget(max)} ${
+    //       name === 'prices' ? 'triệu' : 'm2'
+    //     }`,
+    //   },
+    //   {
+    //     [`${name}Arr`]: [min, max],
+    //   }
+    // );
+  };
+  console.log(selectedValue);
   return (
     <div>
       <div
@@ -144,21 +170,25 @@ const SearchPopup = ({
                 </ul>
               ) : (
                 <div className="p-12 py-20 ">
-                  <div className="flex flex-col items-center justify-center relative ">
-                    <div className="z-30 absolute top-[-48px] font-bold text-xl text-orange-600">
-                      {persent1 === 100 && persent2 === 100
-                        ? `Trên ${convert100toTarget(persent1)} ${
-                            name === 'price' ? 'triệu' : 'm2'
-                          } +`
+                  <div className="flex flex-col items-center justify-center relative hover:cursor-pointer">
+                    <div className="z-30 absolute top-[-48px] font-bold text-[1.5rem] text-orange-600 hover:cursor-pointer">
+                      {percent1 === 100 && percent2 === 100
+                        ? `Trên ${convert100toTarget(percent1)} ${
+                            name === 'prices' ? 'triệu' : 'm2'
+                          }`
+                        : percent1 === 0 && percent2 === 0
+                        ? `${convert100toTarget(percent1)} ${
+                            name === 'prices' ? 'triệu' : 'm2'
+                          }`
                         : `Từ ${
-                            persent1 <= persent2
-                              ? convert100toTarget(persent1)
-                              : convert100toTarget(persent2)
+                            percent1 <= percent2
+                              ? convert100toTarget(percent1)
+                              : convert100toTarget(percent2)
                           } - ${
-                            persent2 >= persent1
-                              ? convert100toTarget(persent2)
-                              : convert100toTarget(persent1)
-                          } ${name === 'price' ? 'triệu' : 'm2'}`}
+                            percent2 >= percent1
+                              ? convert100toTarget(percent2)
+                              : convert100toTarget(percent1)
+                          } ${name === 'prices' ? 'triệu' : 'm2'}`}
                     </div>
                     <div
                       onClick={handleClickTrack}
@@ -175,10 +205,10 @@ const SearchPopup = ({
                       min="0"
                       step="1"
                       type="range"
-                      value={persent1}
-                      className="w-full appearance-none pointer-events-none absolute top-0 bottom-0"
+                      value={percent1}
+                      className="w-full  appearance-none pointer-events-none absolute top-0 bottom-0 slider-mask"
                       onChange={(e) => {
-                        setPersent1(+e.target.value);
+                        setPercent1(+e.target.value);
                         activedEl && setActivedEl('');
                       }}
                     />
@@ -187,41 +217,67 @@ const SearchPopup = ({
                       min="0"
                       step="1"
                       type="range"
-                      value={persent2}
-                      className="w-full appearance-none pointer-events-none absolute top-0 bottom-0"
+                      value={percent2}
+                      className="w-full  appearance-none pointer-events-none absolute top-0 bottom-0"
                       onChange={(e) => {
-                        setPersent2(+e.target.value);
+                        setPercent2(+e.target.value);
                         activedEl && setActivedEl('');
                       }}
                     />
+                    <div className="absolute z-30 top-6 left-0 right-0 flex justify-between items-center">
+                      <span
+                        className="cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleClickTrack(e, 0);
+                        }}
+                      >
+                        0
+                      </span>
+                      <span
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleClickTrack(e, 100);
+                        }}
+                        className={
+                          name === 'prices'
+                            ? 'mr-[-25px] cursor-pointer'
+                            : 'mr-[5px] cursor-pointer'
+                        }
+                      >
+                        {name === 'prices' ? 'Trên 15 triệu' : '90'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mt-24">
+                    <h4 className="font-medium mb-4">Chọn nhanh:</h4>
+                    <div className="flex gap-2 items-center flex-wrap w-full">
+                      {content?.map((item) => {
+                        return (
+                          <button
+                            key={item.code}
+                            onClick={() => handleActive(item.code, item.value)}
+                            className={`px-4 py-2 bg-gray-200 rounded-md cursor-pointer ${
+                              item.code === activedEl
+                                ? 'bg-blue-600 text-white'
+                                : ''
+                            }`}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               )}
-            </div>
-            <div className="mt-1">
-              <h4 className="font-medium mb-4">Chọn nhanh:</h4>
-              <div className="flex gap-2 items-center flex-wrap w-full">
-                {content?.map((item) => {
-                  return (
-                    <button
-                      key={item.code}
-                      onClick={() => handleActive(item.code, item.value)}
-                      className={`px-4 py-2 bg-gray-200 rounded-md cursor-pointer 
-                      ${item.code === activedEl ? 'bg-blue-500 text-white' : ''}
-                      `}
-                    >
-                      {item.value}
-                    </button>
-                  );
-                })}
-              </div>
             </div>
           </div>
           {(name === 'prices' || name === 'areas') && (
             <button
               type="button"
-              className="w-full h-[50px] font-bold absolute bottom-0 bg-[#ffa500] py-2 rounded-bl-md rounded-br-md"
-              // onClick={handleBeforeSubmit}
+              className="w-full absolute bottom-0 bg-[#FFA500] py-4 font-bold rounded-bl-md rounded-br-md"
+              onClick={handleBeforeSubmit}
             >
               ÁP DỤNG
             </button>
