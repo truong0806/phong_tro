@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from '../../../../components/index';
+import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ListPostItem } from '../../index';
 import getDate from '../../../../ultils/getDate';
@@ -8,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../../store/action';
 import { FilterListPostBtn } from '../../index';
 
-const ListPost = ({ linkRef, categoryCode, loading }) => {
+const ListPost = ({  categoryCode, loading }) => {
   const dispatch = useDispatch();
   const { posts_limit } = useSelector((state) => state.post);
   const [searchParams] = useSearchParams();

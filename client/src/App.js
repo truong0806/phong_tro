@@ -20,6 +20,7 @@ function App() {
           <Route path={path.CHO_THUE_MAT_BANG} element={<Retal />} />
           <Route path={path.CHO_THUE_PHONG_TRO} element={<Retal />} />
           <Route path={path.NHA_CHO_THUE} element={<Retal />} />
+          <Route path={path.TIM_NGUOI_O_GHEP} element={<Retal />} />
           <Route
             path={path.DETAIL_POST_TITLE__POSTID}
             element={<DetailPost />}

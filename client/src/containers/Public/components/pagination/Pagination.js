@@ -10,8 +10,10 @@ function Pagination() {
   const [currentPage, setCurrentPage] = useState(+page || 1);
   const [inHideEnd, isInHideEnd] = useState(false);
   const [inHideStart, isInHideStart] = useState(false);
+  const postLength = process.env.REACT_APP_LIMIT_POST_NUMBER;
+
   useEffect(() => {
-    const maxPage = Math.ceil(count / 5);
+    const maxPage = Math.ceil(count / postLength);
     const end = currentPage + 1 > maxPage ? maxPage : currentPage + 1;
     const start = currentPage - 1 <= 0 ? 1 : currentPage - 1;
     const temp = [];
@@ -19,15 +21,11 @@ function Pagination() {
     setArrPage(temp);
     currentPage >= maxPage - 1 ? isInHideEnd(true) : isInHideEnd(false);
     currentPage <= 2 ? isInHideStart(true) : isInHideStart(false);
-  }, [count, posts_limit, currentPage]);
-
-  const postLimitEmpty =
-    posts_limit === 0 || Math.round(count / 5) === 1 ? '' : '';
-  //console.log('arrpage', arrpage);
+  }, [count, posts_limit, currentPage, postLength]);
 
   return (
     <div
-      className={`flex items-center gap-1 justify-center mt-[20px] mb-[50px] ${postLimitEmpty}`}
+      className={`flex items-center gap-1 justify-center mt-[20px] mb-[50px] `}
     >
       {!inHideStart && (
         <ListNumber number={1} setCurrentPage={setCurrentPage} />
@@ -46,7 +44,7 @@ function Pagination() {
       {!inHideEnd && (
         <ListNumber
           text="»»"
-          number={Math.floor(count / posts_limit.length)}
+          number={Math.floor(count / postLength)}
           setCurrentPage={setCurrentPage}
           type="end"
         />

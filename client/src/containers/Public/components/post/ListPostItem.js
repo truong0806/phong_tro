@@ -31,7 +31,7 @@ const ListPostItem = ({
       {images?.length > 4 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
-          className="w-[45%] flex flex-wrap gap-[2px] items-center relative cursor-pointerv"
+          className="w-[40%] flex flex-wrap gap-[2px] items-center justify-center relative cursor-pointerv"
         >
           {images
             ?.filter((i, index) => indexs.some((i) => i === index))
@@ -66,40 +66,10 @@ const ListPostItem = ({
             )}
           </span>
         </Link>
-      ) : images?.length > 0 ? (
-        <Link
-          to={`chi-tiet/${slug(title)}/${id}`}
-          className="w-[245px] h-[245px] relative cursor-pointer"
-        >
-          {images
-            ?.filter((j, index) => indexs.some((j) => j - 3 === index))
-            ?.map((j, index) => {
-              return <img src={j} className="w-full h-full object-cover" />;
-            })}
-
-          <span className="absolute bottom-2 left-4 bg-[rgba(0,0,0,.5)] text-white py-[3px] px-[5px] rounded-[3px] text-[.9rem]">
-            {`${images?.length}`} ảnh
-          </span>
-          <span
-            className="absolute bottom-2 right-4 text-white "
-            onMouseEnter={() => {
-              setIsHoverHeart(true);
-            }}
-            onMouseLeave={() => {
-              setIsHoverHeart(false);
-            }}
-          >
-            {isHoverHeart ? (
-              <RiHeartFill size={20} color="red" />
-            ) : (
-              <RiHeartLine size={20} />
-            )}
-          </span>
-        </Link>
       ) : (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
-          className="w-[245px] h-[245px] relative cursor-pointer"
+          className="w-[40%] h-[245px] relative items-center justify-center cursor-pointer"
         >
           <img
             src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"

@@ -6,6 +6,7 @@ import chothuematbang from '../../data/chothuematbang.json'
 import chothuecanho from '../../data/chothuecanho.json'
 import nhachothue from '../../data/nhachothue.json'
 import chothuephongtro from '../../data/chothuephongtro.json'
+import timnguoioghep from '../../data/timnguoioghep.json'
 import genarateCode from '../ultils/generateCode'
 import { dataArea, dataPrice } from '../ultils/data'
 import { getNumberFormString } from '../ultils/common'
@@ -13,6 +14,7 @@ require('dotenv').config()
 
 const hashPassword = (password) =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(12))
+
 const dataBody = [
   {
     header: chothuephongtro.header,
@@ -34,7 +36,13 @@ const dataBody = [
     body: nhachothue.body,
     code: 'NCT',
   },
+  {
+    header: timnguoioghep.header,
+    body: timnguoioghep.body,
+    code: 'TNOG',
+  },
 ]
+
 export const insertService = () =>
   new Promise(async (resolve, reject) => {
     try {
@@ -90,6 +98,16 @@ export const insertService = () =>
             'dddd, HH:mm DD/MM/YYYY',
             'vi',
           ).toDate()
+          await db.Attribute.findOrCreate({
+            where: { id: attributesId },
+            defaults: {
+              id: attributesId,
+              price: item?.header?.attributes?.price,
+              acreage: item?.header?.attributes?.acreage,
+              published: item?.header?.attributes?.published,
+              hashtag: item?.header?.attributes?.hashtag,
+            },
+          }),
           await db.Post.findOrCreate({
             where: {
               id: postId,
@@ -117,21 +135,15 @@ export const insertService = () =>
               )?.code,
               provinceCode,
             },
+          })  
+
+          await db.Images.findOrCreate({
+            where: { id: imagesId },
+            defaults: {
+              id: imagesId,
+              image: JSON.stringify(item?.images),
+            },
           })
-          await db.Attribute.create({
-            id: attributesId,
-            price: item?.header?.attributes?.price,
-            acreage: item?.header?.attributes?.acreage,
-            published: item?.header?.attributes?.published,
-            hashtag: item?.header?.attributes?.hashtag,
-          }),
-            await db.Images.findOrCreate({
-              where: { id: imagesId },
-              defaults: {
-                id: imagesId,
-                image: JSON.stringify(item?.images),
-              },
-            })
           await db.Label.findOrCreate({
             where: { code: labelCode },
             defaults: {
