@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../../../../components/index';
 import { useSearchParams } from 'react-router-dom';
 import { ListPostItem } from '../../index';
@@ -6,11 +6,13 @@ import getDate from '../../../../ultils/getDate';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../../store/action';
+import { FilterListPostBtn } from '../../index';
 
 const ListPost = ({ linkRef, categoryCode, loading }) => {
   const dispatch = useDispatch();
   const { posts_limit } = useSelector((state) => state.post);
   const [searchParams] = useSearchParams();
+
   useEffect(() => {
     let params = [];
     for (let entry of searchParams.entries()) {
@@ -40,21 +42,7 @@ const ListPost = ({ linkRef, categoryCode, loading }) => {
       </section>
       <div className="flex items-center text-[.95rem] gap-2 my-[10px] ">
         <span className="">Sắp xếp: </span>
-        <Button
-          padding={'py-[5px] px-[10px]'}
-          bgcolor={'bg-gray-200'}
-          text="Mặc định"
-        />
-        <Button
-          padding={'py-[5px] px-[10px]'}
-          bgcolor={'bg-gray-200'}
-          text="Mới nhất"
-        />
-        <Button
-          padding={'py-[5px] px-[10px]'}
-          bgcolor={'bg-gray-200'}
-          text="Có video"
-        />
+        <FilterListPostBtn />
       </div>
       <div className="px-5 mx-[-20px] py-4 ">
         {loading ? (

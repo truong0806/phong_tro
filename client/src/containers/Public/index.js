@@ -23,3 +23,4 @@ export { default as SlideBar } from './components/sidebar/SlideBar';
 export { default as Pagination } from './components/pagination/Pagination';
 export { default as ListNumber } from './components/pagination/ListNumber';
 export { default as SearchPopup } from './components/search/SearchPopup';
+export { default as FilterListPostBtn } from './components/post/FilterListPostBtn';

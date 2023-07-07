@@ -198,33 +198,37 @@ const SearchPopup = ({
                 </div>
               )}
             </div>
-            <div className="mt-1">
-              <h4 className="font-medium mb-4">Chọn nhanh:</h4>
-              <div className="flex gap-2 items-center flex-wrap w-full">
-                {content?.map((item) => {
-                  return (
-                    <button
-                      key={item.code}
-                      onClick={() => handleActive(item.code, item.value)}
-                      className={`px-4 py-2 bg-gray-200 rounded-md cursor-pointer 
-                      ${item.code === activedEl ? 'bg-blue-500 text-white' : ''}
-                      `}
-                    >
-                      {item.value}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
           </div>
           {(name === 'prices' || name === 'areas') && (
-            <button
-              type="button"
-              className="w-full h-[50px] font-bold absolute bottom-0 bg-[#ffa500] py-2 rounded-bl-md rounded-br-md"
-              // onClick={handleBeforeSubmit}
-            >
-              ÁP DỤNG
-            </button>
+            <div>
+              <div className="w-[calc(100% - 40px)] overflow-auto overflow-y-auto overscroll-contain py-[10px] px-[25px] ">
+                <div className="mt-1">
+                  <h4 className="font-medium mb-4">Chọn nhanh:</h4>
+                  <div className="flex gap-2 items-center flex-wrap w-full">
+                    {content?.map((item) => {
+                      return (
+                        <button
+                          key={item.code}
+                          onClick={() => handleActive(item.code, item.value)}
+                          className={`px-4 py-2 bg-gray-200 rounded-md cursor-pointer 
+                      ${item.code === activedEl ? 'bg-blue-500 text-white' : ''}
+                      `}
+                        >
+                          {item.value}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="w-full h-[50px] font-bold absolute bottom-0 bg-[#ffa500] py-2 rounded-bl-md rounded-br-md"
+                // onClick={handleBeforeSubmit}
+              >
+                ÁP DỤNG
+              </button>
+            </div>
           )}
         </div>
       </div>
