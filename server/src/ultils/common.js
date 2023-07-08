@@ -1,0 +1,1 @@
+export const getNumberFormString = (string) => string.match(/\d+/)
