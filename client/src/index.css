@@ -69,3 +69,6 @@ input[type='range']::-ms-thumb {
 input[type='range']::-ms-thumb:active {
   border: solid 1px rgb(144, 211, 255);
 }
+.btn-prices-search {
+  background-color: rgb(37 99 235);
+}

@@ -28,7 +28,7 @@ function ListNumber({ text, number, currentPage, setCurrentPage }) {
   };
 
   const handleChangePage = () => {
-    if (!(number === '...')) {
+    if (!(+number === '...')) {
       setCurrentPage(+number);
       navigate({
         pathname: location.pathname,
@@ -41,7 +41,9 @@ function ListNumber({ text, number, currentPage, setCurrentPage }) {
       className={
         +number === +currentPage
           ? `${active} ${number === '...' ? 'cursor-text' : 'cursor-pointer'}`
-          : `${notActive} ${number === '...' ? 'cursor-text' : 'cursor-pointer'}`
+          : `${notActive} ${
+              number === '...' ? 'cursor-text' : 'cursor-pointer'
+            }`
       }
       onClick={handleChangePage}
     >

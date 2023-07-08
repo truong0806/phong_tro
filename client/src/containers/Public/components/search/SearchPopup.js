@@ -10,12 +10,29 @@ const SearchPopup = ({
   selectedValue,
   setSelectedValue,
 }) => {
-  const [percent1, setPercent1] = useState(0);
-  const [percent2, setPercent2] = useState(100);
+  const convertto100 = (percent) => {
+    let target = name === 'prices' ? 15 : name === 'areas' ? 90 : 1;
+    return Math.floor((percent / target) * 100);
+  };
+  const [percent1, setPercent1] = useState(
+    name === 'prices' && selectedValue?.prices.pricesArr
+      ? convertto100(+selectedValue?.prices.pricesArr[0])
+      : name === 'areas' && selectedValue?.areas.areasArr
+      ? convertto100(+selectedValue?.areas.areasArr[0])
+      : 0
+  );
+  console.log('🚀 ~ file: SearchPopup.js:21 ~ percent1:', percent1);
+  const [percent2, setPercent2] = useState(
+    name === 'prices' && selectedValue?.prices.pricesArr
+      ? convertto100(+selectedValue?.prices.pricesArr[1])
+      : name === 'areas' && selectedValue?.areas.areasArr
+      ? convertto100(+selectedValue?.areas.areasArr[1])
+      : 0
+  );
+  console.log('🚀 ~ file: SearchPopup.js:29 ~ percent2:', percent2);
   const [activedEl, setActivedEl] = useState('');
 
   useEffect(() => {
-    console.log('activedEl: ', activedEl);
     const activedTrackEl = document.getElementById('track-active');
     if (activedTrackEl) {
       if (percent2 <= percent1) {
@@ -59,10 +76,6 @@ const SearchPopup = ({
       ? Math.ceil(Math.round(percent * 0.9) / 5) * 5
       : 0;
   };
-  const convertto100 = (percent) => {
-    let target = name === 'prices' ? 15 : name === 'areas' ? 90 : 1;
-    return Math.floor((percent / target) * 100);
-  };
   const handleActive = (code, value) => {
     setActivedEl(code);
     let arrMaxMin =
@@ -90,27 +103,19 @@ const SearchPopup = ({
     let min = percent1 <= percent2 ? percent1 : percent2;
     let max = percent1 <= percent2 ? percent2 : percent1;
     let arrMinMax = [convert100toTarget(min), convert100toTarget(max)];
+
     setSelectedValue((prevState) => ({
       ...prevState,
-      [name]: { name: activedEl, value: arrMinMax },
+      [name]: {
+        name: `Từ ${convert100toTarget(min)} - ${convert100toTarget(max)} ${
+          name === 'price' ? 'triệu' : 'm2'
+        }`,
+        [`${name}Arr`]: arrMinMax,
+      },
     }));
-    // const gaps = name === 'price'
-    //     ? getCodes(arrMinMax, content)
-    //     : name === 'area' ? getCodesArea(arrMinMax, content) : []
-    // handleSubmit(
-    //   e,
-    //   {
-    //     [`${name}Number`]: arrMinMax,
-    //     [name]: `Từ ${convert100toTarget(min)} - ${convert100toTarget(max)} ${
-    //       name === 'prices' ? 'triệu' : 'm2'
-    //     }`,
-    //   },
-    //   {
-    //     [`${name}Arr`]: [min, max],
-    //   }
-    // );
+    setShowPopup(false);
   };
-  console.log(selectedValue);
+
   return (
     <div>
       <div
@@ -135,10 +140,13 @@ const SearchPopup = ({
               {name === 'categories' || name === 'provinces' ? (
                 <ul className="list-none">
                   {content?.slice(0, -2).map((item, index) => {
-                    //const isChecked = item.code === selectedValue;
                     return (
                       <li
-                        onClick={() => handleItemClick(item, index, name)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleItemClick(item, index, name);
+                          setShowPopup(false);
+                        }}
                         key={item.id}
                         className="hover:text-[#007aff] relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
                       >
@@ -148,19 +156,19 @@ const SearchPopup = ({
                           id={item.code}
                           value={item.code}
                           className="accent-[#007aff]"
-                          checked={index === 0}
+                          checked={
+                            item.code === selectedValue[`${name}`].code
+                              ? true
+                              : false
+                          }
                         ></input>
                         <label
                           htmlFor={item.code}
-                          className="pl-4 font-bold"
-                          // style={{
-                          //   color:
-                          //     index === 0
-                          //       ? '#007aff'
-                          //       : isChecked
-                          //       ? '#007aff'
-                          //       : 'inherit',
-                          // }}
+                          className={`pl-4 font-bold ${
+                            item.code === selectedValue[`${name}`].code
+                              ? 'text-[#007aff]'
+                              : ''
+                          }`}
                         >
                           {item.value}
                         </label>
@@ -259,7 +267,7 @@ const SearchPopup = ({
                             onClick={() => handleActive(item.code, item.value)}
                             className={`px-4 py-2 bg-gray-200 rounded-md cursor-pointer ${
                               item.code === activedEl
-                                ? 'bg-blue-600 text-white'
+                                ? 'btn-prices-search text-white'
                                 : ''
                             }`}
                           >
