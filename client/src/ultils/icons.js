@@ -10,7 +10,7 @@ import {
   BsStarFill,
   BsBookmarkStarFill,
 } from 'react-icons/bs';
-import { FiSearch } from 'react-icons/fi';
+import { FiSearch, FiDelete } from 'react-icons/fi';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { GrNext, GrStar } from 'react-icons/gr';
 import {
@@ -43,6 +43,7 @@ const icon = {
   BsStarFill,
   RiHeartFill,
   RiHeartLine,
+  FiDelete,
 };
 
 export default icon;

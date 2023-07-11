@@ -10,7 +10,6 @@ function HomePage() {
   const [categoryCurrent, setCategoryCurrent] = useState({});
   const [categoryCode, setcategoryCode] = useState('none');
   const { categories } = useSelector((state) => state.app);
-  const { count } = useSelector((state) => state.post);
 
   useState(() => {
     setLoading(false);
