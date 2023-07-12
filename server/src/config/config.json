@@ -2,7 +2,7 @@
   "development": {
     "username": "khuyenm3_wp618",
     "password": "truong911@",
-    "database": "khuyenm3_phongtro123",
+    "database": "khuyenm3_phongtro",
     "host": "103.200.22.212",
     "dialect": "mysql",
     "logging": false,

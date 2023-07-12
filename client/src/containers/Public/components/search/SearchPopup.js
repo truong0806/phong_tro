@@ -121,30 +121,37 @@ const SearchPopup = ({
       percent2
     );
   };
-  console.log('content', content);
   return (
     <div>
       <div
-        className="fixed top-0 left-0 right-0 bottom-0 bg-overlay-70 z-20 "
+        className="fixed w-full h-full bg-overlay-70 z-20 top-0 left-0 right-0 bottom-0  overflow-y-auto"
         onClick={handleCloseClick}
       >
         <div
           onClick={(e) => {
             e.stopPropagation();
           }}
-          className="fixed w-[700px] left-0 right-0 bottom-0 bg-white max-h-[500px] top-[60px] overflow-hidden my-0 mx-auto rounded-lg"
+          className="relative flex flex-col h-[500px] w-[700px] left-0 right-0 bottom-0 my-0 mx-auto top-[60px]  bg-white border rounded-lg overflow-hidden"
         >
-          <div className="h-[45px]  relative flex items-center justify-center border-b border-solid">
+          <div
+            className={`${
+              name === 'provinces' ? 'h-[45px]' : 'h-[45px]'
+            }  relative flex items-center justify-center border-b border-solid`}
+          >
             <span className="uppercase font-bold">Chọn loại bất động sản</span>
             <div
-              className="cursor-pointer bg-left_arrow_bg absolute bg-center top-0 left-0 w-[45px] h-[45px] bg-50% bg-no-repeat "
+              className=" cursor-pointer bg-left_arrow_bg absolute bg-center top-0 left-0 w-[45px] h-[45px] bg-50% bg-no-repeat "
               onClick={handleCloseClick}
             ></div>
           </div>
-          <div className="w-[calc(100% - 40px)] overflow-auto overflow-y-scroll overscroll-contain py-[10px] px-[25px] ">
+          <div
+            className={`relative py-[10px] px-[25px] h-full ${
+              name === 'provinces' ? 'hover:overflow-auto hover:overflow-y-scroll ' : ''
+            } `}
+          >
             <div className="">
               {name === 'categories' ? (
-                <ul className="list-none">
+                <ul className="list-none ">
                   {content?.slice(0, -2).map((item, index) => {
                     return (
                       <li
@@ -183,7 +190,7 @@ const SearchPopup = ({
                   })}
                 </ul>
               ) : name === 'provinces' ? (
-                <ul className="list-none">
+                <ul className="list-none overflow-y-auto">
                   {content?.map((item, index) => {
                     return (
                       <li
@@ -193,14 +200,14 @@ const SearchPopup = ({
                           setShowPopup(false);
                         }}
                         key={item.id}
-                        className="hover:text-[#007aff] relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
+                        className="hover:text-[#007aff] overflow-y-auto relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
                       >
                         <input
                           type="radio"
                           name={name}
                           id={item.code}
                           value={item.code}
-                          className="accent-[#007aff]"
+                          className="accent-[#007aff] "
                           checked={
                             item.code === selectedValue[`${name}`].code
                               ? true
@@ -233,12 +240,13 @@ const SearchPopup = ({
                     handleClickTrack={handleClickTrack}
                     activedEl={activedEl}
                     setActivedEl={setActivedEl}
+                    setSelectedValue={setSelectedValue}
                   />
                   <div className="mt-24">
                     <h4 className="font-medium mb-4">Chọn nhanh:</h4>
                     <div className="flex gap-2 items-center flex-wrap w-full">
                       {content?.map((item) => {
-                        console.log(item.value);
+                        
                         return (
                           <button
                             key={item.code}

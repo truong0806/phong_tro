@@ -96,8 +96,7 @@ export const getProvince = () => async (dispatch) => {
 export const getProvince1 = () => async (dispatch) => {
   try {
     const response = await apis.apiProvince1();
-    console.log('🚀 ~ file: app.js:99 ~ getProvince1 ~ response:', response);
-    // console.log('app: ', response)
+    
     if (response?.status === 200) {
       dispatch({
         type: actionTypes.GET_PROVINCES1,

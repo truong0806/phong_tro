@@ -4,6 +4,7 @@ import { SearchPopup } from '../../index';
 import icons from '../../../../ultils/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../../store/action';
+import { getCodesPrices } from '../../../../ultils/common/getCode';
 const {
   GrNext,
   HiOutlineLocationMarker,
@@ -22,13 +23,21 @@ function Search() {
     prices: { name: 'Chọn giá', pricesNumber: [0, 15] },
     areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
   });
+  console.log(
+    '🚀 ~ file: Search.js:26 ~ Search ~ selectedValue:',
+    selectedValue
+  );
   const [showPopup, setShowPopup] = useState(false);
   const [content, setContent] = useState([]);
   const [name, setName] = useState([]);
   const { areas, prices, categories, provinces } = useSelector(
     (state) => state.app
   );
-
+  console.log(
+    'getCodesPrices',
+    getCodesPrices(selectedValue.prices.pricesNumber, prices)
+  );
+  console.log(selectedValue.prices.pricesNumber);
   useEffect(() => {
     dispatch(actions.getProvince1());
   }, [dispatch]);
@@ -43,7 +52,6 @@ function Search() {
     setSelectedValue((prevState) => ({
       ...prevState,
       [name]: {
-        ...prevState,
         name: defaultText,
       },
     }));
@@ -79,7 +87,10 @@ function Search() {
   );
   return (
     <>
-      <div className="lg:w-full w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2">
+      <div
+        tabIndex="-1"
+        className="lg:w-full w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2"
+      >
         <span
           onClick={(e) => handShowPopup(e, categories, 'categories')}
           className="cursor-pointer flex-1 md:w-full lg:w-full font-bold"

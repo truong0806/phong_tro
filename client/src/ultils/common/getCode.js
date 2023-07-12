@@ -1,6 +1,6 @@
 import { getNumbersArea, getNumbersPrice } from './getnumbers';
 
-export const getCodePrice = (totals) => {
+export const getMaxMinPrice = (totals) => {
   let arr = [];
   return totals?.map((item) => {
     let arrMaxMin = getNumbersPrice(item.value);
@@ -18,7 +18,7 @@ export const getCodePrice = (totals) => {
     };
   });
 };
-export const getCodeArea = (totals) => {
+export const getMaxMinArea = (totals) => {
   let arr = [];
   return totals?.map((item) => {
     let arrMaxMin = getNumbersArea(item.value);
@@ -36,9 +36,10 @@ export const getCodeArea = (totals) => {
     };
   });
 };
-
-export const getCodes = (arrMinMax, prices) => {
-  const pricesWithMinMax = getCodePrice(prices);
+export const getCodesPrices = (arrMinMax, prices) => {
+  console.log('arrMinMax', arrMinMax);
+  const pricesWithMinMax = getMaxMinPrice(prices);
+  console.log("🚀 ~ file: getCode.js:42 ~ getCodesPrices ~ pricesWithMinMax:", pricesWithMinMax)
   return pricesWithMinMax.filter(
     (item) =>
       (item.min >= arrMinMax[0] && item.min <= arrMinMax[1]) ||
@@ -46,7 +47,7 @@ export const getCodes = (arrMinMax, prices) => {
   );
 };
 export const getCodesArea = (arrMinMax, areas) => {
-  const areasWithMinMax = getCodeArea(areas);
+  const areasWithMinMax = getMaxMinArea(areas);
   return areasWithMinMax.filter(
     (item) =>
       (item.min >= arrMinMax[0] && item.min <= arrMinMax[1]) ||

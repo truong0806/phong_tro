@@ -10,6 +10,7 @@ const Slider_track = ({
   handleClickTrack,
   activedEl,
   setActivedEl,
+  setSelectedValue,
 }) => {
   return (
     <div className="flex flex-col items-center justify-center relative hover:cursor-pointer">
@@ -52,6 +53,12 @@ const Slider_track = ({
         onChange={(e) => {
           setPercent1(+e.target.value);
           activedEl && setActivedEl('');
+          setSelectedValue((prev) => ({
+            ...prev,
+            [name]: {
+              [`${name}Number`]: [0,0],
+            },
+          }));
         }}
       />
       <input
@@ -64,6 +71,12 @@ const Slider_track = ({
         onChange={(e) => {
           setPercent2(+e.target.value);
           activedEl && setActivedEl('');
+          setSelectedValue((prev) => ({
+            ...prev,
+            [name]: {
+              [`${name}Number`]: [0,0],
+            },
+          }));
         }}
       />
       <div className="absolute z-30 top-6 left-0 right-0 flex justify-between items-center">
