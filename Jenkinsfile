@@ -1,7 +1,2 @@
-node{
- 
-        stage('test') {
-            println("Test jenkinvs")
-        }
-    
-}
+@Library("cicd")_
+pipelineFileName() // file name in "vars" folder 
