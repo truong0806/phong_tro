@@ -1,7 +1,7 @@
 node{
   stages {
         stage('test') {
-            println("Test jenkins")
+            println("Test jenkinvs")
         }
     }
 }
