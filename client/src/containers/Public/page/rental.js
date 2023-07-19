@@ -26,8 +26,7 @@ function RentalApartment() {
     if (category) {
       setcategoryCode(category.code);
     }
-    console.log('prices', prices);
-    console.log('areas', areas);
+   
     setLoading(false);
 
     // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });

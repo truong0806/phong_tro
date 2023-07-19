@@ -59,7 +59,7 @@ const ItemSidebar = ({
                 content?.slice(0, 5).map((item) => {
                   return (
                     <Link
-                      to={slug(item.value)}
+                      to={`/${slug(item.value)}`}
                       className="flex items-center justify-between border-dashed border-b-[1px]"
                       key={item.code}
                     >

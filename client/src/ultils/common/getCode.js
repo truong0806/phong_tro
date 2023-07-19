@@ -37,10 +37,8 @@ export const getMaxMinArea = (totals) => {
   });
 };
 export const getCodesPrices = (arrMinMax, prices) => {
-  console.log('arrMinMax', arrMinMax);
   const pricesWithMinMax = getMaxMinPrice(prices);
-  console.log("🚀 ~ file: getCode.js:42 ~ getCodesPrices ~ pricesWithMinMax:", pricesWithMinMax)
-  return pricesWithMinMax.filter(
+  return pricesWithMinMax?.filter(
     (item) =>
       (item.min >= arrMinMax[0] && item.min <= arrMinMax[1]) ||
       (item.max >= arrMinMax[0] && item.max <= arrMinMax[1])

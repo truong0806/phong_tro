@@ -111,6 +111,7 @@ const SearchPopup = ({
       convert100toTarget(min, name),
       convert100toTarget(max, name),
     ];
+
     handleSubmit(
       e,
       arrMinMax,
@@ -118,7 +119,8 @@ const SearchPopup = ({
       max,
       convert100toTarget,
       percent1,
-      percent2
+      percent2,
+      name
     );
   };
   return (
@@ -146,7 +148,9 @@ const SearchPopup = ({
           </div>
           <div
             className={`relative py-[10px] px-[25px] h-full ${
-              name === 'provinces' ? 'hover:overflow-auto hover:overflow-y-scroll ' : ''
+              name === 'provinces'
+                ? 'hover:overflow-auto hover:overflow-y-scroll '
+                : ''
             } `}
           >
             <div className="">
@@ -169,7 +173,12 @@ const SearchPopup = ({
                           id={item.code}
                           value={item.code}
                           className="accent-[#007aff]"
-                          checked={
+                          // onChange={
+                          //   item.code === selectedValue[`${name}`].code
+                          //     ? true
+                          //     : false
+                          // }
+                          defaultChecked={
                             item.code === selectedValue[`${name}`].code
                               ? true
                               : false
@@ -208,7 +217,7 @@ const SearchPopup = ({
                           id={item.code}
                           value={item.code}
                           className="accent-[#007aff] "
-                          checked={
+                          defaultChecked={
                             item.code === selectedValue[`${name}`].code
                               ? true
                               : false
@@ -246,7 +255,6 @@ const SearchPopup = ({
                     <h4 className="font-medium mb-4">Chọn nhanh:</h4>
                     <div className="flex gap-2 items-center flex-wrap w-full">
                       {content?.map((item) => {
-                        
                         return (
                           <button
                             key={item.code}

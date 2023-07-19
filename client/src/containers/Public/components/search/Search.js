@@ -4,7 +4,11 @@ import { SearchPopup } from '../../index';
 import icons from '../../../../ultils/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../../store/action';
-import { getCodesPrices } from '../../../../ultils/common/getCode';
+
+import {
+  getCodesArea,
+  getCodesPrices,
+} from '../../../../ultils/common/getCode';
 const {
   GrNext,
   HiOutlineLocationMarker,
@@ -23,21 +27,12 @@ function Search() {
     prices: { name: 'Chọn giá', pricesNumber: [0, 15] },
     areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
   });
-  console.log(
-    '🚀 ~ file: Search.js:26 ~ Search ~ selectedValue:',
-    selectedValue
-  );
   const [showPopup, setShowPopup] = useState(false);
   const [content, setContent] = useState([]);
   const [name, setName] = useState([]);
   const { areas, prices, categories, provinces } = useSelector(
     (state) => state.app
   );
-  console.log(
-    'getCodesPrices',
-    getCodesPrices(selectedValue.prices.pricesNumber, prices)
-  );
-  console.log(selectedValue.prices.pricesNumber);
   useEffect(() => {
     dispatch(actions.getProvince1());
   }, [dispatch]);
@@ -58,8 +53,25 @@ function Search() {
   };
 
   const handleSubmit = useCallback(
-    (e, arrMinMax, min, max, convert100toTarget, percent1, percent2) => {
+    (e, arrMinMax, min, max, convert100toTarget, percent1, percent2, name) => {
+       const gaps =
+         name === 'prices'
+           ? getCodesPrices(
+               [
+                 convert100toTarget(percent1, name),
+                 convert100toTarget(percent2, name),
+               ],
+               content
+             )
+           : getCodesArea(
+               [
+                 convert100toTarget(percent1, name),
+                 convert100toTarget(percent2, name),
+               ],
+               content
+             );
       e.stopPropagation();
+     
       setShowPopup(false);
       setSelectedValue((prev) => ({
         ...prev,
@@ -80,11 +92,16 @@ function Search() {
                   name
                 )}${name === 'prices' ? ' triệu' : 'm'}`,
           [`${name}Arr`]: [min, max],
+          [`${name}Code`]: gaps.map((item) => item.code),
         },
       }));
     },
-    [name]
+    [name, content]
   );
+
+  const handleSearch = () => {
+    console.log(selectedValue);
+  };
   return (
     <>
       <div
@@ -154,6 +171,7 @@ function Search() {
         </span>
         <button
           type="button"
+          onClick={handleSearch}
           className="md:w-full lg:w-full outline-none py-2 px-4 rounded-md  bg-[#ffba00] font-bold md:bg-secondary1 text-[13px] flex-1 flex items-center justify-center gap-2 text-black md:text-white"
         >
           <FiSearch />
