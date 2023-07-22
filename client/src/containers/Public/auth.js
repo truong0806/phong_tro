@@ -7,11 +7,11 @@ import { Loading } from '../../components';
 
 // import {  useSelector } from 'react-redux'
 function Auth() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setLoading(false);
+      setLoading(true);
     }, 2000);
 
     return () => clearTimeout(timeout);

@@ -9,6 +9,8 @@ import {
   getCodesArea,
   getCodesPrices,
 } from '../../../../ultils/common/getCode';
+import { useLocation, useNavigate, createSearchParams } from 'react-router-dom';
+import { removeSFromString } from '../../../../ultils/common/removeS';
 const {
   GrNext,
   HiOutlineLocationMarker,
@@ -19,8 +21,11 @@ const {
   FiSearch,
   FiDelete,
 } = icons;
-function Search() {
+
+function Search({ loading }) {
+  const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState({
     categories: { name: 'Phòng trọ, nhà trọ', code: 'abc' },
     provinces: { name: 'Toàn quốc', code: 'abc' },
@@ -44,6 +49,7 @@ function Search() {
     setShowPopup(true);
   };
   const handleDeleteTitle = (name, defaultText) => {
+    // navigate('/new-url', { replace: true });
     setSelectedValue((prevState) => ({
       ...prevState,
       [name]: {
@@ -75,7 +81,7 @@ function Search() {
       setShowPopup(false);
       setSelectedValue((prev) => ({
         ...prev,
-        [`${name}Code`]: gaps.map((item) => item.code),
+        [`${removeSFromString(name)}Code`]: gaps.map((item) => item.code),
         [name]: {
           [`${name}Number`]: arrMinMax,
           name:
@@ -97,7 +103,7 @@ function Search() {
         },
       }));
     },
-    [ content]
+    [content]
   );
 
   const handleSearch = () => {
@@ -108,8 +114,11 @@ function Search() {
     queryCode.forEach((item) => {
       queryCodeObject[item[0]] = item[1];
     });
-    console.log(queryCode);
-    console.log(queryCodeObject);
+    dispatch(actions.GetPostsLimit(queryCodeObject));
+    navigate({
+      pathname: location.pathname,
+      search: createSearchParams(queryCodeObject).toString(),
+    });
   };
   return (
     <>
@@ -189,6 +198,7 @@ function Search() {
       </div>
       {showPopup && (
         <SearchPopup
+          loading={loading}
           selectedValue={selectedValue}
           content={content}
           name={name}

@@ -17,7 +17,7 @@ function RentalApartment() {
   });
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(false);
 
     const category = categories?.find((item) => {
       return `/${slug(item.value)}` === location.pathname;
@@ -26,8 +26,8 @@ function RentalApartment() {
     if (category) {
       setcategoryCode(category.code);
     }
-   
-    setLoading(false);
+
+    setLoading(true);
 
     // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [location, categories, prices, areas]);

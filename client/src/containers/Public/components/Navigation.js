@@ -27,9 +27,7 @@ const active =
 //     value: 'Cho thuê mặt bằng',
 //   },
 // ]
-const Navigation = () => {
-  const [loading, setLoading] = useState(false);
-  //const [categories, setCategories] = useState([])
+const Navigation = ({ setLoading, loading }) => {
   const [isPinned, setIsPinned] = useState(false);
   const { categories } = useSelector((state) => state.app);
 
@@ -44,7 +42,8 @@ const Navigation = () => {
   useEffect(() => {
     setLoading(false);
     dispatch(actions.getCategories());
-  }, [dispatch]);
+    setLoading(true);
+  }, [dispatch, setLoading]);
 
   const navClass = isPinned
     ? 'fixed top-0 z-30 bg-secondary1 text-white'

@@ -38,6 +38,7 @@ const ItemSidebar = ({
   };
 
   const handleFilterPost = (code) => {
+    setLoading(false);
     dispatch(actions.ClearPostsLimit());
     setLoading(true);
     navigate({

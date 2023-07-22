@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../../store/action';
 import { FilterListPostBtn } from '../../index';
 
-const ListPost = ({  categoryCode, loading }) => {
+const ListPost = ({ categoryCode, loading }) => {
   const dispatch = useDispatch();
   const { posts_limit } = useSelector((state) => state.post);
   const [searchParams] = useSearchParams();
@@ -45,29 +45,31 @@ const ListPost = ({  categoryCode, loading }) => {
       </div>
       <div className="px-5 mx-[-20px] py-4 ">
         {loading ? (
+          posts_limit?.length > 0 ? (
+            posts_limit?.map((item) => {
+              return (
+                <ListPostItem
+                  key={item.id}
+                  attributes={item?.attributes}
+                  description={JSON.parse(item?.description)}
+                  users={item?.users}
+                  images={JSON.parse(item?.images?.image)}
+                  title={item?.title}
+                  label={item?.label}
+                  address={item?.address}
+                  star={item?.star}
+                  id={item?.id}
+                />
+              );
+            })
+          ) : (
+            <div className="w-full items-center justify-center">
+              <p className="text-center">Không có dữ liệu</p>
+            </div>
+          )
+        ) : (
           <div className="flex my-10 w-full items-center justify-center">
             <CircularProgress />
-          </div>
-        ) : posts_limit?.length > 0 ? (
-          posts_limit?.map((item) => {
-            return (
-              <ListPostItem
-                key={item.id}
-                attributes={item?.attributes}
-                description={JSON.parse(item?.description)}
-                users={item?.users}
-                images={JSON.parse(item?.images?.image)}
-                title={item?.title}
-                label={item?.label}
-                address={item?.address}
-                star={item?.star}
-                id={item?.id}
-              />
-            );
-          })
-        ) : (
-          <div className="w-full items-center justify-center">
-            <p className="text-center">Không có dữ liệu</p>
           </div>
         )}
       </div>
