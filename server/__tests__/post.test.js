@@ -1,67 +1,96 @@
-import { postService } from '../src/service/post'
-import db from '../src/models'
-describe('post', () => {
-  it('should return all post', async () => {
-    db.Post.findAll = jest.fn().mockResolvedValue([
-      {
-        title: 'title1',
-        star: 'star1',
-        images: [{ image: 'image1' }],
-        attributes: {
-          price: 100,
-          acreage: 200,
-          published: true,
-          hashtag: 'hashtag1',
-        },
-        users: {
-          name: 'John',
-          phone: '123456789',
-          zalo: 'zalo1',
-        },
+// Import the function to be tested
+import { getPost, getPostLimit } from '../src/controllers/postController'
+import * as service from '../src/service/post'
+const sequelize = require('../src/models/index')
+
+jest.mock('../src/service/post', () => ({
+  postService: jest.fn(),
+  postLimitService: jest.fn(),
+}))
+
+describe('getPostAllPost', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+  afterAll(async () => {
+    await sequelize.closeConnection()
+  })
+  test('should return all posts', async () => {
+    const mockResponse = [
+      { title: 'Post 1', content: 'Content of Post 1' },
+      { title: 'Post 2', content: 'Content of Post 2' },
+      // Add more sample data as needed
+    ]
+
+    service.postService.mockResolvedValue(mockResponse)
+    const req = {}
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    }
+    await getPost(req, res)
+
+    expect(res.status).toHaveBeenCalledWith(200)
+    expect(res.json).toHaveBeenCalledWith(mockResponse)
+  })
+  test('should return an error response with status 500 if service call fails', async () => {
+    const mockError = new Error('Service call failed')
+    service.postService.mockRejectedValue(mockError)
+    const req = {}
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    }
+    await getPost(req, res)
+    expect(res.status).toHaveBeenCalledWith(500)
+    expect(res.json).toHaveBeenCalledWith({
+      err: -1,
+      msg: 'Fail at post controller' + mockError,
+    })
+  })
+})
+describe('getPostPostLimit', () => {
+  test('should return a successful response with status 200', async () => {
+    const mockResponse = { data: 'Mock data' }
+    const mockPage = 2
+    const mockQuery = { category: 'tech' }
+    service.postLimitService.mockResolvedValue(mockResponse)
+    const req = {
+      query: {
+        page: mockPage,
+        ...mockQuery,
       },
-      {
-        title: 'title2',
-        star: 'star2',
-        images: [{ image: 'image2' }],
-        attributes: {
-          price: 200,
-          acreage: 300,
-          published: false,
-          hashtag: 'hashtag2',
-        },
-        users: {
-          name: 'Jane',
-          phone: '987654321',
-          zalo: 'zalo2',
-        },
+    }
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    }
+    await getPostLimit(req, res)
+    expect(service.postLimitService).toHaveBeenCalledWith(mockPage, mockQuery)
+    expect(res.status).toHaveBeenCalledWith(200)
+    expect(res.json).toHaveBeenCalledWith(mockResponse)
+  })
+  test('should return an error response with status 500 if service call fails', async () => {
+    const mockError = new Error('Service call failed')
+    const mockPage = 1
+    const mockQuery = { category: 'sports' }
+    service.postLimitService.mockRejectedValue(mockError)
+    const req = {
+      query: {
+        page: mockPage,
+        ...mockQuery,
       },
-    ])
-    const result = await postService(db)
-    expect(result.err).toBe(0)
-    expect(result.msg).toBe('OK')
-    expect(result.response).toHaveLength(2)
-    expect(db.Post.findAll).toHaveBeenCalledWith({
-      attributes: ['id', 'title', 'star', 'address', 'description'],
-      distinct: true,
-      include: [
-        {
-          as: 'images',
-          attributes: ['image'],
-          model: db.Images,
-        },
-        {
-          as: 'attributes',
-          attributes: ['price', 'acreage', 'published', 'hashtag'],
-          model: db.Attribute,
-        },
-        {
-          as: 'users',
-          attributes: ['name', 'phone', 'zalo'],
-          model: db.User,
-        },
-      ],
-      nest: true,
-      raw: true,
+    }
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    }
+    await getPostLimit(req, res)
+    expect(service.postLimitService).toHaveBeenCalledWith(mockPage, mockQuery)
+    expect(res.status).toHaveBeenCalledWith(500)
+    expect(res.json).toHaveBeenCalledWith({
+      err: -1,
+      msg: 'Fail at post controller' + mockError,
     })
   })
 })

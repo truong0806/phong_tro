@@ -100,7 +100,8 @@ function Search() {
   );
 
   const handleSearch = () => {
-    console.log(selectedValue);
+    const queryCode = Object.entries(selectedValue)
+    console.log(queryCode);
   };
   return (
     <>
