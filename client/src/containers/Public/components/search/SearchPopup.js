@@ -49,6 +49,7 @@ const SearchPopup = ({
   const handleItemClick = (item, event) => {
     setSelectedValue((prevState) => ({
       ...prevState,
+      [`${name}Code`]: item.code,
       [name]: {
         name: item.value,
         code: item.code,

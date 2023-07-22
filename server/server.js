@@ -26,7 +26,7 @@ app.use(
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }),
 )
-updateCategoryCount()
+//updateCategoryCount()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 initRoutes(app)

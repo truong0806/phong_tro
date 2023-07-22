@@ -43,13 +43,8 @@ Object.keys(db).forEach((modelName) => {
     db[modelName].associate(db)
   }
 })
-async function closeConnection() {
-  await sequelize.close()
-}
+
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
-module.exports = {
-  db,
-  closeConnection,
-}
+module.exports = db

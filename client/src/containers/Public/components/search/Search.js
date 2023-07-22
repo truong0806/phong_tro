@@ -54,27 +54,28 @@ function Search() {
 
   const handleSubmit = useCallback(
     (e, arrMinMax, min, max, convert100toTarget, percent1, percent2, name) => {
-       const gaps =
-         name === 'prices'
-           ? getCodesPrices(
-               [
-                 convert100toTarget(percent1, name),
-                 convert100toTarget(percent2, name),
-               ],
-               content
-             )
-           : getCodesArea(
-               [
-                 convert100toTarget(percent1, name),
-                 convert100toTarget(percent2, name),
-               ],
-               content
-             );
+      const gaps =
+        name === 'prices'
+          ? getCodesPrices(
+              [
+                convert100toTarget(percent1, name),
+                convert100toTarget(percent2, name),
+              ],
+              content
+            )
+          : getCodesArea(
+              [
+                convert100toTarget(percent1, name),
+                convert100toTarget(percent2, name),
+              ],
+              content
+            );
       e.stopPropagation();
-     
+
       setShowPopup(false);
       setSelectedValue((prev) => ({
         ...prev,
+        [`${name}Code`]: gaps.map((item) => item.code),
         [name]: {
           [`${name}Number`]: arrMinMax,
           name:
@@ -96,12 +97,19 @@ function Search() {
         },
       }));
     },
-    [name, content]
+    [ content]
   );
 
   const handleSearch = () => {
-    const queryCode = Object.entries(selectedValue)
+    const queryCode = Object.entries(selectedValue).filter((item) => {
+      return item[0].includes('Code');
+    });
+    let queryCodeObject = {};
+    queryCode.forEach((item) => {
+      queryCodeObject[item[0]] = item[1];
+    });
     console.log(queryCode);
+    console.log(queryCodeObject);
   };
   return (
     <>
