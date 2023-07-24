@@ -39,8 +39,10 @@ const ItemSidebar = ({
 
   const handleFilterPost = (code) => {
     setLoading(false);
-    dispatch(actions.ClearPostsLimit());
-    setLoading(true);
+    setTimeout(() => {
+      dispatch(actions.ClearPostsLimit());
+      setLoading(true);
+    });
     navigate({
       pathname: location.pathname,
       search: createSearchParams({ [type]: code }).toString(),
@@ -65,13 +67,13 @@ const ItemSidebar = ({
                       key={item.code}
                     >
                       <h2>
-                        <a
-                          href="#"
+                        <span
+                          href=""
                           className="flex items-center justify-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm"
                         >
                           <BsChevronRight size={14} style={{ opacity: 0.3 }} />
                           {item.value}
-                        </a>
+                        </span>
                       </h2>
 
                       <span className="text-xs text-[#aaa]">
@@ -90,9 +92,9 @@ const ItemSidebar = ({
                             <li className="flex cursor-pointer flex-1 items-center border-dashed border-b-[1px]">
                               <h2>
                                 <a
-                                  onClick={() =>
-                                    handleFilterPost(item.left.code)
-                                  }
+                                  onClick={() => {
+                                    handleFilterPost(item.left.code);
+                                  }}
                                   href="#"
                                   className="flex   items-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm"
                                 >

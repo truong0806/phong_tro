@@ -22,7 +22,7 @@ const {
   FiDelete,
 } = icons;
 
-function Search({ loading }) {
+function Search( ) {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -198,7 +198,6 @@ function Search({ loading }) {
       </div>
       {showPopup && (
         <SearchPopup
-          loading={loading}
           selectedValue={selectedValue}
           content={content}
           name={name}

@@ -9,11 +9,9 @@ import {
   convertto100,
 } from '../../../../ultils/common/convertPercent';
 import { removeSFromString } from '../../../../ultils/common/removeS';
-import { CircularProgress } from '@mui/material';
 
 
 const SearchPopup = ({
-  loading,
   setShowPopup,
   content,
   name,
@@ -151,8 +149,7 @@ const SearchPopup = ({
               onClick={handleCloseClick}
             ></div>
           </div>
-          {loading ? (
-            <div
+          <div
               className={`relative py-[10px] px-[25px] h-full ${
                 name === 'provinces'
                   ? 'hover:overflow-auto hover:overflow-y-scroll '
@@ -285,9 +282,6 @@ const SearchPopup = ({
                 )}
               </div>
             </div>
-          ) : (
-            <CircularProgress />
-          )}
 
           {(name === 'prices' || name === 'areas') && (
             <button

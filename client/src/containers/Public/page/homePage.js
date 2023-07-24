@@ -11,10 +11,6 @@ function HomePage() {
   const [categoryCode, setcategoryCode] = useState('none');
   const { categories } = useSelector((state) => state.app);
 
-  useState(() => {
-    setLoading(false);
-  });
-
   useEffect(() => {
     setLoading(false);
     const category = categories?.find((item) => {
@@ -27,7 +23,11 @@ function HomePage() {
     setLoading(true);
     // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [location, categories]);
-
+  const handleLoading = () => {
+    setTimeout(() => {
+      setLoading(true);
+    }, 1000);
+  };
   return (
     <div>
       <Province categoryCurrent={categoryCurrent} />
@@ -38,7 +38,7 @@ function HomePage() {
           <Pagination />
         </div>
         <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
-          <SlideBar setLoading={setLoading} />
+          <SlideBar  setLoading={setLoading} />
         </div>
       </div>
     </div>

@@ -11,17 +11,20 @@ import * as actions from '../../../store/action';
 const { AiOutlineHeart, BiLogIn, AiOutlineUserAdd, AiOutlinePlusCircle } =
   icons;
 
-function Header() {
+function Header({ handlLoad }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
   const goRegister = useCallback(() => {
+    handlLoad();
     navigate(`${path.AUTH}/${path.REGISTER}`);
   }, []);
   const goLogin = useCallback(() => {
+    handlLoad();
     navigate(`${path.AUTH}/${path.LOGIN}`);
   }, []);
   const goHome = useCallback(() => {
+    handlLoad();  
     navigate('/');
   }, []);
 

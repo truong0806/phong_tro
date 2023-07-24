@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../../store/action';
 import ItemSidebar from './ItemSidebar';
 
-function SlideBar({ setLoading, loading }) {
+function SlideBar({ setLoading, loading, handleLoading }) {
   const { categories, prices, areas } = useSelector((state) => state.app);
   //const location = useLocation();
   const { posts } = useSelector((state) => state.post);
