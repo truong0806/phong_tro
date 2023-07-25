@@ -14,14 +14,15 @@ function Pagination() {
   const postLength = process.env.REACT_APP_LIMIT_POST_NUMBER;
 
   useEffect(() => {
-    setMaxPage(+Math.ceil(count / postLength));
-    const end = currentPage + 1 > maxPage ? maxPage : currentPage + 1;
-    const start = currentPage - 1 <= 0 ? 1 : currentPage - 1;
-    const temp = [];
+    let maxPage = Math.ceil(count / postLength) + 1;
+    setMaxPage(maxPage);
+    let end = currentPage + 2 > maxPage ? maxPage : currentPage + 2;
+    let start = currentPage - 2 <= 1 ? 1 : currentPage - 2;
+    let temp = [];
     for (let i = start; i <= end; i++) temp.push(i);
     setArrPage(temp);
     currentPage >= maxPage - 1 ? setIsHideEnd(true) : setIsHideEnd(false);
-    currentPage <= 2 ? setIsHideStart(true) : setIsHideStart(false);
+    currentPage <= 3 ? setIsHideStart(true) : setIsHideStart(false);
   }, [count, posts_limit, currentPage, postLength, maxPage]);
 
   return (

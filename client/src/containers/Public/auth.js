@@ -15,18 +15,12 @@ function Auth() {
 
     return () => clearTimeout(timeout);
   }, []);
-  const handlLoad = () => {
-    setLoading(false);
-    const timeout = setTimeout(() => {
-      setLoading(true);
-    }, 1000);
-    return () => clearTimeout(timeout);
-  };
+ 
   return (
     <>
       {loading ? (
         <div className="w-full flex flex-col items-center ">
-          <Header handlLoad={handlLoad} />
+          <Header setLoading={setLoading} />
           <Navigation />
           <ScrollTop />
           <div className="w-[84%] flex flex-col  mt-3">

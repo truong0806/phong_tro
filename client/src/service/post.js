@@ -13,7 +13,6 @@ export const apiGetPosts = () =>
   });
 export const apiGetPostsLimit = (query) =>
   new Promise(async (resolve, reject) => {
-  
     try {
       const response = await axiosConfig({
         method: 'get',

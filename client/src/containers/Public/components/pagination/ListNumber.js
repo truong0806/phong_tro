@@ -22,14 +22,25 @@ function ListNumber({ text, number, currentPage, setCurrentPage }) {
     for (let entry of entries) {
       params.push(entry);
     }
-    let a = {};
-    params?.map((i) => (a = { ...a, [i[0]]: i[1] }));
-    return a;
+    let searchParamsObject = {};
+    params?.forEach((i) => {
+      if (
+        Object.keys(searchParamsObject)?.some(
+          (item) => item === i[0] && item !== 'page'
+        )
+      ) {
+        searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]];
+      } else {
+        searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] };
+      }
+    });
+    return searchParamsObject;
   };
 
   const handleChangePage = () => {
     if (!(+number === '...')) {
       setCurrentPage(+number);
+      console.log("🚀 ~ file: ListNumber.js:43 ~ handleChangePage ~ number:", number)
       navigate({
         pathname: location.pathname,
         search: createSearchParams(append(entries)).toString(),

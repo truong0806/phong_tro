@@ -22,7 +22,7 @@ import updateCategoryCount from './src/ultils/updateCategoryCount'
 // app.use(requireToken)
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin:  process.env.CLIENT_URL1,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }),
 )

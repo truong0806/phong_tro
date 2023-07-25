@@ -10,7 +10,6 @@ import {
 } from '../../../../ultils/common/convertPercent';
 import { removeSFromString } from '../../../../ultils/common/removeS';
 
-
 const SearchPopup = ({
   setShowPopup,
   content,
@@ -18,6 +17,7 @@ const SearchPopup = ({
   selectedValue,
   setSelectedValue,
   handleSubmit,
+  defaultText,
 }) => {
   const [percent1, setPercent1] = useState(
     name === 'prices' && selectedValue?.prices.pricesNumber
@@ -136,7 +136,7 @@ const SearchPopup = ({
           onClick={(e) => {
             e.stopPropagation();
           }}
-          className="relative flex flex-col h-[500px] w-[700px] left-0 right-0 bottom-0 my-0 mx-auto top-[60px]  bg-white border rounded-lg overflow-hidden"
+          className="relative flex flex-col h-[500px]lg:flex-row w-[700px] left-0 right-0 bottom-0 my-0 mx-auto top-[60px]  bg-white border rounded-lg overflow-hidden"
         >
           <div
             className={`${
@@ -150,138 +150,214 @@ const SearchPopup = ({
             ></div>
           </div>
           <div
-              className={`relative py-[10px] px-[25px] h-full ${
-                name === 'provinces'
-                  ? 'hover:overflow-auto hover:overflow-y-scroll '
-                  : ''
-              } `}
-            >
-              <div className="">
-                {name === 'categories' ? (
-                  <ul className="list-none ">
-                    {content?.slice(0, -2).map((item, index) => {
-                      return (
-                        <li
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleItemClick(item, index, name);
-                            setShowPopup(false);
-                          }}
-                          key={item.id}
-                          className="hover:text-[#007aff] relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
-                        >
-                          <input
-                            type="radio"
-                            name={name}
-                            id={item.code}
-                            value={item.code}
-                            className="accent-[#007aff]"
-                            // onChange={
-                            //   item.code === selectedValue[`${name}`].code
-                            //     ? true
-                            //     : false
-                            // }
-                            defaultChecked={
-                              item.code === selectedValue[`${name}`].code
-                                ? true
-                                : false
-                            }
-                          ></input>
-                          <label
-                            htmlFor={item.code}
-                            className={`pl-4  ${
-                              item.code === selectedValue[`${name}`].code
-                                ? 'text-[#007aff]'
-                                : ''
-                            }`}
-                          >
-                            {item.value}
-                          </label>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                ) : name === 'provinces' ? (
-                  <ul className="list-none overflow-y-auto">
-                    {content?.map((item, index) => {
-                      return (
-                        <li
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleItemClick(item, index, name);
-                            setShowPopup(false);
-                          }}
-                          key={item.id}
-                          className="hover:text-[#007aff] overflow-y-auto relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
-                        >
-                          <input
-                            type="radio"
-                            name={name}
-                            id={item.code}
-                            value={item.code}
-                            className="accent-[#007aff] "
-                            defaultChecked={
-                              item.code === selectedValue[`${name}`].code
-                                ? true
-                                : false
-                            }
-                          ></input>
-                          <label
-                            htmlFor={item.code}
-                            className={`pl-4  ${
-                              item.code === selectedValue[`${name}`].code
-                                ? 'text-[#007aff]'
-                                : ''
-                            }`}
-                          >
-                            {item.value}
-                          </label>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                ) : (
-                  <div className="p-12 py-20 ">
-                    <SliderTrack
+            className={`relative py-[10px] px-[25px] h-full ${
+              name === 'provinces'
+                ? 'hover:overflow-auto hover:overflow-y-scroll '
+                : ''
+            } `}
+          >
+            <div className="">
+              {name === 'categories' ? (
+                <ul className="list-none ">
+                  <li
+                    onClick={(e) => {
+                      console.log(defaultText);
+
+                      setSelectedValue((prevState) => ({
+                        ...prevState,
+                        [`${removeSFromString(name)}Code`]: null,
+                        [name]: {
+                          name: defaultText,
+                          code: null,
+                        },
+                      }));
+                      console.log(selectedValue);
+                      setShowPopup(false);
+                    }}
+                    className="hover:text-[#007aff] overflow-y-auto relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
+                  >
+                    <input
+                      type="radio"
                       name={name}
-                      percent1={percent1}
-                      percent2={percent2}
-                      setPercent1={setPercent1}
-                      setPercent2={setPercent2}
-                      convert100toTarget={convert100toTarget}
-                      handleClickTrack={handleClickTrack}
-                      activedEl={activedEl}
-                      setActivedEl={setActivedEl}
-                      setSelectedValue={setSelectedValue}
-                    />
-                    <div className="mt-24">
-                      <h4 className="font-medium mb-4">Chọn nhanh:</h4>
-                      <div className="flex gap-2 items-center flex-wrap w-full">
-                        {content?.map((item) => {
-                          return (
-                            <button
-                              key={item.code}
-                              onClick={() =>
-                                handleActive(item.code, item.value)
-                              }
-                              className={`px-4 py-2 bg-gray-200 rounded-md cursor-pointer ${
-                                item.value === selectedValue[`${name}`].name
-                                  ? 'btn-prices-search text-white'
-                                  : item.code === activedEl
-                                  ? 'btn-prices-search text-white'
-                                  : ''
-                              }`}
-                            >
-                              {item.value}
-                            </button>
-                          );
-                        })}
-                      </div>
+                      id="default"
+                      value={selectedValue[`${name}`].name}
+                      className="accent-[#007aff] "
+                      onChange={(e) => handleItemClick(e, {})}
+                      defaultChecked={
+                        defaultText === selectedValue[`${name}`].name ||
+                        selectedValue[`${name}`].name === 'Phòng trọ, nhà trọ'
+                          ? true
+                          : false
+                      }
+                    ></input>
+                    <label
+                      htmlFor="default"
+                      className={`pl-4  ${
+                        defaultText === selectedValue[`${name}`].name ||
+                        selectedValue[`${name}`].name === 'Phòng trọ, nhà trọ'
+                          ? 'text-[#007aff]'
+                          : ''
+                      }`}
+                    >
+                      {defaultText}
+                    </label>
+                  </li>
+                  {content?.slice(0, -2).map((item, index) => {
+                    return (
+                      <li
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleItemClick(item, index, name);
+                        }}
+                        key={item.id}
+                        className="hover:text-[#007aff] relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
+                      >
+                        <input
+                          type="radio"
+                          name={name}
+                          id="default"
+                          value={item.value}
+                          className="accent-[#007aff]"
+                          defaultChecked={
+                            item.code === selectedValue[`${name}`].code
+                              ? true
+                              : false
+                          }
+                          onChange={(e) => handleSubmit(e, {})}
+                        ></input>
+                        <label
+                          htmlFor="default"
+                          className={`pl-4  ${
+                            item.code === selectedValue[`${name}`].code
+                              ? 'text-[#007aff]'
+                              : ''
+                          }`}
+                        >
+                          {item.value}
+                        </label>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : name === 'provinces' ? (
+                <ul className="list-none overflow-y-auto">
+                  <li
+                    onClick={(e) => {
+                      setSelectedValue((prevState) => ({
+                        ...prevState,
+                        [`${removeSFromString(name)}Code`]: null,
+                        [name]: {
+                          name: defaultText,
+                          code: null,
+                        },
+                      }));
+                      setShowPopup(false);
+                    }}
+                    className="hover:text-[#007aff] overflow-y-auto relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
+                  >
+                    <input
+                      type="radio"
+                      name={name}
+                      id="default"
+                      value={defaultText}
+                      className="accent-[#007aff] "
+                      onChange={(e) => handleItemClick(e, {})}
+                      defaultChecked={
+                        defaultText === `${selectedValue[`${name}`].name} ` ||
+                        defaultText === `${selectedValue[`${name}`].name}`
+                          ? true
+                          : false
+                      }
+                    ></input>
+                    <label
+                      htmlFor="default"
+                      className={`pl-4  ${
+                        defaultText === `${selectedValue[`${name}`].name} ` ||
+                        defaultText === `${selectedValue[`${name}`].name}`
+                          ? 'text-[#007aff]'
+                          : ''
+                      }`}
+                    >
+                      {defaultText}
+                    </label>
+                  </li>
+                  {content?.map((item, index) => {
+                    return (
+                      <li
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleItemClick(item, index, name);
+                          setShowPopup(false);
+                        }}
+                        key={item.id}
+                        className="hover:text-[#007aff] overflow-y-auto relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
+                      >
+                        <input
+                          type="radio"
+                          name={name}
+                          id={item.code}
+                          value={item.code}
+                          className="accent-[#007aff] "
+                          defaultChecked={
+                            item.code === selectedValue[`${name}`].code
+                              ? true
+                              : false
+                          }
+                        ></input>
+                        <label
+                          htmlFor={item.code}
+                          className={`pl-4  ${
+                            item.code === selectedValue[`${name}`].code
+                              ? 'text-[#007aff]'
+                              : ''
+                          }`}
+                        >
+                          {item.value}
+                        </label>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <div className="p-12 py-20 ">
+                  <SliderTrack
+                    name={name}
+                    percent1={percent1}
+                    percent2={percent2}
+                    setPercent1={setPercent1}
+                    setPercent2={setPercent2}
+                    convert100toTarget={convert100toTarget}
+                    handleClickTrack={handleClickTrack}
+                    activedEl={activedEl}
+                    setActivedEl={setActivedEl}
+                    setSelectedValue={setSelectedValue}
+                  />
+                  <div className="mt-24">
+                    <h4 className="font-medium mb-4">Chọn nhanh:</h4>
+                    <div className="flex gap-2 items-center flex-wrap w-full">
+                      {content?.map((item) => {
+                        return (
+                          <button
+                            key={item.code}
+                            onClick={() => handleActive(item.code, item.value)}
+                            className={`px-4 py-2 bg-gray-200 rounded-md cursor-pointer ${
+                              item.value === selectedValue[`${name}`].name
+                                ? 'btn-prices-search text-white'
+                                : item.code === activedEl
+                                ? 'btn-prices-search text-white'
+                                : ''
+                            }`}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
+          </div>
 
           {(name === 'prices' || name === 'areas') && (
             <button

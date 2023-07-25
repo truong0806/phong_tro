@@ -24,10 +24,11 @@ const searchItem = ({
         {IconBefore}
         <span
           className={`${
-            fontWeight &&
-            'font-bold text-[#007bff]   md:text-black text-[.95rem] '
+            fontWeight
+              ? 'font-bold text-[#007bff]   md:text-black text-[.95rem] '
+              : ''
           } ${
-            text === defaultText
+            (text === defaultText) 
               ? ''
               : 'font-bold text-[#007bff]   md:text-black text-[.95rem] '
           } w-[100%] overflow-hidden text-ellipsis whitespace-nowrap text-[.95rem] `}
@@ -36,7 +37,9 @@ const searchItem = ({
         </span>
       </div>
       <div className={text === defaultText ? '' : 'font-bold text-black'}>
-        {text === defaultText ? IconAfter : (
+        {text === defaultText ? (
+          IconAfter
+        ) : (
           <span onClick={handleDelete}>{deleteIcon}</span>
         )}
       </div>

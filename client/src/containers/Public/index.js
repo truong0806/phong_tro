@@ -10,6 +10,7 @@ export { default as Login } from './auth/login';
 // Page
 export { default as HomePage } from './page/homePage';
 export { default as Retal } from './page/rental';
+export { default as SearchDetail } from './page/SearchDetail';
 
 // component
 export { default as ProvinceBtn } from './components/ProvinceBtn';

@@ -21,21 +21,23 @@ const ListPost = ({ categoryCode }) => {
         params.push(entry);
       }
       let searchParamsObject = {};
-      params?.map((i) => {
-        return (searchParamsObject = { ...searchParamsObject, [i[0]]: i[1] });
+      params?.forEach((i) => {
+        if (Object.keys(searchParamsObject)?.some((item) => item === i[0])) {
+          searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]];
+        } else {
+          searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] };
+        }
       });
-      if (categoryCode && categoryCode !== 'none') {
+      console.log(
+        '🚀 ~ file: ListPost.js:27 ~ useEffect ~ searchParamsObject:',
+        searchParamsObject
+      );
+      if (categoryCode && categoryCode !== 'none')
         searchParamsObject.categoryCode = categoryCode;
-        dispatch(actions.GetPostsLimit(searchParamsObject));
-        setLoading(true);
-      } else {
-        dispatch(actions.GetPostsLimit(searchParamsObject));
-        setLoading(true);
-      }
-    }, 1000);
-
-    // dispatch(actions.GetPostsLimit(searchParamsObject));
-  }, [searchParams, categoryCode, dispatch]);
+      dispatch(actions.GetPostsLimit(searchParamsObject));
+      setLoading(true);
+    });
+  }, [searchParams, categoryCode]);
 
   return (
     <div className="m-[20px] ">
@@ -53,7 +55,7 @@ const ListPost = ({ categoryCode }) => {
       </div>
       <div className="px-5 mx-[-20px] py-4 ">
         {loading ? (
-          posts_limit && posts_limit.length > 0 ? (
+          posts_limit.length > 0 ? (
             posts_limit.map((item) => (
               <ListPostItem
                 key={item.id}

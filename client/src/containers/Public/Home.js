@@ -26,7 +26,7 @@ function Home() {
     <>
       {isLoading ? (
         <div className="w-full flex-col items-left  ">
-          <Header linkRef={linkRef} />
+          <Header linkRef={linkRef} setLoading={setIsLoading} />
           <Navigation categories={categories} />
           <div className="w-5/6 flex flex-col justify-center items-center my-[10px] mx-auto">
             <Search />
