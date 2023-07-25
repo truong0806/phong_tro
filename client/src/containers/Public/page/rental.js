@@ -17,7 +17,7 @@ function RentalApartment() {
   });
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(false);
 
     const category = categories?.find((item) => {
       return `/${slug(item.value)}` === location.pathname;
@@ -26,9 +26,8 @@ function RentalApartment() {
     if (category) {
       setcategoryCode(category.code);
     }
-    console.log('prices', prices);
-    console.log('areas', areas);
-    setLoading(false);
+
+    setLoading(true);
 
     // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [location, categories, prices, areas]);
@@ -37,7 +36,7 @@ function RentalApartment() {
     <div>
       <Province categoryCurrent={categoryCurrent} />
       <div className="w-full justify-center  flex flex-row gap-2 mb-3">
-        <div className="w-[100%] lg:w-[65%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
+        <div className="w-[100%] lg:w-[70%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
           <ListPost
             loading={loading}
             linkRef={linkRef}

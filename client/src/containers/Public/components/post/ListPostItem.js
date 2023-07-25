@@ -115,7 +115,7 @@ const ListPostItem = ({
         <p className="text-gray-500  w-full h-[100px] text-ellipsis overflow-hidden text-justify">
           {description}
         </p>
-        <div className="flex  items-center justify-between my-3 lg:flex-row">
+        <div className="flex  items-center justify-between my-3 lg:flex-row xl:flex-row">
           <div className="flex items-center">
             <img
               src="https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png"
@@ -149,3 +149,5 @@ const ListPostItem = ({
 };
 
 export default ListPostItem;
+
+

@@ -10,6 +10,7 @@ export { default as Login } from './auth/login';
 // Page
 export { default as HomePage } from './page/homePage';
 export { default as Retal } from './page/rental';
+export { default as SearchDetail } from './page/SearchDetail';
 
 // component
 export { default as ProvinceBtn } from './components/ProvinceBtn';
@@ -23,4 +24,5 @@ export { default as SlideBar } from './components/sidebar/SlideBar';
 export { default as Pagination } from './components/pagination/Pagination';
 export { default as ListNumber } from './components/pagination/ListNumber';
 export { default as SearchPopup } from './components/search/SearchPopup';
+export { default as SliderTrack } from './components/search/Slider_track';
 export { default as FilterListPostBtn } from './components/post/FilterListPostBtn';

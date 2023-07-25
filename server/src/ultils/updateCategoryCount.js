@@ -31,7 +31,7 @@ const updateCategoryCount = async () => {
     await Promise.all(
       counts?.map(async (count) => {
         const { categoryCode, count: postCount } = count
-        await db.Category.update(
+        await db.Category?.update(
           { count: postCount },
           { where: { code: categoryCode } },
         )

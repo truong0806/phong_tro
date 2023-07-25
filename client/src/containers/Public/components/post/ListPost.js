@@ -1,34 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ListPostItem } from '../../index';
 import getDate from '../../../../ultils/getDate';
-import CircularProgress from '@mui/material/CircularProgress';
+import { PropagateLoader } from 'react-spinners';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../../store/action';
 import { FilterListPostBtn } from '../../index';
 
-const ListPost = ({  categoryCode, loading }) => {
+const ListPost = ({ categoryCode }) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const { posts_limit } = useSelector((state) => state.post);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    let params = [];
-    for (let entry of searchParams.entries()) {
-      params.push(entry);
-    }
-    let searchParamsObject = {};
-    params?.map((i) => {
-      return (searchParamsObject = { ...searchParamsObject, [i[0]]: i[1] });
+    setLoading(false);
+    setTimeout(() => {
+      let params = [];
+      for (let entry of searchParams.entries()) {
+        params.push(entry);
+      }
+      let searchParamsObject = {};
+      params?.forEach((i) => {
+        if (Object.keys(searchParamsObject)?.some((item) => item === i[0])) {
+          searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]];
+        } else {
+          searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] };
+        }
+      });
+      console.log(
+        '🚀 ~ file: ListPost.js:27 ~ useEffect ~ searchParamsObject:',
+        searchParamsObject
+      );
+      if (categoryCode && categoryCode !== 'none')
+        searchParamsObject.categoryCode = categoryCode;
+      dispatch(actions.GetPostsLimit(searchParamsObject));
+      setLoading(true);
     });
-    if (categoryCode && categoryCode !== 'none') {
-      searchParamsObject.categoryCode = categoryCode;
-      dispatch(actions.GetPostsLimit(searchParamsObject));
-    } else {
-      dispatch(actions.GetPostsLimit(searchParamsObject));
-    }
-    // dispatch(actions.GetPostsLimit(searchParamsObject));
-  }, [searchParams, categoryCode, dispatch]);
+  }, [searchParams, categoryCode]);
+
   return (
     <div className="m-[20px] ">
       <section className=" flex justify-between">
@@ -45,12 +55,8 @@ const ListPost = ({  categoryCode, loading }) => {
       </div>
       <div className="px-5 mx-[-20px] py-4 ">
         {loading ? (
-          <div className="flex my-10 w-full items-center justify-center">
-            <CircularProgress />
-          </div>
-        ) : posts_limit?.length > 0 ? (
-          posts_limit?.map((item) => {
-            return (
+          posts_limit.length > 0 ? (
+            posts_limit.map((item) => (
               <ListPostItem
                 key={item.id}
                 attributes={item?.attributes}
@@ -63,11 +69,13 @@ const ListPost = ({  categoryCode, loading }) => {
                 star={item?.star}
                 id={item?.id}
               />
-            );
-          })
+            ))
+          ) : (
+            <p>Không có dữ liệu</p>
+          )
         ) : (
-          <div className="w-full items-center justify-center">
-            <p className="text-center">Không có dữ liệu</p>
+          <div className="flex my-10 w-full items-center justify-center">
+            <PropagateLoader color="#1266dd" size={12} />
           </div>
         )}
       </div>

@@ -11,20 +11,29 @@ import * as actions from '../../../store/action';
 const { AiOutlineHeart, BiLogIn, AiOutlineUserAdd, AiOutlinePlusCircle } =
   icons;
 
-function Header() {
+function Header({setLoading, }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
   const goRegister = useCallback(() => {
+    handlLoad();
     navigate(`${path.AUTH}/${path.REGISTER}`);
   }, []);
   const goLogin = useCallback(() => {
+    handlLoad();
     navigate(`${path.AUTH}/${path.LOGIN}`);
   }, []);
   const goHome = useCallback(() => {
+    handlLoad();
     navigate('/');
   }, []);
-
+  const handlLoad = () => {
+    setLoading(false);
+    const timeout = setTimeout(() => {
+      setLoading(true);
+    }, 1000);
+    return () => clearTimeout(timeout);
+  };
   return (
     <div className="w-full flex items-center lg:justify-between lg:w-[1100px] mx-auto my-0">
       <img

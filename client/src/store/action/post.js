@@ -66,7 +66,6 @@ export const ClearPostsLimit = () => async (dispatch) => {
 export const getPostsByCategory = (categoryCode) => async (dispatch) => {
   try {
     const response = await apiGetPostsByCategory(categoryCode);
-    // console.log('GetPostsByCategory:', response.data.response)
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_POSTS_BY_CATEGORY,

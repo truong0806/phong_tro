@@ -6,6 +6,7 @@ const initState = {
   msg: '',
   areas: [],
   provinces: [],
+  provinces1: [],
   count: 0,
 };
 const appReducer = (state = initState, action) => {
@@ -33,6 +34,12 @@ const appReducer = (state = initState, action) => {
       return {
         ...state,
         provinces: action.provinces || [],
+        msg: action.msg || '',
+      };
+    case actionTypes.GET_PROVINCES1:
+      return {
+        ...state,
+        provinces1: action.provinces1 || [],
         msg: action.msg || '',
       };
 

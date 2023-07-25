@@ -93,3 +93,26 @@ export const getProvince = () => async (dispatch) => {
     });
   }
 };
+export const getProvince1 = () => async (dispatch) => {
+  try {
+    const response = await apis.apiProvince1();
+    
+    if (response?.status === 200) {
+      dispatch({
+        type: actionTypes.GET_PROVINCES1,
+        provinces1: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_PROVINCES1,
+        msg: response.data.msg,
+        provinces1: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_PROVINCES1,
+      provinces1: null,
+    });
+  }
+};

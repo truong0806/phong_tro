@@ -7,6 +7,7 @@ import areaRouter from './areas'
 import provinceRouter from './province'
 const swaggerUI = require('swagger-ui-express')
 const docs = require('../../doc')
+
 const initRoutes = (app) => {
   app.use('/api/v1/auth', authRouter)
   app.use('/api/v1/insert', insertRouter)

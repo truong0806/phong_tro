@@ -1,10 +1,18 @@
-import React, { useCallback, useState } from 'react';
+
+import React, { useCallback, useEffect, useState } from 'react';
 import { SearchItem } from '../../../../components';
 import { SearchPopup } from '../../index';
 import icons from '../../../../ultils/icons';
-import { useSelector } from 'react-redux';
-import { getCodePrice, getCodeArea } from '../../../../ultils/common/getCode';
+import { useSelector, useDispatch } from 'react-redux';
+import * as actions from '../../../../store/action';
 
+import {
+  getCodesArea,
+  getCodesPrices,
+} from '../../../../ultils/common/getCode';
+import { useNavigate, createSearchParams, useLocation } from 'react-router-dom';
+import { removeSFromString } from '../../../../ultils/common/removeS';
+import { path } from '../../../../ultils/constains';
 const {
   GrNext,
   HiOutlineLocationMarker,
@@ -13,73 +21,234 @@ const {
   MdOutlineHouseSiding,
   RiDeleteBack2Line,
   FiSearch,
+  FiDelete,
 } = icons;
+
 function Search() {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState({
-    categories: { name: 'Phòng trọ, nhà trọ', code: 'abc' },
+    categories: { name: 'Phòng trọ, nhà trọ', code: '' },
     provinces: { name: 'Toàn quốc', code: 'abc' },
-    prices: { name: 'Chọn giá' },
-    areas: { name: 'Chọn diện tích' },
+    prices: { name: 'Chọn giá', pricesNumber: [0, 15] },
+    areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
   });
   const [showPopup, setShowPopup] = useState(false);
   const [content, setContent] = useState([]);
+  const [defaultText, setDefaultText] = useState('');
   const [name, setName] = useState([]);
-  const { provinces, areas, prices, categories } = useSelector(
+  const { areas, prices, categories, provinces } = useSelector(
     (state) => state.app
   );
+  useEffect(() => {
+    if (!location.pathname.includes(path.SEARCH)) {
+      setSelectedValue({
+        categories: { name: 'Phòng trọ, nhà trọ', code: '' },
+        provinces: { name: 'Toàn quốc', code: 'abc' },
+        prices: { name: 'Chọn giá', pricesNumber: [0, 15] },
+        areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
+      });
+    }
+  }, []);
 
-  const handShowPopup = (content, name) => {
+  const handShowPopup = (e, content, name, defaultText) => {
+    e.stopPropagation();
     setContent(content);
     setName(name);
     setShowPopup(true);
+    setDefaultText(defaultText);
+  };
+  const handleDeleteTitle = (name, defaultText) => {
+    setSelectedValue((prevState) => ({
+      ...prevState,
+      [name]: {
+        name: defaultText,
+      },
+    }));
+  };
+
+  const handleSubmit = useCallback(
+    (e, arrMinMax, min, max, convert100toTarget, percent1, percent2, name) => {
+      const gaps =
+        name === 'prices'
+          ? getCodesPrices(
+              [
+                convert100toTarget(percent1, name),
+                convert100toTarget(percent2, name),
+              ],
+              content
+            )
+          : getCodesArea(
+              [
+                convert100toTarget(percent1, name),
+                convert100toTarget(percent2, name),
+              ],
+              content
+            );
+      e.stopPropagation();
+
+      setShowPopup(false);
+      setSelectedValue((prev) => ({
+        ...prev,
+        [`${removeSFromString(name)}Code`]: gaps.map((item) => item.code),
+        [name]: {
+          [`${name}Number`]: arrMinMax,
+          name:
+            percent1 === 100 && percent2 === 100
+              ? `Trên ${convert100toTarget(max, name)}${
+                  name === 'prices' ? ' triệu' : 'm'
+                }`
+              : convert100toTarget(min, name) === 0 &&
+                convert100toTarget(min, name) === 0
+              ? `Dưới ${convert100toTarget(max, name)}${
+                  name === 'prices' ? ' triệu' : 'm'
+                }`
+              : `Từ ${convert100toTarget(min, name)} - ${convert100toTarget(
+                  max,
+                  name
+                )}${name === 'prices' ? ' triệu' : 'm'}`,
+          [`${name}Arr`]: [min, max],
+          [`${name}Code`]: gaps.map((item) => item.code),
+        },
+      }));
+    },
+    [content]
+  );
+
+  const handleSearch = () => {
+    const queryCode = Object.entries(selectedValue).filter((item) => {
+      return item[0].includes('Code');
+    });
+    let queryCodeObject = {};
+    queryCode.forEach((item) => {
+      queryCodeObject[item[0]] = item[1];
+    });
+    const queryText = Object.entries(selectedValue).filter(
+      (item) => !item[0].includes('Code') || !item[0].includes('Number')
+    );
+    let queryTextObj = {};
+    queryText.forEach((item) => {
+      queryTextObj[item[0]] = item[1];
+    });
+    console.log(
+      '🚀 ~ file: Search.js:133 ~ queryText.forEach ~ queryText:',
+      queryText
+    );
+    let titleSearch = `${
+      queryTextObj.categories.name
+        ? queryTextObj.categories.name
+        : 'Cho thuê tất cả'
+    } ${
+      queryTextObj.provinces.name
+        ? `${queryTextObj.provinces.name === 'Toàn quốc' ? '' : 'tỉnh'} ${
+            queryTextObj.provinces.name
+          }`
+        : ''
+    } ${
+      queryTextObj.prices.name !== 'Chọn giá'
+        ? `giá ${queryTextObj.prices.name}`
+        : ''
+    } ${
+      queryTextObj.areas.name !== 'Chọn diện tích'
+        ? `diện tích ${queryTextObj.areas.name}`
+        : ''
+    } `;
+    console.log(
+      '🚀 ~ file: Search.js:139 ~ handleSearch ~ titleSearch:',
+      titleSearch
+    );
+    navigate(
+      {
+        pathname: path.SEARCH,
+        search: createSearchParams(queryCodeObject).toString(),
+      },
+      { state: { titleSearch } }
+    );
   };
   console.log(selectedValue);
   return (
     <>
-      <div className="lg:w-full w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2">
+      <div
+        tabIndex="-1"
+        className="mb-[15px] lg:w-full w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2"
+      >
         <span
-          onClick={() => handShowPopup(categories, 'categories')}
-          className="cursor-pointer flex-1 md:w-full lg:w-full"
+          onClick={(e) =>
+            handShowPopup(e, categories, 'categories', 'Tìm tất cả')
+          }
+          className="cursor-pointer flex-1 md:w-full lg:w-full font-bold"
         >
           <SearchItem
+            defaultText={'Phòng trọ, nhà trọ'}
             fontWeight
             IconBefore={<MdOutlineHouseSiding />}
             IconAfter={<RiDeleteBack2Line />}
             text={selectedValue.categories.name}
+            deleteIcon={
+              <FiDelete
+                onClick={() =>
+                  handleDeleteTitle('categories', 'Phòng trọ, nhà trọ')
+                }
+              />
+            }
           />
         </span>
         <span
-          onClick={() => handShowPopup(provinces, 'provinces')}
+          onClick={(e) =>
+            handShowPopup(e, provinces, 'provinces', 'Tìm tất cả')
+          }
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
+            defaultText={'Toàn quốc'}
             IconBefore={<HiOutlineLocationMarker />}
             IconAfter={<GrNext />}
             text={selectedValue.provinces.name}
+            deleteIcon={
+              <FiDelete
+                onClick={() => handleDeleteTitle('provinces', 'Toàn quốc')}
+              />
+            }
           />
         </span>
         <span
-          onClick={() => handShowPopup(prices, 'prices')}
+          onClick={(e) => handShowPopup(e, prices, 'prices', 'Chọn giá ')}
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
+            defaultText={'Chọn giá'}
             IconBefore={<TbReportMoney />}
             IconAfter={<GrNext />}
             text={selectedValue.prices.name}
+            deleteIcon={
+              <FiDelete
+                onClick={() => handleDeleteTitle('prices', 'Chọn giá')}
+              />
+            }
           />
         </span>
         <span
-          onClick={() => handShowPopup(areas, 'areas')}
+          onClick={(e) => handShowPopup(e, areas, 'areas', 'Chọn diện tích ')}
+
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
+            defaultText={'Chọn diện tích'}
             IconBefore={<RiCrop2Line />}
             IconAfter={<GrNext />}
             text={selectedValue.areas.name}
+            deleteIcon={
+              <FiDelete
+                onClick={() => handleDeleteTitle('areas', 'Chọn diện tích')}
+              />
+            }
           />
         </span>
         <button
           type="button"
+          onClick={handleSearch}
+
           className="md:w-full lg:w-full outline-none py-2 px-4 rounded-md  bg-[#ffba00] font-bold md:bg-secondary1 text-[13px] flex-1 flex items-center justify-center gap-2 text-black md:text-white"
         >
           <FiSearch />
@@ -88,11 +257,14 @@ function Search() {
       </div>
       {showPopup && (
         <SearchPopup
+          defaultText={defaultText}
           selectedValue={selectedValue}
           content={content}
           name={name}
           setShowPopup={setShowPopup}
           setSelectedValue={setSelectedValue}
+          showPopup={showPopup}
+          handleSubmit={handleSubmit}
         />
       )}
     </>

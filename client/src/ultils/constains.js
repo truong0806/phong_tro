@@ -10,6 +10,7 @@ export const path = {
   CHO_THUE_PHONG_TRO: 'cho-thue-phong-tro',
   TIM_NGUOI_O_GHEP: 'tim-nguoi-o-ghep',
   DETAIL_POST_TITLE__POSTID: 'chi-tiet/:title/:postid',
+  SEARCH: 'search',
 };
 
 export const text = {
