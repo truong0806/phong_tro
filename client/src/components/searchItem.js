@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-
 const searchItem = ({
   IconBefore,
   IconAfter,
@@ -43,6 +42,7 @@ const searchItem = ({
           <span onClick={handleDelete}>{deleteIcon}</span>
         )}
       </div>
+
     </div>
   );
 };
