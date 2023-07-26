@@ -1,21 +1,21 @@
 import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-const RelatePostItem = ({ item }) => {
+const RelatePostItem = ({ item, listNewPostEff, listNew }) => {
   const formatTime = () => {
     moment.locale('vn');
     return moment(item.createdAt).fromNow();
   };
   const images = JSON.parse(item?.images?.image)?.shift();
   return (
-    <div className="">
+    <div className="w-150px md:w-full w-full flex flex-col md:px-[10px] md:mx-[-10px]  py-4 md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
       <Link
         href="#"
-        className="flex w-full border-solid border-b-[1px] py-[10px] relative"
+        className=" flex flex-col md:flex-row w-full md:w-full h-[245px] md:h-[70px] items-center justify-center relative cursor-pointerv "
       >
-        <div className="w-[65px] relative z-10 h-[65px]">
+        <div className="w-full h-[120px] md:w-[65px] relative z-10 md:h-[65px] items-center justify-center">
           <img
-            className="lazyload lazy  w-full h-full object-cover absolute  left-0 rounded block"
+            className="lazyload  lazy object-cover h-full  w-full  "
             data-src={images}
             src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
             alt={item.title}

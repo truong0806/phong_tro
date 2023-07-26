@@ -14,8 +14,13 @@ function SlideBar({ setLoading, loading, handleLoading }) {
   }, [dispatch]);
   return (
     <div className="w-full">
-      <ItemSidebar header="Danh mục cho thuê" content={categories} />
       <ItemSidebar
+        className={`hidden`}
+        header="Danh mục cho thuê"
+        content={categories}
+      />
+      <ItemSidebar
+        className={`hidden`}
         setLoading={setLoading}
         loading={loading}
         header="Xem theo giá"
@@ -24,13 +29,14 @@ function SlideBar({ setLoading, loading, handleLoading }) {
         isDouble
       />
       <ItemSidebar
+        className={`hidden`}
         setLoading={setLoading}
         type="areaCode"
         header="Xem theo diện tích"
         content={areas}
         isDouble
       />
-      <ItemSidebar header="Tin mới đăng" content={posts} isListPost />
+      <ItemSidebar listNew listNewPostEff={`flex-row`} header="Tin mới đăng" content={posts} isListPost />
       <ItemSidebar header="Bài viết mới" />
       <ItemSidebar header="Có thể bạn quan tâm" />
     </div>

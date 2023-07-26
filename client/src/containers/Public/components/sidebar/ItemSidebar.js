@@ -21,6 +21,9 @@ const ItemSidebar = ({
   isListPost,
   type,
   setLoading,
+  className,
+  listNewPostEff,
+  listNew,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -49,12 +52,18 @@ const ItemSidebar = ({
     });
   };
   return (
-    <div className="border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5">
+    <div
+      className={`${
+        listNew ? '' : className
+      } md:block border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5`}
+    >
       <section>
         <div className="mb-4 w-full">
-          <span className="text-[18.2px] font-bold">{header}</span>
+          <span className={`text-[1.2rem] font-bold`}>{header}</span>
         </div>
-        <ul>
+        <ul className={`${
+        listNew &&  'overflow-x-auto overflow-y-hidden' 
+      }`}>
           {!isListPost && (
             <div>
               {!isDouble &&
@@ -89,7 +98,9 @@ const ItemSidebar = ({
                       return (
                         <div key={index}>
                           <div className="flex items-center justify-around">
-                            <li className="flex cursor-pointer flex-1 items-center border-dashed border-b-[1px]">
+                            <li
+                              className={`flex cursor-pointer flex-1 items-center border-dashed border-b-[1px]`}
+                            >
                               <h2>
                                 <a
                                   onClick={() => {
@@ -131,7 +142,13 @@ const ItemSidebar = ({
               )}
             </div>
           )}
-          {isListPost && <RelatePostSideBar content={content} />}
+          {isListPost && (
+            <RelatePostSideBar
+              listNewPostEff={listNewPostEff}
+              listNew
+              content={content}
+            />
+          )}
         </ul>
       </section>
     </div>
