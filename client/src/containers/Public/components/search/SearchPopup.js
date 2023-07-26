@@ -76,7 +76,6 @@ const SearchPopup = ({
       setPercent2(percent);
     }
   };
-
   const handleActive = (code, value) => {
     setActivedEl(code);
     setSelectedValue((prev) => ({

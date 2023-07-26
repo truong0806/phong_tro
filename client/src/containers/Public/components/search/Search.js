@@ -1,3 +1,4 @@
+
 import React, { useCallback, useEffect, useState } from 'react';
 import { SearchItem } from '../../../../components';
 import { SearchPopup } from '../../index';
@@ -165,6 +166,7 @@ function Search() {
       { state: { titleSearch } }
     );
   };
+  console.log(selectedValue);
   return (
     <>
       <div
@@ -228,6 +230,7 @@ function Search() {
         </span>
         <span
           onClick={(e) => handShowPopup(e, areas, 'areas', 'Chọn diện tích ')}
+
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
@@ -245,6 +248,7 @@ function Search() {
         <button
           type="button"
           onClick={handleSearch}
+
           className="md:w-full lg:w-full outline-none py-2 px-4 rounded-md  bg-[#ffba00] font-bold md:bg-secondary1 text-[13px] flex-1 flex items-center justify-center gap-2 text-black md:text-white"
         >
           <FiSearch />
