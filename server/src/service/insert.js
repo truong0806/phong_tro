@@ -108,34 +108,36 @@ export const insertService = () =>
               hashtag: item?.header?.attributes?.hashtag,
             },
           }),
-          await db.Post.findOrCreate({
-            where: {
-              id: postId,
-              title: item?.header?.title,
-              address: item?.header?.address,
-            },
-            defaults: {
-              id: postId,
-              title: item?.header?.title,
-              star: item?.header?.star,
-              labelCode,
-              address: item?.header?.address,
-              attributesId: attributesId,
-              categoryCode: cate.code,
-              description: desc,
-              userId,
-              overviewId,
-              imagesId,
-              areaCode: dataArea.find(
-                (area) => area.max > currentArea && area.min <= currentArea,
-              )?.code,
-              priceCode: dataPrice.find(
-                (price) =>
-                  price.max > currentPrice && price.min <= currentPrice,
-              )?.code,
-              provinceCode,
-            },
-          })  
+            await db.Post.findOrCreate({
+              where: {
+                id: postId,
+                title: item?.header?.title,
+                address: item?.header?.address,
+              },
+              defaults: {
+                id: postId,
+                title: item?.header?.title,
+                star: item?.header?.star,
+                labelCode,
+                address: item?.header?.address,
+                attributesId: attributesId,
+                categoryCode: cate.code,
+                description: desc,
+                userId,
+                overviewId,
+                imagesId,
+                areaCode: dataArea.find(
+                  (area) => area.max > currentArea && area.min <= currentArea,
+                )?.code,
+                priceCode: dataPrice.find(
+                  (price) =>
+                    price.max > currentPrice && price.min <= currentPrice,
+                )?.code,
+                provinceCode,
+                pricenumber: currentPrice,
+                areaNumber: currentArea,
+              },
+            })
 
           await db.Images.findOrCreate({
             where: { id: imagesId },

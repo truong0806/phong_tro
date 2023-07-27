@@ -8,12 +8,12 @@ const RelatePostItem = ({ item, listNewPostEff, listNew }) => {
   };
   const images = JSON.parse(item?.images?.image)?.shift();
   return (
-    <div className="w-150px md:w-full w-full flex flex-col md:px-[10px] md:mx-[-10px]  py-4 md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div className=" lg:w-full w-full flex flex-col lg:px-[10px] lg:mx-[-10px]  lg:py-2 lg:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
       <Link
         href="#"
-        className=" flex flex-col md:flex-row w-full md:w-full h-[245px] md:h-[70px] items-center justify-center relative cursor-pointerv "
+        className="w-[150px] flex flex-col lg:flex-row lg:w-full h-[245px] lg:h-[70px] items-center justify-center relative cursor-pointerv "
       >
-        <div className="w-full h-[120px] md:w-[65px] relative z-10 md:h-[65px] items-center justify-center">
+        <div className="w-full h-[120px] font-normal mb-3 lg:w-[65px] relative z-10 lg:h-[65px] items-center justify-center">
           <img
             className="lazyload  lazy object-cover h-full  w-full  "
             data-src={images}
@@ -23,7 +23,7 @@ const RelatePostItem = ({ item, listNewPostEff, listNew }) => {
           ></img>
           <span className="block bg-35px"></span>
         </div>
-        <div className="w-4/5 relative mb-0 ml-[15px] justify-between leading-5">
+        <div className="w-full lg:w-4/5  relative mb-0 leading-5">
           <p className="line-clamp-2 relative top-0 text-[1rem] font-normal   text-[#3763e0] mb-[10px]">
             {item.title}
           </p>
@@ -31,7 +31,7 @@ const RelatePostItem = ({ item, listNewPostEff, listNew }) => {
             <span className="text-[#16c784] font-bold text-[.9rem]">
               {item.attributes.price}
             </span>
-            <time className="font-[.9rem] text-[#aaa]">{formatTime()}</time>
+            <time className="lg::block hidden font-[.9rem] text-[#aaa]">{formatTime()}</time>
           </div>
         </div>
       </Link>

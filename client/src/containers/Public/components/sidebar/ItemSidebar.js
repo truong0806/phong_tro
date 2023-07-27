@@ -55,15 +55,13 @@ const ItemSidebar = ({
     <div
       className={`${
         listNew ? '' : className
-      } md:block border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5`}
+      } lg:block border border-[#dedede] w-[70%] lg:w-full shadow-md rounded-md border-solid bg-white p-5 mb-5`}
     >
       <section>
-        <div className="mb-4 w-full">
+        <div className="mb-4  lg:w-full">
           <span className={`text-[1.2rem] font-bold`}>{header}</span>
         </div>
-        <ul className={`${
-        listNew &&  'overflow-x-auto overflow-y-hidden' 
-      }`}>
+        <ul className={`${listNew && ' overflow-x-auto overflow-y-hidden'}`}>
           {!isListPost && (
             <div>
               {!isDouble &&

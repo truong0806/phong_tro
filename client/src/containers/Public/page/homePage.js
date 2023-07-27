@@ -28,8 +28,8 @@ function HomePage() {
   return (
     <div>
       <Province categoryCurrent={categoryCurrent} />
-      <div className="w-full justify-center flex-col flex md:flex-row gap-2 mb-3">
-        <div className="w-[100%] lg:w-[70%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
+      <div className="w-full justify-center flex-col flex lg:flex-row gap-2 mb-3">
+        <div className="w-[100%] lg:w-[70%]  bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
           <ListPost loading={loading} categoryCode={categoryCode} />
           {/* <Pagination /> */}
           <Pagination />
