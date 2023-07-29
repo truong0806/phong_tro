@@ -27,10 +27,15 @@ module.exports = {
       avatar: {
         type: Sequelize.BLOB('long'),
       },
+      publickey: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
+
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,

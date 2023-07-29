@@ -1,6 +1,7 @@
 import db from '../models'
 const moment = require('moment')
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import { v4 as v4 } from 'uuid'
 import chothuematbang from '../../data/chothuematbang.json'
 import chothuecanho from '../../data/chothuecanho.json'
@@ -43,7 +44,7 @@ const dataBody = [
   },
 ]
 
-export const insertService = () =>
+export const insertService = () => {
   new Promise(async (resolve, reject) => {
     try {
       dataBody.forEach((cate) => {
@@ -60,6 +61,7 @@ export const insertService = () =>
           })
         })
       })
+      createPriceAndArea()
       const provinceCodes = []
       const labelCodes = []
       dataBody.forEach((cate) => {
@@ -211,13 +213,13 @@ export const insertService = () =>
           defaults: item,
         })
       })
-      await createPriceAndArea()
 
       resolve('Add data to database Done')
     } catch (error) {
       reject(error)
     }
   })
+}
 
 export const createPriceAndArea = () =>
   new Promise(async (resolve, reject) => {

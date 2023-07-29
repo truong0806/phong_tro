@@ -1,0 +1,23 @@
+@port = 3030
+
+### Register
+POST http://localhost:3030/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "phone":"0938134357",
+    "password":"truong123",
+    "name":"truong"
+}
+
+### Login
+POST http://localhost:{{port}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+   "phone":"0938134357",
+    "password":"truong123"
+}
+
+### Insert
+POST http://localhost:{{port}}/api/v1/insert

@@ -35,7 +35,7 @@ function Register() {
   }, [msg, update]);
   const handleSubmit = async () => {
     const finalinvalids = payload;
-    const invalids = validate(finalinvalids, setInvalidFields);
+    const invalids = validate(finalinvalids, 'Đăng ký', setInvalidFields);
     if (invalids === 0) {
       dispatch(actions.register(payload));
       Swal.fire('Done', 'Đăng ký thành công', 'success');

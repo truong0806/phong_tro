@@ -33,11 +33,16 @@ function Login() {
     msg && Swal.fire('Oops !', msg, 'error');
   }, [msg, update]);
   const handleSubmit = async () => {
-    const finalinvalids = payload;
-    const invalids = validate(finalinvalids, setInvalidFields);
+    const finalinvalids = { payload };
+    console.log(
+      '🚀 ~ file: login.js:37 ~ handleSubmit ~ finalinvalids:',
+      finalinvalids
+    );
+    const invalids = validate(finalinvalids, 'Đăng nhập', setInvalidFields);
+    console.log('🚀 ~ file: login.js:39 ~ handleSubmit ~ invalids:', invalids);
     if (invalids === 0) {
-      dispatch(actions.register(payload));
-      Swal.fire('Done', 'Đăng ký thành công', 'success');
+      dispatch(actions.login(payload));
+      Swal.fire('Done', 'Đăng nhập thành công', 'success');
       navigate('/');
     }
   };

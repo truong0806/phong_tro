@@ -1,4 +1,4 @@
-export default function validate(payload, setInvalidFields) {
+export default function validate(payload,name, setInvalidFields) {
   let invalids = 0;
   const fields = Object.entries(payload);
   fields.forEach((item) => {
@@ -25,7 +25,7 @@ export default function validate(payload, setInvalidFields) {
         }
         break;
       case 'comfirmPassword':
-        if (item[1] === '') {
+        if (item[1] === '' && name !== 'Đăng nhập') {
           setInvalidFields((prev) => [
             ...prev,
             {
@@ -34,7 +34,7 @@ export default function validate(payload, setInvalidFields) {
             },
           ]);
           invalids += 1;
-        } else if (item[1] !== payload.password) {
+        } else if (item[1] !== payload.password && name !== 'Đăng nhập') {
           setInvalidFields((prev) => [
             ...prev,
             {
@@ -85,7 +85,7 @@ export default function validate(payload, setInvalidFields) {
         }
         break;
       case 'name':
-        if (item[1] === '') {
+        if (item[1] === '' && name !== 'Đăng nhập') {
           setInvalidFields((prev) => [
             ...prev,
             {
