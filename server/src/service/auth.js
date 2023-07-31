@@ -67,13 +67,6 @@ export const loginService = ({ phone, password }) =>
         where: { phone },
         raw: true,
       })
-      await db.User.update(
-        { publickey: publicKey },
-        {
-          where: { phone: response.phone },
-        },
-      )
-      console.log('🚀 ~ file: auth.js:69 ~ newPromise ~ response:', response)
       const isCorrectPassword =
         response && bcrypt.compareSync(password, response.password)
       const token =

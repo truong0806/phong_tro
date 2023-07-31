@@ -10,7 +10,7 @@ import chothuephongtro from '../../data/chothuephongtro.json'
 import timnguoioghep from '../../data/timnguoioghep.json'
 import genarateCode from '../ultils/generateCode'
 import { dataArea, dataPrice } from '../ultils/data'
-import { getNumberFormString } from '../ultils/common'
+import { getNumberFromString } from '../ultils/common'
 require('dotenv').config()
 
 const hashPassword = (password) =>
@@ -86,11 +86,17 @@ export const insertService = () => {
               value: item?.header?.class?.classType?.trim(),
             })
           let desc = JSON.stringify(item?.mainContent?.content)
-          let currentArea = getNumberFormString(
+          let currentArea = getNumberFromString(
             item?.header?.attributes?.acreage,
           )
-          let currentPrice = getNumberFormString(
+          console.log(
+            `🚀 ~ file: insert.js:92 ~ cate.body.forEach ${item?.header?.attributes?.acreage} currentArea: ${currentArea}`,
+          )
+          let currentPrice = getNumberFromString(
             item?.header?.attributes?.price,
+          )
+          console.log(
+            `🚀 ~ file: insert.js:95 ~ cate.body.forEach ${item?.header?.attributes?.price} currentPrice: ${currentPrice}`,
           )
           const dateString = item?.overview?.content.find(
             (i) => i.name === 'Ngày đăng:',
@@ -110,44 +116,13 @@ export const insertService = () => {
               hashtag: item?.header?.attributes?.hashtag,
             },
           }),
-            await db.Post.findOrCreate({
-              where: {
-                id: postId,
-                title: item?.header?.title,
-                address: item?.header?.address,
-              },
+            await db.Images.findOrCreate({
+              where: { id: imagesId },
               defaults: {
-                id: postId,
-                title: item?.header?.title,
-                star: item?.header?.star,
-                labelCode,
-                address: item?.header?.address,
-                attributesId: attributesId,
-                categoryCode: cate.code,
-                description: desc,
-                userId,
-                overviewId,
-                imagesId,
-                areaCode: dataArea.find(
-                  (area) => area.max > currentArea && area.min <= currentArea,
-                )?.code,
-                priceCode: dataPrice.find(
-                  (price) =>
-                    price.max > currentPrice && price.min <= currentPrice,
-                )?.code,
-                provinceCode,
-                pricenumber: currentPrice,
-                areaNumber: currentArea,
+                id: imagesId,
+                image: JSON.stringify(item?.images),
               },
             })
-
-          await db.Images.findOrCreate({
-            where: { id: imagesId },
-            defaults: {
-              id: imagesId,
-              image: JSON.stringify(item?.images),
-            },
-          })
           await db.Label.findOrCreate({
             where: { code: labelCode },
             defaults: {
@@ -197,6 +172,36 @@ export const insertService = () => {
               )?.value,
               zalo: item?.contact?.content.find((i) => i.name === 'Zalo')
                 ?.value,
+            },
+          })
+          await db.Post.findOrCreate({
+            where: {
+              id: postId,
+              title: item?.header?.title,
+              address: item?.header?.address,
+            },
+            defaults: {
+              id: postId,
+              title: item?.header?.title,
+              star: item?.header?.star,
+              labelCode,
+              address: item?.header?.address,
+              attributesId: attributesId,
+              categoryCode: cate.code,
+              description: desc,
+              userId,
+              overviewId,
+              imagesId,
+              areaCode: dataArea.find(
+                (area) => area.max > currentArea && area.min <= currentArea,
+              )?.code,
+              priceCode: dataPrice.find(
+                (price) =>
+                  price.max > currentPrice && price.min <= currentPrice,
+              )?.code,
+              provinceCode,
+              priceNumber: +currentPrice,
+              areaNumber: +currentArea,
             },
           })
         })
