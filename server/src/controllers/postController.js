@@ -12,9 +12,12 @@ export const getPost = async (req, res) => {
   }
 }
 export const getPostLimit = async (req, res) => {
-  const { page, ...query } = req.query
+  const { page, priceNumber, areaNumber, ...query } = req.query
   try {
-    const response = await service.postLimitService(page, query)
+    const response = await service.postLimitService(page, query, {
+      priceNumber,
+      areaNumber,
+    })
     return res.status(200).json(response)
   } catch (error) {
     return res.status(500).json({
@@ -24,15 +27,3 @@ export const getPostLimit = async (req, res) => {
   }
 }
 
-export const getPostsByCategory = async (req, res) => {
-  const { code } = req.query
-  try {
-    const response = await service.getPostsByCategoryService(code)
-    return res.status(200).json(response)
-  } catch (error) {
-    return res.status(500).json({
-      err: -1,
-      msg: 'Fail at post controller' + error,
-    })
-  }
-}

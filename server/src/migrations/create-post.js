@@ -48,10 +48,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       priceNumber: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       areaNumber: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       createdAt: {
         allowNull: false,

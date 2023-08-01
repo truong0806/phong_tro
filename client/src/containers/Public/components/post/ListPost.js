@@ -28,16 +28,12 @@ const ListPost = ({ categoryCode }) => {
           searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] };
         }
       });
-      console.log(
-        '🚀 ~ file: ListPost.js:27 ~ useEffect ~ searchParamsObject:',
-        searchParamsObject
-      );
       if (categoryCode && categoryCode !== 'none')
         searchParamsObject.categoryCode = categoryCode;
       dispatch(actions.GetPostsLimit(searchParamsObject));
       setLoading(true);
     });
-  }, [searchParams, categoryCode]);
+  }, [searchParams, categoryCode, dispatch]);
 
   return (
     <div className="m-[20px] ">
@@ -46,7 +42,7 @@ const ListPost = ({ categoryCode }) => {
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>
         </div>
         <span className="text-[14px] ">
-          Cập nhật: <time title="Thứ 7, 12:25 15/04/2023">{getDate()}</time>
+          Cập nhật: <time >{getDate()}</time>
         </span>
       </section>
       <div className="flex items-center text-[.95rem] gap-2 my-[10px] ">
