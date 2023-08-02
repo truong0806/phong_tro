@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../../assets/logoWithoutBg.png';
@@ -11,10 +11,17 @@ import * as actions from '../../../store/action';
 const { AiOutlineHeart, BiLogIn, AiOutlineUserAdd, AiOutlinePlusCircle } =
   icons;
 
-function Header({setLoading, }) {
+function Header({ setLoading }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { userData } = useSelector((state) => state.user);
+  console.log("🚀 ~ file: Header.js:18 ~ Header ~ userData:", userData)
   const { isLoggedIn } = useSelector((state) => state.auth);
+
+  useEffect(() =>{
+    isLoggedIn && dispatch(actions.getUser());
+  },[dispatch, isLoggedIn])
+
   const goRegister = useCallback(() => {
     handlLoad();
     navigate(`${path.AUTH}/${path.REGISTER}`);
@@ -82,7 +89,7 @@ function Header({setLoading, }) {
         )}
         {isLoggedIn && (
           <div className="cursor-pointer  flex items-center gap-1">
-            <span>Ten !</span>
+            <span>{userData.name}</span>
             <Button
               margin="py-[20px]"
               fontW="font-normal text-[14px] h-[40px]"

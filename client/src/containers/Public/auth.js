@@ -2,26 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header, Navigation, WhyUs, Support, ScrollTop } from './index';
 import { PropagateLoader } from 'react-spinners';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../store/action';
 
 // import {  useSelector } from 'react-redux'
 function Auth() {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
+  const { categories } = useSelector((state) => state.app);
   useEffect(() => {
     setLoading(false);
     const timeout = setTimeout(() => {
+      dispatch(actions.getCategories());
       setLoading(true);
     }, 1000);
 
     return () => clearTimeout(timeout);
   }, []);
- 
+
   return (
     <>
       {loading ? (
         <div className="w-full flex flex-col items-center ">
           <Header setLoading={setLoading} />
-          <Navigation />
+          <Navigation categories={categories} />
           <ScrollTop />
           <div className="w-[84%] flex flex-col  mt-3">
             <Outlet />

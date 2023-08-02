@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import axios from 'axios';
 
 const instance = axios.create({
@@ -6,14 +5,19 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (config) =>
+  function (config) {
     // Do something before request is sent
-    // const token = localStorage.getItem('persist:auth');
-    // console.log(token)
-    config,
-  (error) =>
-    // Do something with request error
-    Promise.reject(error)
+    let token =
+      localStorage.getItem('persist:auth') &&
+      JSON.parse(localStorage.getItem('persist:auth'))?.token.slice(1, -1);
+    config.headers = {
+      authorization: `Bearer ${token}`,
+    };
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
 );
 
 // Add a response interceptor

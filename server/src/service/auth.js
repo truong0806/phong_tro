@@ -3,7 +3,7 @@ import db from '../models'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
-import { v4 as uuidv4 } from 'uuid'
+import { v4 } from 'uuid'
 require('dotenv').config()
 
 const hashPassword = (password) =>
@@ -25,7 +25,6 @@ function generateKeyPair() {
   return { publicKey, privateKey }
 }
 const { publicKey, privateKey } = generateKeyPair()
-
 export const registerService = ({ phone, password, name }) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -35,16 +34,19 @@ export const registerService = ({ phone, password, name }) =>
           phone,
           name,
           password: hashPassword(password),
-          id: uuidv4,
-          publickey: publicKey,
+          id: v4(),
+          // publickey: publicKey,
         },
       })
       const token =
         response[1] &&
-        jwt.sign({ id: response[0].id, phone: response[0].phone }, privateKey, {
-          algorithm: 'RS256',
-          expiresIn: '2d',
-        })
+        jwt.sign(
+          { id: response[0].id, phone: response[0].phone },
+          process.env.SECRET_KEY,
+            {
+            expiresIn: '2d',
+          }
+        )
 
       resolve({
         err: token ? 0 : 2,
@@ -52,8 +54,8 @@ export const registerService = ({ phone, password, name }) =>
           ? 'Register is successfully !'
           : 'Phone number has been aldready used !',
         token: token || null,
-        publicKey: publicKey,
-        privateKey: privateKey,
+        // publicKey: publicKey,
+        // privateKey: privateKey,
       })
     } catch (error) {
       reject(error)
@@ -73,21 +75,12 @@ export const loginService = ({ phone, password }) =>
         isCorrectPassword &&
         jwt.sign(
           { id: response.id, phone: response.phone },
-          privateKey,
-
-          {
-            algorithm: 'RS256',
-            expiresIn: '2d',
-          },
+          process.env.SECRET_KEY,
+          // {
+          //   algorithm: 'RS256',
+          //   expiresIn: '2d',
+          // },
         )
-      console.log('response.publickey', response.publickey)
-      jwt.verify(token, response.publickey, (err, decoded) => {
-        console.log(
-          '🚀 ~ file: auth.js:88 ~ jwt.verify ~ publicKey:',
-          publicKey,
-        )
-        console.log('decoded login:', decoded)
-      })
       resolve({
         err: token ? 0 : 2,
         msg: token

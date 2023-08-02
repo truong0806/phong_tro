@@ -33,11 +33,7 @@ function Login() {
     msg && Swal.fire('Oops !', msg, 'error');
   }, [msg, update]);
   const handleSubmit = async () => {
-    const finalinvalids = { payload };
-    console.log(
-      '🚀 ~ file: login.js:37 ~ handleSubmit ~ finalinvalids:',
-      finalinvalids
-    );
+    const finalinvalids = payload;
     const invalids = validate(finalinvalids, 'Đăng nhập', setInvalidFields);
     console.log('🚀 ~ file: login.js:39 ~ handleSubmit ~ invalids:', invalids);
     if (invalids === 0) {
@@ -98,7 +94,7 @@ function Login() {
                         name: '',
                       });
                       setInvalidFields([]);
-                      navigate(path.REGISTER);
+                      navigate(`${path.AUTH}/${path.FORGOTPASSWORD}`);
                     }}
                     className="hover:text-[red]  cursor-pointer"
                   >
@@ -112,7 +108,7 @@ function Login() {
                         name: '',
                       });
                       setInvalidFields([]);
-                      navigate(path.REGISTER);
+                      navigate(`${path.AUTH}/${path.REGISTER}`);
                     }}
                     className="hover:text-[red]  cursor-pointer "
                   >

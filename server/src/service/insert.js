@@ -164,6 +164,7 @@ export const insertService = () => {
               )?.value,
             },
             defaults: {
+              id: userId,
               name: item?.contact?.content.find((i) => i.name === 'Liên hệ:')
                 ?.value,
               password: hashPassword('truong911'),

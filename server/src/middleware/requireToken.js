@@ -1,16 +1,18 @@
+import jwt from 'jsonwebtoken'
+
 function requireToken(req, res, next) {
-  const token = req.headers.authorization // Lấy token từ header
-
-  if (!token) {
-    return res.status(401).json({ message: 'Yêu cầu cung cấp token.' })
+  let accessToken = req.headers.authorization?.split(' ')[1]
+  if (!accessToken) {
+    return res.status(401).json({ err: 1, msg: 'Missing access token' })
   }
-
-  // Kiểm tra token ở đây (ví dụ: kiểm tra trong cơ sở dữ liệu)
-
-  if (!isValidToken(token)) {
-    return res.status(403).json({ message: 'Token không hợp lệ.' })
-  }
-
-  next() // Chuyển tiếp yêu cầu nếu token hợp lệ
+  jwt.verify(accessToken, process.env.SECRET_KEY, (err, user) => {
+    if (err)
+      return res.status(401).json({
+        err: 1,
+        msg: 'Access token expired',
+      })
+    req.user = user
+    next()
+  })
 }
 export default requireToken

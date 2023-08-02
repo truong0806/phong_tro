@@ -8,6 +8,7 @@ import {
   DetailPost,
   Retal,
   SearchDetail,
+  ForgotPassword,
 } from './containers/Public';
 import { path } from './ultils/constains';
 
@@ -32,6 +33,7 @@ function App() {
         <Route path={path.AUTH} element={<Auth />}>
           <Route path={path.REGISTER} element={<Register />} />
           <Route path={path.LOGIN} element={<Login />} />
+          <Route path={path.FORGOTPASSWORD} element={<ForgotPassword />} />
         </Route>
       </Routes>
     </div>

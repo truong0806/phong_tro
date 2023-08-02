@@ -23,8 +23,7 @@ export const register = (payload) => async (dispatch) => {
   }
 };
 export const login = (payload) => async (dispatch) => {
-  console.log("🚀 ~ file: auth.js:26 ~ login ~ payload:", payload)
-  try {
+   try {
     const response = await apiLogin(payload);
     // console.log(response)
     if (response?.data.err === 0) {

@@ -15,7 +15,6 @@ function Pagination() {
 
   useEffect(() => {
     let page = searchParams.get('page');
-    console.log('🚀 ~ file: Pagination.js:22 ~ useEffect ~ page:', page);
     page && +page !== currentPage && setCurrentPage(+page);
     !page && setCurrentPage(1);
   },[searchParams, currentPage]);

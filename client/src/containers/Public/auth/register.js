@@ -43,7 +43,7 @@ function Register() {
     }
   };
   return (
-    <div className="w-full flex flex-col items-center ">
+    <div className="w-full flex flex-col items-center justify-center">
       <div className="items-center justify-center">
         <div className="bg-white  border-[#dedede] border w-[600px] m-auto pt-[30px] px-[30px] pb-[100px] rounded-md shadow-sm ">
           <h3 className="font-bold text-3xl mb-[10px]">Tạo tài khoản mới</h3>
@@ -129,7 +129,7 @@ function Register() {
                       name: '',
                     });
                     setInvalidFields([]);
-                    navigate(path.LOGIN);
+                    navigate(`${path.AUTH}/${path.LOGIN}`);
                   }}
                   className="text-blue-500 hover:underline cursor-pointer ml-[5px]"
                 >

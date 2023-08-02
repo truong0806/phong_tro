@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ListPost, Pagination, Province, SlideBar } from '../index';
+import { ListPost, Pagination, SlideBar } from '../index';
 import slug from 'slug';
 
 function SearchDetail() {

@@ -1,17 +1,20 @@
+// Use extension REST client: humao.rest-client
+
 @port = 3030
+@url = http://localhost
 
 ### Register
-POST http://localhost:3030/api/v1/auth/register
+POST {{url}}:{{port}}/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "phone":"0938134357",
+    "phone":"0938334123",
     "password":"truong123",
     "name":"truong"
 }
 
 ### Login
-POST http://localhost:{{port}}/api/v1/auth/login
+POST {{url}}:{{port}}/api/v1/auth/login
 Content-Type: application/json
 
 {
@@ -20,4 +23,11 @@ Content-Type: application/json
 }
 
 ### Insert
-POST http://localhost:{{port}}/api/v1/insert
+POST {{url}}:{{port}}/api/v1/insert
+
+### Get user
+GET {{url}}:{{port}}/api/v1/user/getUserCurrent
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmMGI2MzMxLTJiNGMtNDNlMC05ZjNhLWNjZjg0OWZhNGIzYSIsInBob25lIjoiMDkzODMzNDEyMyIsImlhdCI6MTY5MDk4MDUzNSwiZXhwIjoxNjkxMTUzMzM1fQ.jZoXbA6moOrV3e0g39qMG2HMxm5vCjS5XKSeXTQ2rn4
+
+

@@ -1,0 +1,20 @@
+import db from '../models'
+
+//Get all categories
+export const userService = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await db.User.findOne({
+        where: { id },
+        raw: true,
+        attributes: { exclude: ['password', 'publickey'] },
+      })
+      resolve({
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to get user',
+        response,
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })

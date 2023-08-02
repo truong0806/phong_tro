@@ -5,8 +5,11 @@ export { default as WhyUs } from './components/WhyUs';
 export { default as Navigation } from './components/Navigation';
 export { default as Support } from './components/Support';
 export { default as DetailPost } from './components/DetailPost';
+
+//auth
 export { default as Register } from './auth/register';
 export { default as Login } from './auth/login';
+export { default as ForgotPassword } from './auth/forgotPassword';
 // Page
 export { default as HomePage } from './page/homePage';
 export { default as Retal } from './page/rental';
