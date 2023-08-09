@@ -1,0 +1,23 @@
+name: AI Code Reviewer
+
+on:
+  push:
+    branches: ["releases"]
+  pull_request:
+    branches: ["releases"]
+    
+permissions: write-all
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: AI Code Reviewer
+        uses: truong0806/phong_tro@releases
+        with:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GIT }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_MODEL: "gpt-3" # Optional: defaults to "gpt-4"
+          exclude: "**/*.json, **/*.md" # Optional: exclude patterns separated by commas
