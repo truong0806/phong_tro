@@ -3,6 +3,7 @@ export const path = {
   HOME__PAGE: ':page',
   AUTH: '/auth',
   REGISTER: 'register',
+  FORGOTPASSWORD: 'forgotpassword',
   LOGIN: 'login',
   CHO_THUE_CAN_HO: 'cho-thue-can-ho',
   CHO_THUE_MAT_BANG: 'cho-thue-mat-bang',

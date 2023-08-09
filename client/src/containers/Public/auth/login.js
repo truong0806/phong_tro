@@ -34,10 +34,11 @@ function Login() {
   }, [msg, update]);
   const handleSubmit = async () => {
     const finalinvalids = payload;
-    const invalids = validate(finalinvalids, setInvalidFields);
+    const invalids = validate(finalinvalids, 'Đăng nhập', setInvalidFields);
+    console.log('🚀 ~ file: login.js:39 ~ handleSubmit ~ invalids:', invalids);
     if (invalids === 0) {
-      dispatch(actions.register(payload));
-      Swal.fire('Done', 'Đăng ký thành công', 'success');
+      dispatch(actions.login(payload));
+      Swal.fire('Done', 'Đăng nhập thành công', 'success');
       navigate('/');
     }
   };
@@ -93,7 +94,7 @@ function Login() {
                         name: '',
                       });
                       setInvalidFields([]);
-                      navigate(path.REGISTER);
+                      navigate(`${path.AUTH}/${path.FORGOTPASSWORD}`);
                     }}
                     className="hover:text-[red]  cursor-pointer"
                   >
@@ -107,7 +108,7 @@ function Login() {
                         name: '',
                       });
                       setInvalidFields([]);
-                      navigate(path.REGISTER);
+                      navigate(`${path.AUTH}/${path.REGISTER}`);
                     }}
                     className="hover:text-[red]  cursor-pointer "
                   >

@@ -1,4 +1,3 @@
-
 import React, { useCallback, useEffect, useState } from 'react';
 import { SearchItem } from '../../../../components';
 import { SearchPopup } from '../../index';
@@ -92,6 +91,7 @@ function Search() {
       setSelectedValue((prev) => ({
         ...prev,
         [`${removeSFromString(name)}Code`]: gaps.map((item) => item.code),
+        [`${removeSFromString(name)}Number`]: arrMinMax,
         [name]: {
           [`${name}Number`]: arrMinMax,
           name:
@@ -118,7 +118,7 @@ function Search() {
 
   const handleSearch = () => {
     const queryCode = Object.entries(selectedValue).filter((item) => {
-      return item[0].includes('Code');
+      return item[0].includes('Number');
     });
     let queryCodeObject = {};
     queryCode.forEach((item) => {
@@ -131,10 +131,6 @@ function Search() {
     queryText.forEach((item) => {
       queryTextObj[item[0]] = item[1];
     });
-    console.log(
-      '🚀 ~ file: Search.js:133 ~ queryText.forEach ~ queryText:',
-      queryText
-    );
     let titleSearch = `${
       queryTextObj.categories.name
         ? queryTextObj.categories.name
@@ -154,10 +150,7 @@ function Search() {
         ? `diện tích ${queryTextObj.areas.name}`
         : ''
     } `;
-    console.log(
-      '🚀 ~ file: Search.js:139 ~ handleSearch ~ titleSearch:',
-      titleSearch
-    );
+
     navigate(
       {
         pathname: path.SEARCH,
@@ -166,7 +159,6 @@ function Search() {
       { state: { titleSearch } }
     );
   };
-  console.log(selectedValue);
   return (
     <>
       <div
@@ -230,7 +222,6 @@ function Search() {
         </span>
         <span
           onClick={(e) => handShowPopup(e, areas, 'areas', 'Chọn diện tích ')}
-
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
@@ -248,7 +239,6 @@ function Search() {
         <button
           type="button"
           onClick={handleSearch}
-
           className="md:w-full lg:w-full outline-none py-2 px-4 rounded-md  bg-[#ffba00] font-bold md:bg-secondary1 text-[13px] flex-1 flex items-center justify-center gap-2 text-black md:text-white"
         >
           <FiSearch />

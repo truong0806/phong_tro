@@ -38,9 +38,8 @@ function ListNumber({ text, number, currentPage, setCurrentPage }) {
   };
 
   const handleChangePage = () => {
-    if (!(+number === '...')) {
+    if (+number !== '...') {
       setCurrentPage(+number);
-      console.log("🚀 ~ file: ListNumber.js:43 ~ handleChangePage ~ number:", number)
       navigate({
         pathname: location.pathname,
         search: createSearchParams(append(entries)).toString(),

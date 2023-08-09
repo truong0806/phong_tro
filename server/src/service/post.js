@@ -1,5 +1,5 @@
 import db from '../models'
-
+const { Op } = require('sequelize')
 //Get all post
 export const postService = () =>
   new Promise(async (resolve, reject) => {
@@ -44,12 +44,23 @@ export const postService = () =>
       reject(error)
     }
   })
-export const postLimitService = (page, query) =>
+export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
   new Promise(async (resolve, reject) => {
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1
+      const queries = {
+        ...query,
+      }
+      if (priceNumber)
+      queries.priceNumber = {
+        [Op.between]: priceNumber,
+      }
+      if (areaNumber)
+      queries.areaNumber = {
+        [Op.between]: areaNumber,
+      }
       const response = await db.Post.findAndCountAll({
-        where: query,
+        where: queries,
         raw: true,
         nest: true,
         offset: offset * +process.env.LIMIT,
@@ -66,11 +77,6 @@ export const postLimitService = (page, query) =>
             as: 'users',
             attributes: ['name', 'phone', 'zalo'],
           },
-          // {
-          //   model: db.Label,
-          //   as: 'label',
-          //   attributes: ['code', 'value'],
-          // },
         ],
         attributes: ['id', 'title', 'star', 'address', 'description'],
         distinct: true,
@@ -85,20 +91,3 @@ export const postLimitService = (page, query) =>
     }
   })
 
-export const getPostsByCategoryService = (category) =>
-  new Promise(async (resolve, reject) => {
-    try {
-      const response = await db.Post.findAndCountAll({
-        where: {
-          categoryCode: category,
-        },
-      })
-      resolve({
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to find post',
-        response,
-      })
-    } catch (error) {
-      reject(error)
-    }
-  })

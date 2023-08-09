@@ -27,25 +27,27 @@ const ListPostItem = ({
     return stars;
   };
   return (
-    <div className="w-full flex border-t border-red-500 py-4 ">
+    <div className="w-full flex flex-col md:px-[10px] md:mx-[-10px]  border-t border-red-500 py-4 md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
       {images?.length > 4 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
-          className="w-[40%] flex flex-wrap gap-[2px] items-center justify-center relative cursor-pointerv"
+          className="w-full md:w-2/5 h-[245px] md:gap-[2px] items-center justify-center relative cursor-pointerv "
         >
-          {images
-            ?.filter((i, index) => indexs.some((i) => i === index))
-            ?.map((i, index) => {
-              return (
-                <img
-                  key={index}
-                  src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
-                  data-src={i}
-                  className="lazyload  lazy w-[130px] h-[120px] object-cover"
-                  //loading="lazy"
-                />
-              );
-            })}
+          {
+            images
+              ?.filter((i, index) => indexs.some((i) => i === index))
+              ?.map((i, index) => {
+                return (
+                  <img
+                    key={index}
+                    src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
+                    data-src={i}
+                    className="lazyload  lazy object-cover md:object-cover h-[245px]  w-full  "
+                    //loading="lazy"
+                  />
+                );
+              })[1]
+          }
 
           <span className="bg-overlay-70 text-white px-2 rounded-md absolute left-3 bottom-1">
             {`${images?.length}`} ảnh
@@ -69,7 +71,7 @@ const ListPostItem = ({
       ) : (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
-          className="w-[40%] h-[245px] relative items-center justify-center cursor-pointer"
+          className="w-2/5 h-[245px] gap-[2px] relative items-center justify-center cursor-pointer"
         >
           <img
             src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
@@ -77,7 +79,7 @@ const ListPostItem = ({
           />
         </Link>
       )}
-      <div className="w-3/5 ml-[15px]">
+      <div className="w-full md:w-3/5 md:ml-[15px] mt-2">
         <h3 className="flex justify-between gap-4 text-base font-bold whitespace-normal mb-[5px] md:mb-[10px]">
           <Link
             to={`chi-tiet/${slug(title)}/${id}`}
@@ -112,11 +114,11 @@ const ListPostItem = ({
             </Link>
           </span>
         </div>
-        <p className="text-gray-500  w-full h-[100px] text-ellipsis overflow-hidden text-justify">
+        <p className="text-gray-500 hidden sm:block w-full md:h-[100px] h-[40px] text-ellipsis overflow-hidden text-justify">
           {description}
         </p>
         <div className="flex  items-center justify-between my-3 lg:flex-row xl:flex-row">
-          <div className="flex items-center">
+          <div className="sm:flex items-center hidden">
             <img
               src="https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png"
               alt="avatar"
@@ -124,7 +126,7 @@ const ListPostItem = ({
             />
             <p className="text-[#8a8d91] ml-1">{users.name}</p>
           </div>
-          <div className="flex flex-col items-center md:flex-row">
+          <div className="flex items-center flex-row">
             <button
               className={`${
                 users.phone ? 'show' : 'hidden'
@@ -149,5 +151,3 @@ const ListPostItem = ({
 };
 
 export default ListPostItem;
-
-

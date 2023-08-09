@@ -10,7 +10,6 @@ function HomePage() {
   const [categoryCurrent, setCategoryCurrent] = useState({});
   const [categoryCode, setcategoryCode] = useState('none');
   const { categories } = useSelector((state) => state.app);
-  const { count } = useSelector((state) => state.post);
 
   useEffect(() => {
     setLoading(false);
@@ -28,13 +27,13 @@ function HomePage() {
   return (
     <div>
       <Province categoryCurrent={categoryCurrent} />
-      <div className="w-full justify-center flex flex-row gap-2 mb-3">
-        <div className="w-[100%] lg:w-[70%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
+      <div className="w-full justify-center flex-col flex lg:flex-row gap-2 mb-3">
+        <div className="w-[100%] lg:w-[70%]  bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
           <ListPost loading={loading} categoryCode={categoryCode} />
           {/* <Pagination /> */}
           <Pagination />
         </div>
-        <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
+        <div className="  lg:block lg:w-[30%] ">
           <SlideBar setLoading={setLoading} />
         </div>
       </div>

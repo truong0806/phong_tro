@@ -2,12 +2,29 @@ import axios from 'axios'
 import db from '../models'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { v4 as uuidv4 } from 'uuid'
+import crypto from 'crypto'
+import { v4 } from 'uuid'
 require('dotenv').config()
 
 const hashPassword = (password) =>
   bcrypt.hashSync(password, bcrypt.genSaltSync(12))
 
+function generateKeyPair() {
+  const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+    modulusLength: 2048, // Adjust the key length as needed (e.g., 2048, 4096)
+    publicKeyEncoding: {
+      type: 'spki',
+      format: 'pem',
+    },
+    privateKeyEncoding: {
+      type: 'pkcs8',
+      format: 'pem',
+    },
+  })
+
+  return { publicKey, privateKey }
+}
+const { publicKey, privateKey } = generateKeyPair()
 export const registerService = ({ phone, password, name }) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -17,7 +34,8 @@ export const registerService = ({ phone, password, name }) =>
           phone,
           name,
           password: hashPassword(password),
-          id: uuidv4,
+          id: v4(),
+          // publickey: publicKey,
         },
       })
       const token =
@@ -25,14 +43,19 @@ export const registerService = ({ phone, password, name }) =>
         jwt.sign(
           { id: response[0].id, phone: response[0].phone },
           process.env.SECRET_KEY,
-          { expiresIn: '2d' },
+            {
+            expiresIn: '2d',
+          }
         )
+
       resolve({
         err: token ? 0 : 2,
         msg: token
           ? 'Register is successfully !'
           : 'Phone number has been aldready used !',
         token: token || null,
+        // publicKey: publicKey,
+        // privateKey: privateKey,
       })
     } catch (error) {
       reject(error)
@@ -40,6 +63,7 @@ export const registerService = ({ phone, password, name }) =>
   })
 export const loginService = ({ phone, password }) =>
   new Promise(async (resolve, reject) => {
+    console.log(phone)
     try {
       const response = await db.User.findOne({
         where: { phone },
@@ -52,7 +76,10 @@ export const loginService = ({ phone, password }) =>
         jwt.sign(
           { id: response.id, phone: response.phone },
           process.env.SECRET_KEY,
-          { expiresIn: '2d' },
+          // {
+          //   algorithm: 'RS256',
+          //   expiresIn: '2d',
+          // },
         )
       resolve({
         err: token ? 0 : 2,
