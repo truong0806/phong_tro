@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: AI Code Reviewer
-        uses: truong0806/phong_tro@releases
+        uses: truong0806/ai-code-reviewer@main
         with:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GIT }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
