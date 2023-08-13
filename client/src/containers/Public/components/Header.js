@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../../assets/logoWithoutBg.png';
@@ -15,12 +15,7 @@ function Header({ setLoading }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
-  console.log("🚀 ~ file: Header.js:18 ~ Header ~ userData:", userData)
   const { isLoggedIn } = useSelector((state) => state.auth);
-
-  useEffect(() =>{
-    isLoggedIn && dispatch(actions.getUser());
-  },[dispatch, isLoggedIn])
 
   const goRegister = useCallback(() => {
     handlLoad();

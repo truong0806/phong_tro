@@ -3,9 +3,6 @@ import cors from 'cors'
 import * as dotenv from 'dotenv'
 dotenv.config()
 const app = express()
-const https = require('https')
-const path = require('path')
-const fs = require('fs')
 const port = process.env.PORT || 8888
 const swaggerUI = require('swagger-ui-express')
 const docs = require('./doc')
@@ -20,6 +17,12 @@ import updateCategoryCount from './src/ultils/updateCategoryCount'
 //   ),
 // }
 // app.use(requireToken)
+import path from 'path'
+
+import https from 'https'
+
+import fs from 'fs'
+
 app.use(
   cors({
     origin:  process.env.CLIENT_URL1,

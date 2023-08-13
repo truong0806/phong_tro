@@ -4,7 +4,6 @@ import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index';
 import * as actions from '../../store/action';
 import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
-import { apiUser } from '../../service/user';
 
 function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,17 +11,11 @@ function Home() {
   const linkRef = useRef();
   const { categories } = useSelector((state) => state.app);
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { userData } = useSelector((state) => state.user);
 
   useEffect(() => {
-    // const fetchUser = async () => {
-    //   const response = await apiUser();
-    //   console.log(
-    //     '🚀 ~ file: Home.js:19 ~ fetchUser ~ response:',
-    //     response.data.response
-    //   );
-    // };
-    
+    setTimeout(() => {
+      isLoggedIn && dispatch(actions.getUser());
+    }, 1000);
   }, [isLoggedIn, dispatch]);
 
   useEffect(() => {
