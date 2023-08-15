@@ -3,7 +3,6 @@ import express from 'express'
 import requireToken from '../middleware/requireToken'
 
 const router = express.Router()
-router.use(requireToken)
-router.get('/getUserCurrent', userController.getUser)
+router.get('/getUserCurrent',requireToken, userController.getUser)
 
 export default router

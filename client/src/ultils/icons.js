@@ -20,8 +20,9 @@ import {
   RiHeartFill,
   RiHeartLine,
 } from 'react-icons/ri';
-import { TbReportMoney } from 'react-icons/tb';
+import { TbReportMoney, TbDiscount2 } from 'react-icons/tb';
 import { MdOutlineHouseSiding } from 'react-icons/md';
+import { LuLayoutDashboard } from 'react-icons/lu';
 
 const icon = {
   AiOutlineHeart,
@@ -44,6 +45,7 @@ const icon = {
   RiHeartFill,
   RiHeartLine,
   FiDelete,
+  LuLayoutDashboard,TbDiscount2,
 };
 
 export default icon;

@@ -24,7 +24,7 @@ const RelatePostItem = ({ item, listNewPostEff, listNew }) => {
           <span className="block bg-35px"></span>
         </div>
         <div className="w-full lg:w-4/5  relative mb-0 leading-5">
-          <p className="line-clamp-2 relative top-0 text-[1rem] font-normal   text-[#3763e0] mb-[10px]">
+          <p className="c relative top-0 text-[1rem] font-normal   text-[#3763e0] mb-[10px]">
             {item.title}
           </p>
           <div className="flex items-end relative  justify-between">

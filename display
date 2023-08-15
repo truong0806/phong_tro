@@ -1,0 +1,1034 @@
+[33mcommit 80616d75ec267ef81c21afe2276e95e806739414[m[33m ([m[1;36mHEAD -> [m[1;32mv3.9[m[33m, [m[1;31morigin/v3.9[m[33m)[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Sun Aug 13 17:35:20 2023 +0000
+
+    add
+
+[33mcommit 467431873e7c74bacc2d8b920e16af64e9e64b68[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Wed Aug 2 13:57:50 2023 +0000
+
+    add api user, display user name
+
+[33mcommit f7c10ad1bef851c16aae6bb4fb11f1eba9d7927f[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Tue Aug 1 18:15:47 2023 +0000
+
+    edit search with priceNmuber and areaNumber
+
+[33mcommit 6e7254976357c5e9b791746d88bd54628d5721f1[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Mon Jul 31 14:15:42 2023 +0000
+
+    add priceNumber and areaNumber
+
+[33mcommit c2bbed9a124b213edeee354d473724f01cc53a5d[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Sat Jul 29 16:50:05 2023 +0000
+
+    edit login with token
+
+[33mcommit 498d03c653d41b5bd32fddaab913a4017649a36b[m[33m ([m[1;31morigin/v3.8[m[33m)[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Thu Jul 27 09:23:42 2023 +0000
+
+    add
+
+[33mcommit e800b15777356b348a075bf4b5ab7047b26af5ae[m
+Merge: 94317d6 c5f0426
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Wed Jul 26 14:48:12 2023 +0000
+
+    :Merge branch 'v3.8' of github.com:truong0806/phong_tro into v3.8
+
+[33mcommit 94317d6f58bb01887e8b7194d04884b8233fa303[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Wed Jul 26 14:46:52 2023 +0000
+
+    reponsive reate post
+
+[33mcommit c5f0426cc7e63d089adcecb4a56310184e8dde71[m
+Merge: 07cfe0f 2e61277
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Tue Jul 25 20:58:38 2023 +0700
+
+    Merge branch 'releases' into v3.8
+
+[33mcommit 07cfe0f7500bdec6e39cc2e14196e83ec7844a68[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Tue Jul 25 13:47:49 2023 +0000
+
+    #42 search and push url
+
+[33mcommit 1651ac780199557679db88e679b5341cab5c25e9[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Mon Jul 24 13:36:35 2023 +0000
+
+    #41 fixed loading
+
+[33mcommit ebd68aa525122e9ce59a08bdc21439b9833fd7e1[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Sat Jul 22 13:25:35 2023 +0000
+
+    edit search query
+
+[33mcommit 05fb5402c7efb31a6d3ea3355c13d4a95e2e5370[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Sat Jul 22 10:00:34 2023 +0000
+
+    add
+
+[33mcommit 7a2605f48697e573c8f93fcda9297b8cfabbe8e9[m[33m ([m[1;31morigin/v3.6[m[33m)[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Sat Jul 22 15:16:31 2023 +0700
+
+    add unit test
+
+[33mcommit c2c503811da8ee1f418d8f205bca1dddfcefd81f[m
+Author: Ubuntu <azureuser@vm-ubu-4CPU.ni2j33bwnutelp4oteqaxxrpcd.ux.internal.cloudapp.net>
+Date:   Wed Jul 19 05:00:42 2023 +0000
+
+    fix selectValue
+
+[33mcommit 2e612770e7196ab314281254953d0465ed206195[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 14:46:02 2023 +0700
+
+    Update Jenkinsfile
+
+[33mcommit 6ac84e13178489b8654d554f7eaf8ea47308ceb7[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 14:36:14 2023 +0700
+
+    Update Jenkinsfile
+
+[33mcommit 9d8126a63df4563937d538c43d76bdb273d2f23a[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 14:34:25 2023 +0700
+
+    Update Jenkinsfile
+
+[33mcommit 7842f5e6a85d13d46a70ff4443af5665dc8df474[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 14:33:18 2023 +0700
+
+    Update Jenkinsfile
+
+[33mcommit c2c2e272f871f30e0163d423a375a8dbd81d61c1[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 14:21:56 2023 +0700
+
+    Update Jenkinsfile
+
+[33mcommit f28d32a87e05519cb920bd013604617688a337de[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 13:36:34 2023 +0700
+
+    Create Jenkinsfile
+
+[33mcommit 61b5072f0b0673138b85c6334bdd39d50a5e0d3d[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 13:35:54 2023 +0700
+
+    Delete Jenkinsfile
+
+[33mcommit 8185cf9ea9390932cc9bc1a053128fa35b8263a7[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 13:33:47 2023 +0700
+
+    Update Jenkinsfile
+
+[33mcommit 03baf9fb4f64e007e28f66e4e76dab5a9d479e3c[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 13:28:36 2023 +0700
+
+    Update Jenkinsfile
+
+[33mcommit 92831929e85fb870a7aa002a9091a0ccda715f96[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sun Jul 16 13:17:02 2023 +0700
+
+    Create Jenkinsfile
+
+[33mcommit 58af0cdacce3c3eba8dc3a75bbf842b164330c13[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 12 21:37:57 2023 +0700
+
+    j
+
+[33mcommit 372435d5294ec46ce4100d79b169308cb408b7b5[m[33m ([m[1;31morigin/v3.7[m[33m)[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Tue Jul 11 13:16:18 2023 +0700
+
+    Fix error bg button in price, ares click
+
+[33mcommit 9987fe5013a85e62d313a0a4e1b0550c404a4978[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Sat Jul 8 21:15:24 2023 +0700
+
+    add
+
+[33mcommit 225c23ce1b7c19e754d4620ed7742cacd9298081[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Sat Jul 8 21:14:18 2023 +0700
+
+    Create docker-image.yml
+
+[33mcommit a7f858d1ef81c067fbfe7e274be2c9bcc5e96743[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Sat Jul 8 21:09:25 2023 +0700
+
+    remove
+
+[33mcommit b7081780378b11112062acdf775bd2b5dffbe294[m
+Author: Ubuntu <ubuntu@ip-172-31-8-84.ap-southeast-1.compute.internal>
+Date:   Sat Jul 8 09:21:47 2023 +0000
+
+    #36 Done Model Search
+
+[33mcommit 6b7458b234da35034d5bc656344aa7db719371d5[m
+Merge: 23d0d48 9b20b98
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Fri Jul 7 21:36:47 2023 +0700
+
+    Merge pull request #34 from truong0806/v3.6
+    
+    V3.6
+
+[33mcommit 9b20b98d05a1e76e27421ffab56519f4518ba747[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Fri Jul 7 21:32:08 2023 +0700
+
+    remove scrape
+
+[33mcommit 5afbf8921cafb99c308ceccdb48271edd6751732[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Fri Jul 7 21:25:16 2023 +0700
+
+    #32 Fix search slider-track
+
+[33mcommit 2dd770969b51173a6bbcda1b56bc8f4855f31efa[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Fri Jul 7 11:28:31 2023 +0700
+
+    ađ filter button
+
+[33mcommit 23d0d48a58d425bd66d490f7ac362d6be245879b[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Thu Jul 6 17:31:26 2023 +0700
+
+    Update Dockerfile
+
+[33mcommit f6865c12988e5caeb975d7b8568083036385338f[m
+Merge: f24b375 bc4a821
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Thu Jul 6 17:31:02 2023 +0700
+
+    Merge branch 'releases' of https://github.com/truong0806/phong_tro into releases
+
+[33mcommit f24b375795a6255b2efb8e08a8616685ee40d9e4[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Thu Jul 6 17:27:00 2023 +0700
+
+    Update Dockerfile
+
+[33mcommit bc4a821c49e6493786676278919da13e7d096fcc[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Thu Jul 6 00:05:53 2023 +0700
+
+    Update Dockerfile
+
+[33mcommit ef1635e5281bd13aec2381c665ab78b0a2b13cc2[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:46:20 2023 +0700
+
+    Update Dockerfile
+
+[33mcommit 1ba822b52086fbcfbcca7e2d911be56171594086[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:44:52 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 9ba3389f2eed2393c9f9981173afae7da7e30462[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:38:57 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 99eaf94dc3b042b5d8d55fafbefda64cb5fa1bfe[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:34:35 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 21be10c8af5280e70a488dfa18bae6e19078bb4c[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:32:20 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 2e5d8f8c0bd7e597304bbe24ae62c91458c9a54a[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:26:40 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 82bc2609c136aaf529f1642af65d1f859da5be18[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:24:44 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 518f830718bb9e30e5a646e57628887d04225330[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:24:26 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 9d6ce88e2a2de42ea301b2c3e745d31b7a0d7b84[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:16:59 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 05801758f55eb0b5cb405a1c539389d9b4f2d430[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 23:15:16 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 854939bcb291d32ebc4d6bdf2a55ab688c5043ff[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 21:37:06 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 9201273f9a7d84c6eae52b032803a76490e4df6c[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 21:27:37 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 3bb1b05ca48efa4668808cb7f6628188a5897055[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 21:24:49 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit f1c7e203f5e545de391234d63afbe849186ee2c2[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 21:22:06 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 99b1254f944d8f58204b60770ecbb451472a9f7c[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 21:19:16 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 21d4666114e05357a098c3546b7d267d40aca90a[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 21:15:51 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit d1d3af323a7950b783961a7d3d3e3f09db9d7fa3[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 21:10:31 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 54ad50a65589aa64fd1d09ffb867961a6369f461[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 21:06:45 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit af13a24f5e2609c401daea17223a9be90bb0a286[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:58:22 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 30b7ab706a83b7e65b41c69726bf1c70303ab038[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:56:40 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 8b578fb8f277e7751b397357ce4cc21763eb3656[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:50:23 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 659a20ea5f490359b224a5ea8b8dc72770610c64[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:46:39 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 8c98b9c8597160fa9bbcb00e827cf13a6078654c[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:44:16 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 5431aee4b7178e3e821aa7717cf54fb20f89f483[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:41:46 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit d45f6adffead9dd56b61a2c0a0aea5520b7769b8[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:39:10 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 13f02b1a78256d783e8edfe513c6938723212bf7[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:35:08 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 5db651965d125201c9ae304a614dee09c47b8b72[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:25:38 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit 6797d3a9c6c134af514ef9e41f280d5659073b0d[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:23:24 2023 +0700
+
+    edit github workflows
+
+[33mcommit 54406bc486f8496e0480c802449dcdc4ef7e4baa[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:14:09 2023 +0700
+
+    add server
+
+[33mcommit dafd28cdf2b2b38aa76549bd293581d8cad16c20[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:11:15 2023 +0700
+
+    edit compose
+
+[33mcommit 7465e6193be01aec8b73b256e94d78ff9c2d8cec[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:04:50 2023 +0700
+
+    edit Dockerfile
+
+[33mcommit 472748af8fca3980921a593ac148ac2ecfc2ee39[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 20:03:41 2023 +0700
+
+    add docker-compose
+
+[33mcommit f620841a2883be650d34dd2985487e05ec407a49[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 17:54:21 2023 +0700
+
+    ađ docker
+
+[33mcommit 6aac6908a929b5c6610d93ee370c4d879a78fb8f[m
+Merge: fb52d8a a65bb4c
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 17:03:24 2023 +0700
+
+    Merge pull request #31 from truong0806/v3.6
+    
+    a
+
+[33mcommit fb52d8ad1359660a8d7dedb14ebdf4de497435be[m
+Merge: e6f4434 1ef2b42
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 17:00:40 2023 +0700
+
+    Merge pull request #30 from truong0806/main
+    
+    a
+
+[33mcommit e6f443401f4c0c1e4a50af3cfa61ef20b772f05a[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:58:40 2023 +0700
+
+    a
+
+[33mcommit a65bb4c711f999b7d70fe6b4e2ca7097e0224687[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:46:08 2023 +0700
+
+    a
+
+[33mcommit 1b2ea706f935a71db765eeb41408de1718f00c48[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:41:16 2023 +0700
+
+    Delete server directory
+
+[33mcommit 86df951a64f44882e6049f7e923f369987ddffbf[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:40:53 2023 +0700
+
+    Delete scrape-data directory
+
+[33mcommit 2ed9e9214fee2471620fa8fd86405a549787169a[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:40:38 2023 +0700
+
+    Delete rest directory
+
+[33mcommit 1ef2b42e7cd0114bffd094bf6fce7a95ecfdaaab[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:39:51 2023 +0700
+
+    Update docker-image.yml
+
+[33mcommit a18d2fd80f79369bb9d89bb324f1ee5a4c1f94fd[m
+Merge: d61c791 91245a4
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:37:40 2023 +0700
+
+    Merge pull request #28 from truong0806/v3.6
+    
+    V3.6
+
+[33mcommit 91245a4783bc31f39a7ac2933e8b3232290070a6[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:35:34 2023 +0700
+
+    remove
+
+[33mcommit d61c791ccdc3c5632a4e0ba5910e34150810d982[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:30:50 2023 +0700
+
+    Delete client directory
+
+[33mcommit 543ebe0cc8e7908ee83816c9b495dae9f130d0cb[m
+Merge: c947ca2 297c1cc
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:29:03 2023 +0700
+
+    Merge pull request #27 from truong0806/revert-24-releases
+    
+    Revert "Releases"
+
+[33mcommit 297c1cc1a435ea87872c08871ab0133e619aa82e[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:28:44 2023 +0700
+
+    Revert "Releases"
+
+[33mcommit c947ca201e5f866b3b1ae4590891e79fcc33c89b[m
+Merge: 598053c 48dc7ec
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:28:01 2023 +0700
+
+    Merge pull request #26 from truong0806/revert-25-releases
+    
+    Revert "Releases"
+
+[33mcommit 48dc7ece8913cb59d0c37b899639e5cfafac496a[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:27:45 2023 +0700
+
+    Revert "Releases"
+
+[33mcommit 14423055d4c9b14cfe9097204956608020dbb5c5[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:25:48 2023 +0700
+
+    Create docker-image.yml
+
+[33mcommit 598053c68a3d3d24e6440f0e766dd2b9bc44d0cc[m
+Merge: 4f0dd60 f74035d
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:23:30 2023 +0700
+
+    Merge pull request #25 from truong0806/releases
+    
+    Releases
+
+[33mcommit f74035dacccdbba6c15ffc4b65da2fe983182176[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:22:33 2023 +0700
+
+    a
+
+[33mcommit ecd3b8ef04e9d73dc8f0aeb7bb45127d4d0aecfb[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:22:19 2023 +0700
+
+    a
+
+[33mcommit 4f0dd60c7f949119e095d613a43c8aff9faa3732[m
+Merge: 4917534 20b400c
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:15:17 2023 +0700
+
+    Merge pull request #24 from truong0806/releases
+    
+    Releases
+
+[33mcommit 20b400cba1be7862f4f9fcb0844c57019ad44c77[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:13:18 2023 +0700
+
+    a
+
+[33mcommit ba8a061f1e6896512f483c448c08834a37156efd[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:11:22 2023 +0700
+
+    add
+
+[33mcommit 25217614ad1f364b0ac21a482fe7177da3bd1c69[m
+Merge: 7ff004c c2036b1
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:10:55 2023 +0700
+
+    Merge branch 'releases' of https://github.com/truong0806/phong_tro into releases
+
+[33mcommit 7ff004c18b90fed4a88643bdd31979d68e8a1c56[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:09:37 2023 +0700
+
+    aaadd
+
+[33mcommit c2036b102ab096d955381c63e1fe3162bcbc69e7[m
+Merge: cacb6c6 4917534
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:01:38 2023 +0700
+
+    Merge pull request #23 from truong0806/v3.6
+    
+    V3.6
+
+[33mcommit cacb6c66ee485ddf155cb43d667e9e9e689350af[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 16:00:30 2023 +0700
+
+    add
+
+[33mcommit 4917534a2660638879af63b632b13fd99bceee2d[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 15:48:15 2023 +0700
+
+    add github workflows
+
+[33mcommit b1180492d298d9d7292f294a8391d411c716a9c0[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Wed Jul 5 01:29:43 2023 +0700
+
+    Add popup
+
+[33mcommit bb39d6a0f92dd5623e8379c47c698e468add0073[m
+Author: Ubuntu <ubuntu@ip-172-31-8-84.ap-southeast-1.compute.internal>
+Date:   Mon Jul 3 15:03:01 2023 +0000
+
+    #21 add popup
+
+[33mcommit ebc552ed58f6ba989c97761c02ef49ac8a884f5e[m
+Author: Ubuntu <ubuntu@ip-172-31-8-84.ap-southeast-1.compute.internal>
+Date:   Sat Jul 1 16:36:58 2023 +0000
+
+    add
+
+[33mcommit 539cc2c2d4b06bda88503e53e6e68df55c36a4ba[m
+Author: Ubuntu <ubuntu@ip-172-31-8-84.ap-southeast-1.compute.internal>
+Date:   Sat Jul 1 10:29:59 2023 +0000
+
+    create dockerfile, docker-compose, dockerignore
+
+[33mcommit 6f440a565563b136b0350e9087fa2b0aef34cc3c[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Sat Jun 24 21:33:36 2023 +0700
+
+    add province table
+
+[33mcommit dd246c18f6eb9562f983ec18824756b3d4ff4f15[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Sat Jun 24 02:48:10 2023 +0700
+
+    #20 add retal page
+
+[33mcommit b082ae7fd463a74b2d63417062a570ca9f2ec1a5[m[33m ([m[1;31morigin/v3.5[m[33m)[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Fri Jun 16 19:25:47 2023 +0700
+
+    Add
+
+[33mcommit b5bf48a5f9a54a59742cdd8eea2ed26056cdabce[m[33m ([m[1;31morigin/v3.4[m[33m)[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Thu Jun 15 00:43:32 2023 +0700
+
+    Add 4 page
+
+[33mcommit 1c1185bdcccd0d70f30b5fd84f8051eab521df38[m
+Merge: 5317b18 f120c5b
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Tue Jun 13 20:54:13 2023 +0700
+
+    Merge pull request #19 from truong0806/feature
+    
+    Feature
+
+[33mcommit f120c5b33390782944d0935c4de674dbb1254c03[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Tue Jun 13 20:52:19 2023 +0700
+
+    Filter post with searchparams
+
+[33mcommit 6c61272b92e7aeb3015b836400d8888c54188450[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Sat Jun 10 21:34:36 2023 +0700
+
+    aa
+
+[33mcommit 0ea9e131ae178456274b2585a4dc22863e96fe07[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Sat Jun 10 21:32:41 2023 +0700
+
+    Filter price
+
+[33mcommit 3e0db3e1b65d6de0cf950c344a4163c79e5535e5[m[33m ([m[1;31morigin/v3.2[m[33m)[m
+Merge: 014ba87 4d4d977
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Fri Jun 9 00:56:57 2023 +0700
+
+    Merge pull request #18 from truong0806/feature
+    
+    #17 Feature tin moi dang
+
+[33mcommit 4d4d977b31d567391e902708cfda5fb68db3e0ae[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Fri Jun 9 00:51:30 2023 +0700
+
+    #17 featá»á»ure Tin MÆoi Dang
+
+[33mcommit 014ba872f1aee6518b16c6d2a6c6bd5d688cc7df[m[33m ([m[1;31morigin/v3.1[m[33m)[m
+Merge: 0f86371 7d1afe8
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jun 7 17:51:49 2023 +0700
+
+    Merge pull request #16 from truong0806/feature
+    
+    #13 render prices and areas in sidebar
+
+[33mcommit 5317b18230cc68a333004863c399089a128d40ea[m
+Merge: c0b2d75 0f86371
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Jun 7 17:49:26 2023 +0700
+
+    Merge pull request #12 from truong0806/v3.1
+    
+    V3.1
+
+[33mcommit 7d1afe8476bcdb5343ec4711b48cf6831a3cd8eb[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Tue Jun 6 18:38:18 2023 +0700
+
+    #13 render prices and areas in sidebar
+
+[33mcommit 0f8637166f74663834ae295f4f7c67e23d4703f2[m
+Merge: 2961934 90305ae
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Mon Jun 5 00:17:22 2023 +0700
+
+    Merge pull request #11 from truong0806/feature
+    
+    #10 push feature
+
+[33mcommit 90305ae622e7b5eb30af737afbcd785a35d91549[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Mon Jun 5 00:14:50 2023 +0700
+
+    #10 push feature
+
+[33mcommit 2961934b29322072c04b4baadbc752579bbff793[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Fri Jun 2 18:48:28 2023 +0700
+
+    add
+
+[33mcommit 243e155ddd4c781460dd83f2d8e4624b8aa2e2e9[m[33m ([m[1;31morigin/v3.0[m[33m)[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Thu Jun 1 19:35:48 2023 +0700
+
+    add
+
+[33mcommit 5aaa649761f935b39e3b73dc80dcc714a1bfdc37[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Wed May 24 20:43:49 2023 +0700
+
+    add
+
+[33mcommit c2354bbcb62076fa07747416c880177f314281bd[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Wed May 24 01:12:07 2023 +0700
+
+    Create
+    
+    itemSideBar
+
+[33mcommit 90f2fa6550c682289cf973351f9e29faa9e365f5[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Mon May 22 00:39:19 2023 +0700
+
+    add unit test
+
+[33mcommit b7da1509f9cc416dfe550bb42f3761fad2e69545[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Sat May 20 18:13:25 2023 +0700
+
+    add
+
+[33mcommit 36abf04f90e4c9f6a07da046630c9295b16307ac[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Thu May 18 12:07:01 2023 +0700
+
+    Add Pagination
+
+[33mcommit eeb7e2a613c10874f832fa1e20c476dd43716fd8[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Thu May 18 00:48:06 2023 +0700
+
+    add
+
+[33mcommit aa7f139bd02921c0d946edf0592e067d1e757178[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Wed May 17 17:39:49 2023 +0700
+
+    add
+
+[33mcommit b10f81eaddbbbe1d669aa451fcddef94496f5f9a[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Sun May 7 23:23:39 2023 +0700
+
+    Show post in api
+
+[33mcommit beceece6618896a88937b3ddfe219560e51464bb[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Sun Apr 30 00:08:48 2023 +0700
+
+    add
+
+[33mcommit ff456307895905b5e412c93b1b436b4c89a232cc[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Mon Apr 24 01:47:16 2023 +0700
+
+    add
+
+[33mcommit 798d9e00e1c70c79d8a6b99aa26187d2135590e4[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Sat Apr 15 15:49:28 2023 +0700
+
+    add Province and list post
+
+[33mcommit df02b602bc187250d124ace23c335dd1cdcd58ad[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Mon Apr 10 01:18:50 2023 +0700
+
+    edit ui
+
+[33mcommit f49c79207334ce38a32f71c2db534fb3b296ce45[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Sat Apr 8 16:36:02 2023 +0700
+
+    Create navigation bar with categary title
+
+[33mcommit a354c0f5b0bd13caf0c79ea30c8cbe1266d11928[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Tue Apr 4 20:54:22 2023 +0700
+
+    Add NavLink
+
+[33mcommit efe7fe90402e2ca39900fe4e17b95aae6e452d55[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Mon Apr 3 00:03:24 2023 +0700
+
+    Create handleChange
+
+[33mcommit 5fd6311c76cadd26d1ef61ab289f7e387277f614[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Fri Mar 31 18:55:02 2023 +0700
+
+    insert data with api
+
+[33mcommit 0e78be1ad4da2f140c7162bc0e75c294f65fe834[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Fri Mar 31 02:05:57 2023 +0700
+
+    create insert help insert date to db
+
+[33mcommit 0b68fb6490697bf3ff483704038a7e526bfedb11[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Thu Mar 30 17:08:02 2023 +0700
+
+    insert value indb
+
+[33mcommit 01469d3bad8f6e46184430d1ec01a6c496c59a00[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Thu Mar 30 15:57:09 2023 +0700
+
+    add validate
+
+[33mcommit 4317922294622328ba37ad32c75850f75dabbad7[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Wed Mar 29 19:33:35 2023 +0700
+
+    done validate
+
+[33mcommit c0b2d75fa65566cde978db8bbca0f97ca00a57b2[m
+Merge: 54c962f ac3f4a0
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Mar 29 18:40:00 2023 +0700
+
+    Merge pull request #2 from truong0806/v1.0
+    
+    add validation
+
+[33mcommit ac3f4a0640f4df4c80186f2953301dbf41ac0d22[m
+Author: truong8699 <thanhtruong090123@gmail.com>
+Date:   Wed Mar 29 18:38:06 2023 +0700
+
+    add validation
+
+[33mcommit 54c962ff85e823ad11fd62133e98ac1443a5c7a6[m
+Author: truong8699 <panda08061999@gmail.com>
+Date:   Wed Mar 29 17:57:23 2023 +0700
+
+    add
+
+[33mcommit 46e601d36aa4e5ec98f13e5740a652b2dc1ad06b[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Thu Mar 9 12:35:56 2023 +0700
+
+    fix node install error
+
+[33mcommit b4efb6984440bf0f16b3f43d5091ae7f0af2ab5c[m
+Author: thanhtruong8699 <125945247+thanhtruong8699@users.noreply.github.com>
+Date:   Sat Mar 4 16:26:00 2023 +0000
+
+    add payload
+
+[33mcommit 038a349a16fbeb4e2fbcf3468a64a4d219950f3b[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sat Mar 4 08:34:45 2023 +0700
+
+    login and register api
+
+[33mcommit 124924c1af455f12e309b098bed28731f656f19c[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Mon Feb 27 12:26:58 2023 +0700
+
+    create register api
+
+[33mcommit f6c6e16d7bb0bf316620c24efe722cd10f3fb7cc[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Fri Feb 17 18:00:30 2023 +0700
+
+    add format file config
+
+[33mcommit dd06177c7f1f891757e5c3d87ee2f30273f99532[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Fri Feb 17 17:44:40 2023 +0700
+
+    Update README.md
+
+[33mcommit 054ac5d8beeac5aeee73c22461296ac69a393f65[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Fri Feb 17 17:42:51 2023 +0700
+
+    scrape data done
+
+[33mcommit 427279a04c618dbd250f865cd01198c588b5e332[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Fri Feb 17 17:36:20 2023 +0700
+
+    crape data done
+
+[33mcommit 8708bdefd10a5ce2beb0a72197685fe0c4bcce48[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Fri Feb 17 13:37:39 2023 +0700
+
+    add
+
+[33mcommit f6aa9dc1292d65eb7328e980920d5c0187516720[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Fri Feb 17 00:57:27 2023 +0700
+
+    add
+
+[33mcommit fc5e461dd8855e9ae83f786581157b35f7ded563[m
+Author: thanhtrieunguyen <nthtrieu204@gmail.com>
+Date:   Thu Feb 16 16:19:41 2023 +0700
+
+    add
+
+[33mcommit c5e4b7233ce85bcbbf219ebd1367a1998b85f9a6[m
+Author: thanhtrieunguyen <nthtrieu204@gmail.com>
+Date:   Thu Feb 16 14:28:27 2023 +0700
+
+    add
+
+[33mcommit 9eb326edd0515fd11005ffa61e31292a4eaf867b[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Feb 15 17:53:44 2023 +0000
+
+    Add scrapeData module
+
+[33mcommit d1ba46b213f8d199221d53d8bed5957cc8722537[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Wed Feb 15 10:55:35 2023 +0000
+
+    Add navigation bar and support section
+
+[33mcommit c497843e9a569df86cb71bc8152acc26205b38c6[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Mon Feb 13 17:50:08 2023 +0000
+
+    add WhyUs.js
+
+[33mcommit 9b3ae78cdef440d8b7cd01974b9bbf48c69c5090[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Mon Feb 13 11:27:41 2023 +0000
+
+    add InputForm
+
+[33mcommit 12855a1eed718371aa525f1eafccb974cc52fc82[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Mon Feb 13 07:43:39 2023 +0000
+
+    add
+
+[33mcommit 96d4647a4a44a8ae1ea7dff0e4ce4452e40f0108[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Mon Feb 13 07:35:56 2023 +0000
+
+    add icon react
+
+[33mcommit e8214dd233cf4f45b86bf6027cc52a16ae257ab3[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Sat Feb 11 13:19:16 2023 +0000
+
+    fix icon
+
+[33mcommit 5bbe35e5d9e137580a65e1c012060d4156857cb4[m
+Author: Nguyễn Thanh Trường <thanhtruong090123@gmail.com>
+Date:   Thu Feb 9 04:41:32 2023 +0000
+
+    Add header
+
+[33mcommit ba7cb77f795f7fde8be1c823190f39f9b23e2e27[m
+Author: truong0806 <thanhtruong090123@gmail.com>
+Date:   Wed Feb 8 12:49:25 2023 +0700
+
+    init

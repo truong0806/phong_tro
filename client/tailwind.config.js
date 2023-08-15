@@ -32,6 +32,7 @@ module.exports = {
         cirlcle_rec: "url('/src/assets/cirlcle-rec.svg')",
         'star-bg': "url('/src/assets/star2.png')",
         menu: "url('/src/assets/menu.svg')",
+        dashboard_user: "url('/src/assets/uicon-dashboard.svg')",
       },
     },
     fontFamily: {
