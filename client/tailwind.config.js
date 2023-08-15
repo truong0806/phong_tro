@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{html,js}', 'public/index.html'],
+  content: ['./src/**/*.{html,js,svg}', 'public/index.html'],
 
   theme: {
     backgroundSize: {
@@ -25,6 +25,10 @@ module.exports = {
       MaxWidth: {
         600: '600px',
         1100: '1100px',
+      },
+      minWidth: {
+        200: '200px',
+        300: '300px',
       },
       backgroundImage: {
         'support-bg': "url('/src/assets/support-bg.jpg')",

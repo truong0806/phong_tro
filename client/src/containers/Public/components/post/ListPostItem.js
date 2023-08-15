@@ -31,7 +31,7 @@ const ListPostItem = ({
       {images?.length > 4 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
-          className="w-full md:w-2/5 h-[245px] md:gap-[2px] items-center justify-center relative cursor-pointerv "
+          className="w-full md:w-2/5 h-[240px] md:gap-[2px] items-center justify-center relative cursor-pointerv "
         >
           {
             images
@@ -42,7 +42,7 @@ const ListPostItem = ({
                     key={index}
                     src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
                     data-src={i}
-                    className="lazyload  lazy object-cover md:object-cover h-[245px]  w-full  "
+                    className="lazyload  lazy object-cover md:object-cover h-[240px]  w-full  "
                     //loading="lazy"
                   />
                 );

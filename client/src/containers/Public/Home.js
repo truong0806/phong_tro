@@ -13,10 +13,8 @@ function Home() {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    setTimeout(() => {
-      isLoggedIn && dispatch(actions.getUser());
-    }, 1000);
-  }, [isLoggedIn, dispatch]);
+    isLoggedIn && dispatch(actions.getUser());
+  });
 
   useEffect(() => {
     setIsLoading(false);
@@ -28,12 +26,16 @@ function Home() {
       setIsLoading(true);
     }, 1000);
     // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn]);
   return (
     <>
       {isLoading ? (
         <div className="w-full flex-col items-left  ">
-          <Header linkRef={linkRef} setLoading={setIsLoading} />
+          <Header
+            linkRef={linkRef}
+            setLoading={setIsLoading}
+            loading={isLoading}
+          />
           <Navigation categories={categories} />
           <div className="w-5/6 flex flex-col justify-center items-center my-[10px] mx-auto">
             <Search />
