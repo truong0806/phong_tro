@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../../assets/logoWithoutBg.png';
-import { Button } from '../../../components';
+import { Button, User } from '../../../components';
 import icons from '../../../ultils/icons';
 import { path } from '../../../ultils/constains';
 import * as actions from '../../../store/action';
@@ -22,8 +22,6 @@ function Header({ setLoading, loading }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isShowMenu, setIsShowMenu] = useState(false);
-  console.log('🚀 ~ file: Header.js:24 ~ Header ~ loading:', loading);
-  const { userData } = useSelector((state) => state.user);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const goRegister = useCallback(() => {
@@ -93,30 +91,7 @@ function Header({ setLoading, loading }) {
         )}
         {isLoggedIn && (
           <div className="cursor-pointer relative right-0 w-full  flex items-center gap-1 mt-[5px]">
-            <div className="flex flex-row justify-center left-2 absolute w-[240px] h-[70px] mt-[5px] ">
-              <img
-                className="w-[40px] h-[40px] justify-center items-center mt-[12px] rounded-[50%] mr-[10px]"
-                src="https://phongtro123.com/images/default-user.png"
-              ></img>
-              <div className="flex flex-col w-4/5 ">
-                <span className="text-[1.2rem]">
-                  Xin chào, {loading ? <strong>{userData.name}</strong> : '...'}
-                </span>
-                <span>
-                  Số điện thoại:{' '}
-                  {loading ? <strong>{userData.phone}</strong> : '...'}
-                </span>
-                <span>
-                  TK chính:
-                  {loading ? (
-                    <strong>{userData.phone ? userData.phone : 0}</strong>
-                  ) : (
-                    '...'
-                  )}
-                </span>
-                <span className="text-[0.9rem]"></span>
-              </div>
-            </div>
+            <User loading={loading} />
             <Button
               margin="absolute right-[380px]"
               fontW="font-normal text-[14px] h-[40px]"

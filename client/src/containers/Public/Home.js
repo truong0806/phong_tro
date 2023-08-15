@@ -14,7 +14,7 @@ function Home() {
 
   useEffect(() => {
     isLoggedIn && dispatch(actions.getUser());
-  });
+  }, [dispatch]);
 
   useEffect(() => {
     setIsLoading(false);

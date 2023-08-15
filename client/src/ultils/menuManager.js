@@ -2,7 +2,7 @@ const menuManager = [
   {
     id: 1,
     text: 'Đăng tin cho thuê',
-    path: '/system/create-new',
+    path: '/quan-ly/dang-tin-moi',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

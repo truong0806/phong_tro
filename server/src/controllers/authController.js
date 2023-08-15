@@ -2,7 +2,6 @@ import * as authService from '../service/auth'
 
 export const register = async (req, res) => {
     const { phone, name, password } = req.body
-    console.log("🚀 ~ file: authController.js:5 ~ register ~ phone:", phone)
     try {
         if (!phone || !password || !name) return res.status(400).json({ err: 1, msg: "Missing input" })
         const isCorrectphones = /^-?[\d.]+(?:e-?\d+)?$/.test(phone);

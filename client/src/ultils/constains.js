@@ -12,6 +12,8 @@ export const path = {
   TIM_NGUOI_O_GHEP: 'tim-nguoi-o-ghep',
   DETAIL_POST_TITLE__POSTID: 'chi-tiet/:title/:postid',
   SEARCH: 'search',
+  SYSTEM: '/quan-ly/*',
+  CREATE_NEW_POST: 'dang-tin-moi',
 };
 
 export const text = {

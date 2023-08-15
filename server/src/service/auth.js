@@ -43,9 +43,9 @@ export const registerService = ({ phone, password, name }) =>
         jwt.sign(
           { id: response[0].id, phone: response[0].phone },
           process.env.SECRET_KEY,
-            {
+          {
             expiresIn: '2d',
-          }
+          },
         )
 
       resolve({
@@ -76,10 +76,9 @@ export const loginService = ({ phone, password }) =>
         jwt.sign(
           { id: response.id, phone: response.phone },
           process.env.SECRET_KEY,
-          // {
-          //   algorithm: 'RS256',
-          //   expiresIn: '2d',
-          // },
+          {
+            expiresIn: '30m',
+          },
         )
       resolve({
         err: token ? 0 : 2,

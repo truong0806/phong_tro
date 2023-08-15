@@ -11,6 +11,8 @@ import {
   ForgotPassword,
 } from './containers/Public';
 import { path } from './ultils/constains';
+import { System } from './containers/System';
+import CreatePost from './containers/System/CreatePost';
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
           <Route path={path.REGISTER} element={<Register />} />
           <Route path={path.LOGIN} element={<Login />} />
           <Route path={path.FORGOTPASSWORD} element={<ForgotPassword />} />
+        </Route>
+        <Route path={path.SYSTEM} element={<System />}>
+          <Route path={path.CREATE_NEW_POST} element={<CreatePost />} />
         </Route>
       </Routes>
     </div>
