@@ -6,15 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
 
 function Home() {
-  const [isLoading, setIsLoading] = useState(false);
+ 
   const dispatch = useDispatch();
   const linkRef = useRef();
-  const { categories } = useSelector((state) => state.app);
   const { isLoggedIn } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    isLoggedIn && dispatch(actions.getUser());
-  }, [dispatch]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(false);
@@ -36,7 +32,7 @@ function Home() {
             setLoading={setIsLoading}
             loading={isLoading}
           />
-          <Navigation categories={categories} />
+          <Navigation isAdmin={false}/>
           <div className="w-5/6 flex flex-col justify-center items-center my-[10px] mx-auto">
             <Search />
             <Outlet />

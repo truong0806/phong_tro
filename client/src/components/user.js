@@ -1,34 +1,91 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../store/action';
+import { path } from '../ultils/constains';
+import { Navigate } from 'react-router-dom';
+import CopyButton from './CopyButton';
 
-const User = ({ loading }) => {
-  const { userData } = useSelector((state) => state.user);
+const User = ({ inSideBar }) => {
+  const dispatch = useDispatch();
+  const { userData, msg } = useSelector((state) => state.user);
+  console.log('🚀 ~ file: user.js:10 ~ User ~ msg:', msg);
+  const [isLoading, setIsLoading] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    setIsLoading(false);
+    setTimeout(() => {
+      if (msg && msg === 'Access token expired') {
+        dispatch(actions.logout());
+        return <Navigate to={`/auth/${path.LOGIN}`} replace={true} />;
+      } else {
+        isLoggedIn && dispatch(actions.getUser());
+        setIsLoading(true);
+      }
+    });
+  }, [dispatch, isLoggedIn]);
   return (
-      <div className="flex flex-row justify-center left-2 absolute w-[240px] h-[70px] mt-[5px] ">
+    <div className="mt-[5px] flex flex-col">
+      <div
+        className={`${
+          inSideBar
+            ? 'flex flex-row w-full'
+            : 'z-60 flex flex-row justify-center left-2  w-[240px] h-[70px] '
+        }`}
+      >
         <img
-          className="w-[40px] h-[40px] justify-center items-center mt-[12px] rounded-[50%] mr-[10px]"
+          className={`${
+            inSideBar
+              ? 'w-[50px] h-[50px] rounded-[50%] '
+              : 'w-[40px] h-[40px] justify-center items-center mt-[6px] rounded-[50%] mr-[10px]'
+          }`}
           src={
             userData.avatar || 'https://phongtro123.com/images/default-user.png'
           }
         ></img>
-        <div className="flex flex-col w-4/5 ">
+        <div
+          className={
+            inSideBar
+              ? 'w-full flex flex-col min-h-[60px]  mt-2 ml-3'
+              : 'flex flex-col w-4/5'
+          }
+        >
           <span className="text-[1.2rem]">
-            Xin chào, {loading ? <strong>{userData.name}</strong> : '...'}
-          </span>
-          <span>
-            Số điện thoại: {loading ? <strong>{userData.phone}</strong> : '...'}
-          </span>
-          <span>
-            TK chính:
-            {loading ? (
-              <strong>{userData.phone ? userData.phone : 0}</strong>
+            {inSideBar ? '' : 'Xin chào,'}{' '}
+            {isLoading ? (
+              <strong className="whitespace-nowrap">{userData.name}</strong>
             ) : (
               '...'
             )}
           </span>
+          <span className="mt-1 gap-1 flex flex-row whitespace-nowrap">
+            {inSideBar ? '' : 'Số điện thoại: '}
+            {isLoading ? (
+              <CopyButton valueCopy={userData.phone} text={userData.phone} />
+            ) : (
+              '...'
+            )}
+          </span>
+
           <span className="text-[0.9rem]"></span>
         </div>
       </div>
+      {inSideBar ? (
+        <div className=" p-1 flex flex-col  mb-[14px] gap-2">
+          <span className="whitespace-nowrap flex flex-row  text-ellipsis w-[150px]">
+            Mã thành viên:{' '}
+            <b className=" text-ellipsis overflow-hidden">
+              <CopyButton valueCopy={userData.id} text={userData.id} />
+            </b>
+          </span>
+          <span>
+            TK Chính: <b>0</b>
+          </span>
+        </div>
+      ) : (
+        ''
+      )}
+    </div>
   );
 };
 

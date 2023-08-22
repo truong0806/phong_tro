@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { ListPost, Pagination, SlideBar } from '../index';
 import slug from 'slug';
 
-function SearchDetail() {
+function SearchDetail( ) {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [categoryCode, setcategoryCode] = useState('none');
@@ -19,7 +19,7 @@ function SearchDetail() {
     setLoading(false);
 
     const category = categories?.find((item) => {
-      return `/${slug(item.value)}` === location.pathname;
+      return `/${slug(item.value)}` === location?.pathname;
     });
     setCategoryCurrent(category);
     if (category) {

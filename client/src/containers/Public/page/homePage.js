@@ -14,7 +14,7 @@ function HomePage() {
   useEffect(() => {
     setLoading(false);
     const category = categories?.find((item) => {
-      return `/${slug(item.value)}` === location.pathname;
+      return `/${slug(item.value)}` === location?.pathname;
     });
     setCategoryCurrent(category);
     if (category) {

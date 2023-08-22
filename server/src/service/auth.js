@@ -77,7 +77,7 @@ export const loginService = ({ phone, password }) =>
           { id: response.id, phone: response.phone },
           process.env.SECRET_KEY,
           {
-            expiresIn: '30m',
+            expiresIn: '2d',
           },
         )
       resolve({

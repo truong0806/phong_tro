@@ -4,10 +4,10 @@ import { path } from '../../../ultils/constains';
 
 const Header = () => {
   return (
-    <div className="w-full fixed">
-      <nav className="bg-[#055699] h-[45px] w-full shadow-md flex  first-line:flex-row text-[#fff]">
+    <div className="w-full fixed left-0">
+      <nav className="bg-secondary1 h-[45px] w-full shadow-md flex  first-line:flex-row text-[#fff]">
         <Link
-          className=" text-[1rem] flex font-bold px-[15px] py-[0.75rem]  w-[200px]"
+          className=" text-[1rem] flex font-bold px-[15px] py-[0.75rem]  w-[200px] justify-center items-center"
           to={path.HOME}
           replace={true}
         >
@@ -61,7 +61,7 @@ const Header = () => {
                   Ở ghép
                 </Link>
               </li>
-              <li className="">
+              <li className="hover:text-[#f90]">
                 <Link href="https://phongtro123.com/bang-gia-dich-vu">
                   Bảng giá dịch vụ
                 </Link>

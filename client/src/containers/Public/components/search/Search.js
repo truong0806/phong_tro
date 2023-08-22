@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { SearchItem } from '../../../../components';
 import { SearchPopup } from '../../index';
 import icons from '../../../../ultils/icons';
-import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../../../store/action';
+import { useSelector } from 'react-redux';
 
 import {
   getCodesArea,
@@ -25,7 +24,6 @@ const {
 
 function Search() {
   const location = useLocation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState({
     categories: { name: 'Phòng trọ, nhà trọ', code: '' },
@@ -41,7 +39,7 @@ function Search() {
     (state) => state.app
   );
   useEffect(() => {
-    if (!location.pathname.includes(path.SEARCH)) {
+    if (!location?.pathname.includes(path.SEARCH)) {
       setSelectedValue({
         categories: { name: 'Phòng trọ, nhà trọ', code: '' },
         provinces: { name: 'Toàn quốc', code: 'abc' },

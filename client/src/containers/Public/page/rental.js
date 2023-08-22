@@ -20,7 +20,7 @@ function RentalApartment() {
     setLoading(false);
 
     const category = categories?.find((item) => {
-      return `/${slug(item.value)}` === location.pathname;
+      return `/${slug(item.value)}` === location?.pathname;
     });
     setTimeout(() => {
       setCategoryCurrent(category);

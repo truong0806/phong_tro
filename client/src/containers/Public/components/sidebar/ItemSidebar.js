@@ -47,7 +47,7 @@ const ItemSidebar = ({
       setLoading(true);
     });
     navigate({
-      pathname: location.pathname,
+      pathname: location?.pathname,
       search: createSearchParams({ [type]: code }).toString(),
     });
   };
