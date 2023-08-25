@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{html,js,svg}', 'public/index.html'],
+  content: [
+    './src/**/*.{html,js,svg}',
+    'public/index.html',
+    './node_modules/flowbite/**/*.js',
+  ],
 
   theme: {
     backgroundSize: {
@@ -54,5 +58,5 @@ module.exports = {
       desktop: '1280px',
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };

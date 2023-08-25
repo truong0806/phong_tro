@@ -132,10 +132,9 @@ function Header({ setLoading, loading }) {
             <div
               className={`${
                 isShowMenu ? 'flex' : 'hidden'
-              } flex-col  absolute top-[20px] min-w-200 drop-shadow-xl bg-white shadow-md rounded-md py-[15px] px-[20px] right-[80px] z-50`}
+              } flex-col  absolute top-[50px] min-w-200 drop-shadow-xl bg-white shadow-md rounded-md py-[15px] px-[20px] right-[80px] z-50`}
             >
               {menuManager?.map((item) => {
-                console.log(item.icon);
                 return (
                   <Link
                     className="py-[10px] items-center text-[1rem] flex flex-row text-[#1266dd] hover:text-[#f60]"

@@ -3,10 +3,10 @@ import { apiUser } from '../../service/user';
 export const getUser = () => async (dispatch) => {
   try {
     const response = await apiUser();
-    console.log(
-      '🚀 ~ file: user.js:8 ~ getUser ~ response:',
-      response.data.response
-    );
+    // console.log(
+    //   '🚀 ~ file: user.js:8 ~ getUser ~ response:',
+    //   response.data.response
+    // );
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_USER,

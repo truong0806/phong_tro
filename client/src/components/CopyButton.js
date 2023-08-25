@@ -12,7 +12,7 @@ const CopyButton = ({ valueCopy, text }) => {
   };
 
   return (
-    <div onClick={copyToClipboard} class=" cursor-pointer w-full">
+    <div onClick={copyToClipboard} className=" cursor-pointer w-full">
       {copyNotification ? (
         <span
           className={`${

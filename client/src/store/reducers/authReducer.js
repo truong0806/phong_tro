@@ -1,6 +1,8 @@
 import actionTypes from '../action/actionTypes';
 
-const initState = {
+const initState = 
+
+{
   isLoggedIn: false,
   token: null,
   phone: '',
@@ -16,7 +18,7 @@ const authReducer = (state = initState, action) => {
         ...state,
         isLoggedIn: true,
         token: action.data,
-        phone: action.data
+        phone: action.data,
       };
     case actionTypes.REGISTER_FAIL:
     case actionTypes.LOGIN_FAIL:
@@ -34,7 +36,11 @@ const authReducer = (state = initState, action) => {
         msg: '',
         token: null,
       };
-
+    case actionTypes.REFRESH_TOKEN:
+      return {
+        ...state,
+        user: { ...user, accessToken: payload },
+      };
     default:
       return state;
   }

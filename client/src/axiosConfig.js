@@ -3,6 +3,11 @@ import axios from 'axios';
 const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
 });
+const axiosPrivate = axios.create({
+  baseURL: process.env.REACT_APP_SERVER_URL,
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true,
+});
 
 instance.interceptors.request.use(
   function (config) {
