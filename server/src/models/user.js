@@ -10,6 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Post, { foreignKey: 'userId', as: 'users' })
     }
+    static associate(models) {
+      User.hasOne(models.RefreshToken, {
+        foreignKey: 'id',
+        as: 'users',
+      })
+    }
   }
   User.init(
     {

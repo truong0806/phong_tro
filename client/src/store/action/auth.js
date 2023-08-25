@@ -7,7 +7,7 @@ export const register = (payload) => async (dispatch) => {
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.REGISTER_SUCCESS,
-        data: response.data.token,
+        data: response.data,
       });
     } else {
       dispatch({
@@ -23,13 +23,12 @@ export const register = (payload) => async (dispatch) => {
   }
 };
 export const login = (payload) => async (dispatch) => {
-   try {
+  try {
     const response = await apiLogin(payload);
-    // console.log(response)
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.LOGIN_SUCCESS,
-        data: response.data.token,
+        data: response.data,
       });
     } else {
       dispatch({
@@ -48,3 +47,9 @@ export const login = (payload) => async (dispatch) => {
 export const logout = () => ({
   type: actionTypes.LOGOUT,
 });
+export const refreshToken = (accessToken, refreshToken) => (dispatch) => {
+  dispatch({
+    type: actionTypes.REFRESH_TOKEN,
+    payload: { accessToken, refreshToken },
+  });
+};

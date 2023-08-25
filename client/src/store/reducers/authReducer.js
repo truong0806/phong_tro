@@ -1,10 +1,9 @@
 import actionTypes from '../action/actionTypes';
 
-const initState = 
-
-{
+const initState = {
   isLoggedIn: false,
-  token: null,
+  accessToken: null,
+  refreshToken: null,
   phone: '',
   msg: '',
   update: false,
@@ -17,7 +16,8 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        token: action.data,
+        accessToken: action.data.accessToken,
+        refreshToken: action.data.refreshToken,
         phone: action.data,
       };
     case actionTypes.REGISTER_FAIL:
@@ -26,7 +26,8 @@ const authReducer = (state = initState, action) => {
         ...state,
         isLoggedIn: false,
         msg: action.data,
-        token: null,
+        accessToken: null,
+        refreshToken: null,
         update: !state.update,
       };
     case actionTypes.LOGOUT:
@@ -34,12 +35,15 @@ const authReducer = (state = initState, action) => {
         ...state,
         isLoggedIn: false,
         msg: '',
-        token: null,
+        accessToken: null,
+        refreshToken: null,
       };
     case actionTypes.REFRESH_TOKEN:
       return {
         ...state,
-        user: { ...user, accessToken: payload },
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
+        isLoggedIn: true,
       };
     default:
       return state;

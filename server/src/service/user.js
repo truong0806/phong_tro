@@ -7,7 +7,7 @@ export const userService = (id) =>
       const response = await db.User.findOne({
         where: { id },
         raw: true,
-        attributes: { exclude: ['password', 'publickey'] },
+        attributes: { exclude: ['password'] },
       })
       resolve({
         err: response ? 0 : 1,

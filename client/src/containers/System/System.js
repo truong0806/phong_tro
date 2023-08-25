@@ -9,7 +9,7 @@ import Breadcrumb from './components/Breadcrumb';
 const System = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const location = useLocation();
-  if (!isLoggedIn)
+  if (!isLoggedIn || isLoggedIn === 'false')
     return <Navigate to={`/auth/${path.LOGIN}`} replace={true} />;
   const currentPage = menuManager.filter((item) => {
     return item.path === location.pathname;

@@ -1,22 +1,24 @@
 import axios from 'axios';
+import reducStore from './redux';
+import TokenService from './service/token';
+import * as actions from './store/action';
+const { store, persistor } = reducStore();
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
-});
-const axiosPrivate = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL,
-  headers: { 'Content-Type': 'application/json' },
-  withCredentials: true,
 });
 
 instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    let token =
+    let accessToken =
       localStorage.getItem('persist:auth') &&
-      JSON.parse(localStorage.getItem('persist:auth'))?.token.slice(1, -1);
+      JSON.parse(localStorage.getItem('persist:auth'))?.accessToken.slice(
+        1,
+        -1
+      );
     config.headers = {
-      authorization: token ? `Bearer ${token}` : null,
+      authorization: accessToken ? `Bearer ${accessToken}` : null,
     };
     return config;
   },
@@ -26,14 +28,41 @@ instance.interceptors.request.use(
 );
 
 // Add a response interceptor
+
+const { dispatch } = store;
 instance.interceptors.response.use(
-  (response) =>
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    response,
-  (error) =>
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    Promise.reje
+  (res) => {
+    return res;
+  },
+  async (err) => {
+    const originalConfig = err.config;
+    if (originalConfig.url !== '/auth/login' && err.response) {
+      // Access Token was expired
+      if (err.response.status === 401 && !originalConfig._retry) {
+        originalConfig._retry = true;
+        console.log(
+          '🚀 ~ file: setupInterceptors.js:23 ~ refreshToken:',
+          TokenService.getLocalRefreshToken()
+        );
+        try {
+          const rs = await instance.post('/auth/refreshtoken', {
+            refreshToken: TokenService.getLocalRefreshToken(),
+          });
+
+          const { accessToken } = rs.data;
+          const { refreshToken } = rs.data;
+
+          dispatch(actions.refreshToken(accessToken, refreshToken));
+          TokenService.updateLocalAccessToken(accessToken);
+
+          return instance(originalConfig);
+        } catch (_error) {
+          return Promise.reject(_error);
+        }
+      }
+    }
+
+    return Promise.reject(err);
+  }
 );
 export default instance;

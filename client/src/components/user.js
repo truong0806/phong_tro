@@ -14,7 +14,7 @@ const User = ({ inSideBar }) => {
   useEffect(() => {
     setIsLoading(false);
     setTimeout(() => {
-      if (msg && msg === 'Access token expired') {
+      if (msg && msg === 'AccessToken expired') {
         dispatch(actions.logout());
         return <Navigate to={`/auth/${path.LOGIN}`} replace={true} />;
       } else {

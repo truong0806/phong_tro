@@ -12,7 +12,7 @@ const Navigation = ({ isAdmin }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actions.getCategories());
-  });
+  },[dispatch]);
   const [isPinned, setIsPinned] = useState(false);
   const { categories } = useSelector((state) => state.app);
   useEffect(() => {

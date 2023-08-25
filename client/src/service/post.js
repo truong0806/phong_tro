@@ -18,7 +18,7 @@ export const apiGetPostsLimit = (query) =>
         method: 'get',
         url: `/post/limit`,
         params: query,
-        headers: { Authorization: `${JSON.parse(localStorage.getItem('persist:auth')).token.replace(/["']+/g, '')}` }
+        headers: { Authorization: `${JSON.parse(localStorage.getItem('persist:auth')).accessToken.replace(/["']+/g, '')}` }
       });
       resolve(response);
     } catch (error) {

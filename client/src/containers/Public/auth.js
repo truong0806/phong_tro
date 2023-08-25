@@ -18,7 +18,7 @@ function Auth() {
     }, 1000);
 
     return () => clearTimeout(timeout);
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

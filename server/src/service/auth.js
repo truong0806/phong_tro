@@ -1,9 +1,9 @@
-import axios from 'axios'
 import db from '../models'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
 import { v4 } from 'uuid'
+import { createToken } from '../middleware/refreshToken'
 require('dotenv').config()
 
 const hashPassword = (password) =>
@@ -24,7 +24,6 @@ function generateKeyPair() {
 
   return { publicKey, privateKey }
 }
-const { publicKey, privateKey } = generateKeyPair()
 export const registerService = ({ phone, password, name }) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -38,22 +37,23 @@ export const registerService = ({ phone, password, name }) =>
           // publickey: publicKey,
         },
       })
-      const token =
+      const accessToken =
         response[1] &&
         jwt.sign(
           { id: response[0].id, phone: response[0].phone },
           process.env.SECRET_KEY,
           {
-            expiresIn: '2d',
+            expiresIn: `${process.env.JWT_EXPIRATION}s`,
           },
         )
-
+      let refreshToken = await createToken(response[0].phone, response[0].id)
       resolve({
-        err: token ? 0 : 2,
-        msg: token
+        err: accessToken ? 0 : 2,
+        msg: accessToken
           ? 'Register is successfully !'
           : 'Phone number has been aldready used !',
-        token: token || null,
+        accessToken: accessToken || null,
+        refreshToken: refreshToken || null,
         // publicKey: publicKey,
         // privateKey: privateKey,
       })
@@ -63,7 +63,6 @@ export const registerService = ({ phone, password, name }) =>
   })
 export const loginService = ({ phone, password }) =>
   new Promise(async (resolve, reject) => {
-    console.log(phone)
     try {
       const response = await db.User.findOne({
         where: { phone },
@@ -71,23 +70,26 @@ export const loginService = ({ phone, password }) =>
       })
       const isCorrectPassword =
         response && bcrypt.compareSync(password, response.password)
-      const token =
+      const accessToken =
         isCorrectPassword &&
         jwt.sign(
           { id: response.id, phone: response.phone },
           process.env.SECRET_KEY,
           {
-            expiresIn: '2d',
+            expiresIn: `${process.env.JWT_EXPIRATION}s`,
           },
         )
+      const refreshToken = await createToken(response.phone, response.id)
+      console.log(process.env.JWT_EXPIRATION)
       resolve({
-        err: token ? 0 : 2,
-        msg: token
+        err: accessToken ? 0 : 2,
+        msg: accessToken
           ? 'Login is successfully !'
           : response
           ? 'Password is wrong'
           : 'Phone number is not found',
-        token: token || null,
+        accessToken: accessToken || null,
+        refreshToken: refreshToken || null,
       })
     } catch (error) {
       reject(error)
