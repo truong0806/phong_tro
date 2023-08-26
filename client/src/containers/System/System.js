@@ -5,7 +5,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Header, SideBar } from './components';
 import menuManager from '../../ultils/menuManager';
 import Breadcrumb from './components/Breadcrumb';
-
+import { text } from '../../ultils/constains';
 const System = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const location = useLocation();
@@ -19,11 +19,12 @@ const System = () => {
       <Header />
       <div className="flex w-full h-full flex-auto">
         <SideBar />
-        <div className="flex-auto shadow-md h-full pt-[60px] ml-[200px]  bg-white ">
+        <div className="flex-auto shadow-md h-full pt-[60px] ml-[200px] px-[42px] bg-white ">
           <Breadcrumb
             currentPage={currentPage[0].text}
             fatherPage={'Quản lý'}
           />
+          
           <Outlet />
         </div>
       </div>

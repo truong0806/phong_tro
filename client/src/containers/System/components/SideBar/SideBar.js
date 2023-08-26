@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button, User } from '../../../../components';
 import MenuAdmin from './MenuAdmin';
-
-
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
   return (
@@ -19,15 +18,17 @@ const SideBar = () => {
             textColor={''}
             padding={'py-[0.25rem] px-[0.5rem]'}
           />
-          <Button
-            width={
-              'text-[0.875rem] rounded-[0.2rem] hover:bg-[#c82333] border-[#bd2130]'
-            }
-            text={'Đăng tin'}
-            bgcolor={'bg-[#dc3545]'}
-            textColor={'text-white'}
-            padding={'py-[0.25rem] px-[0.5rem]'}
-          />
+          <Link to={'/quan-ly/dang-tin-moi'}>
+            <Button
+              width={
+                'text-[0.875rem] rounded-[0.2rem] hover:bg-[#c82333] border-[#bd2130]'
+              }
+              text={'Đăng tin'}
+              bgcolor={'bg-[#dc3545]'}
+              textColor={'text-white'}
+              padding={'py-[0.25rem] px-[0.5rem]'}
+            />
+          </Link>
         </div>
         <div className="p-4 flex text-[0.9rem]  bg-[#fff9e6] py-[10px] pt-[10px] pb-[7px] mb-[10px] rounded-[5px] ">
           <div className="mt-[5px] opacity-1">

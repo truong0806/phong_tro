@@ -20,6 +20,10 @@ export const text = {
   HOME_TITLE: 'Kênh thông tin Phòng Trọ số 1 Việt Nam',
   PAGE_DESCRIPTION:
     'Kênh thông tin Phòng Trọ số 1 Việt Nam - Website đăng tin cho thuê phòng trọ, nhà nguyên căn, căn hộ, ở ghép nhanh, hiệu quả với 100.000+ tin đăng và 2.500.000 lượt xem mỗi tháng.',
+  NOTE_ALERT: `Nếu bạn đã từng đăng tin trên Phongtro123.com, hãy sử dụng chức năng
+  ĐẨY TIN / GIA HẠN / NÂNG CẤP VIP trong mục QUẢN LÝ TIN ĐĂNG để làm
+  mới, đẩy tin lên cao thay vì đăng tin mới. Tin đăng trùng nhau sẽ
+  không được duyệt.`,
 };
 
 export const location = [
