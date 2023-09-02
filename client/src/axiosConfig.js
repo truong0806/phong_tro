@@ -27,8 +27,6 @@ instance.interceptors.request.use(
   }
 );
 
-// Add a response interceptor
-
 const { dispatch } = store;
 instance.interceptors.response.use(
   (res) => {
@@ -48,7 +46,6 @@ instance.interceptors.response.use(
           const rs = await instance.post('/auth/refreshtoken', {
             refreshToken: TokenService.getLocalRefreshToken(),
           });
-
           const { accessToken } = rs.data;
           const { refreshToken } = rs.data;
 

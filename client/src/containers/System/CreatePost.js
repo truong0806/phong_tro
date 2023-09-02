@@ -77,6 +77,7 @@ const CreatePost = () => {
           <div className="w-[30%] bg-blue-600 h-[200px] "></div>
         </div>
       </form>
+      
     </div>
   );
 };

@@ -7,9 +7,10 @@ import CopyButton from './CopyButton';
 
 const User = ({ inSideBar }) => {
   const dispatch = useDispatch();
-  const { userData, msg } = useSelector((state) => state.user);
+  const { userData , msg } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
+  console.log("🚀 ~ file: user.js:13 ~ User ~ msg:", msg)
 
   useEffect(() => {
     setIsLoading(false);
