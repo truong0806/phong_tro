@@ -13,6 +13,10 @@ module.exports = {
     },
 
     extend: {
+      boxShadow: {
+        '3xl': '0 0 0 0.2rem rgba(0,123,255,.25)',
+      },
+
       width: {
         1100: '1100px',
       },

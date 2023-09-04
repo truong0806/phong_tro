@@ -18,11 +18,13 @@ export const getUser = () => async (dispatch) => {
         type: actionTypes.GET_USER,
         msg: response.data.msg,
       });
+      dispatch({ type: actionTypes.LOGOUT });
     }
   } catch (error) {
     dispatch({
       type: actionTypes.GET_USER,
       userData: null,
     });
+    dispatch({ type: actionTypes.LOGOUT });
   }
 };

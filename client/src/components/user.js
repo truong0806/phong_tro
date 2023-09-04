@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../store/action';
-import { path } from '../ultils/constains';
-import { Navigate } from 'react-router-dom';
 import CopyButton from './CopyButton';
 
 const User = ({ inSideBar }) => {
   const dispatch = useDispatch();
-  const { userData , msg } = useSelector((state) => state.user);
+  const { userData, msg } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
-  console.log("🚀 ~ file: user.js:13 ~ User ~ msg:", msg)
+  console.log('🚀 ~ file: user.js:13 ~ User ~ msg:', msg);
 
   useEffect(() => {
     setIsLoading(false);
-    setTimeout(() => {
-      if (msg && msg === 'AccessToken expired') {
-        dispatch(actions.logout());
-        return <Navigate to={`/auth/${path.LOGIN}`} replace={true} />;
-      } else {
-        isLoggedIn && dispatch(actions.getUser());
+    isLoggedIn &&
+      setTimeout(() => {
+        dispatch(actions.getUser());
         setIsLoading(true);
-      }
-    });
+      }, 1000);
   }, [dispatch, isLoggedIn]);
   return (
     <div className="mt-[5px] flex flex-col">
@@ -42,7 +36,8 @@ const User = ({ inSideBar }) => {
           src={
             userData.avatar || 'https://phongtro123.com/images/default-user.png'
           }
-        ></img>
+          alt=''
+        />
         <div
           className={
             inSideBar

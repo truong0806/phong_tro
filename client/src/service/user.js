@@ -9,13 +9,7 @@ export const apiUser = () =>
       });
       resolve(response);
     } catch (error) {
-      const auth = {
-        accessTokken: 'null',
-        isLoggin: "'false",
-        refreshToken: 'null',
-      };
-      
-      await localStorage.setItem('persist:auth', JSON.stringify(auth));
+     
       reject(error);
     }
   });

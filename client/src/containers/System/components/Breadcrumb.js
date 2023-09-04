@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Breadcrumb = ({ currentPage, fatherPage }) => {
   return (
-    <div className='mb-[1rem]'>
+    <div className="mb-[1rem]">
       <nav
         className="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
         aria-label="Breadcrumb"
@@ -11,7 +11,6 @@ const Breadcrumb = ({ currentPage, fatherPage }) => {
         <ol className="flex flex-row items-center justify-center space-x-1 md:space-x-3">
           <li className="  items-center ">
             <Link
-            
               to={'/'}
               className="flex flex-row items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
             >
@@ -37,15 +36,14 @@ const Breadcrumb = ({ currentPage, fatherPage }) => {
                 viewBox="0 0 6 10"
               >
                 <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m1 9 4-4-4-4"
                 />
               </svg>
               <a
-                href="#"
+                href="/"
                 className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"
               >
                 {fatherPage}
@@ -63,9 +61,9 @@ const Breadcrumb = ({ currentPage, fatherPage }) => {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m1 9 4-4-4-4"
                 />
               </svg>

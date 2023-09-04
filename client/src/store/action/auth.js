@@ -35,12 +35,14 @@ export const login = (payload) => async (dispatch) => {
         type: actionTypes.LOGIN_FAIL,
         data: response.data.msg,
       });
+      dispatch({ type: actionTypes.LOGOUT });
     }
   } catch (error) {
     dispatch({
       type: actionTypes.LOGIN_FAIL,
       data: null,
     });
+    dispatch({ type: actionTypes.LOGOUT });
   }
 };
 

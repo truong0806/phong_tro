@@ -2,7 +2,7 @@ import axios from 'axios';
 import reducStore from './redux';
 import TokenService from './service/token';
 import * as actions from './store/action';
-const { store, persistor } = reducStore();
+const { store } = reducStore();
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
@@ -11,6 +11,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
+
     let accessToken =
       localStorage.getItem('persist:auth') &&
       JSON.parse(localStorage.getItem('persist:auth'))?.accessToken.slice(
