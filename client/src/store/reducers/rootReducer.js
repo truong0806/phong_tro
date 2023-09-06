@@ -6,11 +6,12 @@ import authReducer from './authReducer';
 import userReducer from './userReducer';
 import postReducer from './postReducer';
 import appReducer from './appReducer';
+import provincesReducer from './provincesReducer';
 
 const authConfig = {
   storage,
   key: 'auth',
-  whitelist: ['isLoggedIn', 'accessToken','refreshToken'],
+  whitelist: ['isLoggedIn', 'accessToken', 'refreshToken'],
   stateReconciler: autoMergeLevel2,
 };
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   post: postReducer,
   app: appReducer,
+  provinces: provincesReducer,
 });
 
 export default rootReducer;

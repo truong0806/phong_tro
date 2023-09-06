@@ -55,7 +55,7 @@ const ItemSidebar = ({
     <div
       className={`${
         listNew ? '' : className
-      } lg:block border border-[#dedede] w-[70%] lg:w-full shadow-md rounded-md border-solid bg-white p-5 mb-5`}
+      } lg:block border border-[#dedede] w-[70%] lg:w-full shadow-md rounded-md border-solid bg-white p-[15px] mb-5`}
     >
       <section>
         <div className="mb-4  lg:w-full">

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-clamp-lines": "^3.0.3",
+    "react-select-virtualized": "^5.5.0"
+  }
+}

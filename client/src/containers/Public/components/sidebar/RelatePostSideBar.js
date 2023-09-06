@@ -7,7 +7,7 @@ const RelatePostSideBar = ({ content, listNewPostEff, listNew }) => {
       <li
         className={`${
           listNew && listNewPostEff
-        } overflow-auto lg:max-w-[750px]  lg:w-full  gap-8 lg:gap-1  flex lg:flex-col items-center justify-between pb-[10px]`}
+        } overflow-hidden lg:max-w-[750px]  lg:w-full  gap-8 lg:gap-1  flex lg:flex-col items-center justify-between pb-[10px]`}
         key={'a'}
       >
         {content.length > 0 &&

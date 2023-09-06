@@ -6,7 +6,6 @@ const initState = {
   msg: '',
   areas: [],
   provinces: [],
-  provinces1: [],
   count: 0,
 };
 const appReducer = (state = initState, action) => {

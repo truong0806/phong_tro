@@ -10,6 +10,7 @@ function HomePage() {
   const [categoryCurrent, setCategoryCurrent] = useState({});
   const [categoryCode, setcategoryCode] = useState('none');
   const { categories } = useSelector((state) => state.app);
+ 
 
   useEffect(() => {
     setLoading(false);
@@ -21,6 +22,7 @@ function HomePage() {
       setcategoryCode(category.code);
     }
     setLoading(true);
+    
     // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [location, categories]);
 

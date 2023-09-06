@@ -1,19 +1,35 @@
-import React from 'react';
-import { text } from '../../ultils/constains';
+import React, { useEffect, useState } from 'react';
+import { text, luuY } from '../../ultils/constains';
 import { Button, InputSelect } from '../../components';
 import { InputText } from './components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../store/action';
+import { Select } from 'react-select-virtualized';
 
 const CreatePost = () => {
-  const doituong = ['nam', 'nữ'];
+  const [isLoading, setIsLoading] = useState(false);
+  const doituong = [{ value: 'nam' }, { value: 'nữ' }];
+  const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
-  console.log('🚀 ~ file: CreatePost.js:9 ~ CreatePost ~ userData:', userData);
+  const { categories } = useSelector((state) => state.app);
+  const { provinces1, districts, wards } = useSelector(
+    (state) => state.provinces
+  );
+  useEffect(() => {
+    setIsLoading(false);
+    setTimeout(() => {
+      dispatch(actions.getCategories());
+      dispatch(actions.getLocation());
+      setIsLoading(true);
+    });
+  }, [dispatch]);
   return (
     <div className="z-2150 h-full">
       <div className=" items-center  pb-2 mb-3 ">
         <h1 className="text-[2.5rem] mt-2 py-[1rem]">Đăng tin mới</h1>
         <div className="border-b-2"></div>
       </div>
+      <Select options={provinces1} />
       <div
         className="bg-[#f8d7da] border-[#f5c6cb] text-[#721c24] py-[0.75rem] px-[1.25rem] rounded-[0.25rem] mb-[3rem]"
         role="alert"
@@ -30,10 +46,32 @@ const CreatePost = () => {
             </div>
             <div className="flex flex-col  text-[1rem]">
               <div className="mt-3 gap-2 justify-between flex flex-row">
-                <InputSelect text={'Tỉnh/Thành Phố'} maxW={'max-w-[22%]'} />
-                <InputSelect text={'Quận/Huyện'} maxW={'max-w-[22%]'} />
-                <InputSelect text={'Phường/Xã'} maxW={'max-w-[22%]'} />
-                <InputSelect text={'Đường/Phố'} maxW={'max-w-[22%]'} />
+                <InputSelect
+                  isLoading={isLoading}
+                  text={'Tỉnh/Thành phố'}
+                  array={provinces1}
+                  nameValue={'name'}
+                  maxW={'max-w-[22%]'}
+                />
+                <InputSelect
+                  isLoading={isLoading}
+                  text={'Quận/Huyện'}
+                  array={districts}
+                  nameValue={'name'}
+                  maxW={'max-w-[22%]'}
+                />
+                <InputSelect
+                  isLoading={isLoading}
+                  text={'Phường/Xã'}
+                  array={wards}
+                  nameValue={'name'}
+                  maxW={'max-w-[22%]'}
+                />
+                <InputSelect
+                  isLoading={isLoading}
+                  text={'Đường/Phố'}
+                  maxW={'max-w-[22%]'}
+                />
               </div>
               <InputText label={'Số nhà'} styleInput={'max-w-[22%]'} />
               <InputText
@@ -43,7 +81,12 @@ const CreatePost = () => {
               <div className="mt-5 w-full mb-[30px]">
                 <h3 className="text-[1.75rem] font-bold">Thông tin mô tả</h3>
               </div>
-              <InputSelect text={'Loại chuyên mục'} maxW={'max-w-[50%]'} />
+              <InputSelect
+                array={categories}
+                nameValue={'value'}
+                text={'Loại chuyên mục'}
+                maxW={'max-w-[50%]'}
+              />
               <InputText label={'Tiêu đề'} styleInput={'w-full'} />
               <div className="flex flex-col mb-[14px]">
                 <label className="font-bold">Nội dung mô tả</label>
@@ -108,10 +151,11 @@ const CreatePost = () => {
               </div>
               <InputSelect
                 array={doituong}
+                nameValue={'value'}
                 text={'Đối tượng cho thuê'}
                 maxW={'max-w-[50%]'}
               />
-              
+
               <div className="mt-10 w-full mb-[14px]">
                 <h3 className="text-[1.75rem] font-bold">Hình ảnh</h3>
               </div>
@@ -128,18 +172,18 @@ const CreatePost = () => {
                     >
                       <g
                         fill="#000000"
-                        fill-rule="nonzero"
+                        fillRule="nonzero"
                         stroke="none"
-                        stroke-width="1"
-                        stroke-linecap="butt"
-                        stroke-linejoin="miter"
-                        stroke-miterlimit="10"
-                        stroke-dasharray=""
-                        stroke-dashoffset="0"
-                        font-family="none"
-                        font-weight="none"
-                        font-size="none"
-                        text-anchor="none"
+                        strokeWidth="1"
+                        strokeLinecap="butt"
+                        strokeLinejoin="miter"
+                        strokeMiterlimit="10"
+                        strokeDasharray=""
+                        strokeDashoffset="0"
+                        fontFamily="none"
+                        fontWeight="none"
+                        fontSize="none"
+                        textAnchor="none"
                       >
                         <g transform="scale(8.53333,8.53333)">
                           <path d="M10,5c-0.552,0 -1,0.448 -1,1v1c0,0.552 -0.448,1 -1,1h-5c-0.552,0 -1,0.448 -1,1v15c0,0.552 0.448,1 1,1h24c0.552,0 1,-0.448 1,-1v-15c0,-0.552 -0.448,-1 -1,-1h-5c-0.552,0 -1,-0.448 -1,-1v-1c0,-0.552 -0.448,-1 -1,-1zM15,9c3.866,0 7,3.134 7,7c0,3.866 -3.134,7 -7,7c-3.866,0 -7,-3.134 -7,-7c0,-3.866 3.134,-7 7,-7zM25,10c0.552,0 1,0.448 1,1c0,0.552 -0.448,1 -1,1c-0.552,0 -1,-0.448 -1,-1c0,-0.552 0.448,-1 1,-1zM15,11c-2.76142,0 -5,2.23858 -5,5c0,2.76142 2.23858,5 5,5c2.76142,0 5,-2.23858 5,-5c0,-2.76142 -2.23858,-5 -5,-5z"></path>
@@ -151,10 +195,14 @@ const CreatePost = () => {
                 </div>
               </div>
 
-              <div className="mt-10 w-full mb-[14px]">
+              <div className="mt-10 w-full mb-[28px]">
                 <h3 className="text-[1.75rem] font-bold">Video</h3>
               </div>
               <div className="flex flex-col">
+                <InputText
+                  label={'Video Link (Youtube)'}
+                  styleInput={'w-full border-[#ced4da]'}
+                />
                 <p>Hoặc upload Video từ máy của bạn</p>
                 <div className="mb-[14px] mt-2 border-dashed border-2 border-[#bbb]">
                   <div className="p-[28px] items-center justify-center flex flex-col">
@@ -167,18 +215,18 @@ const CreatePost = () => {
                     >
                       <g
                         fill="#000000"
-                        fill-rule="nonzero"
+                        fillRule="nonzero"
                         stroke="none"
-                        stroke-width="1"
-                        stroke-linecap="butt"
-                        stroke-linejoin="miter"
-                        stroke-miterlimit="10"
-                        stroke-dasharray=""
-                        stroke-dashoffset="0"
-                        font-family="none"
-                        font-weight="none"
-                        font-size="none"
-                        text-anchor="none"
+                        strokeWidth="1"
+                        strokeLinecap="butt"
+                        strokeLinejoin="miter"
+                        strokeMiterlimit="10"
+                        strokeDasharray=""
+                        strokeDashoffset="0"
+                        fontFamily="none"
+                        fontWeight="none"
+                        fontSize="none"
+                        textAnchor="none"
                       >
                         <g transform="scale(5.12,5.12)">
                           <path d="M2,4c-0.55226,0.00006 -0.99994,0.44774 -1,1v4.83203c-0.01785,0.10799 -0.01785,0.21818 0,0.32617v29.67383c-0.01785,0.10799 -0.01785,0.21818 0,0.32617v4.8418c0.00006,0.55226 0.44774,0.99994 1,1h46c0.55226,-0.00006 0.99994,-0.44774 1,-1v-4.83203c0.01785,-0.10799 0.01785,-0.21818 0,-0.32617v-29.67383c0.01785,-0.10799 0.01785,-0.21818 0,-0.32617v-4.8418c-0.00006,-0.55226 -0.44774,-0.99994 -1,-1zM3,6h3v3h-3zM8,6h4v3h-4zM14,6h4v3h-4zM20,6h4v3h-4zM26,6h4v3h-4zM32,6h4v3h-4zM38,6h4v3h-4zM44,6h3v3h-3zM3,11h44v28h-44zM20.94141,18c-0.52926,0.03111 -0.94227,0.46983 -0.94141,1v12c0.00027,0.35997 0.19397,0.69203 0.50718,0.86945c0.31321,0.17742 0.69761,0.17283 1.00649,-0.01203l10,-6c0.30109,-0.18078 0.48529,-0.50623 0.48529,-0.85742c0,-0.35119 -0.1842,-0.67664 -0.48529,-0.85742l-10,-6c-0.14316,-0.08628 -0.30566,-0.1353 -0.47266,-0.14258c-0.03318,-0.00165 -0.06643,-0.00165 -0.09961,0zM22,20.76563l7.05664,4.23438l-7.05664,4.23438zM3,41h3v3h-3zM8,41h4v3h-4zM14,41h4v3h-4zM20,41h4v3h-4zM26,41h4v3h-4zM32,41h4v3h-4zM38,41h4v3h-4zM44,41h3v3h-3z"></path>
@@ -189,13 +237,32 @@ const CreatePost = () => {
                   </div>
                 </div>
               </div>
-              <div className='mt-[42px] mb-[100px] w-full'>
-              <Button  text={'Tiếp tục'} bgcolor={'w-full py-[0.5rem] px-[1rem] text-[1.25rem] bg-[#28a745] border-[#28a745] text-[#fff] font-bold item-center'}/>
-
+              <div className="mt-[42px] mb-[100px] w-full">
+                <Button
+                  text={'Tiếp tục'}
+                  bgcolor={
+                    'w-full h-[27px] py-[0.5rem] px-[1rem] text-[1.25rem] bg-[#28a745] border-[#28a745] text-[#fff] font-bold item-center'
+                  }
+                />
               </div>
             </div>
           </div>
-          <div className="max-w-[30%] w-full bg-blue-600 h-[300px] "></div>
+
+          <div className="max-w-[30%] w-full  ">
+            <div className="flex flex-col bg-blue-600 h-[300px] mb-[30px]"></div>
+            <div className="flex flex-col  mb-[30px] border-[1.3px] border-[#ffeeba] bg-[#fff3cd] rounded-">
+              <div className="p-[17.5px] text-[#856404]">
+                <h4 className="text-[1.5rem] ">Lưu ý khi đăng tin</h4>
+                <ul className="m-[10px] ">
+                  {luuY.map((item, index) => (
+                    <li key={index} className="list-disc mb-[7px]">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>
