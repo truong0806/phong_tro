@@ -35,7 +35,7 @@ function Login() {
   const handleSubmit = async () => {
     const finalinvalids = payload;
     const invalids = validate(finalinvalids, 'Đăng nhập', setInvalidFields);
-    console.log('🚀 ~ file: login.js:39 ~ handleSubmit ~ invalids:', invalids);
+    // console.log('🚀 ~ file: login.js:39 ~ handleSubmit ~ invalids:', invalids);
     if (invalids === 0) {
       dispatch(actions.login(payload));
       Swal.fire('Done', 'Đăng nhập thành công', 'success');

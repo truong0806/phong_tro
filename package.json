@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "react-clamp-lines": "^3.0.3",
-    "react-select-virtualized": "^5.5.0"
+    "react-select-virtualized": "^5.5.0",
+    "react-tailwindcss-select": "^1.8.5"
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index';
 import * as actions from '../../store/action';
@@ -7,7 +7,6 @@ import { PropagateLoader } from 'react-spinners';
 
 function Home() {
   const dispatch = useDispatch();
-  const linkRef = useRef();
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   
@@ -21,14 +20,13 @@ function Home() {
       dispatch(actions.getProvince());
       setIsLoading(true);
     }, 1000);
-    // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
+    //linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [dispatch, isLoggedIn]);
   return (
     <>
       {isLoading ? (
         <div className="w-full flex-col items-left  ">
           <Header
-            linkRef={linkRef}
             setLoading={setIsLoading}
             loading={isLoading}
           />

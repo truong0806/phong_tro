@@ -12,3 +12,4 @@ export const apiProvince = () =>
       reject(error);
     }
   });
+  

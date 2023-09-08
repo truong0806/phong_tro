@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/**/*.{html,js,svg}',
+    './src/**/*.{html,js,svg,jsx,ts,tsx}',
     'public/index.html',
-    './node_modules/flowbite/**/*.js',
+    './node_modules/flowbite/**/*.js',"./node_modules/react-tailwindcss-select/dist/index.esm.js" 
   ],
 
   theme: {
