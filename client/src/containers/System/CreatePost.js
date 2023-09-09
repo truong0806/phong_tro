@@ -1,17 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { text, luuY } from '../../ultils/constains';
 import { Button } from '../../components';
 import { Address, Overview } from './components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/action';
+import { apiUploadImages } from '../../service';
 
 const CreatePost = () => {
+  const { userData } = useSelector((state) => state.user);
+  const [payload, setPayload] = useState({
+    categoryCode: '',
+    title: '',
+    description: '',
+    priceNumber: 0,
+    areaNumber: 0,
+    address: '',
+    images: [],
+    imageCode: '',
+    priceCode: '',
+    areaCode: '',
+    target: '',
+    targetCode: '',
+    province: '',
+  });
+  console.log('🚀 ~ file: CreatePost.js:23 ~ CreatePost ~ payload:', payload);
+
   const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
       dispatch(actions.getCategories());
     });
   }, [dispatch]);
+
   return (
     <div className="z-2150 h-full">
       <div className=" items-center  pb-2 mb-3 ">
@@ -26,9 +46,13 @@ const CreatePost = () => {
       </div>
       <form className="h-full">
         <div className="flex flex-row gap-[3%] ">
-          <div className="flex flex-col  text-[1rem] max-w-[70%]  w-full  ">
-            <Address />
-            <Overview />
+          <div className="flex flex-col  text-[1rem] max-w-[70%]  w-full    ">
+            <Address value={payload} setValue={setPayload} />
+            <Overview
+              userData={userData}
+              value={payload}
+              setValue={setPayload}
+            />
             <div className="mt-[42px] mb-[100px] w-full">
               <Button
                 text={'Tiếp tục'}

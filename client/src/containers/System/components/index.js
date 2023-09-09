@@ -5,3 +5,5 @@ export { default as InputTextReadOnly } from '../../../components/InputTextReadO
 export { default as SelectAddress } from './CreatePost/Address/SelectAddress';
 export { default as Address } from './CreatePost/Address/Address';
 export { default as Overview } from './CreatePost/overview';
+export { default as UploadImages } from './CreatePost/UploadImages';
+export { default as UploadVideos } from './CreatePost/UploadVideos';

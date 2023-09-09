@@ -5,7 +5,7 @@ import {
   apiGetWard,
   apiLocation,
 } from '../../../../../service';
-const Address = () => {
+const Address = ({ value, setValue }) => {
   const [provinces, setProvinces] = useState([]);
   const [apartmentNumber, setApartmentNumber] = useState([]);
   const [street, setStreet] = useState([]);
@@ -50,7 +50,33 @@ const Address = () => {
     !district ? setReset(true) : setReset(false);
     !district && setWards([]);
   }, [district]);
-  console.log({ province, district, ward });
+  useEffect(() => {
+    setValue((prev) => ({
+      ...prev,
+      address: `${apartmentNumber.length === 0 ? '' : `${apartmentNumber},`} ${
+        street.length === 0 ? '' : `${street},`
+      } ${ward ? `${wards?.find((item) => item.code === +ward)?.name},` : ''} ${
+        district
+          ? `${districts?.find((item) => item.code === +district)?.name},`
+          : ''
+      } ${
+        province ? provinces?.find((item) => item.code === +province)?.name : ''
+      }`,
+      province: province
+        ? provinces?.find((item) => item.code === +province)?.name
+        : '',
+    }));
+  }, [
+    setValue,
+    apartmentNumber,
+    street,
+    ward,
+    district,
+    province,
+    districts,
+    provinces,
+    wards,
+  ]);
 
   return (
     <div className="mt-3 gap-2 justify-between flex flex-col">

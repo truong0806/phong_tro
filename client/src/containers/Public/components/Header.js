@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../../assets/logoWithoutBg.png';
@@ -102,6 +102,7 @@ function Header({ setLoading, loading }) {
               bfIcon="justify-center item-center"
               After={
                 <img
+                  alt=""
                   src="https://phongtro123.com/images/hot.gif"
                   width="40px"
                 ></img>
