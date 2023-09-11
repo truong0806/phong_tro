@@ -2,7 +2,7 @@ import * as postController from '../controllers/postController'
 import express from 'express'
 import jwt from 'jsonwebtoken'
 
-async function  verifyToken (req, res, next)  {
+async function verifyToken(req, res, next) {
   const token = req.header('Authorization')
   const response = await db.User.findOne({
     where: { phone },
@@ -23,7 +23,8 @@ async function  verifyToken (req, res, next)  {
 }
 const router = express.Router()
 
-router.get('/all',  postController.getPost)
-router.get('/limit',  postController.getPostLimit)
+router.get('/all', postController.getPost)
+router.get('/limit', postController.getPostLimit)
+router.post('/create', postController.createPost)
 
 export default router

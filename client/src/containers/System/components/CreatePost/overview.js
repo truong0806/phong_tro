@@ -13,7 +13,6 @@ const Overview = ({ value, setValue, userData }) => {
   const { categories } = useSelector((state) => state.app);
   const [category, setCategory] = useState({});
   const [images, setImages] = useState([]);
-  console.log("🚀 ~ file: overview.js:16 ~ Overview ~ images:", images)
   const [doituong, setDoiTuong] = useState({});
   const [titles, setTitles] = useState({});
   const [desc, setDesc] = useState({});

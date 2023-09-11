@@ -6,6 +6,12 @@ export const apiLocation = () =>
       const provinces = await axiosDefaults({
         method: 'get',
         url: 'https://provinces.open-api.vn/api/p/',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*',
+          'Access-Control-Allow-Methods': 'POST, PUT, PATCH, GET, DELETE, OPTIONS'
+        }
       });
       resolve(provinces);
     } catch (error) {
@@ -19,6 +25,12 @@ export const apiGetDistricts = (provinceCode) =>
       const response = await axiosDefaults({
         method: 'get',
         url: `https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*',
+          'Access-Control-Allow-Methods': 'POST, PUT, PATCH, GET, DELETE, OPTIONS'
+        }
       });
       resolve(response);
     } catch (error) {
@@ -31,6 +43,12 @@ export const apiGetWard = (districtCode) =>
       const response = await axiosDefaults({
         method: 'get',
         url: `https://provinces.open-api.vn/api/d/${districtCode}?depth=2`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': '*',
+          'Access-Control-Allow-Methods': 'POST, PUT, PATCH, GET, DELETE, OPTIONS'
+        }
       });
       resolve(response);
     } catch (error) {

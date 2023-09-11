@@ -53,18 +53,16 @@ const Address = ({ value, setValue }) => {
   useEffect(() => {
     setValue((prev) => ({
       ...prev,
-      address: `${apartmentNumber.length === 0 ? '' : `${apartmentNumber},`} ${
-        street.length === 0 ? '' : `${street},`
-      } ${ward ? `${wards?.find((item) => item.code === +ward)?.name},` : ''} ${
-        district
+      address: `${apartmentNumber.length === 0 ? '' : `${apartmentNumber},`} ${street.length === 0 ? '' : `${street},`
+        } ${ward ? `${wards?.find((item) => item.code === +ward)?.name},` : ''} ${district
           ? `${districts?.find((item) => item.code === +district)?.name},`
           : ''
-      } ${
-        province ? provinces?.find((item) => item.code === +province)?.name : ''
-      }`,
+        } ${province ? provinces?.find((item) => item.code === +province)?.name : ''
+        }`,
       province: province
         ? provinces?.find((item) => item.code === +province)?.name
         : '',
+      label: districts
     }));
   }, [
     setValue,
@@ -124,19 +122,15 @@ const Address = ({ value, setValue }) => {
       </div>
       <InputTextReadOnly
         label="Địa chỉ chính xác"
-        value={`${apartmentNumber.length === 0 ? '' : `${apartmentNumber},`} ${
-          street.length === 0 ? '' : `${street},`
-        } ${
-          ward ? `${wards?.find((item) => item.code === +ward)?.name},` : ''
-        } ${
-          district
+        value={`${apartmentNumber.length === 0 ? '' : `${apartmentNumber},`} ${street.length === 0 ? '' : `${street},`
+          } ${ward ? `${wards?.find((item) => item.code === +ward)?.name},` : ''
+          } ${district
             ? `${districts?.find((item) => item.code === +district)?.name},`
             : ''
-        } ${
-          province
+          } ${province
             ? provinces?.find((item) => item.code === +province)?.name
             : ''
-        }`}
+          }`}
       />
     </div>
   );

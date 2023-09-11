@@ -1,5 +1,7 @@
 import db from '../models'
 const { Op } = require('sequelize')
+
+import { v4 as v4 } from 'uuid'
 //Get all post
 export const postService = () =>
   new Promise(async (resolve, reject) => {
@@ -52,13 +54,13 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
         ...query,
       }
       if (priceNumber)
-      queries.priceNumber = {
-        [Op.between]: priceNumber,
-      }
+        queries.priceNumber = {
+          [Op.between]: priceNumber,
+        }
       if (areaNumber)
-      queries.areaNumber = {
-        [Op.between]: areaNumber,
-      }
+        queries.areaNumber = {
+          [Op.between]: areaNumber,
+        }
       const response = await db.Post.findAndCountAll({
         where: queries,
         raw: true,
@@ -90,4 +92,41 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
       reject(error)
     }
   })
-
+export const postCreateService = (queries) => new Promise(async (resolve, reject) => {
+  try {
+    let postId = v4()
+    let labelCode = genarateCode(item?.header?.class?.classType).trim()
+    await db.Post.findOrCreate({
+      where: {
+        id: postId,
+        title: queries.title,
+        address: queries.address,
+      },
+      defaults: {
+        id: postId,
+        title: queries.title,
+        labelCode,
+        address: item?.header?.address,
+        attributesId: attributesId,
+        categoryCode: cate.code,
+        description: desc,
+        userId,
+        overviewId,
+        imagesId,
+        areaCode: dataArea.find(
+          (area) => area.max > currentArea && area.min <= currentArea,
+        )?.code,
+        priceCode: dataPrice.find(
+          (price) =>
+            price.max > currentPrice && price.min <= currentPrice,
+        )?.code,
+        provinceCode,
+        priceNumber: +currentPrice,
+        areaNumber: +currentArea,
+      },
+    })
+    resolve('Create post done')
+  } catch (error) {
+    reject(error)
+  }
+})

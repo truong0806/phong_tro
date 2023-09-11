@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import ClampLines from 'react-clamp-lines';
 const RelatePostItem = ({ item, listNewPostEff, listNew }) => {
   const formatTime = () => {
     moment.locale('VN');
@@ -25,18 +24,7 @@ const RelatePostItem = ({ item, listNewPostEff, listNew }) => {
           <span className="block bg-35px"></span>
         </div>
         <div className="flex flex-col h-full w-[70%] lg:w-[70%] relative mb-0 leading-5">
-          <ClampLines
-            text={item.title}
-            lines={1}
-            ellipsis="..."
-            className="text-[1rem] font-normal   text-[#3763e0] mb-[10px]"
-            innerElement="p"
-            buttons={false}
-            stopPropagation={false}
-          />
-          {/* <p className="truncate relative  text-[1rem] font-normal   text-[#3763e0] mb-[10px]">
-            {item.title}
-          </p> */}
+          
           <div className="flex flex-row  relative justify-around">
             <span className="text-[#16c784] font-bold text-[0.9rem]">
               {item.attributes.price}
