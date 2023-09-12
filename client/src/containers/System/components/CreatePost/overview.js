@@ -4,7 +4,7 @@ import { InputSelect } from '../../../../components';
 import { useSelector } from 'react-redux';
 import { UploadImages } from '../';
 
-const Overview = ({ value, setValue, userData }) => {
+const Overview = ({ value, setValue, userData, setPreviewImages, previewImages }) => {
   const doituongs = [
     { code: 'all', value: 'Tất cả' },
     { code: 'male', value: 'Nam' },
@@ -30,6 +30,7 @@ const Overview = ({ value, setValue, userData }) => {
       phoneContact: userData.phone,
       author: userData.name,
       images: images,
+      label: `${category.value} ${value.label}`,
     }));
   }, [category, doituong, titles, desc, setValue, userData]);
 
@@ -129,7 +130,7 @@ const Overview = ({ value, setValue, userData }) => {
         maxW={'max-w-[50%]'}
       />
 
-      <UploadImages setImages={setImages} />
+      <UploadImages setPreviewImages={setPreviewImages} previewImages={previewImages} />
 
       <UploadVideos setValue={setValue} />
     </div>

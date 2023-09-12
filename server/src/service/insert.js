@@ -89,14 +89,8 @@ export const insertService = () => {
           let currentArea = getNumberFromString(
             item?.header?.attributes?.acreage,
           )
-          console.log(
-            `🚀 ~ file: insert.js:92 ~ cate.body.forEach ${item?.header?.attributes?.acreage} currentArea: ${currentArea}`,
-          )
           let currentPrice = getNumberFromString(
             item?.header?.attributes?.price,
-          )
-          console.log(
-            `🚀 ~ file: insert.js:95 ~ cate.body.forEach ${item?.header?.attributes?.price} currentPrice: ${currentPrice}`,
           )
           const dateString = item?.overview?.content.find(
             (i) => i.name === 'Ngày đăng:',

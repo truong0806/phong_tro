@@ -8,6 +8,7 @@ import { apiUploadImages } from '../../service';
 
 const CreatePost = () => {
   const { userData } = useSelector((state) => state.user);
+  const [previewImages, setPreviewImages] = useState([]);
   const [payload, setPayload] = useState({
     categoryCode: '',
     title: '',
@@ -22,6 +23,7 @@ const CreatePost = () => {
     target: '',
     targetCode: '',
     province: '',
+    label: '',
   });
   console.log('🚀 ~ file: CreatePost.js:23 ~ CreatePost ~ payload:', payload);
 
@@ -32,6 +34,25 @@ const CreatePost = () => {
     });
   }, [dispatch]);
 
+
+
+  const handleSumit = async (e) => {
+    e.preventDefault();
+    const images = [];
+    const formData = new FormData();
+    for (let i of previewImages) {
+      formData.append('file', i);
+      console.log('🚀 ~ file: overview.js:45 ~ handleFile ~ i', i);
+      formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
+      formData.append('folder', 'post');
+      const response = await apiUploadImages(formData);
+      if (response.status === 200) {
+        images.push(response?.data?.url);
+        setPayload((prev) => ({ ...prev, images: images }));
+      }
+    }
+    console.log('🚀 ~ file: overview.js:47 ~ handleFile ~ images:', images);
+  }
   return (
     <div className="z-2150 h-full">
       <div className=" items-center  pb-2 mb-3 ">
@@ -49,12 +70,15 @@ const CreatePost = () => {
           <div className="flex flex-col  text-[1rem] max-w-[70%]  w-full    ">
             <Address value={payload} setValue={setPayload} />
             <Overview
+              previewImages={previewImages}
+              setPreviewImages={setPreviewImages}
               userData={userData}
               value={payload}
               setValue={setPayload}
             />
             <div className="mt-[42px] mb-[100px] w-full">
               <Button
+                onClick={(e) => handleSumit(e)}
                 text={'Tiếp tục'}
                 bgcolor={
                   'w-full h-[27px] py-[0.5rem] px-[1rem] text-[1.25rem] bg-[#28a745] border-[#28a745] text-[#fff] font-bold item-center'

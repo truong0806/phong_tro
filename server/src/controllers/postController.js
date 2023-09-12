@@ -28,11 +28,6 @@ export const getPostLimit = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-  res.send('create')
-  console.log(
-    '🚀 ~ file: postController.js:45 ~ createPost ~ req.body:',
-    req.body,
-  )
   const {
     title,
     description,
@@ -48,7 +43,6 @@ export const createPost = async (req, res) => {
     phoneContact,
     author,
   } = req.body
-  console.log('🚀 ~ file: postController.js:47 ~ createPost ~ title:', title)
   try {
     if (
       !title ||

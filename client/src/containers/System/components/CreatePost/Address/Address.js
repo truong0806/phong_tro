@@ -62,7 +62,7 @@ const Address = ({ value, setValue }) => {
       province: province
         ? provinces?.find((item) => item.code === +province)?.name
         : '',
-      label: districts
+      label: district ? districts?.find((item) => item.code === +district)?.name : '',
     }));
   }, [
     setValue,

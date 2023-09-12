@@ -1,7 +1,10 @@
 import db from '../models'
 const { Op } = require('sequelize')
-
+const moment = require('moment')
 import { v4 as v4 } from 'uuid'
+import generateCode from '../ultils/generateCode'
+import { getNumberFromString, generateHashtag } from '../ultils/common'
+import { dataArea, dataPrice } from '../ultils/data'
 //Get all post
 export const postService = () =>
   new Promise(async (resolve, reject) => {
@@ -94,23 +97,103 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
   })
 export const postCreateService = (queries) => new Promise(async (resolve, reject) => {
   try {
-    let postId = v4()
-    let labelCode = genarateCode(item?.header?.class?.classType).trim()
-    await db.Post.findOrCreate({
+    const hashtag = generateHashtag()
+    const dateCreate = moment(
+      Date.now(),
+      'dddd, HH:mm DD/MM/YYYY',
+      'vi',
+    ).toDate()
+    const attributesId = v4()
+    const postId = v4()
+    const overviewId = v4()
+    const imagesId = v4()
+    const provinceCode = generateCode(
+      queries.address.split(',')?.slice(-1)[0].trim(),
+    )
+    const labelCode = generateCode(queries.label).trim()
+    const provinceCodes = []
+    const labelCodes = []
+    labelCodes.every((item) => item.code !== labelCode) &&
+      labelCodes?.push({
+        code: labelCode,
+        value: queries.label,
+      })
+    provinceCodes.every((item) => item.code !== provinceCode) &&
+      provinceCodes.push({
+        code: provinceCode,
+        value: queries.address.split(',')?.slice(-1)[0].trim(),
+      })
+    const currentArea = getNumberFromString(
+      queries.areaNumber,
+    )
+    const currentPrice = getNumberFromString(
+      queries.priceNumber,
+    )
+
+    await db.Attribute.findOrCreate({
+      where: { id: attributesId },
+      defaults: {
+        id: attributesId,
+        price: queries.priceNumber,
+        acreage: queries.areaNumber,
+        published: Date.now(),
+        hashtag: hashtag,
+      },
+    }),
+      await db.Images.findOrCreate({
+        where: { id: imagesId },
+        defaults: {
+          id: imagesId,
+          image: JSON.stringify(queries.images),
+        },
+      })
+    await db.Label.findOrCreate({
+      where: { code: labelCode },
+      defaults: {
+        code: labelCode,
+        value: queries.label,
+      },
+    })
+    await db.Overview.create({
+      id: overviewId,
+      code: `#${hashtag}`,
+      area: queries.label,
+      type: queries.categoryName,
+      target: queries.target,
+      bonus: "",
+      created: dateCreate,
+      expired: null,
+    },
+    )
+    provinceCodes?.forEach(async (item) => {
+      await db.Province.findOrCreate({
+        where: { code: item.code },
+        defaults: item,
+      })
+    })
+    labelCodes?.forEach(async (item) => {
+      await db.Label.findOrCreate({
+        where: { code: item.code },
+        defaults: item,
+      })
+    })
+    const [post, created] = await db.Post.findOrCreate({
       where: {
-        id: postId,
-        title: queries.title,
-        address: queries.address,
+        [Op.or]: [
+          { title: queries.title, },
+          { address: queries.address, },
+          { address: queries.description, }
+        ]
       },
       defaults: {
         id: postId,
         title: queries.title,
         labelCode,
-        address: item?.header?.address,
+        address: queries.address,
         attributesId: attributesId,
-        categoryCode: cate.code,
-        description: desc,
-        userId,
+        categoryCode: queries.categoryCode,
+        description: queries.description,
+        userId: queries.userId,
         overviewId,
         imagesId,
         areaCode: dataArea.find(
@@ -125,7 +208,10 @@ export const postCreateService = (queries) => new Promise(async (resolve, reject
         areaNumber: +currentArea,
       },
     })
-    resolve('Create post done')
+    resolve({
+      err: created ? 0 : 1,
+      msg: created ? 'Create post succress' : 'Create post failed', 
+    })
   } catch (error) {
     reject(error)
   }

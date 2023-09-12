@@ -1,35 +1,17 @@
 import React, { useState } from 'react';
 
-const UploadImages = ({ setImages }) => {
-  const [previewImages, setPreviewImages] = useState([]);
+const UploadImages = ({ setPreviewImages, previewImages }) => {
 
   const handImageChange = async (e) => {
     setTimeout(() => {
       let files = e.target.files;
       for (let i of files) {
         setPreviewImages((prev) => [...prev, URL.createObjectURL(i)]);
-        setImages((prev) => [...prev, URL.createObjectURL(i)]);
       }
     }, 4000);
   };
 
-  // const handleUploadImage = async (e) => {
-  //   e.stopPropagation();
-  //   let images = [];
-  //   let files = e.target.files;
-  //   const formData = new FormData();
-  //   for (let i of files) {
-  //     formData.append('file', i);
-  //     formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
-  //     formData.append('folder', 'post');
-  //     const response = await apiUploadImages(formData);
-  //     if (response.status === 200) {
-  //       images.push(response?.data?.url);
-  //       setValue((prev) => ({ ...prev, images: images }));
-  //     }
-  //   }
-  //   console.log('🚀 ~ file: overview.js:47 ~ handleFile ~ images:', images);
-  // };
+  
 
   const handleDelete = (imageToDelete) => {
     setPreviewImages((prev) => prev.filter((image) => image !== imageToDelete));
@@ -93,8 +75,8 @@ const UploadImages = ({ setImages }) => {
       <div className="flex flex-wrap gap-[4%]">
         {previewImages.length > 0 &&
           previewImages?.map((image, index) => (
-            <div className="w-[110px] shadow-2xl mb-[20px]  ">
-              <div key={index} className="h-[110px]  ">
+            <div key={index}  className="w-[110px] shadow-2xl mb-[20px]  ">
+              <div className="h-[110px]  ">
                 <img src={image} alt={`Preview ${index}`} />
               </div>
               <div
