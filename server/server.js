@@ -17,11 +17,6 @@ import updateCategoryCount from './src/ultils/updateCategoryCount'
 //   ),
 // }
 // app.use(requireToken)
-import path from 'path'
-
-import https from 'https'
-
-import fs from 'fs'
 
 app.use(
   cors({
@@ -29,7 +24,7 @@ app.use(
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }),
 )
-updateCategoryCount()
+// updateCategoryCount()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 initRoutes(app)

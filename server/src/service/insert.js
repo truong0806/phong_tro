@@ -125,30 +125,22 @@ export const insertService = () => {
             },
           })
 
-          await db.Overview.findOrCreate({
-            where: {
-              id: item?.overview?.content.find((i) => i.name === 'Mã tin:')
-                ?.value,
-            },
-            defaults: {
-              id: overviewId,
-              code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
-                ?.value,
-              area: item?.overview?.content.find((i) => i.name === 'Khu vực')
-                ?.value,
-              type: item?.overview?.content.find(
-                (i) => i.name === 'Loại tin rao:',
-              )?.value,
-              target: item?.overview?.content.find(
-                (i) => i.name === 'Đối tượng thuê:',
-              )?.value,
-              bonus: item?.overview?.content.find((i) => i.name === 'Gói tin:')
-                ?.value,
-              created: dateCreate,
-              expired: item?.overview?.content.find(
-                (i) => i.name === 'Ngày hết hạn:',
-              ).value,
-            },
+          await db.Overview.create({
+            id: overviewId,
+            code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
+              ?.value,
+            area: item?.overview?.content.find((i) => i.name === 'Khu vực')
+              ?.value,
+            type: item?.overview?.content.find(
+              (i) => i.name === 'Loại tin rao:',
+            )?.value,
+            target: item?.overview?.content.find(
+              (i) => i.name === 'Đối tượng thuê:',
+            )?.value,
+            bonus: item?.overview?.content.find((i) => i.name === 'Gói tin:')
+              ?.value,
+            create: new Date(),
+            expire: 0
           })
 
           await db.User.findOrCreate({
@@ -167,11 +159,11 @@ export const insertService = () => {
               )?.value,
               zalo: item?.contact?.content.find((i) => i.name === 'Zalo')
                 ?.value,
+              publickey: userId,
             },
           })
           await db.Post.findOrCreate({
             where: {
-              id: postId,
               title: item?.header?.title,
               address: item?.header?.address,
             },

@@ -8,7 +8,7 @@ import { apiUploadImages } from '../../service';
 
 const CreatePost = () => {
   const { userData } = useSelector((state) => state.user);
-  const [previewImages, setPreviewImages] = useState([]);
+  const [imagesFile, setImagesFile] = useState([]);
   const [payload, setPayload] = useState({
     categoryCode: '',
     title: '',
@@ -34,24 +34,18 @@ const CreatePost = () => {
     });
   }, [dispatch]);
 
-
-
   const handleSumit = async (e) => {
-    e.preventDefault();
-    const images = [];
-    const formData = new FormData();
-    for (let i of previewImages) {
-      formData.append('file', i);
-      console.log('🚀 ~ file: overview.js:45 ~ handleFile ~ i', i);
+    let images = [];
+    let formData = new FormData();
+    imagesFile.map(async (item) => {
+      formData.append('file', item.files);
       formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
-      formData.append('folder', 'post');
-      const response = await apiUploadImages(formData);
+      let response = await apiUploadImages(formData);
       if (response.status === 200) {
-        images.push(response?.data?.url);
-        setPayload((prev) => ({ ...prev, images: images }));
+        images.push(response.data.url);
       }
-    }
-    console.log('🚀 ~ file: overview.js:47 ~ handleFile ~ images:', images);
+    });
+    setPayload((prev) => ({ ...prev, images: images }));
   }
   return (
     <div className="z-2150 h-full">
@@ -70,8 +64,8 @@ const CreatePost = () => {
           <div className="flex flex-col  text-[1rem] max-w-[70%]  w-full    ">
             <Address value={payload} setValue={setPayload} />
             <Overview
-              previewImages={previewImages}
-              setPreviewImages={setPreviewImages}
+              setImagesFile={setImagesFile} imagesFile={imagesFile}
+              handleSumit={handleSumit}
               userData={userData}
               value={payload}
               setValue={setPayload}

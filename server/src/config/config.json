@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "khuyenm3_wp618",
-    "password": "truong911@",
-    "database": "khuyenm3_phongtro",
-    "host": "103.200.22.212",
+    "username": "root",
+    "password": "truong911",
+    "database": "phongtro",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
@@ -11,7 +11,7 @@
   "test": {
     "username": "root",
     "password": "truong911",
-    "database": "phongtro123",
+    "database": "phongtro",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": false,

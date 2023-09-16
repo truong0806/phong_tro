@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       zalo: DataTypes.STRING,
       fbUrl: DataTypes.STRING,
       avatar: DataTypes.BLOB,
-      publickey: DataTypes.TEXT,
     },
     {
       sequelize,

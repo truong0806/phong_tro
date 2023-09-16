@@ -24,7 +24,7 @@ const InputForm = ({
         id={name}
         type={type || 'text'}
         className={`${styleInput} `}
-        value={value}
+        value={value || ''}
         onChange={onChange}
         onFocus={() => {
           setInvalidFields([])

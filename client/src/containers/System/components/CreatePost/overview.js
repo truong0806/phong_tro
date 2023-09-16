@@ -4,7 +4,7 @@ import { InputSelect } from '../../../../components';
 import { useSelector } from 'react-redux';
 import { UploadImages } from '../';
 
-const Overview = ({ value, setValue, userData, setPreviewImages, previewImages }) => {
+const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, userData, setPreviewImages, previewImages }) => {
   const doituongs = [
     { code: 'all', value: 'Tất cả' },
     { code: 'male', value: 'Nam' },
@@ -12,7 +12,6 @@ const Overview = ({ value, setValue, userData, setPreviewImages, previewImages }
   ];
   const { categories } = useSelector((state) => state.app);
   const [category, setCategory] = useState({});
-  const [images, setImages] = useState([]);
   const [doituong, setDoiTuong] = useState({});
   const [titles, setTitles] = useState({});
   const [desc, setDesc] = useState({});
@@ -29,10 +28,9 @@ const Overview = ({ value, setValue, userData, setPreviewImages, previewImages }
       userId: userData.id,
       phoneContact: userData.phone,
       author: userData.name,
-      images: images,
       label: `${category.value} ${value.label}`,
     }));
-  }, [category, doituong, titles, desc, setValue, userData]);
+  }, [category, doituong, titles, desc, setValue, userData]) ;
 
   return (
     <div>
@@ -130,7 +128,7 @@ const Overview = ({ value, setValue, userData, setPreviewImages, previewImages }
         maxW={'max-w-[50%]'}
       />
 
-      <UploadImages setPreviewImages={setPreviewImages} previewImages={previewImages} />
+      <UploadImages setImagesFile={setImagesFile} imagesFile={imagesFile} handleSumit={handleSumit} setPreviewImages={setPreviewImages} previewImages={previewImages} />
 
       <UploadVideos setValue={setValue} />
     </div>
