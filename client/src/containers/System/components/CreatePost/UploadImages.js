@@ -3,7 +3,6 @@ import { Loading } from '../../../../components';
 
 const UploadImages = ({ setImagesFile, imagesFile }) => {
   const [loading, setLoading] = useState(true);
-  console.log("🚀 ~ file: UploadImages.js:6 ~ UploadImages ~ loading:", loading)
   const handImageChange = async (e) => {
     setTimeout(() => {
       let files = e.target.files;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { InputText, UploadVideos } from '../../components';
 import { InputSelect } from '../../../../components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UploadImages } from '../';
 
 const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, userData, setPreviewImages, previewImages }) => {
@@ -15,6 +15,7 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
   const [doituong, setDoiTuong] = useState({});
   const [titles, setTitles] = useState({});
   const [desc, setDesc] = useState({});
+
 
   useEffect(() => {
     setValue((prev) => ({
@@ -30,8 +31,8 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
       author: userData.name,
       label: `${category.value} ${value.label}`,
     }));
-  }, [category, doituong, titles, desc, setValue, userData]) ;
-
+  }, [category, doituong, titles, desc, setValue, userData]);
+ 
   return (
     <div>
       <div className="mt-5 w-full mb-[30px]">

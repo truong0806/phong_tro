@@ -56,3 +56,16 @@ export const apiUploadImages = (images) =>
       reject(error);
     }
   });
+  export const apiCreateNewPost = (payload) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: 'get',
+        url: `/post/create`,
+        
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
