@@ -1,11 +1,8 @@
-pipeline {
-  agent any
+node {
+  def phongtro
   stages {
     stage ('Build') {
       println('Building')
-      steps {
-        echo 'Building..'
-      }
       sh: "cd client"
       println('cd client')
       sh: "npm i"
