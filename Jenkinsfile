@@ -11,6 +11,7 @@ pipeline {
       sh: "npm i"
       println('install nodemodule')
       sh: "npm start"
+      println('Complete')
     }
 
   }
