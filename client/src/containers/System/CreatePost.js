@@ -4,11 +4,9 @@ import { Button } from '../../components';
 import { Address, Overview } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/action';
-import { apiUploadImages } from '../../service';
-import { getCodesPrices, getCodesArea } from '../../ultils/common/getCode'
+import { apiCreateNewPost, apiUploadImages } from '../../service';
 const CreatePost = () => {
 
-  const { prices, areas } = useSelector((state) => state.app);
   const { userData } = useSelector((state) => state.user);
   const [imagesFile, setImagesFile] = useState([]);
   const [payload, setPayload] = useState({
@@ -29,30 +27,14 @@ const CreatePost = () => {
   });
   console.log('🚀 ~ file: CreatePost.js:23 ~ CreatePost ~ payload:', payload);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(actions.getPrices())
-    dispatch(actions.getAreas())
-  },[dispatch]);
-  useEffect(() => {
-    const dataPrice = editMaxMin(prices, 'price');
-    const dataArea = editMaxMin(areas, 'area');
-    let priceCode = dataPrice.find(
-      (price) => price.max > +payload.priceNumber && price.min <= +payload.priceNumber,
-    )?.code
-    console.log("🚀 ~ file: CreatePost.js:38 ~ useEffect ~ priceCode:", priceCode)
-    let areaCode = dataArea.find(
-      (area) => area.max > +payload.areaNumber && area.min <= +payload.areaNumber,
-    )?.code
     setTimeout(() => {
       dispatch(actions.getCategories());
     }, 1000);
   }, [dispatch]);
 
-
-
   const handleSumit = async (e) => {
-
-
     let images = [];
     let formData = new FormData();
     imagesFile.map(async (item) => {
@@ -64,41 +46,12 @@ const CreatePost = () => {
       }
     });
     setPayload((prev) => ({ ...prev, images: images }));
+    setTimeout(async () => {
+      const response = await apiCreateNewPost(payload);
+      console.log("🚀 ~ file: CreatePost.js:51 ~ setTimeout ~ response:", response)
+    }, 1000)
+  }
 
-  }
-  const editMaxMin = (arr, type) => {
-    console.log("🚀 ~ file: CreatePost.js:43 ~ editMaxMin ~ arr:", arr)
-    let doituongMoi1 = arr.map(function (doituong) {
-      var giaTri = doituong.value;
-      var mangGiaTri = giaTri.split(' ');
-      var doituongMoi = Object.assign({}, doituong);
-      if (type === 'price') {
-        if (mangGiaTri[0] === 'Dưới') {
-          doituongMoi.min = 0;
-          doituongMoi.max = parseFloat(mangGiaTri[1]);
-        } else if (mangGiaTri[0] === 'Từ') {
-          doituongMoi.min = parseFloat(mangGiaTri[1]);
-          doituongMoi.max = parseFloat(mangGiaTri[3]);
-        } else if (mangGiaTri[0] === 'Trên') {
-          doituongMoi.min = parseFloat(mangGiaTri[1]);
-          doituongMoi.max = 99999999;
-        }
-      } else {
-        if (mangGiaTri[0] === 'Dưới') {
-          doituongMoi.min = 0;
-          doituongMoi.max = parseFloat(mangGiaTri[1]);
-        } else if (mangGiaTri[0] === 'Từ') {
-          doituongMoi.min = parseFloat(mangGiaTri[1]);
-          doituongMoi.max = parseFloat(mangGiaTri[3]);
-        } else if (mangGiaTri[0] === 'Trên') {
-          doituongMoi.min = parseFloat(mangGiaTri[1]);
-          doituongMoi.max = 99999999;
-        }
-      }
-      return doituongMoi;
-    });
-    return doituongMoi1
-  }
   return (
     <div className="z-2150 h-full">
       <div className=" items-center  pb-2 mb-3 ">

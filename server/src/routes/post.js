@@ -6,6 +6,6 @@ const router = express.Router()
 
 router.get('/all', postController.getPost)
 router.get('/limit', postController.getPostLimit)
-router.post('/create',requireToken, postController.createPost)
+router.post('/create', postController.createPost)
 
 export default router

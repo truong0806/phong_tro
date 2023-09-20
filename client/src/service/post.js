@@ -56,13 +56,13 @@ export const apiUploadImages = (images) =>
       reject(error);
     }
   });
-  export const apiCreateNewPost = (payload) =>
+export const apiCreateNewPost = (payload) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axiosConfig({
-        method: 'get',
+        method: 'post',
         url: `/post/create`,
-        
+        data: payload,
       });
       resolve(response);
     } catch (error) {

@@ -95,51 +95,46 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
       reject(error)
     }
   })
-export const postCreateService = (queries) => new Promise(async (resolve, reject) => {
-  try {
-    const hashtag = generateHashtag()
-    const dateCreate = moment(
-      Date.now(),
-      'dddd, HH:mm DD/MM/YYYY',
-      'vi',
-    ).toDate()
-    const attributesId = v4()
-    const postId = v4()
-    const overviewId = v4()
-    const imagesId = v4()
-    const provinceCode = generateCode(
-      queries.address.split(',')?.slice(-1)[0].trim(),
-    )
-    const labelCode = generateCode(queries.label).trim()
-    const provinceCodes = []
-    const labelCodes = []
-    labelCodes.every((item) => item.code !== labelCode) &&
-      labelCodes?.push({
-        code: labelCode,
-        value: queries.label,
-      })
-    provinceCodes.every((item) => item.code !== provinceCode) &&
-      provinceCodes.push({
-        code: provinceCode,
-        value: queries.address.split(',')?.slice(-1)[0].trim(),
-      })
-    const currentArea = getNumberFromString(
-      queries.areaNumber,
-    )
-    const currentPrice = getNumberFromString(
-      queries.priceNumber,
-    )
+export const postCreateService = (queries) =>
+  new Promise(async (resolve, reject) => {
+    console.log("🚀 ~ file: post.js:99 ~ queries:", queries)
+    try {
+      const hashtag = generateHashtag()
+      const currentDate = new Date()
+      const attributesId = v4()
+      const postId = v4()
+      const overviewId = v4()
+      const imagesId = v4()
+      const labelCode = generateCode(queries.label).trim()
+      const currentArea = getNumberFromString(queries.areaNumber)
+      const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
+      const provinceCode = queries?.province?.includes('Thành phố')
+        ? generateCode(queries?.province?.replace('Thành phố', ''))
+        : generateCode(queries?.province?.replace('Tỉnh', ''))
 
-    await db.Attribute.findOrCreate({
-      where: { id: attributesId },
-      defaults: {
-        id: attributesId,
-        price: queries.priceNumber,
-        acreage: queries.areaNumber,
-        published: Date.now(),
-        hashtag: hashtag,
-      },
-    }),
+      await db.Attribute.findOrCreate({
+        where: {
+          id: attributesId,
+          price:
+            +currentPrice < 1
+              ? `${queries.priceNumber} đồng/tháng`
+              : `${currentPrice} triệu/tháng`,
+          acreage: `${queries.areaNumber} m2`,
+          published: moment(new Date()).format('DD/MM/YYYY'),
+          hashtag,
+        },
+        defaults: {
+          id: attributesId,
+          price:
+            +currentPrice < 1
+              ? `${queries.priceNumber} đồng/tháng`
+              : `${currentPrice} triệu/tháng`,
+          acreage: `${queries.areaNumber} m2`,
+          published: moment(new Date()).format('DD/MM/YYYY'),
+          hashtag,
+        },
+      }),
+        console.log(1);
       await db.Images.findOrCreate({
         where: { id: imagesId },
         defaults: {
@@ -147,72 +142,77 @@ export const postCreateService = (queries) => new Promise(async (resolve, reject
           image: JSON.stringify(queries.images),
         },
       })
-    await db.Label.findOrCreate({
-      where: { code: labelCode },
-      defaults: {
-        code: labelCode,
-        value: queries.label,
-      },
-    })
-    await db.Overview.create({
-      id: overviewId,
-      code: `#${hashtag}`,
-      area: queries.label,
-      type: queries.categoryName,
-      target: queries.target,
-      bonus: "",
-      created: dateCreate,
-      expired: null,
-    },
-    )
-    provinceCodes?.forEach(async (item) => {
-      await db.Province.findOrCreate({
-        where: { code: item.code },
-        defaults: item,
-      })
-    })
-    labelCodes?.forEach(async (item) => {
+      console.log(2);
       await db.Label.findOrCreate({
-        where: { code: item.code },
-        defaults: item,
+        where: { code: labelCode },
+        defaults: {
+          code: labelCode,
+          value: queries.label,
+        },
       })
-    })
-    const [post, created] = await db.Post.findOrCreate({
-      where: {
-        [Op.or]: [
-          { title: queries.title, },
-          { address: queries.address, },
-          { address: queries.description, }
-        ]
-      },
-      defaults: {
-        id: postId,
-        title: queries.title,
-        labelCode,
-        address: queries.address,
-        attributesId: attributesId,
-        categoryCode: queries.categoryCode,
-        description: queries.description,
-        userId: queries.userId,
-        overviewId,
-        imagesId,
-        areaCode: dataArea.find(
-          (area) => area.max > currentArea && area.min <= currentArea,
-        )?.code,
-        priceCode: dataPrice.find(
-          (price) =>
-            price.max > currentPrice && price.min <= currentPrice,
-        )?.code,
-        provinceCode,
-        priceNumber: +currentPrice,
-        areaNumber: +currentArea,
-      },
-    })
-    resolve({
-      err: created ? 0 : 1,
-      msg: created ? 'Create post succress' : 'Create post failed', 
-    })
-  } catch (error) {
-    reject(error)
-  }
-})
+      console.log(3);
+      await db.Overview.create({
+        id: overviewId,
+        code: `#${hashtag}`,
+        area: queries.label,
+        type: queries?.categoryName,
+        target: queries?.target,
+        bonus: 'Tin thường',
+        create: currentDate,
+        expire: currentDate.setDate(currentDate.getDate() + 10),
+      })
+      console.log(4);
+      await db.Province.findOrCreate({
+        where: {
+          [Op.or]: [
+            { value: queries?.province?.replace('Thành phố ', '') },
+            { value: queries?.province?.replace('Tỉnh ', '') },
+          ],
+        },
+        defaults: {
+          code: provinceCode,
+          value: queries?.province?.includes('Thành phố ')
+            ? queries?.province?.replace('Thành phố ', '')
+            : queries?.province?.replace('Tỉnh ', ''),
+        },
+      })
+      console.log(5);
+      const [post, created] = await db.Post.findOrCreate({
+        where: {
+          [Op.or]: [
+            { title: queries.title },
+            { address: queries.address },
+            { address: queries.description },
+          ],
+        },
+        defaults: {
+          id: postId,
+          title: queries.title || null,
+          labelCode,
+          address: queries.address || null,
+          attributesId: attributesId,
+          categoryCode: queries.categoryCode,
+          description: JSON.stringify(queries.description) || null,
+          userId: queries.userId,
+          overviewId,
+          imagesId,
+          areaCode: dataArea.find(
+            (area) => area.max > currentArea && area.min <= currentArea,
+          )?.code,
+          priceCode: dataPrice.find(
+            (price) => price.max > currentPrice && price.min <= currentPrice,
+          )?.code,
+          provinceCode: provinceCode || null,
+          priceNumber: +currentPrice || null,
+          areaNumber: +currentArea || null
+        },
+      })
+      console.log(6);
+      resolve({
+        err: created ? 0 : 1,
+        msg: created ? 'Create post succress' : 'Create post failed',
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })

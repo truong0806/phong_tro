@@ -29,40 +29,27 @@ export const getPostLimit = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const {
+    categoryCode,
     title,
     description,
     priceNumber,
-    areaNumber,
-    address,
-    images,
-    imageCode,
-    priceCode,
-    areaCode,
-    province,
-    userId,
-    phoneContact,
-    author,
+    areaNumber, label
   } = req.body
+  console.log("🚀 ~ file: postController.js:38 ~ createPost ~ req.body:", req.body)
+
   try {
     if (
+      !categoryCode ||
       !title ||
       !description ||
       !priceNumber ||
-      !areaNumber ||
-      !address ||
-      !images ||
-      !imageCode ||
-      !priceCode ||
-      !areaCode ||
-      !province ||
-      !userId ||
-      !phoneContact ||
-      !author
+      !label ||
+      !areaNumber
     ) {
+      return res.status(400).json({ err: 1, msg: 'Missing input' })
+    } else {
       const response = await service.postCreateService(req.body)
       return res.status(200).json(response)
-    } else {
-      return res.status(400).json({ err: 1, msg: 'Missing input' })
     }
   } catch (error) {
     return res.status(500).json({

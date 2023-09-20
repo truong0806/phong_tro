@@ -3,6 +3,7 @@ import { InputText, UploadVideos } from '../../components';
 import { InputSelect } from '../../../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { UploadImages } from '../';
+import * as actions from '../../../../store/action';
 
 const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, userData, setPreviewImages, previewImages }) => {
   const doituongs = [
@@ -10,6 +11,8 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
     { code: 'male', value: 'Nam' },
     { code: 'female', value: 'Nữ' },
   ];
+  const dispatch = useDispatch();
+  const { prices, areas } = useSelector((state) => state.app);
   const { categories } = useSelector((state) => state.app);
   const [category, setCategory] = useState({});
   const [doituong, setDoiTuong] = useState({});
@@ -18,21 +21,59 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
 
 
   useEffect(() => {
+    dispatch(actions.getPrices())
+    dispatch(actions.getAreas())
+  }, [dispatch]);
+
+  useEffect(() => {
     setValue((prev) => ({
       ...prev,
       categoryCode: category.code,
       categoryName: category.value,
       title: titles,
       description: desc,
-      target: doituong.value,
+      target: doituong.value || 'Tất cả',
       targetCode: doituong.code,
       userId: userData.id,
       phoneContact: userData.phone,
       author: userData.name,
-      label: `${category.value} ${value.label}`,
+      label: `${category?.value} ${value?.province}`,
     }));
-  }, [category, doituong, titles, desc, setValue, userData]);
- 
+  }, [category, doituong, titles, desc, setValue]);
+
+  const editMaxMin = (arr, type) => {
+    console.log("🚀 ~ file: CreatePost.js:43 ~ editMaxMin ~ arr:", arr)
+    let doituongMoi1 = arr.map(function (doituong1) {
+      var giaTri = doituong1.value;
+      var mangGiaTri = giaTri.split(' ');
+      var doituongMoi = Object.assign({}, doituong1);
+      if (type === 'price') {
+        if (mangGiaTri[0] === 'Dưới') {
+          doituongMoi.min = 0;
+          doituongMoi.max = parseFloat(mangGiaTri[1]);
+        } else if (mangGiaTri[0] === 'Từ') {
+          doituongMoi.min = parseFloat(mangGiaTri[1]);
+          doituongMoi.max = parseFloat(mangGiaTri[3]);
+        } else if (mangGiaTri[0] === 'Trên') {
+          doituongMoi.min = parseFloat(mangGiaTri[1]);
+          doituongMoi.max = 99999999;
+        }
+      } else {
+        if (mangGiaTri[0] === 'Dưới') {
+          doituongMoi.min = 0;
+          doituongMoi.max = parseFloat(mangGiaTri[1]);
+        } else if (mangGiaTri[0] === 'Từ') {
+          doituongMoi.min = parseFloat(mangGiaTri[1]);
+          doituongMoi.max = parseFloat(mangGiaTri[3]);
+        } else if (mangGiaTri[0] === 'Trên') {
+          doituongMoi.min = parseFloat(mangGiaTri[1]);
+          doituongMoi.max = 99999999;
+        }
+      }
+      return doituongMoi;
+    });
+    return doituongMoi1
+  }
   return (
     <div>
       <div className="mt-5 w-full mb-[30px]">
@@ -83,8 +124,14 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
         <label className="font-bold">Giá cho thuê</label>
         <div className="flex flex-row w-full h-[33px] my-2">
           <input
-            onChange={(e) =>
-              setValue((prev) => ({ ...prev, priceNumber: e.target.value }))
+            onChange={(e) => {
+              const dataPrice = editMaxMin(prices, 'price');
+              setValue((prev) => ({
+                ...prev, priceNumber: e.target.value, priceCode: dataPrice.find(
+                  (price) => price.max > e.target.value / 1000000 && price.min <= e.target.value / 1000000,
+                )?.code
+              }))
+            }
             }
             type="number"
             className="w-[60%] focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem] border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
@@ -108,7 +155,12 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
         <div className="flex flex-row w-full h-[33px] my-2">
           <input
             onChange={(e) => {
-              setValue((prev) => ({ ...prev, areaNumber: e.target.value }));
+              const dataArea = editMaxMin(areas, 'area');
+              setValue((prev) => ({
+                ...prev, areaNumber: e.target.value, areaCode: dataArea.find(
+                  (area) => area.max > e.target.value && area.min <= e.target.value,
+                )?.code
+              }));
             }}
             type="number"
             className="w-[90%] focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem] border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
@@ -122,7 +174,6 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
       </div>
       <InputSelect
         name={'target'}
-        value={'Tất cả'}
         setValue={setDoiTuong}
         array={doituongs}
         text={'Đối tượng'}
