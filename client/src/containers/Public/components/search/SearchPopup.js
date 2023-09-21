@@ -19,6 +19,7 @@ const SearchPopup = ({
   handleSubmit,
   defaultText,
 }) => {
+  console.log("🚀 ~ file: SearchPopup.js:22 ~ name:", name)
   const [percent1, setPercent1] = useState(
     name === 'prices' && selectedValue?.prices.pricesNumber
       ? convertto100(+selectedValue?.prices.pricesNumber[0], name)
@@ -139,7 +140,7 @@ const SearchPopup = ({
         >
           <div
             className={`${
-              name === 'provinces' ? 'h-[45px]' : 'h-[45px]'
+              name === 'province' ? 'h-[45px]' : 'h-[45px]'
             }  relative flex items-center justify-center border-b border-solid`}
           >
             <span className="uppercase font-bold">Chọn loại bất động sản</span>
@@ -150,13 +151,13 @@ const SearchPopup = ({
           </div>
           <div
             className={`relative py-[10px] px-[25px] h-full ${
-              name === 'provinces'
+              name === 'province'
                 ? 'hover:overflow-auto hover:overflow-y-scroll '
                 : ''
             } `}
           >
             <div className="">
-              {name === 'categories' ? (
+              {name === 'category' ? (
                 <ul className="list-none ">
                   <li
                     onClick={(e) => {
@@ -238,7 +239,7 @@ const SearchPopup = ({
                     );
                   })}
                 </ul>
-              ) : name === 'provinces' ? (
+              ) : name === 'province' ? (
                 <ul className="list-none overflow-y-auto">
                   <li
                     onClick={(e) => {

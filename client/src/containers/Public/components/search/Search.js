@@ -26,11 +26,12 @@ function Search() {
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState({
-    categories: { name: 'Phòng trọ, nhà trọ', code: '' },
-    provinces: { name: 'Toàn quốc', code: 'abc' },
+    category: { name: 'Phòng trọ, nhà trọ', code: '' },
+    province: { name: 'Toàn quốc', code: 'abc' },
     prices: { name: 'Chọn giá', pricesNumber: [0, 15] },
     areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
   });
+  console.log("🚀 ~ file: Search.js:34 ~ Search ~ selectedValue:", selectedValue)
   const [showPopup, setShowPopup] = useState(false);
   const [content, setContent] = useState([]);
   const [defaultText, setDefaultText] = useState('');
@@ -41,8 +42,8 @@ function Search() {
   useEffect(() => {
     if (!location?.pathname.includes(path.SEARCH)) {
       setSelectedValue({
-        categories: { name: 'Phòng trọ, nhà trọ', code: '' },
-        provinces: { name: 'Toàn quốc', code: 'abc' },
+        category: { name: 'Phòng trọ, nhà trọ', code: '' },
+        province: { name: 'Toàn quốc', code: 'abc' },
         prices: { name: 'Chọn giá', pricesNumber: [0, 15] },
         areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
       });
@@ -70,19 +71,19 @@ function Search() {
       const gaps =
         name === 'prices'
           ? getCodesPrices(
-              [
-                convert100toTarget(percent1, name),
-                convert100toTarget(percent2, name),
-              ],
-              content
-            )
+            [
+              convert100toTarget(percent1, name),
+              convert100toTarget(percent2, name),
+            ],
+            content
+          )
           : getCodesArea(
-              [
-                convert100toTarget(percent1, name),
-                convert100toTarget(percent2, name),
-              ],
-              content
-            );
+            [
+              convert100toTarget(percent1, name),
+              convert100toTarget(percent2, name),
+            ],
+            content
+          );
       e.stopPropagation();
 
       setShowPopup(false);
@@ -94,15 +95,13 @@ function Search() {
           [`${name}Number`]: arrMinMax,
           name:
             percent1 === 100 && percent2 === 100
-              ? `Trên ${convert100toTarget(max, name)}${
-                  name === 'prices' ? ' triệu' : 'm'
-                }`
+              ? `Trên ${convert100toTarget(max, name)}${name === 'prices' ? ' triệu' : 'm'
+              }`
               : convert100toTarget(min, name) === 0 &&
                 convert100toTarget(min, name) === 0
-              ? `Dưới ${convert100toTarget(max, name)}${
-                  name === 'prices' ? ' triệu' : 'm'
+                ? `Dưới ${convert100toTarget(max, name)}${name === 'prices' ? ' triệu' : 'm'
                 }`
-              : `Từ ${convert100toTarget(min, name)} - ${convert100toTarget(
+                : `Từ ${convert100toTarget(min, name)} - ${convert100toTarget(
                   max,
                   name
                 )}${name === 'prices' ? ' triệu' : 'm'}`,
@@ -116,8 +115,9 @@ function Search() {
 
   const handleSearch = () => {
     const queryCode = Object.entries(selectedValue).filter((item) => {
-      return item[0].includes('Number');
+      return item[0].includes('Number') || item[0].includes('provinceCode') || item[0].includes('categoryCode');
     });
+    console.log("🚀 ~ file: Search.js:122 ~ queryCode ~ queryCode:", queryCode)
     let queryCodeObject = {};
     queryCode.forEach((item) => {
       queryCodeObject[item[0]] = item[1];
@@ -129,25 +129,20 @@ function Search() {
     queryText.forEach((item) => {
       queryTextObj[item[0]] = item[1];
     });
-    let titleSearch = `${
-      queryTextObj.categories.name
-        ? queryTextObj.categories.name
-        : 'Cho thuê tất cả'
-    } ${
-      queryTextObj.provinces.name
-        ? `${queryTextObj.provinces.name === 'Toàn quốc' ? '' : 'tỉnh'} ${
-            queryTextObj.provinces.name
-          }`
+    let titleSearch = `${queryTextObj.category.name
+      ? queryTextObj.category.name
+      : 'Cho thuê tất cả'
+      } ${queryTextObj.province.name
+        ? `${queryTextObj.province.name === 'Toàn quốc' ? '' : 'tỉnh'} ${queryTextObj.province.name
+        }`
         : ''
-    } ${
-      queryTextObj.prices.name !== 'Chọn giá'
+      } ${queryTextObj.prices.name !== 'Chọn giá'
         ? `giá ${queryTextObj.prices.name}`
         : ''
-    } ${
-      queryTextObj.areas.name !== 'Chọn diện tích'
+      } ${queryTextObj.areas.name !== 'Chọn diện tích'
         ? `diện tích ${queryTextObj.areas.name}`
         : ''
-    } `;
+      } `;
 
     navigate(
       {
@@ -165,7 +160,7 @@ function Search() {
       >
         <span
           onClick={(e) =>
-            handShowPopup(e, categories, 'categories', 'Tìm tất cả')
+            handShowPopup(e, categories, 'category', 'Tìm tất cả')
           }
           className="cursor-pointer flex-1 md:w-full lg:w-full font-bold"
         >
@@ -174,11 +169,11 @@ function Search() {
             fontWeight
             IconBefore={<MdOutlineHouseSiding />}
             IconAfter={<RiDeleteBack2Line />}
-            text={selectedValue.categories.name}
+            text={selectedValue.category.name}
             deleteIcon={
               <FiDelete
                 onClick={() =>
-                  handleDeleteTitle('categories', 'Phòng trọ, nhà trọ')
+                  handleDeleteTitle('category', 'Phòng trọ, nhà trọ')
                 }
               />
             }
@@ -186,7 +181,7 @@ function Search() {
         </span>
         <span
           onClick={(e) =>
-            handShowPopup(e, provinces, 'provinces', 'Tìm tất cả')
+            handShowPopup(e, provinces, 'province', 'Tìm tất cả')
           }
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
@@ -194,10 +189,10 @@ function Search() {
             defaultText={'Toàn quốc'}
             IconBefore={<HiOutlineLocationMarker />}
             IconAfter={<GrNext />}
-            text={selectedValue.provinces.name}
+            text={selectedValue.province.name}
             deleteIcon={
               <FiDelete
-                onClick={() => handleDeleteTitle('provinces', 'Toàn quốc')}
+                onClick={() => handleDeleteTitle('province', 'Toàn quốc')}
               />
             }
           />

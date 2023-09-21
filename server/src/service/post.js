@@ -58,11 +58,18 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
       }
       if (priceNumber)
         queries.priceNumber = {
-          [Op.between]: priceNumber,
+          [Op.and]: [
+            { [Op.gte]: priceNumber[0] },
+            { [Op.lt]: priceNumber[1] }
+          ]
         }
       if (areaNumber)
         queries.areaNumber = {
-          [Op.between]: areaNumber,
+          [Op.and]: [
+            { [Op.gte]: areaNumber[0] },
+            { [Op.lt]: areaNumber[1] }
+          ]
+
         }
       const response = await db.Post.findAndCountAll({
         where: queries,
@@ -70,6 +77,7 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
         nest: true,
         offset: offset * +process.env.LIMIT,
         limit: +process.env.LIMIT,
+        order: [['createdAt', 'DESC']],
         include: [
           { model: db.Images, as: 'images', attributes: ['image'] },
           {
@@ -109,7 +117,7 @@ export const postCreateService = (queries) =>
       const currentArea = getNumberFromString(queries.areaNumber)
       const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
       const provinceCode = queries?.province?.includes('Thành phố')
-        ? generateCode(queries?.province?.replace('Thành phố', ''))
+        ? generateCode(queries?.province?.replace('Thành phố ', ''))
         : generateCode(queries?.province?.replace('Tỉnh', ''))
 
       await db.Attribute.findOrCreate({
