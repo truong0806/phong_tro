@@ -5,7 +5,7 @@ import {
   apiGetWard,
   apiLocation,
 } from '../../../../../service';
-const Address = ({ value, setValue }) => {
+const Address = ({ value, setValue, invalidFields, setInvalidFields }) => {
   const [provinces, setProvinces] = useState([]);
   const [apartmentNumber, setApartmentNumber] = useState([]);
   const [street, setStreet] = useState([]);
@@ -53,12 +53,12 @@ const Address = ({ value, setValue }) => {
   useEffect(() => {
     setValue((prev) => ({
       ...prev,
-      address: `${apartmentNumber.length === 0 ? '' : `${apartmentNumber},`} ${street.length === 0 ? '' : `${street},`
-        } ${ward ? `${wards?.find((item) => item.code === +ward)?.name},` : ''} ${district
-          ? `${districts?.find((item) => item.code === +district)?.name},`
-          : ''
-        } ${province ? provinces?.find((item) => item.code === +province)?.name : ''
-        }`,
+      apartmentNumber: apartmentNumber.length === 0 ? '' : apartmentNumber,
+      street: street.length === 0 ? '' : street,
+      ward,
+      district,
+      address: `${apartmentNumber.length === 0 ? '' : `${apartmentNumber}, `}${street.length === 0 ? '' : `${street}, `
+        }${ward ? `${wards?.find((item) => item.code === +ward)?.name}, ` : ''}${district ? `${districts?.find((item) => item.code === +district)?.name}, ` : ''}${province ? provinces?.find((item) => item.code === +province)?.name : ''}`,
       province: province
         ? provinces?.find((item) => item.code === +province)?.name
         : '',
@@ -83,12 +83,18 @@ const Address = ({ value, setValue }) => {
       </div>
       <div className="flex flex-col">
         <InputText
+          name={'apartmentNumber'}
+          invalidFields={invalidFields}
+          setInvalidFields={setInvalidFields}
           typeInput={'text'}
           label={'Số nhà'}
           setValue={setApartmentNumber}
           styleInput={'max-w-[30%]'}
         />
         <InputText
+          name={'street'}
+          invalidFields={invalidFields}
+          setInvalidFields={setInvalidFields}
           typeInput={'text'}
           label={'Đường'}
           setValue={setStreet}
@@ -97,6 +103,9 @@ const Address = ({ value, setValue }) => {
       </div>
       <div className="flex flex-row gap-3">
         <SelectAddress
+          setInvalidFields={setInvalidFields}
+          name={'province'}
+          invalidFields={invalidFields}
           type="province"
           value={province}
           setValue={setProvince}
@@ -104,6 +113,9 @@ const Address = ({ value, setValue }) => {
           label="Tỉnh/Thành phố"
         />
         <SelectAddress
+          setInvalidFields={setInvalidFields}
+          name={'district'}
+          invalidFields={invalidFields}
           reset={reset}
           type="district"
           value={district}
@@ -112,6 +124,9 @@ const Address = ({ value, setValue }) => {
           label="Quận/Huyện"
         />
         <SelectAddress
+          setInvalidFields={setInvalidFields}
+          name={'ward'}
+          invalidFields={invalidFields}
           reset={reset}
           type="ward"
           value={ward}

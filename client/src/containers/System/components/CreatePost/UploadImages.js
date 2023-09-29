@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { Loading } from '../../../../components';
 
-const UploadImages = ({ setImagesFile, imagesFile }) => {
+const UploadImages = ({ setInvalidFields, setImagesFile, imagesFile, invalidFields }) => {
   const [loading, setLoading] = useState(true);
   const handImageChange = async (e) => {
     setTimeout(() => {
@@ -14,12 +14,11 @@ const UploadImages = ({ setImagesFile, imagesFile }) => {
     }, 1000);
 
   };
-
   const handleDelete = (imageToDelete) => {
     setImagesFile((prev) => prev.filter((image) => image.url !== imageToDelete));
     setLoading(true)
   };
-
+  
   return (
     <div>
       <div className="mt-10 w-full mb-[14px]">
@@ -66,6 +65,7 @@ const UploadImages = ({ setImagesFile, imagesFile }) => {
           </label>
           <input
             hidden
+            onClick={() => setInvalidFields((prev) => prev.filter((field) => field.name !== 'images'))}
             onChange={(e) => {
               e.stopPropagation();
               setLoading(false);
@@ -79,6 +79,10 @@ const UploadImages = ({ setImagesFile, imagesFile }) => {
           ></input>
         </div>
       </div>
+      <small className="text-red-500">
+        {invalidFields?.some((field) => field.name === 'images') &&
+          `Vui lòng chọn ảnh`}
+      </small>
       {!loading ?
         <div className='flex items-center justify-center mt-3'>
           <Loading />

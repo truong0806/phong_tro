@@ -8,6 +8,8 @@ const SelectAddress = ({
   type,
   reset,
   name,
+  invalidFields,
+  setInvalidFields
 }) => {
   return (
     <div className="w-full">
@@ -15,10 +17,11 @@ const SelectAddress = ({
         {label}
       </label>
       <select
-        value={reset ? '' : value}
+        onFocus={() => setInvalidFields((prev) => prev.filter((field) => field.name !== name))}
+        defaultValue=''
         onChange={(e) => setValue(e.target.value)}
         id="select-address"
-        className="bg-gray-50 border my-2 py-2 border-gray-300 text-gray-900 mb-6 text-[0.8rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-1 "
+        className="bg-gray-50 border my-2 py-2 border-gray-300 text-gray-900 mb-2 text-[0.8rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-1 "
       >
         <option value="">{`-- Chọn ${label} --`}</option>
         {array?.map((item, index) => (
@@ -28,25 +31,29 @@ const SelectAddress = ({
               type === 'province'
                 ? item?.code
                 : type === 'district'
-                ? item?.code
-                : item?.code
+                  ? item?.code
+                  : item?.code
             }
             value={
               type === 'province'
                 ? item?.code
                 : type === 'district'
-                ? item?.code
-                : item?.code
+                  ? item?.code
+                  : item?.code
             }
           >
             {type === 'province'
               ? item?.name
               : type === 'district'
-              ? item?.name
-              : item?.name}
+                ? item?.name
+                : item?.name}
           </option>
         ))}
       </select>
+      <small className="text-red-500">
+        {invalidFields?.some((field) => field.name === name) &&
+          `Vui lòng chọn ${(label)}`}
+      </small>
     </div>
   );
 };

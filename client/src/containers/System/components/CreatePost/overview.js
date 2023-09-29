@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { InputText, UploadVideos } from '../../components';
+import { InputText, InputTextReadOnly, UploadVideos } from '../../components';
 import { InputSelect } from '../../../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { UploadImages } from '../';
 import * as actions from '../../../../store/action';
+import { editMaxMin } from '../../../../ultils/common/editArray';
 
-const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, userData, setPreviewImages, previewImages }) => {
+const Overview = ({
+  setInvalidFields,
+  invalidFields,
+  setImagesFile,
+  imagesFile,
+  handleSumit,
+  payload,
+  value,
+  setValue,
+  userData,
+  setPreviewImages,
+  previewImages,
+}) => {
   const doituongs = [
     { code: 'all', value: 'Tất cả' },
     { code: 'male', value: 'Nam' },
@@ -14,72 +27,50 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
   const dispatch = useDispatch();
   const { prices, areas } = useSelector((state) => state.app);
   const { categories } = useSelector((state) => state.app);
-  const [category, setCategory] = useState({});
-  const [doituong, setDoiTuong] = useState({});
-  const [titles, setTitles] = useState({});
-  const [desc, setDesc] = useState({});
-
+  const [category, setCategory] = useState([{ code: '', value: '' }]);
+  const [doituong, setDoiTuong] = useState([{ code: '', value: '' }]);
+  const [titles, setTitles] = useState([{ code: '', value: '' }]);
+  const [desc, setDesc] = useState('');
 
   useEffect(() => {
-    dispatch(actions.getPrices())
-    dispatch(actions.getAreas())
+    dispatch(actions.getPrices());
+    dispatch(actions.getAreas());
   }, [dispatch]);
 
   useEffect(() => {
     setValue((prev) => ({
       ...prev,
-      categoryCode: category.code,
-      categoryName: category.value,
+      categoryCode: category.code === undefined ? '' : category.code,
       title: titles,
       description: desc,
-      target: doituong.value || 'Tất cả',
+      target: doituong.value || '',
       targetCode: doituong.code,
       userId: userData.id,
       phoneContact: userData.phone,
-      author: userData.name,
       label: `${category?.value} ${value?.province}`,
     }));
-  }, [category, doituong, titles, desc, setValue]);
 
-  const editMaxMin = (arr, type) => {
-    console.log("🚀 ~ file: CreatePost.js:43 ~ editMaxMin ~ arr:", arr)
-    let doituongMoi1 = arr.map(function (doituong1) {
-      var giaTri = doituong1.value;
-      var mangGiaTri = giaTri.split(' ');
-      var doituongMoi = Object.assign({}, doituong1);
-      if (type === 'price') {
-        if (mangGiaTri[0] === 'Dưới') {
-          doituongMoi.min = 0;
-          doituongMoi.max = parseFloat(mangGiaTri[1]);
-        } else if (mangGiaTri[0] === 'Từ') {
-          doituongMoi.min = parseFloat(mangGiaTri[1]);
-          doituongMoi.max = parseFloat(mangGiaTri[3]);
-        } else if (mangGiaTri[0] === 'Trên') {
-          doituongMoi.min = parseFloat(mangGiaTri[1]);
-          doituongMoi.max = 99999999;
-        }
-      } else {
-        if (mangGiaTri[0] === 'Dưới') {
-          doituongMoi.min = 0;
-          doituongMoi.max = parseFloat(mangGiaTri[1]);
-        } else if (mangGiaTri[0] === 'Từ') {
-          doituongMoi.min = parseFloat(mangGiaTri[1]);
-          doituongMoi.max = parseFloat(mangGiaTri[3]);
-        } else if (mangGiaTri[0] === 'Trên') {
-          doituongMoi.min = parseFloat(mangGiaTri[1]);
-          doituongMoi.max = 99999999;
-        }
-      }
-      return doituongMoi;
-    });
-    return doituongMoi1
-  }
+  }, [
+    category,
+    doituong,
+    titles,
+    desc,
+    setValue,
+    userData.phone,
+    userData.id,
+    value?.province,
+    previewImages,
+  ]);
+
   return (
     <div>
       <div className="mt-5 w-full mb-[30px]">
         <h3 className="text-[1.75rem] font-bold">Thông tin mô tả</h3>
       </div>
       <InputSelect
+        setInvalidFields={setInvalidFields}
+        invalidFields={invalidFields}
+        name={'categoryCode'}
         setValue={setCategory}
         array={categories}
         nameValue={'value'}
@@ -87,6 +78,9 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
         maxW={'max-w-[50%]'}
       />
       <InputText
+        setInvalidFields={setInvalidFields}
+        name={'title'}
+        invalidFields={invalidFields}
         typeInput={'text'}
         setValue={setTitles}
         label={'Tiêu đề'}
@@ -97,22 +91,31 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
           Nội dung mô tả
         </label>
         <textarea
+          onFocus={() =>
+            setInvalidFields((prev) =>
+              prev.filter((field) => field.name !== 'description')
+            )
+          }
           onChange={(e) => setDesc(e.target.value)}
           id="desc"
           cols="30"
           rows="10"
           type="text"
-          className="focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] border-[#ced4da] py-[0.375rem] px-[0.75rem] text-[1rem] text-[#495057] h-[220px]"
+          className="focus:ring-[rgba(0,123,255,.25)] mb-2 focus:border-[#80bdff] border-[#ced4da] py-[0.375rem] px-[0.75rem] text-[1rem] text-[#495057] h-[220px]"
         ></textarea>
+        <small className="text-red-500">
+          {invalidFields?.some((field) => field.name === 'description') &&
+            `Vui lòng nhập nội dung bài đăng`}
+        </small>
       </div>
-      <InputText
+      <InputTextReadOnly
         typeInput={'text'}
         label={'Thông tin liên hệ'}
         value={userData.name}
         readonly
         styleInput={'max-w-[50%] bg-[#e9ecef]'}
       />
-      <InputText
+      <InputTextReadOnly
         typeInput={'text'}
         label={'Điện thoại'}
         value={userData.phone}
@@ -124,42 +127,65 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
         <label className="font-bold">Giá cho thuê</label>
         <div className="flex flex-row w-full h-[33px] my-2">
           <input
+            onFocus={() =>
+              setInvalidFields((prev) =>
+                prev.filter((field) => field.name !== 'priceNumber')
+              )
+            }
             onChange={(e) => {
               const dataPrice = editMaxMin(prices, 'price');
               setValue((prev) => ({
-                ...prev, priceNumber: e.target.value, priceCode: dataPrice.find(
-                  (price) => price.max > e.target.value / 1000000 && price.min <= e.target.value / 1000000,
-                )?.code
-              }))
-            }
-            }
+                ...prev,
+                priceNumber: e.target.value,
+                priceCode: dataPrice.find(
+                  (price) =>
+                    price.max > e.target.value / 1000000 &&
+                    price.min <= e.target.value / 1000000
+                )?.code,
+              }));
+            }}
             type="number"
             className="w-[60%] focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem] border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
           ></input>
+
           <div className="w-[40%] h-full  items-center justify-center ">
-            <select className="bg-gray-50 font-bold  text-md py-[0.25rem] rounded-r-[0.25rem]  text-[0.8rem] h-full border-gray-300 text-gray-900  focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] w-full">
-              <option value="đồng/tháng" selected>
-                đồng/tháng
-              </option>
+            <select
+              defaultValue=""
+              className="bg-gray-50 font-bold  text-md py-[0.25rem] rounded-r-[0.25rem]  text-[0.8rem] h-full border-gray-300 text-gray-900  focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] w-full"
+            >
+              <option value="đồng/tháng">đồng/tháng</option>
               <option value="đồng/m2/tháng">đồng/m2/tháng</option>
             </select>
           </div>
         </div>
-
-        <small className="">
-          Nhập đầy đủ số, ví dụ 1 triệu thì nhập là 1000000
-        </small>
+        <div className="flex flex-col">
+          <small className="">
+            Nhập đầy đủ số, ví dụ 1 triệu thì nhập là 1000000
+          </small>
+          <small className="text-red-500">
+            {invalidFields?.some((field) => field.name === 'priceNumber') &&
+              `Vui lòng nhập số tiền`}
+          </small>
+        </div>
       </div>
       <div className="mb-[14px] max-w-[50%]">
         <label className="font-bold">Diện tích</label>
         <div className="flex flex-row w-full h-[33px] my-2">
           <input
+            onFocus={() =>
+              setInvalidFields((prev) =>
+                prev.filter((field) => field.name !== 'areaNumber')
+              )
+            }
             onChange={(e) => {
               const dataArea = editMaxMin(areas, 'area');
               setValue((prev) => ({
-                ...prev, areaNumber: e.target.value, areaCode: dataArea.find(
-                  (area) => area.max > e.target.value && area.min <= e.target.value,
-                )?.code
+                ...prev,
+                areaNumber: e.target.value,
+                areaCode: dataArea.find(
+                  (area) =>
+                    area.max > e.target.value && area.min <= e.target.value
+                )?.code,
               }));
             }}
             type="number"
@@ -171,17 +197,27 @@ const Overview = ({ setImagesFile, imagesFile, handleSumit, value, setValue, use
             </span>
           </div>
         </div>
+        <small className="text-red-500">
+          {invalidFields?.some((field) => field.name === 'areaNumber') &&
+            `Vui lòng nhập diện tích`}
+        </small>
       </div>
       <InputSelect
+        setInvalidFields={setInvalidFields}
+        invalidFields={invalidFields}
         name={'target'}
         setValue={setDoiTuong}
         array={doituongs}
         text={'Đối tượng'}
         maxW={'max-w-[50%]'}
       />
-
-      <UploadImages setImagesFile={setImagesFile} imagesFile={imagesFile} handleSumit={handleSumit} setPreviewImages={setPreviewImages} previewImages={previewImages} />
-
+      <UploadImages
+        setInvalidFields={setInvalidFields}
+        invalidFields={invalidFields}
+        setImagesFile={setImagesFile}
+        imagesFile={imagesFile}
+        handleSumit={handleSumit}
+      />
       <UploadVideos setValue={setValue} />
     </div>
   );

@@ -5,11 +5,17 @@ import { Address, Overview } from './components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/action';
 import { apiCreateNewPost, apiUploadImages } from '../../service';
+import validate from '../../ultils/validate';
 const CreatePost = () => {
+  const [invalidFields, setInvalidFields] = useState([]);
 
   const { userData } = useSelector((state) => state.user);
   const [imagesFile, setImagesFile] = useState([]);
   const [payload, setPayload] = useState({
+    apartmentNumber: '',
+    street: '',
+    ward: '',
+    district: '',
     categoryCode: '',
     title: '',
     description: '',
@@ -25,7 +31,6 @@ const CreatePost = () => {
     priceCode: '',
     areaCode: '',
   });
-  console.log('🚀 ~ file: CreatePost.js:23 ~ CreatePost ~ payload:', payload);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,7 +38,12 @@ const CreatePost = () => {
       dispatch(actions.getCategories());
     }, 1000);
   }, [dispatch]);
-
+  useEffect(() => {
+    console.log(
+      '🚀 ~ file: CreatePost.js:11 ~ CreatePost ~ invalidFields:',
+      invalidFields
+    );
+  }, [invalidFields]);
   const handleSumit = async (e) => {
     let images = [];
     let formData = new FormData();
@@ -45,12 +55,49 @@ const CreatePost = () => {
         images.push(response.data.url);
       }
     });
+
     setPayload((prev) => ({ ...prev, images: images }));
-    setTimeout(async () => {
-      const response = await apiCreateNewPost(payload);
-      console.log("🚀 ~ file: CreatePost.js:51 ~ setTimeout ~ response:", response)
-    }, 1000)
-  }
+    const result = validate(payload, 'Create Post', setInvalidFields);
+    console.log('🚀 ~ file: CreatePost.js:58 ~ handleSumit ~ result:', result);
+
+    console.log(
+      '🚀 ~ file: overview.js:54 ~ useEffect ~ previewImages:',
+      imagesFile
+    );
+    if (payload.address.length > 0) {
+      setInvalidFields((prev) =>
+        prev.filter((field) => field.name !== 'address')
+      );
+    }
+    if (payload.priceCode.length > 0) {
+      setInvalidFields((prev) =>
+        prev.filter((field) => field.name !== 'priceCode')
+      );
+    }
+    if (payload.areaCode.length > 0) {
+      setInvalidFields((prev) =>
+        prev.filter((field) => field.name !== 'areaCode')
+      );
+    }
+    if (imagesFile.length > 0) {
+      setInvalidFields((prev) =>
+        prev.filter((field) => field.name !== 'images')
+      );
+      setInvalidFields((prev) =>
+        prev.filter((field) => field.name !== 'imageCode')
+      );
+    }
+    console.log('🚀 ~ file: CreatePost.js:58 ~ handleSumit ~ result1:', result);
+    if (invalidFields.length === 0) {
+      setTimeout(async () => {
+        const response = await apiCreateNewPost(payload);
+        console.log(
+          '🚀 ~ file: CreatePost.js:51 ~ setTimeout ~ response:',
+          response
+        );
+      }, 1000);
+    }
+  };
 
   return (
     <div className="z-2150 h-full">
@@ -67,10 +114,18 @@ const CreatePost = () => {
       <form className="h-full">
         <div className="flex flex-row gap-[3%] ">
           <div className="flex flex-col  text-[1rem] max-w-[70%]  w-full    ">
-            <Address value={payload} setValue={setPayload} />
+            <Address
+              invalidFields={invalidFields}
+              setInvalidFields={setInvalidFields}
+              value={payload}
+              setValue={setPayload}
+            />
             <Overview
-
-              setImagesFile={setImagesFile} imagesFile={imagesFile}
+              setInvalidFields={setInvalidFields}
+              payload={payload}
+              invalidFields={invalidFields}
+              setImagesFile={setImagesFile}
+              imagesFile={imagesFile}
               handleSumit={handleSumit}
               userData={userData}
               value={payload}
