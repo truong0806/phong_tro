@@ -57,6 +57,19 @@ export const apiUploadImages = (images) =>
       reject(error);
     }
   });
+export const apiDestroyImages = (images) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios({
+        method: 'delete',
+        url: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/destroy`,
+        data: images,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
 export const apiCreateNewPost = (payload) =>
   new Promise(async (resolve, reject) => {
     try {

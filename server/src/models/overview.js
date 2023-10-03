@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       area: DataTypes.STRING,
       type: DataTypes.STRING,
       target: DataTypes.STRING,
-      create: DataTypes.DATE,
-      expire: DataTypes.DATE,
+      create: DataTypes.STRING,
+      expire: DataTypes.STRING,
       bonus: DataTypes.STRING,
     },
     {

@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/action';
 import { apiCreateNewPost, apiUploadImages } from '../../service';
 import validate from '../../ultils/validate';
+
+
+
 const CreatePost = () => {
   const [invalidFields, setInvalidFields] = useState([]);
-
   const { userData } = useSelector((state) => state.user);
   const [imagesFile, setImagesFile] = useState([]);
   const [payload, setPayload] = useState({
@@ -45,12 +47,14 @@ const CreatePost = () => {
     );
   }, [invalidFields]);
   const handleSumit = async (e) => {
+
     let images = [];
     let formData = new FormData();
     imagesFile.map(async (item) => {
       formData.append('file', item.files);
       formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
       let response = await apiUploadImages(formData);
+      console.log("🚀 ~ file: CreatePost.js:66 ~ imagesFile.map ~ response:", response)
       if (response.status === 200) {
         images.push(response.data.url);
       }
@@ -91,10 +95,8 @@ const CreatePost = () => {
     if (invalidFields.length === 0) {
       setTimeout(async () => {
         const response = await apiCreateNewPost(payload);
-        console.log(
-          '🚀 ~ file: CreatePost.js:51 ~ setTimeout ~ response:',
-          response
-        );
+        if (response.msg === 'Create post failed') {
+        }
       }, 1000);
     }
   };

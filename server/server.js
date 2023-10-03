@@ -9,6 +9,7 @@ const docs = require('./doc')
 import initRoutes from './src/routes'
 import requireToken from './src/middleware/requireToken'
 import updateCategoryCount from './src/ultils/updateCategoryCount'
+import generateDate from './src/ultils/generateDate'
 
 // const options = {
 //   key: fs.readFileSync(path.join(__dirname, 'src/ultils/key', 'localhost.key')),
@@ -17,13 +18,13 @@ import updateCategoryCount from './src/ultils/updateCategoryCount'
 //   ),
 // }
 // app.use(requireToken)
-
 app.use(
   cors({
-    origin:  process.env.CLIENT_URL,
+    origin: process.env.CLIENT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }),
 )
+console.log(generateDate())
 // updateCategoryCount()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

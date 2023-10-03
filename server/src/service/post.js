@@ -2,9 +2,10 @@ import db from '../models'
 const { Op } = require('sequelize')
 const moment = require('moment')
 import { v4 as v4 } from 'uuid'
-import generateCode from '../ultils/generateCode'
 import { getNumberFromString, generateHashtag } from '../ultils/common'
 import { dataArea, dataPrice } from '../ultils/data'
+import genarateDate from '../ultils/generateDate'
+import generateCode from '../ultils/generateCode'
 //Get all post
 export const postService = () =>
   new Promise(async (resolve, reject) => {
@@ -108,14 +109,23 @@ export const postCreateService = (queries) =>
     console.log("🚀 ~ file: post.js:99 ~ queries:", queries)
     try {
       const hashtag = generateHashtag()
-      const currentDate = new Date()
+      console.log(1.1);
       const attributesId = v4()
+      console.log(1.2);
       const postId = v4()
+      console.log(1.3);
+      const currentDate = genarateDate()
+      console.log(1.4);
       const overviewId = v4()
+      console.log(1.5);
       const imagesId = v4()
+      console.log(1.6);
       const labelCode = generateCode(queries.label).trim()
+      console.log(1.7);
       const currentArea = getNumberFromString(queries.areaNumber)
+      console.log(1.8);
       const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
+      console.log(1.9);
       const provinceCode = queries?.province?.includes('Thành phố')
         ? generateCode(queries?.province?.replace('Thành phố ', ''))
         : generateCode(queries?.province?.replace('Tỉnh', ''))
@@ -128,7 +138,7 @@ export const postCreateService = (queries) =>
               ? `${queries.priceNumber} đồng/tháng`
               : `${currentPrice} triệu/tháng`,
           acreage: `${queries.areaNumber} m2`,
-          published: moment(new Date()).format('DD/MM/YYYY'),
+          published: currentDate.today,
           hashtag,
         },
         defaults: {
@@ -166,8 +176,8 @@ export const postCreateService = (queries) =>
         type: queries?.categoryName,
         target: queries?.target,
         bonus: 'Tin thường',
-        create: currentDate,
-        expire: currentDate.setDate(currentDate.getDate() + 10),
+        create: currentDate.today,
+        expire: currentDate.expireDay
       })
       console.log(4);
       await db.Province.findOrCreate({
@@ -218,7 +228,7 @@ export const postCreateService = (queries) =>
       console.log(6);
       resolve({
         err: created ? 0 : 1,
-        msg: created ? 'Create post succress' : 'Create post failed',
+        msg: created ? 'Create post success' : 'Create post failed',
       })
     } catch (error) {
       reject(error)
