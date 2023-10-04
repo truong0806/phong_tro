@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Breadcrumb = ({ currentPage, fatherPage }) => {
+const Breadcrumb = ({ currentPage, fatherPage, fatherPath }) => {
   return (
     <div className="mb-[1rem]">
       <nav
@@ -11,7 +11,6 @@ const Breadcrumb = ({ currentPage, fatherPage }) => {
         <ol className="flex flex-row items-center justify-center space-x-1 md:space-x-3">
           <li className="  items-center ">
             <Link
-              to={'/'}
               className="flex flex-row items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
             >
               <svg

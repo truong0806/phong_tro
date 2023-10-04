@@ -1,6 +1,7 @@
 import db from '../models'
 const { Op } = require('sequelize')
 const moment = require('moment')
+import async from 'async'
 import { v4 as v4 } from 'uuid'
 import { getNumberFromString, generateHashtag } from '../ultils/common'
 import { dataArea, dataPrice } from '../ultils/data'
@@ -59,18 +60,11 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
       }
       if (priceNumber)
         queries.priceNumber = {
-          [Op.and]: [
-            { [Op.gte]: priceNumber[0] },
-            { [Op.lt]: priceNumber[1] }
-          ]
+          [Op.and]: [{ [Op.gte]: priceNumber[0] }, { [Op.lt]: priceNumber[1] }],
         }
       if (areaNumber)
         queries.areaNumber = {
-          [Op.and]: [
-            { [Op.gte]: areaNumber[0] },
-            { [Op.lt]: areaNumber[1] }
-          ]
-
+          [Op.and]: [{ [Op.gte]: areaNumber[0] }, { [Op.lt]: areaNumber[1] }],
         }
       const response = await db.Post.findAndCountAll({
         where: queries,
@@ -106,26 +100,26 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
   })
 export const postCreateService = (queries) =>
   new Promise(async (resolve, reject) => {
-    console.log("🚀 ~ file: post.js:99 ~ queries:", queries)
+    console.log('🚀 ~ file: post.js:99 ~ queries:', queries)
     try {
       const hashtag = generateHashtag()
-      console.log(1.1);
+      console.log(1.1)
       const attributesId = v4()
-      console.log(1.2);
+      console.log(1.2)
       const postId = v4()
-      console.log(1.3);
+      console.log(1.3)
       const currentDate = genarateDate()
-      console.log(1.4);
+      console.log(1.4)
       const overviewId = v4()
-      console.log(1.5);
+      console.log(1.5)
       const imagesId = v4()
-      console.log(1.6);
+      console.log(1.6)
       const labelCode = generateCode(queries.label).trim()
-      console.log(1.7);
+      console.log(1.7)
       const currentArea = getNumberFromString(queries.areaNumber)
-      console.log(1.8);
+      console.log(1.8)
       const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
-      console.log(1.9);
+      console.log(1.9)
       const provinceCode = queries?.province?.includes('Thành phố')
         ? generateCode(queries?.province?.replace('Thành phố ', ''))
         : generateCode(queries?.province?.replace('Tỉnh', ''))
@@ -152,7 +146,7 @@ export const postCreateService = (queries) =>
           hashtag,
         },
       }),
-        console.log(1);
+        console.log(1)
       await db.Images.findOrCreate({
         where: { id: imagesId },
         defaults: {
@@ -160,7 +154,7 @@ export const postCreateService = (queries) =>
           image: JSON.stringify(queries.images),
         },
       })
-      console.log(2);
+      console.log(2)
       await db.Label.findOrCreate({
         where: { code: labelCode },
         defaults: {
@@ -168,7 +162,7 @@ export const postCreateService = (queries) =>
           value: queries.label,
         },
       })
-      console.log(3);
+      console.log(3)
       await db.Overview.create({
         id: overviewId,
         code: `#${hashtag}`,
@@ -177,9 +171,9 @@ export const postCreateService = (queries) =>
         target: queries?.target,
         bonus: 'Tin thường',
         create: currentDate.today,
-        expire: currentDate.expireDay
+        expire: currentDate.expireDay,
       })
-      console.log(4);
+      console.log(4)
       await db.Province.findOrCreate({
         where: {
           [Op.or]: [
@@ -194,24 +188,24 @@ export const postCreateService = (queries) =>
             : queries?.province?.replace('Tỉnh ', ''),
         },
       })
-      console.log(5);
+      console.log(5)
       const [post, created] = await db.Post.findOrCreate({
         where: {
           [Op.or]: [
-            { title: queries.title },
-            { address: queries.address },
-            { address: queries.description },
+            { title: query.title },
+            { address: query.address },
+            { address: query.description },
           ],
         },
         defaults: {
           id: postId,
-          title: queries.title || null,
+          title: query.title || null,
           labelCode,
-          address: queries.address || null,
+          address: query.address || null,
           attributesId: attributesId,
-          categoryCode: queries.categoryCode,
-          description: JSON.stringify(queries.description) || null,
-          userId: queries.userId,
+          categoryCode: query.categoryCode,
+          description: JSON.stringify(query.description) || null,
+          userId: query.userId,
           overviewId,
           imagesId,
           areaCode: dataArea.find(
@@ -222,10 +216,11 @@ export const postCreateService = (queries) =>
           )?.code,
           provinceCode: provinceCode || null,
           priceNumber: +currentPrice || null,
-          areaNumber: +currentArea || null
+          areaNumber: +currentArea || null,
         },
       })
-      console.log(6);
+
+      console.log(6)
       resolve({
         err: created ? 0 : 1,
         msg: created ? 'Create post success' : 'Create post failed',

@@ -14,6 +14,7 @@ export const path = {
   SEARCH: 'search',
   SYSTEM: '/quan-ly/*',
   CREATE_NEW_POST: 'dang-tin-moi',
+  MANAGE_POST: 'quan-ly-tin-dang',
 };
 
 export const text = {

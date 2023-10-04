@@ -41,6 +41,7 @@ const Overview = ({
     setValue((prev) => ({
       ...prev,
       categoryCode: category.code === undefined ? '' : category.code,
+      categoryName: category.value,
       title: titles,
       description: desc,
       target: doituong.value || '',

@@ -131,15 +131,14 @@ function Header({ setLoading, loading }) {
               }}
             />
             <div
-              className={`${
-                isShowMenu ? 'flex' : 'hidden'
-              } flex-col  absolute top-[50px] min-w-200 drop-shadow-xl bg-white shadow-md rounded-md py-[15px] px-[20px] right-[80px] z-50`}
+              className={`${isShowMenu ? 'flex' : 'hidden'
+                } flex-col  absolute top-[50px] min-w-200 drop-shadow-xl bg-white shadow-md rounded-md py-[15px] px-[20px] right-[80px] z-50`}
             >
               {menuManager?.map((item) => {
                 return (
                   <Link
                     className="py-[10px] items-center text-[1rem] flex flex-row text-[#1266dd] hover:text-[#f60]"
-                    to={item.path}
+                    to={`quan-ly/${item.path}`}
                     key={item.id}
                   >
                     <span>{item.icon}</span>

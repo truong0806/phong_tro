@@ -15,6 +15,7 @@ const CreatePost = () => {
   const [imagesFile, setImagesFile] = useState([]);
   const [payload, setPayload] = useState({
     apartmentNumber: '',
+    categoryName: '',
     street: '',
     ward: '',
     district: '',
@@ -48,26 +49,7 @@ const CreatePost = () => {
   }, [invalidFields]);
   const handleSumit = async (e) => {
 
-    let images = [];
-    let formData = new FormData();
-    imagesFile.map(async (item) => {
-      formData.append('file', item.files);
-      formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
-      let response = await apiUploadImages(formData);
-      console.log("🚀 ~ file: CreatePost.js:66 ~ imagesFile.map ~ response:", response)
-      if (response.status === 200) {
-        images.push(response.data.url);
-      }
-    });
-
-    setPayload((prev) => ({ ...prev, images: images }));
     const result = validate(payload, 'Create Post', setInvalidFields);
-    console.log('🚀 ~ file: CreatePost.js:58 ~ handleSumit ~ result:', result);
-
-    console.log(
-      '🚀 ~ file: overview.js:54 ~ useEffect ~ previewImages:',
-      imagesFile
-    );
     if (payload.address.length > 0) {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'address')
@@ -93,18 +75,34 @@ const CreatePost = () => {
     }
     console.log('🚀 ~ file: CreatePost.js:58 ~ handleSumit ~ result1:', result);
     if (invalidFields.length === 0) {
-      setTimeout(async () => {
-        const response = await apiCreateNewPost(payload);
-        if (response.msg === 'Create post failed') {
-        }
-      }, 1000);
+      let images = [];
+      let formData = new FormData();
+      let uploadPromises = imagesFile.map(async (item) => {
+        formData.append('file', item.files);
+        formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
+        return apiUploadImages(formData);
+      });
+      Promise.all(uploadPromises)
+        .then((responses) => {
+          responses.forEach((response, index) => {
+            console.log("🚀 ~ file: CreatePost.js:66 ~ imagesFile.map ~ response:", response)
+            if (response.status === 200) {
+              images.push(response.data.url);
+              setPayload((prev) => ({ ...prev, images: images }));
+              apiCreateNewPost(payload);
+            } else {
+              console.log('Upload images failed')
+            }
+          })
+        })
+
     }
   };
 
   return (
     <div className="z-2150 h-full">
       <div className=" items-center  pb-2 mb-3 ">
-        <h1 className="text-[2.5rem] mt-2 py-[1rem]">Đăng tin mới</h1>
+        <h1 className="text-[2rem] mt-2 py-[1rem]">Đăng tin mới</h1>
         <div className="border-b-2"></div>
       </div>
       <div
