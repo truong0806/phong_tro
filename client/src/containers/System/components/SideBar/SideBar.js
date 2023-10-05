@@ -20,7 +20,7 @@ const SideBar = () => {
           />
           <Link to={'/quan-ly/dang-tin-moi'}>
             <Button
-              width={
+              width={ 
                 'text-[0.875rem] rounded-[0.2rem] hover:bg-[#c82333] border-[#bd2130]'
               }
               text={'Đăng tin'}
