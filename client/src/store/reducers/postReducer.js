@@ -6,6 +6,7 @@ const initState = {
   count: 0,
   posts_by_categories: [],
   posts_limit: [],
+  posts_limit_admin: []
 };
 
 const postReducer = (state = initState, action) => {
@@ -20,6 +21,13 @@ const postReducer = (state = initState, action) => {
       return {
         ...state,
         posts_limit: action.posts_limit || [],
+        msg: action.msg || '',
+        count: action.count || 0,
+      };
+    case actionTypes.GET_POSTS_LIMIT_ADMIN:
+      return {
+        ...state,
+        posts_limit_admin: action.posts_limit_admin || [],
         msg: action.msg || '',
         count: action.count || 0,
       };

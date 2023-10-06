@@ -20,18 +20,16 @@ const User = ({ inSideBar }) => {
   return (
     <div className="mt-[5px] flex flex-col">
       <div
-        className={`${
-          inSideBar
-            ? 'flex flex-row w-full'
-            : 'z-60 flex flex-row justify-center left-2  w-[240px] h-[70px] '
-        }`}
+        className={`${inSideBar
+          ? 'flex flex-row w-full'
+          : 'z-60 flex flex-row justify-center left-2  w-[240px] h-[70px] '
+          }`}
       >
         <img
-          className={`${
-            inSideBar
-              ? 'w-[50px] h-[50px] rounded-[50%] '
-              : 'w-[40px] h-[40px] justify-center items-center mt-[6px] rounded-[50%] mr-[10px]'
-          }`}
+          className={`${inSideBar
+            ? 'w-[50px] h-[50px] rounded-[50%] '
+            : 'w-[40px] h-[40px] justify-center items-center mt-[6px] rounded-[50%] mr-[10px]'
+            }`}
           src={
             userData.avatar || 'https://phongtro123.com/images/default-user.png'
           }
@@ -44,7 +42,7 @@ const User = ({ inSideBar }) => {
               : 'flex flex-col w-4/5'
           }
         >
-          <span className="text-[1.2rem]">
+          <span className="text-[1rem]">
             {inSideBar ? '' : 'Xin chào,'}{' '}
             {isLoading ? (
               <strong className="whitespace-nowrap">{userData.name}</strong>
@@ -52,7 +50,7 @@ const User = ({ inSideBar }) => {
               '...'
             )}
           </span>
-          <span className="mt-1 gap-1 flex flex-row whitespace-nowrap">
+          <span className="mt-1 gap-1 flex flex-row whitespace-nowrap text-[0.8rem]">
             {inSideBar ? '' : 'Số điện thoại: '}
             {isLoading ? (
               <CopyButton valueCopy={userData.phone} text={userData.phone} />
@@ -65,8 +63,8 @@ const User = ({ inSideBar }) => {
         </div>
       </div>
       {inSideBar ? (
-        <div className=" p-1 flex flex-col  mb-[14px] gap-2">
-          <span className="whitespace-nowrap flex flex-row  text-ellipsis w-[150px]">
+        <div className=" p-1 flex flex-col  text-[0.9rem] mb-[14px] gap-2">
+          <span className="whitespace-nowrap flex flex-row   text-ellipsis w-[150px]">
             Mã thành viên:{' '}
             <b className=" text-ellipsis overflow-hidden">
               <CopyButton valueCopy={userData.id} text={userData.id} />

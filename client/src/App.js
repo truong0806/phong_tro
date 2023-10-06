@@ -16,7 +16,7 @@ import { System, CreatePost, ManagePost } from './containers/System';
 
 function App() {
   return (
-    <div className="h-full lg:w-full justify-center items-center bg-primary bg-auto text-base">
+    <div className="h-full lg:w-full w-screen justify-center items-center bg-primary bg-auto text-base">
       <Routes>
         <Route path={path.HOME} element={<Home />}>
           <Route path="*" element={<HomePage />} />

@@ -98,9 +98,61 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
       reject(error)
     }
   })
+
+export const postLimitAdminService = (page, query, id, bonus) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      let offset = !page || +page <= 1 ? 0 : +page - 1
+      const queries = {
+        ...query, userId: id
+      }
+      let overview = {
+        model: db.Overview,
+        as: 'overviews',
+        attributes: ['bonus']
+      };
+
+      if (bonus !== undefined && bonus !== '') {
+        overview.where = { bonus: bonus };
+      }
+
+      const response = await db.Post.findAndCountAll({
+        where: queries,
+        raw: true,
+        nest: true,
+        offset: offset * +process.env.LIMIT_ADMIN,
+        limit: +process.env.LIMIT,
+        order: [['createdAt', 'DESC']],
+        include: [
+          { model: db.Images, as: 'images', attributes: ['image'] },
+          {
+            model: db.Attribute,
+            as: 'attributes',
+            attributes: ['price', 'acreage', 'published', 'hashtag'],
+          },
+          overview,
+          {
+            model: db.User,
+            as: 'users',
+            attributes: ['name', 'phone', 'zalo'],
+          },
+        ],
+        attributes: ['id', 'title', 'star', 'address', 'description'],
+        distinct: true,
+      })
+      resolve({
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to find post',
+        response,
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })
+
+
 export const postCreateService = (queries) =>
   new Promise(async (resolve, reject) => {
-    console.log('🚀 ~ file: post.js:99 ~ queries:', queries)
     try {
       const hashtag = generateHashtag()
       console.log(1.1)

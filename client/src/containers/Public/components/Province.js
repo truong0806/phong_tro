@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 export function Province({ linkRef, categoryCurrent }) {
   return (
-    <div ref={linkRef} className="flex flex-col w-full items-center">
-      <div className="items-center justify-center w-full  my-[20px] mx-[10px]  xs:bg-[#225aff]  text-white p-[15px] rounded-lg">
+    <div ref={linkRef} className="flex flex-col  justify-center items-center mx-[150px]">
+      <div className="items-center justify-center w-full  my-[20px]  xs:bg-[#225aff]  text-white p-[15px] rounded-lg">
         <h1 className="text-[1.8rem] m-0 h-full text-left leading-9 font-bold ">
           {categoryCurrent !== undefined
             ? categoryCurrent?.header

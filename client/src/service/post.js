@@ -32,6 +32,24 @@ export const apiGetPostsLimit = (query) =>
       reject(error);
     }
   });
+export const apiGetPostsLimitAdmin = (query) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: 'get',
+        url: `/post/limit-admin`,
+        params: query,
+        headers: {
+          Authorization: `${JSON.parse(
+            localStorage.getItem('persist:auth')
+          ).accessToken.replace(/["']+/g, '')}`,
+        },
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
 export const apiGetPostsByCategory = (categoryCode) =>
   new Promise(async (resolve, reject) => {
     try {

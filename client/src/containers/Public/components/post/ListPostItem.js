@@ -27,7 +27,7 @@ const ListPostItem = ({
     return stars;
   };
   return (
-    <div className="w-full flex flex-col md:px-[10px] md:mx-[-10px]  border-t border-red-500 py-4 md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div className="w-full  flex flex-col md:px-[5px]  mx-[5px]  border-t border-red-500 py-2 md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
       {images?.length > 4 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
@@ -90,13 +90,13 @@ const ListPostItem = ({
               handleStar(+star)?.map((star, num) => {
                 return <span key={num}>{star}</span>;
               })}
-            <span className="ml-[4px] text-justify">{title}</span>
+            <span className="ml-[4px] text-justify line-clamp-2 overflow-hidden">{title}</span>
           </Link>
           <div className="w-[10%] flex justify-end">
             <BsBookmarkStarFill size={20} color="orange" />
           </div>
         </h3>
-        <div className="md:my-3 flex items-center justify-between gap-1 md:gap-5 flex-wrap">
+        <div className="md:my-6 my-6 flex items-center justify-between gap-1 md:gap-5 flex-wrap">
           <span className="text-[1.2rem] text-[#16c784] font-bold">
             {attributes.price.split(' ')[1] === 'đồng/tháng' ? `${+attributes.price.split(' ')[0] / 1000}.000 đồng/tháng` : attributes.price}
           </span>
@@ -113,10 +113,10 @@ const ListPostItem = ({
             </Link>
           </span>
         </div>
-        <p className="text-gray-500 hidden sm:block w-full md:h-[100px] h-[40px] text-ellipsis overflow-hidden text-justify">
+        <p className="text-gray-500 h-[100px] line-clamp-5 overflow-hidden my-[10px]">
           {description}
         </p>
-        <div className="flex  items-center justify-between my-3 lg:flex-row xl:flex-row">
+        <div className="flex  items-center justify-between my-9 lg:flex-row xl:flex-row">
           <div className="sm:flex items-center hidden">
             <img
               src="https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png"

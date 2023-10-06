@@ -10,7 +10,7 @@ function HomePage() {
   const [categoryCurrent, setCategoryCurrent] = useState({});
   const [categoryCode, setcategoryCode] = useState('none');
   const { categories } = useSelector((state) => state.app);
- 
+
 
   useEffect(() => {
     setLoading(false);
@@ -22,20 +22,20 @@ function HomePage() {
       setcategoryCode(category.code);
     }
     setLoading(true);
-    
+
     // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [location, categories]);
 
   return (
-    <div>
+    <div className=''>
       <Province categoryCurrent={categoryCurrent} />
-      <div className="w-full justify-center flex-col flex lg:flex-row gap-2 mb-3">
-        <div className="w-[100%] lg:w-[70%]  bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
+      <div className="w-[1250px]  mx-[75px] justify-center flex-col flex lg:flex-row gap-2 mb-3">
+        <div className="w-[65%] ml-[40px]   bg-white border border-[#dedede] shadow-md rounded-md border-solid  ">
           <ListPost loading={loading} categoryCode={categoryCode} />
           {/* <Pagination /> */}
           <Pagination />
         </div>
-        <div className="  lg:block lg:w-[30%] ">
+        <div className="  w-[25%]">
           <SlideBar setLoading={setLoading} />
         </div>
       </div>

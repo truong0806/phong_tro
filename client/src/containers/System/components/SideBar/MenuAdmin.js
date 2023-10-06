@@ -4,15 +4,15 @@ import { NavLink } from 'react-router-dom';
 import * as actions from '../../../../store/action';
 import { useDispatch } from 'react-redux';
 const notActive =
-  'hover:bg-[#f1f1f1] w-full  py-[10px] items-center text-[1rem] flex flex-row  ';
+  'hover:bg-[#f1f1f1] w-full  py-[8px] items-center text-[1rem]  flex flex-row  ';
 const active =
-  'hover:bg-[#f1f1f1] w-full font-bold py-[10px] items-center text-[1rem] flex flex-row  ';
+  'hover:bg-[#f1f1f1] w-full font-bold py-[8px] items-center text-[1rem]  flex flex-row  ';
 
 const MenuAdmin = () => {
   const dispatch = useDispatch();
   return (
     <div>
-      <ul className="mx-[-20px] mb-[15px] px-[10px] ">
+      <ul className="mx-[-20px] mb-[15px] px-[15px] ">
         {menuSider?.map((item) => {
           return (
             <NavLink
@@ -27,7 +27,7 @@ const MenuAdmin = () => {
         })}
         <li className="hover:bg-[#f1f1f1]">
           <div
-            className="py-[10px] items-center text-[1rem] flex flex-row  cursor-pointer hover:bg-[#f1f1f1]"
+            className="py-[10px] items-center text-[0.8rem] flex flex-row  cursor-pointer hover:bg-[#f1f1f1]"
             onClick={() => {
               dispatch(actions.logout());
             }}

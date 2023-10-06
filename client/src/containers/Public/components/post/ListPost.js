@@ -30,14 +30,14 @@ const ListPost = ({ categoryCode }) => {
       });
       if (categoryCode && categoryCode !== 'none')
         searchParamsObject.categoryCode = categoryCode;
-        console.log("🚀 ~ file: ListPost.js:33 ~ setTimeout ~ searchParamsObject:", searchParamsObject)
+      console.log("🚀 ~ file: ListPost.js:33 ~ setTimeout ~ searchParamsObject:", searchParamsObject)
       dispatch(actions.GetPostsLimit(searchParamsObject));
       setLoading(true);
     });
   }, [searchParams, categoryCode, dispatch]);
 
   return (
-    <div className="m-[20px] ">
+    <div className="mx-[20px] ">
       <section className=" flex justify-between">
         <div className="">
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>

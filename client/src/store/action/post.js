@@ -3,6 +3,7 @@ import {
   apiGetPosts,
   apiGetPostsLimit,
   apiGetPostsByCategory,
+  apiGetPostsLimitAdmin
 } from '../../service/post';
 export const getPosts = () => async (dispatch) => {
   try {
@@ -46,6 +47,29 @@ export const GetPostsLimit = (query) => async (dispatch) => {
     dispatch({
       type: actionTypes.GET_POSTS_LIMIT,
       posts_limit: null,
+    });
+  }
+};
+export const GetPostsLimitAdmin = (query) => async (dispatch) => {
+  try {
+    const response = await apiGetPostsLimitAdmin(query);
+    if (response?.data.err === 0) {
+      dispatch({
+        type: actionTypes.GET_POSTS_LIMIT_ADMIN,
+        posts_limit_admin: response.data.response?.rows,
+        count: response.data.response?.count,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_POSTS_LIMIT_ADMIN,
+        msg: response.data.msg,
+        posts_limit_admin: null
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_POSTS_LIMIT_ADMIN,
+      posts_limit_admin: null,
     });
   }
 };
