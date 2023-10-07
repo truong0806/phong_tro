@@ -3,7 +3,8 @@ module.exports = {
   content: [
     './src/**/*.{html,js,svg,jsx,ts,tsx}',
     'public/index.html',
-    './node_modules/flowbite/**/*.js',"./node_modules/react-tailwindcss-select/dist/index.esm.js" 
+    './node_modules/flowbite/**/*.js',
+    './node_modules/react-tailwindcss-select/dist/index.esm.js',
   ],
 
   theme: {
@@ -16,6 +17,7 @@ module.exports = {
       boxShadow: {
         '2xl': '0px 1px 5px 0px rgba(0, 0, 0, 0.25);',
         '3xl': '0 0 0 0.2rem rgba(0,123,255,.25)',
+        '4xl': '0 0 20px 0 rgba(0, 0, 0, 0.3)',
       },
 
       width: {

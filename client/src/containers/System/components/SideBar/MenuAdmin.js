@@ -13,7 +13,7 @@ const MenuAdmin = () => {
   return (
     <div>
       <ul className="mx-[-20px] mb-[15px] px-[15px] ">
-        {menuSider.slice(2)?.map((item) => {
+        {menuSider.slice(3)?.map((item) => {
           return (
             <NavLink
               to={item.path}

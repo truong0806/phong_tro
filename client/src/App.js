@@ -17,6 +17,8 @@ import {
   ManagePost,
   EditProfile,
   ChangePhoneNumber,
+  ChangePassword,
+  RechargePage,
 } from './containers/System';
 
 function App() {
@@ -45,11 +47,13 @@ function App() {
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.CREATE_NEW_POST} element={<CreatePost />} />
           <Route path={path.MANAGE_POST} element={<ManagePost />} />
+          <Route path={path.RECHARGE} element={<RechargePage />} />
           <Route path={path.EDIT_PROFILE} element={<EditProfile />}></Route>
           <Route
             path={path.CHANGE_PHONE_NUMBER}
             element={<ChangePhoneNumber />}
           />
+          <Route path={path.CHANGE_PASSWORD} element={<ChangePassword />} />
         </Route>
       </Routes>
     </div>

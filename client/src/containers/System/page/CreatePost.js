@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { text, luuY } from '../../ultils/constains';
-import { Button } from '../../components';
-import { Address, Overview } from './components';
+import { text, luuY } from '../../../ultils/constains';
+import { Button } from '../../../components';
+import { Address, Overview } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
-import * as actions from '../../store/action';
-import { apiCreateNewPost, apiUploadImages } from '../../service';
-import validate from '../../ultils/validate';
+import * as actions from '../../../store/action';
+import { apiCreateNewPost, apiUploadImages } from '../../../service';
+import validate from '../../../ultils/validate';
 
 
 

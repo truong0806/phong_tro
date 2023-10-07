@@ -12,6 +12,12 @@ const menuSider = [
 
   },
   {
+    id: 0,
+    text: 'Đổi mật khẩu',
+    path: 'cap-nhat-thong-tin-ca-nhan/doi-mat-khau',
+
+  },
+  {
     id: 1,
     text: 'Quản lý tin đăng',
     path: 'quan-ly-tin-dang',
@@ -61,7 +67,7 @@ const menuSider = [
   {
     id: 3,
     text: 'Nạp tiền vào tài khoản',
-    path: '/quan-ly/nap-tien',
+    path: 'nap-tien',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

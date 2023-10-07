@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '../../components';
-import * as actions from '../../store/action';
+import { Button } from '../../../components';
+import * as actions from '../../../store/action';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Link,
@@ -9,8 +9,8 @@ import {
     useSearchParams,
     createSearchParams,
 } from 'react-router-dom';
-import { Pagination } from '../Public';
-import PostTable from './components/ManagerPost/PostTable';
+import { Pagination } from '../../Public';
+import PostTable from '../components/ManagerPost/PostTable';
 
 const ManagePost = () => {
     const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const ManagePost = () => {
             });
             dispatch(actions.GetPostsLimitAdmin(searchParamsObject));
             setLoading(true);
-        }, 3000);
+        }, 2000);
     }, [searchParams, categoryCode, dispatch]);
 
     const handleFilterPost = (value) => {

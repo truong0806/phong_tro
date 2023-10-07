@@ -16,7 +16,9 @@ export const path = {
   CREATE_NEW_POST: 'dang-tin-moi',
   MANAGE_POST: 'quan-ly-tin-dang',
   EDIT_PROFILE: 'cap-nhat-thong-tin-ca-nhan',
+  RECHARGE: 'nap-tien',
   CHANGE_PHONE_NUMBER: 'cap-nhat-thong-tin-ca-nhan/doi-so-dien-thoai',
+  CHANGE_PASSWORD: 'cap-nhat-thong-tin-ca-nhan/doi-mat-khau',
 };
 
 export const text = {
@@ -53,3 +55,9 @@ export const luuY = [
   'Để tăng độ tin cậy và tin rao được nhiều người quan tâm hơn, hãy sửa vị trí tin rao của bạn trên bản đồ bằng cách kéo icon tới đúng vị trí của tin rao.',
   'Tin đăng có hình ảnh rõ ràng sẽ được xem và gọi gấp nhiều lần so với tin rao không có ảnh. Hãy đăng ảnh để được giao dịch nhanh chóng!',
 ];
+export const depositMethod = [
+  {
+    value: 'Chuyển khoản',
+    imgUrl: 'https://phongtro123.com/images/bank-transfer.png'
+  },
+]

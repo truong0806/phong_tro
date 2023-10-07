@@ -23,6 +23,7 @@ const System = () => {
         <SideBar />
         <div className="flex-auto  h-full pt-[60px] ml-[200px] px-[42px] bg-white ">
           <Breadcrumb
+            location={location.pathname}
             fatherPath={'quan-ly'}
             currentPage={currentPage[0].text}
             fatherPage={'Quản lý'}
