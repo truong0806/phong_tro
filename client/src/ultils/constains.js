@@ -15,6 +15,8 @@ export const path = {
   SYSTEM: '/quan-ly/*',
   CREATE_NEW_POST: 'dang-tin-moi',
   MANAGE_POST: 'quan-ly-tin-dang',
+  EDIT_PROFILE: 'cap-nhat-thong-tin-ca-nhan',
+  CHANGE_PHONE_NUMBER: 'cap-nhat-thong-tin-ca-nhan/doi-so-dien-thoai',
 };
 
 export const text = {

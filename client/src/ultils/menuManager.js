@@ -206,7 +206,7 @@ const menuManager = [
   {
     id: 5,
     text: 'Thông tin cá nhân',
-    path: '/system/profile',
+    path: 'cap-nhat-thong-tin-ca-nhan',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

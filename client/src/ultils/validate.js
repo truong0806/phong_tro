@@ -1,5 +1,4 @@
 export default function validate(payload, name, setInvalidFields) {
-  console.log("🚀 ~ file: validate.js:2 ~ validate ~ payload:", payload)
   let invalids = 0;
   const fields = Object.entries(payload);
   if (name === 'Create Post') {

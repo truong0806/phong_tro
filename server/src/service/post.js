@@ -109,7 +109,7 @@ export const postLimitAdminService = (page, query, id, bonus) =>
       let overview = {
         model: db.Overview,
         as: 'overviews',
-        attributes: ['bonus']
+        attributes: ['bonus', 'code', 'create', 'expire']
       };
 
       if (bonus !== undefined && bonus !== '') {
@@ -155,23 +155,14 @@ export const postCreateService = (queries) =>
   new Promise(async (resolve, reject) => {
     try {
       const hashtag = generateHashtag()
-      console.log(1.1)
       const attributesId = v4()
-      console.log(1.2)
       const postId = v4()
-      console.log(1.3)
       const currentDate = genarateDate()
-      console.log(1.4)
       const overviewId = v4()
-      console.log(1.5)
       const imagesId = v4()
-      console.log(1.6)
       const labelCode = generateCode(queries.label).trim()
-      console.log(1.7)
       const currentArea = getNumberFromString(queries.areaNumber)
-      console.log(1.8)
       const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
-      console.log(1.9)
       const provinceCode = queries?.province?.includes('Thành phố')
         ? generateCode(queries?.province?.replace('Thành phố ', ''))
         : generateCode(queries?.province?.replace('Tỉnh', ''))
@@ -198,7 +189,6 @@ export const postCreateService = (queries) =>
           hashtag,
         },
       }),
-        console.log(1)
       await db.Images.findOrCreate({
         where: { id: imagesId },
         defaults: {
@@ -206,7 +196,6 @@ export const postCreateService = (queries) =>
           image: JSON.stringify(queries.images),
         },
       })
-      console.log(2)
       await db.Label.findOrCreate({
         where: { code: labelCode },
         defaults: {
@@ -214,7 +203,6 @@ export const postCreateService = (queries) =>
           value: queries.label,
         },
       })
-      console.log(3)
       await db.Overview.create({
         id: overviewId,
         code: `#${hashtag}`,
@@ -225,7 +213,6 @@ export const postCreateService = (queries) =>
         create: currentDate.today,
         expire: currentDate.expireDay,
       })
-      console.log(4)
       await db.Province.findOrCreate({
         where: {
           [Op.or]: [
@@ -240,7 +227,6 @@ export const postCreateService = (queries) =>
             : queries?.province?.replace('Tỉnh ', ''),
         },
       })
-      console.log(5)
       const [post, created] = await db.Post.findOrCreate({
         where: {
           [Op.or]: [
@@ -271,8 +257,6 @@ export const postCreateService = (queries) =>
           areaNumber: +currentArea || null,
         },
       })
-
-      console.log(6)
       resolve({
         err: created ? 0 : 1,
         msg: created ? 'Create post success' : 'Create post failed',

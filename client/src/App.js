@@ -11,8 +11,13 @@ import {
   ForgotPassword,
 } from './containers/Public';
 import { path } from './ultils/constains';
-import menuManager  from './ultils/menuManager';
-import { System, CreatePost, ManagePost } from './containers/System';
+import {
+  System,
+  CreatePost,
+  ManagePost,
+  EditProfile,
+  ChangePhoneNumber,
+} from './containers/System';
 
 function App() {
   return (
@@ -40,6 +45,11 @@ function App() {
         <Route path={path.SYSTEM} element={<System />}>
           <Route path={path.CREATE_NEW_POST} element={<CreatePost />} />
           <Route path={path.MANAGE_POST} element={<ManagePost />} />
+          <Route path={path.EDIT_PROFILE} element={<EditProfile />}></Route>
+          <Route
+            path={path.CHANGE_PHONE_NUMBER}
+            element={<ChangePhoneNumber />}
+          />
         </Route>
       </Routes>
     </div>

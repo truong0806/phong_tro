@@ -18,7 +18,7 @@ const SideBar = () => {
             textColor={''}
             padding={'py-[0.3rem] px-[0.3rem]'}
           />
-          <Link to={'/quan-ly/dang-tin-moi'}>
+          <Link to={'dang-tin-moi'}>
             <Button
               width={
                 'text-[0.9rem] rounded-[0.2rem] hover:bg-[#c82333] border-[#bd2130]'

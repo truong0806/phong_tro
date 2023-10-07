@@ -80,7 +80,6 @@ export const loginService = ({ phone, password }) =>
           },
         )
       const refreshToken = await createToken(response.phone, response.id)
-      console.log(process.env.JWT_EXPIRATION)
       resolve({
         err: accessToken ? 0 : 2,
         msg: accessToken

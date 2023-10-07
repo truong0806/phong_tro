@@ -31,7 +31,6 @@ function Search() {
     prices: { name: 'Chọn giá', pricesNumber: [0, 15] },
     areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
   });
-  console.log("🚀 ~ file: Search.js:34 ~ Search ~ selectedValue:", selectedValue)
   const [showPopup, setShowPopup] = useState(false);
   const [content, setContent] = useState([]);
   const [defaultText, setDefaultText] = useState('');
@@ -48,7 +47,7 @@ function Search() {
         areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
       });
     }
-  }, []);
+  }, [location]);
 
   const handShowPopup = (e, content, name, defaultText) => {
     e.stopPropagation();
@@ -117,7 +116,6 @@ function Search() {
     const queryCode = Object.entries(selectedValue).filter((item) => {
       return item[0].includes('Number') || item[0].includes('provinceCode') || item[0].includes('categoryCode');
     });
-    console.log("🚀 ~ file: Search.js:122 ~ queryCode ~ queryCode:", queryCode)
     let queryCodeObject = {};
     queryCode.forEach((item) => {
       queryCodeObject[item[0]] = item[1];

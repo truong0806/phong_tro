@@ -30,7 +30,6 @@ const ListPost = ({ categoryCode }) => {
       });
       if (categoryCode && categoryCode !== 'none')
         searchParamsObject.categoryCode = categoryCode;
-      console.log("🚀 ~ file: ListPost.js:33 ~ setTimeout ~ searchParamsObject:", searchParamsObject)
       dispatch(actions.GetPostsLimit(searchParamsObject));
       setLoading(true);
     });

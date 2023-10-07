@@ -4,6 +4,7 @@ import {
   AiOutlinePlusCircle,
 } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
+import { FaRegCopy } from 'react-icons/fa';
 import {
   BsChevronRight,
   BsFillBookmarkStarFill,
@@ -25,6 +26,7 @@ import { MdOutlineHouseSiding } from 'react-icons/md';
 import { LuLayoutDashboard } from 'react-icons/lu';
 
 const icon = {
+  FaRegCopy,
   AiOutlineHeart,
   BsBookmarkStarFill,
   BsFillBookmarkStarFill,

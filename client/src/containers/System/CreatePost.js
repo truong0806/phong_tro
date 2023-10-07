@@ -42,14 +42,9 @@ const CreatePost = () => {
     }, 1000);
   }, [dispatch]);
   useEffect(() => {
-    console.log(
-      '🚀 ~ file: CreatePost.js:11 ~ CreatePost ~ invalidFields:',
-      invalidFields
-    );
   }, [invalidFields]);
   const handleSumit = async (e) => {
-
-    const result = validate(payload, 'Create Post', setInvalidFields);
+    validate(payload, 'Create Post', setInvalidFields);
     if (payload.address.length > 0) {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'address')
@@ -73,7 +68,6 @@ const CreatePost = () => {
         prev.filter((field) => field.name !== 'imageCode')
       );
     }
-    console.log('🚀 ~ file: CreatePost.js:58 ~ handleSumit ~ result1:', result);
     if (invalidFields.length === 0) {
       let images = [];
       let formData = new FormData();
@@ -85,7 +79,6 @@ const CreatePost = () => {
       Promise.all(uploadPromises)
         .then((responses) => {
           responses.forEach((response, index) => {
-            console.log("🚀 ~ file: CreatePost.js:66 ~ imagesFile.map ~ response:", response)
             if (response.status === 200) {
               images.push(response.data.url);
               setPayload((prev) => ({ ...prev, images: images }));

@@ -27,9 +27,7 @@ export const getPostLimit = async (req, res) => {
   }
 }
 export const getPostLimitAdmin = async (req, res) => {
-  console.log("🚀 ~ file: postController.js:30 ~ getPostLimitAdmin ~ req:", req.user)
   const { page, bonus, ...query } = req.query
-  console.log("🚀 ~ file: postController.js:32 ~ getPostLimitAdmin ~ bonus:", bonus)
   const {id} = req.user
   try {
     if (!id) {
@@ -55,8 +53,6 @@ export const createPost = async (req, res) => {
     priceNumber,
     areaNumber, label
   } = req.body
-  console.log("🚀 ~ file: postController.js:38 ~ createPost ~ req.body:", req.body)
-
   try {
     if (
       !categoryCode ||

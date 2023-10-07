@@ -1,8 +1,20 @@
-const menuManager = [
+const menuSider = [
+  {
+    id: 0,
+    text: 'Đăng tin mới',
+    path: 'dang-tin-moi',
+
+  },
+  {
+    id: 0,
+    text: 'Đổi số điện thoại',
+    path: 'cap-nhat-thong-tin-ca-nhan/doi-so-dien-thoai',
+
+  },
   {
     id: 1,
     text: 'Quản lý tin đăng',
-    path: '/quan-ly/quan-ly-tin-dang',
+    path: 'quan-ly-tin-dang',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +39,7 @@ const menuManager = [
   {
     id: 2,
     text: 'Sửa thông tin cá nhân',
-    path: '/quan-ly/sua-thong-tin-ca-nhan',
+    path: 'cap-nhat-thong-tin-ca-nhan',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -159,4 +171,4 @@ const menuManager = [
   },
 ];
 
-export default menuManager;
+export default menuSider;

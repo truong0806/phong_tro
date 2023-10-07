@@ -3,16 +3,18 @@ import { path } from '../../ultils/constains';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Header, SideBar } from './components';
-import menuManager from '../../ultils/menuManager';
+import menuSider from '../../ultils/menuSider';
 import Breadcrumb from './components/Breadcrumb';
 const System = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const location = useLocation();
   if (!isLoggedIn || isLoggedIn === 'false')
     return <Navigate to={`/auth/${path.LOGIN}`} replace={true} />;
-  const currentPage = menuManager.filter((item) => {
+  const currentPage = menuSider.filter((item) => {
     return `/quan-ly/${item.path}` === location.pathname;
   });
+    console.log("🚀 ~ file: System.js:16 ~ currentPage ~ location.pathname:", location.pathname)
+  console.log("🚀 ~ file: System.js:16 ~ currentPage ~ currentPage:", currentPage)
   console.log("🚀 ~ file: System.js:16 ~ currentPage ~ currentPage:", currentPage[0].text)
   return (
     <div className="w-full  flex-col items-center">

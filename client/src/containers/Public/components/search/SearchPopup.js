@@ -19,7 +19,6 @@ const SearchPopup = ({
   handleSubmit,
   defaultText,
 }) => {
-  console.log("🚀 ~ file: SearchPopup.js:22 ~ name:", name)
   const [percent1, setPercent1] = useState(
     name === 'prices' && selectedValue?.prices.pricesNumber
       ? convertto100(+selectedValue?.prices.pricesNumber[0], name)
@@ -161,7 +160,6 @@ const SearchPopup = ({
                 <ul className="list-none ">
                   <li
                     onClick={(e) => {
-                      console.log(defaultText);
 
                       setSelectedValue((prevState) => ({
                         ...prevState,
@@ -171,7 +169,6 @@ const SearchPopup = ({
                           code: null,
                         },
                       }));
-                      console.log(selectedValue);
                       setShowPopup(false);
                     }}
                     className="hover:text-[#007aff] overflow-y-auto relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"

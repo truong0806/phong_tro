@@ -17,7 +17,6 @@ export const apiLocation = () =>
   });
 export const apiGetDistricts = (provinceCode) =>
   new Promise(async (resolve, reject) => {
-    console.log('🚀 ~ file: province1.js:29 ~ provinceCode', provinceCode);
     try {
       const response = await axiosDefaults({
         method: 'get',

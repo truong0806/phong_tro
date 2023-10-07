@@ -39,10 +39,6 @@ instance.interceptors.response.use(
       // Access Token was expired
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
-        // console.log(
-        //   '🚀 ~ file: setupInterceptors.js:23 ~ refreshToken:',
-        //   TokenService.getLocalRefreshToken()
-        // );
         try {
           const rs = await instance.post('/auth/refreshtoken', {
             refreshToken: TokenService.getLocalRefreshToken(),

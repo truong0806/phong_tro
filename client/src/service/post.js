@@ -26,7 +26,6 @@ export const apiGetPostsLimit = (query) =>
           ).accessToken.replace(/["']+/g, '')}`,
         },
       });
-      console.log("🚀 ~ file: post.js:29 ~ newPromise ~ response:", response)
       resolve(response);
     } catch (error) {
       reject(error);
