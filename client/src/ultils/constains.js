@@ -57,7 +57,43 @@ export const luuY = [
 ];
 export const depositMethod = [
   {
+    id:0,
     value: 'Chuyển khoản',
     imgUrl: 'https://phongtro123.com/images/bank-transfer.png'
+  },
+  {
+    id:1,
+    value: 'Thẻ ATM Internet Banking',
+    imgUrl: 'https://phongtro123.com/images/payment-method.svg'
+  },
+  {
+    id:2,
+    value: 'Thẻ tín dụng quốc tế',
+    imgUrl: 'https://phongtro123.com/images/credit-card.png'
+  },
+  {
+    id:3,
+    value: 'MOMO',
+    imgUrl: 'https://phongtro123.com/images/momo.png'
+  },
+  {
+    id:4,
+    value: 'ZaloPay',
+    imgUrl: 'https://phongtro123.com/images/zalopay.png'
+  },
+  {
+    id:5,
+    value: 'ShopeePay',
+    imgUrl: 'https://phongtro123.com/images/shopeepay2.svg'
+  },
+  {
+    id:6,
+    value: 'Điểm giao dịch, cửa hàng tiện lợi',
+    imgUrl: 'https://phongtro123.com/images/online-store.svg'
+  },
+  {
+    id:7,
+    value: 'QQuét mã QRCode',
+    imgUrl: 'https://phongtro123.com/images/qr-code.png'
   },
 ]

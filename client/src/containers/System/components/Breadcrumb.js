@@ -3,18 +3,9 @@ import { Link } from 'react-router-dom';
 import menuSider from '../../../ultils/menuSider';
 
 const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
-  console.log("🚀 ~ file: Breadcrumb.js:6 ~ Breadcrumb ~ currentPage:", currentPage)
-  console.log(
-    '🚀 ~ file: Breadcrumb.js:5 ~ Breadcrumb ~ location:',
-    location.split('/')[2]
-  );
   const currentFatherPage = menuSider.filter((item) => {
     return `${item.path}` === location.split('/')[2];
   });
-  console.log(
-    '🚀 ~ file: Breadcrumb.js:10 ~ currentFatherPage ~ currentFatherPage:',
-    currentFatherPage
-  );
   return (
     <div className="mb-[1rem]">
       <nav

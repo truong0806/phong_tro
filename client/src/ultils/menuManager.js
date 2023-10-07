@@ -110,7 +110,7 @@ const menuManager = [
   {
     id: 3,
     text: 'Nạp tiền',
-    path: '/system/recharge',
+    path: 'nap-tien',
     icon: (
       <svg
         width="15"
@@ -152,8 +152,7 @@ const menuManager = [
             r="1"
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(1.09411 23.2727) rotate(143.02) scale(38.6884 53.1966)"
-          >
-          </radialGradient>
+          ></radialGradient>
         </defs>
       </svg>
     ),
@@ -281,7 +280,6 @@ const menuManager = [
       </svg>
     ),
   },
-
 ];
 
 export default menuManager;
