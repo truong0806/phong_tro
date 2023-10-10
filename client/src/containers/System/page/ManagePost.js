@@ -10,7 +10,8 @@ import {
     createSearchParams,
 } from 'react-router-dom';
 import { Pagination } from '../../Public';
-import PostTable from '../components/ManagerPost/PostTable';
+import TableDisplay from '../components/TableDisplay';
+import { postTableTitle } from '../../../ultils/constains';
 
 const ManagePost = () => {
     const dispatch = useDispatch();
@@ -120,7 +121,7 @@ const ManagePost = () => {
                 </div>
             </div>
             <div className="border-b-2"></div>
-            <PostTable loading={loading} posts_limit_admin={posts_limit_admin} />
+            <TableDisplay listTitle={postTableTitle} loading={loading} data={posts_limit_admin} />
             <Pagination />
         </div>
     );

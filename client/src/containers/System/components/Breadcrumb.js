@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import menuSider from '../../../ultils/menuSider';
 
 const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
   const currentFatherPage = menuSider.filter((item) => {
     return `${item.path}` === location.split('/')[2];
+  });
+  console.log(
+    '🚀 ~ file: Breadcrumb.js:10 ~ currentFatherPage ~ currentFatherPage:',
+    currentFatherPage
+  );
+  useEffect(() => {
+    document.title = currentPage;
   });
   return (
     <div className="mb-[1rem]">
@@ -81,29 +88,28 @@ const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
               </li>
             </>
           )}
-              <svg
-                className="w-3 h-3 mx-1 text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 9 4-4-4-4"
-                />
-              </svg>
-              <li aria-current="page">
-                <div className="flex items-center">
-                  <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
-                    {currentPage}
-                  </span>
-                </div>
-              </li>
-           
+          <svg
+            className="w-3 h-3 mx-1 text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <li aria-current="page">
+            <div className="flex items-center">
+              <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+                {currentPage}
+              </span>
+            </div>
+          </li>
         </ol>
       </nav>
     </div>

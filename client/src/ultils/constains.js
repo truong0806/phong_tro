@@ -19,6 +19,8 @@ export const path = {
   RECHARGE: 'nap-tien',
   CHANGE_PHONE_NUMBER: 'cap-nhat-thong-tin-ca-nhan/doi-so-dien-thoai',
   CHANGE_PASSWORD: 'cap-nhat-thong-tin-ca-nhan/doi-mat-khau',
+  DEPOSIT_HISTORY: 'lich-su-nap-tien',
+  PAYMENT_HISTORY: 'lich-su-thanh-toan',
 };
 
 export const text = {
@@ -57,43 +59,70 @@ export const luuY = [
 ];
 export const depositMethod = [
   {
-    id:0,
+    id: 0,
     value: 'Chuyển khoản',
-    imgUrl: 'https://phongtro123.com/images/bank-transfer.png'
+    imgUrl: 'https://phongtro123.com/images/bank-transfer.png',
   },
   {
-    id:1,
+    id: 1,
     value: 'Thẻ ATM Internet Banking',
-    imgUrl: 'https://phongtro123.com/images/payment-method.svg'
+    imgUrl: 'https://phongtro123.com/images/payment-method.svg',
   },
   {
-    id:2,
+    id: 2,
     value: 'Thẻ tín dụng quốc tế',
-    imgUrl: 'https://phongtro123.com/images/credit-card.png'
+    imgUrl: 'https://phongtro123.com/images/credit-card.png',
   },
   {
-    id:3,
+    id: 3,
     value: 'MOMO',
-    imgUrl: 'https://phongtro123.com/images/momo.png'
+    imgUrl: 'https://phongtro123.com/images/momo.png',
   },
   {
-    id:4,
+    id: 4,
     value: 'ZaloPay',
-    imgUrl: 'https://phongtro123.com/images/zalopay.png'
+    imgUrl: 'https://phongtro123.com/images/zalopay.png',
   },
   {
-    id:5,
+    id: 5,
     value: 'ShopeePay',
-    imgUrl: 'https://phongtro123.com/images/shopeepay2.svg'
+    imgUrl: 'https://phongtro123.com/images/shopeepay2.svg',
   },
   {
-    id:6,
+    id: 6,
     value: 'Điểm giao dịch, cửa hàng tiện lợi',
-    imgUrl: 'https://phongtro123.com/images/online-store.svg'
+    imgUrl: 'https://phongtro123.com/images/online-store.svg',
   },
   {
-    id:7,
+    id: 7,
     value: 'QQuét mã QRCode',
-    imgUrl: 'https://phongtro123.com/images/qr-code.png'
+    imgUrl: 'https://phongtro123.com/images/qr-code.png',
   },
-]
+];
+
+export const postTableTitle = [
+  {
+    title: 'Mã tin',
+  },
+  {
+    title: 'Ảnh đại diện',
+  },
+  {
+    title: 'Tiêu đề',
+  },
+  {
+    title: 'Giá',
+  },
+  {
+    title: 'Ngày bắt đầu',
+  },
+  {
+    title: 'Ngày hết hạn',
+  },
+  {
+    title: 'Trạng thái',
+  },
+  {
+    title: '',
+  },
+];

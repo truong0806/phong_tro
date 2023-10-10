@@ -89,7 +89,7 @@ const menuSider = [
   {
     id: 4,
     text: 'Lịch sử nạp tiền',
-    path: '/quan-ly/lich-su-nap-tien',
+    path: 'lich-su-nap-tien',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@ const menuSider = [
   {
     id: 5,
     text: 'Lịch sử thanh toán',
-    path: '/quan-ly/lich-su-thanh-toan',
+    path: 'lich-su-thanh-toan',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
