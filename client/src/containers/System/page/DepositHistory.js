@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import DepositHistoryTable from '../components/DepositHistory/DepositHistoryTable';
+import { DepositHistoryTable } from '../components';
 
 const DepositHistory = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(true);
   return (
     <div>
       <div className=" items-center  pb-1 lex justify-between ">

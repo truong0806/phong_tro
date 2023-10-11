@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropagateLoader } from 'react-spinners';
 
 const PaymentHistory = ({ loading }) => {
   return (
@@ -29,8 +30,8 @@ const PaymentHistory = ({ loading }) => {
         </thead>
         {loading ? (
           <tbody className="">
-            <tr>
-              <td colspan="7" className="p-[10px]"></td>
+             <tr>
+              <td colSpan="7" className="py-10 text-center">Không có thông tin lịch sử thanh toán</td>
             </tr>
           </tbody>
         ) : (

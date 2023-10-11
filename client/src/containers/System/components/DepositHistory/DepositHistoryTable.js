@@ -34,7 +34,7 @@ const DepositHistoryTable = ({loading}) => {
         {loading ? (
           <tbody className="">
             <tr>
-              <td colspan="7" className="p-[10px]"></td>
+              <td colSpan="7" className="py-10 text-center">Không có thông tin lịch sử nạp tiền</td>
             </tr>
           </tbody>
         ) : (

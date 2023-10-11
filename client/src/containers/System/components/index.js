@@ -7,3 +7,7 @@ export { default as Address } from './CreatePost/Address/Address';
 export { default as Overview } from './CreatePost/overview';
 export { default as UploadImages } from './CreatePost/UploadImages';
 export { default as UploadVideos } from './CreatePost/UploadVideos';
+
+export { default as PostTable } from './ManagerPost/PostTable';
+export { default as DepositHistoryTable } from './DepositHistory/DepositHistoryTable';
+export { default as PaymentHistoryTable } from './PaymentHistory/PaymentHistoryTable';

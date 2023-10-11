@@ -20,12 +20,16 @@ import {
   RiDeleteBack2Line,
   RiHeartFill,
   RiHeartLine,
+  RiDeleteBin6Line,
+  RiEdit2Line
 } from 'react-icons/ri';
 import { TbReportMoney, TbDiscount2 } from 'react-icons/tb';
 import { MdOutlineHouseSiding } from 'react-icons/md';
 import { LuLayoutDashboard } from 'react-icons/lu';
 
 const icon = {
+  RiDeleteBin6Line,
+  RiEdit2Line,
   FaRegCopy,
   AiOutlineHeart,
   BsBookmarkStarFill,

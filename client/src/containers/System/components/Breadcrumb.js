@@ -6,10 +6,6 @@ const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
   const currentFatherPage = menuSider.filter((item) => {
     return `${item.path}` === location.split('/')[2];
   });
-  console.log(
-    '🚀 ~ file: Breadcrumb.js:10 ~ currentFatherPage ~ currentFatherPage:',
-    currentFatherPage
-  );
   useEffect(() => {
     document.title = currentPage;
   });

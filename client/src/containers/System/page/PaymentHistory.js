@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import DepositHistoryTable from '../components/DepositHistory/DepositHistoryTable';
+import { PaymentHistoryTable } from '../components';
 
 const PaymentHistory = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(true);
   return (
     <div>
       <div className=" items-center  pb-1 lex justify-between ">
@@ -10,7 +10,7 @@ const PaymentHistory = () => {
         <div className="flex gap-1 justify-end text-[0.9rem]"></div>
       </div>
       <div className="border-b-2"></div>
-      <DepositHistoryTable loading={loading} />
+      <PaymentHistoryTable loading={loading} />
     </div>
   );
 };

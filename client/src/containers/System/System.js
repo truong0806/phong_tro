@@ -13,9 +13,6 @@ const System = () => {
   const currentPage = menuSider.filter((item) => {
     return `/quan-ly/${item.path}` === location.pathname;
   });
-    console.log("🚀 ~ file: System.js:16 ~ currentPage ~ location.pathname:", location.pathname)
-  console.log("🚀 ~ file: System.js:16 ~ currentPage ~ currentPage:", currentPage)
-  console.log("🚀 ~ file: System.js:16 ~ currentPage ~ currentPage:", currentPage[0].text)
   return (
     <div className="w-full  flex-col items-center">
       <Header />

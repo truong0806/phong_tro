@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PropagateLoader } from 'react-spinners';
 import CopyButton from '../../../../components/CopyButton';
 import { checkStatus } from '../../../../ultils/common/checkStatus';
+import icons from '../../../../ultils/icons';
+const { RiDeleteBin6Line, RiEdit2Line } = icons;
 
-const PostTable = ({ loading, posts_limit_admin }) => {
+const PostTable = ({ loading, posts_limit_admin, valueSelect }) => {
   return (
     <div>
       <table className="w-[100%] mb-[0.8rem] text-[0.9rem] border-collapse border ">
@@ -19,22 +21,22 @@ const PostTable = ({ loading, posts_limit_admin }) => {
             <th className=" h-[5px] w-[20%] border border-[#dee2e6]">
               Tiêu đề
             </th>
-            <th className=" h-[5px] w-[10%] border border-[#dee2e6]">Giá</th>
+            <th className=" h-[5px] w-[15%] border border-[#dee2e6]">Giá</th>
             <th className=" h-[5px] w-[10%] border border-[#dee2e6]">
               Ngày bắt đầu
             </th>
             <th className=" h-[5px] w-[10%] border border-[#dee2e6]">
               Ngày hết hạn
             </th>
-            <th className=" h-[5px] w-[15%] border border-[#dee2e6]">
+            <th className=" h-[5px] w-[13%] border border-[#dee2e6]">
               Trạng thái
             </th>
             <th className=" h-[5px] w-[5%] border border-[#dee2e6]"></th>
           </tr>
         </thead>
-        {loading ? (
+        {loading === true ? (
           <tbody className="">
-            {posts_limit_admin ? (
+            {posts_limit_admin.length !== 0 ? (
               posts_limit_admin?.map((item, index) => {
                 let imgObject = JSON.parse(item.images.image);
                 return (
@@ -78,7 +80,7 @@ const PostTable = ({ loading, posts_limit_admin }) => {
                       </Link>
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">
-                      <Link className="line-clamp-2 overflow-hidden">
+                      <Link className="line-clamp-2 overflow-hidden justify-center flex items-center">
                         {item.attributes.price.split(' ')[1] === 'đồng/tháng'
                           ? `${
                               +item.attributes.price.split(' ')[0] / 1000
@@ -87,30 +89,63 @@ const PostTable = ({ loading, posts_limit_admin }) => {
                       </Link>
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">
-                      <Link className="line-clamp-2 overflow-hidden ">
-                        {item.overviews.create}
+                      <Link className="justify-center flex items-center">
+                        {item.overviews.create.split(' ')[3]}
                       </Link>
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">
-                      {item.overviews.expire}{' '}
+                      <div className="justify-center flex items-center">
+                        {item.overviews.expire.split(' ')[3]}
+                      </div>
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">
-                      {checkStatus(item?.overviews?.expire?.split(' ')[3])}
+                      <div className="">
+                        <span
+                          className={`${
+                            item.overviews.status === 'Đang hoạt động'
+                              ? 'p-2 text-[#57b477] flex justify-center font-bold'
+                              : 'p-2 text-[#f67053] flex justify-center font-bold'
+                          }`}
+                        >
+                          {item.overviews.status}
+                        </span>
+                      </div>
                     </td>
-                    <td className="p-[10px] border border-[#dee2e6]">
-                      <Link className="">EDIT</Link>
+                    <td className="p-[10px] border border-[#dee2e6] items-center">
+                      <div className="flex items-center justify-center gap-4">
+                        <Link className="flex justify-center">
+                          <RiEdit2Line
+                            size={20}
+                            color="#ffb000"
+                            onMouseOver={({ target }) =>
+                              (target.style.color = 'blue')
+                            }
+                            onMouseOut={({ target }) =>
+                              (target.style.color = '#ffb000')
+                            }
+                          />
+                        </Link>
+                        <Link className="flex justify-center">
+                          <RiDeleteBin6Line
+                            size={20}
+                            color="#FF0000"
+                            onMouseOver={({ target }) =>
+                              (target.style.color = 'blue')
+                            }
+                            onMouseOut={({ target }) =>
+                              (target.style.color = 'FF0000')
+                            }
+                          />
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 );
               })
             ) : (
               <tr>
-                <td colspan="7" className="p-[10px]">
-                  Bạn chưa có tin đăng nào. Bấm{' '}
-                  <Link href="https://phongtro123.com/quan-ly/dang-tin-moi.html">
-                    vào đây
-                  </Link>{' '}
-                  để bắt đầu đăng tin
+                <td colSpan="7" className="text-center py-10 ">
+                  <h2>Không có bài đăng trong {valueSelect}</h2>
                 </td>
               </tr>
             )}
@@ -118,7 +153,7 @@ const PostTable = ({ loading, posts_limit_admin }) => {
         ) : (
           <tbody>
             <tr>
-              <td colspan="7" className="pt-[20px]">
+              <td colSpan="7" className="text-center py-10 ">
                 <div className="flex justify-center  items-center ">
                   <PropagateLoader color="#1266dd" size={12} />
                 </div>
