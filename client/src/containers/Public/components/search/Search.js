@@ -70,19 +70,19 @@ function Search() {
       const gaps =
         name === 'prices'
           ? getCodesPrices(
-            [
-              convert100toTarget(percent1, name),
-              convert100toTarget(percent2, name),
-            ],
-            content
-          )
+              [
+                convert100toTarget(percent1, name),
+                convert100toTarget(percent2, name),
+              ],
+              content
+            )
           : getCodesArea(
-            [
-              convert100toTarget(percent1, name),
-              convert100toTarget(percent2, name),
-            ],
-            content
-          );
+              [
+                convert100toTarget(percent1, name),
+                convert100toTarget(percent2, name),
+              ],
+              content
+            );
       e.stopPropagation();
 
       setShowPopup(false);
@@ -94,13 +94,15 @@ function Search() {
           [`${name}Number`]: arrMinMax,
           name:
             percent1 === 100 && percent2 === 100
-              ? `Trên ${convert100toTarget(max, name)}${name === 'prices' ? ' triệu' : 'm'
-              }`
+              ? `Trên ${convert100toTarget(max, name)}${
+                  name === 'prices' ? ' triệu' : 'm'
+                }`
               : convert100toTarget(min, name) === 0 &&
                 convert100toTarget(min, name) === 0
-                ? `Dưới ${convert100toTarget(max, name)}${name === 'prices' ? ' triệu' : 'm'
+              ? `Dưới ${convert100toTarget(max, name)}${
+                  name === 'prices' ? ' triệu' : 'm'
                 }`
-                : `Từ ${convert100toTarget(min, name)} - ${convert100toTarget(
+              : `Từ ${convert100toTarget(min, name)} - ${convert100toTarget(
                   max,
                   name
                 )}${name === 'prices' ? ' triệu' : 'm'}`,
@@ -114,7 +116,11 @@ function Search() {
 
   const handleSearch = () => {
     const queryCode = Object.entries(selectedValue).filter((item) => {
-      return item[0].includes('Number') || item[0].includes('provinceCode') || item[0].includes('categoryCode');
+      return (
+        item[0].includes('Number') ||
+        item[0].includes('provinceCode') ||
+        item[0].includes('categoryCode')
+      );
     });
     let queryCodeObject = {};
     queryCode.forEach((item) => {
@@ -127,20 +133,25 @@ function Search() {
     queryText.forEach((item) => {
       queryTextObj[item[0]] = item[1];
     });
-    let titleSearch = `${queryTextObj.category.name
-      ? queryTextObj.category.name
-      : 'Cho thuê tất cả'
-      } ${queryTextObj.province.name
-        ? `${queryTextObj.province.name === 'Toàn quốc' ? '' : 'tỉnh'} ${queryTextObj.province.name
-        }`
+    let titleSearch = `${
+      queryTextObj.category.name
+        ? queryTextObj.category.name
+        : 'Cho thuê tất cả'
+    } ${
+      queryTextObj.province.name
+        ? `${queryTextObj.province.name === 'Toàn quốc' ? '' : 'tỉnh'} ${
+            queryTextObj.province.name
+          }`
         : ''
-      } ${queryTextObj.prices.name !== 'Chọn giá'
+    } ${
+      queryTextObj.prices.name !== 'Chọn giá'
         ? `giá ${queryTextObj.prices.name}`
         : ''
-      } ${queryTextObj.areas.name !== 'Chọn diện tích'
+    } ${
+      queryTextObj.areas.name !== 'Chọn diện tích'
         ? `diện tích ${queryTextObj.areas.name}`
         : ''
-      } `;
+    } `;
 
     navigate(
       {
@@ -178,9 +189,7 @@ function Search() {
           />
         </span>
         <span
-          onClick={(e) =>
-            handShowPopup(e, provinces, 'province', 'Tìm tất cả')
-          }
+          onClick={(e) => handShowPopup(e, provinces, 'province', 'Tìm tất cả')}
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem

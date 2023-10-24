@@ -2,15 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components';
+import { usePathname } from '../../../ultils/common/usePathname';
 
 const EditProfile = () => {
+  const pageTitle = usePathname();
   const { userData } = useSelector((state) => state.user);
   return (
     <div>
       <div className=" items-center   pb-1 mb-1 flex justify-between ">
-        <h1 className="text-[2rem] mt-2 py-[0.5rem] ">
-          Cập nhật thông tin cá nhân
-        </h1>
+        <h1 className="text-[2rem] mt-2 py-[0.5rem] ">{pageTitle[0].text}</h1>
       </div>
       <div className="border-b-2"></div>
       <div className="flex justify-center ml-[20%] w-[70%] mt-10 mb-[170px]">
@@ -93,7 +93,9 @@ const EditProfile = () => {
           <div className="flex flex-row items-center  mt-[20px]">
             <label className="whitespace-nowrap w-[20%]">Mật khẩu</label>
             <div className="w-full">
-              <Link to={'doi-mat-khau'} target='_blank'
+              <Link
+                to={'doi-mat-khau'}
+                target="_blank"
                 className="hover:underline text-[#007bff] "
               >
                 Đổi mật khẩu

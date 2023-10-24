@@ -1,4 +1,4 @@
-import db from '../models'
+import db, { sequelize } from '../models'
 const { Op } = require('sequelize')
 const moment = require('moment')
 import async from 'async'
@@ -7,11 +7,12 @@ import { getNumberFromString, generateHashtag } from '../ultils/common'
 import { dataArea, dataPrice } from '../ultils/data'
 import genarateDate from '../ultils/generateDate'
 import generateCode from '../ultils/generateCode'
+import { checkStatus } from '../ultils/checkStatus'
 //Get all post
 export const postService = () =>
   new Promise(async (resolve, reject) => {
     try {
-      const response = await db.Post.findAll({
+      const response = await db.Post.findAndCountAll({
         raw: true,
         nest: true,
         include: [
@@ -43,8 +44,6 @@ export const postService = () =>
         distinct: true,
       })
       resolve({
-        err: response ? 0 : 1,
-        msg: response ? 'OK' : 'Failed to find post',
         response,
       })
     } catch (error) {
@@ -99,21 +98,21 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
     }
   })
 
-export const postLimitAdminService = (page, query, id, bonus) =>
+export const postLimitAdminService = (page, query, bonus) =>
   new Promise(async (resolve, reject) => {
+    let today = genarateDate().today
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1
       const queries = {
-        ...query, userId: id
+        ...query,
       }
       let overview = {
         model: db.Overview,
         as: 'overviews',
-        attributes: ['bonus', 'code', 'create', 'expire']
-      };
-
+        attributes: ['id', 'bonus', 'code', 'create', 'expire'],
+      }
       if (bonus !== undefined && bonus !== '') {
-        overview.where = { bonus: bonus };
+        overview.where = { bonus: bonus }
       }
 
       const response = await db.Post.findAndCountAll({
@@ -140,6 +139,11 @@ export const postLimitAdminService = (page, query, id, bonus) =>
         attributes: ['id', 'title', 'star', 'address', 'description'],
         distinct: true,
       })
+      response.rows.forEach((row) => {
+        row.overviews.status = checkStatus(
+          row?.overviews?.expire?.split(' ')[3],
+        )
+      })
       resolve({
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to find post',
@@ -149,7 +153,6 @@ export const postLimitAdminService = (page, query, id, bonus) =>
       reject(error)
     }
   })
-
 
 export const postCreateService = (queries) =>
   new Promise(async (resolve, reject) => {
@@ -189,13 +192,13 @@ export const postCreateService = (queries) =>
           hashtag,
         },
       }),
-      await db.Images.findOrCreate({
-        where: { id: imagesId },
-        defaults: {
-          id: imagesId,
-          image: JSON.stringify(queries.images),
-        },
-      })
+        await db.Images.findOrCreate({
+          where: { id: imagesId },
+          defaults: {
+            id: imagesId,
+            image: JSON.stringify(queries.images),
+          },
+        })
       await db.Label.findOrCreate({
         where: { code: labelCode },
         defaults: {
@@ -260,6 +263,44 @@ export const postCreateService = (queries) =>
       resolve({
         err: created ? 0 : 1,
         msg: created ? 'Create post success' : 'Create post failed',
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })
+
+export const postDeleteService = (postId) =>
+  new Promise(async (resolve, reject) => {
+    console.log('Post id', postId)
+    try {
+      const post = await db.Post.findOne({
+        where: { id: postId },
+        attributes: [
+          'id',
+          'title',
+          'star',
+          'address',
+          'description',
+          'overviewId',
+          'attributesId',
+          'imagesId',
+        ],
+      })
+      if (!post) {
+        resolve({
+          err: 1,
+          msg: 'Delete post failed ',
+        })
+        return
+      }
+      await db.Overview.destroy({ where: { id: post.overviewId } })
+      await db.Attribute.destroy({ where: { id: post.attributesId } })
+      await db.Images.destroy({ where: { id: post.imagesId } })
+      const deleted = await db.Post.destroy({ where: { id: postId } })
+      resolve({
+        err: deleted > 0 ? 0 : 1,
+        msg: deleted > 0 ? 'Delete post success' : 'Delete post failed',
+        deleted,
       })
     } catch (error) {
       reject(error)

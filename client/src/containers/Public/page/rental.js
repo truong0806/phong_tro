@@ -10,7 +10,7 @@ function RentalApartment() {
   const [categoryCode, setcategoryCode] = useState('none');
   const [categoryCurrent, setCategoryCurrent] = useState({});
   const { categories, prices, areas } = useSelector((state) => state.app);
- 
+  const { count, posts_limit } = useSelector((state) => state.post);
 
   useState(() => {
     setLoading(false);
@@ -42,7 +42,7 @@ function RentalApartment() {
             loading={loading}
             categoryCode={categoryCode}
           />
-          <Pagination />
+          <Pagination count={count} posts_limit={posts_limit} />
         </div>
         <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
           <SlideBar setLoading={setLoading} />

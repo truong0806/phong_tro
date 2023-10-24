@@ -135,7 +135,7 @@ const SearchPopup = ({
           onClick={(e) => {
             e.stopPropagation();
           }}
-          className="relative flex flex-col h-[500px]lg:flex-row w-[700px] left-0 right-0 bottom-0 my-0 mx-auto top-[60px]  bg-white border rounded-lg overflow-hidden"
+          className="relative flex flex-col h-[500px] lg:flex-row w-[700px] left-0 right-0 bottom-0 my-0 mx-auto top-[60px]  bg-white border rounded-lg overflow-hidden"
         >
           <div
             className={`${
@@ -160,7 +160,6 @@ const SearchPopup = ({
                 <ul className="list-none ">
                   <li
                     onClick={(e) => {
-
                       setSelectedValue((prevState) => ({
                         ...prevState,
                         [`${removeSFromString(name)}Code`]: null,

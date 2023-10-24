@@ -49,12 +49,13 @@ export const apiGetPostsLimitAdmin = (query) =>
       reject(error);
     }
   });
-export const apiGetPostsByCategory = (categoryCode) =>
+export const apiDeletePost = (postId) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axiosConfig({
-        method: 'get',
-        url: `/post/category?code=${categoryCode}`,
+        method: 'delete',
+        url: `/post/delete`,
+        params: { postId },
       });
       resolve(response);
     } catch (error) {
@@ -65,7 +66,7 @@ export const apiUploadImages = (images) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axios({
-        method: 'post',
+        method: 'delete',
         url: `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
         data: images,
       });

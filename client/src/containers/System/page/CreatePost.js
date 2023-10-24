@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/action';
 import { apiCreateNewPost, apiUploadImages } from '../../../service';
 import validate from '../../../ultils/validate';
-
-
+import { usePathname } from '../../../ultils/common/usePathname';
 
 const CreatePost = () => {
+  const pageTitle = usePathname();
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
   const [imagesFile, setImagesFile] = useState([]);
@@ -41,8 +41,7 @@ const CreatePost = () => {
       dispatch(actions.getCategories());
     }, 1000);
   }, [dispatch]);
-  useEffect(() => {
-  }, [invalidFields]);
+  useEffect(() => {}, [invalidFields]);
   const handleSumit = async (e) => {
     validate(payload, 'Create Post', setInvalidFields);
     if (payload.address.length > 0) {
@@ -76,26 +75,24 @@ const CreatePost = () => {
         formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
         return apiUploadImages(formData);
       });
-      Promise.all(uploadPromises)
-        .then((responses) => {
-          responses.forEach((response, index) => {
-            if (response.status === 200) {
-              images.push(response.data.url);
-              setPayload((prev) => ({ ...prev, images: images }));
-              apiCreateNewPost(payload);
-            } else {
-              console.log('Upload images failed')
-            }
-          })
-        })
-
+      Promise.all(uploadPromises).then((responses) => {
+        responses.forEach((response, index) => {
+          if (response.status === 200) {
+            images.push(response.data.url);
+            setPayload((prev) => ({ ...prev, images: images }));
+            apiCreateNewPost(payload);
+          } else {
+            console.log('Upload images failed');
+          }
+        });
+      });
     }
   };
 
   return (
     <div className="z-2150 h-full">
       <div className=" items-center  pb-2 mb-3 ">
-        <h1 className="text-[2rem] mt-2 py-[1rem]">Đăng tin mới</h1>
+        <h1 className="text-[2rem] mt-2 py-[1rem]">{pageTitle[0].text}</h1>
         <div className="border-b-2"></div>
       </div>
       <div

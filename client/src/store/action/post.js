@@ -2,7 +2,6 @@ import actionTypes from './actionTypes';
 import {
   apiGetPosts,
   apiGetPostsLimit,
-  apiGetPostsByCategory,
   apiGetPostsLimitAdmin
 } from '../../service/post';
 export const getPosts = () => async (dispatch) => {
@@ -84,30 +83,6 @@ export const ClearPostsLimit = () => async (dispatch) => {
     dispatch({
       type: actionTypes.GET_POSTS_LIMIT,
       posts_limit: null,
-    });
-  }
-};
-export const getPostsByCategory = (categoryCode) => async (dispatch) => {
-  try {
-    const response = await apiGetPostsByCategory(categoryCode);
-    if (response?.data.err === 0) {
-      dispatch({
-        type: actionTypes.GET_POSTS_BY_CATEGORY,
-        posts_by_categories: response.data.response?.rows,
-        count: response.data.response?.count,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.GET_POSTS_BY_CATEGORY,
-        msg: response.data.msg,
-        posts_by_categories: null,
-        count: null,
-      });
-    }
-  } catch (error) {
-    dispatch({
-      type: actionTypes.GET_POSTS_BY_CATEGORY,
-      posts_by_categories: null,
     });
   }
 };

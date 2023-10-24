@@ -2,97 +2,107 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '../../../components';
 import * as actions from '../../../store/action';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-  createSearchParams,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Pagination } from '../../Public';
 import { postTableTitle } from '../../../ultils/constains';
 import { PostTable } from '../components';
-import { checkStatus } from '../../../ultils/common/checkStatus';
+import { usePathname } from '../../../ultils/common/usePathname';
+import EditPost from '../components/ManagerPost/EditPost';
+import { apiDeletePost } from '../../../service';
+import Swal from 'sweetalert2';
 
 const ManagePost = () => {
+  const pageTitle = usePathname();
   const dispatch = useDispatch();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [valueSelect, setValueSelect] = useState();
   const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const { posts_limit_admin } = useSelector((state) => state.post);
   const [categoryCode] = useState('none');
-  const [searchParams] = useSearchParams();
+  const [bonusType, setBonusType] = useState('');
+  const [status, setStatus] = useState('');
+  const [itemEdit, setItemEdit] = useState('');
+  const [updateData, setUpdateData] = useState(false);
 
   useEffect(() => {
     setLoading(false);
-    setTimeout(() => {
-      let params = [];
-      for (let entry of searchParams.entries()) {
-        params.push(entry);
-      }
-      let searchParamsObject = {};
-      params?.forEach((i) => {
-        if (Object.keys(searchParamsObject)?.some((item) => item === i[0])) {
-          searchParamsObject[i[0]] = [...searchParamsObject[i[0]], i[1]];
-        } else {
-          searchParamsObject = { ...searchParamsObject, [i[0]]: [i[1]] };
-        }
-      });
-      dispatch(actions.GetPostsLimitAdmin(searchParamsObject)).finally(() => {
-        posts_limit_admin?.map((item) => {
-          return (item.overviews.status = `${checkStatus(
-            item?.overviews?.expire?.split(' ')[3]
-          )}`);
-        });
-        setLoading(true);
-      });
-    }, 1000);
-  }, [searchParams, categoryCode, dispatch]);
+    fetchPost();
+  }, [categoryCode, updateData]);
 
-  const handleFilterPostWithType = (value) => {
-    setValueSelect(value);
-    setTimeout(() => {
-      dispatch(actions.ClearPostsLimit());
-    });
-    let searchParams = {};
-    if (value !== '') {
-      searchParams = { bonus: value };
-    } else {
-      searchParams = {};
-    }
-    navigate({
-      pathname: location?.pathname,
-      search: createSearchParams(searchParams).toString(),
+  const fetchPost = () => {
+    let searchParamsObject = {};
+    dispatch(actions.GetPostsLimitAdmin(searchParamsObject)).finally(() => {
+      setLoading(true);
     });
   };
 
-  const handleFilterPostWithStatus = (value) => {
-    setValueSelect(value);
-    setTimeout(() => {
-      dispatch(actions.ClearPostsLimit());
+  const filterData = (bonusType, status) => {
+    let filteredData = posts_limit_admin.filter((row) => {
+      let matchBonus = true;
+      let matchStatus = true;
+
+      if (bonusType) {
+        matchBonus = row.overviews.bonus === bonusType;
+      }
+
+      if (status) {
+        matchStatus = row.overviews.status === status;
+      }
+
+      return matchBonus && matchStatus;
     });
-    let searchParams = {};
-    if (value !== '') {
-      searchParams = { status: value };
-    } else {
-      searchParams = {};
-    }
-    navigate({
-      pathname: location?.pathname,
-      search: createSearchParams(searchParams).toString(),
+
+    return filteredData;
+  };
+
+  const filteredData = filterData(bonusType, status);
+
+  const handShowPopup = (e, item) => {
+    e.stopPropagation();
+    setItemEdit(item);
+    setShowPopup(true);
+  };
+
+  const handleDeletePost = async (e, postId) => {
+    e.stopPropagation();
+    console.log(
+      '🚀 ~ file: ManagePost.js:69 ~ handleDeletePost ~ postId:',
+      postId.id
+    );
+    Swal.fire({
+      title: 'Bạn muốn xoá bài đăng này?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Xoá',
+      denyButtonText: `Không xoá`,
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const response = await apiDeletePost(postId.id);
+        if (response.data.err === 0) {
+          setUpdateData((pre) => !pre);
+        } else {
+          Swal.fire('Oops!', 'Xoá bài đăng thất bại', 'error');
+        }
+        console.log(
+          '🚀 ~ file: ManagePost.js:69 ~ handleDeletePost ~ response:',
+          response
+        );
+        Swal.fire('Xoá thành công!', '', 'success');
+      } else if (result.isDenied) {
+        Swal.fire('Không xoá bài đăng', '', 'info');
+      }
     });
   };
 
   return (
     <div>
       <div className=" items-center  pb-1 mb-3 flex justify-between ">
-        <h1 className="text-[2rem] mt-2 py-[1rem] ">Quản lý tin đăng</h1>
+        <h1 className="text-[2rem] mt-2 py-[1rem] ">{pageTitle[0].text}</h1>
         <div className="flex gap-1 justify-end text-[0.9rem]">
           <select
             defaultValue=""
             onChange={(e) => {
-              handleFilterPostWithType(e.target.value);
+              setBonusType(e.target.value);
             }}
             className="text-[0.75rem] focus:border-custom-gray focus:shadow-lg cursor-pointer py-[0.25rem] px-[0.5rem] rounded-[0.25rem] hover:bg-[#6c757d] hover:text-white focus:bg-[#6c757d] focus:text-white border-[#6c757d]"
           >
@@ -122,7 +132,7 @@ const ManagePost = () => {
             defaultValue=""
             className="text-[0.75rem] focus:border-custom-gray focus:shadow-lg  cursor-pointer  py-[0.25rem] px-[0.5rem]  rounded-[0.25rem] hover:bg-[#6c757d] hover:text-white focus:bg-[#6c757d] focus:text-white border-[#6c757d]"
             onChange={(e) => {
-              handleFilterPostWithStatus(e.target.value);
+              setStatus(e.target.value);
             }}
           >
             <option className="bg-white text-[#212529]">
@@ -151,12 +161,20 @@ const ManagePost = () => {
       </div>
       <div className="border-b-2"></div>
       <PostTable
-        valueSelect={valueSelect}
+        handleDeletePost={handleDeletePost}
+        handShowPopup={handShowPopup}
+        setShowPopup={setShowPopup}
         listTitle={postTableTitle}
         loading={loading}
-        posts_limit_admin={posts_limit_admin}
+        posts_limit_admin={filteredData}
       />
-      <Pagination />
+      <Pagination
+        count={Object.keys(posts_limit_admin).length}
+        posts_limit={filteredData}
+      />
+      {showPopup && (
+        <EditPost setShowPopup={setShowPopup} itemEdit={itemEdit} />
+      )}
     </div>
   );
 };

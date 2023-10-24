@@ -22,9 +22,9 @@ app.use(
   cors({
     origin: process.env.CLIENT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    exposedHeaders: ['Content-Range'],
   }),
 )
-console.log(generateDate())
 // updateCategoryCount()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

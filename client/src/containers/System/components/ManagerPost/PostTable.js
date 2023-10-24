@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PropagateLoader } from 'react-spinners';
 import CopyButton from '../../../../components/CopyButton';
-import { checkStatus } from '../../../../ultils/common/checkStatus';
 import icons from '../../../../ultils/icons';
 const { RiDeleteBin6Line, RiEdit2Line } = icons;
 
-const PostTable = ({ loading, posts_limit_admin, valueSelect }) => {
+const PostTable = ({
+  loading,
+  posts_limit_admin,
+  setShowPopup,
+  handShowPopup,
+  handleDeletePost,
+}) => {
   return (
     <div>
       <table className="w-[100%] mb-[0.8rem] text-[0.9rem] border-collapse border ">
@@ -36,7 +41,7 @@ const PostTable = ({ loading, posts_limit_admin, valueSelect }) => {
         </thead>
         {loading === true ? (
           <tbody className="">
-            {posts_limit_admin.length !== 0 ? (
+            {posts_limit_admin?.length !== 0 ? (
               posts_limit_admin?.map((item, index) => {
                 let imgObject = JSON.parse(item.images.image);
                 return (
@@ -102,7 +107,7 @@ const PostTable = ({ loading, posts_limit_admin, valueSelect }) => {
                       <div className="">
                         <span
                           className={`${
-                            item.overviews.status === 'Đang hoạt động'
+                            item.overviews.status === 'Tin đang hiển thị'
                               ? 'p-2 text-[#57b477] flex justify-center font-bold'
                               : 'p-2 text-[#f67053] flex justify-center font-bold'
                           }`}
@@ -113,7 +118,10 @@ const PostTable = ({ loading, posts_limit_admin, valueSelect }) => {
                     </td>
                     <td className="p-[10px] border border-[#dee2e6] items-center">
                       <div className="flex items-center justify-center gap-4">
-                        <Link className="flex justify-center">
+                        <Link
+                          onClick={(e) => handShowPopup(e, item)}
+                          className="flex justify-center"
+                        >
                           <RiEdit2Line
                             size={20}
                             color="#ffb000"
@@ -125,7 +133,10 @@ const PostTable = ({ loading, posts_limit_admin, valueSelect }) => {
                             }
                           />
                         </Link>
-                        <Link className="flex justify-center">
+                        <Link
+                          onClick={(e) => handleDeletePost(e, item)}
+                          className="flex justify-center"
+                        >
                           <RiDeleteBin6Line
                             size={20}
                             color="#FF0000"
@@ -145,7 +156,7 @@ const PostTable = ({ loading, posts_limit_admin, valueSelect }) => {
             ) : (
               <tr>
                 <td colSpan="7" className="text-center py-10 ">
-                  <h2>Không có bài đăng trong {valueSelect}</h2>
+                  <h2>Không có bài đăng</h2>
                 </td>
               </tr>
             )}
