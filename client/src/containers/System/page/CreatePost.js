@@ -7,6 +7,7 @@ import * as actions from '../../../store/action';
 import { apiCreateNewPost, apiUploadImages } from '../../../service';
 import validate from '../../../ultils/validate';
 import { usePathname } from '../../../ultils/common/usePathname';
+import Swal from 'sweetalert2';
 
 const CreatePost = () => {
   const pageTitle = usePathname();
@@ -75,17 +76,42 @@ const CreatePost = () => {
         formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
         return apiUploadImages(formData);
       });
-      Promise.all(uploadPromises).then((responses) => {
-        responses.forEach((response, index) => {
-          if (response.status === 200) {
-            images.push(response.data.url);
-            setPayload((prev) => ({ ...prev, images: images }));
-            apiCreateNewPost(payload);
-          } else {
-            console.log('Upload images failed');
-          }
+      console.log(
+        '🚀 ~ file: CreatePost.js:78 ~ uploadPromises ~ uploadPromises:',
+        uploadPromises
+      );
+      Promise.all(uploadPromises)
+        .then((responses) => {
+          responses.forEach((response, index) => {
+            if (response.status === 200) {
+              images.push(response.data.url);
+              setPayload((prev) => ({ ...prev, images: images }));
+            } else {
+              console.log('Upload images failed');
+            }
+          });
+        })
+        .then(() => {
+          apiCreateNewPost(payload).then((response) => {
+            console.log(
+              '🚀 ~ file: CreatePost.js:95 ~ apiCreateNewPost ~ response:',
+              response
+            );
+
+             if(response.status === 200 &&
+              response.data.err === 0 &&
+              response.data.msg === "Create post success"){
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Your work has been saved',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                window.location.reload();
+              }
+          });
         });
-      });
     }
   };
 

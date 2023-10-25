@@ -61,7 +61,7 @@ const PostTable = ({
                       </Link>
                     </td>
                     <td className="p-[10px] h-full border border-[#dee2e6] flex gap-2 justify-center overflow-hidden">
-                      {imgObject.length !== 0 ? (
+                      {imgObject?.length !== 0 ? (
                         imgObject?.slice(0, 4).map((img, index) => {
                           return (
                             <div key={index}>
@@ -86,21 +86,21 @@ const PostTable = ({
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">
                       <Link className="line-clamp-2 overflow-hidden justify-center flex items-center">
-                        {item.attributes.price.split(' ')[1] === 'đồng/tháng'
+                        {item?.attributes?.price?.split(' ')[1] === 'đồng/tháng'
                           ? `${
-                              +item.attributes.price.split(' ')[0] / 1000
+                              +item?.attributes?.price?.split(' ')[0] / 1000
                             }.000 đồng/tháng`
                           : item.attributes.price}
                       </Link>
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">
                       <Link className="justify-center flex items-center">
-                        {item.overviews.create.split(' ')[3]}
+                        {item?.overviews?.create?.split(' ')[3]}
                       </Link>
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">
                       <div className="justify-center flex items-center">
-                        {item.overviews.expire.split(' ')[3]}
+                        {item?.overviews?.expire?.split(' ')[3]}
                       </div>
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">

@@ -69,27 +69,19 @@ const ManagePost = () => {
       postId.id
     );
     Swal.fire({
-      title: 'Bạn muốn xoá bài đăng này?',
-      showDenyButton: true,
+      title: 'Bạn muốn xoá file?',
+      icon: 'warning',
       showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
       confirmButtonText: 'Xoá',
-      denyButtonText: `Không xoá`,
     }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         const response = await apiDeletePost(postId.id);
         if (response.data.err === 0) {
           setUpdateData((pre) => !pre);
-        } else {
-          Swal.fire('Oops!', 'Xoá bài đăng thất bại', 'error');
         }
-        console.log(
-          '🚀 ~ file: ManagePost.js:69 ~ handleDeletePost ~ response:',
-          response
-        );
-        Swal.fire('Xoá thành công!', '', 'success');
-      } else if (result.isDenied) {
-        Swal.fire('Không xoá bài đăng', '', 'info');
+        Swal.fire('Xoá thành công !', 'File của bạn đã xoá', 'success');
       }
     });
   };

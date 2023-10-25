@@ -32,7 +32,7 @@ const ListPostItem = ({
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
           className="w-full md:w-2/5 h-[240px] md:gap-[2px] items-center justify-center relative cursor-pointerv "
-        >
+       >
           {
             images
               ?.filter((i, index) => indexs.some((i) => i === index))
@@ -98,7 +98,7 @@ const ListPostItem = ({
         </h3>
         <div className="md:my-6 my-6 flex items-center justify-between gap-1 md:gap-5 flex-wrap">
           <span className="text-[1.2rem] text-[#16c784] font-bold">
-            {attributes.price.split(' ')[1] === 'đồng/tháng' ? `${+attributes.price.split(' ')[0] / 1000}.000 đồng/tháng` : attributes.price}
+            {attributes?.price?.split(' ')[1] === 'đồng/tháng' ? `${+attributes?.price?.split(' ')[0] / 1000}.000 đồng/tháng` : attributes.price}
           </span>
           <span className="text-[#333] leading-normal md:leading-[19px] ">
             {attributes.acreage}
@@ -108,7 +108,7 @@ const ListPostItem = ({
               href="https://phongtro123.com/tinh-thanh/ho-chi-minh/quan-go-vap"
               title={address}
             >
-              {`${address.split(',')[address.split(',').length - 2]},${address.split(',')[address.split(',').length - 1]
+              {`${address?.split(',')[address?.split(',').length - 2]},${address?.split(',')[address?.split(',').length - 1]
                 }`}
             </Link>
           </span>

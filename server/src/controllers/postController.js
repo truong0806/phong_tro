@@ -30,15 +30,16 @@ export const getPostLimit = async (req, res) => {
 }
 export const getPostLimitAdmin = async (req, res) => {
   const { page, bonus, ...query } = req.query
-  // const { id } = req.user
+  const { id } = req.user
+  console.log("🚀 ~ file: postController.js:34 ~ getPostLimitAdmin ~ id:", id)
   try {
-    // if (!id) {
-    //   return res.status(400).json({
-    //     err: 1,
-    //     msg: 'Missing input',
-    //   })
-    // }
-    const response = await service.postLimitAdminService(page, query, bonus)
+    if (!id) {
+      return res.status(400).json({
+        err: 1,
+        msg: 'Missing input',
+      })
+    }
+    const response = await service.postLimitAdminService(page, query, id, bonus)
     return res.status(200).json(response)
   } catch (error) {
     return res.status(500).json({

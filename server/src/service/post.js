@@ -98,13 +98,14 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
     }
   })
 
-export const postLimitAdminService = (page, query, bonus) =>
+export const postLimitAdminService = (page, query, id, bonus) =>
   new Promise(async (resolve, reject) => {
     let today = genarateDate().today
     try {
       let offset = !page || +page <= 1 ? 0 : +page - 1
       const queries = {
         ...query,
+        userId: id,
       }
       let overview = {
         model: db.Overview,
@@ -158,10 +159,10 @@ export const postCreateService = (queries) =>
   new Promise(async (resolve, reject) => {
     try {
       const hashtag = generateHashtag()
-      const attributesId = v4()
+      let attributesId = v4()
       const postId = v4()
       const currentDate = genarateDate()
-      const overviewId = v4()
+      let overviewId = v4()
       const imagesId = v4()
       const labelCode = generateCode(queries.label).trim()
       const currentArea = getNumberFromString(queries.areaNumber)
@@ -172,14 +173,15 @@ export const postCreateService = (queries) =>
 
       await db.Attribute.findOrCreate({
         where: {
-          id: attributesId,
-          price:
-            +currentPrice < 1
-              ? `${queries.priceNumber} đồng/tháng`
-              : `${currentPrice} triệu/tháng`,
-          acreage: `${queries.areaNumber} m2`,
-          published: currentDate.today,
-          hashtag,
+          [Op.and]: [
+            {
+              price:
+                +currentPrice < 1
+                  ? `${currentPrice * 1000000} đồng/tháng`
+                  : `${currentPrice} triệu/tháng`,
+            },
+            { acreage: `${queries.areaNumber} m2` },
+          ],
         },
         defaults: {
           id: attributesId,
@@ -191,30 +193,50 @@ export const postCreateService = (queries) =>
           published: moment(new Date()).format('DD/MM/YYYY'),
           hashtag,
         },
-      }),
-        await db.Images.findOrCreate({
-          where: { id: imagesId },
-          defaults: {
-            id: imagesId,
-            image: JSON.stringify(queries.images),
-          },
+      })
+        .then(([attribute, created]) => {
+          if (!created) {
+            console.log('Attribute ID:', attribute.id)
+            attributesId = attribute.id
+            console.log('Attribute after:', attributesId)
+          }
         })
+        .catch((error) => {
+          console.error('Error:', error)
+        })
+      await db.Overview.findOrCreate({
+        where: {
+          [Op.and]: [
+            {
+              area: queries.label,
+            },
+            { type: queries?.categoryName },
+            { target: queries?.target },
+          ],
+        },
+        defaults: {
+          id: overviewId,
+          code: `#${hashtag}`,
+          area: queries.label,
+          type: queries?.categoryName,
+          target: queries?.target,
+          bonus: 'Tin thường',
+          create: currentDate.today,
+          expire: currentDate.expireDay,
+        },
+      }).then(([overview, isCreated]) => {
+        if (!isCreated) {
+          console.log('overview ID:', overview.id)
+          overviewId = overview.id
+          console.log('overview after:', overviewId)
+        }
+      })
       await db.Label.findOrCreate({
         where: { code: labelCode },
         defaults: {
           code: labelCode,
           value: queries.label,
         },
-      })
-      await db.Overview.create({
-        id: overviewId,
-        code: `#${hashtag}`,
-        area: queries.label,
-        type: queries?.categoryName,
-        target: queries?.target,
-        bonus: 'Tin thường',
-        create: currentDate.today,
-        expire: currentDate.expireDay,
       })
       await db.Province.findOrCreate({
         where: {
@@ -230,23 +252,30 @@ export const postCreateService = (queries) =>
             : queries?.province?.replace('Tỉnh ', ''),
         },
       })
-      const [post, created] = await db.Post.findOrCreate({
+      await db.Images.findOrCreate({
+        where: { id: imagesId },
+        defaults: {
+          id: imagesId,
+          image: JSON.stringify(queries.images),
+        },
+      })
+      await db.Post.findOrCreate({
         where: {
           [Op.or]: [
-            { title: query.title },
-            { address: query.address },
-            { address: query.description },
+            { title: queries.title },
+            { address: queries.address },
+            { description: queries.description },
           ],
         },
         defaults: {
           id: postId,
-          title: query.title || null,
+          title: queries.title || null,
           labelCode,
-          address: query.address || null,
+          address: queries.address || null,
           attributesId: attributesId,
-          categoryCode: query.categoryCode,
-          description: JSON.stringify(query.description) || null,
-          userId: query.userId,
+          categoryCode: queries.categoryCode,
+          description: JSON.stringify(queries.description) || null,
+          userId: queries.userId,
           overviewId,
           imagesId,
           areaCode: dataArea.find(
@@ -260,10 +289,20 @@ export const postCreateService = (queries) =>
           areaNumber: +currentArea || null,
         },
       })
-      resolve({
-        err: created ? 0 : 1,
-        msg: created ? 'Create post success' : 'Create post failed',
-      })
+        .then(([postRow, isCreated]) => {
+          if (!isCreated) {
+            db.Images.destroy({ where: { id: imagesId } })
+            console.log('Không thể tạo bài đăng')
+          } else {
+            resolve({
+              err: isCreated ? 0 : 1,
+              msg: isCreated ? 'Create post success' : 'Create post failed',
+            })
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error)
+        })
     } catch (error) {
       reject(error)
     }
@@ -271,7 +310,6 @@ export const postCreateService = (queries) =>
 
 export const postDeleteService = (postId) =>
   new Promise(async (resolve, reject) => {
-    console.log('Post id', postId)
     try {
       const post = await db.Post.findOne({
         where: { id: postId },
