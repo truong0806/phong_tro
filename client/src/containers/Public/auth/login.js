@@ -10,14 +10,14 @@ import { WhyUs, Support } from '../index';
 
 function Login() {
   const navigate = useNavigate();
-  const { msg, update } = useSelector((state) => state.auth);
+  const { isLoggedIn, msg, update, accessToken } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
   const [payload, setPayload] = useState({
     phone: '',
     password: '',
-    name: '',
-    comfirmPassword: '',
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,19 +26,22 @@ function Login() {
       [name]: value,
     }));
   };
+
   useEffect(() => {
-    msg && Swal.fire('Lỗi', msg, 'error');
-  }, [msg]);
+    isLoggedIn && navigate('/'); //
+  }, [isLoggedIn]);
+
   useEffect(() => {
-    msg && Swal.fire('Oops !', msg, 'error');
+    msg && Swal.fire('Oops !', 'Sai số điện thoại hoặc mật khẩu', 'error');
   }, [msg, update]);
+
   const handleSubmit = async () => {
     const finalinvalids = payload;
     const invalids = validate(finalinvalids, 'Đăng nhập', setInvalidFields);
     if (invalids === 0) {
-      dispatch(actions.login(payload));
-      Swal.fire('Done', 'Đăng nhập thành công', 'success');
-      navigate('/');
+      dispatch(actions.login(payload)).then((res) => {
+        console.log(res);
+      });
     }
   };
   return (

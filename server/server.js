@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
+const schedule = require('node-schedule');
 dotenv.config()
 const app = express()
 const port = process.env.PORT || 8888
@@ -8,6 +9,7 @@ const swaggerUI = require('swagger-ui-express')
 const docs = require('./doc')
 import initRoutes from './src/routes'
 import requireToken from './src/middleware/requireToken'
+import checkExpiredRefeshToken from './src/middleware/checkExpiredRefeshToken'
 import updateCategoryCount from './src/ultils/updateCategoryCount'
 import generateDate from './src/ultils/generateDate'
 
@@ -25,6 +27,7 @@ app.use(
     exposedHeaders: ['Content-Range'],
   }),
 )
+
 // updateCategoryCount()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

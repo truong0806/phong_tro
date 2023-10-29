@@ -110,7 +110,12 @@ export const postLimitAdminService = (page, query, id, bonus) =>
       let overview = {
         model: db.Overview,
         as: 'overviews',
-        attributes: ['id', 'bonus', 'code', 'create', 'expire'],
+        attributes: ['id', 'bonus', 'code', 'create', 'expire', 'target'],
+      }
+      let categories = {
+        model: db.Category,
+        as: 'categories',
+        attributes: ['id', 'code', 'value'],
       }
       if (bonus !== undefined && bonus !== '') {
         overview.where = { bonus: bonus }
@@ -130,6 +135,7 @@ export const postLimitAdminService = (page, query, id, bonus) =>
             as: 'attributes',
             attributes: ['price', 'acreage', 'published', 'hashtag'],
           },
+          categories,
           overview,
           {
             model: db.User,
@@ -309,6 +315,42 @@ export const postCreateService = (queries) =>
   })
 
 export const postDeleteService = (postId) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const post = await db.Post.findOne({
+        where: { id: postId },
+        attributes: [
+          'id',
+          'title',
+          'star',
+          'address',
+          'description',
+          'overviewId',
+          'attributesId',
+          'imagesId',
+        ],
+      })
+      if (!post) {
+        resolve({
+          err: 1,
+          msg: 'Delete post failed ',
+        })
+        return
+      }
+      await db.Overview.destroy({ where: { id: post.overviewId } })
+      await db.Attribute.destroy({ where: { id: post.attributesId } })
+      await db.Images.destroy({ where: { id: post.imagesId } })
+      const deleted = await db.Post.destroy({ where: { id: postId } })
+      resolve({
+        err: deleted > 0 ? 0 : 1,
+        msg: deleted > 0 ? 'Delete post success' : 'Delete post failed',
+        deleted,
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })
+export const postUpdateService = (postId) =>
   new Promise(async (resolve, reject) => {
     try {
       const post = await db.Post.findOne({

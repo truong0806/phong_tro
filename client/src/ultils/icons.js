@@ -2,6 +2,7 @@ import {
   AiOutlineHeart,
   AiOutlineUserAdd,
   AiOutlinePlusCircle,
+  AiOutlineClose
 } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
 import { FaRegCopy } from 'react-icons/fa';
@@ -28,6 +29,7 @@ import { MdOutlineHouseSiding } from 'react-icons/md';
 import { LuLayoutDashboard } from 'react-icons/lu';
 
 const icon = {
+  AiOutlineClose,
   RiDeleteBin6Line,
   RiEdit2Line,
   FaRegCopy,

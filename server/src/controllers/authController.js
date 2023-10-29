@@ -1,6 +1,9 @@
 import * as authService from '../service/auth'
 import db from '../models'
-import { verifyExpiration } from '../middleware/refreshToken'
+import {
+  verifyExpiration,
+  verifyRefreshToken,
+} from '../middleware/refreshToken'
 import jwt from 'jsonwebtoken'
 
 export const register = async (req, res) => {
@@ -56,39 +59,53 @@ export const login = async (req, res) => {
   }
 }
 export const refreshToken = async (req, res) => {
-  const { refreshToken: requestToken } = req.body
+  const { refreshTokens } = req.body
 
-  if (requestToken == null) {
-    return res.status(403).json({ message: 'Refresh Token is required!' })
+  if (refreshTokens == null) {
+    return res.status(403).json({ msg: 'Refresh Token is required!' })
   }
 
   try {
-    let refreshToken = await db.RefreshToken.findOne({
-      where: { token: requestToken },
-    })
-
-    if (!refreshToken) {
-      res.status(403).json({ message: 'Refresh token is not in database!' })
-      return
-    }
-    if (verifyExpiration(refreshToken)) {
-      db.RefreshToken.destroy({ where: { id: refreshToken.id } })
-      res.status(403).json({
-        message: 'Refresh token was expired. Please make a new signin request',
+    verifyRefreshToken(refreshTokens)
+      .then(({ tokenDetails }) => {
+        const payload = { _id: tokenDetails._id, roles: tokenDetails.roles }
+        const accessToken = jwt.sign(
+          payload,
+          process.env.SECRET_KEY,
+          { expiresIn: '14m' },
+        )
+        res.status(200).json({
+          err: 0,
+          accessToken,
+          msg: 'Access token created successfully',
+        })
       })
-      return
-    }
-    
-    const user = await db.User.findOne({ where: { id: refreshToken.userId } })
-    let newAccessToken = jwt.sign({ id: user.id, phone: user.phone }, process.env.SECRET_KEY, {
-      expiresIn: `${process.env.JWT_EXPIRATION}s`,
-    })
-    
-    return res.status(200).json({
-      accessToken: newAccessToken,
-      refreshToken: refreshToken.token,
-    })
+
+      .catch((err) => res.status(400).json(err))
   } catch (err) {
-    return res.status(500).send({ message: err })
+    return res.status(500).send({ msg: err })
+  }
+}
+
+export const refreshTokenDelete = async (req, res) => {
+  const { refreshTokens } = req.body
+  try {
+    const userToken = await db.RefreshToken.findOne({
+      where: { token: refreshTokens },
+    })
+    if (!userToken)
+      return res
+        .status(200)
+        .json({ error: 0, message: 'Logged Out Sucessfully' })
+
+    await db.RefreshToken.destroy({
+      where: {
+        id: userToken.id,
+      },
+    })
+    res.status(200).json({ error: 0, message: 'Logged Out Sucessfully' })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ err: 1, msg: 'Internal Server Error' })
   }
 }

@@ -2,7 +2,7 @@ import actionTypes from './actionTypes';
 import {
   apiGetPosts,
   apiGetPostsLimit,
-  apiGetPostsLimitAdmin
+  apiGetPostsLimitAdmin,
 } from '../../service/post';
 export const getPosts = () => async (dispatch) => {
   try {
@@ -62,7 +62,7 @@ export const GetPostsLimitAdmin = (query) => async (dispatch) => {
       dispatch({
         type: actionTypes.GET_POSTS_LIMIT_ADMIN,
         msg: response.data.msg,
-        posts_limit_admin: null
+        posts_limit_admin: null,
       });
     }
   } catch (error) {
@@ -86,3 +86,7 @@ export const ClearPostsLimit = () => async (dispatch) => {
     });
   }
 };
+export const editPostsLimit = (dataEdit) => ({
+  type: actionTypes.EDIT_POST,
+  dataEdit,
+});

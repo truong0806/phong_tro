@@ -11,7 +11,7 @@ import { WhyUs, Support } from '../index';
 
 function Register() {
   const navigate = useNavigate();
-  const { msg, update } = useSelector((state) => state.auth);
+  const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
   const [payload, setPayload] = useState({
@@ -27,6 +27,10 @@ function Register() {
       [name]: value,
     }));
   };
+  useEffect(() => {
+    isLoggedIn && navigate('/');
+  }, [isLoggedIn]);
+
   useEffect(() => {
     msg && Swal.fire('Lỗi', msg, 'error');
   }, [msg]);

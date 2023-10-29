@@ -11,7 +11,7 @@ function HomePage() {
   const [categoryCode, setcategoryCode] = useState('none');
   const { categories } = useSelector((state) => state.app);
   const { count, posts_limit } = useSelector((state) => state.post);
-  console.log("🚀 ~ file: homePage.js:14 ~ HomePage ~ posts_limit:", posts_limit)
+  
 
   useEffect(() => {
     setLoading(false);

@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { apiRegister, apiLogin } from '../../service/auth';
+import { apiRegister, apiLogin, apiLogout } from '../../service/auth';
 
 export const register = (payload) => async (dispatch) => {
   try {
@@ -35,7 +35,6 @@ export const login = (payload) => async (dispatch) => {
         type: actionTypes.LOGIN_FAIL,
         data: response.data.msg,
       });
-      dispatch({ type: actionTypes.LOGOUT });
     }
   } catch (error) {
     dispatch({
@@ -46,9 +45,13 @@ export const login = (payload) => async (dispatch) => {
   }
 };
 
-export const logout = () => ({
-  type: actionTypes.LOGOUT,
-});
+export const logout = (refreshTokens) => async (dispatch) => {
+  console.log("🚀 ~ file: auth.js:49 ~ logout ~ refreshTokens:", refreshTokens)
+  apiLogout(refreshTokens);
+  dispatch({
+    type: actionTypes.LOGOUT,
+  });
+};
 export const refreshToken = (accessToken, refreshToken) => (dispatch) => {
   dispatch({
     type: actionTypes.REFRESH_TOKEN,

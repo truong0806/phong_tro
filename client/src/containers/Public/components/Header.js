@@ -8,6 +8,7 @@ import icons from '../../../ultils/icons';
 import { path } from '../../../ultils/constains';
 import * as actions from '../../../store/action';
 import menuManager from '../../../ultils/menuManager';
+import { apiLogout } from '../../../service';
 
 const {
   AiOutlineHeart,
@@ -22,7 +23,7 @@ function Header({ setLoading, loading }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isShowMenu, setIsShowMenu] = useState(false);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, refreshToken } = useSelector((state) => state.auth);
 
   const goRegister = useCallback(() => {
     handlLoad();
@@ -131,8 +132,9 @@ function Header({ setLoading, loading }) {
               }}
             />
             <div
-              className={`${isShowMenu ? 'flex' : 'hidden'
-                } flex-col  absolute top-[50px] min-w-200 drop-shadow-xl bg-white shadow-md rounded-md py-[15px] px-[20px] right-[80px] z-50`}
+              className={`${
+                isShowMenu ? 'flex' : 'hidden'
+              } flex-col  absolute top-[50px] min-w-200 drop-shadow-xl bg-white shadow-md rounded-md py-[15px] px-[20px] right-[80px] z-50`}
             >
               {menuManager?.map((item) => {
                 return (
@@ -175,7 +177,7 @@ function Header({ setLoading, loading }) {
                 <span
                   className="ml-[10px]"
                   onClick={() => {
-                    dispatch(actions.logout());
+                    dispatch(actions.logout(refreshToken));
                     setIsShowMenu(false);
                   }}
                 >

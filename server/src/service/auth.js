@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
 import { v4 } from 'uuid'
+import moment from 'moment'
 import { createToken } from '../middleware/refreshToken'
 require('dotenv').config()
 
@@ -68,28 +69,50 @@ export const loginService = ({ phone, password }) =>
         where: { phone },
         raw: true,
       })
-      const isCorrectPassword =
-        response && bcrypt.compareSync(password, response.password)
-      const accessToken =
-        isCorrectPassword &&
-        jwt.sign(
-          { id: response.id, phone: response.phone },
-          process.env.SECRET_KEY,
-          {
-            expiresIn: `${process.env.JWT_EXPIRATION}s`,
+      if (response === null) {
+        resolve({
+          err: 2,
+          msg: 'Wrong login name or password',
+          accessToken: null,
+          refreshToken: null,
+        })
+      } else {
+        const isCorrectPassword =
+          response && bcrypt.compareSync(password, response.password)
+        const accessToken =
+          isCorrectPassword &&
+          jwt.sign(
+            { id: response.id, phone: response.phone },
+            process.env.SECRET_KEY,
+            {
+              expiresIn: `${process.env.JWT_EXPIRATION}s`,
+            },
+          )
+        const refreshToken = await createToken(response.phone, response.id)
+        await db.RefreshToken.destroy({
+          where: {
+            userId: response.id,
           },
-        )
-      const refreshToken = await createToken(response.phone, response.id)
-      resolve({
-        err: accessToken ? 0 : 2,
-        msg: accessToken
-          ? 'Login is successfully !'
-          : response
-          ? 'Password is wrong'
-          : 'Phone number is not found',
-        accessToken: accessToken || null,
-        refreshToken: refreshToken || null,
-      })
+        })
+
+        await db.RefreshToken.create({
+          id: v4(),
+          userId: response.id,
+          token: refreshToken,
+          expiryDate: moment().add(1, 'minutes').toDate(), // hạn của token là 1 ngày
+        })
+
+        resolve({
+          err: accessToken ? 0 : 2,
+          msg: accessToken
+            ? 'Login is successfully !'
+            : response
+            ? 'Password is wrong'
+            : 'Phone number is not found',
+          accessToken: accessToken || null,
+          refreshToken: refreshToken || null,
+        })
+      }
     } catch (error) {
       reject(error)
     }

@@ -93,3 +93,24 @@ export const deletePost = async (req, res) => {
     })
   }
 }
+export const updatePost = async (req, res) => {
+  const { postId } = req.query
+  console.log('🚀 ~ file: postController.js:76 ~ deletePost ~ id:', postId)
+  try {
+    if (!postId) {
+      return res.status(400).json({ err: 1, msg: 'Missing input' })
+    } else {
+      const deleted = await service.postUpdateService(postId)
+      console.log(
+        '🚀 ~ file: postController.js:82 ~ deletePost ~ response:',
+        deleted,
+      )
+      return res.status(200).json(deleted)
+    }
+  } catch (error) {
+    return res.status(500).json({
+      err: -1,
+      msg: 'Fail at authentication controller' + error,
+    })
+  }
+}

@@ -9,5 +9,6 @@ router.get('/limit', postController.getPostLimit)
 router.get('/limit-admin', requireToken, postController.getPostLimitAdmin)
 router.post('/create', postController.createPost)
 router.delete('/delete', postController.deletePost)
+router.post('/update', postController.updatePost)
 
 export default router

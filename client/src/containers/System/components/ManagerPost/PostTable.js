@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { PropagateLoader } from 'react-spinners';
 import CopyButton from '../../../../components/CopyButton';
 import icons from '../../../../ultils/icons';
+import { useDispatch } from 'react-redux';
+import * as actions from '../../../../store/action';
 const { RiDeleteBin6Line, RiEdit2Line } = icons;
 
 const PostTable = ({
@@ -11,7 +13,10 @@ const PostTable = ({
   setShowPopup,
   handShowPopup,
   handleDeletePost,
+  setIsEdit
 }) => {
+  const dispatch = useDispatch();
+
   return (
     <div>
       <table className="w-[100%] mb-[0.8rem] text-[0.9rem] border-collapse border ">
@@ -119,7 +124,11 @@ const PostTable = ({
                     <td className="p-[10px] border border-[#dee2e6] items-center">
                       <div className="flex items-center justify-center gap-4">
                         <Link
-                          onClick={(e) => handShowPopup(e, item)}
+                          onClick={(e) => {
+                            dispatch(actions.editPostsLimit(item));
+                            handShowPopup(e);
+                            setIsEdit(true)
+                          }}
                           className="flex justify-center"
                         >
                           <RiEdit2Line

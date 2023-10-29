@@ -5,7 +5,15 @@ import {
   apiGetWard,
   apiLocation,
 } from '../../../../../service';
-const Address = ({ value, setValue, invalidFields, setInvalidFields }) => {
+const Address = ({
+  value,
+  setValue,
+  invalidFields,
+  setInvalidFields,
+  isEdit,
+}) => {
+  console.log('🚀 ~ file: Address.js:15 ~ isEdit:', isEdit);
+  console.log('🚀 ~ file: Address.js:9 ~ Address ~ value:', value);
   const [provinces, setProvinces] = useState([]);
   const [apartmentNumber, setApartmentNumber] = useState([]);
   const [street, setStreet] = useState([]);
@@ -17,6 +25,9 @@ const Address = ({ value, setValue, invalidFields, setInvalidFields }) => {
   const [reset, setReset] = useState(false);
 
   useEffect(() => {
+    setApartmentNumber(isEdit ? value.split(',')[0].trimStart() : '');
+    setStreet(isEdit ? value.split(',')[1].trimStart() : '');
+
     const fetchPublicProvince = async () => {
       const response = await apiLocation();
       if (response.status === 200) {
@@ -24,7 +35,7 @@ const Address = ({ value, setValue, invalidFields, setInvalidFields }) => {
       }
     };
     fetchPublicProvince();
-  }, []);
+  }, [apartmentNumber]);
 
   useEffect(() => {
     setDistrict(null);
@@ -57,12 +68,27 @@ const Address = ({ value, setValue, invalidFields, setInvalidFields }) => {
       street: street.length === 0 ? '' : street,
       ward,
       district,
-      address: `${apartmentNumber.length === 0 ? '' : `${apartmentNumber}, `}${street.length === 0 ? '' : `${street}, `
-        }${ward ? `${wards?.find((item) => item.code === +ward)?.name}, ` : ''}${district ? `${districts?.find((item) => item.code === +district)?.name}, ` : ''}${province ? provinces?.find((item) => item.code === +province)?.name : ''}`,
+      address: value
+        ? value
+        : `${apartmentNumber.length === 0 ? '' : `${apartmentNumber}, `}${
+            street.length === 0 ? '' : `${street}, `
+          }${
+            ward ? `${wards?.find((item) => item.code === +ward)?.name}, ` : ''
+          }${
+            district
+              ? `${districts?.find((item) => item.code === +district)?.name}, `
+              : ''
+          }${
+            province
+              ? provinces?.find((item) => item.code === +province)?.name
+              : ''
+          }`,
       province: province
         ? provinces?.find((item) => item.code === +province)?.name
         : '',
-      label: district ? districts?.find((item) => item.code === +district)?.name : '',
+      label: district
+        ? districts?.find((item) => item.code === +district)?.name
+        : '',
     }));
   }, [
     setValue,
@@ -83,6 +109,7 @@ const Address = ({ value, setValue, invalidFields, setInvalidFields }) => {
       </div>
       <div className="flex flex-col">
         <InputText
+          value={apartmentNumber}
           name={'apartmentNumber'}
           invalidFields={invalidFields}
           setInvalidFields={setInvalidFields}
@@ -92,6 +119,7 @@ const Address = ({ value, setValue, invalidFields, setInvalidFields }) => {
           styleInput={'max-w-[30%]'}
         />
         <InputText
+          value={street}
           name={'street'}
           invalidFields={invalidFields}
           setInvalidFields={setInvalidFields}
@@ -119,8 +147,9 @@ const Address = ({ value, setValue, invalidFields, setInvalidFields }) => {
           reset={reset}
           type="district"
           value={district}
-          setValue={setDistrict}
+          editValue={district}
           array={districts}
+          setValue={setDistrict}
           label="Quận/Huyện"
         />
         <SelectAddress
@@ -137,15 +166,27 @@ const Address = ({ value, setValue, invalidFields, setInvalidFields }) => {
       </div>
       <InputTextReadOnly
         label="Địa chỉ chính xác"
-        value={`${apartmentNumber.length === 0 ? '' : `${apartmentNumber},`} ${street.length === 0 ? '' : `${street},`
-          } ${ward ? `${wards?.find((item) => item.code === +ward)?.name},` : ''
-          } ${district
-            ? `${districts?.find((item) => item.code === +district)?.name},`
-            : ''
-          } ${province
-            ? provinces?.find((item) => item.code === +province)?.name
-            : ''
-          }`}
+        value={
+          isEdit
+            ? value
+            : `${apartmentNumber.length === 0 ? '' : `${apartmentNumber},`} ${
+                street.length === 0 ? '' : `${street},`
+              } ${
+                ward
+                  ? `${wards?.find((item) => item.code === +ward)?.name},`
+                  : ''
+              } ${
+                district
+                  ? `${
+                      districts?.find((item) => item.code === +district)?.name
+                    },`
+                  : ''
+              } ${
+                province
+                  ? provinces?.find((item) => item.code === +province)?.name
+                  : ''
+              }`
+        }
       />
     </div>
   );

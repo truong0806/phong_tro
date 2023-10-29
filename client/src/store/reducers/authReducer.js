@@ -18,7 +18,6 @@ const authReducer = (state = initState, action) => {
         isLoggedIn: true,
         accessToken: action.data.accessToken,
         refreshToken: action.data.refreshToken,
-        phone: action.data,
       };
     case actionTypes.REGISTER_FAIL:
     case actionTypes.LOGIN_FAIL:
@@ -26,12 +25,16 @@ const authReducer = (state = initState, action) => {
         ...state,
         isLoggedIn: false,
         msg: action.data,
+        accessToken: null,
+        refreshToken: null,
         update: !state.update,
       };
     case actionTypes.LOGOUT:
       return {
         ...state,
         isLoggedIn: false,
+        accessToken: null,
+        refreshToken: null,
         msg: '',
       };
     case actionTypes.REFRESH_TOKEN:

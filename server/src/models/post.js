@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         as: 'overviews',
       })
+      Post.belongsTo(models.Category, {
+        foreignKey: 'categoryCode',
+        targetKey: 'code',
+        as: 'categories',
+      })
       Post.belongsTo(models.User, {
         foreignKey: 'userId',
         targetKey: 'id',
@@ -58,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: 'Post',
       charset: 'utf8',
-      collate: 'utf8_unicode_ci'
+      collate: 'utf8_unicode_ci',
     },
   )
   return Post

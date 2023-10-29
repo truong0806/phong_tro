@@ -10,11 +10,13 @@ import { usePathname } from '../../../ultils/common/usePathname';
 import EditPost from '../components/ManagerPost/EditPost';
 import { apiDeletePost } from '../../../service';
 import Swal from 'sweetalert2';
+import 'animate.css';
 
 const ManagePost = () => {
   const pageTitle = usePathname();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const { posts_limit_admin } = useSelector((state) => state.post);
   const [categoryCode] = useState('none');
@@ -24,6 +26,7 @@ const ManagePost = () => {
   const [updateData, setUpdateData] = useState(false);
 
   useEffect(() => {
+    dispatch(actions.getCategories());
     setLoading(false);
     fetchPost();
   }, [categoryCode, updateData]);
@@ -153,6 +156,7 @@ const ManagePost = () => {
       </div>
       <div className="border-b-2"></div>
       <PostTable
+        setIsEdit={setIsEdit}
         handleDeletePost={handleDeletePost}
         handShowPopup={handShowPopup}
         setShowPopup={setShowPopup}
@@ -164,9 +168,7 @@ const ManagePost = () => {
         count={Object.keys(posts_limit_admin).length}
         posts_limit={filteredData}
       />
-      {showPopup && (
-        <EditPost setShowPopup={setShowPopup} itemEdit={itemEdit} />
-      )}
+      {showPopup && <EditPost setShowPopup={setShowPopup} isEdit />}
     </div>
   );
 };

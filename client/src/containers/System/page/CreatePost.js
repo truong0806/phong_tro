@@ -9,40 +9,52 @@ import validate from '../../../ultils/validate';
 import { usePathname } from '../../../ultils/common/usePathname';
 import Swal from 'sweetalert2';
 
-const CreatePost = () => {
+const CreatePost = ({ isEdit, isCreate }) => {
   const pageTitle = usePathname();
+  const { dataEdit } = useSelector((state) => state.post);
+  console.log('🚀 ~ file: CreatePost.js:15 ~ CreatePost ~ dataEdit:', dataEdit);
+
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
   const [imagesFile, setImagesFile] = useState([]);
-  const [payload, setPayload] = useState({
-    apartmentNumber: '',
-    categoryName: '',
-    street: '',
-    ward: '',
-    district: '',
-    categoryCode: '',
-    title: '',
-    description: '',
-    priceNumber: 0,
-    areaNumber: 0,
-    address: '',
-    images: [],
-    imageCode: '',
-    target: '',
-    targetCode: '',
-    province: '',
-    label: '',
-    priceCode: '',
-    areaCode: '',
+  const [payload, setPayload] = useState(() => {
+    const initData = {
+      apartmentNumber: '',
+      categoryName: dataEdit?.categories.value || '',
+      street: '',
+      ward: '',
+      district: '',
+      categoryCode: dataEdit?.categories.code || '',
+      title: dataEdit?.title || '',
+      description: dataEdit?.description || '',
+      priceNumber: dataEdit?.attributes.price,
+      areaNumber: dataEdit?.attributes.acreage || 0,
+      address: isEdit ? dataEdit?.address : '',
+      images: dataEdit?.images,
+      imageCode: '',
+      target: dataEdit?.overviews.target,
+      targetCode: '',
+      province: '',
+      label: '',
+      priceCode: '',
+      areaCode: '',
+    };
+    return initData;
   });
+  console.log(
+    '🚀 ~ file: CreatePost.js:43 ~ const[payload,setPayload]=useState ~ payload:',
+    payload
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     setTimeout(() => {
       dispatch(actions.getCategories());
     }, 1000);
-  }, [dispatch]);
+  }, [dispatch, payload, dataEdit]);
+
   useEffect(() => {}, [invalidFields]);
+
   const handleSumit = async (e) => {
     validate(payload, 'Create Post', setInvalidFields);
     if (payload.address.length > 0) {
@@ -98,18 +110,20 @@ const CreatePost = () => {
               response
             );
 
-             if(response.status === 200 &&
+            if (
+              response.status === 200 &&
               response.data.err === 0 &&
-              response.data.msg === "Create post success"){
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Your work has been saved',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-                window.location.reload();
-              }
+              response.data.msg === 'Create post success'
+            ) {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              window.location.reload();
+            }
           });
         });
     }
@@ -117,23 +131,28 @@ const CreatePost = () => {
 
   return (
     <div className="z-2150 h-full">
-      <div className=" items-center  pb-2 mb-3 ">
-        <h1 className="text-[2rem] mt-2 py-[1rem]">{pageTitle[0].text}</h1>
-        <div className="border-b-2"></div>
-      </div>
-      <div
-        className="bg-[#f8d7da] border-[#f5c6cb] text-[#721c24] py-[0.75rem] px-[1.25rem] rounded-[0.25rem] mb-[3rem]"
-        role="alert"
-      >
-        {text.NOTE_ALERT}
-      </div>
+      {!isEdit && (
+        <>
+          <div className=" items-center  pb-2 mb-3 ">
+            <h1 className="text-[2rem] mt-2 py-[1rem]">{pageTitle[0].text}</h1>
+            <div className="border-b-2"></div>
+          </div>
+          <div
+            className="bg-[#f8d7da] border-[#f5c6cb] text-[#721c24] py-[0.75rem] px-[1.25rem] rounded-[0.25rem] mb-[3rem]"
+            role="alert"
+          >
+            {text.NOTE_ALERT}
+          </div>
+        </>
+      )}
       <form className="h-full">
         <div className="flex flex-row gap-[3%] ">
           <div className="flex flex-col  text-[1rem] max-w-[70%]  w-full    ">
             <Address
+              isEdit
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
-              value={payload}
+              value={payload.address}
               setValue={setPayload}
             />
             <Overview
@@ -157,7 +176,7 @@ const CreatePost = () => {
               />
             </div>
           </div>
-          <div className="max-w-[30%] w-full  ">
+          <div className={`max-w-[30%] w-full  ${isEdit && `hidden`}`}>
             <div className="flex flex-col bg-blue-600 h-[300px] mb-[30px]"></div>
             <div className="flex flex-col  mb-[30px] border-[1.3px] border-[#ffeeba] bg-[#fff3cd] rounded-">
               <div className="p-[17.5px] text-[#856404]">
