@@ -2,6 +2,7 @@ import * as service from '../service/user'
 
 export const getUser = async (req, res) => {
   const { id } = req.user
+  console.log("🚀 ~ file: userController.js:5 ~ getUser ~ req.user:", req.user)
   try {
     const response = await service.userService(id)
     return res.status(200).json(response)

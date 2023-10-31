@@ -14,8 +14,8 @@ module.exports = {
       userId: {
         type: Sequelize.STRING,
       },
-      expiryDate: {
-        type: Sequelize.DATE,
+      expire: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

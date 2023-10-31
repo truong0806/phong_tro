@@ -69,6 +69,7 @@ export const loginService = ({ phone, password }) =>
         where: { phone },
         raw: true,
       })
+      console.log('🚀 ~ file: auth.js:72 ~ newPromise ~ response:', response)
       if (response === null) {
         resolve({
           err: 2,
@@ -88,7 +89,8 @@ export const loginService = ({ phone, password }) =>
               expiresIn: `${process.env.JWT_EXPIRATION}s`,
             },
           )
-        const refreshToken = await createToken(response.phone, response.id)
+
+        const refreshToken = await createToken(response.id, response.phone)
         await db.RefreshToken.destroy({
           where: {
             userId: response.id,
@@ -111,6 +113,12 @@ export const loginService = ({ phone, password }) =>
             : 'Phone number is not found',
           accessToken: accessToken || null,
           refreshToken: refreshToken || null,
+          user: {
+            id: response.id,
+            name: response.name,
+            phone: response.phone,
+            zalo: response.zalo,
+          },
         })
       }
     } catch (error) {

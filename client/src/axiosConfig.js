@@ -10,17 +10,12 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
-
-    let accessToken =
-      localStorage.getItem('persist:auth') &&
-      JSON.parse(localStorage.getItem('persist:auth'))?.accessToken.slice(
-        1,
-        -1
-      );
-    config.headers = {
-      authorization: accessToken ? `Bearer ${accessToken}` : null,
-    };
+    const accessToken = TokenService.getLocalAccessToken();
+    if (accessToken) {
+      config.headers = {
+        authorization: accessToken ? `Bearer ${accessToken}` : null,
+      };
+    }
     return config;
   },
   function (error) {
@@ -35,20 +30,12 @@ instance.interceptors.response.use(
   },
   async (err) => {
     const originalConfig = err.config;
+    console.log("🚀 ~ file: axiosConfig.js:33 ~ originalConfig:", originalConfig)
     if (originalConfig.url !== '/auth/login' && err.response) {
-      // Access Token was expired
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
         try {
-          const rs = await instance.post('/auth/refreshtoken', {
-            refreshToken: TokenService.getLocalRefreshToken(),
-          });
-          const { accessToken } = rs.data;
-          const { refreshToken } = rs.data;
-
-          dispatch(actions.refreshToken(accessToken, refreshToken));
-          TokenService.updateLocalAccessToken(accessToken);
-
+          dispatch(actions.refreshToken(TokenService.getLocalRefreshToken()));
           return instance(originalConfig);
         } catch (_error) {
           return Promise.reject(_error);

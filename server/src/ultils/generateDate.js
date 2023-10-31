@@ -6,9 +6,9 @@ const formatDate = (times) => {
     let time = `${times.getHours()}:${times.getMinutes()}`
     return `${day}, ${time} ${date}`
 }
-const genarateDate = () => {
+const genarateDate = (days) => {
     let today = new Date()
-    let expireDay = moment(today).add('7', 'd').toDate()
+    let expireDay = moment(today).add(days, 'd').toDate()
     return {
         today: formatDate(today),
         expireDay: formatDate(expireDay),

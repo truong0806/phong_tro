@@ -167,7 +167,7 @@ export const postCreateService = (queries) =>
       const hashtag = generateHashtag()
       let attributesId = v4()
       const postId = v4()
-      const currentDate = genarateDate()
+      const currentDate = genarateDate(7)
       let overviewId = v4()
       const imagesId = v4()
       const labelCode = generateCode(queries.label).trim()

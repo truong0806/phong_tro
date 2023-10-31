@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       token: DataTypes.STRING,
       userId: DataTypes.STRING,
-      expiryDate: DataTypes.DATE,
+      expire: DataTypes.STRING,
     },
     {
       sequelize,

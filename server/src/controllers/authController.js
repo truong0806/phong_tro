@@ -68,11 +68,17 @@ export const refreshToken = async (req, res) => {
   try {
     verifyRefreshToken(refreshTokens)
       .then(({ tokenDetails }) => {
-        const payload = { _id: tokenDetails._id, roles: tokenDetails.roles }
-        const accessToken = jwt.sign(
-          payload,
-          process.env.SECRET_KEY,
-          { expiresIn: '14m' },
+        console.log(
+          '🚀 ~ file: authController.js:86 ~ .then ~ tokenDetails:',
+          tokenDetails,
+        )
+        const payload = { id: tokenDetails.id, phone: tokenDetails.phone }
+        const accessToken = jwt.sign(payload, process.env.SECRET_KEY, {
+          expiresIn: `${process.env.JWT_EXPIRATION}s`,
+        })
+        console.log(
+          '🚀 ~ file: authController.js:77 ~ .then ~ NewaccessToken:',
+          accessToken,
         )
         res.status(200).json({
           err: 0,

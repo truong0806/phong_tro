@@ -2,32 +2,38 @@ import { v4 } from 'uuid'
 import db from '../models'
 import jwt from 'jsonwebtoken'
 import moment from 'moment'
+import genarateDate from '../ultils/generateDate'
 
-export const createToken = async (phone, id) => {
-  let expiredAt = new Date()
-  expiredAt.setMinutes(
-    expiredAt.getMinutes() + +process.env.NUMBER_JWT_REFRESH_EXPIRATION,
-  )
+export const createToken = async (id, phone) => {
+  const expiryDate = moment().add(7, 'days').format('YYYY-MM-DD HH:mm:ss')
   let _token = jwt.sign(
     { id: id, phone: phone },
     process.env.SECRET_KEY_REFRESH,
   )
-  let refreshToken = await db.RefreshToken.create({
+  const refreshToken = await db.RefreshToken.create({
     id: v4(),
     token: _token,
     userId: id,
-    expiryDate: expiredAt.getTime(),
+    expire: expiryDate,
   })
 
   return refreshToken.token
 }
 export const verifyExpiration = (token) => {
-  const now = moment()
-  const expireDate = token.expiryDate.getTime()
-  if (now.isAfter(expireDate)) {
+  if (!token) {
     return false
   } else {
-    return true
+    const now = moment()
+    const expireDate = token.expire
+    console.log(
+      '🚀 ~ file: refreshToken.js:32 ~ verifyExpiration ~ expireDate:',
+      expireDate,
+    )
+    if (now.isAfter(expireDate)) {
+      return true
+    } else {
+      return true
+    }
   }
 }
 

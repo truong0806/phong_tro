@@ -19,6 +19,7 @@ const ManagePost = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const { posts_limit_admin } = useSelector((state) => state.post);
+  const { isLoggedIn, accessToken } = useSelector((state) => state.auth);
   const [categoryCode] = useState('none');
   const [bonusType, setBonusType] = useState('');
   const [status, setStatus] = useState('');
@@ -28,15 +29,11 @@ const ManagePost = () => {
   useEffect(() => {
     dispatch(actions.getCategories());
     setLoading(false);
-    fetchPost();
-  }, [categoryCode, updateData]);
-
-  const fetchPost = () => {
     let searchParamsObject = {};
     dispatch(actions.GetPostsLimitAdmin(searchParamsObject)).finally(() => {
       setLoading(true);
     });
-  };
+  }, [categoryCode, updateData, isLoggedIn, accessToken]);
 
   const filterData = (bonusType, status) => {
     let filteredData = posts_limit_admin.filter((row) => {

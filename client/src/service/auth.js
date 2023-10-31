@@ -13,6 +13,20 @@ export const apiRegister = (payload) =>
       reject(error);
     }
   });
+export const apiRefeshToken = (refreshToken) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      console.log('refreshToken', refreshToken);
+      const response = await axiosConfig({
+        method: 'post',
+        url: '/auth/refreshtoken',
+        data: { refreshTokens: refreshToken },
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
 export const apiLogin = (payload) =>
   new Promise(async (resolve, reject) => {
     try {
