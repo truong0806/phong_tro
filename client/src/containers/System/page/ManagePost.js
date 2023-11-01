@@ -20,6 +20,10 @@ const ManagePost = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { posts_limit_admin } = useSelector((state) => state.post);
   const { isLoggedIn, accessToken } = useSelector((state) => state.auth);
+  console.log(
+    '🚀 ~ file: ManagePost.js:23 ~ ManagePost ~ accessToken:',
+    accessToken
+  );
   const [categoryCode] = useState('none');
   const [bonusType, setBonusType] = useState('');
   const [status, setStatus] = useState('');
@@ -30,10 +34,12 @@ const ManagePost = () => {
     dispatch(actions.getCategories());
     setLoading(false);
     let searchParamsObject = {};
-    dispatch(actions.GetPostsLimitAdmin(searchParamsObject)).finally(() => {
-      setLoading(true);
-    });
-  }, [categoryCode, updateData, isLoggedIn, accessToken]);
+    setTimeout(() => {
+      dispatch(actions.GetPostsLimitAdmin(searchParamsObject)).finally(() => {
+        setLoading(true);
+      });
+    }, 200);
+  }, [dispatch, categoryCode, updateData, isLoggedIn]);
 
   const filterData = (bonusType, status) => {
     let filteredData = posts_limit_admin.filter((row) => {

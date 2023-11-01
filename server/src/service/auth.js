@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import { v4 } from 'uuid'
 import moment from 'moment'
 import { createToken } from '../middleware/refreshToken'
+import { generateAccessToken } from '../middleware/jwt'
 require('dotenv').config()
 
 const hashPassword = (password) =>
@@ -62,14 +63,13 @@ export const registerService = ({ phone, password, name }) =>
       reject(error)
     }
   })
-export const loginService = ({ phone, password }) =>
+export const loginService = ({ phone, password }) => 
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.User.findOne({
         where: { phone },
         raw: true,
       })
-      console.log('🚀 ~ file: auth.js:72 ~ newPromise ~ response:', response)
       if (response === null) {
         resolve({
           err: 2,
@@ -78,17 +78,15 @@ export const loginService = ({ phone, password }) =>
           refreshToken: null,
         })
       } else {
+        console.log("🚀 ~ file: auth.js:74 ~ newPromise ~ response:", response)
         const isCorrectPassword =
           response && bcrypt.compareSync(password, response.password)
         const accessToken =
-          isCorrectPassword &&
-          jwt.sign(
-            { id: response.id, phone: response.phone },
-            process.env.SECRET_KEY,
-            {
-              expiresIn: `${process.env.JWT_EXPIRATION}s`,
-            },
-          )
+          isCorrectPassword && generateAccessToken(response.id, response.phone)
+        console.log(
+          '🚀 ~ file: auth.js:84 ~ newPromise ~ accessToken:',
+          accessToken,
+        )
 
         const refreshToken = await createToken(response.id, response.phone)
         await db.RefreshToken.destroy({

@@ -44,6 +44,14 @@ const authReducer = (state = initState, action) => {
         accessToken: action.accessToken,
         refreshToken: action.refreshToken,
       };
+    case actionTypes.REFRESH_TOKEN_FAIL:
+      return {
+        ...state,
+        isLoggedIn: false,
+        accessToken: null,
+        refreshToken: null,
+        msg: action.msg,
+      };
     default:
       return state;
   }

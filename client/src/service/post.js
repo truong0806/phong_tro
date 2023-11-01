@@ -20,11 +20,6 @@ export const apiGetPostsLimit = (query) =>
         method: 'get',
         url: `/post/limit`,
         params: query,
-        headers: {
-          Authorization: `${JSON.parse(
-            localStorage.getItem('persist:auth')
-          ).accessToken.replace(/["']+/g, '')}`,
-        },
       });
       resolve(response);
     } catch (error) {
@@ -37,12 +32,7 @@ export const apiGetPostsLimitAdmin = (query) =>
       const response = await axiosConfig({
         method: 'get',
         url: `/post/limit-admin`,
-        params: query,
-        headers: {
-          Authorization: `${JSON.parse(
-            localStorage.getItem('persist:auth')
-          ).accessToken.replace(/["']+/g, '')}`,
-        },
+        params: query
       });
       resolve(response);
     } catch (error) {

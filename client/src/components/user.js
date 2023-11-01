@@ -2,10 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../store/action';
 import CopyButton from './CopyButton';
+import swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { path } from '../ultils/constains';
+import Tokenservice from '../service/token';
 
 const User = ({ inSideBar }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { userData } = useSelector((state) => state.user);
+  const { msg } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
@@ -13,27 +19,43 @@ const User = ({ inSideBar }) => {
     setIsLoading(false);
     isLoggedIn &&
       setTimeout(() => {
-        dispatch(actions.getUser());
+        dispatch(actions.getUser())
         setIsLoading(true);
-      }, 1000);
+      }, 300);
   }, [dispatch, isLoggedIn]);
+
+  useEffect(() => {
+    console.log('🚀 ~ file: user.js:13 ~ User ~ msg:', msg);
+
+    if (msg)
+      swal
+        .fire('Oop !', 'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại', 'info')
+        .then(() => {
+          dispatch(actions.clearMsg());
+          dispatch(actions.logout(Tokenservice.getLocalRefreshToken()));
+          navigate(`${path.AUTH}/${path.LOGIN}`);
+        });
+  }, [msg]);
+
   return (
     <div className="mt-[5px] flex flex-col">
       <div
-        className={`${inSideBar
-          ? 'flex flex-row w-full'
-          : 'z-60 flex flex-row justify-center left-2  w-[240px] h-[70px] '
-          }`}
+        className={`${
+          inSideBar
+            ? 'flex flex-row w-full'
+            : 'z-60 flex flex-row justify-center left-2  w-[240px] h-[70px] '
+        }`}
       >
         <img
-          className={`${inSideBar
-            ? 'w-[50px] h-[50px] rounded-[50%] '
-            : 'w-[40px] h-[40px] justify-center items-center mt-[6px] rounded-[50%] mr-[10px]'
-            }`}
+          className={`${
+            inSideBar
+              ? 'w-[50px] h-[50px] rounded-[50%] '
+              : 'w-[40px] h-[40px] justify-center items-center mt-[6px] rounded-[50%] mr-[10px]'
+          }`}
           src={
             userData.avatar || 'https://phongtro123.com/images/default-user.png'
           }
-          alt=''
+          alt=""
         />
         <div
           className={

@@ -5,7 +5,6 @@ import {
   apiLogout,
   apiRefeshToken,
 } from '../../service/auth';
-import TokenService from '../../service/token';
 
 export const register = (payload) => async (dispatch) => {
   try {
@@ -63,13 +62,35 @@ export const logout = (refreshTokens) => async (dispatch) => {
 };
 export const refreshToken = (refreshToken) => async (dispatch) => {
   const response = await apiRefeshToken(refreshToken);
+  console.log('🚀 ~ file: auth.js:66 ~ refreshToken ~ response:', response);
   if (response?.data.err === 0) {
     dispatch({
       type: actionTypes.REFRESH_TOKEN,
       accessToken: response.data.accessToken,
       refreshToken: refreshToken,
+      msg: response.data.msg,
     });
-    TokenService.updateLocalAccessToken(response.data.accessToken);
+  } else {
+    dispatch({
+      type: actionTypes.REFRESH_TOKEN_FAIL,
+      msg: response.data.msg,
+    });
   }
-  ///dispatch({ type: actionTypes.LOGOUT });
+  dispatch({ type: actionTypes.LOGOUT });
 };
+export const setAuthTokens =
+  (accessToken, refreshToken) => async (dispatch) => {
+    dispatch({
+      type: actionTypes.REFRESH_TOKEN,
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    });
+  };
+export const setMsgExpiredToken = (msg) => async (dispatch) => {
+  dispatch({
+    type: actionTypes.REFRESH_TOKEN_FAIL,
+    msg: msg,
+  });
+};
+
+export default setAuthTokens;

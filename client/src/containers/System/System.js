@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { path } from '../../ultils/constains';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
@@ -8,11 +8,15 @@ import Breadcrumb from './components/Breadcrumb';
 const System = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const location = useLocation();
-  if (!isLoggedIn || isLoggedIn === 'false')
-    return <Navigate to={`/auth/${path.LOGIN}`} replace={true} />;
+
   const currentPage = menuSider.filter((item) => {
     return `/quan-ly/${item.path}` === location.pathname;
   });
+
+  useEffect(() => {
+    if (!isLoggedIn || isLoggedIn === 'false')
+      return <Navigate to={`/auth/${path.LOGIN}`} replace={true} />;
+  }, [isLoggedIn]);
   return (
     <div className="w-full  flex-col items-center">
       <Header />

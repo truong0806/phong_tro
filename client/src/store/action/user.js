@@ -1,5 +1,6 @@
 import actionTypes from './actionTypes';
 import { apiUser } from '../../service/user';
+
 export const getUser = () => async (dispatch) => {
   try {
     const response = await apiUser();
@@ -7,7 +8,6 @@ export const getUser = () => async (dispatch) => {
       dispatch({
         type: actionTypes.GET_USER,
         userData: response.data.response,
-        msg: response.data.msg,
       });
     } else {
       dispatch({
@@ -21,4 +21,10 @@ export const getUser = () => async (dispatch) => {
       userData: null,
     });
   }
+};
+
+export const clearMsg = () => async (dispatch) => {
+  dispatch({
+    type: actionTypes.CLEAR_MSG,
+  });
 };

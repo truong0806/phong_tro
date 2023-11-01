@@ -13,6 +13,11 @@ const userReducer = (state = initState, action) => {
         userData: action.userData || {},
         msg: action.msg || '',
       };
+    case actionTypes.CLEAR_MSG:
+      return {
+        ...state,
+        msg: '',
+      };
     default:
       return state;
   }

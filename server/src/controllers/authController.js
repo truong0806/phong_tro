@@ -5,6 +5,7 @@ import {
   verifyRefreshToken,
 } from '../middleware/refreshToken'
 import jwt from 'jsonwebtoken'
+import { generateAccessToken } from '../middleware/jwt'
 
 export const register = async (req, res) => {
   const { phone, name, password } = req.body
@@ -72,10 +73,10 @@ export const refreshToken = async (req, res) => {
           '🚀 ~ file: authController.js:86 ~ .then ~ tokenDetails:',
           tokenDetails,
         )
-        const payload = { id: tokenDetails.id, phone: tokenDetails.phone }
-        const accessToken = jwt.sign(payload, process.env.SECRET_KEY, {
-          expiresIn: `${process.env.JWT_EXPIRATION}s`,
-        })
+        const accessToken = generateAccessToken(
+          tokenDetails.id,
+          tokenDetails.phone,
+        )
         console.log(
           '🚀 ~ file: authController.js:77 ~ .then ~ NewaccessToken:',
           accessToken,
@@ -87,7 +88,12 @@ export const refreshToken = async (req, res) => {
         })
       })
 
-      .catch((err) => res.status(400).json(err))
+      .catch((err) =>
+        res.status(200).json({
+          err: 1,
+          msg: 'Token expired',
+        }),
+      )
   } catch (err) {
     return res.status(500).send({ msg: err })
   }

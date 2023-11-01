@@ -3,6 +3,7 @@ import menuSider from '../../../../ultils/menuSider';
 import { NavLink } from 'react-router-dom';
 import * as actions from '../../../../store/action';
 import { useDispatch } from 'react-redux';
+import Tokenservice from '../../../../service/token';
 const notActive =
   'hover:bg-[#f1f1f1] w-full  py-[8px] items-center text-[1rem]  flex flex-row  ';
 const active =
@@ -29,7 +30,7 @@ const MenuAdmin = () => {
           <div
             className="py-[10px] items-center text-[0.8rem] flex flex-row  cursor-pointer hover:bg-[#f1f1f1]"
             onClick={() => {
-              dispatch(actions.logout());
+              dispatch(actions.logout(Tokenservice.getLocalRefreshToken()));
             }}
           >
             <span>

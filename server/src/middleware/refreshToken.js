@@ -3,13 +3,12 @@ import db from '../models'
 import jwt from 'jsonwebtoken'
 import moment from 'moment'
 import genarateDate from '../ultils/generateDate'
+import { generateRefeshToken, verifyAccessToken } from '../middleware/jwt'
 
 export const createToken = async (id, phone) => {
   const expiryDate = moment().add(7, 'days').format('YYYY-MM-DD HH:mm:ss')
-  let _token = jwt.sign(
-    { id: id, phone: phone },
-    process.env.SECRET_KEY_REFRESH,
-  )
+  let _token = generateRefeshToken(id)
+
   const refreshToken = await db.RefreshToken.create({
     id: v4(),
     token: _token,

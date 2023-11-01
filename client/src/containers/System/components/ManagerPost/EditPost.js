@@ -7,11 +7,7 @@ import CreatePost from '../../page/CreatePost';
 import icon from '../../../../ultils/icons';
 const { AiOutlineClose } = icon;
 
-const EditPost = ({ setShowPopup, showPopup , isEdit}) => {
-  const [invalidFields, setInvalidFields] = useState([]);
-  const [category, setCategory] = useState([{ code: '', value: '' }]);
-  const { categories } = useSelector((state) => state.app);
-  const [titles, setTitles] = useState([{ code: '', value: '' }]);
+const EditPost = ({ setShowPopup}) => {
   
   const handleCloseClick = () => {
     setShowPopup(false);
