@@ -10,9 +10,9 @@ import { usePathname } from '../../../ultils/common/usePathname';
 import Swal from 'sweetalert2';
 
 const CreatePost = ({ isEdit, isCreate }) => {
+  console.log('🚀 ~ file: CreatePost.js:13 ~ CreatePost ~ isEdit:', isEdit);
   const pageTitle = usePathname();
   const { dataEdit } = useSelector((state) => state.post);
-  console.log('🚀 ~ file: CreatePost.js:15 ~ CreatePost ~ dataEdit:', dataEdit);
 
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
@@ -51,28 +51,28 @@ const CreatePost = ({ isEdit, isCreate }) => {
     setTimeout(() => {
       dispatch(actions.getCategories());
     }, 1000);
-  }, [dispatch, payload, dataEdit]);
+  }, [dispatch]);
 
   useEffect(() => {}, [invalidFields]);
 
   const handleSumit = async (e) => {
     validate(payload, 'Create Post', setInvalidFields);
-    if (payload.address.length > 0) {
+    if (payload?.address?.length > 0) {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'address')
       );
     }
-    if (payload.priceCode.length > 0) {
+    if (payload?.priceCode?.length > 0) {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'priceCode')
       );
     }
-    if (payload.areaCode.length > 0) {
+    if (payload?.areaCode?.length > 0) {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'areaCode')
       );
     }
-    if (imagesFile.length > 0) {
+    if (imagesFile?.length > 0) {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'images')
       );
@@ -80,7 +80,7 @@ const CreatePost = ({ isEdit, isCreate }) => {
         prev.filter((field) => field.name !== 'imageCode')
       );
     }
-    if (invalidFields.length === 0) {
+    if (invalidFields?.length === 0) {
       let images = [];
       let formData = new FormData();
       let uploadPromises = imagesFile.map(async (item) => {
@@ -149,15 +149,15 @@ const CreatePost = ({ isEdit, isCreate }) => {
         <div className="flex flex-row gap-[3%] ">
           <div className="flex flex-col  text-[1rem] max-w-[70%]  w-full    ">
             <Address
-              isEdit
+              isEdit={isEdit}
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
-              value={payload.address}
+              value={payload}
               setValue={setPayload}
             />
             <Overview
+              isEdit={isEdit}
               setInvalidFields={setInvalidFields}
-              payload={payload}
               invalidFields={invalidFields}
               setImagesFile={setImagesFile}
               imagesFile={imagesFile}

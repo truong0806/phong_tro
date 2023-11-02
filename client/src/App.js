@@ -48,7 +48,7 @@ function App() {
         </Route>
 
         <Route path={path.SYSTEM} element={<System />}>
-          <Route path={path.CREATE_NEW_POST} element={<CreatePost />} />
+          <Route path={path.CREATE_NEW_POST} element={<CreatePost  />} />
           <Route path={path.MANAGE_POST} element={<ManagePost />} />
           <Route path={path.RECHARGE} element={<RechargePage />} />
           <Route path={path.DEPOSIT_HISTORY} element={<DepositHistory />} />

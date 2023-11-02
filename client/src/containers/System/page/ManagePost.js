@@ -20,10 +20,7 @@ const ManagePost = () => {
   const [showPopup, setShowPopup] = useState(false);
   const { posts_limit_admin } = useSelector((state) => state.post);
   const { isLoggedIn, accessToken } = useSelector((state) => state.auth);
-  console.log(
-    '🚀 ~ file: ManagePost.js:23 ~ ManagePost ~ accessToken:',
-    accessToken
-  );
+
   const [categoryCode] = useState('none');
   const [bonusType, setBonusType] = useState('');
   const [status, setStatus] = useState('');
@@ -70,10 +67,6 @@ const ManagePost = () => {
 
   const handleDeletePost = async (e, postId) => {
     e.stopPropagation();
-    console.log(
-      '🚀 ~ file: ManagePost.js:69 ~ handleDeletePost ~ postId:',
-      postId.id
-    );
     Swal.fire({
       title: 'Bạn muốn xoá file?',
       icon: 'warning',

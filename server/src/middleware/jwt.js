@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 
 const generateAccessToken = (id, phone) => {
   return jwt.sign({ id: id, phone: phone }, process.env.SECRET_KEY, {
-    expiresIn: '60s',
+    expiresIn: '3d',
   })
 }
 const verifyAccessToken = (token) => {

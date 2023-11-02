@@ -12,8 +12,6 @@ const Address = ({
   setInvalidFields,
   isEdit,
 }) => {
-  console.log('🚀 ~ file: Address.js:15 ~ isEdit:', isEdit);
-  console.log('🚀 ~ file: Address.js:9 ~ Address ~ value:', value);
   const [provinces, setProvinces] = useState([]);
   const [apartmentNumber, setApartmentNumber] = useState([]);
   const [street, setStreet] = useState([]);
@@ -25,8 +23,8 @@ const Address = ({
   const [reset, setReset] = useState(false);
 
   useEffect(() => {
-    setApartmentNumber(isEdit ? value.split(',')[0].trimStart() : '');
-    setStreet(isEdit ? value.split(',')[1].trimStart() : '');
+    // setApartmentNumber(isEdit ? value.split(',')[0].trimStart() : '');
+    // setStreet(isEdit ? value.split(',')[1]?.trimStart() : '');
 
     const fetchPublicProvince = async () => {
       const response = await apiLocation();
@@ -35,7 +33,7 @@ const Address = ({
       }
     };
     fetchPublicProvince();
-  }, [apartmentNumber]);
+  }, []);
 
   useEffect(() => {
     setDistrict(null);
@@ -49,6 +47,7 @@ const Address = ({
     !province ? setReset(true) : setReset(false);
     !province && setDistricts([]);
   }, [province]);
+
   useEffect(() => {
     setWard(null);
     const fetchPublicWard = async () => {
@@ -61,15 +60,16 @@ const Address = ({
     !district ? setReset(true) : setReset(false);
     !district && setWards([]);
   }, [district]);
+
   useEffect(() => {
     setValue((prev) => ({
       ...prev,
-      apartmentNumber: apartmentNumber.length === 0 ? '' : apartmentNumber,
-      street: street.length === 0 ? '' : street,
+      apartmentNumber: isEdit ? value.address.split(',')[0].trimStart() : '',
+      street: isEdit ? value.address.split(',')[1].trimStart() : '',
       ward,
       district,
-      address: value
-        ? value
+      address: isEdit
+        ? value.address
         : `${apartmentNumber.length === 0 ? '' : `${apartmentNumber}, `}${
             street.length === 0 ? '' : `${street}, `
           }${
@@ -90,17 +90,7 @@ const Address = ({
         ? districts?.find((item) => item.code === +district)?.name
         : '',
     }));
-  }, [
-    setValue,
-    apartmentNumber,
-    street,
-    ward,
-    district,
-    province,
-    districts,
-    provinces,
-    wards,
-  ]);
+  }, []);
 
   return (
     <div className="mt-3 gap-2 justify-between flex flex-col">
@@ -109,23 +99,23 @@ const Address = ({
       </div>
       <div className="flex flex-col">
         <InputText
-          value={apartmentNumber}
+          value={value.apartmentNumber}
           name={'apartmentNumber'}
           invalidFields={invalidFields}
           setInvalidFields={setInvalidFields}
           typeInput={'text'}
           label={'Số nhà'}
-          setValue={setApartmentNumber}
+          setValue={setValue}
           styleInput={'max-w-[30%]'}
         />
         <InputText
-          value={street}
+          value={value.street}
           name={'street'}
           invalidFields={invalidFields}
           setInvalidFields={setInvalidFields}
           typeInput={'text'}
           label={'Đường'}
-          setValue={setStreet}
+          setValue={setValue}
           styleInput={'max-w-[60%]'}
         />
       </div>
@@ -165,13 +155,16 @@ const Address = ({
         />
       </div>
       <InputTextReadOnly
+        setValue={setValue}
         label="Địa chỉ chính xác"
         value={
           isEdit
-            ? value
-            : `${apartmentNumber.length === 0 ? '' : `${apartmentNumber},`} ${
-                street.length === 0 ? '' : `${street},`
-              } ${
+            ? value.address
+            : `${
+                value.apartmentNumber.length === 0
+                  ? ''
+                  : `${value.apartmentNumber},`
+              } ${value.street.length === 0 ? '' : `${value.street},`} ${
                 ward
                   ? `${wards?.find((item) => item.code === +ward)?.name},`
                   : ''

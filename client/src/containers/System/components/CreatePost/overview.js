@@ -12,13 +12,14 @@ const Overview = ({
   setImagesFile,
   imagesFile,
   handleSumit,
-  payload,
   value,
   setValue,
   userData,
   setPreviewImages,
   previewImages,
+  isEdit,
 }) => {
+  console.log('🚀 ~ file: overview.js:22 ~ value:', value);
   const doituongs = [
     { code: 'all', value: 'Tất cả' },
     { code: 'male', value: 'Nam' },
@@ -29,7 +30,7 @@ const Overview = ({
   const { categories } = useSelector((state) => state.app);
   const [category, setCategory] = useState([{ code: '', value: '' }]);
   const [doituong, setDoiTuong] = useState([{ code: '', value: '' }]);
-  const [titles, setTitles] = useState([{ code: '', value: '' }]);
+  const [titles, setTitles] = useState([]);
   const [desc, setDesc] = useState('');
 
   useEffect(() => {
@@ -40,17 +41,26 @@ const Overview = ({
   useEffect(() => {
     setValue((prev) => ({
       ...prev,
-      categoryCode: category.code === undefined ? '' : category.code,
-      categoryName: category.value,
-      title: titles,
-      description: desc,
+      categoryCode: isEdit
+        ? value.categoryCode
+        : category.code === undefined
+        ? ''
+        : category.code,
+      priceNumber: isEdit
+        ? value.priceNumber.split(' ')[1] === 'đồng/tháng'
+          ? +value.priceNumber.split(' ')[0]
+          : +value.priceNumber.split(' ')[0] * 1000000
+        : 0,
+      areaNumber: isEdit ? +value.areaNumber.split(' ')[0] : 0,
+      categoryName: isEdit ? value.categoryName : category.value,
+      title: isEdit ? value?.title : '',
+      description: isEdit ? value?.description.replace(/"/g, '') : '',
       target: doituong.value || '',
       targetCode: doituong.code,
       userId: userData.id,
       phoneContact: userData.phone,
       label: `${category?.value} ${value?.province}`,
     }));
-
   }, [
     category,
     doituong,
@@ -83,8 +93,9 @@ const Overview = ({
         name={'title'}
         invalidFields={invalidFields}
         typeInput={'text'}
-        setValue={setTitles}
+        setValue={setValue.title}
         label={'Tiêu đề'}
+        value={value.title}
         styleInput={'w-full'}
       />
       <div className="flex flex-col mb-[14px]">
@@ -102,6 +113,7 @@ const Overview = ({
           cols="30"
           rows="10"
           type="text"
+          value={value.description}
           className="focus:ring-[rgba(0,123,255,.25)] mb-2 focus:border-[#80bdff] border-[#ced4da] py-[0.375rem] px-[0.75rem] text-[1rem] text-[#495057] h-[220px]"
         ></textarea>
         <small className="text-red-500">
@@ -128,6 +140,7 @@ const Overview = ({
         <label className="font-bold">Giá cho thuê</label>
         <div className="flex flex-row w-full h-[33px] my-2">
           <input
+            value={value.priceNumber}
             onFocus={() =>
               setInvalidFields((prev) =>
                 prev.filter((field) => field.name !== 'priceNumber')
@@ -173,6 +186,7 @@ const Overview = ({
         <label className="font-bold">Diện tích</label>
         <div className="flex flex-row w-full h-[33px] my-2">
           <input
+            value={value.areaNumber}
             onFocus={() =>
               setInvalidFields((prev) =>
                 prev.filter((field) => field.name !== 'areaNumber')
