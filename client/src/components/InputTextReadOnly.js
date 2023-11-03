@@ -6,7 +6,6 @@ const InputTextReadOnly = ({
   styleLable,
   value,
   readonly,
-  setValue
 }) => {
   return (
     <div>

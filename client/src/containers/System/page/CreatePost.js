@@ -9,35 +9,34 @@ import validate from '../../../ultils/validate';
 import { usePathname } from '../../../ultils/common/usePathname';
 import Swal from 'sweetalert2';
 
-const CreatePost = ({ isEdit, isCreate }) => {
-  console.log('🚀 ~ file: CreatePost.js:13 ~ CreatePost ~ isEdit:', isEdit);
+const CreatePost = ({ isEdit }) => {
   const pageTitle = usePathname();
   const { dataEdit } = useSelector((state) => state.post);
+  console.log('🚀 ~ file: CreatePost.js:15 ~ CreatePost ~ dataEdit:', dataEdit);
 
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
   const [imagesFile, setImagesFile] = useState([]);
+
   const [payload, setPayload] = useState(() => {
     const initData = {
-      apartmentNumber: '',
+      apartmentNumber: dataEdit?.address.split(',')[0] || '',
       categoryName: dataEdit?.categories.value || '',
-      street: '',
-      ward: '',
-      district: '',
+      street: dataEdit?.address.split(',')[1] || '',
+      ward: dataEdit?.address.split(',')[2] || '',
+      district: dataEdit?.address.split(',')[3] || '',
       categoryCode: dataEdit?.categories.code || '',
       title: dataEdit?.title || '',
-      description: dataEdit?.description || '',
-      priceNumber: dataEdit?.attributes.price,
-      areaNumber: dataEdit?.attributes.acreage || 0,
-      address: isEdit ? dataEdit?.address : '',
-      images: dataEdit?.images,
-      imageCode: '',
-      target: dataEdit?.overviews.target,
-      targetCode: '',
-      province: '',
-      label: '',
-      priceCode: '',
-      areaCode: '',
+      description: dataEdit?.description.replace(/"/g, '') || '',
+      priceNumber: isEdit
+        ? dataEdit?.attributes?.price?.split(' ')[1] === 'đồng/tháng'
+          ? +dataEdit?.attributes?.price?.split(' ')[0]
+          : +dataEdit?.attributes?.price?.split(' ')[0] * 1000000
+        : 0,
+      areaNumber: +dataEdit?.attributes?.acreage?.split(' ')[0] || 0,
+      images: dataEdit?.images || [],
+      target: dataEdit?.overviews.target || '',
+      province: dataEdit?.address.split(',')[4] || '',
     };
     return initData;
   });
@@ -51,6 +50,11 @@ const CreatePost = ({ isEdit, isCreate }) => {
     setTimeout(() => {
       dispatch(actions.getCategories());
     }, 1000);
+    setPayload((prev) => ({
+      ...prev,
+      userId: userData?.id,
+      phoneContact: userData?.phone,
+    }));
   }, [dispatch]);
 
   useEffect(() => {}, [invalidFields]);

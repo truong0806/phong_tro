@@ -57,7 +57,6 @@ export const createPost = async (req, res) => {
       !title ||
       !description ||
       !priceNumber ||
-      !label ||
       !areaNumber
     ) {
       return res.status(400).json({ err: 1, msg: 'Missing input' })

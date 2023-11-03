@@ -11,6 +11,7 @@ const SelectAddress = ({
   invalidFields,
   setInvalidFields,
   dataPro,
+  setLoca,
 }) => {
   return (
     <div className="w-full">
@@ -26,8 +27,12 @@ const SelectAddress = ({
         defaultValue=""
         onChange={(e) => {
           const proCode = e.target.value;
-          console.log("🚀 ~ file: SelectAddress.js:29 ~ proCode:", proCode)
-          setValue(proCode);
+          console.log('🚀 ~ file: SelectAddress.js:29 ~ proCode:', proCode);
+          setValue((prev) => ({
+            ...prev,
+            [name]: array?.find((item) => item.code === +proCode)?.name,
+          }));
+          setLoca(proCode);
         }}
         id="select-address"
         className="bg-gray-50 border my-2 py-2 border-gray-300 text-gray-900 mb-2 text-[0.8rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-1 "

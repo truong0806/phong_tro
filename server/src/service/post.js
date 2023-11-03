@@ -163,6 +163,7 @@ export const postLimitAdminService = (page, query, id, bonus) =>
 
 export const postCreateService = (queries) =>
   new Promise(async (resolve, reject) => {
+    console.log(queries);
     try {
       const hashtag = generateHashtag()
       let attributesId = v4()
@@ -170,7 +171,8 @@ export const postCreateService = (queries) =>
       const currentDate = genarateDate(7)
       let overviewId = v4()
       const imagesId = v4()
-      const labelCode = generateCode(queries.label).trim()
+      const label = `${queries.categoryName} ${queries.province}`
+      const labelCode = generateCode(label).trim()
       const currentArea = getNumberFromString(queries.areaNumber)
       const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
       const provinceCode = queries?.province?.includes('Thành phố')
@@ -214,7 +216,7 @@ export const postCreateService = (queries) =>
         where: {
           [Op.and]: [
             {
-              area: queries.label,
+              area: label,
             },
             { type: queries?.categoryName },
             { target: queries?.target },
@@ -223,7 +225,7 @@ export const postCreateService = (queries) =>
         defaults: {
           id: overviewId,
           code: `#${hashtag}`,
-          area: queries.label,
+          area: label,
           type: queries?.categoryName,
           target: queries?.target,
           bonus: 'Tin thường',
@@ -241,7 +243,7 @@ export const postCreateService = (queries) =>
         where: { code: labelCode },
         defaults: {
           code: labelCode,
-          value: queries.label,
+          value: label,
         },
       })
       await db.Province.findOrCreate({
@@ -269,7 +271,7 @@ export const postCreateService = (queries) =>
         where: {
           [Op.or]: [
             { title: queries.title },
-            { address: queries.address },
+            { address: `${queries.apartmentNumber}, ${queries.street}, ${queries.ward}, ${queries.district}, ${queries.province},` },
             { description: queries.description },
           ],
         },
@@ -277,7 +279,9 @@ export const postCreateService = (queries) =>
           id: postId,
           title: queries.title || null,
           labelCode,
-          address: queries.address || null,
+          address:
+            `${queries.apartmentNumber}, ${queries.street}, ${queries.ward}, ${queries.district}, ${queries.province},` ||
+            null,
           attributesId: attributesId,
           categoryCode: queries.categoryCode,
           description: JSON.stringify(queries.description) || null,

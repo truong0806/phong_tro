@@ -9,6 +9,7 @@ const inputSelect = ({
   name,
   invalidFields,
   setInvalidFields,
+  codes,
 }) => {
   return (
     <div className={` mb-4 ${maxW}`}>
@@ -25,7 +26,16 @@ const inputSelect = ({
         }
         onChange={(e) => {
           const [value, code] = e.target.value.split(',');
-          setValue({ value, code });
+          setValue((prev) => {
+            const newValues = {
+              ...prev,
+              [name]: value,
+            };
+            if (codes) {
+              newValues[codes] = code;
+            }
+            return newValues;
+          });
         }}
         className="bg-gray-50 border my-2 py-2 border-gray-300 text-gray-900 mb-2 text-[0.8rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-1 "
       >

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { InputText, InputTextReadOnly, UploadVideos } from '../../components';
 import { InputSelect } from '../../../../components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +19,6 @@ const Overview = ({
   previewImages,
   isEdit,
 }) => {
-  console.log('🚀 ~ file: overview.js:22 ~ value:', value);
   const doituongs = [
     { code: 'all', value: 'Tất cả' },
     { code: 'male', value: 'Nam' },
@@ -28,50 +27,11 @@ const Overview = ({
   const dispatch = useDispatch();
   const { prices, areas } = useSelector((state) => state.app);
   const { categories } = useSelector((state) => state.app);
-  const [category, setCategory] = useState([{ code: '', value: '' }]);
-  const [doituong, setDoiTuong] = useState([{ code: '', value: '' }]);
-  const [titles, setTitles] = useState([]);
-  const [desc, setDesc] = useState('');
 
   useEffect(() => {
     dispatch(actions.getPrices());
     dispatch(actions.getAreas());
   }, [dispatch]);
-
-  useEffect(() => {
-    setValue((prev) => ({
-      ...prev,
-      categoryCode: isEdit
-        ? value.categoryCode
-        : category.code === undefined
-        ? ''
-        : category.code,
-      priceNumber: isEdit
-        ? value.priceNumber.split(' ')[1] === 'đồng/tháng'
-          ? +value.priceNumber.split(' ')[0]
-          : +value.priceNumber.split(' ')[0] * 1000000
-        : 0,
-      areaNumber: isEdit ? +value.areaNumber.split(' ')[0] : 0,
-      categoryName: isEdit ? value.categoryName : category.value,
-      title: isEdit ? value?.title : '',
-      description: isEdit ? value?.description.replace(/"/g, '') : '',
-      target: doituong.value || '',
-      targetCode: doituong.code,
-      userId: userData.id,
-      phoneContact: userData.phone,
-      label: `${category?.value} ${value?.province}`,
-    }));
-  }, [
-    category,
-    doituong,
-    titles,
-    desc,
-    setValue,
-    userData.phone,
-    userData.id,
-    value?.province,
-    previewImages,
-  ]);
 
   return (
     <div>
@@ -79,10 +39,11 @@ const Overview = ({
         <h3 className="text-[1.75rem] font-bold">Thông tin mô tả</h3>
       </div>
       <InputSelect
+        codes={'categoryCode'}
         setInvalidFields={setInvalidFields}
         invalidFields={invalidFields}
-        name={'categoryCode'}
-        setValue={setCategory}
+        name={'categoryName'}
+        setValue={setValue}
         array={categories}
         nameValue={'value'}
         text={'Loại chuyên mục'}
@@ -93,7 +54,7 @@ const Overview = ({
         name={'title'}
         invalidFields={invalidFields}
         typeInput={'text'}
-        setValue={setValue.title}
+        setValue={setValue}
         label={'Tiêu đề'}
         value={value.title}
         styleInput={'w-full'}
@@ -108,7 +69,12 @@ const Overview = ({
               prev.filter((field) => field.name !== 'description')
             )
           }
-          onChange={(e) => setDesc(e.target.value)}
+          onChange={(e) =>
+            setValue((prev) => ({
+              ...prev,
+              description: e.target.value,
+            }))
+          }
           id="desc"
           cols="30"
           rows="10"
@@ -147,15 +113,9 @@ const Overview = ({
               )
             }
             onChange={(e) => {
-              const dataPrice = editMaxMin(prices, 'price');
               setValue((prev) => ({
                 ...prev,
                 priceNumber: e.target.value,
-                priceCode: dataPrice.find(
-                  (price) =>
-                    price.max > e.target.value / 1000000 &&
-                    price.min <= e.target.value / 1000000
-                )?.code,
               }));
             }}
             type="number"
@@ -193,14 +153,9 @@ const Overview = ({
               )
             }
             onChange={(e) => {
-              const dataArea = editMaxMin(areas, 'area');
               setValue((prev) => ({
                 ...prev,
                 areaNumber: e.target.value,
-                areaCode: dataArea.find(
-                  (area) =>
-                    area.max > e.target.value && area.min <= e.target.value
-                )?.code,
               }));
             }}
             type="number"
@@ -221,7 +176,7 @@ const Overview = ({
         setInvalidFields={setInvalidFields}
         invalidFields={invalidFields}
         name={'target'}
-        setValue={setDoiTuong}
+        setValue={setValue}
         array={doituongs}
         text={'Đối tượng'}
         maxW={'max-w-[50%]'}
