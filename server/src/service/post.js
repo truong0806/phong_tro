@@ -163,7 +163,7 @@ export const postLimitAdminService = (page, query, id, bonus) =>
 
 export const postCreateService = (queries) =>
   new Promise(async (resolve, reject) => {
-    console.log(queries);
+    console.log(queries)
     try {
       const hashtag = generateHashtag()
       let attributesId = v4()
@@ -213,15 +213,7 @@ export const postCreateService = (queries) =>
           console.error('Error:', error)
         })
       await db.Overview.findOrCreate({
-        where: {
-          [Op.and]: [
-            {
-              area: label,
-            },
-            { type: queries?.categoryName },
-            { target: queries?.target },
-          ],
-        },
+        where: { id: overviewId },
         defaults: {
           id: overviewId,
           code: `#${hashtag}`,
@@ -232,12 +224,6 @@ export const postCreateService = (queries) =>
           create: currentDate.today,
           expire: currentDate.expireDay,
         },
-      }).then(([overview, isCreated]) => {
-        if (!isCreated) {
-          console.log('overview ID:', overview.id)
-          overviewId = overview.id
-          console.log('overview after:', overviewId)
-        }
       })
       await db.Label.findOrCreate({
         where: { code: labelCode },
@@ -271,7 +257,9 @@ export const postCreateService = (queries) =>
         where: {
           [Op.or]: [
             { title: queries.title },
-            { address: `${queries.apartmentNumber}, ${queries.street}, ${queries.ward}, ${queries.district}, ${queries.province},` },
+            {
+              address: `${queries.apartmentNumber}, ${queries.street}, ${queries.ward}, ${queries.district}, ${queries.province},`,
+            },
             { description: queries.description },
           ],
         },
@@ -354,38 +342,128 @@ export const postDeleteService = (postId) =>
       reject(error)
     }
   })
-export const postUpdateService = (postId) =>
+
+export const postUpdateService = (postId, queries) =>
   new Promise(async (resolve, reject) => {
     try {
-      const post = await db.Post.findOne({
-        where: { id: postId },
-        attributes: [
-          'id',
-          'title',
-          'star',
-          'address',
-          'description',
-          'overviewId',
-          'attributesId',
-          'imagesId',
-        ],
+      const post = await db.Post.findOne({ where: { id: postId } })
+      let attributesId = v4()
+      let overviewId = v4()
+      const imagesId = v4()
+      const hashtag = generateHashtag()
+      const currentDate = genarateDate(7)
+      const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
+      const currentArea = getNumberFromString(queries.areaNumber)
+      const label = `${queries.categoryName} ${queries.province}`
+      const labelCode = generateCode(label).trim()
+      const address = `${queries.apartmentNumber}, ${queries.street}, ${queries.ward}, ${queries.district}, ${queries.province}`
+      const provinceCode = queries?.province?.includes('Thành phố')
+        ? generateCode(queries?.province?.replace('Thành phố ', ''))
+        : generateCode(queries?.province?.replace('Tỉnh', ''))
+
+      await db.Label.findOrCreate({
+        where: { code: labelCode },
+        defaults: {
+          code: labelCode,
+          value: label,
+        },
       })
-      if (!post) {
+      await db.Province.findOrCreate({
+        where: {
+          [Op.or]: [
+            { value: queries?.province?.replace('Thành phố ', '') },
+            { value: queries?.province?.replace('Tỉnh ', '') },
+          ],
+        },
+        defaults: {
+          code: provinceCode,
+          value: queries?.province?.includes('Thành phố ')
+            ? queries?.province?.replace('Thành phố ', '')
+            : queries?.province?.replace('Tỉnh ', ''),
+        },
+      })
+      await db.Images.destroy({ where: { id: post.imagesId } })
+      await db.Attribute.findOrCreate({
+        where: {
+          [Op.and]: [
+            {
+              price:
+                +currentPrice < 1
+                  ? `${currentPrice * 1000000} đồng/tháng`
+                  : `${currentPrice} triệu/tháng`,
+            },
+            { acreage: `${queries.areaNumber} m2` },
+          ],
+        },
+        defaults: {
+          id: attributesId,
+          price:
+            +currentPrice < 1
+              ? `${queries.priceNumber} đồng/tháng`
+              : `${currentPrice} triệu/tháng`,
+          acreage: `${queries.areaNumber} m2`,
+          published: moment(new Date()).format('DD/MM/YYYY'),
+          hashtag,
+        },
+      })
+        .then(([attribute, created]) => {
+          if (!created) {
+            console.log('Attribute ID:', attribute.id)
+            attributesId = attribute.id
+            console.log('Attribute after:', attributesId)
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error)
+        })
+      await db.Overview.update(
+        {
+          area: label,
+          type: queries?.categoryName,
+          target: queries?.target,
+          bonus: 'Tin thường',
+        },
+
+        {
+          where: { id: post.overviewId },
+        },
+      )
+      await db.Images.findOrCreate({
+        where: { id: imagesId },
+        defaults: {
+          id: imagesId,
+          image: JSON.stringify(queries.images),
+        },
+      })
+      const [updatedRows] = await db.Post.update(
+        {
+          title: queries.title,
+          description: queries.description,
+          address: address,
+          categoryCode: queries.categoryCode,
+          provinceCode: queries.provinceCode,
+          priceNumber: currentPrice,
+          areaNumber: currentArea,
+          labelCode: labelCode,
+          attributesId: attributesId,
+          imagesId: imagesId,
+        },
+        {
+          where: { id: postId },
+        },
+      )
+      if (updatedRows) {
+        console.log(`Updated rows: ${updatedRows}`)
+        resolve({
+          err: 0,
+          msg: 'Update post success',
+        })
+      } else {
         resolve({
           err: 1,
-          msg: 'Delete post failed ',
+          msg: 'Post not found',
         })
-        return
       }
-      await db.Overview.destroy({ where: { id: post.overviewId } })
-      await db.Attribute.destroy({ where: { id: post.attributesId } })
-      await db.Images.destroy({ where: { id: post.imagesId } })
-      const deleted = await db.Post.destroy({ where: { id: postId } })
-      resolve({
-        err: deleted > 0 ? 0 : 1,
-        msg: deleted > 0 ? 'Delete post success' : 'Delete post failed',
-        deleted,
-      })
     } catch (error) {
       reject(error)
     }

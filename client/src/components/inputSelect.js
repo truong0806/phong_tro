@@ -17,7 +17,7 @@ const inputSelect = ({
         {text}
       </label>
       <select
-        defaultValue={''}
+        value={value}
         id="select-address"
         onFocus={() =>
           setInvalidFields((prev) =>
@@ -25,27 +25,21 @@ const inputSelect = ({
           )
         }
         onChange={(e) => {
-          const [value, code] = e.target.value.split(',');
-          setValue((prev) => {
-            const newValues = {
-              ...prev,
-              [name]: value,
-            };
-            if (codes) {
-              newValues[codes] = code;
-            }
-            return newValues;
-          });
+          const value = e.target.value;
+          setValue((prev) => ({
+            ...prev,
+            [name]: array?.find((item) => item.code === value)?.value,
+          }));
         }}
         className="bg-gray-50 border my-2 py-2 border-gray-300 text-gray-900 mb-2 text-[0.8rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-1 "
       >
-        <option value="" className="hidden">
-          {category ? category : `-- Chọn ${text} --`}
+        <option value="" className="">
+          {`-- Chọn ${text} --`}
         </option>
         {array?.map((item, index) => (
           <option
             className="flex justify-center items-center"
-            value={`${item?.value},${item?.code}`}
+            value={item?.code}
             key={index}
           >
             {item?.value}

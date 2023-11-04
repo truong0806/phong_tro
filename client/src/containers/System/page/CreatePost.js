@@ -4,15 +4,21 @@ import { Button } from '../../../components';
 import { Address, Overview } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/action';
-import { apiCreateNewPost, apiUploadImages } from '../../../service';
+import { toast } from 'react-toastify';
+import {
+  apiCreateNewPost,
+  apiUpdatePost,
+  apiUploadImages,
+} from '../../../service';
 import validate from '../../../ultils/validate';
 import { usePathname } from '../../../ultils/common/usePathname';
 import Swal from 'sweetalert2';
 
 const CreatePost = ({ isEdit }) => {
+  console.log('🚀 ~ file: CreatePost.js:18 ~ CreatePost ~ isEdit:', isEdit);
   const pageTitle = usePathname();
   const { dataEdit } = useSelector((state) => state.post);
-  console.log('🚀 ~ file: CreatePost.js:15 ~ CreatePost ~ dataEdit:', dataEdit);
+  console.log('🚀 ~ file: CreatePost.js:19 ~ CreatePost ~ dataEdit:', dataEdit);
 
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
@@ -20,31 +26,45 @@ const CreatePost = ({ isEdit }) => {
 
   const [payload, setPayload] = useState(() => {
     const initData = {
-      apartmentNumber: dataEdit?.address.split(',')[0] || '',
-      categoryName: dataEdit?.categories.value || '',
-      street: dataEdit?.address.split(',')[1] || '',
-      ward: dataEdit?.address.split(',')[2] || '',
-      district: dataEdit?.address.split(',')[3] || '',
-      categoryCode: dataEdit?.categories.code || '',
-      title: dataEdit?.title || '',
-      description: dataEdit?.description.replace(/"/g, '') || '',
+      postId: dataEdit?.id,
+      apartmentNumber: isEdit ? dataEdit?.address.split(',')[0] : '',
+      categoryName: isEdit ? dataEdit?.categories.value : '',
+      street: isEdit ? dataEdit?.address.split(',')[1] : '',
+      ward: isEdit ? dataEdit?.address.split(',')[2] : '',
+      district: isEdit ? dataEdit?.address.split(',')[3] : '',
+
+      title: isEdit ? dataEdit?.title : '',
+      description: isEdit ? dataEdit?.description.replace(/"/g, '') : '',
       priceNumber: isEdit
         ? dataEdit?.attributes?.price?.split(' ')[1] === 'đồng/tháng'
           ? +dataEdit?.attributes?.price?.split(' ')[0]
           : +dataEdit?.attributes?.price?.split(' ')[0] * 1000000
         : 0,
-      areaNumber: +dataEdit?.attributes?.acreage?.split(' ')[0] || 0,
-      images: dataEdit?.images || [],
-      target: dataEdit?.overviews.target || '',
-      province: dataEdit?.address.split(',')[4] || '',
+      areaNumber: isEdit ? +dataEdit?.attributes?.acreage?.split(' ')[0] : 0,
+      images: isEdit ? dataEdit?.images : [],
+      target: isEdit ? dataEdit?.overviews.target : '',
+      province: isEdit ? dataEdit?.address.split(',')[4] : '',
     };
     return initData;
   });
   console.log(
-    '🚀 ~ file: CreatePost.js:43 ~ const[payload,setPayload]=useState ~ payload:',
+    '🚀 ~ file: CreatePost.js:49 ~ const[payload,setPayload]=useState ~ payload:',
     payload
   );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    let imgObject = JSON.parse(dataEdit.images.image);
+
+    const imgObjectWithId = imgObject.map((url, index) => {
+      return {
+        id: index,
+        url,
+      };
+    });
+    setImagesFile(imgObjectWithId);
+    console.log('imagesFile', imagesFile);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -55,27 +75,26 @@ const CreatePost = ({ isEdit }) => {
       userId: userData?.id,
       phoneContact: userData?.phone,
     }));
-  }, [dispatch]);
+  }, [dispatch, userData]);
 
   useEffect(() => {}, [invalidFields]);
 
+  const handleUpdate = async (e) => {
+    // validate(payload, 'Create Post', setInvalidFields);
+    // if (imagesFile?.length > 0) {
+    //   setInvalidFields((prev) =>
+    //     prev.filter((field) => field.name !== 'images')
+    //   );
+    //   setInvalidFields((prev) =>
+    //     prev.filter((field) => field.name !== 'imageCode')
+    //   );
+    // }
+    apiUpdatePost(payload);
+    console.log(payload);
+  };
+
   const handleSumit = async (e) => {
     validate(payload, 'Create Post', setInvalidFields);
-    if (payload?.address?.length > 0) {
-      setInvalidFields((prev) =>
-        prev.filter((field) => field.name !== 'address')
-      );
-    }
-    if (payload?.priceCode?.length > 0) {
-      setInvalidFields((prev) =>
-        prev.filter((field) => field.name !== 'priceCode')
-      );
-    }
-    if (payload?.areaCode?.length > 0) {
-      setInvalidFields((prev) =>
-        prev.filter((field) => field.name !== 'areaCode')
-      );
-    }
     if (imagesFile?.length > 0) {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'images')
@@ -119,6 +138,16 @@ const CreatePost = ({ isEdit }) => {
               response.data.err === 0 &&
               response.data.msg === 'Create post success'
             ) {
+              toast.options = {
+                onHidden: function () {
+                  window.location.reload();
+                },
+              };
+              // toast.update(idLoad, {
+              //   render: 'All is good',
+              //   type: 'success',
+              //   isLoading: false,
+              // });
               Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -172,8 +201,10 @@ const CreatePost = ({ isEdit }) => {
             />
             <div className="mt-[42px] mb-[100px] w-full">
               <Button
-                onClick={(e) => handleSumit(e)}
-                text={'Tiếp tục'}
+                onClick={(e) => {
+                  isEdit ? handleUpdate(e) : handleSumit(e);
+                }}
+                text={isEdit ? 'Cập Nhật' : 'Đăng bài'}
                 bgcolor={
                   'w-full h-[27px] py-[0.5rem] px-[1rem] text-[1.25rem] bg-[#28a745] border-[#28a745] text-[#fff] font-bold item-center'
                 }

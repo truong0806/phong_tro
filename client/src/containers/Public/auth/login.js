@@ -7,6 +7,7 @@ import * as actions from '../../../store/action';
 import validate from '../../../ultils/validate';
 import { path } from '../../../ultils/constains';
 import { WhyUs, Support } from '../index';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Login() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function Login() {
   );
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
+  const [loginS, setLoginS] = useState([]);
   const [payload, setPayload] = useState({
     phone: '',
     password: '',
@@ -31,19 +33,20 @@ function Login() {
     isLoggedIn && navigate('/'); //
   }, [isLoggedIn]);
 
+  useEffect(() => {}, [msg, update]);
+
   useEffect(() => {
     msg && Swal.fire('Oops !', 'Sai số điện thoại hoặc mật khẩu', 'error');
   }, [msg, update]);
-
+  
   const handleSubmit = async () => {
     const finalinvalids = payload;
     const invalids = validate(finalinvalids, 'Đăng nhập', setInvalidFields);
     if (invalids === 0) {
-      dispatch(actions.login(payload)).then((res) => {
-        console.log(res);
-      });
+      dispatch(actions.login(payload));
     }
   };
+
   return (
     <div className="w-full flex flex-col items-center ">
       <div className="items-center justify-center">

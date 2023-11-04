@@ -1,24 +1,43 @@
-import React, {  useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Loading } from '../../../../components';
 
-const UploadImages = ({ setInvalidFields, setImagesFile, imagesFile, invalidFields }) => {
+const UploadImages = ({
+  isEdit,
+  setInvalidFields,
+  setImagesFile,
+  imagesFile,
+  invalidFields,
+}) => {
+  console.log("🚀 ~ file: UploadImages.js:11 ~ imagesFile:", imagesFile)
+  
   const [loading, setLoading] = useState(true);
   const handImageChange = async (e) => {
     setTimeout(() => {
       let files = e.target.files;
       for (let i of files) {
-        setImagesFile((prev) => [...prev, { files: i, url: URL.createObjectURL(i) }]
-        )
+        setImagesFile((prev) => [
+          ...prev,
+          { files: i, url: URL.createObjectURL(i) },
+        ]);
       }
       setLoading(true);
     }, 1000);
-
   };
   const handleDelete = (imageToDelete) => {
-    setImagesFile((prev) => prev.filter((image) => image.url !== imageToDelete));
-    setLoading(true)
+    setImagesFile((prev) =>
+      prev.filter((image) => image.url !== imageToDelete)
+    );
+    setLoading(true);
   };
-  
+
+  useEffect(() => {
+    console.log(
+      '🚀 ~ file: UploadImages.js:5 ~ UploadImages ~ imagesFile:',
+      imagesFile
+    );
+    const objectList = imagesFile.map((url) => ({ url }));
+    console.log('obj', objectList);
+  }, []);
   return (
     <div>
       <div className="mt-10 w-full mb-[14px]">
@@ -65,11 +84,15 @@ const UploadImages = ({ setInvalidFields, setImagesFile, imagesFile, invalidFiel
           </label>
           <input
             hidden
-            onClick={() => setInvalidFields((prev) => prev.filter((field) => field.name !== 'images'))}
+            onClick={() =>
+              setInvalidFields((prev) =>
+                prev.filter((field) => field.name !== 'images')
+              )
+            }
             onChange={(e) => {
               e.stopPropagation();
               setLoading(false);
-              handImageChange(e)
+              handImageChange(e);
             }}
             accept="image/jpg, image/png, image/jpeg"
             name="image"
@@ -83,19 +106,21 @@ const UploadImages = ({ setInvalidFields, setImagesFile, imagesFile, invalidFiel
         {invalidFields?.some((field) => field.name === 'images') &&
           `Vui lòng chọn ảnh`}
       </small>
-      {!loading ?
-        <div className='flex items-center justify-center mt-3'>
+      {!loading ? (
+        <div className="flex items-center justify-center mt-3">
           <Loading />
         </div>
-        :
+      ) : (
         <div className="flex flex-wrap gap-[4%]">
-
           {imagesFile?.length > 0 &&
             imagesFile?.map((image, index) => (
-
               <div key={index} className="w-[110px] shadow-2xl mb-[20px]  ">
                 <div className="h-[110px]  ">
-                  <img className='object-cover w-full h-full' src={image.url} alt={`Preview ${index}`} />
+                  <img
+                    className="object-cover w-full h-full"
+                    src={image.url}
+                    alt={`Preview ${index}`}
+                  />
                 </div>
                 <div
                   id={image.url}
@@ -128,8 +153,8 @@ const UploadImages = ({ setInvalidFields, setImagesFile, imagesFile, invalidFiel
                 </div>
               </div>
             ))}
-
-        </div>}
+        </div>
+      )}
     </div>
   );
 };

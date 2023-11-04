@@ -4,6 +4,8 @@ import { Header, Navigation, WhyUs, Support, ScrollTop } from './index';
 import { PropagateLoader } from 'react-spinners';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/action';
+import { ToastContainer } from 'react-toastify';
+
 
 // import {  useSelector } from 'react-redux'
 function Auth() {
@@ -27,6 +29,7 @@ function Auth() {
           <Header setLoading={setLoading} />
           <Navigation categories={categories} />
           <ScrollTop />
+          <ToastContainer />
           <div className="w-[84%] flex flex-col  mt-3">
             <Outlet />
           </div>

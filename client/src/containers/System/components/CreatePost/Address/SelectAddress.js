@@ -24,10 +24,9 @@ const SelectAddress = ({
             prev.filter((field) => field.name !== name)
           )
         }
-        defaultValue=""
+        value={reset ? '' : value}
         onChange={(e) => {
           const proCode = e.target.value;
-          console.log('🚀 ~ file: SelectAddress.js:29 ~ proCode:', proCode);
           setValue((prev) => ({
             ...prev,
             [name]: array?.find((item) => item.code === +proCode)?.name,

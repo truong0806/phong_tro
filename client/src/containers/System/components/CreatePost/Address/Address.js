@@ -21,6 +21,27 @@ const Address = ({
   const [reset, setReset] = useState(false);
 
   useEffect(() => {
+    const foundProvince =
+      value.province.length > 0 &&
+      provinces?.find((item) => item.name === value?.province?.trim());
+    setProvince(foundProvince ? foundProvince.code : '');
+  }, [value, provinces]);
+  
+  useEffect(() => {
+    const foundDistrict =
+      value.district.length > 0 &&
+      districts?.find((item) => item.name === value?.district?.trim());
+    setDistrict(foundDistrict ? foundDistrict.code : '');
+  }, [value, districts]);
+
+  useEffect(() => {
+    const foundWard =
+      value.ward.length > 0 &&
+      wards?.find((item) => item.name === value?.ward?.trim());
+    setWard(foundWard ? foundWard.code : '');
+  }, [value, wards]);
+
+  useEffect(() => {
     const fetchPublicProvince = async () => {
       const response = await apiLocation();
       if (response.status === 200) {
@@ -102,7 +123,6 @@ const Address = ({
           reset={reset}
           type="district"
           value={district}
-          editValue={district}
           array={districts}
           setValue={setValue}
           setLoca={setDistrict}

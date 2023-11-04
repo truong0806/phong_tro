@@ -56,7 +56,7 @@ const ListPost = ({ categoryCode }) => {
               <ListPostItem
                 key={item.id}
                 attributes={item?.attributes}
-                description={JSON.parse(item?.description)}
+                description={item?.description}
                 users={item?.users}
                 images={JSON.parse(item?.images?.image)}
                 title={item?.title}

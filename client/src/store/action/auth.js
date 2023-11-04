@@ -30,8 +30,6 @@ export const register = (payload) => async (dispatch) => {
 export const login = (payload) => async (dispatch) => {
   try {
     const response = await apiLogin(payload);
-    console.log('🚀 ~ file: auth.js:34 ~ login ~ response:', response);
-
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.LOGIN_SUCCESS,

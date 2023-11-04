@@ -33,17 +33,28 @@ const Overview = ({
     dispatch(actions.getAreas());
   }, [dispatch]);
 
+  useEffect(() => {
+    setValue((prev) => ({
+      ...prev,
+      categoryCode: categories?.find(
+        (item) => item.value === value?.categoryName
+      )?.code,
+    }));
+  }, [dispatch, value?.categoryName]);
+
   return (
     <div>
       <div className="mt-5 w-full mb-[30px]">
         <h3 className="text-[1.75rem] font-bold">Thông tin mô tả</h3>
       </div>
       <InputSelect
-        codes={'categoryCode'}
         setInvalidFields={setInvalidFields}
         invalidFields={invalidFields}
         name={'categoryName'}
         setValue={setValue}
+        value={
+          categories?.find((item) => item.value === value?.categoryName)?.code
+        }
         array={categories}
         nameValue={'value'}
         text={'Loại chuyên mục'}
@@ -173,6 +184,7 @@ const Overview = ({
         </small>
       </div>
       <InputSelect
+        value={doituongs?.find((item) => item.value === value?.target)?.code}
         setInvalidFields={setInvalidFields}
         invalidFields={invalidFields}
         name={'target'}
@@ -182,6 +194,7 @@ const Overview = ({
         maxW={'max-w-[50%]'}
       />
       <UploadImages
+        isEdit={isEdit}
         setInvalidFields={setInvalidFields}
         invalidFields={invalidFields}
         setImagesFile={setImagesFile}
