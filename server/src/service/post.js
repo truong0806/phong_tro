@@ -250,9 +250,21 @@ export const postCreateService = (queries) =>
         where: { id: imagesId },
         defaults: {
           id: imagesId,
-          image: JSON.stringify(queries.images),
+          image: JSON.stringify(queries.images.image),
         },
       })
+      console.log(
+        '🚀 ~ file: post.js:254 ~ newPromise ~ JSON.stringify(queries.images):',
+        JSON.stringify(queries.images),
+      )
+      console.log(
+        '🚀 ~ file: post.js:259 ~ newPromise ~ queries.images:',
+        queries.images,
+      )
+      console.log(
+        '🚀 ~ file: post.js:259 ~ newPromise ~ queries.images.image:',
+        queries.images.image,
+      )
       await db.Post.findOrCreate({
         where: {
           [Op.or]: [

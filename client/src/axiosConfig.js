@@ -2,9 +2,7 @@ import axios from 'axios';
 import reducStore from './redux';
 import TokenService from './service/token';
 import * as actions from './store/action';
-import { path } from './ultils/constains';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
 
 const { store } = reducStore();
 

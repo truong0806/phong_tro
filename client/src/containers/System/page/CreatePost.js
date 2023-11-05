@@ -18,7 +18,6 @@ const CreatePost = ({ isEdit }) => {
   console.log('🚀 ~ file: CreatePost.js:18 ~ CreatePost ~ isEdit:', isEdit);
   const pageTitle = usePathname();
   const { dataEdit } = useSelector((state) => state.post);
-  console.log('🚀 ~ file: CreatePost.js:19 ~ CreatePost ~ dataEdit:', dataEdit);
 
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
@@ -32,16 +31,14 @@ const CreatePost = ({ isEdit }) => {
       street: isEdit ? dataEdit?.address.split(',')[1] : '',
       ward: isEdit ? dataEdit?.address.split(',')[2] : '',
       district: isEdit ? dataEdit?.address.split(',')[3] : '',
-
       title: isEdit ? dataEdit?.title : '',
-      description: isEdit ? dataEdit?.description.replace(/"/g, '') : '',
+      description: isEdit ? JSON.parse(dataEdit?.description) : '',
       priceNumber: isEdit
         ? dataEdit?.attributes?.price?.split(' ')[1] === 'đồng/tháng'
           ? +dataEdit?.attributes?.price?.split(' ')[0]
           : +dataEdit?.attributes?.price?.split(' ')[0] * 1000000
         : 0,
       areaNumber: isEdit ? +dataEdit?.attributes?.acreage?.split(' ')[0] : 0,
-      images: isEdit ? dataEdit?.images : [],
       target: isEdit ? dataEdit?.overviews.target : '',
       province: isEdit ? dataEdit?.address.split(',')[4] : '',
     };
@@ -54,16 +51,16 @@ const CreatePost = ({ isEdit }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let imgObject = JSON.parse(dataEdit.images.image);
-
-    const imgObjectWithId = imgObject.map((url, index) => {
-      return {
-        id: index,
-        url,
-      };
-    });
-    setImagesFile(imgObjectWithId);
-    console.log('imagesFile', imagesFile);
+    if (isEdit) {
+      let images = JSON.parse(dataEdit?.images?.image).map((item, index) => {
+        return {
+          id: index,
+          url: item,
+        };
+      });
+      images && setImagesFile(images);
+      console.log('🚀 ~ file: CreatePost.js:63 ~ useEffect ~ images:', images);
+    }
   }, []);
 
   useEffect(() => {
@@ -80,18 +77,93 @@ const CreatePost = ({ isEdit }) => {
   useEffect(() => {}, [invalidFields]);
 
   const handleUpdate = async (e) => {
-    // validate(payload, 'Create Post', setInvalidFields);
-    // if (imagesFile?.length > 0) {
-    //   setInvalidFields((prev) =>
-    //     prev.filter((field) => field.name !== 'images')
-    //   );
-    //   setInvalidFields((prev) =>
-    //     prev.filter((field) => field.name !== 'imageCode')
-    //   );
-    // }
-    apiUpdatePost(payload);
-    console.log(payload);
+    validate(payload, 'Create Post', setInvalidFields);
+  
+    if (imagesFile?.length > 0) {
+      setInvalidFields((prev) =>
+        prev.filter((field) => field.name !== 'images')
+      );
+    }
+  
+    const separateUrlsIntoObjects = (arr) => {
+      const httpUrls = [];
+      const blobUrls = [];
+  
+      for (const url of arr) {
+        if (url.url.startsWith('http://')) {
+          httpUrls.push(url);
+        } else if (url.url.startsWith('blob:')) {
+          blobUrls.push(url);
+        }
+      }
+  
+      const result = {
+        httpUrls: httpUrls,
+        blobUrls: blobUrls,
+      };
+  
+      return result;
+    };
+  
+    let res = separateUrlsIntoObjects(imagesFile);
+    
+  
+    if (invalidFields?.length === 0) {
+      let imagesList = [];
+      let formData = new FormData();
+      let uploadPromises = res.blobUrls.map(async (item) => {
+        formData.append('file', item.files);
+        formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
+        return apiUploadImages(formData);
+      });
+      res?.httpUrls.map((item) => {
+        imagesList.push(item.url);
+      });
+      Promise.all(uploadPromises).then((responses) => {
+        const updatedImagesList = [];
+  
+        responses.forEach((response, index) => {
+          console.log('🚀 ~ file: CreatePost.js:122 ~ responses.forEach ~ response:', response);
+          if (response.status === 200) {
+            updatedImagesList.push(response.data.url);
+          } else {
+            console.log('Upload images failed');
+          }
+        });
+  
+        // Combine the original imagesList with updatedImagesList
+        const combinedImages = [...imagesList, ...updatedImagesList];
+  
+        // Set payload with the combined images
+        setPayload((prev) => ({
+          ...prev,
+          images: combinedImages,
+        }));
+  
+        if (combinedImages.length > 0) {
+          // Perform the post update here
+          apiUpdatePost(payload).then((updateResponse) => {
+            if (
+              updateResponse.status === 200 &&
+              updateResponse.data.err === 0 &&
+              updateResponse.data.msg === 'Update post success'
+            ) {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Cập nhật thành công',
+                showConfirmButton: false,
+                timer: 1500,
+              }).then(() => window.location.reload());
+            }
+          });
+        } else {
+          console.log('No images');
+        }
+      });
+    }
   };
+  
 
   const handleSumit = async (e) => {
     validate(payload, 'Create Post', setInvalidFields);
@@ -99,13 +171,12 @@ const CreatePost = ({ isEdit }) => {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'images')
       );
-      setInvalidFields((prev) =>
-        prev.filter((field) => field.name !== 'imageCode')
-      );
     }
+
     if (invalidFields?.length === 0) {
       let images = [];
       let formData = new FormData();
+
       let uploadPromises = imagesFile.map(async (item) => {
         formData.append('file', item.files);
         formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
@@ -118,46 +189,65 @@ const CreatePost = ({ isEdit }) => {
       Promise.all(uploadPromises)
         .then((responses) => {
           responses.forEach((response, index) => {
+            console.log(
+              '🚀 ~ file: CreatePost.js:122 ~ responses.forEach ~ response:',
+              response
+            );
             if (response.status === 200) {
-              images.push(response.data.url);
-              setPayload((prev) => ({ ...prev, images: images }));
+              images.push({ url: response.data.url });
+              setPayload((prev) => ({
+                ...prev,
+                images: {
+                  image: images,
+                },
+              }));
+              console.log(
+                '🚀 ~ file: CreatePost.js:118 ~ responses.forEach ~ images:',
+                images
+              );
             } else {
               console.log('Upload images failed');
             }
           });
         })
         .then(() => {
-          apiCreateNewPost(payload).then((response) => {
-            console.log(
-              '🚀 ~ file: CreatePost.js:95 ~ apiCreateNewPost ~ response:',
-              response
-            );
-
-            if (
-              response.status === 200 &&
-              response.data.err === 0 &&
-              response.data.msg === 'Create post success'
-            ) {
-              toast.options = {
-                onHidden: function () {
-                  window.location.reload();
-                },
-              };
-              // toast.update(idLoad, {
-              //   render: 'All is good',
-              //   type: 'success',
-              //   isLoading: false,
-              // });
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              window.location.reload();
-            }
-          });
+          console.log(
+            '🚀 ~ file: CreatePost.js:131 ~ apiCreateNewPost ~ payload:',
+            payload
+          );
+          if (payload.images !== '') {
+            // apiCreateNewPost(payload).then((response) => {
+            //   console.log(
+            //     '🚀 ~ file: CreatePost.js:95 ~ apiCreateNewPost ~ response:',
+            //     response
+            //   );
+            //   if (
+            //     response.status === 200 &&
+            //     response.data.err === 0 &&
+            //     response.data.msg === 'Create post success'
+            //   ) {
+            //     // toast.options = {
+            //     //   onHidden: function () {
+            //     //     window.location.reload();
+            //     //   },
+            //     // };
+            //     // toast.update(idLoad, {
+            //     //   render: 'All is good',
+            //     //   type: 'success',
+            //     //   isLoading: false,
+            //     // });
+            //     Swal.fire({
+            //       position: 'center',
+            //       icon: 'success',
+            //       title: 'Your work has been saved',
+            //       showConfirmButton: false,
+            //       timer: 1500,
+            //     }).then(window.location.reload());
+            //   }
+            // });
+          } else {
+            console.log('No images');
+          }
         });
     }
   };

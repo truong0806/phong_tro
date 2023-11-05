@@ -8,8 +8,7 @@ const UploadImages = ({
   imagesFile,
   invalidFields,
 }) => {
-  console.log("🚀 ~ file: UploadImages.js:11 ~ imagesFile:", imagesFile)
-  
+  console.log('imagesFile', imagesFile);
   const [loading, setLoading] = useState(true);
   const handImageChange = async (e) => {
     setTimeout(() => {
@@ -24,20 +23,11 @@ const UploadImages = ({
     }, 1000);
   };
   const handleDelete = (imageToDelete) => {
-    setImagesFile((prev) =>
-      prev.filter((image) => image.url !== imageToDelete)
-    );
+    setImagesFile((prev) => prev.filter((image) => image.url !== imageToDelete));
     setLoading(true);
+    console.log('🚀 ~ file: UploadImages.js:11 ~ imagesFile:', imagesFile);
   };
 
-  useEffect(() => {
-    console.log(
-      '🚀 ~ file: UploadImages.js:5 ~ UploadImages ~ imagesFile:',
-      imagesFile
-    );
-    const objectList = imagesFile.map((url) => ({ url }));
-    console.log('obj', objectList);
-  }, []);
   return (
     <div>
       <div className="mt-10 w-full mb-[14px]">
@@ -123,10 +113,9 @@ const UploadImages = ({
                   />
                 </div>
                 <div
-                  id={image.url}
+                  id={image}
                   onClick={(e) => {
-                    const value = document.getElementById(image.url).id;
-                    handleDelete(value);
+                    handleDelete(image.url);
                   }}
                   className="w-full bg-white py-[5px] border-none cursor-pointer"
                 >
