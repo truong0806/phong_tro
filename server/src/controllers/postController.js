@@ -93,8 +93,14 @@ export const deletePost = async (req, res) => {
   }
 }
 export const updatePost = async (req, res) => {
-  const { postId, categoryCode, title, description, priceNumber, areaNumber } =
-    req.body
+  const {
+    postId,
+    categoryCode,
+    title,
+    description,
+    priceNumber,
+    areaNumber
+  } = req.body
   console.log(
     '🚀 ~ file: postController.js:97 ~ updatePost ~ categoryCode:',
     categoryCode,
@@ -108,12 +114,11 @@ export const updatePost = async (req, res) => {
 
   try {
     if (
-      !categoryCode ||
       !title ||
       !description ||
       !priceNumber ||
       !areaNumber ||
-      !postId
+      !postId 
     ) {
       return res.status(400).json({ err: 1, msg: 'Missing input' })
     } else {

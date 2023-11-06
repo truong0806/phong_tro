@@ -250,7 +250,7 @@ export const postCreateService = (queries) =>
         where: { id: imagesId },
         defaults: {
           id: imagesId,
-          image: JSON.stringify(queries.images.image),
+          image: JSON.stringify(queries.images),
         },
       })
       console.log(
@@ -359,13 +359,14 @@ export const postUpdateService = (postId, queries) =>
   new Promise(async (resolve, reject) => {
     try {
       const post = await db.Post.findOne({ where: { id: postId } })
+      console.log("🚀 ~ file: post.js:362 ~ newPromise ~ post:", post)
       let attributesId = v4()
       let overviewId = v4()
       const imagesId = v4()
       const hashtag = generateHashtag()
       const currentDate = genarateDate(7)
-      const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
       const currentArea = getNumberFromString(queries.areaNumber)
+      const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
       const label = `${queries.categoryName} ${queries.province}`
       const labelCode = generateCode(label).trim()
       const address = `${queries.apartmentNumber}, ${queries.street}, ${queries.ward}, ${queries.district}, ${queries.province}`
@@ -394,40 +395,6 @@ export const postUpdateService = (postId, queries) =>
             : queries?.province?.replace('Tỉnh ', ''),
         },
       })
-      await db.Images.destroy({ where: { id: post.imagesId } })
-      await db.Attribute.findOrCreate({
-        where: {
-          [Op.and]: [
-            {
-              price:
-                +currentPrice < 1
-                  ? `${currentPrice * 1000000} đồng/tháng`
-                  : `${currentPrice} triệu/tháng`,
-            },
-            { acreage: `${queries.areaNumber} m2` },
-          ],
-        },
-        defaults: {
-          id: attributesId,
-          price:
-            +currentPrice < 1
-              ? `${queries.priceNumber} đồng/tháng`
-              : `${currentPrice} triệu/tháng`,
-          acreage: `${queries.areaNumber} m2`,
-          published: moment(new Date()).format('DD/MM/YYYY'),
-          hashtag,
-        },
-      })
-        .then(([attribute, created]) => {
-          if (!created) {
-            console.log('Attribute ID:', attribute.id)
-            attributesId = attribute.id
-            console.log('Attribute after:', attributesId)
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error)
-        })
       await db.Overview.update(
         {
           area: label,
@@ -440,13 +407,35 @@ export const postUpdateService = (postId, queries) =>
           where: { id: post.overviewId },
         },
       )
-      await db.Images.findOrCreate({
-        where: { id: imagesId },
-        defaults: {
-          id: imagesId,
-          image: JSON.stringify(queries.images),
+      console.log(
+        '🚀 ~ file: post.js:412 ~ newPromise ~ queries?.images:',
+        queries?.images,
+      )
+      await db.Images.update(
+        {
+          image: queries?.images,
         },
-      })
+
+        {
+          where: { id: post.imagesId },
+        },
+      )
+      await db.Attribute.update(
+        {
+          price:
+            +currentPrice < 1
+              ? `${queries.priceNumber} đồng/tháng`
+              : `${currentPrice} triệu/tháng`,
+          acreage: `${queries.areaNumber} m2`,
+          published: moment(new Date()).format('DD/MM/YYYY'),
+          hashtag,
+        },
+
+        {
+          where: { id: post.attributesId },
+        },
+      )
+
       const [updatedRows] = await db.Post.update(
         {
           title: queries.title,
@@ -457,8 +446,6 @@ export const postUpdateService = (postId, queries) =>
           priceNumber: currentPrice,
           areaNumber: currentArea,
           labelCode: labelCode,
-          attributesId: attributesId,
-          imagesId: imagesId,
         },
         {
           where: { id: postId },

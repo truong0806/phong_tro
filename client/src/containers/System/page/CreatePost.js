@@ -18,6 +18,7 @@ const CreatePost = ({ isEdit }) => {
   console.log('🚀 ~ file: CreatePost.js:18 ~ CreatePost ~ isEdit:', isEdit);
   const pageTitle = usePathname();
   const { dataEdit } = useSelector((state) => state.post);
+  console.log('🚀 ~ file: CreatePost.js:21 ~ CreatePost ~ dataEdit:', dataEdit);
 
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
@@ -25,34 +26,31 @@ const CreatePost = ({ isEdit }) => {
 
   const [payload, setPayload] = useState(() => {
     const initData = {
-      postId: dataEdit?.id,
       apartmentNumber: isEdit ? dataEdit?.address.split(',')[0] : '',
       categoryName: isEdit ? dataEdit?.categories.value : '',
       street: isEdit ? dataEdit?.address.split(',')[1] : '',
       ward: isEdit ? dataEdit?.address.split(',')[2] : '',
       district: isEdit ? dataEdit?.address.split(',')[3] : '',
       title: isEdit ? dataEdit?.title : '',
-      description: isEdit ? JSON.parse(dataEdit?.description) : '',
+      description: isEdit ? dataEdit?.description : '',
       priceNumber: isEdit
         ? dataEdit?.attributes?.price?.split(' ')[1] === 'đồng/tháng'
-          ? +dataEdit?.attributes?.price?.split(' ')[0]
-          : +dataEdit?.attributes?.price?.split(' ')[0] * 1000000
-        : 0,
-      areaNumber: isEdit ? +dataEdit?.attributes?.acreage?.split(' ')[0] : 0,
+          ? dataEdit?.attributes?.price?.split(' ')[0]
+          : dataEdit?.attributes?.price?.split(' ')[0] * 1000000
+        : '',
+      images: '',
+      areaNumber: isEdit ? dataEdit?.attributes?.acreage?.split(' ')[0] : '',
       target: isEdit ? dataEdit?.overviews.target : '',
       province: isEdit ? dataEdit?.address.split(',')[4] : '',
     };
     return initData;
   });
-  console.log(
-    '🚀 ~ file: CreatePost.js:49 ~ const[payload,setPayload]=useState ~ payload:',
-    payload
-  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isEdit) {
-      let images = JSON.parse(dataEdit?.images?.image).map((item, index) => {
+      let images = JSON.parse(dataEdit?.images?.image)?.map((item, index) => {
         return {
           id: index,
           url: item,
@@ -72,183 +70,187 @@ const CreatePost = ({ isEdit }) => {
       userId: userData?.id,
       phoneContact: userData?.phone,
     }));
+    console.log(
+      '🚀 ~ file: CreatePost.js:755 ~ CreatePost ~ imagesFile:',
+      imagesFile
+    );
   }, [dispatch, userData]);
 
   useEffect(() => {}, [invalidFields]);
 
-  const handleUpdate = async (e) => {
-    validate(payload, 'Create Post', setInvalidFields);
-  
-    if (imagesFile?.length > 0) {
-      setInvalidFields((prev) =>
-        prev.filter((field) => field.name !== 'images')
-      );
-    }
-  
-    const separateUrlsIntoObjects = (arr) => {
-      const httpUrls = [];
-      const blobUrls = [];
-  
-      for (const url of arr) {
-        if (url.url.startsWith('http://')) {
-          httpUrls.push(url);
-        } else if (url.url.startsWith('blob:')) {
-          blobUrls.push(url);
-        }
+  const separateUrlsIntoObjects = (arr) => {
+    const httpUrls = [];
+    const blobUrls = [];
+
+    for (const url of arr) {
+      if (url.url.startsWith('http://')) {
+        httpUrls.push(url);
+      } else if (url.url.startsWith('blob:')) {
+        blobUrls.push(url);
       }
-  
-      const result = {
-        httpUrls: httpUrls,
-        blobUrls: blobUrls,
-      };
-  
-      return result;
+    }
+
+    const result = {
+      err: 0,
+      httpUrls: httpUrls,
+      blobUrls: blobUrls,
     };
-  
+
+    return result;
+  };
+
+  const handleUpdate = async () => {
+    if (isEdit) payload.postId = dataEdit?.id;
     let res = separateUrlsIntoObjects(imagesFile);
-    
-  
-    if (invalidFields?.length === 0) {
-      let imagesList = [];
-      let formData = new FormData();
-      let uploadPromises = res.blobUrls.map(async (item) => {
-        formData.append('file', item.files);
-        formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
-        return apiUploadImages(formData);
-      });
-      res?.httpUrls.map((item) => {
-        imagesList.push(item.url);
-      });
-      Promise.all(uploadPromises).then((responses) => {
-        const updatedImagesList = [];
-  
-        responses.forEach((response, index) => {
-          console.log('🚀 ~ file: CreatePost.js:122 ~ responses.forEach ~ response:', response);
+    if (res.err === 0) {
+      if (invalidFields?.length === 0) {
+        let imagesList = [];
+        let imagesListHttp = res.httpUrls;
+        imagesListHttp.map((item) => {
+          imagesList.push(item.url);
+        });
+
+        let formData = new FormData();
+        const uploadPromises = res.blobUrls.map(async (item) => {
+          formData.append('file', item.files);
+          formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
+          let response = await apiUploadImages(formData);
           if (response.status === 200) {
-            updatedImagesList.push(response.data.url);
-          } else {
-            console.log('Upload images failed');
+            imagesList.push(response.data?.secure_url);
           }
         });
-  
-        // Combine the original imagesList with updatedImagesList
-        const combinedImages = [...imagesList, ...updatedImagesList];
-  
-        // Set payload with the combined images
-        setPayload((prev) => ({
-          ...prev,
-          images: combinedImages,
-        }));
-  
-        if (combinedImages.length > 0) {
-          // Perform the post update here
-          apiUpdatePost(payload).then((updateResponse) => {
-            if (
-              updateResponse.status === 200 &&
-              updateResponse.data.err === 0 &&
-              updateResponse.data.msg === 'Update post success'
-            ) {
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Cập nhật thành công',
-                showConfirmButton: false,
-                timer: 1500,
-              }).then(() => window.location.reload());
-            }
+        console.log(
+          '🚀 ~ file: CreatePost.js:117 ~ uploadPromises ~ imagesList:',
+          imagesList
+        );
+        await Promise.all(uploadPromises);
+        console.log(
+          '🚀 ~ file: CreatePost.js:129 ~ handleUpdate ~ payload:',
+          payload
+        );
+
+        console.log(
+          '🚀 ~ file: CreatePost.js:135 ~ handleUpdate ~ imagesFile:',
+          imagesFile
+        );
+        //const imgArr = imagesList.split(',').map((url) => url.trim());
+        let finalPayload = {
+          ...payload,
+          userId: userData?.id,
+          phoneContact: userData?.phone,
+          priceNumber: payload.priceNumber,
+          areaNumber: payload.areaNumber,
+          images: JSON.stringify(imagesList),
+        };
+        console.log(
+          '🚀 ~ file: CreatePost.js:133 ~ handleUpdate ~ finalPayload:',
+          finalPayload
+        );
+        const response = await apiUpdatePost(finalPayload);
+        if (response.data.err === 0) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cập nhật bài đăng thành công',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            //window.location.reload();
+            setPayload({
+              apartmentNumber: '',
+              categoryName: '',
+              street: '',
+              ward: '',
+              district: '',
+              title: '',
+              description: '',
+              priceNumber: '',
+              images: '',
+              areaNumber: '0',
+              target: '',
+              province: '',
+            });
           });
         } else {
-          console.log('No images');
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Cập nhật bài đăng thất bài',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(window.location.reload());
         }
-      });
+      }
     }
   };
-  
 
   const handleSumit = async (e) => {
     validate(payload, 'Create Post', setInvalidFields);
-    if (imagesFile?.length > 0) {
+    if (imagesFile.length > 0) {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'images')
       );
     }
-
-    if (invalidFields?.length === 0) {
-      let images = [];
+    if (invalidFields.length === 0) {
+      let imagesList = [];
       let formData = new FormData();
-
-      let uploadPromises = imagesFile.map(async (item) => {
+      const uploadPromises = imagesFile.map(async (item) => {
         formData.append('file', item.files);
         formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
-        return apiUploadImages(formData);
+        let response = await apiUploadImages(formData);
+        if (response.status === 200) {
+          imagesList.push(response.data?.secure_url);
+        }
       });
+      await Promise.all(uploadPromises);
+      let finalPayload = {
+        ...payload,
+        images: JSON.stringify(imagesList),
+      };
+      setPayload((prev) => ({ ...prev, images: imagesList }));
+      console.log(
+        '🚀 ~ file: CreatePost.js:203 ~ uploadPromises ~ imagesList:',
+        imagesList
+        );
+        console.log("🚀 ~ file: CreatePost.js:207 ~ handleSumit ~ finalPayload:", finalPayload)
       console.log(
         '🚀 ~ file: CreatePost.js:78 ~ uploadPromises ~ uploadPromises:',
         uploadPromises
       );
-      Promise.all(uploadPromises)
-        .then((responses) => {
-          responses.forEach((response, index) => {
-            console.log(
-              '🚀 ~ file: CreatePost.js:122 ~ responses.forEach ~ response:',
-              response
-            );
-            if (response.status === 200) {
-              images.push({ url: response.data.url });
-              setPayload((prev) => ({
-                ...prev,
-                images: {
-                  image: images,
-                },
-              }));
-              console.log(
-                '🚀 ~ file: CreatePost.js:118 ~ responses.forEach ~ images:',
-                images
-              );
-            } else {
-              console.log('Upload images failed');
-            }
+      const response = await apiCreateNewPost(finalPayload);
+        if (response.data.err === 0) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Đăng bài đăng thành công',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            //window.location.reload();
+            setPayload({
+              apartmentNumber: '',
+              categoryName: '',
+              street: '',
+              ward: '',
+              district: '',
+              title: '',
+              description: '',
+              priceNumber: '',
+              images: '',
+              areaNumber: '0',
+              target: '',
+              province: '',
+            });
           });
-        })
-        .then(() => {
-          console.log(
-            '🚀 ~ file: CreatePost.js:131 ~ apiCreateNewPost ~ payload:',
-            payload
-          );
-          if (payload.images !== '') {
-            // apiCreateNewPost(payload).then((response) => {
-            //   console.log(
-            //     '🚀 ~ file: CreatePost.js:95 ~ apiCreateNewPost ~ response:',
-            //     response
-            //   );
-            //   if (
-            //     response.status === 200 &&
-            //     response.data.err === 0 &&
-            //     response.data.msg === 'Create post success'
-            //   ) {
-            //     // toast.options = {
-            //     //   onHidden: function () {
-            //     //     window.location.reload();
-            //     //   },
-            //     // };
-            //     // toast.update(idLoad, {
-            //     //   render: 'All is good',
-            //     //   type: 'success',
-            //     //   isLoading: false,
-            //     // });
-            //     Swal.fire({
-            //       position: 'center',
-            //       icon: 'success',
-            //       title: 'Your work has been saved',
-            //       showConfirmButton: false,
-            //       timer: 1500,
-            //     }).then(window.location.reload());
-            //   }
-            // });
-          } else {
-            console.log('No images');
-          }
-        });
+        } else {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Đăng bài đăng thất bài',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(window.location.reload());
+        }
     }
   };
 

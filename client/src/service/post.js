@@ -32,7 +32,7 @@ export const apiGetPostsLimitAdmin = (query) =>
       const response = await axiosConfig({
         method: 'get',
         url: `/post/limit-admin`,
-        params: query
+        params: query,
       });
       resolve(response);
     } catch (error) {
