@@ -4,7 +4,7 @@ import { Button } from '../../../components';
 import { Address, Overview } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/action';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import {
   apiCreateNewPost,
   apiUpdatePost,
@@ -14,31 +14,31 @@ import validate from '../../../ultils/validate';
 import { usePathname } from '../../../ultils/common/usePathname';
 import Swal from 'sweetalert2';
 
-const CreatePost = ({ isEdit }) => {
+const CreatePost = ({ isEdit, setShowPopup }) => {
   console.log('🚀 ~ file: CreatePost.js:18 ~ CreatePost ~ isEdit:', isEdit);
   const pageTitle = usePathname();
   const { dataEdit } = useSelector((state) => state.post);
-  console.log('🚀 ~ file: CreatePost.js:21 ~ CreatePost ~ dataEdit:', dataEdit);
 
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
   const [imagesFile, setImagesFile] = useState([]);
+  const dispatch = useDispatch();
 
   const [payload, setPayload] = useState(() => {
     const initData = {
       apartmentNumber: isEdit ? dataEdit?.address.split(',')[0] : '',
       categoryName: isEdit ? dataEdit?.categories.value : '',
-      street: isEdit ? dataEdit?.address.split(',')[1] : '',
+      street: isEdit ? dataEdit?.address.split(',')[1]?.trim() : '',
       ward: isEdit ? dataEdit?.address.split(',')[2] : '',
       district: isEdit ? dataEdit?.address.split(',')[3] : '',
       title: isEdit ? dataEdit?.title : '',
       description: isEdit ? dataEdit?.description : '',
       priceNumber: isEdit
         ? dataEdit?.attributes?.price?.split(' ')[1] === 'đồng/tháng'
-          ? dataEdit?.attributes?.price?.split(' ')[0]
-          : dataEdit?.attributes?.price?.split(' ')[0] * 1000000
+          ? +dataEdit?.attributes?.price?.split(' ')[0]
+          : +dataEdit?.attributes?.price?.split(' ')[0] * 1000000
         : '',
-      images: '',
+      images: isEdit ? JSON.parse(dataEdit?.images?.image) : '',
       areaNumber: isEdit ? dataEdit?.attributes?.acreage?.split(' ')[0] : '',
       target: isEdit ? dataEdit?.overviews.target : '',
       province: isEdit ? dataEdit?.address.split(',')[4] : '',
@@ -46,9 +46,9 @@ const CreatePost = ({ isEdit }) => {
     return initData;
   });
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
+    console.log('🚀 ~ file: CreatePost.js:21 ~ CreatePost ~ payload:', payload);
+
     if (isEdit) {
       let images = JSON.parse(dataEdit?.images?.image)?.map((item, index) => {
         return {
@@ -57,7 +57,10 @@ const CreatePost = ({ isEdit }) => {
         };
       });
       images && setImagesFile(images);
-      console.log('🚀 ~ file: CreatePost.js:63 ~ useEffect ~ images:', images);
+      setPayload((prev) => ({
+        ...prev,
+        images: JSON.parse(dataEdit?.images?.image),
+      }));
     }
   }, []);
 
@@ -70,10 +73,6 @@ const CreatePost = ({ isEdit }) => {
       userId: userData?.id,
       phoneContact: userData?.phone,
     }));
-    console.log(
-      '🚀 ~ file: CreatePost.js:755 ~ CreatePost ~ imagesFile:',
-      imagesFile
-    );
   }, [dispatch, userData]);
 
   useEffect(() => {}, [invalidFields]);
@@ -81,176 +80,112 @@ const CreatePost = ({ isEdit }) => {
   const separateUrlsIntoObjects = (arr) => {
     const httpUrls = [];
     const blobUrls = [];
-
     for (const url of arr) {
-      if (url.url.startsWith('http://')) {
+      if (url.url.startsWith('http://') || url.url.startsWith('https://')) {
         httpUrls.push(url);
       } else if (url.url.startsWith('blob:')) {
         blobUrls.push(url);
       }
     }
-
     const result = {
       err: 0,
       httpUrls: httpUrls,
       blobUrls: blobUrls,
     };
-
     return result;
   };
 
-  const handleUpdate = async () => {
-    if (isEdit) payload.postId = dataEdit?.id;
-    let res = separateUrlsIntoObjects(imagesFile);
-    if (res.err === 0) {
-      if (invalidFields?.length === 0) {
-        let imagesList = [];
-        let imagesListHttp = res.httpUrls;
-        imagesListHttp.map((item) => {
-          imagesList.push(item.url);
-        });
-
-        let formData = new FormData();
-        const uploadPromises = res.blobUrls.map(async (item) => {
-          formData.append('file', item.files);
-          formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
-          let response = await apiUploadImages(formData);
-          if (response.status === 200) {
-            imagesList.push(response.data?.secure_url);
-          }
-        });
-        console.log(
-          '🚀 ~ file: CreatePost.js:117 ~ uploadPromises ~ imagesList:',
-          imagesList
-        );
-        await Promise.all(uploadPromises);
-        console.log(
-          '🚀 ~ file: CreatePost.js:129 ~ handleUpdate ~ payload:',
-          payload
-        );
-
-        console.log(
-          '🚀 ~ file: CreatePost.js:135 ~ handleUpdate ~ imagesFile:',
-          imagesFile
-        );
-        //const imgArr = imagesList.split(',').map((url) => url.trim());
-        let finalPayload = {
-          ...payload,
-          userId: userData?.id,
-          phoneContact: userData?.phone,
-          priceNumber: payload.priceNumber,
-          areaNumber: payload.areaNumber,
-          images: JSON.stringify(imagesList),
-        };
-        console.log(
-          '🚀 ~ file: CreatePost.js:133 ~ handleUpdate ~ finalPayload:',
-          finalPayload
-        );
-        const response = await apiUpdatePost(finalPayload);
-        if (response.data.err === 0) {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Cập nhật bài đăng thành công',
-            showConfirmButton: false,
-            timer: 1500,
-          }).then(() => {
-            //window.location.reload();
-            setPayload({
-              apartmentNumber: '',
-              categoryName: '',
-              street: '',
-              ward: '',
-              district: '',
-              title: '',
-              description: '',
-              priceNumber: '',
-              images: '',
-              areaNumber: '0',
-              target: '',
-              province: '',
-            });
-          });
-        } else {
-          Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Cập nhật bài đăng thất bài',
-            showConfirmButton: false,
-            timer: 1500,
-          }).then(window.location.reload());
-        }
-      }
-    }
-  };
-
-  const handleSumit = async (e) => {
+  const handleSumit = async () => {
     validate(payload, 'Create Post', setInvalidFields);
     if (imagesFile.length > 0) {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'images')
       );
     }
-    if (invalidFields.length === 0) {
+    if (isEdit) payload.postId = dataEdit?.id;
+    let res = separateUrlsIntoObjects(imagesFile);
+    if (invalidFields?.length === 0) {
       let imagesList = [];
+      let imagesListHttp = isEdit && res.httpUrls;
+      isEdit &&
+        imagesListHttp.map((item) => {
+          imagesList.push(item.url);
+        });
+
       let formData = new FormData();
-      const uploadPromises = imagesFile.map(async (item) => {
-        formData.append('file', item.files);
-        formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
-        let response = await apiUploadImages(formData);
-        if (response.status === 200) {
-          imagesList.push(response.data?.secure_url);
-        }
-      });
+      const uploadPromises = isEdit
+        ? res?.blobUrls?.map(async (item) => {
+            formData.append('file', item.files);
+            formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
+            let response = await apiUploadImages(formData);
+            if (response.status === 200) {
+              imagesList.push(response.data?.secure_url);
+            }
+          })
+        : imagesFile.map(async (item) => {
+            formData.append('file', item.files);
+            formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
+            let response = await apiUploadImages(formData);
+            if (response.status === 200) {
+              imagesList.push(response.data?.secure_url);
+            }
+          });
+
       await Promise.all(uploadPromises);
+
       let finalPayload = {
         ...payload,
-        images: JSON.stringify(imagesList),
+        userId: userData?.id,
+        phoneContact: userData?.phone,
+        priceNumber: payload.priceNumber.toString(),
+        areaNumber: payload.areaNumber.toString(),
+        images: isEdit ? JSON.stringify(imagesList) : imagesList,
       };
-      setPayload((prev) => ({ ...prev, images: imagesList }));
-      console.log(
-        '🚀 ~ file: CreatePost.js:203 ~ uploadPromises ~ imagesList:',
-        imagesList
-        );
-        console.log("🚀 ~ file: CreatePost.js:207 ~ handleSumit ~ finalPayload:", finalPayload)
-      console.log(
-        '🚀 ~ file: CreatePost.js:78 ~ uploadPromises ~ uploadPromises:',
-        uploadPromises
-      );
-      const response = await apiCreateNewPost(finalPayload);
-        if (response.data.err === 0) {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Đăng bài đăng thành công',
-            showConfirmButton: false,
-            timer: 1500,
-          }).then(() => {
-            //window.location.reload();
-            setPayload({
-              apartmentNumber: '',
-              categoryName: '',
-              street: '',
-              ward: '',
-              district: '',
-              title: '',
-              description: '',
-              priceNumber: '',
-              images: '',
-              areaNumber: '0',
-              target: '',
-              province: '',
-            });
+      const idLoad = toast.loading('Please wait...');
+
+      const response = isEdit
+        ? await apiUpdatePost(finalPayload)
+        : await apiCreateNewPost(finalPayload);
+      if (response.data.err === 0) {
+        setPayload({
+          apartmentNumber: '',
+          categoryName: '',
+          street: '',
+          ward: '',
+          district: '',
+          title: '',
+          description: '',
+          priceNumber: '',
+          images: '',
+          areaNumber: '',
+          target: '',
+          province: '',
+        });
+
+        if (isEdit) {
+          toast.update(idLoad, {
+            render: isEdit
+              ? 'Cập nhật tin đăng thành công'
+              : 'Đăng tin thành công',
+            type: 'success',
+            isLoading: false,
+            autoClose: 2000,
           });
+          setTimeout(() => {
+            setShowPopup(false);
+          }, 2000);
         } else {
-          Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Đăng bài đăng thất bài',
-            showConfirmButton: false,
-            timer: 1500,
-          }).then(window.location.reload());
+          window.location.reload();
+          console.log('payload', payload);
         }
+      } else {
+        toast.update(idLoad, {
+          render: isEdit ? 'Cập nhật tin đăng thất bại' : 'Đăng tin thất bại',
+          type: 'error',
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
     }
   };
 
@@ -294,7 +229,7 @@ const CreatePost = ({ isEdit }) => {
             <div className="mt-[42px] mb-[100px] w-full">
               <Button
                 onClick={(e) => {
-                  isEdit ? handleUpdate(e) : handleSumit(e);
+                  handleSumit(e);
                 }}
                 text={isEdit ? 'Cập Nhật' : 'Đăng bài'}
                 bgcolor={

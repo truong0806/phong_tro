@@ -12,12 +12,12 @@ const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
   return (
     <div className="mb-[1rem]">
       <nav
-        className="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
+        className="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 "
         aria-label="Breadcrumb"
       >
         <ol className="flex flex-row items-center justify-center space-x-1 md:space-x-3">
           <li className="  items-center flex ">
-            <Link className="flex flex-row items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+            <Link className="flex flex-row items-center text-sm font-medium text-gray-700 hover:text-blue-600 ">
               <svg
                 className="w-3 h-3 mr-2.5 mb-1"
                 aria-hidden="true"
@@ -101,7 +101,7 @@ const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
           </svg>
           <li aria-current="page">
             <div className="flex items-center">
-              <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+              <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2">
                 {currentPage}
               </span>
             </div>

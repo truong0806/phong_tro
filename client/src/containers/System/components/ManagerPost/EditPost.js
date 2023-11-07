@@ -3,11 +3,12 @@ import InputText from '../../../../components/InputText';
 import Address from '../CreatePost/Address/Address';
 import { InputSelect } from '../../../../components';
 import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import CreatePost from '../../page/CreatePost';
 import icon from '../../../../ultils/icons';
 const { AiOutlineClose } = icon;
 
-const EditPost = ({ setShowPopup}) => {
+const EditPost = ({  setShowPopup}) => {
   
   const handleCloseClick = () => {
     setShowPopup(false);
@@ -17,6 +18,7 @@ const EditPost = ({ setShowPopup}) => {
       onClick={handleCloseClick}
       className="fixed w-full h-full bg-overlay-70 z-20 top-0 left-0 right-0 bottom-0  overflow-y-auto"
     >
+      <ToastContainer />
       <div
         onClick={(e) => {
           e.stopPropagation();
@@ -41,7 +43,7 @@ const EditPost = ({ setShowPopup}) => {
           <div className="border-b-2"></div>
         </div>
         <div className="p-[15px] overflow-y-auto overflow-hidden">
-          <CreatePost isEdit />
+          <CreatePost isEdit setShowPopup={setShowPopup} />
         </div>
       </div>
     </div>

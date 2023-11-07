@@ -164,7 +164,7 @@ const ManagePost = () => {
         count={Object.keys(posts_limit_admin).length}
         posts_limit={filteredData}
       />
-      {showPopup && <EditPost setShowPopup={setShowPopup} isEdit />}
+      {showPopup && <EditPost setShowPopup={setShowPopup}  isEdit />}
     </div>
   );
 };

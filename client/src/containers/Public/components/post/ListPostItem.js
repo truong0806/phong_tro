@@ -27,7 +27,7 @@ const ListPostItem = ({
     return stars;
   };
   return (
-    <div className="w-full  flex flex-col md:px-[5px]  mx-[5px]  border-t border-red-500 py-2 md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div className="w-full  flex flex-col md:px-[5px]  mx-[5px]  border-t border-red-500 py-2 md:flex-row hover:bg-gray-100 ">
       {images?.length > 4 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}

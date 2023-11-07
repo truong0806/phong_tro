@@ -5,6 +5,7 @@ import {
   apiGetWard,
   apiLocation,
 } from '../../../../../service';
+import SelectAddress2 from './SelectAddress2';
 const Address = ({
   value,
   setValue,
@@ -13,6 +14,7 @@ const Address = ({
   isEdit,
 }) => {
   const [provinces, setProvinces] = useState([]);
+  const [provinces1, setProvinces1] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
   const [province, setProvince] = useState('');
@@ -26,7 +28,7 @@ const Address = ({
       provinces?.find((item) => item.name === value?.province?.trim());
     setProvince(foundProvince ? foundProvince.code : '');
   }, [value, provinces]);
-  
+
   useEffect(() => {
     const foundDistrict =
       value.district.length > 0 &&
@@ -44,6 +46,10 @@ const Address = ({
   useEffect(() => {
     const fetchPublicProvince = async () => {
       const response = await apiLocation();
+      console.log(
+        '🚀 ~ file: Address.js:49 ~ fetchPublicProvince ~ response:',
+        response
+      );
       if (response.status === 200) {
         setProvinces(response?.data);
       }
@@ -79,7 +85,7 @@ const Address = ({
 
   return (
     <div className="mt-3 gap-2 justify-between flex flex-col">
-      <div className="w-full">
+      <div className="w-full mb-[35px]">
         <h3 className="text-[1.75rem] font-bold mb-[7px]">Địa chỉ cho thuê</h3>
       </div>
       <div className="flex flex-col">
@@ -105,7 +111,7 @@ const Address = ({
         />
       </div>
       <div className="flex flex-row gap-3">
-        <SelectAddress
+        {/* <SelectAddress
           setInvalidFields={setInvalidFields}
           name={'province'}
           invalidFields={invalidFields}
@@ -115,8 +121,19 @@ const Address = ({
           setLoca={setProvince}
           array={provinces}
           label="Tỉnh/Thành phố"
+        /> */}
+        <SelectAddress2
+          setInvalidFields={setInvalidFields}
+          name={'province'}
+          invalidFields={invalidFields}
+          type="province"
+          value={province}
+          setValue={setValue}
+          array={provinces}
+          setLoca={setProvince}
+          label="Tỉnh/Thành phố"
         />
-        <SelectAddress
+        <SelectAddress2
           setInvalidFields={setInvalidFields}
           name={'district'}
           invalidFields={invalidFields}
@@ -128,18 +145,19 @@ const Address = ({
           setLoca={setDistrict}
           label="Quận/Huyện"
         />
-        <SelectAddress
-          setInvalidFields={setInvalidFields}
-          name={'ward'}
-          invalidFields={invalidFields}
-          reset={reset}
-          type="ward"
-          value={ward}
-          setValue={setValue}
-          setLoca={setWard}
-          array={wards}
-          label="Phường/Xã"
+        <SelectAddress2
+         setInvalidFields={setInvalidFields}
+         name={'ward'}
+         invalidFields={invalidFields}
+         reset={reset}
+         type="ward"
+         value={ward}
+         setValue={setValue}
+         setLoca={setWard}
+         array={wards}
+         label="Phường/Xã"
         />
+        
       </div>
       <InputTextReadOnly
         setValue={setValue}

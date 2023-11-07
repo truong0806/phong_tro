@@ -13,12 +13,14 @@ const SelectAddress = ({
   dataPro,
   setLoca,
 }) => {
+  
   return (
     <div className="w-full">
       <label htmlFor="default" className="mb-10 font-bold whitespace-nowrap">
         {label}
       </label>
       <select
+
         onFocus={() =>
           setInvalidFields((prev) =>
             prev.filter((field) => field.name !== name)

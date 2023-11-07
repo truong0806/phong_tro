@@ -4,7 +4,7 @@ import { path } from '../../../ultils/constains';
 
 const Header = () => {
   return (
-    <div className="w-full fixed left-0">
+    <div className="w-full fixed left-0 z-50">
       <nav className="bg-secondary1 h-[45px] w-full shadow-md flex  first-line:flex-row text-[#fff]">
         <Link
           className=" text-[1rem] flex font-bold px-[15px] py-[0.75rem]  w-[200px] justify-center items-center"

@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UploadImages } from '../';
 import * as actions from '../../../../store/action';
 import { editMaxMin } from '../../../../ultils/common/editArray';
+import CurrencyInput from 'react-currency-input-field';
+import InputSelect2 from '../../../../components/InputSelect2';
 
 const Overview = ({
   setInvalidFields,
@@ -44,10 +46,10 @@ const Overview = ({
 
   return (
     <div>
-      <div className="mt-5 w-full mb-[30px]">
+      <div className="w-full mb-[35px]">
         <h3 className="text-[1.75rem] font-bold">Thông tin mô tả</h3>
       </div>
-      <InputSelect
+      <InputSelect2
         setInvalidFields={setInvalidFields}
         invalidFields={invalidFields}
         name={'categoryName'}
@@ -71,7 +73,7 @@ const Overview = ({
         styleInput={'w-full'}
       />
       <div className="flex flex-col mb-[14px]">
-        <label htmlFor="desc" className="font-bold">
+        <label htmlFor="desc" className="font-bold border-spacing-2">
           Nội dung mô tả
         </label>
         <textarea
@@ -91,7 +93,7 @@ const Overview = ({
           rows="10"
           type="text"
           value={value.description}
-          className="focus:ring-[rgba(0,123,255,.25)] mb-2 focus:border-[#80bdff] border-[#ced4da] py-[0.375rem] px-[0.75rem] text-[1rem] text-[#495057] h-[220px]"
+          className="border-gray-300 mb-2 focus:border-[#80bdff] border-[#000000] py-[0.375rem] px-[0.75rem] text-[1rem] text-[#495057] h-[220px]"
         ></textarea>
         <small className="text-red-500">
           {invalidFields?.some((field) => field.name === 'description') &&
@@ -116,7 +118,26 @@ const Overview = ({
       <div className="mb-[14px] max-w-[50%]">
         <label className="font-bold">Giá cho thuê</label>
         <div className="flex flex-row w-full h-[33px] my-2">
-          <input
+          <CurrencyInput
+            className="w-[60%] focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem] border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
+            value={value?.priceNumber}
+            id="validation-example-2-field"
+            placeholder="$1,234,567"
+            allowDecimals={false}
+            step={10}
+            onValueChange={(value) => {
+              setValue((prev) => ({
+                ...prev,
+                priceNumber: value,
+              }));
+            }}
+            onFocus={() =>
+              setInvalidFields((prev) =>
+                prev.filter((field) => field.name !== 'priceNumber')
+              )
+            }
+          />
+          {/* <input
             value={value.priceNumber}
             onFocus={() =>
               setInvalidFields((prev) =>
@@ -131,7 +152,7 @@ const Overview = ({
             }}
             type="number"
             className="w-[60%] focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem] border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
-          ></input>
+          ></input> */}
 
           <div className="w-[40%] h-full  items-center justify-center ">
             <select
@@ -183,7 +204,7 @@ const Overview = ({
             `Vui lòng nhập diện tích`}
         </small>
       </div>
-      <InputSelect
+      <InputSelect2
         value={doituongs?.find((item) => item.value === value?.target)?.code}
         setInvalidFields={setInvalidFields}
         invalidFields={invalidFields}
