@@ -10,6 +10,7 @@ const InputText = ({
   typeInput,
   invalidFields,
   setInvalidFields,
+  haveLabel,
 }) => {
   function lowerCaseFirstLetter(str) {
     return str.charAt(0).toLowerCase() + str.slice(1);
@@ -17,9 +18,15 @@ const InputText = ({
   return (
     <div>
       <div className={`flex flex-col mb-[15px] `}>
-        <label className={`font-bold mb-[2px] whitespace-nowrap ${styleLable}`}>
-          {label}
-        </label>
+        {label && (
+          <label
+            className={`${
+              !label && 'hidden'
+            }font-bold mb-[2px] whitespace-nowrap ${styleLable}`}
+          >
+            {label}
+          </label>
+        )}
         <input
           onFocus={() =>
             setInvalidFields((prev) =>
@@ -33,7 +40,7 @@ const InputText = ({
             }));
           }}
           type={typeInput}
-          className={`border-gray-300 border-[1px] text-[0.8rem] focus:border-[#80bdff] rounded-[0.25rem] my-2 py-[0.375rem] px-[0.75rem] ${styleInput} `}
+          className={`border-gray-300 border-[1px] text-[0.8rem] focus:border-[#80bdff] rounded-[0.25rem] py-[0.375rem] px-[0.75rem]  ${styleInput} `}
           name="street_number"
           id="street_number"
           value={value}

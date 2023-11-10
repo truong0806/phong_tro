@@ -93,7 +93,7 @@ const Overview = ({
           rows="10"
           type="text"
           value={value.description}
-          className="border-gray-300 mb-2 focus:border-[#80bdff] border-[#000000] py-[0.375rem] px-[0.75rem] text-[1rem] text-[#495057] h-[220px]"
+          className="border-gray-300 mb-2 focus:border-[#80bdff] py-[0.375rem] px-[0.75rem] text-[1rem] text-[#495057] h-[220px]"
         ></textarea>
         <small className="text-red-500">
           {invalidFields?.some((field) => field.name === 'description') &&

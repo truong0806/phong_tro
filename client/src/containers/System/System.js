@@ -25,6 +25,7 @@ const System = () => {
       <div className="flex w-full h-full flex-auto">
         <SideBar />
         <div className="flex-auto  h-full pt-[60px] ml-[200px] px-[42px] bg-white ">
+          <ToastContainer/>
           <Breadcrumb
             location={location.pathname}
             fatherPath={'quan-ly'}

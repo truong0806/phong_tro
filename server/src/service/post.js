@@ -143,7 +143,7 @@ export const postLimitAdminService = (page, query, id, bonus) =>
             attributes: ['name', 'phone', 'zalo'],
           },
         ],
-        attributes: ['id', 'title', 'star', 'address', 'description'],
+        attributes: ['id', 'title', 'star', 'address', 'description', 'priceNumber', 'areaNumber'],
         distinct: true,
       })
       response.rows.forEach((row) => {

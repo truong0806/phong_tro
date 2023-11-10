@@ -39,24 +39,20 @@ const SelectAddress2 = ({
     setInvalidFields((prev) => prev.filter((field) => field.name !== name));
   };
 
-  
   return (
     <div className="w-full pb-[15px]">
-      <label
-        htmlFor="default"
-        className="mb-[5px] font-bold whitespace-nowrap"
-      >
+      <label htmlFor="default" className="mb-[5px] font-bold whitespace-nowrap">
         {label}
       </label>
       <div className="">
         <Select
+          noOptionsMessage={() => 'Không có'}
           value={selectedTinh}
           onChange={handleTinhChange}
           onFocus={handleSelectFocus}
           options={newArray}
           isSearchable={true}
           placeholder={`-- ${label} --`}
-          
         />
       </div>
 

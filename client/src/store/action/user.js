@@ -9,6 +9,7 @@ export const getUser = () => async (dispatch) => {
         type: actionTypes.GET_USER,
         userData: response.data.response,
       });
+      localStorage.setItem('user', JSON.stringify(response.data.response));
     } else {
       dispatch({
         type: actionTypes.GET_USER,
