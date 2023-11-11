@@ -2,7 +2,6 @@ import actionTypes from './actionTypes';
 import {
   apiRegister,
   apiLogin,
-  apiLogout,
   apiRefeshToken,
 } from '../../service/auth';
 
@@ -35,7 +34,6 @@ export const login = (payload) => async (dispatch) => {
         type: actionTypes.LOGIN_SUCCESS,
         data: response.data,
       });
-      localStorage.setItem('user', JSON.stringify(response.data.user));
     } else {
       dispatch({
         type: actionTypes.LOGIN_FAIL,
@@ -51,9 +49,7 @@ export const login = (payload) => async (dispatch) => {
   }
 };
 
-export const logout = (refreshTokens) => async (dispatch) => {
-  console.log('🚀 ~ file: auth.js:49 ~ logout ~ refreshTokens:', refreshTokens);
-  apiLogout(refreshTokens);
+export const logout = () => async (dispatch) => {
   dispatch({
     type: actionTypes.LOGOUT,
   });

@@ -14,6 +14,7 @@ const PostTable = ({
   handShowPopup,
   handleDeletePost,
   setIsEdit
+  
 }) => {
   const dispatch = useDispatch();
 

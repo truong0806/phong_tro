@@ -9,20 +9,9 @@ function getLocalAccessToken() {
 }
 
 function updateLocalAccessToken(accessToken) {
-  console.log(
-    '🚀 ~ file: token.js:12 ~ updateLocalAccessToken ~ accessToken:',
-    accessToken
-  );
   let auth = JSON.parse(localStorage.getItem('persist:auth'));
-  console.log('🚀 ~ file: token.js:14 ~ updateLocalAccessToken ~ auth:', auth);
   auth.accessToken = `"${accessToken}"`;
-  // auth.isLoggedIn = 'true';
   localStorage.setItem('persist:auth', JSON.stringify(auth));
-  let auth2 = JSON.parse(localStorage.getItem('persist:auth'));
-  console.log(
-    '🚀 ~ file: token.js:16 ~ updateLocalAccessToken ~ auth2:',
-    auth2
-  );
 }
 const exportedObject = {
   getLocalRefreshToken,

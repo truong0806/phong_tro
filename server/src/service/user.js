@@ -1,6 +1,7 @@
 import db from '../models'
-
+import { verifyOtpService } from './otp'
 //Get all categories
+
 export const userService = (id) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -21,6 +22,15 @@ export const userService = (id) =>
 export const userEditService = (id, queries) =>
   new Promise(async (resolve, reject) => {
     try {
+      const verify = await verifyOtpService(queries.newPhone, queries.otp)
+      console.log("🚀 ~ file: user.js:26 ~ newPromise ~ verify:", verify)
+      if (verify.err === 1) {
+        resolve({
+          err: 1,
+          msg: 'OTP verification failed',
+        })
+        return
+      }
       const user = await db.User.findOne({
         where: { id },
         raw: true,
@@ -30,9 +40,8 @@ export const userEditService = (id, queries) =>
       if (!user) {
         resolve({
           err: 1,
-          msg: 'Delete post failed ',
+          msg: 'User not found',
         })
-        return
       }
       console.log('🚀 ~ file: user.js:44 ~ queries', queries)
 

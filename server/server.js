@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
-const schedule = require('node-schedule');
+const schedule = require('node-schedule')
 dotenv.config()
 const app = express()
 const port = process.env.PORT || 8888
@@ -12,6 +12,7 @@ import requireToken from './src/middleware/requireToken'
 import checkExpiredRefeshToken from './src/middleware/checkExpiredRefeshToken'
 import updateCategoryCount from './src/ultils/updateCategoryCount'
 import generateDate from './src/ultils/generateDate'
+import { checkOtpExpiredRunEvery1min } from './src/middleware/checkOtpExpired'
 
 // const options = {
 //   key: fs.readFileSync(path.join(__dirname, 'src/ultils/key', 'localhost.key')),
@@ -28,6 +29,7 @@ app.use(
   }),
 )
 
+checkOtpExpiredRunEvery1min.invoke();
 // updateCategoryCount()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

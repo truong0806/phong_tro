@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Button } from '../../../components';
 import { usePathname } from '../../../ultils/common/usePathname';
 import { InputText, InputTextReadOnly } from '../components';
+import { path } from '../../../ultils/constains';
 
 const EditProfile = () => {
   const pageTitle = usePathname();
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const [imagesPreview, setImagesPreview] = useState([]);
+  const { msg } = useSelector((state) => state.auth);
   console.log(
     '🚀 ~ file: EditProfile.js:13 ~ EditProfile ~ imagesPreview:',
     imagesPreview
@@ -19,6 +22,11 @@ const EditProfile = () => {
     '🚀 ~ file: EditProfile.js:10 ~ EditProfile ~ userData:',
     userData
   );
+  useEffect(() => {
+    if (!isLoggedIn || isLoggedIn === 'false') {
+      window.location.href = '/auth/login';
+    }
+  }, [isLoggedIn]);
 
   const [payload, setPayload] = useState(() => {
     const initData = {

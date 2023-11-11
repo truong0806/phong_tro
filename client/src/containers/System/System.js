@@ -6,7 +6,6 @@ import { Header, SideBar } from './components';
 import menuSider from '../../ultils/menuSider';
 import Breadcrumb from './components/Breadcrumb';
 import { ToastContainer } from 'react-toastify';
-
 const System = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const location = useLocation();

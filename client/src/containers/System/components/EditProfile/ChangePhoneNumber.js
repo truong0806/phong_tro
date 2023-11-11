@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../../../components';
-import InputText from '../../../../components/InputText';
-import InputTextReadOnly from '../../../../components/InputTextReadOnly';
 import HorizontalInput from '../../../../components/HorizontalInput';
 import validate from '../../../../ultils/validate';
 import { apiEditUser } from '../../../../service/user';
 import * as actions from '../../../../store/action';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { apiSendOtp } from '../../../../service/otp';
+import TokenService from '../../../../service/token';
+import { Navigate } from 'react-router-dom';
+import { path } from '../../../../ultils/constains';
+import Swal from 'sweetalert2';
+
 
 const ChangePhoneNumber = () => {
   const dispatch = useDispatch();
-  const { userData } = useSelector((state) => state.user);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const [invalidFields, setInvalidFields] = useState([]);
-  console.log(
-    '🚀 ~ file: ChangePhoneNumber.js:12 ~ ChangePhoneNumber ~ invalidFields:',
-    invalidFields
-  );
+
   const [payload, setPayload] = useState(() => {
     const initData = {
       phone: JSON.parse(localStorage.getItem('user'))?.phone,
@@ -25,35 +26,48 @@ const ChangePhoneNumber = () => {
     };
     return initData;
   });
+  useEffect(() => {
+    if (!isLoggedIn || isLoggedIn === 'false') {
+      window.location.href = '/auth/login';
+    }
+  }, [isLoggedIn]);
 
-  console.log(
-    '🚀 ~ file: ChangePhoneNumber.js:13 ~ const[payload,setPayload]=useState ~ payload:',
-    payload
-  );
-  useEffect(() => {}, [invalidFields]);
+  const handleSendOtp = () => {
+    const idLoad = toast.loading('Đang gửi OTP...');
+    apiSendOtp({
+      newPhone: payload?.newPhone,
+    }).then(
+      toast.update(idLoad, {
+        render: `Đã gửi OTP đến ${payload?.newPhone}`,
+        type: 'success',
+        isLoading: false,
+        autoClose: 2000,
+      })
+    );
+  };
 
   const handleSubmit = async () => {
+    let rs = TokenService.getLocalRefreshToken();
     const idLoad = toast.loading('Xin chờ...');
     validate(payload, '', setInvalidFields);
     if (invalidFields?.length === 0) {
       const result = await apiEditUser(payload);
-      console.log(
-        '🚀 ~ file: ChangePhoneNumber.js:38 ~ handleSubmit ~ result:',
-        result
-      );
       if (result.data.err === 0) {
-        dispatch(actions.getUser()).then(() => {
+        await dispatch(actions.getUser()).then(() => {
           toast.update(idLoad, {
             render: 'Đổi số điện thoại thành công',
             type: 'success',
             isLoading: false,
             autoClose: 2000,
           });
-          setPayload(() => ({
-            phone: JSON.parse(localStorage.getItem('user'))?.phone,
-            newPhone: '',
-            otp: '',
-          }));
+        });
+        Swal.fire(
+          'Oop !',
+          'Cập nhật thành công, hãy đăng nhập lại',
+          'info'
+        ).then(() => {
+          dispatch(actions.logout());
+          window.location.href = '/auth/login';
         });
       } else {
         toast.update(idLoad, {
@@ -94,7 +108,11 @@ const ChangePhoneNumber = () => {
               setInvalidFields={setInvalidFields}
               invalidFields={invalidFields}
             />
-            <Button text={'Lấy mã xác thực'} width={'col-span-4 bg-[#ffc107] py-2 w-[25%]  ml-[26%] '} />
+            <Button
+              text={'Lấy mã xác thực'}
+              onClick={handleSendOtp}
+              width={'col-span-4 bg-[#ffc107] py-2 w-[25%]  ml-[26%] '}
+            />
             <HorizontalInput
               type={'text'}
               name={'otp'}

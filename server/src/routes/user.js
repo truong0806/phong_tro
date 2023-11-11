@@ -5,6 +5,7 @@ import requireToken from '../middleware/requireToken'
 const router = express.Router()
 router.get('/getUserCurrent',requireToken, userController.getUser)
 router.post('/editUserInfo',requireToken, userController.editUserInfo)
-router.post('/sendOtp',requireToken, userController.sendOtp)
+router.post('/sendotp',requireToken, userController.sendOtp)
+router.post('/verifyotp',requireToken, userController.verifyOtp)
 
 export default router
