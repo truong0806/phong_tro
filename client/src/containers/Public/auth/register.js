@@ -8,12 +8,19 @@ import validate from '../../../ultils/validate';
 import { path } from '../../../ultils/constains';
 // import { Loading } from '../../../components'
 import { WhyUs, Support } from '../index';
+import { pressEnter } from '../../../ultils/pressEnter';
+import {
+  checkCapsLock,
+  handleKeyDownCapLock,
+} from '../../../ultils/checkCapsLock';
 
 function Register() {
   const navigate = useNavigate();
   const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
+  const [capslock, setCapslock] = useState(false);
+  console.log('🚀 ~ file: register.js:23 ~ Register ~ capslock:', capslock);
   const [payload, setPayload] = useState({
     phone: '',
     password: '',
@@ -46,12 +53,36 @@ function Register() {
       navigate('/');
     }
   };
+
+  // useEffect(() => {
+  //   checkCapsLock(setCapslock);
+  // });
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      // Check if the pressed key is an uppercase letter and Caps Lock is off
+      const isUppercase = event.key === event.key.toUpperCase();
+      setCapslock(!isUppercase);
+    };
+
+    // Add event listener when component mounts
+    document.addEventListener('keypress', handleKeyPress);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      document.removeEventListener('keypress', handleKeyPress);
+    };
+  }, []);
+
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <div className="items-center justify-center">
         <div className="bg-white  border-[#dedede] border w-[600px] m-auto pt-[30px] px-[30px] pb-[100px] rounded-md shadow-sm ">
           <h3 className="font-bold text-3xl mb-[10px]">Tạo tài khoản mới</h3>
           <div className="w-full">
+            <div>
+              {/* Your component JSX */}
+              {capslock ? <p>Caps Lock is on!</p> : <p>Caps Lock is off.</p>}
+            </div>
             <InputForm
               name="name"
               stylleGroup="mt-[15px]"
@@ -78,6 +109,9 @@ function Register() {
               styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[10px] mb-[5px]"
             />
             <InputForm
+              onFocus={(event) => {
+                setInvalidFields([]);
+              }}
               name="password"
               stylleGroup="mt-[15px]"
               setInvalidFields={setInvalidFields}
@@ -90,6 +124,7 @@ function Register() {
               styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[5px] mb-[5px]"
               type="password"
             />
+            {capslock && <span className="">Đang bật CapsLock</span>}
             <InputForm
               name="comfirmPassword"
               stylleGroup="mt-[15px]"

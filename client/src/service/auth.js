@@ -54,3 +54,16 @@ export const apiLogout = (refreshToken) =>
       reject(error);
     }
   });
+export const apiChangePassword = (payload) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: 'post',
+        url: '/auth/changepassword',
+        data: payload,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

@@ -1,18 +1,19 @@
-import React from 'react'
+import React from 'react';
 
 const InputForm = ({
   name,
   label,
   styleLabel,
   styleInput,
-  onChange,
   type,
   keyPayload,
   value,
   setValue,
   stylleGroup,
   invalidFields,
-  setInvalidFields
+  setInvalidFields,
+  onChange,
+  onFocus,
 }) => {
   return (
     <div className={`flex-col ${stylleGroup}`}>
@@ -20,15 +21,13 @@ const InputForm = ({
         {label}
       </label>
       <input
+        onChange={onChange}
         name={name}
         id={name}
         type={type || 'text'}
         className={`${styleInput} `}
         value={value || ''}
-        onChange={onChange}
-        onFocus={() => {
-          setInvalidFields([])
-        }}
+        onFocus={onFocus}
       />
       {invalidFields.length > 0 &&
         invalidFields.some((i) => i.name === keyPayload) && (
@@ -37,7 +36,7 @@ const InputForm = ({
           </small>
         )}
     </div>
-  )
-}
+  );
+};
 
-export default InputForm
+export default InputForm;

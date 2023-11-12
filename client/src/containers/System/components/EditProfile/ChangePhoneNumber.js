@@ -10,6 +10,7 @@ import { apiSendOtp } from '../../../../service/otp';
 import TokenService from '../../../../service/token';
 import Swal from 'sweetalert2';
 import { apiLogout } from '../../../../service';
+import { pressEnter } from '../../../../ultils/pressEnter';
 
 const ChangePhoneNumber = () => {
   const dispatch = useDispatch();
@@ -45,8 +46,8 @@ const ChangePhoneNumber = () => {
   };
 
   const handleSubmit = async () => {
-    validate(payload, '', setInvalidFields);
-    if (invalidFields?.length === 0) {
+    const invalids = await validate(payload, '', setInvalidFields);
+    if (invalids === 0) {
       const idLoad = toast.loading('Xin chờ...');
       let rs = TokenService.getLocalRefreshToken();
       const result = await apiChangePhoneNumber(payload);
@@ -80,16 +81,7 @@ const ChangePhoneNumber = () => {
   };
 
   useEffect(() => {
-    const listener = (event) => {
-      if (event.code === 'Enter' || event.code === 'NumpadEnter') {
-        event.preventDefault();
-        handleSubmit();
-      }
-    };
-    document.addEventListener('keydown', listener);
-    return () => {
-      document.removeEventListener('keydown', listener);
-    };
+    pressEnter(handleSubmit);
   }, []);
 
   return (

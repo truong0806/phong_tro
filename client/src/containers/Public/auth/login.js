@@ -7,6 +7,7 @@ import * as actions from '../../../store/action';
 import validate from '../../../ultils/validate';
 import { path } from '../../../ultils/constains';
 import { WhyUs, Support } from '../index';
+import { pressEnter } from '../../../ultils/pressEnter';
 
 
 function Login() {
@@ -46,6 +47,10 @@ function Login() {
       dispatch(actions.login(payload));
     }
   };
+
+  useEffect(() => {
+    pressEnter(handleSubmit);
+  }, []);
 
   return (
     <div className="w-full flex flex-col items-center ">
