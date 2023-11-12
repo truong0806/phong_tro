@@ -40,7 +40,7 @@ const InputText = ({
             }));
           }}
           type={typeInput}
-          className={`border-gray-300 border-[1px] text-[0.8rem] focus:border-[#80bdff] rounded-[0.25rem] py-[0.375rem] px-[0.75rem]  ${styleInput} `}
+          className={`border-gray-300 border-[1px] text-[1rem] focus:border-[#80bdff] rounded-[0.25rem] py-[0.375rem] px-[0.75rem]  ${styleInput} `}
           name="street_number"
           id="street_number"
           value={value}

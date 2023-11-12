@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../../../components';
 import HorizontalInput from '../../../../components/HorizontalInput';
 import validate from '../../../../ultils/validate';
-import { apiEditUser } from '../../../../service/user';
+import { apiChangePhoneNumber } from '../../../../service/user';
 import * as actions from '../../../../store/action';
 import { toast } from 'react-toastify';
 import { apiSendOtp } from '../../../../service/otp';
 import TokenService from '../../../../service/token';
-import { Navigate } from 'react-router-dom';
-import { path } from '../../../../ultils/constains';
 import Swal from 'sweetalert2';
-
+import { apiLogout } from '../../../../service';
 
 const ChangePhoneNumber = () => {
   const dispatch = useDispatch();
@@ -47,11 +45,11 @@ const ChangePhoneNumber = () => {
   };
 
   const handleSubmit = async () => {
-    let rs = TokenService.getLocalRefreshToken();
-    const idLoad = toast.loading('Xin chờ...');
     validate(payload, '', setInvalidFields);
     if (invalidFields?.length === 0) {
-      const result = await apiEditUser(payload);
+      const idLoad = toast.loading('Xin chờ...');
+      let rs = TokenService.getLocalRefreshToken();
+      const result = await apiChangePhoneNumber(payload);
       if (result.data.err === 0) {
         await dispatch(actions.getUser()).then(() => {
           toast.update(idLoad, {
@@ -67,6 +65,7 @@ const ChangePhoneNumber = () => {
           'info'
         ).then(() => {
           dispatch(actions.logout());
+          apiLogout(rs);
           window.location.href = '/auth/login';
         });
       } else {
@@ -79,6 +78,19 @@ const ChangePhoneNumber = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+        event.preventDefault();
+        handleSubmit();
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, []);
 
   return (
     <div className="z-2150 h-full">

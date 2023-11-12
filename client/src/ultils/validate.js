@@ -67,6 +67,28 @@ export default function validate(payload, name, setInvalidFields) {
             invalids += 1;
           }
           break;
+        case 'newPassword':
+          if (item[1] === '') {
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                msg: 'Vui lòng nhập mật khẩu mới',
+              },
+            ]);
+            invalids += 1;
+          } else if (item[1].length < 6) {
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                msg: 'Vui lòng nhập mật khẩu tối thiểu 6 ký tự',
+              },
+            ]);
+            invalids += 1;
+          }
+          break;
+        
         case 'otp':
           if (item[1] === '') {
             setInvalidFields((prev) => [

@@ -121,3 +121,15 @@ export const refreshTokenDelete = async (req, res) => {
     res.status(500).json({ err: 1, msg: 'Internal Server Error' })
   }
 }
+export const changePassword = async (req, res) => {
+  try {
+    const response = await authService.changePasswordService(
+      req.user,
+      req.body,
+    )
+    return res.status(200).json(response)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ err: 1, msg: 'Internal Server Error' })
+  }
+}

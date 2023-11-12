@@ -29,25 +29,19 @@ function generateKeyPair() {
 export const registerService = ({ phone, password, name }) =>
   new Promise(async (resolve, reject) => {
     try {
+      const userId = v4()
       const response = await db.User.findOrCreate({
         where: { phone },
         defaults: {
           phone,
           name,
           password: hashPassword(password),
-          id: v4(),
+          id: userId,
           // publickey: publicKey,
         },
       })
-      const accessToken =
-        response[1] &&
-        jwt.sign(
-          { id: response[0].id, phone: response[0].phone },
-          process.env.SECRET_KEY,
-          {
-            expiresIn: `${process.env.JWT_EXPIRATION}s`,
-          },
-        )
+      console.log('🚀 ~ file: auth.js:43 ~ newPromise ~ response:', response)
+      const accessToken = response[1] && generateAccessToken(userId, phone)
       let refreshToken = await createToken(response[0].phone, response[0].id)
       resolve({
         err: accessToken ? 0 : 2,
@@ -63,7 +57,7 @@ export const registerService = ({ phone, password, name }) =>
       reject(error)
     }
   })
-export const loginService = ({ phone, password }) => 
+export const loginService = ({ phone, password }) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.User.findOne({
@@ -78,9 +72,11 @@ export const loginService = ({ phone, password }) =>
           refreshToken: null,
         })
       } else {
-        console.log("🚀 ~ file: auth.js:74 ~ newPromise ~ response:", response)
+        console.log('🚀 ~ file: auth.js:74 ~ newPromise ~ response:', response)
+
         const isCorrectPassword =
           response && bcrypt.compareSync(password, response.password)
+
         const accessToken =
           isCorrectPassword && generateAccessToken(response.id, response.phone)
         console.log(
@@ -118,6 +114,59 @@ export const loginService = ({ phone, password }) =>
             zalo: response.zalo,
           },
         })
+      }
+    } catch (error) {
+      reject(error)
+    }
+  })
+
+export const changePasswordService = (user, queries) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      console.log('id user', user.id)
+      console.log('queries', queries)
+      const id = user.id
+      const response = await db.User.findOne({
+        where: { id },
+        raw: true,
+      })
+      if (response === null) {
+        resolve({
+          err: 1,
+          msg: 'User not found',
+        })
+      } else {
+        const isCorrectPassword =
+          response && bcrypt.compareSync(queries.oldPassword, response.password)
+        console.log(
+          '🚀 ~ file: auth.js:140 ~ newPromise ~ isCorrectPassword:',
+          isCorrectPassword,
+        )
+        if (!isCorrectPassword) {
+          resolve({
+            err: 1,
+            msg: 'Wrong old password',
+          })
+        } else {
+          const updatedRows = await db.User.update(
+            {
+              password: hashPassword(queries.password),
+            },
+            {
+              where: { id },
+            },
+          )
+          console.log(
+            '🚀 ~ file: auth.js:155 ~ newPromise ~ updatedRows:',
+            updatedRows,
+          )
+          resolve({
+            err: updatedRows ? 0 : 1,
+            msg: updatedRows
+              ? 'Update password success'
+              : 'Update password failure',
+          })
+        }
       }
     } catch (error) {
       reject(error)

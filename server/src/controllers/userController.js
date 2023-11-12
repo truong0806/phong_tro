@@ -14,10 +14,22 @@ export const getUser = async (req, res) => {
     })
   }
 }
+export const changePhoneNumber = async (req, res) => {
+  const { id } = req.user
+  try {
+    const response = await service.changePhoneNumberService(id, req.body)
+    return res.status(200).json(response)
+  } catch (error) {
+    return res.status(500).json({
+      err: -1,
+      msg: 'Fail at user controller' + error,
+    })
+  }
+}
 export const editUserInfo = async (req, res) => {
   const { id } = req.user
   try {
-    const response = await service.userEditService(id, req.body)
+    const response = await service.editUserInfoService(id, req.body)
     return res.status(200).json(response)
   } catch (error) {
     return res.status(500).json({

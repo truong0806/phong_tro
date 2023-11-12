@@ -25,9 +25,7 @@ const User = ({ inSideBar }) => {
   }, [dispatch, isLoggedIn]);
 
   useEffect(() => {
-    console.log('🚀 ~ file: user.js:13 ~ User ~ msg:', msg);
-
-    if (msg)
+   if (msg)
       swal
         .fire('Oop !', 'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại', 'info')
         .then(() => {

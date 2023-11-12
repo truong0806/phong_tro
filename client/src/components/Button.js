@@ -14,13 +14,14 @@ function Button({
   width,
   height,
   margin,
-  padding,bfIcon,After
+  padding,bfIcon,After,onKeyDown
 }) {
   return (
     <button
       type="button"
       className={` px-2 ${margin}  ${padding} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md  lg:flex items-center justify-center gap-1`}
       onClick={onClick}
+      onKeyDown={onKeyDown}
     >
       <span className={bfIcon}>{IcBefor && <IcBefor size={IcBeforSize} />}</span>
       <span>{text}</span>

@@ -1,78 +1,118 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link, Navigate } from 'react-router-dom';
-import { Button } from '../../../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Button, Loading } from '../../../components';
 import { usePathname } from '../../../ultils/common/usePathname';
 import { InputText, InputTextReadOnly } from '../components';
-import { path } from '../../../ultils/constains';
+import { apiEditUserInfo } from '../../../service/user';
+import { toast } from 'react-toastify';
+import * as actions from '../../../store/action';
+import { apiUploadImages } from '../../../service';
 
 const EditProfile = () => {
   const pageTitle = usePathname();
-  const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [payload, setPayload] = useState({
+    name: userData?.name || '',
+    zalo: userData?.zalo || '',
+    fbUrl: userData?.fbUrl || '',
+    email: userData?.email || '',
+  });
+  const [invalidFields, setInvalidFields] = useState([]);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [imagesPreview, setImagesPreview] = useState([]);
-  const { msg } = useSelector((state) => state.auth);
-  console.log(
-    '🚀 ~ file: EditProfile.js:13 ~ EditProfile ~ imagesPreview:',
-    imagesPreview
-  );
   const [loading, setLoading] = useState(false);
-  console.log(
-    '🚀 ~ file: EditProfile.js:10 ~ EditProfile ~ userData:',
-    userData
-  );
+  const [changeImage, setChangeImages] = useState(false);
   useEffect(() => {
     if (!isLoggedIn || isLoggedIn === 'false') {
       window.location.href = '/auth/login';
     }
   }, [isLoggedIn]);
 
-  const [payload, setPayload] = useState(() => {
-    const initData = {
-      id: userData?.id,
+  useEffect(() => {
+    setPayload((prevPayload) => ({
+      ...prevPayload,
       name: userData?.name || '',
-      phone: userData?.phone || '',
       zalo: userData?.zalo || '',
       fbUrl: userData?.fbUrl || '',
-      avatar:
-        userData?.avatar || 'https://www.w3schools.com/w3images/avatar2.png',
-      email: '',
-    };
-    return initData;
-  });
-  console.log(
-    '🚀 ~ file: EditProfile.js:23 ~ const[payload,setPayload]=useState ~ payload:',
-    payload
-  );
+      email: userData?.email || '',
+    }));
+  }, [userData]);
+
+  useEffect(() => {
+    setImagesPreview(() => ({ files: 0, url: userData?.avatar }));
+  }, [userData]);
 
   const ImageChange = async (e) => {
+    e.preventDefault();
+    setChangeImages(true);
+    setLoading(false);
     setTimeout(() => {
       let files = e.target.files;
-      console.log('🚀 ~ file: EditProfile.js:44 ~ setTimeout ~ files:', files);
       for (let i of files) {
-        setImagesPreview(URL.createObjectURL(i));
+        setImagesPreview(() => ({ files: i, url: URL.createObjectURL(i) }));
       }
       setLoading(true);
     }, 1000);
   };
 
-  function dataURLtoBlob(dataURL) {
-    var arr = dataURL.split(','),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
+  const handleSubmit = async () => {
+    if (userData.id) {
+      const idLoad = toast.loading('Xin chờ...');
+      if (changeImage) {
+        let formData = new FormData();
+        formData.append('file', imagesPreview.files);
+        formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
+        let response = await apiUploadImages(formData);
+        if (response.status === 200) {
+          setPayload((prev) => ({
+            ...prev,
+            avatar: response?.data.secure_url,
+          }));
+        }
+      }
+      const finalPayload = {
+        ...payload,
+        avatar: changeImage
+          ? payload.avatar
+          : 'https://www.w3schools.com/w3images/avatar2.png',
+      };
+      console.log(
+        '🚀 ~ file: EditProfile.js:76 ~ handleSubmit ~ finalPayload:',
+        finalPayload
+      );
+      const result = await apiEditUserInfo(finalPayload);
+      if (result.data.err === 0) {
+        toast.update(idLoad, {
+          render: 'Đổi thông tin thành công',
+          type: 'success',
+          isLoading: false,
+          autoClose: 2000,
+        });
+        dispatch(actions.getUser());
+      } else {
+        toast.update(idLoad, {
+          render: 'Đổi thông tin thất bại',
+          type: 'error',
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
     }
-    return new Blob([u8arr], { type: mime });
-  }
+  };
 
   useEffect(() => {
-    setImagesPreview(
-      userData?.avatar || 'https://www.w3schools.com/w3images/avatar2.png'
-    );
+    const listener = (event) => {
+      if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+        event.preventDefault();
+        handleSubmit();
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
   }, []);
 
   return (
@@ -88,7 +128,7 @@ const EditProfile = () => {
               Mã thành viên
             </label>
             <div className="w-full ">
-              <InputTextReadOnly value={payload.id} styleInput={'w-[80%]'} />
+              <InputTextReadOnly value={userData?.id} styleInput={'w-[80%]'} />
             </div>
           </div>
           <div className="flex flex-row items-center ">
@@ -96,7 +136,10 @@ const EditProfile = () => {
               Số điện thoại
             </label>
             <div className="w-full flex flex-col ">
-              <InputTextReadOnly value={payload.phone} styleInput={'w-[80%]'} />
+              <InputTextReadOnly
+                value={userData?.phone}
+                styleInput={'w-[80%]'}
+              />
               <Link
                 target="_blank"
                 to={'doi-so-dien-thoai'}
@@ -132,7 +175,7 @@ const EditProfile = () => {
                 name={'email'}
                 invalidFields={invalidFields}
                 setInvalidFields={setInvalidFields}
-                typeInput={'text'}
+                typeInput={'email'}
                 setValue={setPayload}
                 styleInput={'max-w-[80%]'}
               />
@@ -156,7 +199,7 @@ const EditProfile = () => {
           </div>
           <div className="flex flex-row items-center ">
             <label className="whitespace-nowrap w-[20%] mb-[15px] ">
-              Facebook
+              Link Facebook
             </label>
             <div className="w-full ">
               <InputText
@@ -188,9 +231,12 @@ const EditProfile = () => {
             </label>
             <div className="w-full flex flex-col">
               <img
-                alt=""
-                className="object-cover w-[25%] rounded-[50%]"
-                src={imagesPreview}
+                alt="avatar"
+                className="object-cover w-28 h-28  rounded-full"
+                src={
+                  imagesPreview.url ||
+                  'https://www.w3schools.com/w3images/avatar2.png'
+                }
               ></img>
 
               <Button
@@ -199,9 +245,9 @@ const EditProfile = () => {
                   'mt-[5px] w-[25%] h-[35px] text-bold bg-[#f1f1f1] text-red-600'
                 }
                 onClick={() => {
-                  setPayload((prev) => ({
-                    ...prev,
-                    avatar: 'https://www.w3schools.com/w3images/avatar2.png',
+                  setChangeImages(false);
+                  setImagesPreview(() => ({
+                    url: 'https://www.w3schools.com/w3images/avatar2.png',
                   }));
                 }}
               />
@@ -220,6 +266,7 @@ const EditProfile = () => {
                     )
                   }
                   onChange={(e) => {
+                    e.preventDefault();
                     e.stopPropagation();
                     setLoading(false);
                     ImageChange(e);
@@ -229,18 +276,6 @@ const EditProfile = () => {
                   type="file"
                   id="file"
                 ></input>
-                <input
-                  onChange={(e) => {
-                    e.stopPropagation();
-                    setLoading(false);
-                    ImageChange(e);
-                  }}
-                  type="hidden"
-                  data-public-key="9bca2fc67db5a339d064"
-                  role="uploadcare-uploader"
-                  data-crop="1:1"
-                  data-images-only
-                ></input>
               </div>
             </div>
           </div>
@@ -249,6 +284,9 @@ const EditProfile = () => {
             width={
               'mt-[30px] w-[85%] h-[50px] text-bold bg-[#007bff] text-white'
             }
+            onClick={() => {
+              handleSubmit();
+            }}
           />
           <input type="hidden" name="user_id" value="133482"></input>
         </form>
