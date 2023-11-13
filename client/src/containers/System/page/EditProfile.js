@@ -121,128 +121,121 @@ const EditProfile = () => {
         <h1 className="text-[2rem] mt-2 py-[0.5rem] ">{pageTitle[0].text}</h1>
       </div>
       <div className="border-b-2"></div>
-      <div className="flex justify-center ml-[20%] w-[70%] mt-10 mb-[170px]">
-        <form className=" gap-4 flex flex-col w-full ">
-          <div className="flex flex-row items-center ">
-            <label className="whitespace-nowrap w-[20%] mb-[15px] ">
-              Mã thành viên
-            </label>
-            <div className="w-full ">
-              <InputTextReadOnly value={userData?.id} styleInput={'w-[80%]'} />
-            </div>
+      <div className="flex justify-center px-[30%] w-full mt-10 mb-[170px]">
+        <form className=" grid grid-cols-5 gap-y-5 w-full mt-5">
+          <div className="col-span-2 flex items-center h-full">
+            <label className="whitespace-nowrap">Mã thành viên</label>
           </div>
-          <div className="flex flex-row items-center ">
-            <label className="whitespace-nowrap w-[20%] mb-[35px] ">
-              Số điện thoại
-            </label>
-            <div className="w-full flex flex-col ">
-              <InputTextReadOnly
-                value={userData?.phone}
-                styleInput={'w-[80%]'}
-              />
-              <Link
-                target="_blank"
-                to={'doi-so-dien-thoai'}
-                className="text-[#007bff] hover:underline"
-              >
-                Đổi số điện thoại
-              </Link>
-            </div>
+          <div className="w-full h-full col-span-3">
+            <InputTextReadOnly
+              value={userData?.id}
+              styleComponent={''}
+              styleInput={'w-full'}
+            />
           </div>
-          <div className="flex flex-row items-center mt-[20px]">
-            <label className="whitespace-nowrap w-[20%] mb-[15px] ">
-              Tên hiển thị
-            </label>
-            <div className="w-full ">
-              <InputText
-                value={payload.name}
-                name={'name'}
-                invalidFields={invalidFields}
-                setInvalidFields={setInvalidFields}
-                typeInput={'text'}
-                setValue={setPayload}
-                styleInput={'max-w-[80%]'}
-              />
-            </div>
+          <div className="col-span-2 flex items-center h-full">
+            <label className="whitespace-nowrap">Số điện thoại</label>
           </div>
-          <div className="flex flex-row items-center ">
-            <label className="whitespace-nowrap w-[20%] mb-[15px] ">
-              Email
-            </label>
-            <div className="w-full ">
-              <InputText
-                value={payload.email}
-                name={'email'}
-                invalidFields={invalidFields}
-                setInvalidFields={setInvalidFields}
-                typeInput={'email'}
-                setValue={setPayload}
-                styleInput={'max-w-[80%]'}
-              />
-            </div>
+          <div className="w-full h-full col-span-3">
+            <InputTextReadOnly value={userData?.phone} styleInput={'w-full'} />
           </div>
-          <div className="flex flex-row items-center ">
-            <label className="whitespace-nowrap w-[20%] mb-[15px] ">
-              Số zalo
-            </label>
-            <div className="w-full ">
-              <InputText
-                value={payload.zalo}
-                name={'zalo'}
-                invalidFields={invalidFields}
-                setInvalidFields={setInvalidFields}
-                typeInput={'text'}
-                setValue={setPayload}
-                styleInput={'max-w-[80%]'}
-              />
-            </div>
+          <div className="col-span-2 flex items-center h-full"></div>
+          <div className="w-full h-full col-span-3">
+            <Link
+              target="_blank"
+              to={'doi-so-dien-thoai'}
+              className="text-[#007bff] hover:underline"
+            >
+              Đổi số điện thoại
+            </Link>
           </div>
-          <div className="flex flex-row items-center ">
-            <label className="whitespace-nowrap w-[20%] mb-[15px] ">
-              Link Facebook
-            </label>
-            <div className="w-full ">
-              <InputText
-                value={payload.fbUrl}
-                name={'fbUrl'}
-                invalidFields={invalidFields}
-                setInvalidFields={setInvalidFields}
-                typeInput={'text'}
-                setValue={setPayload}
-                styleInput={'max-w-[80%]'}
-              />
-            </div>
+          <div className="col-span-2 flex items-center h-full pt-5">
+            <label className="whitespace-nowrap">Tên hiển thị</label>
           </div>
-          <div className="flex flex-row items-center  mt-[20px] mb-[15px] ">
-            <label className="whitespace-nowrap w-[20%] ">Mật khẩu</label>
-            <div className="w-full ">
-              <Link
-                to={'doi-mat-khau'}
-                target="_blank"
-                className="hover:underline text-[#007bff] "
-              >
-                Đổi mật khẩu
-              </Link>
-            </div>
+          <div className="w-full h-full col-span-3 pt-5">
+            <InputText
+              value={payload.name}
+              name={'name'}
+              invalidFields={invalidFields}
+              setInvalidFields={setInvalidFields}
+              typeInput={'text'}
+              setValue={setPayload}
+              styleInput={'w-full'}
+            />
           </div>
-          <div className="flex flex-row items-center ">
-            <label className="whitespace-nowrap w-[20%] mb-[15px] ">
-              Ảnh đại diện
-            </label>
-            <div className="w-full flex flex-col">
+          <div className="col-span-2 flex items-center h-full">
+            <label className="whitespace-nowrap">Email</label>
+          </div>
+          <div className="w-full h-full col-span-3">
+            <InputText
+              value={payload.email}
+              name={'email'}
+              invalidFields={invalidFields}
+              setInvalidFields={setInvalidFields}
+              typeInput={'email'}
+              setValue={setPayload}
+              styleInput={'w-full'}
+            />
+          </div>
+          <div className="col-span-2 flex items-center h-full">
+            <label className="whitespace-nowrap">Số zalo</label>
+          </div>
+          <div className="w-full h-full col-span-3">
+            <InputText
+              value={payload.zalo}
+              name={'zalo'}
+              invalidFields={invalidFields}
+              setInvalidFields={setInvalidFields}
+              typeInput={'text'}
+              setValue={setPayload}
+              styleInput={'w-full'}
+            />
+          </div>
+          <div className="col-span-2 flex items-center h-full">
+            <label className="whitespace-nowrap">Link Facebook</label>
+          </div>
+          <div className="w-full h-full col-span-3">
+            <InputText
+              value={payload.fbUrl}
+              name={'fbUrl'}
+              invalidFields={invalidFields}
+              setInvalidFields={setInvalidFields}
+              typeInput={'text'}
+              setValue={setPayload}
+              styleInput={'w-full'}
+            />
+          </div>
+          <div className="col-span-2 flex items-center h-full pt-5">
+            <label className="whitespace-nowrap">Mật khẩu</label>
+          </div>
+          <div className="w-full h-full col-span-3 pt-5">
+            <Link
+              to={'doi-mat-khau'}
+              target="_blank"
+              className="hover:underline text-[#007bff] "
+            >
+              Đổi mật khẩu
+            </Link>
+          </div>
+          <div className="col-span-2 flex items-center h-full pt-5">
+            <label className="whitespace-nowrap">Ảnh đại diện</label>
+          </div>
+          <div className="w-full h-full col-span-3 pt-5">
+            <div className="w-full flex justify-center ">
               <img
                 alt="avatar"
-                className="object-cover w-28 h-28  rounded-full"
+                className="object-cover w-[140px] h-[140px]  rounded-full"
                 src={
                   imagesPreview.url ||
                   'https://www.w3schools.com/w3images/avatar2.png'
                 }
               ></img>
-
+            </div>
+            <div className="w-full flex justify-center ">
               <Button
                 text={`Xóa hình này`}
                 width={
-                  'mt-[5px] w-[25%] h-[35px] text-bold bg-[#f1f1f1] text-red-600'
+                  'mt-[5px] w-full h-[35px] text-bold bg-[#f1f1f1] text-red-600'
                 }
                 onClick={() => {
                   setChangeImages(false);
@@ -251,7 +244,9 @@ const EditProfile = () => {
                   }));
                 }}
               />
-              <div className="mt-[5px] w-[25%] h-[35px] text-bold bg-[#f1f1f1] text-black">
+            </div>
+            <div className="w-full flex justify-center ">
+              <div className="mt-[5px] w-full h-[35px] text-bold bg-[#f1f1f1] text-black">
                 <label
                   htmlFor="file"
                   className="cursor-pointer p-[0.5rem] items-center justify-center flex flex-col"
@@ -279,16 +274,6 @@ const EditProfile = () => {
               </div>
             </div>
           </div>
-          <Button
-            text={`Lưu & Cập nhật`}
-            width={
-              'mt-[30px] w-[85%] h-[50px] text-bold bg-[#007bff] text-white'
-            }
-            onClick={() => {
-              handleSubmit();
-            }}
-          />
-          <input type="hidden" name="user_id" value="133482"></input>
         </form>
       </div>
     </div>

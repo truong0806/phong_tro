@@ -17,7 +17,7 @@ const InputText = ({
   }
   return (
     <div>
-      <div className={`flex flex-col mb-[15px] `}>
+      <div className={`flex flex-col`}>
         {label && (
           <label
             className={`${

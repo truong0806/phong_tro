@@ -3,13 +3,13 @@ import React from 'react';
 const InputTextReadOnly = ({
   label,
   styleInput,
-  styleLable,
+  styleComponent,
   value,
   readonly,
 }) => {
   return (
     <div>
-      <div className={`flex flex-col mb-[14px]  ${styleLable}`}>
+      <div className={`flex flex-col  ${styleComponent}`}>
         <label className="font-bold">{label}</label>
         <input
           type="text"

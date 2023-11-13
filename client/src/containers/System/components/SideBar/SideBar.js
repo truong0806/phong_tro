@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const SideBar = () => {
   return (
-    <div className="w-[200px] p-[20px] justify-center overflow-x-hidden overflow-y-auto left-0 bottom-0 bg-[#f8f9fa] min-h-[90vh] fixed top-[45px] border-r border-[#e6e6e6]">
+    <div className="hidden md:block w-1/6 p-[20px] justify-center overflow-x-hidden overflow-y-auto left-0 bottom-0 bg-[#f8f9fa] min-h-[90vh] fixed top-[45px] border-r border-[#e6e6e6]">
       <nav className=" ">
         <User inSideBar={true} />
         <div className="flex items-center justify-center gap-2 mb-[10px]">

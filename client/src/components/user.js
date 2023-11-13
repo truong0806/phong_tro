@@ -40,14 +40,15 @@ const User = ({ inSideBar }) => {
       <div
         className={`${
           inSideBar
-            ? 'flex flex-row w-full'
+            ? 'flex flex-col w-full'
             : 'z-60 flex flex-row justify-center left-2  w-[240px] h-[70px] '
         }`}
       >
+        <div className='w-full flex item-center justify-center'>
         <img
           className={`${
             inSideBar
-              ? 'w-[50px] h-[50px] rounded-[50%] '
+              ? 'w-[100px] h-[100px] rounded-[50%] '
               : 'w-[40px] h-[40px] justify-center items-center mt-[6px] rounded-[50%] mr-[10px]'
           }`}
           src={
@@ -55,6 +56,7 @@ const User = ({ inSideBar }) => {
           }
           alt=""
         />
+        </div>
         <div
           className={
             inSideBar
@@ -70,6 +72,7 @@ const User = ({ inSideBar }) => {
               '...'
             )}
           </span>
+          <div className='flex items-center justify-center'>
           <span className="mt-1 gap-1 flex flex-row whitespace-nowrap text-[0.8rem]">
             {inSideBar ? '' : 'Số điện thoại: '}
             {isLoading ? (
@@ -78,10 +81,12 @@ const User = ({ inSideBar }) => {
               '...'
             )}
           </span>
+          </div>
 
           <span className="text-[0.9rem]"></span>
         </div>
       </div>
+
       {inSideBar ? (
         <div className=" p-1 flex flex-col  text-[0.9rem] mb-[14px] gap-2">
           <span className="whitespace-nowrap flex flex-row   text-ellipsis w-[150px]">
