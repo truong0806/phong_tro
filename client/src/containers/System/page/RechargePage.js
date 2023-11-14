@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { depositMethod } from '../../../ultils/constains';
 import { usePathname } from '../../../ultils/common/usePathname';
+import DialogWithAgree from '../components/DialogWithAgree';
 
 const RechargePage = () => {
   const pageTitle = usePathname();
-
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState('');
+  const handleClickOpenDialog = () => {
+    setOpen(true);
+  };
   return (
     <div>
       <div className=" items-center  pb-2 mb-3 ">
@@ -20,7 +25,13 @@ const RechargePage = () => {
           <div className="flex flex-wrap  gap-8 basis-1/3 ">
             {depositMethod?.map((item) => {
               return (
-                <div className="group w-[28%] border rounded-sm mb-[20px] h-[161px] hover:border-[#0074e4] hover:shadow-4xl ">
+                <div
+                  onClick={()=>{
+                    handleClickOpenDialog()
+                    setTitle(item.id)
+                  }}
+                  className="group w-[28%] border rounded-sm mb-[20px] h-[161px] hover:border-[#0074e4] hover:shadow-4xl "
+                >
                   <Link className="w-full h-full text-center flex flex-col">
                     <div className="h-[120px] w-full flex items-center justify-center ">
                       <img
@@ -107,6 +118,7 @@ const RechargePage = () => {
           <div className=""></div>
         </div>
       </div>
+      {open && <DialogWithAgree setOpen={setOpen} open={open} title={title} />}
     </div>
   );
 };

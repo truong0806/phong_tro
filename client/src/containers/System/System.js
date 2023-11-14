@@ -21,10 +21,12 @@ const System = () => {
   return (
     <div className="w-full  flex-col items-center">
       <Header />
-      <div className="flex w-full h-full flex-auto">
-        <SideBar />
-        <div className="flex-auto w-5/6  h-full pt-[60px] ml-[200px] px-[42px] bg-white ">
-          <ToastContainer/>
+      <div className="md:grid md:grid-cols-6">
+        <div className="md:col-span-1 h-full">
+          <SideBar />
+        </div>
+        <div className="md:col-span-5 w-full h-full pt-[60px] pb-[56px] px-[42px] bg-white ">
+          <ToastContainer />
           <Breadcrumb
             location={location.pathname}
             fatherPath={'quan-ly'}

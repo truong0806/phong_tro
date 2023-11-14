@@ -95,8 +95,29 @@ export const depositMethod = [
   },
   {
     id: 7,
-    value: 'QQuét mã QRCode',
+    value: 'Quét mã QRCode',
     imgUrl: 'https://phongtro123.com/images/qr-code.png',
+  },
+];
+export const dataBank = [
+  {
+    id: 0,
+    bankName: `<strong style="color: red">VIETCOMBANK</strong>}
+    - NGÂN HÀNG THƯƠNG MẠI CỔ PHẦN NGOẠI THƯƠNG VIỆT NAM`,
+    accountOwner: 'Công ty TNHH LBKCORP',
+    accountNumber: '0071001050516',
+    branch: 'CN HỒ CHÍ MINH',
+    Content: `Nội dung chuyển khoản, bạn ghi rõ: `,
+  },
+  {
+    id: 1,
+    bankName: `${(
+      <strong style="color: red">ACB</strong>
+    )} - NGÂN HÀNG THƯƠNG MẠI CỔ PHẦN Á CHÂU	`,
+    accountOwner: 'Công ty TNHH LBKCORP',
+    accountNumber: '150590888',
+    branch: 'Đông Sài Gòn',
+    Content: `Nội dung chuyển khoản, bạn ghi rõ: `,
   },
 ];
 

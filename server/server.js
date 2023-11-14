@@ -13,7 +13,7 @@ import checkExpiredRefeshToken from './src/middleware/checkExpiredRefeshToken'
 import updateCategoryCount from './src/ultils/updateCategoryCount'
 import generateDate from './src/ultils/generateDate'
 import { checkOtpExpiredRunEvery1min } from './src/middleware/checkOtpExpired'
-
+import morgan from 'morgan'
 // const options = {
 //   key: fs.readFileSync(path.join(__dirname, 'src/ultils/key', 'localhost.key')),
 //   cert: fs.readFileSync(
@@ -21,6 +21,7 @@ import { checkOtpExpiredRunEvery1min } from './src/middleware/checkOtpExpired'
 //   ),
 // }
 // app.use(requireToken)
+app.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
 app.use(
   cors({
     origin: process.env.CLIENT_URL,

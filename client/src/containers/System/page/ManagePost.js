@@ -24,7 +24,6 @@ const ManagePost = () => {
   const [categoryCode] = useState('none');
   const [bonusType, setBonusType] = useState('');
   const [status, setStatus] = useState('');
-  const [itemEdit, setItemEdit] = useState('');
   const [updateData, setUpdateData] = useState(false);
 
   useEffect(() => {
@@ -61,7 +60,6 @@ const ManagePost = () => {
 
   const handShowPopup = (e, item) => {
     e.stopPropagation();
-    setItemEdit(item);
     setShowPopup(true);
   };
 

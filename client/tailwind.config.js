@@ -32,6 +32,7 @@ module.exports = {
         secondary2: '#f73859',
         'overlay-30': 'rgba(0,0,0,0.3)',
         'overlay-70': 'rgba(0,0,0,0.7)',
+        'title-table': 'rgba(0,0,0,.05)',
       },
       maxWidth: {
         600: '600px',
@@ -48,6 +49,7 @@ module.exports = {
         'star-bg': "url('/src/assets/star2.png')",
         menu: "url('/src/assets/menu.svg')",
         dashboard_user: "url('/src/assets/uicon-dashboard.svg')",
+        logo: "url('/src/assets/logo_70.png')",
       },
     },
     fontFamily: {
@@ -57,8 +59,8 @@ module.exports = {
       sm: '640px',
       // => @media (min-width: 640px) { ... }
       // md: '768px',
-      md: {'min': '992px'},
-       // => @media (min-width: 768px) { ... }
+      md: { min: '992px' },
+      // => @media (min-width: 768px) { ... }
       lg: '1024px',
       // => @media (min-width: 1024px) { ... }
       xl: '1280px',

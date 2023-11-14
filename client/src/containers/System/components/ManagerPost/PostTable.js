@@ -10,10 +10,8 @@ const { RiDeleteBin6Line, RiEdit2Line } = icons;
 const PostTable = ({
   loading,
   posts_limit_admin,
-  setShowPopup,
   handShowPopup,
   handleDeletePost,
-  setIsEdit
   
 }) => {
   const dispatch = useDispatch();
@@ -128,7 +126,6 @@ const PostTable = ({
                           onClick={(e) => {
                             dispatch(actions.editPostsLimit(item));
                             handShowPopup(e);
-                            setIsEdit(true)
                           }}
                           className="flex justify-center"
                         >
