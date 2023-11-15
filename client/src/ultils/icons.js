@@ -25,10 +25,12 @@ import {
   RiEdit2Line
 } from 'react-icons/ri';
 import { TbReportMoney, TbDiscount2 } from 'react-icons/tb';
+import { FaChevronRight } from "react-icons/fa6";
 import { MdOutlineHouseSiding } from 'react-icons/md';
 import { LuLayoutDashboard } from 'react-icons/lu';
 
 const icon = {
+  FaChevronRight,
   AiOutlineClose,
   RiDeleteBin6Line,
   RiEdit2Line,

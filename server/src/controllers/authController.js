@@ -63,7 +63,7 @@ export const refreshToken = async (req, res) => {
   const { refreshTokens } = req.body
 
   if (refreshTokens == null) {
-    return res.status(403).json({ msg: 'Refresh Token is required!' })
+    return res.status(403).json({ err: 1, msg: 'Refresh Token is required!' })
   }
 
   try {
@@ -123,10 +123,7 @@ export const refreshTokenDelete = async (req, res) => {
 }
 export const changePassword = async (req, res) => {
   try {
-    const response = await authService.changePasswordService(
-      req.user,
-      req.body,
-    )
+    const response = await authService.changePasswordService(req.user, req.body)
     return res.status(200).json(response)
   } catch (err) {
     console.log(err)

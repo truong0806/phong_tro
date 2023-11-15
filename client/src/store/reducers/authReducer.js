@@ -5,26 +5,43 @@ const initState = {
   accessToken: '',
   refreshToken: '',
   phone: '',
-  msg: '',
+  msgLogin: '',
+  msgRegister: '',
+  msgRegisterSuccess: '',
   update: false,
 };
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.REGISTER_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        accessToken: action?.data?.accessToken,
+        refreshToken: action?.data?.refreshToken,
+        msgRegisterSuccess: action.data.msg || '',
+      };
     case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
-        accessToken: action.data.accessToken,
-        refreshToken: action.data.refreshToken,
+        accessToken: action?.data?.accessToken,
+        refreshToken: action?.data?.refreshToken,
       };
     case actionTypes.REGISTER_FAIL:
+      return {
+        ...state,
+        isLoggedIn: false,
+        msgRegister: action.data || '',
+        accessToken: null,
+        refreshToken: null,
+        update: !state.update,
+      };
     case actionTypes.LOGIN_FAIL:
       return {
         ...state,
         isLoggedIn: false,
-        msg: action.data,
+        msgLogin: action.data || '',
         accessToken: null,
         refreshToken: null,
         update: !state.update,
@@ -51,6 +68,13 @@ const authReducer = (state = initState, action) => {
         accessToken: null,
         refreshToken: null,
         msg: action.msg,
+      };
+    case actionTypes.CLEAR_MSG_AUTH:
+      return {
+        ...state,
+        msgLogin: '',
+        msgRegister: '',
+        msgRegisterSuccess: '',
       };
     default:
       return state;

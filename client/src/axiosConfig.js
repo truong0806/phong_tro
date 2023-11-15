@@ -38,19 +38,20 @@ instance.interceptors.response.use(
           const response = await instance.post('auth/refreshtoken', {
             refreshTokens: rs,
           });
-          // if (response.data.err === 1) {
-          //   dispatch(actions.logout());
-          //   Swal.fire(
-          //     'Oop !',
-          //     'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại',
-          //     'info'
-          //   ).then(() => {
-          //     dispatch(actions.clearMsg());
-          //     dispatch(actions.logout());
-          //     window.location.href = '/auth/login';
-          //   });
-          // }
-          dispatch(actions.setAuthTokens(response.data.accessToken, rs));
+          if (response.data.err === 1) {
+            dispatch(actions.logout());
+            Swal.fire(
+              'Oop !',
+              'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại',
+              'info'
+            ).then(() => {
+              dispatch(actions.clearMsg());
+              dispatch(actions.logout());
+              window.location.href = '/auth/login';
+            });
+          } else {
+            dispatch(actions.setAuthTokens(response.data.accessToken, rs));
+          }
 
           return instance(originalConfig);
         } catch (_error) {

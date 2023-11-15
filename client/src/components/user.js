@@ -12,6 +12,8 @@ const User = ({ inSideBar }) => {
   const navigate = useNavigate();
   const { userData } = useSelector((state) => state.user);
   const { msg } = useSelector((state) => state.auth);
+  const { msg1 } = useSelector((state) => state.user);
+  console.log('🚀 ~ file: user.js:16 ~ User ~ msg1:', msg1);
   const [isLoading, setIsLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
@@ -19,13 +21,13 @@ const User = ({ inSideBar }) => {
     setIsLoading(false);
     isLoggedIn &&
       setTimeout(() => {
-        dispatch(actions.getUser())
+        dispatch(actions.getUser());
         setIsLoading(true);
       }, 300);
   }, [dispatch, isLoggedIn]);
 
   useEffect(() => {
-   if (msg)
+    if (msg || msg1)
       swal
         .fire('Oop !', 'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại', 'info')
         .then(() => {
@@ -44,18 +46,19 @@ const User = ({ inSideBar }) => {
             : 'z-60 flex flex-row justify-center left-2  w-[240px] h-[70px] '
         }`}
       >
-        <div className='w-full flex item-center justify-center'>
-        <img
-          className={`${
-            inSideBar
-              ? 'w-[100px] h-[100px] rounded-[50%] '
-              : 'w-[40px] h-[40px] justify-center items-center mt-[6px] rounded-[50%] mr-[10px]'
-          }`}
-          src={
-            userData.avatar || 'https://phongtro123.com/images/default-user.png'
-          }
-          alt=""
-        />
+        <div className="w-full flex item-center justify-center">
+          <img
+            className={`${
+              inSideBar
+                ? 'w-[100px] h-[100px] rounded-[50%] '
+                : 'w-[40px] h-[40px] justify-center items-center mt-[6px] rounded-[50%] mr-[10px]'
+            }`}
+            src={
+              userData.avatar ||
+              'https://phongtro123.com/images/default-user.png'
+            }
+            alt=""
+          />
         </div>
         <div
           className={
@@ -72,15 +75,15 @@ const User = ({ inSideBar }) => {
               '...'
             )}
           </span>
-          <div className='flex items-center justify-center'>
-          <span className="mt-1 gap-1 flex flex-row whitespace-nowrap text-[0.8rem]">
-            {inSideBar ? '' : 'Số điện thoại: '}
-            {isLoading ? (
-              <CopyButton valueCopy={userData.phone} text={userData.phone} />
-            ) : (
-              '...'
-            )}
-          </span>
+          <div className="flex items-center justify-center">
+            <span className="mt-1 gap-1 flex flex-row whitespace-nowrap text-[0.8rem]">
+              {inSideBar ? '' : 'Số điện thoại: '}
+              {isLoading ? (
+                <CopyButton valueCopy={userData.phone} text={userData.phone} />
+              ) : (
+                '...'
+              )}
+            </span>
           </div>
 
           <span className="text-[0.9rem]"></span>

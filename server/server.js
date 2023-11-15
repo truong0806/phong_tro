@@ -21,16 +21,22 @@ import morgan from 'morgan'
 //   ),
 // }
 // app.use(requireToken)
-app.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
+app.use(morgan(':method :url :status :response-time ms - :res[content-length]'))
+const allowedOrigins = ['http://localhost:3000', 'https://sandbox.vnpayment.vn'];
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    exposedHeaders: ['Content-Range'],
-  }),
-)
+    origin: function (origin, callback) {
+      // Check if the origin is in the allowed list, or if it's a non-browser request
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  })
+);
 
-checkOtpExpiredRunEvery1min.invoke();
+checkOtpExpiredRunEvery1min.invoke()
 // updateCategoryCount()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

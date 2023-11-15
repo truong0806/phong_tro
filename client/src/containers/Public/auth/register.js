@@ -16,11 +16,16 @@ import {
 
 function Register() {
   const navigate = useNavigate();
-  const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
+  const { isLoggedIn, msgRegister, msgRegisterSuccess } = useSelector(
+    (state) => state.auth
+  );
+  console.log(
+    '🚀 ~ file: register.js:20 ~ Register ~ msgRegisterSuccess:',
+    msgRegisterSuccess
+  );
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
   const [capslock, setCapslock] = useState(false);
-  console.log('🚀 ~ file: register.js:23 ~ Register ~ capslock:', capslock);
   const [payload, setPayload] = useState({
     phone: '',
     password: '',
@@ -39,18 +44,26 @@ function Register() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    msg && Swal.fire('Lỗi', msg, 'error');
-  }, [msg]);
+    msgRegister && Swal.fire('Lỗi', 'Số điện thoại đã được sử dụng', 'error');
+    dispatch(actions.clearMsgAuth());
+  }, [msgRegister, dispatch]);
+
   useEffect(() => {
-    msg && Swal.fire('Oops !', msg, 'error');
-  }, [msg, update]);
+    msgRegisterSuccess &&
+      Swal.fire({
+        icon: 'success',
+        title: 'Đăng ký thành công',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    dispatch(actions.clearMsgAuth());
+  }, [msgRegisterSuccess, dispatch]);
+
   const handleSubmit = async () => {
     const finalinvalids = payload;
     const invalids = validate(finalinvalids, 'Đăng ký', setInvalidFields);
     if (invalids === 0) {
       dispatch(actions.register(payload));
-      Swal.fire('Done', 'Đăng ký thành công', 'success');
-      navigate('/');
     }
   };
 

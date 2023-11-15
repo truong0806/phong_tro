@@ -6,6 +6,7 @@ import priceRouter from './prices'
 import areaRouter from './areas'
 import provinceRouter from './province'
 import userRouter from './user'
+import rechargeRouter from './rechange'
 const swaggerUI = require('swagger-ui-express')
 const docs = require('../../doc')
 
@@ -17,7 +18,8 @@ const initRoutes = (app) => {
   app.use('/api/v1/price', priceRouter)
   app.use('/api/v1/area', areaRouter)
   app.use('/api/v1/province', provinceRouter)
-  app.use('/api/v1/user',  userRouter)
+  app.use('/api/v1/user', userRouter)
+  app.use('/api/v1/recharge', rechargeRouter)
   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(docs))
   return app.use('/', (req, res) => {
     res.send('server on...')

@@ -19,7 +19,7 @@ function Button({
   return (
     <button
       type="button"
-      className={` px-2 ${margin}  ${padding} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md  lg:flex items-center justify-center gap-1`}
+      className={`cursor-pointer px-2 ${margin}  ${padding} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md  lg:flex items-center justify-center gap-1`}
       onClick={onClick}
       onKeyDown={onKeyDown}
     >

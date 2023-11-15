@@ -26,7 +26,6 @@ const UploadVideos = ({ setValue }) => {
                 fill="#000000"
                 fillRule="nonzero"
                 stroke="none"
-                strokeWidth="1"
                 strokeLinecap="butt"
                 strokeLinejoin="miter"
                 strokeMiterlimit="10"

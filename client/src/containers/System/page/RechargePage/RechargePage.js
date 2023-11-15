@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { depositMethod } from '../../../ultils/constains';
-import { usePathname } from '../../../ultils/common/usePathname';
-import DialogWithAgree from '../components/DialogWithAgree';
+import { depositMethod } from '../../../../ultils/constains';
+import { usePathname } from '../../../../ultils/common/usePathname';
+import DialogWithAgree from '../../components/DialogWithAgree';
 
 const RechargePage = () => {
   const pageTitle = usePathname();
@@ -26,13 +26,16 @@ const RechargePage = () => {
             {depositMethod?.map((item) => {
               return (
                 <div
-                  onClick={()=>{
-                    handleClickOpenDialog()
-                    setTitle(item.id)
+                  onClick={() => {
+                    handleClickOpenDialog();
+                    setTitle(item.id);
                   }}
                   className="group w-[28%] border rounded-sm mb-[20px] h-[161px] hover:border-[#0074e4] hover:shadow-4xl "
                 >
-                  <Link className="w-full h-full text-center flex flex-col">
+                  <Link
+                    to={`${item.url}`}
+                    className="w-full h-full text-center flex flex-col"
+                  >
                     <div className="h-[120px] w-full flex items-center justify-center ">
                       <img
                         alt="avatar"
@@ -68,9 +71,6 @@ const RechargePage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
                 class="feather feather-chevron-right"
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -87,9 +87,6 @@ const RechargePage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
                 class="feather feather-chevron-right"
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -106,9 +103,6 @@ const RechargePage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
                 class="feather feather-chevron-right"
               >
                 <polyline points="9 18 15 12 9 6"></polyline>

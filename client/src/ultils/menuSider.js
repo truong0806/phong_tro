@@ -3,19 +3,21 @@ const menuSider = [
     id: 0,
     text: 'Đăng tin mới',
     path: 'dang-tin-moi',
-
   },
   {
     id: 0,
     text: 'Đổi số điện thoại',
     path: 'cap-nhat-thong-tin-ca-nhan/doi-so-dien-thoai',
-
   },
   {
     id: 0,
     text: 'Đổi mật khẩu',
     path: 'cap-nhat-thong-tin-ca-nhan/doi-mat-khau',
-
+  },
+  {
+    id: 0,
+    text: 'Thẻ ngân hàng nội địa (ATM Internet Banking)',
+    path: 'nap-tien/atm-internet-banking',
   },
   {
     id: 1,
@@ -29,7 +31,6 @@ const menuSider = [
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         className="feather feather-file-text"
@@ -54,7 +55,6 @@ const menuSider = [
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         className="feather feather-edit"
@@ -76,7 +76,6 @@ const menuSider = [
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         className="feather feather-dollar-sign"
@@ -98,7 +97,6 @@ const menuSider = [
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         className="feather feather-clock"
@@ -120,7 +118,6 @@ const menuSider = [
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         className="feather feather-calendar"
@@ -144,7 +141,6 @@ const menuSider = [
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         className="feather feather-clipboard"
@@ -166,7 +162,6 @@ const menuSider = [
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         className="feather feather-message-circle"

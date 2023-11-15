@@ -41,7 +41,6 @@ const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
               stroke="currentColor"
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
               d="m1 9 4-4-4-4"
             />
           </svg>
@@ -68,7 +67,6 @@ const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
                   stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth="2"
                   d="m1 9 4-4-4-4"
                 />
               </svg>
@@ -95,7 +93,6 @@ const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
               stroke="currentColor"
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
               d="m1 9 4-4-4-4"
             />
           </svg>

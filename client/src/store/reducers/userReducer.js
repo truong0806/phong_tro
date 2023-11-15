@@ -3,6 +3,7 @@ import actionTypes from '../action/actionTypes';
 const initState = {
   userData: {},
   msg: '',
+  msg1: '',
 };
 
 const userReducer = (state = initState, action) => {
@@ -12,6 +13,12 @@ const userReducer = (state = initState, action) => {
         ...state,
         userData: action.userData || {},
         msg: action.msg || '',
+      };
+    case actionTypes.GET_USER_FAIL:
+      return {
+        ...state,
+        userData: {},
+        msg1: action.msg,
       };
     case actionTypes.CLEAR_MSG:
       return {

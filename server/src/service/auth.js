@@ -49,7 +49,7 @@ export const registerService = ({ phone, password, name }) =>
           ? 'Register is successfully !'
           : 'Phone number has been aldready used !',
         accessToken: accessToken || null,
-        refreshToken: refreshToken || null,
+        refreshToken: accessToken ? refreshToken : null,
         // publicKey: publicKey,
         // privateKey: privateKey,
       })

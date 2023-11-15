@@ -43,3 +43,20 @@ select:focus {
   background-size: contain;
   margin-left: 10px;
 }
+h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+
+@layer utilities {
+  .center-xy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+

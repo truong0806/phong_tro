@@ -14,7 +14,7 @@ const MenuAdmin = () => {
   return (
     <div>
       <ul className="mx-[-20px] mb-[15px] px-[15px] ">
-        {menuSider.slice(3)?.map((item) => {
+        {menuSider.slice(4)?.map((item) => {
           return (
             <NavLink
               to={item.path}
@@ -41,7 +41,6 @@ const MenuAdmin = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className="feather feather-log-out"

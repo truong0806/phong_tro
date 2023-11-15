@@ -1,9 +1,5 @@
 import actionTypes from './actionTypes';
-import {
-  apiRegister,
-  apiLogin,
-  apiRefeshToken,
-} from '../../service/auth';
+import { apiRegister, apiLogin, apiRefeshToken } from '../../service/auth';
 
 export const register = (payload) => async (dispatch) => {
   try {
@@ -80,11 +76,17 @@ export const setAuthTokens =
       refreshToken: refreshToken,
     });
   };
-export const setMsgExpiredToken = (msg) => async (dispatch) => {
+export const setMsgExpiredToken = (type) => async (dispatch) => {
   dispatch({
-    type: actionTypes.REFRESH_TOKEN_FAIL,
-    msg: msg,
+    type: type === 'login' ? actionTypes.LOGIN_FAIL : actionTypes.REGISTER_FAIL,
+    msg: '',
   });
 };
+export const clearMsgAuth = () => async (dispatch) => {
+  dispatch({
+    type: actionTypes.CLEAR_MSG_AUTH,
+  });
+};
+
 
 export default setAuthTokens;

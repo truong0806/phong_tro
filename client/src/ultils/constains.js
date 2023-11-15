@@ -21,6 +21,7 @@ export const path = {
   CHANGE_PASSWORD: 'cap-nhat-thong-tin-ca-nhan/doi-mat-khau',
   DEPOSIT_HISTORY: 'lich-su-nap-tien',
   PAYMENT_HISTORY: 'lich-su-thanh-toan',
+  PAYMENT_WITH_INTERNET_BANKING: 'nap-tien/atm-internet-banking',
 };
 
 export const text = {
@@ -62,41 +63,49 @@ export const depositMethod = [
     id: 0,
     value: 'Chuyển khoản',
     imgUrl: 'https://phongtro123.com/images/bank-transfer.png',
+    url: '',
   },
   {
     id: 1,
     value: 'Thẻ ATM Internet Banking',
     imgUrl: 'https://phongtro123.com/images/payment-method.svg',
+    url: 'atm-internet-banking',
   },
   {
     id: 2,
     value: 'Thẻ tín dụng quốc tế',
     imgUrl: 'https://phongtro123.com/images/credit-card.png',
+    url: 'the-tin-dung',
   },
   {
     id: 3,
     value: 'MOMO',
     imgUrl: 'https://phongtro123.com/images/momo.png',
+    url: 'momo',
   },
   {
     id: 4,
     value: 'ZaloPay',
     imgUrl: 'https://phongtro123.com/images/zalopay.png',
+    url: 'zalo',
   },
   {
     id: 5,
     value: 'ShopeePay',
     imgUrl: 'https://phongtro123.com/images/shopeepay2.svg',
+    url: 'shopeepay',
   },
   {
     id: 6,
     value: 'Điểm giao dịch, cửa hàng tiện lợi',
     imgUrl: 'https://phongtro123.com/images/online-store.svg',
+    url: 'cua-hang-tien-loi',
   },
   {
     id: 7,
     value: 'Quét mã QRCode',
     imgUrl: 'https://phongtro123.com/images/qr-code.png',
+    url: 'qr-code',
   },
 ];
 export const dataBank = [
@@ -118,6 +127,41 @@ export const dataBank = [
     accountNumber: '150590888',
     branch: 'Đông Sài Gòn',
     Content: `Nội dung chuyển khoản, bạn ghi rõ: `,
+  },
+];
+export const promotionRechange = [
+  {
+    id: 0,
+    expireday: '16/11/2023',
+    page: 'atm-internet-banking',
+    styleUser: 'user',
+    h3: 'Khuyến mãi áp dụng từ ngày 10/11/2023 - 15/11/2023',
+    content: [
+      'Tặng thêm <strong>+15%</strong> cho giá trị nạp từ 100.000đ đến dưới 500.000đ',
+      'Tặng thêm <strong>+20%</strong> cho giá trị nạp từ 500.000đ đến dưới 1.000.000đ',
+      'Tặng thêm <strong>+30%</strong> cho giá trị nạp từ 1.000.000đ',
+    ],
+  },
+  {
+    id: 1,
+    expireday: '25/11/2023',
+    page: 'atm-internet-banking',
+    styleUser: 'newuser',
+    h3: 'Đối với tài khoản mới đăng kí',
+    content: [
+      'Tặng thêm <strong>+50%</strong> cho lần nạp đầu tiên tối thiểu 100.000đ trong vòng 5 ngày sau khi đăng tí tài khoản.',
+    ],
+  },
+  {
+    id: 2,
+    expireday: '25/11/2023',
+    page: 'atm-internet-banking',
+    styleUser: 'alert',
+    h3: '',
+    content: [
+      'Lưu ý quan trọng: Trong quá trình thanh toán, bạn vui lòng <strong>KHÔNG ĐÓNG TRÌNH DUYỆT</strong>.',
+      'Nếu gặp khó khăn trong quá trình thanh toán, xin liên hệ 0999999999 để chúng tôi hỗ trợ bạn.',
+    ],
   },
 ];
 

@@ -274,6 +274,14 @@ const EditProfile = () => {
               </div>
             </div>
           </div>
+          <div className="w-full h-full col-span-5 pt-5">
+            <Button
+              text={`Lưu & Cập nhật`}
+              width={
+                'mt-[30px] w-full h-[50px] text-bold bg-[#007bff] text-white'
+              }
+            />
+          </div>
         </form>
       </div>
     </div>

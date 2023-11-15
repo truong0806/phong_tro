@@ -44,6 +44,8 @@ const Overview = ({
     }));
   }, [dispatch, value?.categoryName]);
 
+  
+
   return (
     <div>
       <div className="w-full mb-[35px]">
@@ -122,7 +124,7 @@ const Overview = ({
             className="w-[60%] focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem] border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
             value={value?.priceNumber}
             id="validation-example-2-field"
-            placeholder="$1,234,567"
+            placeholder="1,234,567"
             allowDecimals={false}
             step={10}
             onValueChange={(value) => {

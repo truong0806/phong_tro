@@ -21,12 +21,12 @@ import {
   RechargePage,
   DepositHistory,
   PaymentHistory,
+  RentalPageRechargePage,
 } from './containers/System';
 
 function App() {
   return (
     <div className="h-full lg:w-full w-screen justify-center items-center bg-primary bg-auto text-base">
-      
       <Routes>
         <Route path={path.HOME} element={<Home />}>
           <Route path="*" element={<HomePage />} />
@@ -49,12 +49,18 @@ function App() {
         </Route>
 
         <Route path={path.SYSTEM} element={<System />}>
-          <Route path={path.CREATE_NEW_POST} element={<CreatePost  />} />
+          <Route path={path.CREATE_NEW_POST} element={<CreatePost />} />
           <Route path={path.MANAGE_POST} element={<ManagePost />} />
           <Route path={path.RECHARGE} element={<RechargePage />} />
           <Route path={path.DEPOSIT_HISTORY} element={<DepositHistory />} />
           <Route path={path.PAYMENT_HISTORY} element={<PaymentHistory />} />
           <Route path={path.EDIT_PROFILE} element={<EditProfile />}></Route>
+
+          <Route
+            path={path.PAYMENT_WITH_INTERNET_BANKING}
+            element={<RentalPageRechargePage />}
+          />
+
           <Route
             path={path.CHANGE_PHONE_NUMBER}
             element={<ChangePhoneNumber />}

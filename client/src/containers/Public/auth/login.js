@@ -12,7 +12,7 @@ import { pressEnter } from '../../../ultils/pressEnter';
 
 function Login() {
   const navigate = useNavigate();
-  const { isLoggedIn, msg, update, accessToken } = useSelector(
+  const { isLoggedIn, msgLogin, update, accessToken } = useSelector(
     (state) => state.auth
   );
   const dispatch = useDispatch();
@@ -34,11 +34,12 @@ function Login() {
     isLoggedIn && navigate('/'); //
   }, [isLoggedIn]);
 
-  useEffect(() => {}, [msg, update]);
+  useEffect(() => {}, [msgLogin, update]);
 
   useEffect(() => {
-    msg && Swal.fire('Oops !', 'Sai số điện thoại hoặc mật khẩu', 'error');
-  }, [msg, update]);
+    msgLogin && Swal.fire('Oops !', 'Sai số điện thoại hoặc mật khẩu', 'error');
+    dispatch(actions.setMsgExpiredToken('login'));
+  }, [msgLogin, dispatch]);
   
   const handleSubmit = async () => {
     const finalinvalids = payload;

@@ -7,6 +7,7 @@ export const apiUser = () =>
         method: 'get',
         url: '/user/getUserCurrent',
       });
+      console.log("🚀 ~ file: user.js:10 ~ newPromise ~ response:", response)
       resolve(response);
     } catch (error) {
       reject(error);
