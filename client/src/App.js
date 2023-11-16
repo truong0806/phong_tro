@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   Home,
   Auth,
@@ -23,8 +23,17 @@ import {
   PaymentHistory,
   RentalPageRechargePage,
 } from './containers/System';
+import { useSelector } from 'react-redux';
 
+const ProtectedRoute = ({ isLoggedIn, children }) => {
+  if (!isLoggedIn) {
+    return <Navigate to="/auth/login" replace />;
+  }
+
+  return children;
+};
 function App() {
+  const { isLoggedIn } = useSelector((state) => state.auth);
   return (
     <div className="h-full lg:w-full w-screen justify-center items-center bg-primary bg-auto text-base">
       <Routes>
@@ -48,7 +57,14 @@ function App() {
           <Route path={path.FORGOTPASSWORD} element={<ForgotPassword />} />
         </Route>
 
-        <Route path={path.SYSTEM} element={<System />}>
+        <Route
+          path={path.SYSTEM}
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <System />
+            </ProtectedRoute>
+          }
+        >
           <Route path={path.CREATE_NEW_POST} element={<CreatePost />} />
           <Route path={path.MANAGE_POST} element={<ManagePost />} />
           <Route path={path.RECHARGE} element={<RechargePage />} />
@@ -60,6 +76,11 @@ function App() {
             path={path.PAYMENT_WITH_INTERNET_BANKING}
             element={<RentalPageRechargePage />}
           />
+          <Route
+            path={path.PAY_BY_CREADIT_CARD}
+            element={<RentalPageRechargePage />}
+          />
+          <Route path={path.VNPAY_QR} element={<RentalPageRechargePage />} />
 
           <Route
             path={path.CHANGE_PHONE_NUMBER}

@@ -14,17 +14,19 @@ const MenuAdmin = () => {
   return (
     <div>
       <ul className="mx-[-20px] mb-[15px] px-[15px] ">
-        {menuSider.slice(4)?.map((item) => {
-          return (
-            <NavLink
-              to={item.path}
-              key={item.id}
-              className={({ isActive }) => (isActive ? active : notActive)}
-            >
-              <span>{item.icon}</span>
-              <span className="ml-[10px]">{item.text}</span>
-            </NavLink>
-          );
+        {menuSider.map((item) => {
+          if (item.id !== 0) {
+            return (
+              <NavLink
+                to={item.path}
+                key={item.id}
+                className={({ isActive }) => (isActive ? active : notActive)}
+              >
+                <span>{item.icon}</span>
+                <span className="ml-[10px]">{item.text}</span>
+              </NavLink>
+            );
+          }
         })}
         <li className="hover:bg-[#f1f1f1]">
           <div

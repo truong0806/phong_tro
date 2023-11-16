@@ -41,7 +41,11 @@ const appReducer = (state = initState, action) => {
         provinces1: action.provinces1 || [],
         msg: action.msg || '',
       };
-
+    case actionTypes.RECHARGE_DATA:
+      return {
+        ...state,
+        rechargeData: action.rechargeData || {},
+      };
     default:
       return state;
   }

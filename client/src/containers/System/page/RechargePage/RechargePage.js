@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { depositMethod } from '../../../../ultils/constains';
 import { usePathname } from '../../../../ultils/common/usePathname';
 import DialogWithAgree from '../../components/DialogWithAgree';
+import * as actions from '../../../../store/action';
+import { useDispatch } from 'react-redux';
 
 const RechargePage = () => {
+  const dispatch = useDispatch();
   const pageTitle = usePathname();
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
@@ -23,12 +26,14 @@ const RechargePage = () => {
             Mời bạn chọn phương thức nạp tiền
           </h3>
           <div className="flex flex-wrap  gap-8 basis-1/3 ">
-            {depositMethod?.map((item) => {
+            {depositMethod?.map((item, index) => {
               return (
                 <div
+                  key={index}
                   onClick={() => {
                     handleClickOpenDialog();
                     setTitle(item.id);
+                    dispatch(actions.rechargeAddData(item));
                   }}
                   className="group w-[28%] border rounded-sm mb-[20px] h-[161px] hover:border-[#0074e4] hover:shadow-4xl "
                 >
@@ -71,7 +76,7 @@ const RechargePage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                class="feather feather-chevron-right"
+                className="feather feather-chevron-right"
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
@@ -87,7 +92,7 @@ const RechargePage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                class="feather feather-chevron-right"
+                className="feather feather-chevron-right"
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
@@ -103,7 +108,7 @@ const RechargePage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                class="feather feather-chevron-right"
+                className="feather feather-chevron-right"
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>

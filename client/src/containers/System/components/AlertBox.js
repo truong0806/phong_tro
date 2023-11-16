@@ -11,8 +11,6 @@ const AlertBox = ({ styleUser, data, boxStyle }) => {
     return expireDate >= today;
   });
 
-  console.log(filteredPromotions);
-
   return (
     <div>
       {filteredPromotions?.map((item, index) => {
@@ -21,13 +19,12 @@ const AlertBox = ({ styleUser, data, boxStyle }) => {
           item.styleUser === styleUser
         ) {
           return (
-            <div>
+            <div key={index}>
               <div
-                key={item.index}
                 className={`px-[1.25rem] mb-[1rem] py-[0.75rem] ${boxStyle}`}
               >
-                <h3 key={item.index}>{item.h3}</h3>
-                <div key={item.index}>
+                <h3>{item.h3}</h3>
+                <div>
                   {item.content.map((htmlContent, index) => (
                     <p
                       className="mb-[1rem]"

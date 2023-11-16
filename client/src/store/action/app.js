@@ -89,3 +89,8 @@ export const getProvince = () => async (dispatch) => {
     });
   }
 };
+
+export const rechargeAddData = (rechargeData) => ({
+  type: actionTypes.RECHARGE_DATA,
+  rechargeData,
+});

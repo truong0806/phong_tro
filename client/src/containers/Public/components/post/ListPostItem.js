@@ -32,18 +32,19 @@ const ListPostItem = ({
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
           className="w-full md:w-2/5 h-[240px] md:gap-[2px] items-center justify-center relative cursor-pointerv "
-       >
+        >
           {
             images
               ?.filter((i, index) => indexs.some((i) => i === index))
               ?.map((i, index) => {
                 return (
                   <img
+                    loading="lazy"
                     key={index}
                     src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
                     data-src={i}
                     className="lazyload  lazy object-cover md:object-cover h-[240px]  w-full  "
-                  //loading="lazy"
+                    //loading="lazy"
                   />
                 );
               })[1]
@@ -90,7 +91,9 @@ const ListPostItem = ({
               handleStar(+star)?.map((star, num) => {
                 return <span key={num}>{star}</span>;
               })}
-            <span className="ml-[4px] text-justify line-clamp-2 overflow-hidden">{title}</span>
+            <span className="ml-[4px] text-justify line-clamp-2 overflow-hidden">
+              {title}
+            </span>
           </Link>
           <div className="w-[10%] flex justify-end">
             <BsBookmarkStarFill size={20} color="orange" />
@@ -98,7 +101,9 @@ const ListPostItem = ({
         </h3>
         <div className="md:my-6 my-6 flex items-center justify-between gap-1 md:gap-5 flex-wrap">
           <span className="text-[1.2rem] text-[#16c784] font-bold">
-            {attributes?.price?.split(' ')[1] === 'đồng/tháng' ? `${+attributes?.price?.split(' ')[0] / 1000}.000 đồng/tháng` : attributes.price}
+            {attributes?.price?.split(' ')[1] === 'đồng/tháng'
+              ? `${+attributes?.price?.split(' ')[0] / 1000}.000 đồng/tháng`
+              : attributes.price}
           </span>
           <span className="text-[#333] leading-normal md:leading-[19px] ">
             {attributes.acreage}
@@ -108,8 +113,9 @@ const ListPostItem = ({
               href="https://phongtro123.com/tinh-thanh/ho-chi-minh/quan-go-vap"
               title={address}
             >
-              {`${address?.split(',')[address?.split(',').length - 2]},${address?.split(',')[address?.split(',').length - 1]
-                }`}
+              {`${address?.split(',')[address?.split(',').length - 2]},${
+                address?.split(',')[address?.split(',').length - 1]
+              }`}
             </Link>
           </span>
         </div>
@@ -127,15 +133,17 @@ const ListPostItem = ({
           </div>
           <div className="flex items-center flex-row">
             <button
-              className={`${users.phone ? 'show' : 'hidden'
-                } bg-[#1266dd] w-full whitespace-nowrap my-[3px] rounded-[5px] py-[3px] px-[7px] text-white border-[#1266dd] border-solid border-[1px] cursor-pointer`}
+              className={`${
+                users.phone ? 'show' : 'hidden'
+              } bg-[#1266dd] w-full whitespace-nowrap my-[3px] rounded-[5px] py-[3px] px-[7px] text-white border-[#1266dd] border-solid border-[1px] cursor-pointer`}
               type="button"
             >
               Gọi: {users.phone}
             </button>
             <button
-              className={`${users.zalo ? 'show' : 'hidden'
-                } bg-white w-full   my-[3px] rounded-[5px] ml-[5px] py-[3px] px-[7px] text-[#1266dd] border-[#1266dd] border-solid border-[1px] cursor-pointer hover:bg-[#1266dd] hover:text-white`}
+              className={`${
+                users.zalo ? 'show' : 'hidden'
+              } bg-white w-full   my-[3px] rounded-[5px] ml-[5px] py-[3px] px-[7px] text-[#1266dd] border-[#1266dd] border-solid border-[1px] cursor-pointer hover:bg-[#1266dd] hover:text-white`}
               type="button"
             >
               Nhắn Zalo

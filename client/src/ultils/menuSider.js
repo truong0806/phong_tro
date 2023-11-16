@@ -20,6 +20,16 @@ const menuSider = [
     path: 'nap-tien/atm-internet-banking',
   },
   {
+    id: 0,
+    text: 'Thẻ tín dụng',
+    path: 'nap-tien/the-tin-dung',
+  },
+  {
+    id: 0,
+    text: 'VNPAY QR',
+    path: 'nap-tien/vnpay-qr',
+  },
+  {
     id: 1,
     text: 'Quản lý tin đăng',
     path: 'quan-ly-tin-dang',

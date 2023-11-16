@@ -2,6 +2,7 @@ import * as rechangeController from '../controllers/rechangeController'
 import express from 'express'
 import requireToken from '../middleware/requireToken'
 import moment from 'moment'
+let config = require('config')
 
 const router = express.Router()
 router.post('/create_payment_url', requireToken, function (req, res, next) {
@@ -17,13 +18,13 @@ router.post('/create_payment_url', requireToken, function (req, res, next) {
     req.socket.remoteAddress ||
     req.connection.socket.remoteAddress
 
-  let tmnCode = 'TU9SY9ZU'
-  let secretKey = 'MVMWGSGTIIARWZHJVQQTYQRXXIBOJQQG'
-  let vnpUrl = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
-  let returnUrl = 'http://localhost:8888/order/vnpay_return'
+  let tmnCode = config.get('vnp_TmnCode')
+  let secretKey = config.get('vnp_HashSecret')
+  let vnpUrl = config.get('vnp_Url')
+  let returnUrl = config.get('vnp_ReturnUrl')
   let orderId = moment(date).format('DDHHmmss')
   let amount = req.body.amount
-  let bankCode = ''
+  let bankCode = req.body.bankCode
 
   let locale = 'vn'
   if (locale === null || locale === '') {
@@ -62,6 +63,38 @@ router.post('/create_payment_url', requireToken, function (req, res, next) {
 
   res.json({ err: 0, url: vnpUrl })
 })
+
+router.get('/vnpay_return', requireToken, function (req, res, next) {
+  let vnp_Params = req.query
+  console.log("🚀 ~ file: rechange.js:69 ~ vnp_Params:", vnp_Params)
+
+  let secureHash = vnp_Params['vnp_SecureHash']
+
+  delete vnp_Params['vnp_SecureHash']
+  delete vnp_Params['vnp_SecureHashType']
+
+  vnp_Params = sortObject(vnp_Params)
+
+  let config = require('config')
+  let tmnCode = config.get('vnp_TmnCode')
+  let secretKey = config.get('vnp_HashSecret')
+
+  let querystring = require('qs')
+  let signData = querystring.stringify(vnp_Params, { encode: false })
+  console.log("🚀 ~ file: rechange.js:84 ~ signData:", signData)
+  let crypto = require('crypto')
+  let hmac = crypto.createHmac('sha512', secretKey)
+  let signed = hmac.update(new Buffer(signData, 'utf-8')).digest('hex')
+
+  if (secureHash === signed) {
+    //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
+
+    res.render('success', { code: vnp_Params['vnp_ResponseCode'] })
+  } else {
+    res.render('success', { code: '97' })
+  }
+})
+
 function sortObject(obj) {
   let sorted = {}
   let str = []

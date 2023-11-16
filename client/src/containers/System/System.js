@@ -14,10 +14,6 @@ const System = () => {
     return `/quan-ly/${item.path}` === location.pathname;
   });
 
-  useEffect(() => {
-    if (!isLoggedIn || isLoggedIn === 'false')
-      return <Navigate to={`/auth/${path.LOGIN}`} replace={true} />;
-  }, [isLoggedIn]);
   return (
     <div className="w-full  flex-col items-center">
       <Header />

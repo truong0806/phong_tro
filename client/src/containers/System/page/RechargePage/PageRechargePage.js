@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { promotionRechange } from '../../../../ultils/constains';
+import { promotionRechange, depositMethod } from '../../../../ultils/constains';
 import { useLocation } from 'react-router-dom';
 import AlertBox from '../../components/AlertBox';
 import CurrencyInput from 'react-currency-input-field';
 import { Button } from '../../../../components';
 import icons from '../../../../ultils/icons';
 import { useSelector } from 'react-redux';
-import moment from 'moment';
-import crypto from 'crypto-js';
-import sha256 from 'crypto-js/sha256';
-import hmacSHA512 from 'crypto-js/hmac-sha512';
-import Base64 from 'crypto-js/enc-base64';
-import axios from 'axios';
 import { apiCreatePayment } from '../../../../service/rechange';
 
 const { FaChevronRight } = icons;
 
 const PageRechargePage = () => {
+  const location = useLocation();
   const [payload, setPayload] = useState({
     amount: '',
-    bankCode: null,
   });
-
-  const { userData } = useSelector((state) => state.user);
-
   const [redirectUrl, setRedirectUrl] = useState(null);
   console.log(
     '🚀 ~ file: PageRechargePage.js:27 ~ PageRechargePage ~ redirectUrl:',
     redirectUrl
+  );
+  const dataPaymentMethod = depositMethod?.filter((data) => {
+    return data.url === location.pathname.split('/')[3];
+  });
+  console.log(
+    '🚀 ~ file: PageRechargePage.js:26 ~ dataPaymentMethod ~ dataPaymentMethod:',
+    dataPaymentMethod[0].title
   );
   if (redirectUrl) {
     window.location.href = redirectUrl;
@@ -35,7 +33,11 @@ const PageRechargePage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const respones = await apiCreatePayment(payload);
+    const finalPayload = {
+      ...payload,
+      bankCode: dataPaymentMethod[0].vnp_BankCode,
+    };
+    const respones = await apiCreatePayment(finalPayload);
     if (respones.data.err === 0) {
       setRedirectUrl(respones.data.url);
     }
@@ -49,7 +51,7 @@ const PageRechargePage = () => {
     <div>
       <div className=" items-center  pb-2 mb-3 ">
         <h1 className="text-[2rem] mt-2 py-[1rem]">
-          Thẻ ngân hàng nội địa (ATM Internet Banking)
+          {dataPaymentMethod[0].title}
         </h1>
         <div className="border-b-2"></div>
       </div>
@@ -84,7 +86,7 @@ const PageRechargePage = () => {
                     defaultChecked={true}
                     onChange={(e) => setPayload({ amount: e.target.value })}
                   ></input>
-                  <label for="radio50000">50.000 đ</label>
+                  <label>50.000 đ</label>
                 </div>
                 <div>
                   <input
@@ -95,7 +97,7 @@ const PageRechargePage = () => {
                     value="100000"
                     onChange={(e) => setPayload({ amount: e.target.value })}
                   ></input>
-                  <label for="radio100000">100.000 đ</label>
+                  <label>100.000 đ</label>
                 </div>
                 <div>
                   <input
@@ -106,7 +108,7 @@ const PageRechargePage = () => {
                     value="200000"
                     onChange={(e) => setPayload({ amount: e.target.value })}
                   ></input>
-                  <label for="radio200000">200.000 đ</label>
+                  <label>200.000 đ</label>
                 </div>
                 <div>
                   <input
@@ -117,7 +119,7 @@ const PageRechargePage = () => {
                     value="500000"
                     onChange={(e) => setPayload({ amount: e.target.value })}
                   ></input>
-                  <label for="radio500000">500.000 đ</label>
+                  <label>500.000 đ</label>
                 </div>
                 <div>
                   <input
@@ -128,7 +130,7 @@ const PageRechargePage = () => {
                     value="1000000"
                     onChange={(e) => setPayload({ amount: e.target.value })}
                   ></input>
-                  <label for="radio1000000">1.000.000 đ</label>
+                  <label>1.000.000 đ</label>
                 </div>
                 <div>
                   <input
@@ -139,7 +141,7 @@ const PageRechargePage = () => {
                     value="2000000"
                     onChange={(e) => setPayload({ amount: e.target.value })}
                   ></input>
-                  <label for="radio20000000">2.000.000 đ</label>
+                  <label>2.000.000 đ</label>
                 </div>
                 <div>
                   <input
@@ -150,16 +152,16 @@ const PageRechargePage = () => {
                     value="5000000"
                     onChange={(e) => setPayload({ amount: e.target.value })}
                   ></input>
-                  <label for="radio50000000">5.000.000 đ</label>
+                  <label>5.000.000 đ</label>
                 </div>
               </div>
-              <div class="form-group mt-4">
+              <div className="form-group mt-4">
                 <p className="mt-[1.5rem] mb-[1rem] font-normal">
                   Hoặc nhập số tiền cần nạp
                 </p>
-                <div class="flex flex-row">
-                  <div class="w-5/12">
-                    <div class="flex flex-row">
+                <div className="flex flex-row">
+                  <div className="w-5/12">
+                    <div className="flex flex-row">
                       <CurrencyInput
                         className="focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem]  border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
                         id="validation-example-2-field"
@@ -175,7 +177,7 @@ const PageRechargePage = () => {
                         <span className="px-[0.375rem] text-[1rem]">VNĐ</span>
                       </div>
                     </div>
-                    <span class="js-price-text hidden"></span>
+                    <span className="js-price-text hidden"></span>
                   </div>
                 </div>
               </div>
@@ -215,7 +217,7 @@ const PageRechargePage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                class="feather feather-chevron-right"
+                className="feather feather-chevron-right"
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
@@ -231,7 +233,7 @@ const PageRechargePage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                class="feather feather-chevron-right"
+                className="feather feather-chevron-right"
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
@@ -247,7 +249,7 @@ const PageRechargePage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                class="feather feather-chevron-right"
+                className="feather feather-chevron-right"
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
