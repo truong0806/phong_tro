@@ -38,6 +38,7 @@ const EditProfile = () => {
       fbUrl: userData?.fbUrl || '',
       email: userData?.email || '',
     }));
+    setLoading(true)
   }, [userData]);
 
   useEffect(() => {
@@ -221,15 +222,19 @@ const EditProfile = () => {
             <label className="whitespace-nowrap">Ảnh đại diện</label>
           </div>
           <div className="w-full h-full col-span-3 pt-5">
-            <div className="w-full flex justify-center ">
-              <img
-                alt="avatar"
-                className="object-cover w-[140px] h-[140px]  rounded-full"
-                src={
-                  imagesPreview.url ||
-                  'https://www.w3schools.com/w3images/avatar2.png'
-                }
-              ></img>
+            <div className="w-full flex w-[140px] h-[140px] justify-center ">
+              {loading ? (
+                <img
+                  alt="avatar"
+                  className="object-cover w-[140px] h-[140px]  rounded-full"
+                  src={
+                    imagesPreview.url ||
+                    'https://www.w3schools.com/w3images/avatar2.png'
+                  }
+                ></img>
+              ) : (
+                <Loading />
+              )}
             </div>
             <div className="w-full flex justify-center ">
               <Button

@@ -1,35 +1,5 @@
 const menuSider = [
   {
-    id: 0,
-    text: 'Đăng tin mới',
-    path: 'dang-tin-moi',
-  },
-  {
-    id: 0,
-    text: 'Đổi số điện thoại',
-    path: 'cap-nhat-thong-tin-ca-nhan/doi-so-dien-thoai',
-  },
-  {
-    id: 0,
-    text: 'Đổi mật khẩu',
-    path: 'cap-nhat-thong-tin-ca-nhan/doi-mat-khau',
-  },
-  {
-    id: 0,
-    text: 'Thẻ ngân hàng nội địa (ATM Internet Banking)',
-    path: 'nap-tien/atm-internet-banking',
-  },
-  {
-    id: 0,
-    text: 'Thẻ tín dụng',
-    path: 'nap-tien/the-tin-dung',
-  },
-  {
-    id: 0,
-    text: 'VNPAY QR',
-    path: 'nap-tien/vnpay-qr',
-  },
-  {
     id: 1,
     text: 'Quản lý tin đăng',
     path: 'quan-ly-tin-dang',
@@ -179,6 +149,21 @@ const menuSider = [
         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
       </svg>
     ),
+  },
+  {
+    id: 0,
+    text: 'Đổi mật khẩu',
+    path: 'doi-mat-khau',
+  },
+  {
+    id: 0,
+    text: 'Đăng tin mới',
+    path: 'dang-tin-moi',
+  },
+  {
+    id: 0,
+    text: 'Đổi số điện thoại',
+    path: 'doi-so-dien-thoai',
   },
 ];
 

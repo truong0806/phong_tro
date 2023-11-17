@@ -16,11 +16,8 @@ const ManagePost = () => {
   const pageTitle = usePathname();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const { posts_limit_admin } = useSelector((state) => state.post);
-  const { isLoggedIn, accessToken } = useSelector((state) => state.auth);
-
   const [categoryCode] = useState('none');
   const [bonusType, setBonusType] = useState('');
   const [status, setStatus] = useState('');
@@ -35,7 +32,7 @@ const ManagePost = () => {
         setLoading(true);
       });
     }, 200);
-  }, [dispatch, categoryCode, updateData, isLoggedIn]);
+  }, [dispatch, categoryCode, updateData]);
 
   const filterData = (bonusType, status) => {
     let filteredData = posts_limit_admin.filter((row) => {
@@ -150,7 +147,6 @@ const ManagePost = () => {
       </div>
       <div className="border-b-2"></div>
       <PostTable
-        setIsEdit={setIsEdit}
         handleDeletePost={handleDeletePost}
         handShowPopup={handShowPopup}
         setShowPopup={setShowPopup}
@@ -162,7 +158,7 @@ const ManagePost = () => {
         count={Object.keys(posts_limit_admin).length}
         posts_limit={filteredData}
       />
-      {showPopup && <EditPost setShowPopup={setShowPopup}  isEdit />}
+      {showPopup && <EditPost setShowPopup={setShowPopup} isEdit />}
     </div>
   );
 };

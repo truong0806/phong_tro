@@ -33,12 +33,13 @@ const RechargePage = () => {
                   onClick={() => {
                     handleClickOpenDialog();
                     setTitle(item.id);
+                    console.log("🚀 ~ file: RechargePage.js:36 ~ {depositMethod?.map ~ item:", item)
                     dispatch(actions.rechargeAddData(item));
                   }}
                   className="group w-[28%] border rounded-sm mb-[20px] h-[161px] hover:border-[#0074e4] hover:shadow-4xl "
                 >
                   <Link
-                    to={`${item.url}`}
+                    to={`${item.path}`}
                     className="w-full h-full text-center flex flex-col"
                   >
                     <div className="h-[120px] w-full flex items-center justify-center ">
@@ -49,7 +50,7 @@ const RechargePage = () => {
                       ></img>
                     </div>
                     <div className="w-full px-0 py-[10px] font-bold text-center bg-[#eee] group-hover:bg-[#0074e4] group-hover:text-white">
-                      {item.value}
+                      {item.text}
                     </div>
                   </Link>
                 </div>

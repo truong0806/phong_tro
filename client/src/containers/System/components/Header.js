@@ -1,23 +1,31 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { path } from '../../../ultils/constains';
+import { IoMenu } from 'react-icons/io5';
 
-const Header = () => {
+const Header = ({ setMenuDropDown }) => {
+  const handleOpenSwipeable = (e) => {
+    setMenuDropDown(true);
+  };
   return (
     <div className="w-full fixed left-0 top-0 right-0 z-50">
-      <nav className=" sm:bg-secondary1 bg-[#fff] sm:h-[45px] h-[50px] w-full shadow-md flex   first-line:flex-row text-[#fff]">
+      <nav className="relative md:bg-secondary1 md:justify-start bg-[#fff] md:h-[45px] h-[50px] w-full shadow-md flex   md:flex-row text-[#fff]">
         <Link
-          className="mt-[5px] sm:bg-none logo-header-admin bg-logo bg-contain bg-center bg-no-repeat h-[35px] text-[1rem] flex font-bold px-[15px] py-[0.75rem]  w-[200px] justify-center items-center"
+          className="mt-[5px] md:bg-none logo-header-admin bg-logo bg-contain bg-center bg-no-repeat h-[35px] text-[1rem] flex font-bold px-[15px] py-[0.75rem]  w-[200px] justify-center items-center"
           to={path.HOME}
           replace={true}
         >
-          <span className="hidden sm:block">phongtro123.com</span>
+          <span className="hidden md:block">phongtro123.com</span>
         </Link>
-        <div>
-          <img src="/src/assets/logo_70.png"></img>
+        <div
+          onClick={(e) => {
+            handleOpenSwipeable(e);
+          }}
+          className="z-250 h-full md:hidden absolute right-0"
+        >
+          <IoMenu size={42} color="black" className="p-1 h-full mr-2" />
         </div>
-        <div className="py-[0.75rem]  hidden sm:flex">
+        <div className="py-[0.75rem]  hidden md:flex md:justify-start">
           <div className="">
             <ul className="text-[1rem] flex flex-row whitespace-nowrap gap-6 pl-1">
               <li className="">

@@ -14,7 +14,7 @@ const MenuAdmin = () => {
   return (
     <div>
       <ul className="mx-[-20px] mb-[15px] px-[15px] ">
-        {menuSider.map((item) => {
+        {menuSider?.map((item) => {
           if (item.id !== 0) {
             return (
               <NavLink

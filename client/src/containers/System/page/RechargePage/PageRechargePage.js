@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { promotionRechange, depositMethod } from '../../../../ultils/constains';
 import { useLocation } from 'react-router-dom';
 import AlertBox from '../../components/AlertBox';
 import CurrencyInput from 'react-currency-input-field';
 import { Button } from '../../../../components';
 import icons from '../../../../ultils/icons';
-import { useSelector } from 'react-redux';
 import { apiCreatePayment } from '../../../../service/rechange';
 
 const { FaChevronRight } = icons;
@@ -16,17 +15,12 @@ const PageRechargePage = () => {
     amount: '',
   });
   const [redirectUrl, setRedirectUrl] = useState(null);
-  console.log(
-    '🚀 ~ file: PageRechargePage.js:27 ~ PageRechargePage ~ redirectUrl:',
-    redirectUrl
-  );
   const dataPaymentMethod = depositMethod?.filter((data) => {
-    return data.url === location.pathname.split('/')[3];
+    return (
+      data.path ===
+      location.pathname.split('/')[location.pathname.split('/').length - 1]
+    );
   });
-  console.log(
-    '🚀 ~ file: PageRechargePage.js:26 ~ dataPaymentMethod ~ dataPaymentMethod:',
-    dataPaymentMethod[0].title
-  );
   if (redirectUrl) {
     window.location.href = redirectUrl;
   }

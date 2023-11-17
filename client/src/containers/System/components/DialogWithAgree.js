@@ -13,7 +13,6 @@ import CopyButton from '../../../components/CopyButton';
 export const DialogWithAgree = ({ setOpen, open, title }) => {
   const { userData } = useSelector((state) => state.user);
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('lg'));
   console.log(
     '🚀 ~ file: DialogWithAgree.js:10 ~ DialogWithAgree ~ title:',
     title
@@ -48,75 +47,51 @@ export const DialogWithAgree = ({ setOpen, open, title }) => {
                 <table classname="table table-bordered table-striped">
                   <tbody>
                     <tr className="border bg-title-table">
-                      <td className="p-2 border-[1px] border-[#dee2e6] w-1/5 text-center">
-                        <strong>Ngân hàng</strong>
-                      </td>
-                      <td className="p-2 border-[1px] border-[#dee2e6]  text-center">
-                        <strong>Chủ tài khoản</strong>
-                      </td>
-                      <td className="p-2 border-[1px] border-[#dee2e6]  text-center">
-                        <strong>Số tài khoản</strong>
-                      </td>
-                      <td className="p-2 border-[1px] border-[#dee2e6]  text-center">
-                        <strong>Chi nhánh</strong>
-                      </td>
-                      <td className="p-2 border-[1px] border-[#dee2e6]  text-center">
-                        <strong>Nội dung chuyển khoản</strong>
-                      </td>
-                    </tr>
-                    <tr className="">
-                      <td className="p-5 border-[1px] border-[#dee2e6]">
-                        <strong className="text-red-600">VIETCOMBANK</strong> -
-                        NGÂN HÀNG THƯƠNG MẠI CỔ PHẦN NGOẠI THƯƠNG VIỆT NAM
-                      </td>
-                      <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6]">
-                        Công ty TNHH LBKCORP
-                      </td>
-                      <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6]">
-                        <CopyButton
-                          valueCopy={`0071001050516`}
-                          text={`0071001050516`}
-                        />
-                      </td>
-                      <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6]">
-                        CN HỒ CHÍ MINH
-                      </td>
-                      <td className="p-5 whitespace-nowrap text-red-600 border-[1px] border-[#dee2e6]">
-                        <strong>
-                          <CopyButton
-                            valueCopy={`PT123 - 135833 - ${userData.phone}`}
-                            text={`PT123 - 135833 - ${userData.phone}`}
-                          />
-                        </strong>
-                      </td>
+                      {dataBank[0]?.columnsName?.map((columnsName, index) => {
+                        return (
+                          <td
+                            key={index}
+                            className="p-2 border-[1px] border-[#dee2e6] w-1/5 text-center"
+                          >
+                            <strong>{columnsName}</strong>
+                          </td>
+                        );
+                      })}
                     </tr>
 
-                    <tr>
-                      <td className="p-5 border-[1px] border-[#dee2e6]">
-                        <strong className="text-red-600">ACB</strong> - NGÂN
-                        HÀNG THƯƠNG MẠI CỔ PHẦN Á CHÂU
-                      </td>
-                      <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6]">
-                        Công ty TNHH LBKCORP
-                      </td>
-                      <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6]">
-                        <CopyButton
-                          valueCopy={`150590888`}
-                          text={`150590888`}
-                        />
-                      </td>
-                      <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6]">
-                        Đông Sài Gòn
-                      </td>
-                      <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6] text-red-600">
-                        <strong>
-                          <CopyButton
-                            valueCopy={`PT123 - 135833 - ${userData.phone}`}
-                            text={`PT123 - 135833 - ${userData.phone}`}
-                          />
-                        </strong>
-                      </td>
-                    </tr>
+                    {dataBank[0]?.data?.map((item) => {
+                      return (
+                        <tr className="">
+                          <td className="p-5 border-[1px] border-[#dee2e6]">
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: item.bankName,
+                              }}
+                            ></span>
+                          </td>
+                          <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6]">
+                            {item.accountOwner}
+                          </td>
+                          <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6]">
+                            <CopyButton
+                              valueCopy={item.accountNumber}
+                              text={item.accountNumber}
+                            />
+                          </td>
+                          <td className="p-5 whitespace-nowrap border-[1px] border-[#dee2e6]">
+                            {item.branch}
+                          </td>
+                          <td className="p-5 whitespace-nowrap text-red-600 border-[1px] border-[#dee2e6]">
+                            <strong>
+                              <CopyButton
+                                valueCopy={`PT123 - 135833 - ${userData.phone}`}
+                                text={`PT123 - 135833 - ${userData.phone}`}
+                              />
+                            </strong>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

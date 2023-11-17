@@ -50,6 +50,7 @@ module.exports = {
         menu: "url('/src/assets/menu.svg')",
         dashboard_user: "url('/src/assets/uicon-dashboard.svg')",
         logo: "url('/src/assets/logo_70.png')",
+        mobiMenu: "url('/src/assets/menu-hamburger.svg')",
       },
     },
     fontFamily: {

@@ -1,5 +1,4 @@
 import axiosConfig from '../axiosConfig';
-import axios from 'axios';
 
 export const apiCreatePayment = (payload) =>
   new Promise(async (resolve, reject) => {

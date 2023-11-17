@@ -39,7 +39,7 @@ const InputSelect2 = ({
     setInvalidFields((prev) => prev.filter((field) => field.name !== name));
   };
   return (
-    <div className={` mb-4 ${maxW}`}>
+    <div className={` sm:mb-5 ${maxW}`}>
       <label htmlFor="default" className="pb-[15px] font-bold ">
         {text}
       </label>

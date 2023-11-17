@@ -44,11 +44,9 @@ const Overview = ({
     }));
   }, [dispatch, value?.categoryName]);
 
-  
-
   return (
     <div>
-      <div className="w-full mb-[35px]">
+      <div className="w-full mb-[25px]">
         <h3 className="text-[1.75rem] font-bold">Thông tin mô tả</h3>
       </div>
       <InputSelect2
@@ -62,7 +60,7 @@ const Overview = ({
         array={categories}
         nameValue={'value'}
         text={'Loại chuyên mục'}
-        maxW={'max-w-[50%]'}
+        maxW={'max-w-[50%] mb-3'}
       />
       <InputText
         setInvalidFields={setInvalidFields}
@@ -72,9 +70,9 @@ const Overview = ({
         setValue={setValue}
         label={'Tiêu đề'}
         value={value.title}
-        styleInput={'w-full'}
+        styleInput={'w-full mb-3'}
       />
-      <div className="flex flex-col mb-[14px]">
+      <div className="flex flex-col mb-4">
         <label htmlFor="desc" className="font-bold border-spacing-2">
           Nội dung mô tả
         </label>
@@ -107,21 +105,21 @@ const Overview = ({
         label={'Thông tin liên hệ'}
         value={userData.name}
         readonly
-        styleInput={'max-w-[50%] bg-[#e9ecef]'}
+        styleInput={'sm:max-w-[50%] w-full bg-[#e9ecef]'}
       />
       <InputTextReadOnly
         typeInput={'text'}
         label={'Điện thoại'}
         value={userData.phone}
         readonly
-        styleInput={'max-w-[50%] bg-[#e9ecef]'}
+        styleInput={'sm:max-w-[50%] w-full bg-[#e9ecef]'}
       />
 
-      <div className="mb-[14px] max-w-[50%]">
+      <div className="mb-5 sm:max-w-[50%] w-full">
         <label className="font-bold">Giá cho thuê</label>
         <div className="flex flex-row w-full h-[33px] my-2">
           <CurrencyInput
-            className="w-[60%] focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem] border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
+            className="sm:w-[60%] w-[80%] focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem] border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
             value={value?.priceNumber}
             id="validation-example-2-field"
             placeholder="1,234,567"
@@ -156,7 +154,7 @@ const Overview = ({
             className="w-[60%] focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] rounded-l-[0.25rem] border-[#ced4da] h-full px-[0.75rem] text-[1rem]"
           ></input> */}
 
-          <div className="w-[40%] h-full  items-center justify-center ">
+          <div className="sm:w-[40%] h-full  items-center justify-center ">
             <select
               defaultValue=""
               className="bg-gray-50 font-bold  text-md py-[0.25rem] rounded-r-[0.25rem]  text-[0.8rem] h-full border-gray-300 text-gray-900  focus:ring-[rgba(0,123,255,.25)] focus:border-[#80bdff] w-full"
@@ -176,7 +174,7 @@ const Overview = ({
           </small>
         </div>
       </div>
-      <div className="mb-[14px] max-w-[50%]">
+      <div className="sm:mb-5 w-full sm:max-w-[50%]">
         <label className="font-bold">Diện tích</label>
         <div className="flex flex-row w-full h-[33px] my-2">
           <input
@@ -214,7 +212,7 @@ const Overview = ({
         setValue={setValue}
         array={doituongs}
         text={'Đối tượng'}
-        maxW={'max-w-[50%]'}
+        maxW={'sm:max-w-[50%] w-full'}
       />
       <UploadImages
         isEdit={isEdit}

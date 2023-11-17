@@ -24,6 +24,7 @@ import {
   RentalPageRechargePage,
 } from './containers/System';
 import { useSelector } from 'react-redux';
+import { PopupSupport } from './containers/System/components';
 
 const ProtectedRoute = ({ isLoggedIn, children }) => {
   if (!isLoggedIn) {
@@ -35,7 +36,7 @@ const ProtectedRoute = ({ isLoggedIn, children }) => {
 function App() {
   const { isLoggedIn } = useSelector((state) => state.auth);
   return (
-    <div className="h-full lg:w-full w-screen justify-center items-center bg-primary bg-auto text-base">
+    <div className="h-full lg:w-full justify-center items-center bg-primary bg-auto text-base">
       <Routes>
         <Route path={path.HOME} element={<Home />}>
           <Route path="*" element={<HomePage />} />
@@ -62,6 +63,7 @@ function App() {
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <System />
+              
             </ProtectedRoute>
           }
         >

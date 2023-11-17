@@ -1,109 +1,96 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import menuSider from '../../../ultils/menuSider';
+import { depositMethod } from '../../../ultils/constains';
+import icons from '../../../ultils/icons';
 
-const Breadcrumb = ({ currentPage, fatherPage, fatherPath, location }) => {
-  const currentFatherPage = menuSider.filter((item) => {
-    return `${item.path}` === location.split('/')[2];
+const { MdOutlineChevronRight } = icons;
+const Breadcrumb = () => {
+  const location = useLocation();
+  const dataArr = [...menuSider, ...depositMethod];
+  console.log(
+    '🚀 ~ file: Breadcrumb.js:7 ~ Breadcrumb ~ location.[1]:',
+    location.pathname.split('/')[location.pathname.split('/').length - 1]
+  );
+  const currentFatherPage = dataArr.filter((item) => {
+    return `${item.path}` === location.pathname.split('/')[2];
   });
+  console.log(
+    '🚀 ~ file: Breadcrumb.js:11 ~ currentFatherPage ~ currentFatherPage:',
+    currentFatherPage
+  );
+  const currentPage = dataArr.filter((item) => {
+    return (
+      `${item.path}` ===
+      location.pathname.split('/')[location.pathname.split('/').length - 1]
+    );
+  });
+  console.log(
+    '🚀 ~ file: Breadcrumb.js:14 ~ currentPage ~ currentPage:',
+    currentPage
+  );
+  const fatherPage = 'Quản lý ';
+  console.log(
+    '🚀 ~ file: Breadcrumb.js:18 ~ fatherPage ~ fatherPage:',
+    fatherPage
+  );
   useEffect(() => {
-    document.title = currentPage;
+    document.title = currentPage[0].text;
   });
   return (
     <div className="mb-[1rem]">
       <nav
-        className="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 "
+        className="sm:flex sm:pl-5 pr-5 py-3 text-gray-700 border border-gray-200 rounded-lg sm:bg-[#e9ecef] "
         aria-label="Breadcrumb"
       >
-        <ol className="flex flex-row items-center justify-center space-x-1 md:space-x-3">
-          <li className="  items-center flex ">
-            <Link className="flex flex-row items-center text-sm font-medium text-gray-700 hover:text-blue-600 ">
-              <svg
-                className="w-3 h-3 mr-2.5 mb-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
-              </svg>
+        <ul className="flex flex-row items-center sm:justify-center space-x-1 md:space-x-3">
+          <li className="justify-center  items-center flex ">
+            <Link className="flex flex-row items-center text-sm font-medium text-[#007bff] hover:text-[#0056b3] hover:underline sm:no-underline sm:text-gray-700 sm:hover:text-blue-600 ">
               Trang chủ
             </Link>
           </li>
-          <svg
-            className="w-3 h-3 mx-1 text-gray-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 6 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m1 9 4-4-4-4"
-            />
-          </svg>
+          <div className="mb-1">
+            <MdOutlineChevronRight size={20} />
+          </div>
           <li>
-            <div className="flex items-center">
+            <div className="flex justify-center items-center">
               <a
                 href="/"
-                className=" text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 "
+                className=" text-sm font-medium text-[#007bff] hover:text-[#0056b3] hover:underline sm:no-underline sm:text-gray-700 sm:hover:text-blue-600  md:ml-2 "
               >
                 {fatherPage}
               </a>
             </div>
           </li>
-          {currentFatherPage && currentFatherPage[0].text !== currentPage && (
-            <>
-              <svg
-                className="w-3 h-3 mx-1 text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m1 9 4-4-4-4"
-                />
-              </svg>
-              <li aria-current="page">
-                <div className="flex items-center">
-                  <Link
-                    to={currentFatherPage[0].path}
-                    className="ml-1 text-sm font-medium md:ml-2 hover:text-blue-600 "
-                  >
-                    {currentFatherPage[0].text}
-                  </Link>
+          {currentFatherPage &&
+            currentFatherPage[0].text !== currentPage[0].text && (
+              <>
+                <div className="mb-1">
+                  <MdOutlineChevronRight size={20} />
                 </div>
-              </li>
-            </>
-          )}
-          <svg
-            className="w-3 h-3 mx-1 text-gray-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 6 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m1 9 4-4-4-4"
-            />
-          </svg>
+                <li aria-current="page">
+                  <div className="flex justify-center items-center">
+                    <Link
+                      to={currentFatherPage[0].path}
+                      className="ml-1 text-sm font-medium md:ml-2 hover:text-blue-600 "
+                    >
+                      {currentFatherPage[0].text}
+                    </Link>
+                  </div>
+                </li>
+              </>
+            )}
+          <div className="mb-1">
+            <MdOutlineChevronRight size={20} />
+          </div>
           <li aria-current="page">
-            <div className="flex items-center">
+            <div className="flex justify-center items-center">
               <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2">
-                {currentPage}
+                {currentPage[0].text}
               </span>
             </div>
           </li>
-        </ol>
+        </ul>
       </nav>
     </div>
   );

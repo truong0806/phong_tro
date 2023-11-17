@@ -4,7 +4,7 @@ import { Button } from '../../../components';
 import { Address, Overview } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/action';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import {
   apiCreateNewPost,
   apiUpdatePost,
@@ -12,7 +12,6 @@ import {
 } from '../../../service';
 import validate from '../../../ultils/validate';
 import { usePathname } from '../../../ultils/common/usePathname';
-import Swal from 'sweetalert2';
 
 const CreatePost = ({ isEdit, setShowPopup }) => {
   console.log('🚀 ~ file: CreatePost.js:18 ~ CreatePost ~ isEdit:', isEdit);
@@ -194,11 +193,11 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
       {!isEdit && (
         <>
           <div className=" items-center  pb-2 mb-3 ">
-            <h1 className="text-[2rem] mt-2 py-[1rem]">{pageTitle[0].text}</h1>
+            <h1 className="text-[2.5rem]  py-[1rem]">{pageTitle[0].text}</h1>
             <div className="border-b-2"></div>
           </div>
           <div
-            className="bg-[#f8d7da] border-[#f5c6cb] text-[#721c24] py-[0.75rem] px-[1.25rem] rounded-[0.25rem] mb-[3rem]"
+            className="bg-[#f8d7da] border-[#f5c6cb] text-[#721c24] py-[0.75rem] px-[1.25rem] rounded-[0.25rem] mb-[2rem] sm:mb-[3rem]"
             role="alert"
           >
             {text.NOTE_ALERT}
@@ -206,8 +205,8 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
         </>
       )}
       <form className="h-full">
-        <div className="flex flex-row gap-[3%] ">
-          <div className="flex flex-col  text-[1rem] max-w-[70%]  w-full    ">
+        <div className=" flex flex-col md:flex-row md:gap-[3%] ">
+          <div className="flex flex-col  text-[1rem] w-full md:max-w-[70%]     ">
             <Address
               isEdit={isEdit}
               invalidFields={invalidFields}
@@ -226,19 +225,21 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
               value={payload}
               setValue={setPayload}
             />
-            <div className="mt-[42px] mb-[100px] w-full">
+            <div className="mt-[42px] mb-[40px] sm:mb-[100px] w-full">
               <Button
                 onClick={(e) => {
                   handleSumit(e);
                 }}
                 text={isEdit ? 'Cập Nhật' : 'Đăng bài'}
                 bgcolor={
-                  'w-full h-[27px] py-[0.5rem] px-[1rem] text-[1.25rem] bg-[#28a745] border-[#28a745] text-[#fff] font-bold item-center'
+                  'w-full h-[3rem] py-[0.5rem] px-[1rem] text-[1.25rem] bg-[#28a745] border-[#28a745] text-[#fff] font-bold item-center'
                 }
               />
             </div>
           </div>
-          <div className={`max-w-[30%] w-full  ${isEdit && `hidden`}`}>
+          <div
+            className={`md:max-w-[30%] w-full md:block  ${isEdit && `hidden`}`}
+          >
             <div className="flex flex-col bg-blue-600 h-[300px] mb-[30px]"></div>
             <div className="flex flex-col  mb-[30px] border-[1.3px] border-[#ffeeba] bg-[#fff3cd] rounded-">
               <div className="p-[17.5px] text-[#856404]">
@@ -255,6 +256,7 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
           </div>
         </div>
       </form>
+      
     </div>
   );
 };

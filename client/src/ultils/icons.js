@@ -26,10 +26,11 @@ import {
 } from 'react-icons/ri';
 import { TbReportMoney, TbDiscount2 } from 'react-icons/tb';
 import { FaChevronRight } from "react-icons/fa6";
-import { MdOutlineHouseSiding } from 'react-icons/md';
+import { MdOutlineHouseSiding, MdOutlineChevronRight } from 'react-icons/md';
 import { LuLayoutDashboard } from 'react-icons/lu';
 
 const icon = {
+  MdOutlineChevronRight,
   FaChevronRight,
   AiOutlineClose,
   RiDeleteBin6Line,

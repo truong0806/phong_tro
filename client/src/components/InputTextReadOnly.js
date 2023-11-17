@@ -9,7 +9,7 @@ const InputTextReadOnly = ({
 }) => {
   return (
     <div>
-      <div className={`flex flex-col  ${styleComponent}`}>
+      <div className={`flex flex-col mb-4  ${styleComponent}`}>
         <label className="font-bold">{label}</label>
         <input
           type="text"

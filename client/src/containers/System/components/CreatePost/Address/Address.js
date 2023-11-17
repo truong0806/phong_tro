@@ -84,9 +84,11 @@ const Address = ({
   }, [district]);
 
   return (
-    <div className="mt-3 gap-2 justify-between flex flex-col">
-      <div className="w-full mb-[35px]">
-        <h3 className="text-[1.75rem] font-bold mb-[7px]">Địa chỉ cho thuê</h3>
+    <div className="mt-3 gap-2 justify-between flex flex-col mb-[25px]">
+      <div className="w-full sm:mb-[15px]">
+        <h3 className="text-[1.75rem] font-bold sm:mb-[7px]">
+          Địa chỉ cho thuê
+        </h3>
       </div>
       <div className="flex flex-col">
         <InputText
@@ -146,18 +148,17 @@ const Address = ({
           label="Quận/Huyện"
         />
         <SelectAddress2
-         setInvalidFields={setInvalidFields}
-         name={'ward'}
-         invalidFields={invalidFields}
-         reset={reset}
-         type="ward"
-         value={ward}
-         setValue={setValue}
-         setLoca={setWard}
-         array={wards}
-         label="Phường/Xã"
+          setInvalidFields={setInvalidFields}
+          name={'ward'}
+          invalidFields={invalidFields}
+          reset={reset}
+          type="ward"
+          value={ward}
+          setValue={setValue}
+          setLoca={setWard}
+          array={wards}
+          label="Phường/Xã"
         />
-        
       </div>
       <InputTextReadOnly
         setValue={setValue}
