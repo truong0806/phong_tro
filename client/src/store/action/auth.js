@@ -58,7 +58,6 @@ export const refreshToken = (refreshToken) => async (dispatch) => {
       type: actionTypes.REFRESH_TOKEN,
       accessToken: response.data.accessToken,
       refreshToken: refreshToken,
-      msg: response.data.msg,
     });
   } else {
     dispatch({
@@ -66,7 +65,7 @@ export const refreshToken = (refreshToken) => async (dispatch) => {
       msg: response.data.msg,
     });
   }
-  dispatch({ type: actionTypes.LOGOUT });
+  // dispatch({ type: actionTypes.LOGOUT });
 };
 export const setAuthTokens =
   (accessToken, refreshToken) => async (dispatch) => {
@@ -79,7 +78,6 @@ export const setAuthTokens =
 export const setMsgExpiredToken = (type) => async (dispatch) => {
   dispatch({
     type: type === 'login' ? actionTypes.LOGIN_FAIL : actionTypes.REGISTER_FAIL,
-    msg: '',
   });
 };
 export const clearMsgAuth = () => async (dispatch) => {
@@ -87,6 +85,5 @@ export const clearMsgAuth = () => async (dispatch) => {
     type: actionTypes.CLEAR_MSG_AUTH,
   });
 };
-
 
 export default setAuthTokens;

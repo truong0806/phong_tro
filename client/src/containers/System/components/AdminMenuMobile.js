@@ -17,10 +17,6 @@ export default function AdminMenuMobile({
   setMenuDropDown,
 }) {
   const dispatch = useDispatch();
-  console.log(
-    '🚀 ~ file: AdminMenuMobile.js:16 ~ AdminMenuMobile ~ menuDropDrow:',
-    menuDropDrow
-  );
 
   const toggleDrawer = (open) => (event) => {
     if (

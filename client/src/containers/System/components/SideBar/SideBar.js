@@ -9,15 +9,17 @@ const SideBar = () => {
       <nav className=" ">
         <User inSideBar={true} />
         <div className="flex items-center justify-center gap-2 mb-[10px]">
-          <Button
-            width={
-              'text-[0.9rem] rounded-[0.2rem] hover:bg-[#d39e00] border-[#d39e00]'
-            }
-            text={'Nạp tiền'}
-            bgcolor={'bg-[#ffc107]'}
-            textColor={''}
-            padding={'py-[0.3rem] px-[0.3rem]'}
-          />
+          <Link to={'nap-tien'}>
+            <Button
+              width={
+                'text-[0.9rem] rounded-[0.2rem] hover:bg-[#d39e00] border-[#d39e00]'
+              }
+              text={'Nạp tiền'}
+              bgcolor={'bg-[#ffc107]'}
+              textColor={''}
+              padding={'py-[0.3rem] px-[0.3rem]'}
+            />
+          </Link>
           <Link to={'dang-tin-moi'}>
             <Button
               width={

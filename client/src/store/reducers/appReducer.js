@@ -2,13 +2,19 @@ import actionTypes from '../action/actionTypes';
 
 const initState = {
   categories: [],
+  recharge_list: {},
   prices: [],
   msg: '',
   areas: [],
   provinces: [],
   count: 0,
+  msg_recharge: '',
 };
 const appReducer = (state = initState, action) => {
+  console.log(
+    '🚀 ~ file: appReducer.js:15 ~ appReducer ~ action.typ:',
+    action.typ
+  );
   switch (action.type) {
     case actionTypes.GET_CATEGORIES:
       return {
@@ -44,7 +50,18 @@ const appReducer = (state = initState, action) => {
     case actionTypes.RECHARGE_DATA:
       return {
         ...state,
-        rechargeData: action.rechargeData || {},
+        rechargeData: action.rechargeData || [],
+      };
+    case actionTypes.GET_HISTORY_RECHARGE:
+      return {
+        ...state,
+        recharge_list: action.data || [],
+      };
+    case actionTypes.GET_HISTORY_RECHARGE_FAIL:
+      return {
+        ...state,
+        recharge_list: [],
+        msg_recharge: action.msg || '',
       };
     default:
       return state;

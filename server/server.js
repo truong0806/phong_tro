@@ -14,6 +14,7 @@ import updateCategoryCount from './src/ultils/updateCategoryCount'
 import generateDate from './src/ultils/generateDate'
 import { checkOtpExpiredRunEvery1min } from './src/middleware/checkOtpExpired'
 import morgan from 'morgan'
+import { checkRechargeExpiredRunEvery1min } from './src/middleware/checkRechargeExpired'
 // const options = {
 //   key: fs.readFileSync(path.join(__dirname, 'src/ultils/key', 'localhost.key')),
 //   cert: fs.readFileSync(
@@ -22,21 +23,22 @@ import morgan from 'morgan'
 // }
 // app.use(requireToken)
 app.use(morgan(':method :url :status :response-time ms - :res[content-length]'))
-const allowedOrigins = ['http://localhost:3000', 'https://sandbox.vnpayment.vn'];
+const allowedOrigins = ['http://localhost:3000', 'https://sandbox.vnpayment.vn']
 app.use(
   cors({
     origin: function (origin, callback) {
       // Check if the origin is in the allowed list, or if it's a non-browser request
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
+        callback(null, true)
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(new Error('Not allowed by CORS'))
       }
     },
-  })
-);
+  }),
+)
 
 checkOtpExpiredRunEvery1min.invoke()
+checkRechargeExpiredRunEvery1min.invoke()
 // updateCategoryCount()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

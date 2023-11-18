@@ -76,3 +76,14 @@ h3 {
     }
   }
 }
+
+/* Add these styles to your CSS */
+.rc-anchor-normal {
+  display: inline-block;
+}
+
+/* If you're using reCAPTCHA v2, you may need to adjust the styling of the checkbox */
+.rc-anchor-checkbox {
+  display: inline-block;
+  margin-right: 10px; /* Adjust as needed */
+}

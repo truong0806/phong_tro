@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/action';
 import { ToastContainer } from 'react-toastify';
 
-
 // import {  useSelector } from 'react-redux'
 function Auth() {
   const dispatch = useDispatch();
@@ -14,12 +13,13 @@ function Auth() {
   const { categories } = useSelector((state) => state.app);
   useEffect(() => {
     setLoading(false);
-    const timeout = setTimeout(() => {
-      dispatch(actions.getCategories());
-      setLoading(true);
-    }, 1000);
+    // const timeout = setTimeout(() => {
+    //   dispatch(actions.getCategories());
+    //   setLoading(true);
+    // }, 1000);
 
-    return () => clearTimeout(timeout);
+    // return () => clearTimeout(timeout);
+    setLoading(true);
   }, [dispatch]);
 
   return (

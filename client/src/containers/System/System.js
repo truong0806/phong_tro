@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { path } from '../../ultils/constains';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Header, PopupSupport, SideBar } from './components';
 import menuSider from '../../ultils/menuSider';
 import Breadcrumb from './components/Breadcrumb';
 import { ToastContainer } from 'react-toastify';
 import AdminMenuMobile from './components/AdminMenuMobile';
+import { Loading, User2 } from '../../components';
 import * as actions from '../../store/action';
-import { Loading } from '../../components';
 
 const System = () => {
   const dispatch = useDispatch();
@@ -18,12 +17,12 @@ const System = () => {
   useEffect(() => {
     setLoading(false);
     setTimeout(() => {
-      dispatch(actions.getUser());
+      // dispatch(actions.getUser());
+      dispatch(actions.getHistoryRecharge());
       setLoading(true);
     }, 500);
   }, []);
 
-  console.log('🚀 ~ file: System.js:7 ~ menuSider:', menuSider);
   return (
     <div className="w-full">
       <PopupSupport />
@@ -35,17 +34,7 @@ const System = () => {
               <SideBar />
             </div>
             <div className="md:col-span-5 w-full h-full pt-[60px] pb-[56px] md:px-[42px] px-[15px] bg-white ">
-              <div className="md:hidden p-4 flex text-[1rem] border-[1px] text-[#856404] border-[#ffeeba] bg-[#fff9e6] py-[10px] pt-[10px] pb-[7px] mb-[10px] rounded-[5px] ">
-                <div classname="">
-                  <p>
-                    Xin chào <strong>{userData.name}</strong>.<br></br>Mã tài
-                    khoản: <strong>{userData.id}</strong>
-                  </p>
-                  <p>
-                    Số dư TK của bạn là: <strong>0</strong>
-                  </p>
-                </div>
-              </div>
+              <User2 />
               <ToastContainer />
               <Breadcrumb />
               <AdminMenuMobile

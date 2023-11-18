@@ -13,7 +13,7 @@ function Home() {
 
   useEffect(() => {
     setIsLoading(false);
-    dispatch(actions.getCategories());
+    // dispatch(actions.getCategories());
     setTimeout(() => {
       dispatch(actions.getPrices());
       dispatch(actions.getAreas());

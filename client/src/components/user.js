@@ -6,14 +6,13 @@ import swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { path } from '../ultils/constains';
 import Tokenservice from '../service/token';
+import { formatNumberWithDots } from '../ultils/formatNumberWithDots';
 
 const User = ({ inSideBar }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userData } = useSelector((state) => state.user);
+  const { userData, msg1 } = useSelector((state) => state.user);
   const { msg } = useSelector((state) => state.auth);
-  const { msg1 } = useSelector((state) => state.user);
-  console.log('🚀 ~ file: user.js:16 ~ User ~ msg1:', msg1);
   const [isLoading, setIsLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
@@ -23,19 +22,19 @@ const User = ({ inSideBar }) => {
       setTimeout(() => {
         dispatch(actions.getUser());
         setIsLoading(true);
-      }, 300);
+      }, 700);
   }, [dispatch, isLoggedIn]);
 
   useEffect(() => {
-    if (msg || msg1)
+    if (msg1 === 'Failed to get user')
       swal
         .fire('Oop !', 'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại', 'info')
         .then(() => {
-          dispatch(actions.clearMsg());
-          dispatch(actions.logout(Tokenservice.getLocalRefreshToken()));
+          dispatch(actions.clearMsgUser());
+          dispatch(actions.logout());
           navigate(`${path.AUTH}/${path.LOGIN}`);
         });
-  }, [msg]);
+  }, [msg1]);
 
   return (
     <div className="mt-[5px] flex flex-col">
@@ -99,7 +98,7 @@ const User = ({ inSideBar }) => {
             </b>
           </span>
           <span>
-            TK Chính: <b>0</b>
+            TK Chính: <b>{formatNumberWithDots(userData.balance)}</b>
           </span>
         </div>
       ) : (

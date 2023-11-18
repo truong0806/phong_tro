@@ -8,32 +8,16 @@ const { MdOutlineChevronRight } = icons;
 const Breadcrumb = () => {
   const location = useLocation();
   const dataArr = [...menuSider, ...depositMethod];
-  console.log(
-    '🚀 ~ file: Breadcrumb.js:7 ~ Breadcrumb ~ location.[1]:',
-    location.pathname.split('/')[location.pathname.split('/').length - 1]
-  );
   const currentFatherPage = dataArr.filter((item) => {
     return `${item.path}` === location.pathname.split('/')[2];
   });
-  console.log(
-    '🚀 ~ file: Breadcrumb.js:11 ~ currentFatherPage ~ currentFatherPage:',
-    currentFatherPage
-  );
   const currentPage = dataArr.filter((item) => {
     return (
       `${item.path}` ===
       location.pathname.split('/')[location.pathname.split('/').length - 1]
     );
   });
-  console.log(
-    '🚀 ~ file: Breadcrumb.js:14 ~ currentPage ~ currentPage:',
-    currentPage
-  );
   const fatherPage = 'Quản lý ';
-  console.log(
-    '🚀 ~ file: Breadcrumb.js:18 ~ fatherPage ~ fatherPage:',
-    fatherPage
-  );
   useEffect(() => {
     document.title = currentPage[0].text;
   });

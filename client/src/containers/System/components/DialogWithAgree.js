@@ -13,16 +13,6 @@ import CopyButton from '../../../components/CopyButton';
 export const DialogWithAgree = ({ setOpen, open, title }) => {
   const { userData } = useSelector((state) => state.user);
   const theme = useTheme();
-  console.log(
-    '🚀 ~ file: DialogWithAgree.js:10 ~ DialogWithAgree ~ title:',
-    title
-  );
-
-  const data = title === 0 ? dataBank : {};
-  console.log(
-    '🚀 ~ file: DialogWithAgree.js:14 ~ DialogWithAgree ~ data:',
-    data
-  );
 
   const handleClose = () => {
     setOpen(false);

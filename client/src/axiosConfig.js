@@ -38,14 +38,14 @@ instance.interceptors.response.use(
           const response = await instance.post('auth/refreshtoken', {
             refreshTokens: rs,
           });
-          if (response.data.err === 1) {
-            dispatch(actions.logout());
+          console.log("🚀 ~ file: axiosConfig.js:41 ~ response:", response)
+          if (response?.data.err === 1) {
             Swal.fire(
               'Oop !',
               'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại',
               'info'
             ).then(() => {
-              dispatch(actions.clearMsg());
+              dispatch(actions.clearMsgUser());
               dispatch(actions.logout());
               window.location.href = '/auth/login';
             });

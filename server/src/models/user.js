@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Post, { foreignKey: 'userId', as: 'users' })
     }
     static associate(models) {
+      User.hasMany(models.Order, { foreignKey: 'userId', as: 'orders' })
+    }
+    static associate(models) {
       User.hasOne(models.RefreshToken, {
         foreignKey: 'id',
         as: 'users',
@@ -26,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       fbUrl: DataTypes.STRING,
       email: DataTypes.STRING,
       avatar: DataTypes.STRING,
+      balance: DataTypes.STRING,
     },
     {
       sequelize,

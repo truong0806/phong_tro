@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DepositHistoryTable } from '../components';
 import { usePathname } from '../../../ultils/common/usePathname';
+import { useDispatch } from 'react-redux';
+import * as actions from '../../../store/action';
 
 const DepositHistory = () => {
+  const dispatch = useDispatch();
   const pageTitle = usePathname();
-  const [loading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(false);
+    setTimeout(() => {
+      // dispatch(actions.getUser());
+      dispatch(actions.getHistoryRecharge());
+      setLoading(true);
+    }, 1000);
+  }, []);
   return (
     <div>
       <div className=" items-center  pb-1 lex justify-between ">

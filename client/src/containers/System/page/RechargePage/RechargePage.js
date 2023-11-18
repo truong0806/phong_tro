@@ -3,17 +3,16 @@ import { Link } from 'react-router-dom';
 import { depositMethod } from '../../../../ultils/constains';
 import { usePathname } from '../../../../ultils/common/usePathname';
 import DialogWithAgree from '../../components/DialogWithAgree';
-import * as actions from '../../../../store/action';
-import { useDispatch } from 'react-redux';
+import AccountBalance from '../../components/AccountBalance';
 
 const RechargePage = () => {
-  const dispatch = useDispatch();
   const pageTitle = usePathname();
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const handleClickOpenDialog = () => {
     setOpen(true);
   };
+
   return (
     <div>
       <div className=" items-center  pb-2 mb-3 ">
@@ -33,8 +32,6 @@ const RechargePage = () => {
                   onClick={() => {
                     handleClickOpenDialog();
                     setTitle(item.id);
-                    console.log("🚀 ~ file: RechargePage.js:36 ~ {depositMethod?.map ~ item:", item)
-                    dispatch(actions.rechargeAddData(item));
                   }}
                   className="group w-[28%] border rounded-sm mb-[20px] h-[161px] hover:border-[#0074e4] hover:shadow-4xl "
                 >
@@ -58,65 +55,7 @@ const RechargePage = () => {
             })}
           </div>
         </div>
-        <div className="w-[25%] h-[200px] ml-[10px]  flex flex-col">
-          <div className="border rounded-sm bg-[#fff] mb-[15px]">
-            <div className="p-[1.25rem] ">
-              <span className="">Số dư tài khoản</span>
-              <h3 className="mt-2 text-[#28a745] text-[1.75rem] font-medium">
-                <strong>0đ</strong>
-              </h3>
-            </div>
-          </div>
-          <div className="border rounded-sm bg-[#fff]">
-            <div className="px-[0.65rem] py-[0.3rem] text-white flex flex-row bg-[#6c757d] mb-[5px] items-center justify-center">
-              <span>Lịch sử nạp tiền</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </div>
-          <div className="border rounded-sm bg-[#fff]">
-            <div className="px-[0.65rem] py-[0.3rem] text-white flex flex-row  bg-[#6c757d] mb-[5px] items-center justify-center ">
-              <span>Lịch sử thanh toán</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </div>
-          <div className="border rounded-sm bg-[#fff]">
-            <div className="px-[0.65rem] py-[0.3rem] text-white flex flex-row bg-[#6c757d] mb-[5px] items-center justify-center">
-              <span>Bảng giá dịch vụ</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </div>
-          <div className=""></div>
-        </div>
+        <AccountBalance />
       </div>
       {open && <DialogWithAgree setOpen={setOpen} open={open} title={title} />}
     </div>

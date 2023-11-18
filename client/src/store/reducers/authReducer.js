@@ -5,13 +5,17 @@ const initState = {
   accessToken: '',
   refreshToken: '',
   phone: '',
-  msgLogin: '',
+  msgLoginSuccess: '',
   msgRegister: '',
   msgRegisterSuccess: '',
   update: false,
 };
 
 const authReducer = (state = initState, action) => {
+  console.log(
+    '🚀 ~ file: authReducer.js:16 ~ authReducer ~ action.type:',
+    action.type
+  );
   switch (action.type) {
     case actionTypes.REGISTER_SUCCESS:
       return {
@@ -27,6 +31,7 @@ const authReducer = (state = initState, action) => {
         isLoggedIn: true,
         accessToken: action?.data?.accessToken,
         refreshToken: action?.data?.refreshToken,
+        msgLoginSuccess: action.data.msg || '',
       };
     case actionTypes.REGISTER_FAIL:
       return {
@@ -75,6 +80,7 @@ const authReducer = (state = initState, action) => {
         msgLogin: '',
         msgRegister: '',
         msgRegisterSuccess: '',
+        msgLoginSuccess: '',
       };
     default:
       return state;

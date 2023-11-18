@@ -13,3 +13,15 @@ export const apiCreatePayment = (payload) =>
       reject(error);
     }
   });
+export const apiGetHistoryRecharge = () =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: 'get',
+        url: `/recharge/historyrecharge`,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

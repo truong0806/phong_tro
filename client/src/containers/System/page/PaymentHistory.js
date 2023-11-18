@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PaymentHistoryTable } from '../components';
 import { usePathname } from '../../../ultils/common/usePathname';
+import { useDispatch } from 'react-redux';
+import * as actions from '../../../store/action';
 
 const PaymentHistory = () => {
-  const pageTitle = usePathname()
+  const dispatch = useDispatch();
+  const pageTitle = usePathname();
   const [loading] = useState(true);
+
+
   return (
     <div>
       <div className=" items-center  pb-1 lex justify-between ">

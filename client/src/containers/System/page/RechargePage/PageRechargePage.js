@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { promotionRechange, depositMethod } from '../../../../ultils/constains';
 import { useLocation } from 'react-router-dom';
 import AlertBox from '../../components/AlertBox';
@@ -6,6 +6,7 @@ import CurrencyInput from 'react-currency-input-field';
 import { Button } from '../../../../components';
 import icons from '../../../../ultils/icons';
 import { apiCreatePayment } from '../../../../service/rechange';
+import AccountBalance from '../../components/AccountBalance';
 
 const { FaChevronRight } = icons;
 
@@ -30,6 +31,7 @@ const PageRechargePage = () => {
     const finalPayload = {
       ...payload,
       bankCode: dataPaymentMethod[0].vnp_BankCode,
+      paymenMethod: dataPaymentMethod[0].text,
     };
     const respones = await apiCreatePayment(finalPayload);
     if (respones.data.err === 0) {
@@ -191,66 +193,7 @@ const PageRechargePage = () => {
           </div>
           {redirectUrl && <a href={redirectUrl}>Payment URL</a>}
         </div>
-
-        <div className="w-3/12 h-[200px] ml-[10px]  flex flex-col">
-          <div className="border rounded-sm bg-[#fff] mb-[15px]">
-            <div className="p-[1.25rem] ">
-              <span className="">Số dư tài khoản</span>
-              <h3 className="mt-2 text-[#28a745] text-[1.75rem] font-medium">
-                <strong>0đ</strong>
-              </h3>
-            </div>
-          </div>
-          <div className="border rounded-sm bg-[#fff]">
-            <div className="px-[0.65rem] py-[0.3rem] text-white flex flex-row bg-[#6c757d] mb-[5px] items-center justify-center">
-              <span>Lịch sử nạp tiền</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </div>
-          <div className="border rounded-sm bg-[#fff]">
-            <div className="px-[0.65rem] py-[0.3rem] text-white flex flex-row  bg-[#6c757d] mb-[5px] items-center justify-center ">
-              <span>Lịch sử thanh toán</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </div>
-          <div className="border rounded-sm bg-[#fff]">
-            <div className="px-[0.65rem] py-[0.3rem] text-white flex flex-row bg-[#6c757d] mb-[5px] items-center justify-center">
-              <span>Bảng giá dịch vụ</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </div>
-          <div className=""></div>
-        </div>
+        <AccountBalance />
       </div>
       <AlertBox
         styleUser={'alert'}

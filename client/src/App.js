@@ -26,7 +26,7 @@ import {
 import { useSelector } from 'react-redux';
 import { PopupSupport } from './containers/System/components';
 
-const ProtectedRoute = ({ isLoggedIn, children }) => {
+const ProtectedRoute = ({ isLoggedIn, msg1, children }) => {
   if (!isLoggedIn) {
     return <Navigate to="/auth/login" replace />;
   }
@@ -35,6 +35,7 @@ const ProtectedRoute = ({ isLoggedIn, children }) => {
 };
 function App() {
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const { msg1 } = useSelector((state) => state.user);
   return (
     <div className="h-full lg:w-full justify-center items-center bg-primary bg-auto text-base">
       <Routes>
@@ -63,7 +64,6 @@ function App() {
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <System />
-              
             </ProtectedRoute>
           }
         >

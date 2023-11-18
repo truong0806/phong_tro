@@ -13,6 +13,7 @@ import {
   checkCapsLock,
   handleKeyDownCapLock,
 } from '../../../ultils/checkCapsLock';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 function Register() {
   const navigate = useNavigate();
@@ -26,6 +27,8 @@ function Register() {
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
   const [capslock, setCapslock] = useState(false);
+  const [isCaptchaVerified, setCaptchaVerified] = useState(false);
+  const [noti, setNoti] = useState(false);
   const [payload, setPayload] = useState({
     phone: '',
     password: '',
@@ -45,7 +48,7 @@ function Register() {
 
   useEffect(() => {
     msgRegister && Swal.fire('Lỗi', 'Số điện thoại đã được sử dụng', 'error');
-    dispatch(actions.clearMsgAuth());
+    dispatch(actions.clearMsgAuth());dispatch(actions.setMsgExpiredToken('login'));
   }, [msgRegister, dispatch]);
 
   useEffect(() => {
@@ -85,6 +88,9 @@ function Register() {
       document.removeEventListener('keypress', handleKeyPress);
     };
   }, []);
+  const handleCaptchaChange = (value) => {
+    setCaptchaVerified(value !== null);
+  };
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
@@ -151,6 +157,12 @@ function Register() {
               styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[5px] mb-[5px]"
               type="password"
             />
+            <div className="mt-[10px]">
+              <ReCAPTCHA
+                sitekey="6LeTiBMpAAAAACAAQGAWdSoLr_MH_N7zNtYIerC9"
+                onChange={handleCaptchaChange}
+              />
+            </div>
             <Button
               text="Đăng ký"
               bgcolor="bg-[#3961fb]"
