@@ -112,7 +112,7 @@ const menuSider = [
   {
     id: 6,
     text: 'Bảng giá dịch vụ',
-    path: '/quan-ly/bang-gia-dich-vu',
+    path: '/bang-gia-dich-vu',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

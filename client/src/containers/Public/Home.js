@@ -4,12 +4,14 @@ import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index';
 import * as actions from '../../store/action';
 import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
+import { useLocation } from 'react-router-dom';
 
 function Home() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
-
+  const location = useLocation();
+  console.log('🚀 ~ file: Home.js:14 ~ Home ~ location:', location.pathname);
 
   useEffect(() => {
     setIsLoading(false);
@@ -26,17 +28,14 @@ function Home() {
     <>
       {isLoading ? (
         <div className="w-full flex-col items-left  ">
-          <Header
-            setLoading={setIsLoading}
-            loading={isLoading}
-          />
+          <Header setLoading={setIsLoading} loading={isLoading} />
           <Navigation isAdmin={false} />
           <div className="w-4/7 flex flex-col justify-center items-center my-[10px] mx-[120px]">
-            <Search />
+            {location.pathname !== '/bang-gia-dich-vu' && <Search />}
             <Outlet />
             <WhyUs />
             <Support />
-            <ScrollTop />
+            {location.pathname !== '/bang-gia-dich-vu' && <ScrollTop />}
           </div>
         </div>
       ) : (

@@ -8,7 +8,7 @@ import AccountBalance from '../../components/AccountBalance';
 const RechargePage = () => {
   const pageTitle = usePathname();
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState('');
+  const [item, setItem] = useState('');
   const handleClickOpenDialog = () => {
     setOpen(true);
   };
@@ -31,7 +31,7 @@ const RechargePage = () => {
                   key={index}
                   onClick={() => {
                     handleClickOpenDialog();
-                    setTitle(item.id);
+                    setItem(item);
                   }}
                   className="group w-[28%] border rounded-sm mb-[20px] h-[161px] hover:border-[#0074e4] hover:shadow-4xl "
                 >
@@ -57,7 +57,7 @@ const RechargePage = () => {
         </div>
         <AccountBalance />
       </div>
-      {open && <DialogWithAgree setOpen={setOpen} open={open} title={title} />}
+      {open && <DialogWithAgree setOpen={setOpen} open={open} item={item} />}
     </div>
   );
 };

@@ -22,6 +22,7 @@ const PageRechargePage = () => {
       location.pathname.split('/')[location.pathname.split('/').length - 1]
     );
   });
+  console.log("🚀 ~ file: PageRechargePage.js:25 ~ dataPaymentMethod ~ dataPaymentMethod:", dataPaymentMethod)
   if (redirectUrl) {
     window.location.href = redirectUrl;
   }

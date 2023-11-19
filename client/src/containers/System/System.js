@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { Header, PopupSupport, SideBar } from './components';
+import { Header, SideBar } from './components';
 import menuSider from '../../ultils/menuSider';
 import Breadcrumb from './components/Breadcrumb';
 import { ToastContainer } from 'react-toastify';
 import AdminMenuMobile from './components/AdminMenuMobile';
-import { Loading, User2 } from '../../components';
+import { Loading, PopupSupport, User2 } from '../../components';
 import * as actions from '../../store/action';
 
 const System = () => {

@@ -12,9 +12,16 @@ const Navigation = ({ isAdmin }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actions.getCategories());
-  },[dispatch]);
+  }, [dispatch]);
   const [isPinned, setIsPinned] = useState(false);
   const { categories } = useSelector((state) => state.app);
+  console.log(
+    '🚀 ~ file: Navigation.js:18 ~ Navigation ~ categories:',
+    categories
+  );
+
+  const naviData = { ...categories };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsPinned(window.scrollY > 0);
@@ -57,6 +64,12 @@ const Navigation = ({ isAdmin }) => {
                 </div>
               );
             })}
+          <NavLink
+            to={'/bang-gia-dich-vu'}
+            className={({ isActive }) => (isActive ? active : notActive)}
+          >
+            {'Bảng giá dịch vụ'}
+          </NavLink>
         </div>
       </div>
     </>

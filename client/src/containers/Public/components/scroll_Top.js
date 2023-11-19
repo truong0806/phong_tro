@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useWindowScroll } from 'react-use';
 import throttle from 'lodash/throttle';
 
-function ScrollTop() {
+function ScrollTop({ position }) {
   const { y: pageYOffset } = useWindowScroll();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -29,7 +29,9 @@ function ScrollTop() {
       onClick={handleClick}
       className={`${
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
-      } fixed z-50 bottom-14 cursor-pointer right-6 w-14 h-14 flex items-center justify-center rounded-full bg-red-500 shadow-md hover:bg-red-600 transition duration-300`}
+      } ${
+        position ? position : 'bottom-[50px]'
+      } fixed z-50  cursor-pointer right-[25px] w-[60px] h-[60px] flex items-center justify-center rounded-full bg-red-500 shadow-md hover:bg-red-600 transition duration-300`}
     >
       <img
         src="https://phongtro123.com/images/up-top-white.svg"

@@ -12,10 +12,6 @@ const initState = {
 };
 
 const authReducer = (state = initState, action) => {
-  console.log(
-    '🚀 ~ file: authReducer.js:16 ~ authReducer ~ action.type:',
-    action.type
-  );
   switch (action.type) {
     case actionTypes.REGISTER_SUCCESS:
       return {

@@ -53,7 +53,7 @@ export const createPaymentService = (id, req, res) =>
 
       let date = new Date()
       let createDate = moment(date).format('YYYYMMDDHHmmss')
-      let idOrder = `#${randomSixDigitNumber()}`
+      let idOrder = `${randomSixDigitNumber()}`
       let ipAddr =
         req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||

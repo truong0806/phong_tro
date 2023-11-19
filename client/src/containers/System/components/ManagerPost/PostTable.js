@@ -12,7 +12,6 @@ const PostTable = ({
   posts_limit_admin,
   handShowPopup,
   handleDeletePost,
-  
 }) => {
   const dispatch = useDispatch();
 
@@ -20,7 +19,7 @@ const PostTable = ({
     <div>
       <table className="w-[100%] mb-[0.8rem] text-[0.9rem] border-collapse border ">
         <thead className=" font-bold ">
-          <tr>
+          <tr className="bg-[#e9ecef]">
             <th className="p-[5px] h-[5px] w-[10%] border border-[#dee2e6]">
               Mã tin
             </th>

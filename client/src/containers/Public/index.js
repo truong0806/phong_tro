@@ -18,14 +18,21 @@ export { default as SearchDetail } from './page/SearchDetail';
 // component
 export { default as ProvinceBtn } from './components/ProvinceBtn';
 export { default as ScrollTop } from './components/scroll_Top';
-export { default as Search } from './components/search/Search';
 export { default as Province } from './components/Province';
-export { default as ListPostItem } from './components/post/ListPostItem';
-export { default as ListPost } from './components/post/ListPost';
+
 export { default as ItemSidebar } from './components/sidebar/ItemSidebar';
 export { default as SlideBar } from './components/sidebar/SlideBar';
+
 export { default as Pagination } from './components/pagination/Pagination';
 export { default as ListNumber } from './components/pagination/ListNumber';
+
+export { default as Search } from './components/search/Search';
 export { default as SearchPopup } from './components/search/SearchPopup';
 export { default as SliderTrack } from './components/search/Slider_track';
+
+export { default as ListPostItem } from './components/post/ListPostItem';
+export { default as ListPost } from './components/post/ListPost';
 export { default as FilterListPostBtn } from './components/post/FilterListPostBtn';
+
+export {default as PriceList} from './components/info/PriceList';
+export {default as DemoList} from './components/info/DemoList';

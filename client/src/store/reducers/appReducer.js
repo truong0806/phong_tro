@@ -11,10 +11,6 @@ const initState = {
   msg_recharge: '',
 };
 const appReducer = (state = initState, action) => {
-  console.log(
-    '🚀 ~ file: appReducer.js:15 ~ appReducer ~ action.typ:',
-    action.typ
-  );
   switch (action.type) {
     case actionTypes.GET_CATEGORIES:
       return {

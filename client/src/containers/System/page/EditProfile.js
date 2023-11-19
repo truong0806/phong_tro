@@ -38,7 +38,7 @@ const EditProfile = () => {
       fbUrl: userData?.fbUrl || '',
       email: userData?.email || '',
     }));
-    setLoading(true)
+    setLoading(true);
   }, [userData]);
 
   useEffect(() => {
@@ -83,23 +83,23 @@ const EditProfile = () => {
         '🚀 ~ file: EditProfile.js:76 ~ handleSubmit ~ finalPayload:',
         finalPayload
       );
-      const result = await apiEditUserInfo(finalPayload);
-      if (result.data.err === 0) {
-        toast.update(idLoad, {
-          render: 'Đổi thông tin thành công',
-          type: 'success',
-          isLoading: false,
-          autoClose: 2000,
-        });
-        dispatch(actions.getUser());
-      } else {
-        toast.update(idLoad, {
-          render: 'Đổi thông tin thất bại',
-          type: 'error',
-          isLoading: false,
-          autoClose: 2000,
-        });
-      }
+        const result = await apiEditUserInfo(finalPayload);
+        if (result.data.err === 0) {
+          toast.update(idLoad, {
+            render: 'Đổi thông tin thành công',
+            type: 'success',
+            isLoading: false,
+            autoClose: 2000,
+          });
+          dispatch(actions.getUser());
+        } else {
+          toast.update(idLoad, {
+            render: 'Đổi thông tin thất bại',
+            type: 'error',
+            isLoading: false,
+            autoClose: 2000,
+          });
+        }
     }
   };
 
@@ -222,7 +222,7 @@ const EditProfile = () => {
             <label className="whitespace-nowrap">Ảnh đại diện</label>
           </div>
           <div className="w-full h-full col-span-3 pt-5">
-            <div className="w-full flex w-[140px] h-[140px] justify-center ">
+            <div className="w-full flex h-[140px] justify-center ">
               {loading ? (
                 <img
                   alt="avatar"
@@ -285,6 +285,7 @@ const EditProfile = () => {
               width={
                 'mt-[30px] w-full h-[50px] text-bold bg-[#007bff] text-white'
               }
+              onClick={handleSubmit}
             />
           </div>
         </form>

@@ -7,7 +7,7 @@ const schedule = require('node-schedule')
 export const checkRechargeExpiredRunEvery1min = schedule.scheduleJob(
   '*/1 * * * *',
   async () => {
-    const fifteenMinutesAgo = moment().subtract(2, 'minutes').toDate()
+    const fifteenMinutesAgo = moment().subtract(15, 'minutes').toDate()
     try {
       const expiredRecharge = await db.Order.findAll({
         where: {
@@ -17,21 +17,16 @@ export const checkRechargeExpiredRunEvery1min = schedule.scheduleJob(
           },
         },
       })
-      console.log(
-        '🚀 ~ file: checkRechargeExpired.js:16 ~ expiredRecharge:',
-        expiredRecharge,
-      )
       await Promise.all(
-        expiredRecharge.map(
-          async (recharge) =>
-            await recharge.update({
-              status: '2',
-            }),
-        ),
+        expiredRecharge.map(async (recharge) => {
+          const updated = await recharge.update({
+            status: '2',
+          })
+          console.log('Update recharge id:::', updated.id)
+        }),
       )
-      console.log('Update recharge status to 2', expiredRecharge.length)
     } catch (error) {
-      console.error('Error deleting expired OTPs:', error)
+      console.error('Error deleting expired recharge:', error)
     }
   },
 )

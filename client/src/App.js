@@ -22,9 +22,9 @@ import {
   DepositHistory,
   PaymentHistory,
   RentalPageRechargePage,
+  InfoPage,
 } from './containers/System';
 import { useSelector } from 'react-redux';
-import { PopupSupport } from './containers/System/components';
 
 const ProtectedRoute = ({ isLoggedIn, msg1, children }) => {
   if (!isLoggedIn) {
@@ -35,7 +35,6 @@ const ProtectedRoute = ({ isLoggedIn, msg1, children }) => {
 };
 function App() {
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { msg1 } = useSelector((state) => state.user);
   return (
     <div className="h-full lg:w-full justify-center items-center bg-primary bg-auto text-base">
       <Routes>
@@ -52,6 +51,7 @@ function App() {
             element={<DetailPost />}
           />
           <Route path={'chi-tiet/*'} element={<DetailPost />} />
+          <Route path={path.BANG_GIA_DICH_VU} element={<InfoPage />} />
         </Route>
         <Route path={path.AUTH} element={<Auth />}>
           <Route path={path.REGISTER} element={<Register />} />
@@ -83,6 +83,7 @@ function App() {
             element={<RentalPageRechargePage />}
           />
           <Route path={path.VNPAY_QR} element={<RentalPageRechargePage />} />
+          <Route path={path.MOMO} element={<RentalPageRechargePage />} />
 
           <Route
             path={path.CHANGE_PHONE_NUMBER}

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import icons from '../ultils/icons'
+import icons from '../ultils/icons';
 
+const { FaRegCopy } = icons;
 
-const {
-  FaRegCopy
-} = icons;
-
-const CopyButton = ({ valueCopy, text, className }) => {
+const CopyButton = ({ valueCopy, text, className, textStyle }) => {
   const [copyNotification, setCopyNotification] = useState(false);
 
   const copyToClipboard = () => {
@@ -18,17 +15,25 @@ const CopyButton = ({ valueCopy, text, className }) => {
   };
 
   return (
-    <div onClick={copyToClipboard} className={`${className} cursor-pointer w-full`}>
+    <div
+      onClick={copyToClipboard}
+      className={`${className} cursor-pointer w-full`}
+    >
       {copyNotification ? (
         <span
-          className={`${copyNotification ? '' : 'hidden'
-            } tracking-tight text-green-500`}
+          className={`${
+            copyNotification ? '' : 'hidden'
+          } tracking-tight text-green-500`}
         >
           Đã copy
         </span>
       ) : (
-        <span className={`text-ellipsis overflow-hidden w-full flex flex-row gap-1`}>{text}<FaRegCopy/></span>
-
+        <span
+          className={`${textStyle} text-ellipsis overflow-hidden w-full flex flex-row gap-1`}
+        >
+          {text}
+          <FaRegCopy />
+        </span>
       )}
     </div>
   );

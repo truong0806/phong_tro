@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { formatNumberWithDots } from '../../../ultils/formatNumberWithDots';
+import { Link } from 'react-router-dom';
 
 export const AccountBalance = () => {
   const { userData } = useSelector((state) => state.user);
@@ -15,7 +16,10 @@ export const AccountBalance = () => {
         </div>
       </div>
       <div className="border rounded-sm bg-[#fff]">
-        <div className="px-[0.65rem] py-[0.3rem] text-white flex flex-row bg-[#6c757d] mb-[5px] items-center justify-center">
+        <Link
+          to={'/quan-ly/lich-su-nap-tien'}
+          className="px-[0.65rem] py-[0.3rem] text-white flex flex-row bg-[#6c757d] mb-[5px] items-center justify-center"
+        >
           <span>Lịch sử nạp tiền</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -28,10 +32,10 @@ export const AccountBalance = () => {
           >
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
-        </div>
+        </Link>
       </div>
       <div className="border rounded-sm bg-[#fff]">
-        <div className="px-[0.65rem] py-[0.3rem] text-white flex flex-row  bg-[#6c757d] mb-[5px] items-center justify-center ">
+        <Link to={'/quan-ly/lich-su-thanh-toan'} className="px-[0.65rem] py-[0.3rem] text-white flex flex-row  bg-[#6c757d] mb-[5px] items-center justify-center ">
           <span>Lịch sử thanh toán</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -44,10 +48,10 @@ export const AccountBalance = () => {
           >
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
-        </div>
+        </Link>
       </div>
       <div className="border rounded-sm bg-[#fff]">
-        <div className="px-[0.65rem] py-[0.3rem] text-white flex flex-row bg-[#6c757d] mb-[5px] items-center justify-center">
+        <Link className="px-[0.65rem] py-[0.3rem] text-white flex flex-row bg-[#6c757d] mb-[5px] items-center justify-center">
           <span>Bảng giá dịch vụ</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +64,7 @@ export const AccountBalance = () => {
           >
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
-        </div>
+        </Link>
       </div>
       <div className=""></div>
     </div>

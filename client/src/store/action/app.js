@@ -92,14 +92,6 @@ export const getProvince = () => async (dispatch) => {
 export const getHistoryRecharge = () => async (dispatch) => {
   try {
     const response = await apis.apiGetHistoryRecharge();
-    console.log(
-      '🚀 ~ file: app.js:95 ~ getHistoryRecharge ~ response:',
-      response
-    );
-    console.log(
-      '🚀 ~ file: app.js:95 ~ getHistoryRecharge ~ response:',
-      response?.data.err
-    );
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_HISTORY_RECHARGE,

@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
 import CopyButton from '../../../../components/CopyButton';
-import { Link } from 'react-router-dom';
 import { formatNumberWithDots } from '../../../../ultils/formatNumberWithDots';
 import moment from 'moment';
 
@@ -13,7 +12,7 @@ const DepositHistoryTable = ({ loading }) => {
     <div>
       <table className="w-[100%] mb-[0.8rem] text-[0.9rem] border-collapse border ">
         <thead className=" font-bold ">
-          <tr>
+          <tr className="bg-[#e9ecef]">
             <th className="p-[5px] h-[5px] w-[15%] border border-[#dee2e6]">
               Ngày nạp
             </th>
@@ -32,15 +31,17 @@ const DepositHistoryTable = ({ loading }) => {
             <th className=" h-[5px] w-[10%] border border-[#dee2e6]">
               Thực nhận
             </th>
-            <th className=" h-[5px] w-[15%] border border-[#dee2e6]">
+            <th className=" h-[5px] w-[10%] border border-[#dee2e6]">
               Trạng thái
             </th>
-            <th className=" h-[5px] w-[5%] border border-[#dee2e6]">Ghi chú</th>
+            <th className=" h-[5px] w-[15%] border border-[#dee2e6]">
+              Ghi chú
+            </th>
           </tr>
         </thead>
         {loading === true ? (
           <tbody className="">
-            {recharge_list ? (
+            {recharge_list && recharge_list.length > 0 ? (
               recharge_list?.map((item, index) => {
                 const formattedDate = moment
                   .utc(item?.createdAt)
@@ -52,10 +53,8 @@ const DepositHistoryTable = ({ loading }) => {
                     }`}
                     key={index}
                   >
-                    <td className="p-[10px] border border-[#dee2e6]">
-                      <div className="line-clamp-2 overflow-hidden flex items-center justify-center">
-                        {formattedDate}
-                      </div>
+                    <td className="border border-[#dee2e6] text-center">
+                      <div className="p-2">{formattedDate}</div>
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">
                       <div className="line-clamp-2 overflow-hidden flex items-center justify-center">
@@ -67,10 +66,8 @@ const DepositHistoryTable = ({ loading }) => {
                       </div>
                     </td>
 
-                    <td className="p-[10px] border border-[#dee2e6]">
-                      <div className="line-clamp-2 overflow-hidden flex items-center justify-center">
-                        {item.paymentMethod}
-                      </div>
+                    <td className="border border-[#dee2e6] text-center">
+                      <div className="p-2 ">{item.paymentMethod}</div>
                     </td>
                     <td className="p-[10px] border border-[#dee2e6]">
                       <div className="line-clamp-2 overflow-hidden flex items-center justify-center">
@@ -87,13 +84,13 @@ const DepositHistoryTable = ({ loading }) => {
                         {formatNumberWithDots(+item?.balance)}
                       </div>
                     </td>
-                    <td className="p-[10px] border border-[#dee2e6]">
-                      <div className="line-clamp-2 overflow-hidden flex items-center justify-center">
-                        {item.status == 0 ? (
+                    <td className="border border-[#dee2e6] text-center">
+                      <div className="p-1">
+                        {item.status === '0' ? (
                           <span className="text-yellow-400">
                             Đang thực hiện
                           </span>
-                        ) : item.status == 1 ? (
+                        ) : item.status === '1' ? (
                           <span className="text-green-500">Thành công</span>
                         ) : (
                           <span className="text-red-600">Thất bại</span>
@@ -107,7 +104,7 @@ const DepositHistoryTable = ({ loading }) => {
             ) : (
               <tr>
                 <td colSpan="7" className="text-center py-10 ">
-                  <h2>Không có bài đăng</h2>
+                  <h2>Không có giao dịch nạp tiền</h2>
                 </td>
               </tr>
             )}
