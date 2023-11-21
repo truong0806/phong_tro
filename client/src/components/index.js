@@ -4,5 +4,6 @@ export { default as User } from './user';
 export { default as SearchItem } from './searchItem';
 export { default as InputSelect } from './inputSelect';
 export { default as Loading } from './loading';
-export { default as User2 } from './user.component'
+export { default as User2 } from './user.component';
 export { default as PopupSupport } from './PopupSupport';
+export { default as Breadcrumb } from './Breadcrumb';

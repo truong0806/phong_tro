@@ -8,7 +8,6 @@ const UploadImages = ({
   imagesFile,
   invalidFields,
 }) => {
-  console.log('imagesFile', imagesFile);
   const [loading, setLoading] = useState(true);
   const handImageChange = async (e) => {
     setTimeout(() => {
@@ -25,7 +24,6 @@ const UploadImages = ({
   const handleDelete = (imageToDelete) => {
     setImagesFile((prev) => prev.filter((image) => image.url !== imageToDelete));
     setLoading(true);
-    console.log('🚀 ~ file: UploadImages.js:11 ~ imagesFile:', imagesFile);
   };
 
   return (

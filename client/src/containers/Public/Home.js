@@ -11,7 +11,6 @@ function Home() {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
-  console.log('🚀 ~ file: Home.js:14 ~ Home ~ location:', location.pathname);
 
   useEffect(() => {
     setIsLoading(false);

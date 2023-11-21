@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputText, InputTextReadOnly, UploadVideos } from '../../components';
 import { InputSelect } from '../../../../components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,11 +29,34 @@ const Overview = ({
   const dispatch = useDispatch();
   const { prices, areas } = useSelector((state) => state.app);
   const { categories } = useSelector((state) => state.app);
+  const [category, setCategory] = useState();
+  const [target, setTarget] = useState();
 
   useEffect(() => {
     dispatch(actions.getPrices());
     dispatch(actions.getAreas());
   }, [dispatch]);
+
+  useEffect(() => {
+    const foundCategories =
+      value.categoryName.length > 0 &&
+      categories?.find((item) => item.value === value?.categoryName?.trim());
+
+    setCategory(
+      foundCategories
+        ? { value: foundCategories.code, label: foundCategories.value }
+        : ''
+    );
+  }, [value]);
+  useEffect(() => {
+    const foundTarget =
+      value.target.length > 0 &&
+      doituongs?.find((item) => item.value === value?.target?.trim());
+    
+    setTarget(
+      foundTarget ? { value: foundTarget.code, label: foundTarget.value } : ''
+    );
+  }, [value]);
 
   useEffect(() => {
     setValue((prev) => ({
@@ -54,9 +77,7 @@ const Overview = ({
         invalidFields={invalidFields}
         name={'categoryName'}
         setValue={setValue}
-        value={
-          categories?.find((item) => item.value === value?.categoryName)?.code
-        }
+        value={category}
         array={categories}
         nameValue={'value'}
         text={'Loại chuyên mục'}
@@ -205,7 +226,7 @@ const Overview = ({
         </small>
       </div>
       <InputSelect2
-        value={doituongs?.find((item) => item.value === value?.target)?.code}
+        value={target}
         setInvalidFields={setInvalidFields}
         invalidFields={invalidFields}
         name={'target'}

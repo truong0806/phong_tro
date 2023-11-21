@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import menuSider from '../../../ultils/menuSider';
-import { depositMethod } from '../../../ultils/constains';
-import icons from '../../../ultils/icons';
+import menuSider from '../ultils/menuSider';
+import { depositMethod } from '../ultils/constains';
+import icons from '../ultils/icons';
 
 const { MdOutlineChevronRight } = icons;
 const Breadcrumb = () => {

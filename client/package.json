@@ -43,6 +43,7 @@
     "redux-thunk": "^2.4.2",
     "slug": "^8.2.2",
     "sweetalert2": "^11.7.3",
+    "swiper": "^11.0.4",
     "tailwindcss-react": "^0.0.0",
     "throttle": "^1.0.3",
     "thunk": "0.0.1",

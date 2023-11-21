@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import InputText from '../../../../components/InputText';
-import Address from '../CreatePost/Address/Address';
-import { InputSelect } from '../../../../components';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import CreatePost from '../../page/CreatePost';
 import icon from '../../../../ultils/icons';
 const { AiOutlineClose } = icon;
 
-const EditPost = ({  setShowPopup}) => {
-  
+const EditPost = ({ setShowPopup }) => {
   const handleCloseClick = () => {
     setShowPopup(false);
   };
+
   return (
     <div
       onClick={handleCloseClick}

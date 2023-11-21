@@ -12,9 +12,9 @@ import {
 } from '../../../service';
 import validate from '../../../ultils/validate';
 import { usePathname } from '../../../ultils/common/usePathname';
+import Address2 from '../components/CreatePost/Address/Address2';
 
 const CreatePost = ({ isEdit, setShowPopup }) => {
-  console.log('🚀 ~ file: CreatePost.js:18 ~ CreatePost ~ isEdit:', isEdit);
   const pageTitle = usePathname();
   const { dataEdit } = useSelector((state) => state.post);
 
@@ -37,7 +37,6 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
           ? +dataEdit?.attributes?.price?.split(' ')[0]
           : +dataEdit?.attributes?.price?.split(' ')[0] * 1000000
         : '',
-      images: isEdit ? JSON.parse(dataEdit?.images?.image) : '',
       areaNumber: isEdit ? dataEdit?.attributes?.acreage?.split(' ')[0] : '',
       target: isEdit ? dataEdit?.overviews.target : '',
       province: isEdit ? dataEdit?.address.split(',')[4] : '',
@@ -49,16 +48,18 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
     console.log('🚀 ~ file: CreatePost.js:21 ~ CreatePost ~ payload:', payload);
 
     if (isEdit) {
-      let images = JSON.parse(dataEdit?.images?.image)?.map((item, index) => {
-        return {
-          id: index,
-          url: item,
-        };
-      });
+      let images =
+        dataEdit?.images?.image &&
+        JSON.parse(dataEdit?.images?.image)?.map((item, index) => {
+          return {
+            id: index,
+            url: item,
+          };
+        });
       images && setImagesFile(images);
       setPayload((prev) => ({
         ...prev,
-        images: JSON.parse(dataEdit?.images?.image),
+        images: dataEdit?.images?.image && JSON.parse(dataEdit?.images?.image),
       }));
     }
   }, []);
@@ -95,15 +96,28 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
   };
 
   const handleSumit = async () => {
-    validate(payload, 'Create Post', setInvalidFields);
-    if (imagesFile.length > 0) {
+    const invalids = validate(payload, 'Create Post', setInvalidFields);
+    console.log(
+      '🚀 ~ file: CreatePost.js:103 ~ handleSumit ~ payload:',
+      payload
+    );
+    console.log(
+      '🚀 ~ file: CreatePost.js:103 ~ handleSumit ~ invalids:',
+      invalids
+    );
+
+    if (payload.images === '') {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'images')
       );
     }
+    console.log(
+      '🚀 ~ file: CreatePost.js:111 ~ handleSumit ~ invalidFields:',
+      invalidFields
+    );
     if (isEdit) payload.postId = dataEdit?.id;
     let res = separateUrlsIntoObjects(imagesFile);
-    if (invalidFields?.length === 0) {
+    if (invalids === 0) {
       let imagesList = [];
       let imagesListHttp = isEdit && res.httpUrls;
       isEdit &&
@@ -138,7 +152,7 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
         phoneContact: userData?.phone,
         priceNumber: payload.priceNumber.toString(),
         areaNumber: payload.areaNumber.toString(),
-        images: isEdit ? JSON.stringify(imagesList) : imagesList,
+        images: isEdit ? imagesList && JSON.stringify(imagesList) : imagesList,
       };
       const idLoad = toast.loading('Please wait...');
 
@@ -211,7 +225,7 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
               isEdit={isEdit}
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
-              value={payload}
+              address={payload}
               setValue={setPayload}
             />
             <Overview
@@ -256,7 +270,6 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
           </div>
         </div>
       </form>
-      
     </div>
   );
 };

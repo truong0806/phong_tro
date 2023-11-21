@@ -1,5 +1,6 @@
 import actionTypes from './actionTypes';
 import {
+  apiGetDetailPost,
   apiGetPosts,
   apiGetPostsLimit,
   apiGetPostsLimitAdmin,
@@ -46,6 +47,28 @@ export const GetPostsLimit = (query) => async (dispatch) => {
     dispatch({
       type: actionTypes.GET_POSTS_LIMIT,
       posts_limit: null,
+    });
+  }
+};
+export const GetPostsDetail = (query) => async (dispatch) => {
+  try {
+    const response = await apiGetDetailPost(query);
+    console.log('🚀 ~ file: post.js:56 ~ GetPostsDetail ~ response:', response);
+    if (response?.data.err === 0) {
+      dispatch({
+        type: actionTypes.GET_POST_DETAIL,
+        posts_detail: response.data.response?.rows,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_POST_DETAIL,
+        msg: response.data.msg,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_POST_DETAIL,
+      posts_detail: null,
     });
   }
 };

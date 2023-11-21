@@ -141,8 +141,9 @@ export const insertService = () => {
               ?.value,
             create: item?.overview?.content.find((i) => i.name === 'Ngày đăng:')
               ?.value,
-            expire: item?.overview?.content.find((i) => i.name === 'Ngày hết hạn:')
-              ?.value,
+            expire: item?.overview?.content.find(
+              (i) => i.name === 'Ngày hết hạn:',
+            )?.value,
           })
 
           await db.User.findOrCreate({

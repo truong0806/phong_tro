@@ -13,26 +13,24 @@ const SelectAddress2 = ({
   setInvalidFields,
   dataPro,
   setLoca,
+  setLocal,
 }) => {
-  const [selectedTinh, setSelectedTinh] = useState(null);
+  console.log('🚀 ~ file: SelectAddress2.js:17 ~ value:', value);
+  const [selectedTinh, setSelectedTinh] = useState();
   const newArray = array?.map((item) => {
     return {
       value: item.code,
       label: item.name,
     };
   });
+
   const handleTinhChange = (selectedOption) => {
-    console.log(
-      '🚀 ~ file: SelectAddress2.js:24 ~ handleTinhChange ~ selectedOption:',
-      selectedOption
-    );
-    setSelectedTinh(selectedOption);
     setValue((prev) => ({
       ...prev,
       [name]: selectedOption.label,
     }));
+    setSelectedTinh(selectedOption.label);
     setLoca(selectedOption.value);
-    console.log('🚀 ~ file: SelectAddress2.js:16 ~ value:', value);
   };
 
   const handleSelectFocus = () => {
@@ -47,7 +45,9 @@ const SelectAddress2 = ({
       <div className="">
         <Select
           noOptionsMessage={() => 'Không có'}
-          value={selectedTinh}
+          value={{
+            label: selectedTinh ? selectedTinh : value,
+          }}
           onChange={handleTinhChange}
           onFocus={handleSelectFocus}
           options={newArray}

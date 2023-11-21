@@ -46,7 +46,7 @@ const PostTable = ({
           <tbody className="">
             {posts_limit_admin?.length !== 0 ? (
               posts_limit_admin?.map((item, index) => {
-                let imgObject = JSON.parse(item.images.image);
+                let imgObject = item?.images?.image && JSON.parse(item?.images?.image);
                 return (
                   <tr
                     className={`${

@@ -34,6 +34,7 @@ function Search() {
   const [showPopup, setShowPopup] = useState(false);
   const [content, setContent] = useState([]);
   const [defaultText, setDefaultText] = useState('');
+  const [title, setTitle] = useState('');
   const [name, setName] = useState([]);
   const { areas, prices, categories, provinces } = useSelector(
     (state) => state.app
@@ -49,12 +50,13 @@ function Search() {
     }
   }, [location]);
 
-  const handShowPopup = (e, content, name, defaultText) => {
+  const handShowPopup = (e, content, name, defaultText, title) => {
     e.stopPropagation();
     setContent(content);
     setName(name);
     setShowPopup(true);
     setDefaultText(defaultText);
+    setTitle(title);
   };
   const handleDeleteTitle = (name, defaultText) => {
     setSelectedValue((prevState) => ({
@@ -111,7 +113,7 @@ function Search() {
         },
       }));
     },
-    [content]
+    []
   );
 
   const handleSearch = () => {
@@ -124,7 +126,9 @@ function Search() {
     });
     let queryCodeObject = {};
     queryCode.forEach((item) => {
-      queryCodeObject[item[0]] = item[1];
+      if (item[1] != null) {
+        queryCodeObject[item[0]] = item[1];
+      }
     });
     const queryText = Object.entries(selectedValue).filter(
       (item) => !item[0].includes('Code') || !item[0].includes('Number')
@@ -133,6 +137,8 @@ function Search() {
     queryText.forEach((item) => {
       queryTextObj[item[0]] = item[1];
     });
+    const queryCodeObjectCopy = { ...queryCodeObject };
+
     let titleSearch = `${
       queryTextObj.category.name
         ? queryTextObj.category.name
@@ -156,7 +162,7 @@ function Search() {
     navigate(
       {
         pathname: path.SEARCH,
-        search: createSearchParams(queryCodeObject).toString(),
+        search: createSearchParams(queryCodeObjectCopy).toString(),
       },
       { state: { titleSearch } }
     );
@@ -165,13 +171,19 @@ function Search() {
     <>
       <div
         tabIndex="-1"
-        className="mb-[15px] lg:w-full w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2"
+        className="mb-[15px] w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2"
       >
         <span
           onClick={(e) =>
-            handShowPopup(e, categories, 'category', 'Tìm tất cả')
+            handShowPopup(
+              e,
+              categories,
+              'category',
+              'Tìm tất cả',
+              'Chọn loại bất động sản'
+            )
           }
-          className="cursor-pointer flex-1 md:w-full lg:w-full font-bold"
+          className="cursor-pointer flex-1 w-full font-bold"
         >
           <SearchItem
             defaultText={'Phòng trọ, nhà trọ'}
@@ -189,7 +201,15 @@ function Search() {
           />
         </span>
         <span
-          onClick={(e) => handShowPopup(e, provinces, 'province', 'Tìm tất cả')}
+          onClick={(e) =>
+            handShowPopup(
+              e,
+              provinces,
+              'province',
+              'Tìm tất cả',
+              'Chọn tỉnh thành'
+            )
+          }
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
@@ -205,7 +225,9 @@ function Search() {
           />
         </span>
         <span
-          onClick={(e) => handShowPopup(e, prices, 'prices', 'Chọn giá ')}
+          onClick={(e) =>
+            handShowPopup(e, prices, 'prices', 'Chọn giá ', 'Chọn theo giá ')
+          }
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
@@ -215,13 +237,21 @@ function Search() {
             text={selectedValue.prices.name}
             deleteIcon={
               <FiDelete
-                onClick={() => handleDeleteTitle('prices', 'Chọn giá')}
+                onClick={() => handleDeleteTitle('prices', 'Chọn theo giá')}
               />
             }
           />
         </span>
         <span
-          onClick={(e) => handShowPopup(e, areas, 'areas', 'Chọn diện tích ')}
+          onClick={(e) =>
+            handShowPopup(
+              e,
+              areas,
+              'areas',
+              'Chọn diện tích ',
+              'Chọn diện tích '
+            )
+          }
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
@@ -247,6 +277,7 @@ function Search() {
       </div>
       {showPopup && (
         <SearchPopup
+          title={title}
           defaultText={defaultText}
           selectedValue={selectedValue}
           content={content}

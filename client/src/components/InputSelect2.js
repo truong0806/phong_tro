@@ -14,7 +14,6 @@ const InputSelect2 = ({
   setInvalidFields,
   codes,
 }) => {
-  console.log('🚀 ~ file: inputSelect2.js:14 ~ array:', array);
   const [selected, setSelected] = useState(null);
   const newArray = array?.map((item) => {
     return {
@@ -46,7 +45,7 @@ const InputSelect2 = ({
       <div className="mt-[10px]">
         <Select
           isSearchable={false}
-          value={selected}
+          value={value}
           onChange={handleChange}
           onFocus={handleSelectFocus}
           options={newArray}

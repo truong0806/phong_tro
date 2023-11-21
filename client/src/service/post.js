@@ -97,7 +97,20 @@ export const apiUpdatePost = (payload) =>
       const response = await axiosConfig({
         method: 'post',
         url: `/post/update`,
-        data: {payload},
+        data: payload,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+export const apiGetDetailPost = (query) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: 'get',
+        url: `/post/limit`,
+        params: query,
       });
       resolve(response);
     } catch (error) {

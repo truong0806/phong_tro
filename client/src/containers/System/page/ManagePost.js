@@ -32,7 +32,7 @@ const ManagePost = () => {
         setLoading(true);
       });
     }, 200);
-  }, [dispatch, categoryCode, updateData]);
+  }, [dispatch, categoryCode, updateData, showPopup]);
 
   const filterData = (bonusType, status) => {
     let filteredData = posts_limit_admin.filter((row) => {

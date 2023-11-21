@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import icons from '../../../../ultils/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../../../store/action';
 import 'lazysizes';
 var slug = require('slug');
 const { BsBookmarkStarFill, RiHeartLine, RiHeartFill } = icons;
@@ -17,6 +19,7 @@ const ListPostItem = ({
   id,
 }) => {
   const [isHoverHeart, setIsHoverHeart] = useState(false);
+  const dispatch = useDispatch();
   const handleStar = (star) => {
     const stars = [];
     for (let i = 1; i < +star; i++) {
@@ -28,7 +31,7 @@ const ListPostItem = ({
   };
   return (
     <div className="w-full  flex flex-col md:px-[5px]  mx-[5px]  border-t border-red-500 py-2 md:flex-row hover:bg-gray-100 ">
-      {images?.length > 4 ? (
+      {images?.length > 0 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
           className="w-full md:w-2/5 h-[240px] md:gap-[2px] items-center justify-center relative cursor-pointerv "
@@ -102,7 +105,7 @@ const ListPostItem = ({
         <div className="md:my-6 my-6 flex items-center justify-between gap-1 md:gap-5 flex-wrap">
           <span className="text-[1.2rem] text-[#16c784] font-bold">
             {attributes?.price?.split(' ')[1] === 'đồng/tháng'
-              ? `${+attributes?.price?.split(' ')[0] / 1000}.000 đồng/tháng`
+              ? `${+attributes?.price?.split(' ')[0]}.000 đồng/tháng`
               : attributes.price}
           </span>
           <span className="text-[#333] leading-normal md:leading-[19px] ">
@@ -120,7 +123,7 @@ const ListPostItem = ({
           </span>
         </div>
         <p className="text-gray-500 h-[100px] line-clamp-5 overflow-hidden my-[10px]">
-          {description}
+          {JSON.parse(description)}
         </p>
         <div className="flex  items-center justify-between my-9 lg:flex-row xl:flex-row">
           <div className="sm:flex items-center hidden">

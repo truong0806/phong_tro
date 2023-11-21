@@ -2,11 +2,12 @@ import actionTypes from '../action/actionTypes';
 
 const initState = {
   posts: [],
+  posts_detail: [],
   msg: '',
   count: 0,
   posts_by_categories: [],
   posts_limit: [],
-  posts_limit_admin: []
+  posts_limit_admin: [],
 };
 
 const postReducer = (state = initState, action) => {
@@ -23,6 +24,12 @@ const postReducer = (state = initState, action) => {
         posts_limit: action.posts_limit || [],
         msg: action.msg || '',
         count: action.count || 0,
+      };
+    case actionTypes.GET_POST_DETAIL:
+      return {
+        ...state,
+        posts_detail: action.posts_detail || [],
+        msg: action.msg || '',
       };
     case actionTypes.GET_POSTS_LIMIT_ADMIN:
       return {
@@ -49,8 +56,8 @@ const postReducer = (state = initState, action) => {
     case actionTypes.EDIT_POST:
       return {
         ...state,
-        dataEdit: action.dataEdit || {}
-      }
+        dataEdit: action.dataEdit || {},
+      };
     default:
       return state;
   }

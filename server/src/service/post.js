@@ -65,6 +65,13 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
         queries.areaNumber = {
           [Op.and]: [{ [Op.gte]: areaNumber[0] }, { [Op.lt]: areaNumber[1] }],
         }
+      if (queries.categoryCode && queries.categoryCode !== null) {
+        queries.categoryCode = queries.categoryCode
+      }
+
+      if (queries.provinceCode && queries.provinceCode !== null) {
+        queries.provinceCode = queries.provinceCode
+      }
       const response = await db.Post.findAndCountAll({
         where: queries,
         raw: true,
@@ -143,9 +150,18 @@ export const postLimitAdminService = (page, query, id, bonus) =>
             attributes: ['name', 'phone', 'zalo'],
           },
         ],
-        attributes: ['id', 'title', 'star', 'address', 'description', 'priceNumber', 'areaNumber'],
+        attributes: [
+          'id',
+          'title',
+          'star',
+          'address',
+          'description',
+          'priceNumber',
+          'areaNumber',
+        ],
         distinct: true,
       })
+      console.log("🚀 ~ file: post.js:164 ~ newPromise ~ response:", response)
       response.rows.forEach((row) => {
         row.overviews.status = checkStatus(
           row?.overviews?.expire?.split(' ')[3],
@@ -235,22 +251,22 @@ export const postCreateService = (queries) =>
       await db.Province.findOrCreate({
         where: {
           [Op.or]: [
-            { value: queries?.province?.replace('Thành phố ', '') },
-            { value: queries?.province?.replace('Tỉnh ', '') },
+            { value: queries?.province?.replace('Thành phố ', '').trim() },
+            { value: queries?.province?.replace('Tỉnh ', '').trim() },
           ],
         },
         defaults: {
           code: provinceCode,
-          value: queries?.province?.includes('Thành phố ')
-            ? queries?.province?.replace('Thành phố ', '')
-            : queries?.province?.replace('Tỉnh ', ''),
+          value: queries?.province?.includes('Thành phố ').trim()
+            ? queries?.province?.replace('Thành phố ', '').trim()
+            : queries?.province?.replace('Tỉnh ', '').trim(),
         },
       })
       await db.Images.findOrCreate({
         where: { id: imagesId },
         defaults: {
           id: imagesId,
-          image: JSON.stringify(queries.images),
+          image: JSON.stringify(queries.images) || '',
         },
       })
       console.log(
@@ -260,10 +276,6 @@ export const postCreateService = (queries) =>
       console.log(
         '🚀 ~ file: post.js:259 ~ newPromise ~ queries.images:',
         queries.images,
-      )
-      console.log(
-        '🚀 ~ file: post.js:259 ~ newPromise ~ queries.images.image:',
-        queries.images.image,
       )
       await db.Post.findOrCreate({
         where: {
@@ -359,7 +371,7 @@ export const postUpdateService = (postId, queries) =>
   new Promise(async (resolve, reject) => {
     try {
       const post = await db.Post.findOne({ where: { id: postId } })
-      console.log("🚀 ~ file: post.js:362 ~ newPromise ~ post:", post)
+      console.log('🚀 ~ file: post.js:362 ~ newPromise ~ post:', post)
       let attributesId = v4()
       let overviewId = v4()
       const imagesId = v4()
@@ -384,15 +396,15 @@ export const postUpdateService = (postId, queries) =>
       await db.Province.findOrCreate({
         where: {
           [Op.or]: [
-            { value: queries?.province?.replace('Thành phố ', '') },
-            { value: queries?.province?.replace('Tỉnh ', '') },
+            { value: queries?.province?.replace('Thành phố ', '').trim() },
+            { value: queries?.province?.replace('Tỉnh ', '').trim() },
           ],
         },
         defaults: {
           code: provinceCode,
-          value: queries?.province?.includes('Thành phố ')
-            ? queries?.province?.replace('Thành phố ', '')
-            : queries?.province?.replace('Tỉnh ', ''),
+          value: queries?.province?.includes('Thành phố ').trim()
+            ? queries?.province?.replace('Thành phố ', '').trim()
+            : queries?.province?.replace('Tỉnh ', '').trim(),
         },
       })
       await db.Overview.update(
@@ -439,7 +451,7 @@ export const postUpdateService = (postId, queries) =>
       const [updatedRows] = await db.Post.update(
         {
           title: queries.title,
-          description: queries.description,
+          description: JSON.stringify(queries.description),
           address: address,
           categoryCode: queries.categoryCode,
           provinceCode: queries.provinceCode,
@@ -467,3 +479,12 @@ export const postUpdateService = (postId, queries) =>
       reject(error)
     }
   })
+function removeNullValues(obj) {
+  for (const key in obj) {
+    if (obj[key] === null) {
+      delete obj[key]
+    } else if (typeof obj[key] === 'object') {
+      removeNullValues(obj[key])
+    }
+  }
+}

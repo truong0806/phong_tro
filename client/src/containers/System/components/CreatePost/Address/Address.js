@@ -7,14 +7,13 @@ import {
 } from '../../../../../service';
 import SelectAddress2 from './SelectAddress2';
 const Address = ({
-  value,
+  address,
   setValue,
   invalidFields,
   setInvalidFields,
   isEdit,
 }) => {
   const [provinces, setProvinces] = useState([]);
-  const [provinces1, setProvinces1] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
   const [province, setProvince] = useState('');
@@ -23,33 +22,8 @@ const Address = ({
   const [reset, setReset] = useState(false);
 
   useEffect(() => {
-    const foundProvince =
-      value.province.length > 0 &&
-      provinces?.find((item) => item.name === value?.province?.trim());
-    setProvince(foundProvince ? foundProvince.code : '');
-  }, [value, provinces]);
-
-  useEffect(() => {
-    const foundDistrict =
-      value.district.length > 0 &&
-      districts?.find((item) => item.name === value?.district?.trim());
-    setDistrict(foundDistrict ? foundDistrict.code : '');
-  }, [value, districts]);
-
-  useEffect(() => {
-    const foundWard =
-      value.ward.length > 0 &&
-      wards?.find((item) => item.name === value?.ward?.trim());
-    setWard(foundWard ? foundWard.code : '');
-  }, [value, wards]);
-
-  useEffect(() => {
     const fetchPublicProvince = async () => {
       const response = await apiLocation();
-      console.log(
-        '🚀 ~ file: Address.js:49 ~ fetchPublicProvince ~ response:',
-        response
-      );
       if (response.status === 200) {
         setProvinces(response?.data);
       }
@@ -74,6 +48,10 @@ const Address = ({
     setWard(null);
     const fetchPublicWard = async () => {
       const response = await apiGetWard(district);
+      console.log(
+        '🚀 ~ file: Address.js:86 ~ fetchPublicWard ~ district:',
+        district
+      );
       if (response.status === 200) {
         setWards(response?.data?.wards);
       }
@@ -82,6 +60,43 @@ const Address = ({
     !district ? setReset(true) : setReset(false);
     !district && setWards([]);
   }, [district]);
+
+  // useEffect(() => {
+  //   if (address.province.length > 0) {
+  //     const foundProvince = provinces?.find(
+  //       (item) => item.name === address?.province?.trim()
+  //     );
+  //     setProvince(
+  //       foundProvince
+  //         ? { value: foundProvince.code, label: foundProvince.name }
+  //         : ''
+  //     );
+  //   }
+  // }, [provinces]);
+
+  // useEffect(() => {
+  //   if (address.district.length > 0) {
+  //     const foundDistrict = districts?.find(
+  //       (item) => item.name === address?.district?.trim()
+  //     );
+  //     setDistrict(
+  //       foundDistrict
+  //         ? { value: foundDistrict.code, label: foundDistrict.name }
+  //         : ''
+  //     );
+  //   }
+  // }, [districts]);
+
+  // useEffect(() => {
+  //   if (address.ward.length > 0) {
+  //     const foundWard = wards?.find(
+  //       (item) => item.name === address?.ward?.trim()
+  //     );
+  //     setWard(
+  //       foundWard ? { value: foundWard.code, label: foundWard.name } : ''
+  //     );
+  //   }
+  // }, [wards]);
 
   return (
     <div className="mt-3 gap-2 justify-between flex flex-col mb-[25px]">
@@ -92,7 +107,7 @@ const Address = ({
       </div>
       <div className="flex flex-col">
         <InputText
-          value={value.apartmentNumber}
+          value={address.apartmentNumber}
           name={'apartmentNumber'}
           invalidFields={invalidFields}
           setInvalidFields={setInvalidFields}
@@ -102,7 +117,7 @@ const Address = ({
           styleInput={'max-w-[30%]'}
         />
         <InputText
-          value={value.street}
+          value={address.street}
           name={'street'}
           invalidFields={invalidFields}
           setInvalidFields={setInvalidFields}
@@ -129,7 +144,7 @@ const Address = ({
           name={'province'}
           invalidFields={invalidFields}
           type="province"
-          value={province}
+          value={address?.province?.trim() || province}
           setValue={setValue}
           array={provinces}
           setLoca={setProvince}
@@ -141,7 +156,7 @@ const Address = ({
           invalidFields={invalidFields}
           reset={reset}
           type="district"
-          value={district}
+          value={address?.district?.trim() || district}
           array={districts}
           setValue={setValue}
           setLoca={setDistrict}
@@ -153,7 +168,7 @@ const Address = ({
           invalidFields={invalidFields}
           reset={reset}
           type="ward"
-          value={ward}
+          value={address?.ward?.trim() || ward}
           setValue={setValue}
           setLoca={setWard}
           array={wards}
@@ -165,12 +180,12 @@ const Address = ({
         label="Địa chỉ chính xác"
         value={
           isEdit
-            ? `${value.apartmentNumber}, ${value.street}, ${value.ward}, ${value.district}, ${value.province}`
+            ? `${address.apartmentNumber}, ${address.street}, ${address.ward}, ${address.district}, ${address.province}`
             : `${
-                value?.apartmentNumber?.length === 0
+                address?.apartmentNumber?.length === 0
                   ? ''
-                  : `${value?.apartmentNumber},`
-              } ${value?.street?.length === 0 ? '' : `${value?.street},`} ${
+                  : `${address?.apartmentNumber},`
+              } ${address?.street?.length === 0 ? '' : `${address?.street},`} ${
                 ward
                   ? `${wards?.find((item) => item.code === +ward)?.name},`
                   : ''

@@ -1,6 +1,7 @@
 export default function validate(payload, name, setInvalidFields) {
   let invalids = 0;
   const fields = Object.entries(payload);
+  console.log('🚀 ~ file: validate.js:4 ~ validate ~ fields:', fields);
   if (name === 'Create Post') {
     fields.forEach((item) => {
       if (item[1] === '' || item[1] === null) {
@@ -109,7 +110,7 @@ export default function validate(payload, name, setInvalidFields) {
             invalids += 1;
           }
           break;
-        
+
         case 'otp':
           if (item[1] === '') {
             setInvalidFields((prev) => [
