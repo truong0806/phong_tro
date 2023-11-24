@@ -26,7 +26,7 @@ function Auth() {
     <>
       {loading ? (
         <div className="w-full flex flex-col items-center ">
-          <Header setLoading={setLoading} />
+          <Header />
           <Navigation categories={categories} />
           <ScrollTop />
           <ToastContainer />

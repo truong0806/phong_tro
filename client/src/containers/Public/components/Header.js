@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../../assets/logoWithoutBg.png';
@@ -20,29 +20,34 @@ const {
 } = icons;
 
 function Header({ setLoading, loading }) {
+  const [isloading, setIsLoading] = useState(loading || false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isShowMenu, setIsShowMenu] = useState(false);
   const { isLoggedIn, refreshToken } = useSelector((state) => state.auth);
 
+  // useEffect(() => {
+  //   handlLoad();
+  // }, []);
+
   const goRegister = useCallback(() => {
     handlLoad();
-    navigate(`${path.AUTH}/${path.REGISTER}`);
+    navigate(`/${path.REGISTER}`);
   }, []);
   const goLogin = useCallback(() => {
     handlLoad();
-    navigate(`${path.AUTH}/${path.LOGIN}`);
+    navigate(`/${path.LOGIN}`);
   }, []);
   const goHome = useCallback(() => {
     handlLoad();
     navigate('/');
   }, []);
+
   const handlLoad = () => {
     setLoading(false);
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
       setLoading(true);
     }, 1000);
-    return () => clearTimeout(timeout);
   };
   return (
     <div className="w-full flex h-[70px]  relative items-center lg:justify-between lg:w-[1100px] mx-auto my-0">
@@ -92,7 +97,7 @@ function Header({ setLoading, loading }) {
         )}
         {isLoggedIn && (
           <div className="cursor-pointer relative right-0 w-full  flex items-center gap-1 mt-[5px]">
-            <User loading={loading} />
+            <User />
             <Button
               margin="absolute right-[380px]"
               fontW="font-normal text-[14px] h-[40px]"

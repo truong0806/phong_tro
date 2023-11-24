@@ -16,7 +16,8 @@ export const checkOtpExpiredRunEvery1min = schedule.scheduleJob(
         },
       })
       await Promise.all(expiredOtps.map(async (otp) => otp.destroy()))
-      console.log('Expired OTPs deleted:', expiredOtps.length)
+      expiredOtps.length > 0 &&
+        console.log('Expired OTPs deleted:', expiredOtps.length)
     } catch (error) {
       console.error('Error deleting expired OTPs:', error)
     }

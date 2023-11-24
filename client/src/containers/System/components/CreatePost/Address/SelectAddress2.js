@@ -6,17 +6,22 @@ const SelectAddress2 = ({
   array,
   value,
   setValue,
-  type,
   reset,
   name,
   invalidFields,
   setInvalidFields,
-  dataPro,
   setLoca,
-  setLocal,
+  setReset,
+  isEdit,
 }) => {
-  console.log('🚀 ~ file: SelectAddress2.js:17 ~ value:', value);
-  const [selectedTinh, setSelectedTinh] = useState();
+  console.log(`🚀 ~ file: SelectAddress2.js:20 ~ reset ${label}:`, reset);
+  const [selectedTinh, setSelectedTinh] = useState(
+    reset
+      ? null
+      : {
+          label: value,
+        }
+  );
   const newArray = array?.map((item) => {
     return {
       value: item.code,
@@ -29,8 +34,11 @@ const SelectAddress2 = ({
       ...prev,
       [name]: selectedOption.label,
     }));
-    setSelectedTinh(selectedOption.label);
     setLoca(selectedOption.value);
+    setSelectedTinh({
+      label: selectedOption.label,
+    });
+    // name !== 'province' ? setReset(false) : setReset(true);
   };
 
   const handleSelectFocus = () => {
@@ -45,14 +53,12 @@ const SelectAddress2 = ({
       <div className="">
         <Select
           noOptionsMessage={() => 'Không có'}
-          value={{
-            label: selectedTinh ? selectedTinh : value,
-          }}
+          value={selectedTinh}
           onChange={handleTinhChange}
           onFocus={handleSelectFocus}
           options={newArray}
           isSearchable={true}
-          placeholder={`-- ${label} --`}
+          placeholder={`- ${label} -`}
         />
       </div>
 

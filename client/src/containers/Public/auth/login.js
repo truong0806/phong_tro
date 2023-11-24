@@ -18,7 +18,6 @@ function Login() {
   const { isLoggedIn, msgLogin, update, msgLoginSuccess } = useSelector(
     (state) => state.auth
   );
-  console.log('🚀 ~ file: login.js:19 ~ Login ~ msgLogin:', msgLogin);
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
   const [loginS, setLoginS] = useState([]);
@@ -139,7 +138,7 @@ function Login() {
                         name: '',
                       });
                       setInvalidFields([]);
-                      navigate(`${path.AUTH}/${path.FORGOTPASSWORD}`);
+                      navigate(`/${path.FORGOTPASSWORD}`);
                     }}
                     className="hover:text-[red]  cursor-pointer"
                   >
@@ -153,7 +152,7 @@ function Login() {
                         name: '',
                       });
                       setInvalidFields([]);
-                      navigate(`${path.AUTH}/${path.REGISTER}`);
+                      navigate(`/${path.REGISTER}`);
                     }}
                     className="hover:text-[red]  cursor-pointer "
                   >

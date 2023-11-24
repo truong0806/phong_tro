@@ -7,3 +7,4 @@ export { default as Loading } from './loading';
 export { default as User2 } from './user.component';
 export { default as PopupSupport } from './PopupSupport';
 export { default as Breadcrumb } from './Breadcrumb';
+export { default as Map } from './Map';

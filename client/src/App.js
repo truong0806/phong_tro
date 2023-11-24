@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, Redirect } from 'react-router-dom';
 import {
   Home,
   Auth,
@@ -9,6 +9,7 @@ import {
   Retal,
   SearchDetail,
   ForgotPassword,
+  Page404,
 } from './containers/Public';
 import { path } from './ultils/constains';
 import {
@@ -39,7 +40,7 @@ function App() {
     <div className="h-full lg:w-full justify-center items-center bg-primary bg-auto text-base">
       <Routes>
         <Route path={path.HOME} element={<Home />}>
-          <Route path="*" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path={path.CHO_THUE_CAN_HO} element={<Retal />} />
           <Route path={path.CHO_THUE_MAT_BANG} element={<Retal />} />
           <Route path={path.CHO_THUE_PHONG_TRO} element={<Retal />} />
@@ -52,12 +53,15 @@ function App() {
           />
           <Route path={'chi-tiet/*'} element={<DetailPost />} />
           <Route path={path.BANG_GIA_DICH_VU} element={<InfoPage />} />
-        </Route>
-        <Route path={path.AUTH} element={<Auth />}>
           <Route path={path.REGISTER} element={<Register />} />
           <Route path={path.LOGIN} element={<Login />} />
           <Route path={path.FORGOTPASSWORD} element={<ForgotPassword />} />
         </Route>
+        {/* <Route path={path.AUTH} element={<Auth />}>
+          <Route path={path.REGISTER} element={<Register />} />
+          <Route path={path.LOGIN} element={<Login />} />
+          <Route path={path.FORGOTPASSWORD} element={<ForgotPassword />} />
+        </Route> */}
 
         <Route
           path={path.SYSTEM}
@@ -91,6 +95,7 @@ function App() {
           />
           <Route path={path.CHANGE_PASSWORD} element={<ChangePassword />} />
         </Route>
+        <Route path="/*" element={<Page404 />} />
       </Routes>
     </div>
   );

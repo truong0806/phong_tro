@@ -20,10 +20,6 @@ function Register() {
   const { isLoggedIn, msgRegister, msgRegisterSuccess } = useSelector(
     (state) => state.auth
   );
-  console.log(
-    '🚀 ~ file: register.js:20 ~ Register ~ msgRegisterSuccess:',
-    msgRegisterSuccess
-  );
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
   const [capslock, setCapslock] = useState(false);
@@ -193,7 +189,7 @@ function Register() {
                       name: '',
                     });
                     setInvalidFields([]);
-                    navigate(`${path.AUTH}/${path.LOGIN}`);
+                    navigate(`/${path.LOGIN}`);
                   }}
                   className="text-blue-500 hover:underline cursor-pointer ml-[5px]"
                 >

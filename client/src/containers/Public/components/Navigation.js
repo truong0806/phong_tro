@@ -15,10 +15,6 @@ const Navigation = ({ isAdmin }) => {
   }, [dispatch]);
   const [isPinned, setIsPinned] = useState(false);
   const { categories } = useSelector((state) => state.app);
-  console.log(
-    '🚀 ~ file: Navigation.js:18 ~ Navigation ~ categories:',
-    categories
-  );
 
   const naviData = { ...categories };
 

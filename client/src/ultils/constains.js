@@ -1,10 +1,10 @@
 export const path = {
-  HOME: '/*',
+  HOME: '/',
   HOME__PAGE: ':page',
   AUTH: '/auth',
-  REGISTER: 'register',
+  REGISTER: 'dang-ky-tai-khoan',
   FORGOTPASSWORD: 'forgotpassword',
-  LOGIN: 'login',
+  LOGIN: 'dang-nhap-tai-khoan',
   CHO_THUE_CAN_HO: 'cho-thue-can-ho',
   CHO_THUE_MAT_BANG: 'cho-thue-mat-bang',
   NHA_CHO_THUE: 'nha-cho-thue',
@@ -555,8 +555,6 @@ export const demoData = [
     Tiêu đề màu mặc định, viết thường
   </span>
   , Hiển thị sau các tin VIP.`,
-    images: [
-      'https://phongtro123.com/images/demo-tinthuong.jpg'
-    ],
+    images: ['https://phongtro123.com/images/demo-tinthuong.jpg'],
   },
 ];

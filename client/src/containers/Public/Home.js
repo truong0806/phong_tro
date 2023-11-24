@@ -5,6 +5,7 @@ import * as actions from '../../store/action';
 import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
 import { useLocation } from 'react-router-dom';
+import { path } from '../../ultils/constains';
 
 function Home() {
   const dispatch = useDispatch();
@@ -30,11 +31,13 @@ function Home() {
           <Header setLoading={setIsLoading} loading={isLoading} />
           <Navigation isAdmin={false} />
           <div className="w-4/7 flex flex-col justify-center items-center my-[10px] mx-[120px]">
-            {location.pathname !== '/bang-gia-dich-vu' && <Search />}
+            {location.pathname !== `/${path.BANG_GIA_DICH_VU}` ||
+              location.pathname !== `/${path.LOGIN}` ||
+              (location.pathname !== `/${path.REGISTER}` && <Search />)}
             <Outlet />
             <WhyUs />
             <Support />
-            {location.pathname !== '/bang-gia-dich-vu' && <ScrollTop />}
+            {location.pathname !== `/${path.BANG_GIA_DICH_VU}` && <ScrollTop />}
           </div>
         </div>
       ) : (

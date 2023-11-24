@@ -38,7 +38,7 @@ instance.interceptors.response.use(
           const response = await instance.post('auth/refreshtoken', {
             refreshTokens: rs,
           });
-          console.log("🚀 ~ file: axiosConfig.js:41 ~ response:", response)
+          console.log('🚀 ~ file: axiosConfig.js:41 ~ response:', response);
           if (response?.data.err === 1) {
             Swal.fire(
               'Oop !',
@@ -58,6 +58,16 @@ instance.interceptors.response.use(
           return Promise.reject(_error);
         }
       }
+    }
+    if (err) {
+      if (err.response.status === 404) {
+        // Xử lý lỗi 404: chuyển hướng đến trang 404
+        window.location.href = '/404'; // Điều hướng đến trang 404
+        return null; // Ngăn chặn render component nếu có lỗi 404
+      }
+
+      // Xử lý các lỗi khác nếu cần
+      return <div>Error: {err.message}</div>;
     }
 
     return Promise.reject(err);

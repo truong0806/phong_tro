@@ -78,3 +78,6 @@ h3 {
   display: inline-block;
   margin-right: 10px; /* Adjust as needed */
 }
+#map {
+  height: 300px;
+}

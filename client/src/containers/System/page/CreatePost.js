@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { text, luuY } from '../../../ultils/constains';
-import { Button } from '../../../components';
+import { Button, Map } from '../../../components';
 import { Address, Overview } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/action';
@@ -17,6 +17,7 @@ import Address2 from '../components/CreatePost/Address/Address2';
 const CreatePost = ({ isEdit, setShowPopup }) => {
   const pageTitle = usePathname();
   const { dataEdit } = useSelector((state) => state.post);
+  console.log('🚀 ~ file: CreatePost.js:20 ~ CreatePost ~ dataEdit:', dataEdit);
 
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
@@ -25,11 +26,27 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
 
   const [payload, setPayload] = useState(() => {
     const initData = {
-      apartmentNumber: isEdit ? dataEdit?.address.split(',')[0] : '',
+      apartmentNumber: isEdit
+        ? dataEdit?.address
+            .split(',')
+            [dataEdit?.address.split(',').length - 5].trim()
+        : '',
       categoryName: isEdit ? dataEdit?.categories.value : '',
-      street: isEdit ? dataEdit?.address.split(',')[1]?.trim() : '',
-      ward: isEdit ? dataEdit?.address.split(',')[2] : '',
-      district: isEdit ? dataEdit?.address.split(',')[3] : '',
+      street: isEdit
+        ? dataEdit?.address
+            .split(',')
+            [dataEdit?.address.split(',').length - 4].trim()
+        : '',
+      ward: isEdit
+        ? dataEdit?.address
+            .split(',')
+            [dataEdit?.address.split(',').length - 3].trim()
+        : '',
+      district: isEdit
+        ? dataEdit?.address
+            .split(',')
+            [dataEdit?.address.split(',').length - 2].trim()
+        : '',
       title: isEdit ? dataEdit?.title : '',
       description: isEdit ? dataEdit?.description : '',
       priceNumber: isEdit
@@ -39,7 +56,11 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
         : '',
       areaNumber: isEdit ? dataEdit?.attributes?.acreage?.split(' ')[0] : '',
       target: isEdit ? dataEdit?.overviews.target : '',
-      province: isEdit ? dataEdit?.address.split(',')[4] : '',
+      province: isEdit
+        ? dataEdit?.address
+            .split(',')
+            [dataEdit?.address.split(',').length - 1].trim()
+        : '',
     };
     return initData;
   });
@@ -251,10 +272,8 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
               />
             </div>
           </div>
-          <div
-            className={`md:max-w-[30%] w-full md:block  ${isEdit && `hidden`}`}
-          >
-            <div className="flex flex-col bg-blue-600 h-[300px] mb-[30px]"></div>
+          <div className={`md:max-w-[30%] w-full md:block `}>
+            <Map value={payload} setValue={setPayload} />
             <div className="flex flex-col  mb-[30px] border-[1.3px] border-[#ffeeba] bg-[#fff3cd] rounded-">
               <div className="p-[17.5px] text-[#856404]">
                 <h4 className="text-[1.5rem] ">Lưu ý khi đăng tin</h4>

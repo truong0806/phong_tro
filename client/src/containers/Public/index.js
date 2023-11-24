@@ -14,6 +14,7 @@ export { default as ForgotPassword } from './auth/forgotPassword';
 export { default as HomePage } from './page/homePage';
 export { default as Retal } from './page/rental';
 export { default as SearchDetail } from './page/SearchDetail';
+export { default as Page404 } from './page/Page404';
 
 // component
 export { default as ProvinceBtn } from './components/ProvinceBtn';
