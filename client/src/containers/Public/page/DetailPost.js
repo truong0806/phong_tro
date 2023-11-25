@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../store/action';
 import { useLocation } from 'react-router-dom';
@@ -9,6 +9,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
+import { HeaderDetail, PostDes } from '../components/Detailpost';
 
 function DetailPost() {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ function DetailPost() {
     posts_detail
   );
   const img = JSON.parse(posts_detail[0]?.images?.image || '[]');
+
+ 
+
   useEffect(() => {
     setLoading(false);
     setTimeout(() => {
@@ -40,8 +44,8 @@ function DetailPost() {
   }, [dispatch]);
 
   return (
-    <div className="w-full flex gap-4">
-      <div className="w-2/3 bg-red-500 h-[2000px] flex flex-col">
+    <div className="w-[95%] flex gap-3">
+      <div className="w-2/3 bg-white h-[2000px] flex flex-col p-[20px]">
         <div className="h-[317px] mb-[15px]">
           {img?.length > 0 ? (
             <Swiper
@@ -69,7 +73,8 @@ function DetailPost() {
             />
           )}
         </div>
-        <div></div>
+        <HeaderDetail />
+        <PostDes/>
       </div>
       <aside className="w-1/3 bg-black h-[2000px]"></aside>
     </div>

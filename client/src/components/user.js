@@ -32,7 +32,7 @@ const User = ({ inSideBar }) => {
         .then(() => {
           dispatch(actions.clearMsgUser());
           dispatch(actions.logout());
-          navigate(`${path.AUTH}/${path.LOGIN}`);
+          navigate(`/${path.LOGIN}`);
         });
   }, [msg1]);
 
@@ -50,7 +50,7 @@ const User = ({ inSideBar }) => {
             className={`${
               inSideBar
                 ? 'w-[100px] h-[100px] rounded-[50%] '
-                : 'w-[40px] h-[40px] justify-center items-center mt-[6px] rounded-[50%] mr-[10px]'
+                : 'w-[45px] h-[45px] justify-center items-center mt-[6px] rounded-[50%]'
             }`}
             src={
               userData.avatar ||
@@ -62,7 +62,7 @@ const User = ({ inSideBar }) => {
         <div
           className={
             inSideBar
-              ? 'w-full flex flex-col min-h-[60px]  mt-2 ml-3'
+              ? 'w-full flex flex-col min-h-[60px]  mt-2 ml-2'
               : 'flex flex-col w-4/5'
           }
         >

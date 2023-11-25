@@ -2,11 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node-terminal",
-      "name": "Run Script: start",
+      "type": "msedge",
       "request": "launch",
-      "command": "npm run start",
-      "cwd": "${workspaceFolder}\\server"
+      "name": "Launch Edge against localhost",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/client"
     }
   ]
 }

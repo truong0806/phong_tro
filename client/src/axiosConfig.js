@@ -3,6 +3,7 @@ import reducStore from './redux';
 import TokenService from './service/token';
 import * as actions from './store/action';
 import Swal from 'sweetalert2';
+import { path } from './ultils/constains';
 
 const { store } = reducStore();
 
@@ -47,7 +48,7 @@ instance.interceptors.response.use(
             ).then(() => {
               dispatch(actions.clearMsgUser());
               dispatch(actions.logout());
-              window.location.href = '/auth/login';
+              window.location.href = `/${path.LOGIN}`;
             });
           } else {
             dispatch(actions.setAuthTokens(response.data.accessToken, rs));

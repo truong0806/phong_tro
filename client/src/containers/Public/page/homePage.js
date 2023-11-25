@@ -11,7 +11,6 @@ function HomePage() {
   const [categoryCode, setcategoryCode] = useState('none');
   const { categories } = useSelector((state) => state.app);
   const { count, posts_limit } = useSelector((state) => state.post);
-  
 
   useEffect(() => {
     setLoading(false);
@@ -30,8 +29,8 @@ function HomePage() {
   return (
     <div className="">
       <Province categoryCurrent={categoryCurrent} />
-      <div className="w-[1250px]  mx-[75px] justify-center flex-col flex lg:flex-row gap-2 mb-3">
-        <div className="w-[65%] ml-[40px] p-5   bg-white border border-[#dedede] shadow-md rounded-md border-solid  ">
+      <div className=" justify-center flex-col flex lg:flex-row gap-2 mb-3">
+        <div className="w-[65%] p-5   bg-white border border-[#dedede] shadow-md rounded-md border-solid  ">
           <ListPost loading={loading} categoryCode={categoryCode} />
           {/* <Pagination /> */}
           <Pagination count={count} posts_limit={posts_limit} />

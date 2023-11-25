@@ -4,7 +4,7 @@ export { default as Header } from './components/Header';
 export { default as WhyUs } from './components/WhyUs';
 export { default as Navigation } from './components/Navigation';
 export { default as Support } from './components/Support';
-export { default as DetailPost } from './components/DetailPost';
+export { default as DetailPost } from './page/DetailPost';
 
 //auth
 export { default as Register } from './auth/register';

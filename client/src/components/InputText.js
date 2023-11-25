@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const InputText = ({
   name,
@@ -12,6 +12,7 @@ const InputText = ({
   setInvalidFields,
   haveLabel,
 }) => {
+  const [input, setInput] = useState(value);
   function lowerCaseFirstLetter(str) {
     return str.charAt(0).toLowerCase() + str.slice(1);
   }
@@ -33,7 +34,8 @@ const InputText = ({
               prev.filter((field) => field.name !== name)
             )
           }
-          onChange={(e) => {
+          onChange={(e) => setInput(e.target.value)}
+          onBlur={(e) => {
             setValue((prev) => ({
               ...prev,
               [name]: e.target.value,
@@ -43,7 +45,7 @@ const InputText = ({
           className={`border-gray-300 border-[1px] text-[1rem] focus:border-[#80bdff] rounded-[0.25rem] py-[0.375rem] px-[0.75rem]  ${styleInput} `}
           name="street_number"
           id="street_number"
-          value={value}
+          value={input}
         ></input>
         <small className="text-red-500">
           {invalidFields?.some((field) => field.name === name) &&

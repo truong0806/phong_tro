@@ -83,7 +83,7 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
         images: dataEdit?.images?.image && JSON.parse(dataEdit?.images?.image),
       }));
     }
-  }, []);
+  }, [payload]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -273,7 +273,7 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
             </div>
           </div>
           <div className={`md:max-w-[30%] w-full md:block `}>
-            <Map value={payload} setValue={setPayload} />
+            <Map isEdit={isEdit} value={payload} setValue={setPayload} />
             <div className="flex flex-col  mb-[30px] border-[1.3px] border-[#ffeeba] bg-[#fff3cd] rounded-">
               <div className="p-[17.5px] text-[#856404]">
                 <h4 className="text-[1.5rem] ">Lưu ý khi đăng tin</h4>

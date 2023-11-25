@@ -72,6 +72,16 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
       if (queries.provinceCode && queries.provinceCode !== null) {
         queries.provinceCode = queries.provinceCode
       }
+      let overview = {
+        model: db.Overview,
+        as: 'overviews',
+        attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
+      }
+      let categories = {
+        model: db.Category,
+        as: 'categories',
+        attributes: ['id', 'code', 'value'],
+      }
       const response = await db.Post.findAndCountAll({
         where: queries,
         raw: true,
@@ -86,6 +96,8 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
             as: 'attributes',
             attributes: ['price', 'acreage', 'published', 'hashtag'],
           },
+          categories,
+          overview,
           {
             model: db.User,
             as: 'users',
@@ -161,7 +173,7 @@ export const postLimitAdminService = (page, query, id, bonus) =>
         ],
         distinct: true,
       })
-      console.log("🚀 ~ file: post.js:164 ~ newPromise ~ response:", response)
+      console.log('🚀 ~ file: post.js:164 ~ newPromise ~ response:', response)
       response.rows.forEach((row) => {
         row.overviews.status = checkStatus(
           row?.overviews?.expire?.split(' ')[3],
@@ -186,6 +198,7 @@ export const postCreateService = (queries) =>
       const postId = v4()
       const currentDate = genarateDate(7)
       let overviewId = v4()
+      let locationId = v4()
       const imagesId = v4()
       const label = `${queries.categoryName} ${queries.province}`
       const labelCode = generateCode(label).trim()
@@ -193,7 +206,7 @@ export const postCreateService = (queries) =>
       const currentPrice = getNumberFromString(queries.priceNumber) / 1000000
       const provinceCode = queries?.province?.includes('Thành phố')
         ? generateCode(queries?.province?.replace('Thành phố ', ''))
-        : generateCode(queries?.province?.replace('Tỉnh', ''))
+        : generateCode(queries?.province?.replace('Tỉnh ', ''))
 
       await db.Attribute.findOrCreate({
         where: {
@@ -228,6 +241,7 @@ export const postCreateService = (queries) =>
         .catch((error) => {
           console.error('Error:', error)
         })
+      console.log(1)
       await db.Overview.findOrCreate({
         where: { id: overviewId },
         defaults: {
@@ -241,6 +255,7 @@ export const postCreateService = (queries) =>
           expire: currentDate.expireDay,
         },
       })
+      console.log(2)
       await db.Label.findOrCreate({
         where: { code: labelCode },
         defaults: {
@@ -248,25 +263,35 @@ export const postCreateService = (queries) =>
           value: label,
         },
       })
+      console.log(3)
       await db.Province.findOrCreate({
         where: {
           [Op.or]: [
-            { value: queries?.province?.replace('Thành phố ', '').trim() },
-            { value: queries?.province?.replace('Tỉnh ', '').trim() },
+            { value: queries?.province?.replace('Thành phố ', '') },
+            { value: queries?.province?.replace('Tỉnh ', '') },
           ],
         },
         defaults: {
           code: provinceCode,
-          value: queries?.province?.includes('Thành phố ').trim()
-            ? queries?.province?.replace('Thành phố ', '').trim()
-            : queries?.province?.replace('Tỉnh ', '').trim(),
+          value: queries?.province?.includes('Thành phố ')
+            ? queries?.province?.replace('Thành phố ', '')
+            : queries?.province?.replace('Tỉnh ', ''),
         },
       })
+      console.log(4)
       await db.Images.findOrCreate({
         where: { id: imagesId },
         defaults: {
           id: imagesId,
           image: JSON.stringify(queries.images) || '',
+        },
+      })
+      console.log(5)
+      await db.Location.findOrCreate({
+        where: { id: locationId },
+        defaults: {
+          lat: queries.lat || '',
+          lng: queries.lng || '',
         },
       })
       console.log(
@@ -277,6 +302,7 @@ export const postCreateService = (queries) =>
         '🚀 ~ file: post.js:259 ~ newPromise ~ queries.images:',
         queries.images,
       )
+      console.log(6)
       await db.Post.findOrCreate({
         where: {
           [Op.or]: [
@@ -309,6 +335,7 @@ export const postCreateService = (queries) =>
           provinceCode: provinceCode || null,
           priceNumber: +currentPrice || null,
           areaNumber: +currentArea || null,
+          locationId,
         },
       })
         .then(([postRow, isCreated]) => {
@@ -396,15 +423,15 @@ export const postUpdateService = (postId, queries) =>
       await db.Province.findOrCreate({
         where: {
           [Op.or]: [
-            { value: queries?.province?.replace('Thành phố ', '').trim() },
-            { value: queries?.province?.replace('Tỉnh ', '').trim() },
+            { value: queries?.province?.replace('Thành phố ', '') },
+            { value: queries?.province?.replace('Tỉnh ', '') },
           ],
         },
         defaults: {
           code: provinceCode,
-          value: queries?.province?.includes('Thành phố ').trim()
-            ? queries?.province?.replace('Thành phố ', '').trim()
-            : queries?.province?.replace('Tỉnh ', '').trim(),
+          value: queries?.province?.includes('Thành phố ')
+            ? queries?.province?.replace('Thành phố ', '')
+            : queries?.province?.replace('Tỉnh ', ''),
         },
       })
       await db.Overview.update(

@@ -21,7 +21,6 @@ const Address = ({
   const [ward, setWard] = useState('');
   const [reset, setReset] = useState(false);
 
-  console.log('🚀 ~ file: Address.js:20 ~ province:', province, reset);
   useEffect(() => {
     const fetchPublicProvince = async () => {
       const response = await apiLocation();

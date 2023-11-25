@@ -9,10 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Images.hasOne(models.Post, { foreignKey: 'imagesId', as: 'images' })
-      Images.hasOne(models.Post, {
-        foreignKey: 'attributesId',
-        as: 'attributes',
-      })
+      
     }
   }
   Images.init(

@@ -14,7 +14,6 @@ const SelectAddress2 = ({
   setReset,
   isEdit,
 }) => {
-  console.log(`🚀 ~ file: SelectAddress2.js:20 ~ reset ${label}:`, reset);
   const [selectedTinh, setSelectedTinh] = useState(
     reset
       ? null

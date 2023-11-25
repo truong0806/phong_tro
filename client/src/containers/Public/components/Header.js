@@ -50,9 +50,9 @@ function Header({ setLoading, loading }) {
     }, 1000);
   };
   return (
-    <div className="w-full flex h-[70px]  relative items-center lg:justify-between lg:w-[1100px] mx-auto my-0">
+    <div className=" flex h-[70px]  relative items-center lg:justify-between my-0">
       <img
-        className="w-[240px]  ml-3 h-full cursor-pointer left-0 absolute bg-contain  object-contain "
+        className="w-[240px]  ml-5 h-full cursor-pointer left-0 absolute bg-contain  object-contain "
         src={logo}
         alt="logo"
         onClick={goHome}
@@ -61,7 +61,7 @@ function Header({ setLoading, loading }) {
         <div className="bg-menu h-[25px] w-[25px] bg-contain mr-[8px]" />
         <span className="">Danh Mục</span>
       </div>
-      <div className="w-3/4 h-full cursor-pointer absolute  right-0 flex items-center gap-1 ">
+      <div className="w-3/4 h-full cursor-pointer absolute  right-5 flex items-center gap-1 ">
         {!isLoggedIn && (
           <div className="cursor-pointer relative right-0 w-full flex items-center ">
             <Button

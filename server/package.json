@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js",
+    "startServer": "nodemon --exec babel-node server.js",
     "sequelize": "npx sequelize db:migrate",
     "test": "jest ",
     "doc": "nodemon Express.js"

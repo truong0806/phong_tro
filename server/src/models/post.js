@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         as: 'users',
       })
+      // Post.hasOne(models.Location, {
+      //   foreignKey: 'locationId',
+      //   targetKey: 'id',
+      //   as: 'locations',
+      // })
       // Post.belongsTo(models.Label, {
       //   foreignKey: 'labelCode',
       //   targetKey: 'id',

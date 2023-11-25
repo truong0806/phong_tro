@@ -24,6 +24,7 @@ const EditProfile = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
   const [loading, setLoading] = useState(false);
   const [changeImage, setChangeImages] = useState(false);
+  let finalPayload;
   useEffect(() => {
     if (!isLoggedIn || isLoggedIn === 'false') {
       window.location.href = '/auth/login';
@@ -59,6 +60,9 @@ const EditProfile = () => {
   };
 
   const handleSubmit = async () => {
+    finalPayload = {
+      ...payload,
+    };
     if (userData.id) {
       const idLoad = toast.loading('Xin chờ...');
       if (changeImage) {
@@ -67,39 +71,34 @@ const EditProfile = () => {
         formData.append('upload_preset', process.env.REACT_APP_ASSETS_NAME);
         let response = await apiUploadImages(formData);
         if (response.status === 200) {
-          setPayload((prev) => ({
-            ...prev,
-            avatar: response?.data.secure_url,
-          }));
+          finalPayload = {
+            ...payload,
+            avatar: payload.avatar,
+          };
         }
       }
-      const finalPayload = {
-        ...payload,
-        avatar: changeImage
-          ? payload.avatar
-          : 'https://www.w3schools.com/w3images/avatar2.png',
-      };
       console.log(
         '🚀 ~ file: EditProfile.js:76 ~ handleSubmit ~ finalPayload:',
         finalPayload
       );
-        const result = await apiEditUserInfo(finalPayload);
-        if (result.data.err === 0) {
-          toast.update(idLoad, {
-            render: 'Đổi thông tin thành công',
-            type: 'success',
-            isLoading: false,
-            autoClose: 2000,
-          });
-          dispatch(actions.getUser());
-        } else {
-          toast.update(idLoad, {
-            render: 'Đổi thông tin thất bại',
-            type: 'error',
-            isLoading: false,
-            autoClose: 2000,
-          });
-        }
+
+      const result = await apiEditUserInfo(finalPayload);
+      if (result.data.err === 0) {
+        toast.update(idLoad, {
+          render: 'Đổi thông tin thành công',
+          type: 'success',
+          isLoading: false,
+          autoClose: 2000,
+        });
+        dispatch(actions.getUser());
+      } else {
+        toast.update(idLoad, {
+          render: 'Đổi thông tin thất bại',
+          type: 'error',
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
     }
   };
 

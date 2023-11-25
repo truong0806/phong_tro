@@ -14,7 +14,11 @@ function Button({
   width,
   height,
   margin,
-  padding,bfIcon,After,onKeyDown
+  padding,
+  bfIcon,
+  After,
+  onKeyDown,
+  iconImgBefor,
 }) {
   return (
     <button
@@ -23,9 +27,13 @@ function Button({
       onClick={onClick}
       onKeyDown={onKeyDown}
     >
-      <span className={bfIcon}>{IcBefor && <IcBefor size={IcBeforSize} />}</span>
+      <span className={bfIcon}>
+        {iconImgBefor ? iconImgBefor : IcBefor && <IcBefor size={IcBeforSize} />}
+      </span>
       <span>{text}</span>
-      <span>{IcAfter ? <IcAfter size={IcAfterSize} color={ColorIcon} /> : After}</span>
+      <span>
+        {IcAfter ? <IcAfter size={IcAfterSize} color={ColorIcon} /> : After}
+      </span>
     </button>
   );
 }

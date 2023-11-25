@@ -12,6 +12,7 @@ function Home() {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
+  console.log('🚀 ~ file: Home.js:15 ~ Home ~ location:', location.pathname);
 
   useEffect(() => {
     setIsLoading(false);
@@ -30,10 +31,9 @@ function Home() {
         <div className="w-full flex-col items-left  ">
           <Header setLoading={setIsLoading} loading={isLoading} />
           <Navigation isAdmin={false} />
-          <div className="w-4/7 flex flex-col justify-center items-center my-[10px] mx-[120px]">
-            {location.pathname !== `/${path.BANG_GIA_DICH_VU}` ||
-              location.pathname !== `/${path.LOGIN}` ||
-              (location.pathname !== `/${path.REGISTER}` && <Search />)}
+          <div className="w-4/7 flex flex-col justify-center items-center my-[10px] mx-auto">
+            {location.pathname === `/` && <Search />}
+
             <Outlet />
             <WhyUs />
             <Support />

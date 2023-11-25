@@ -15,7 +15,7 @@ export const getPost = async (req, res) => {
 }
 export const getPostLimit = async (req, res) => {
   const { page, priceNumber, areaNumber, ...query } = req.query
-  console.log("🚀 ~ file: postController.js:18 ~ getPostLimit ~ query:", query)
+  console.log('🚀 ~ file: postController.js:18 ~ getPostLimit ~ query:', query)
   try {
     const response = await service.postLimitService(page, query, {
       priceNumber,
@@ -68,7 +68,7 @@ export const createPost = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       err: -1,
-      msg: 'Fail at authentication controller' + error,
+      msg: 'Fail at post controller' + error,
     })
   }
 }
@@ -94,14 +94,8 @@ export const deletePost = async (req, res) => {
   }
 }
 export const updatePost = async (req, res) => {
-  const {
-    postId,
-    categoryCode,
-    title,
-    description,
-    priceNumber,
-    areaNumber
-  } = req.body
+  const { postId, categoryCode, title, description, priceNumber, areaNumber } =
+    req.body
   console.log(
     '🚀 ~ file: postController.js:97 ~ updatePost ~ categoryCode:',
     categoryCode,
@@ -114,13 +108,7 @@ export const updatePost = async (req, res) => {
   console.log('🚀 ~ file: postController.js:76 ~ deletePost ~ id:', postId)
 
   try {
-    if (
-      !title ||
-      !description ||
-      !priceNumber ||
-      !areaNumber ||
-      !postId 
-    ) {
+    if (!title || !description || !priceNumber || !areaNumber || !postId) {
       return res.status(400).json({ err: 1, msg: 'Missing input' })
     } else {
       const response = await service.postUpdateService(postId, req.body)
