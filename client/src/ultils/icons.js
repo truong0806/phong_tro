@@ -2,7 +2,7 @@ import {
   AiOutlineHeart,
   AiOutlineUserAdd,
   AiOutlinePlusCircle,
-  AiOutlineClose
+  AiOutlineClose,
 } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
 import { FaRegCopy } from 'react-icons/fa';
@@ -22,14 +22,16 @@ import {
   RiHeartFill,
   RiHeartLine,
   RiDeleteBin6Line,
-  RiEdit2Line
+  RiEdit2Line,
 } from 'react-icons/ri';
 import { TbReportMoney, TbDiscount2 } from 'react-icons/tb';
-import { FaChevronRight } from "react-icons/fa6";
+import { FaChevronRight } from 'react-icons/fa6';
 import { MdOutlineHouseSiding, MdOutlineChevronRight } from 'react-icons/md';
 import { LuLayoutDashboard } from 'react-icons/lu';
+import { IoCall } from 'react-icons/io5';
 
 const icon = {
+  IoCall,
   MdOutlineChevronRight,
   FaChevronRight,
   AiOutlineClose,
@@ -56,7 +58,8 @@ const icon = {
   RiHeartFill,
   RiHeartLine,
   FiDelete,
-  LuLayoutDashboard,TbDiscount2,
+  LuLayoutDashboard,
+  TbDiscount2,
 };
 
 export default icon;

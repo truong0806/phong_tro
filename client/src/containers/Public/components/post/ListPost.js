@@ -36,7 +36,7 @@ const ListPost = ({ categoryCode }) => {
   }, [searchParams, categoryCode, dispatch]);
 
   return (
-    <div className="mx-[20px] ">
+    <div className="">
       <section className=" flex justify-between">
         <div className="">
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>
@@ -49,7 +49,7 @@ const ListPost = ({ categoryCode }) => {
         <span className="">Sắp xếp: </span>
         <FilterListPostBtn />
       </div>
-      <div className="px-5 mx-[-20px] py-4 ">
+      <div className="px-[20px] mx-[-20px] py-4 ">
         {loading ? (
           posts_limit.length > 0 ? (
             posts_limit.map((item) => {
@@ -66,6 +66,7 @@ const ListPost = ({ categoryCode }) => {
                   label={item?.label}
                   address={item?.address}
                   star={item?.star}
+                  bonus={item?.overviews?.bonus}
                   id={item?.id}
                 />
               );

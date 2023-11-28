@@ -2,6 +2,7 @@ import actionTypes from '../action/actionTypes';
 
 const initState = {
   posts: [],
+  posts_with_label: [],
   posts_detail: [],
   msg: '',
   count: 0,
@@ -22,6 +23,13 @@ const postReducer = (state = initState, action) => {
       return {
         ...state,
         posts_limit: action.posts_limit || [],
+        msg: action.msg || '',
+        count: action.count || 0,
+      };
+    case actionTypes.GET_POSTS_WITH_LABEL:
+      return {
+        ...state,
+        posts_with_label: action.posts_with_label || [],
         msg: action.msg || '',
         count: action.count || 0,
       };

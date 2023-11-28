@@ -100,6 +100,17 @@ export const insertService = () => {
             'dddd, HH:mm DD/MM/YYYY',
             'vi',
           ).toDate()
+          await db.Images.create({
+            id: imagesId,
+            image: JSON.stringify(item?.images),
+          })
+          await db.Label.findOrCreate({
+            where: { code: labelCode },
+            defaults: {
+              code: labelCode,
+              value: item?.header?.class?.classType?.trim(),
+            },
+          })
           await db.Attribute.findOrCreate({
             where: { id: attributesId },
             defaults: {
@@ -110,41 +121,27 @@ export const insertService = () => {
               hashtag: item?.header?.attributes?.hashtag,
             },
           }),
-            await db.Images.findOrCreate({
-              where: { id: imagesId },
-              defaults: {
-                id: imagesId,
-                image: JSON.stringify(item?.images),
-              },
+            await db.Overview.create({
+              id: overviewId,
+              code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
+                ?.value,
+              area: item?.overview?.content.find((i) => i.name === 'Khu vực')
+                ?.value,
+              type: item?.overview?.content.find(
+                (i) => i.name === 'Loại tin rao:',
+              )?.value,
+              target: item?.overview?.content.find(
+                (i) => i.name === 'Đối tượng thuê:',
+              )?.value,
+              bonus: item?.overview?.content.find((i) => i.name === 'Gói tin:')
+                ?.value,
+              create: item?.overview?.content.find(
+                (i) => i.name === 'Ngày đăng:',
+              )?.value,
+              expire: item?.overview?.content.find(
+                (i) => i.name === 'Ngày hết hạn:',
+              )?.value,
             })
-          await db.Label.findOrCreate({
-            where: { code: labelCode },
-            defaults: {
-              code: labelCode,
-              value: item?.header.class.classType,
-            },
-          })
-
-          await db.Overview.create({
-            id: overviewId,
-            code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
-              ?.value,
-            area: item?.overview?.content.find((i) => i.name === 'Khu vực')
-              ?.value,
-            type: item?.overview?.content.find(
-              (i) => i.name === 'Loại tin rao:',
-            )?.value,
-            target: item?.overview?.content.find(
-              (i) => i.name === 'Đối tượng thuê:',
-            )?.value,
-            bonus: item?.overview?.content.find((i) => i.name === 'Gói tin:')
-              ?.value,
-            create: item?.overview?.content.find((i) => i.name === 'Ngày đăng:')
-              ?.value,
-            expire: item?.overview?.content.find(
-              (i) => i.name === 'Ngày hết hạn:',
-            )?.value,
-          })
 
           await db.User.findOrCreate({
             where: {

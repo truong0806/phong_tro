@@ -1,12 +1,8 @@
 import React, { useState,  } from 'react';
 import { PaymentHistoryTable } from '../components';
-import { usePathname } from '../../../ultils/common/usePathname';
-import { useDispatch } from 'react-redux';
 
 const PaymentHistory = () => {
-  const dispatch = useDispatch();
   const [loading] = useState(true);
-
 
   return (
     <div>

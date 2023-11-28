@@ -28,7 +28,9 @@ function Button({
       onKeyDown={onKeyDown}
     >
       <span className={bfIcon}>
-        {iconImgBefor ? iconImgBefor : IcBefor && <IcBefor size={IcBeforSize} />}
+        {iconImgBefor
+          ? iconImgBefor
+          : IcBefor && <IcBefor size={IcBeforSize} />}
       </span>
       <span>{text}</span>
       <span>

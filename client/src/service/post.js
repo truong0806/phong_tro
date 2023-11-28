@@ -117,3 +117,16 @@ export const apiGetDetailPost = (query) =>
       reject(error);
     }
   });
+export const apiGetPostWithLabel = (query) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: 'get',
+        url: `/post/getpostwithlabel`,
+        params:  query ,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

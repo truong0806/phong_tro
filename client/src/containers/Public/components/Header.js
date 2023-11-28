@@ -25,7 +25,6 @@ function Header({ setLoading, loading }) {
   const dispatch = useDispatch();
   const [isShowMenu, setIsShowMenu] = useState(false);
   const { isLoggedIn, refreshToken } = useSelector((state) => state.auth);
-
   // useEffect(() => {
   //   handlLoad();
   // }, []);
@@ -50,7 +49,7 @@ function Header({ setLoading, loading }) {
     }, 1000);
   };
   return (
-    <div className=" flex h-[70px]  relative items-center lg:justify-between my-0">
+    <div className=" flex h-[70px]  relative items-center justify-between my-0">
       <img
         className="w-[240px]  ml-5 h-full cursor-pointer left-0 absolute bg-contain  object-contain "
         src={logo}

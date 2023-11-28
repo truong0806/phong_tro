@@ -14,13 +14,27 @@ export const getPost = async (req, res) => {
   }
 }
 export const getPostLimit = async (req, res) => {
-  const { page, priceNumber, areaNumber, ...query } = req.query
+  const { page, priceNumber, areaNumber, label, ...query } = req.query
   console.log('🚀 ~ file: postController.js:18 ~ getPostLimit ~ query:', query)
   try {
     const response = await service.postLimitService(page, query, {
+      label,
       priceNumber,
       areaNumber,
     })
+    return res.status(200).json(response)
+  } catch (error) {
+    return res.status(500).json({
+      err: -1,
+      msg: 'Fail at post controller' + error,
+    })
+  }
+}
+export const getPostWithLabel = async (req, res) => {
+  const { label } = req.query
+  console.log("🚀 ~ file: postController.js:35 ~ getPostWithLabel ~ label:", label)
+  try {
+    const response = await service.getPostWithLabelService(label)
     return res.status(200).json(response)
   } catch (error) {
     return res.status(500).json({
@@ -74,6 +88,10 @@ export const createPost = async (req, res) => {
 }
 export const deletePost = async (req, res) => {
   const { postId } = req.query
+  console.log(
+    '🚀 ~ file: postController.js:77 ~ deletePost ~ req.query:',
+    req.query,
+  )
   console.log('🚀 ~ file: postController.js:76 ~ deletePost ~ id:', postId)
   try {
     if (!postId) {

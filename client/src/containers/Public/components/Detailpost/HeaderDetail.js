@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 
 const HeaderDetail = () => {
   const { posts_detail } = useSelector((state) => state.post);
-  
+
   const handleStar = (star) => {
     const stars = [];
     for (let i = 0; i < +star; i++) {
       stars.push(
-        <div className="mx-[2px] mb-[10px] w-[17px] h-[22px] inline-block bg-[length:22px_22px] bg-repeat-x bg-center bg-star-bg"></div>
+        <div className="mx-[2px] mb-[10px] w-[20px] h-[20px] inline-block bg-[length:22px_22px] bg-repeat-x bg-center bg-star-bg"></div>
       );
     }
     return stars;
@@ -30,20 +30,18 @@ const HeaderDetail = () => {
     <div>
       {' '}
       <header className="mb-[15px] pb-4">
-        <div className="flex flex-row h-[30px]">
-          <span className="flex flex-row items-center justify-center ">
+        <h1 className=" leading-9 font-bold text-[#E13427] text-[1.7rem] mb-[5px]">
+          <span className="float-left w-[120px] h-[20px] mr-[3px]">
             {handleStar(5).length > 0
               ? handleStar(5).map((item, index) => (
-                  <div key={index} className="h-full">
+                  <div key={index} className="float-left">
                     {item}
                   </div>
                 ))
               : ''}
           </span>
-          <h1 className="font-bold text-[#E13427] text-[1.7rem] ml-[10px] mb-[5px] h-full flex items-center justify-center">
-            {posts_detail[0]?.title}
-          </h1>
-        </div>
+          <span className="">{posts_detail[0]?.title}</span>
+        </h1>
         <p className="py-[14px]">
           Chuyên mục:{' '}
           <Link className="text-[#1266dd] underline hover:text-[#f60]">

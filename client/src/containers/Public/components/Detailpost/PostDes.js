@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Map } from '../../../../components';
+import setStylePost from '../../../../ultils/setStylePost';
 
 const PostDes = () => {
   const { posts_detail } = useSelector((state) => state.post);
+  const [textColor, setTextColor] = React.useState('');
+  const des = posts_detail[0]?.description;
+
+  useEffect(() => {
+    setStylePost(posts_detail[0]?.overviews?.bonus, setTextColor, 'title');
+  }, [posts_detail]);
+
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 ">
       <section>
         <h2 className="text-[1.5rem] font-bold mb-[15px]">Thông tin mô tả</h2>
         <div
-          className="text-[1.1rem]"
+          className="text-[1.1rem] mb-[2px] leading-10"
           dangerouslySetInnerHTML={{
-            __html: posts_detail[0].description
-              .replace(/\\n/g, '<br/>')
-              .slice(1, -1),
+            __html: des?.replace(/","/g, '<br/>').slice(2, -2),
           }}
         />
+        {/* <p>{JSON.parse()}</p> */}
       </section>
       <section>
         <h2 className="text-[1.5rem] font-bold mb-[15px]">Đặc điểm nổi bật</h2>
@@ -45,7 +52,7 @@ const PostDes = () => {
             </tr>
             <tr className="">
               <td className="py-[10px] w-[25%]">Gói tin:</td>
-              <td className="py-[10px] text-[#E13427]">
+              <td className={`py-[10px] ${textColor}`}>
                 {posts_detail[0]?.overviews?.bonus}
               </td>
             </tr>
@@ -90,7 +97,7 @@ const PostDes = () => {
         <Map isDetail={true} />
       </section>
       <section>
-        <p>
+        <p className="pb-[15px]">
           Bạn đang xem nội dung tin đăng:
           {
             <em className="italic text-[#777]">
@@ -104,10 +111,13 @@ const PostDes = () => {
           lý.
         </p>
         <Button
+          bgcolor={
+            'hover:underline h-[40px] outline px-5 border-[#007aff] border-[1px] text-[#007aff] font-bold '
+          }
           text={'Gửi phản hồi'}
           iconImgBefor={
             <img
-              className="w-[16px] h-[16px]"
+              className="mr-1 w-[16px] h-[16px] "
               src="https://phongtro123.com/images/mobile/report-flag.svg"
             ></img>
           }

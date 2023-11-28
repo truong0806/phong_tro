@@ -12,7 +12,6 @@ import {
 } from '../../../service';
 import validate from '../../../ultils/validate';
 import { usePathname } from '../../../ultils/common/usePathname';
-import Address2 from '../components/CreatePost/Address/Address2';
 
 const CreatePost = ({ isEdit, setShowPopup }) => {
   const pageTitle = usePathname();

@@ -44,6 +44,9 @@ module.exports = {
       overviewId: {
         type: Sequelize.STRING,
       },
+      locationId: {
+        type: Sequelize.STRING,
+      },
       imagesId: {
         type: Sequelize.STRING,
       },

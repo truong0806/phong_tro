@@ -11,8 +11,9 @@ function Home() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
+  const [detail, setDetail] = useState(false);
   const location = useLocation();
-  console.log('🚀 ~ file: Home.js:15 ~ Home ~ location:', location.pathname);
+  console.log('🚀 ~ file: Home.js:16 ~ location:', location.pathname);
 
   useEffect(() => {
     setIsLoading(false);
@@ -23,17 +24,17 @@ function Home() {
       dispatch(actions.getProvince());
       setIsLoading(true);
     }, 1000);
+
     //linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch, isLoggedIn, location.pathname]);
   return (
     <>
       {isLoading ? (
         <div className="w-full flex-col items-left  ">
           <Header setLoading={setIsLoading} loading={isLoading} />
-          <Navigation isAdmin={false} />
+          <Navigation isAdmin={false} isDetail={detail} />
           <div className="w-4/7 flex flex-col justify-center items-center my-[10px] mx-auto">
             {location.pathname === `/` && <Search />}
-
             <Outlet />
             <WhyUs />
             <Support />

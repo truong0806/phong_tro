@@ -51,6 +51,7 @@ module.exports = {
         dashboard_user: "url('/src/assets/uicon-dashboard.svg')",
         logo: "url('/src/assets/logo_70.png')",
         mobiMenu: "url('/src/assets/menu-hamburger.svg')",
+        loveFull: "url('/src/assets/love-full-2.svg')",
       },
     },
     fontFamily: {

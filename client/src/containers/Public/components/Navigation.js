@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useWindowScroll } from 'react-use';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as actions from '../../../store/action';
+import throttle from 'lodash/throttle';
 var slug = require('slug');
 const notActive =
   'hover:bg-secondary2 px-3 flex h-full  items-center justify-center bg-secondary1';
@@ -15,8 +17,8 @@ const Navigation = ({ isAdmin }) => {
   }, [dispatch]);
   const [isPinned, setIsPinned] = useState(false);
   const { categories } = useSelector((state) => state.app);
-
-  const naviData = { ...categories };
+  const { y: pageYOffset } = useWindowScroll();
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +27,19 @@ const Navigation = ({ isAdmin }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  useEffect(() => {
+    const handleScroll = throttle(() => {
+      if (pageYOffset > 20) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    }, 200);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [pageYOffset]);
 
   const navClass = isPinned
     ? 'fixed top-0 z-30 bg-secondary1 text-white'

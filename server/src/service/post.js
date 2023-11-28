@@ -50,13 +50,19 @@ export const postService = () =>
       reject(error)
     }
   })
-export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
+export const postLimitService = (
+  page,
+  query,
+  { label, priceNumber, areaNumber },
+) =>
   new Promise(async (resolve, reject) => {
     try {
+      console.log('🚀 ~ file: post.js:57 ~ label:', label)
       let offset = !page || +page <= 1 ? 0 : +page - 1
       const queries = {
         ...query,
       }
+
       if (priceNumber)
         queries.priceNumber = {
           [Op.and]: [{ [Op.gte]: priceNumber[0] }, { [Op.lt]: priceNumber[1] }],
@@ -77,18 +83,24 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
         as: 'overviews',
         attributes: { exclude: ['id', 'createdAt', 'updatedAt'] },
       }
+      let label = {
+        model: db.Label,
+        as: 'labels',
+        attributes: { exclude: ['id', 'code', 'createdAt', 'updatedAt'] },
+      }
       let categories = {
         model: db.Category,
         as: 'categories',
         attributes: ['id', 'code', 'value'],
       }
+      console.log('🚀 ~ file: post.js:93 ~ newPromise ~ queries:', queries)
       const response = await db.Post.findAndCountAll({
         where: queries,
         raw: true,
         nest: true,
         offset: offset * +process.env.LIMIT,
         limit: +process.env.LIMIT,
-        order: [['createdAt', 'DESC']],
+        order: [['star', 'DESC']],
         include: [
           { model: db.Images, as: 'images', attributes: ['image'] },
           {
@@ -96,12 +108,49 @@ export const postLimitService = (page, query, { priceNumber, areaNumber }) =>
             as: 'attributes',
             attributes: ['price', 'acreage', 'published', 'hashtag'],
           },
+          label,
           categories,
           overview,
           {
             model: db.User,
             as: 'users',
             attributes: ['name', 'phone', 'zalo'],
+          },
+        ],
+        attributes: ['id', 'title', 'star', 'address', 'description'],
+        distinct: true,
+      })
+      // console.log('🚀 ~ file: post.js:126 ~ newPromise ~ response:', response)
+      resolve({
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to find post',
+        response,
+      })
+    } catch (error) {
+      reject(error)
+    }
+  })
+export const getPostWithLabelService = (label) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const labelCode = await db.Label.findOne({
+        where: { value: label },
+      })
+      const response = await db.Post.findAndCountAll({
+        where: { labelCode: labelCode.code },
+        raw: true,
+        nest: true,
+        include: [
+          { model: db.Images, as: 'images', attributes: ['image'] },
+          {
+            model: db.Attribute,
+            as: 'attributes',
+            attributes: ['price', 'acreage', 'published', 'hashtag'],
+          },
+          {
+            model: db.User,
+            as: 'users',
+            attributes: ['name', 'phone'],
           },
         ],
         attributes: ['id', 'title', 'star', 'address', 'description'],
@@ -134,10 +183,12 @@ export const postLimitAdminService = (page, query, id, bonus) =>
       let categories = {
         model: db.Category,
         as: 'categories',
-        attributes: ['id', 'code', 'value'],
+        attributes: ['code', 'value'],
       }
-      if (bonus !== undefined && bonus !== '') {
-        overview.where = { bonus: bonus }
+      let labels = {
+        model: db.Label,
+        as: 'labels',
+        attributes: ['code', 'value'],
       }
 
       const response = await db.Post.findAndCountAll({
@@ -154,6 +205,12 @@ export const postLimitAdminService = (page, query, id, bonus) =>
             as: 'attributes',
             attributes: ['price', 'acreage', 'published', 'hashtag'],
           },
+          {
+            model: db.Label,
+            as: 'labels',
+            attributes: ['value'],
+          },
+          labels,
           categories,
           overview,
           {

@@ -55,7 +55,6 @@ const Map = ({ isEdit, value, setValue, isDetail }) => {
       map?.remove();
     }
 
-    console.log('🚀 ~ file: Map.js:56 ~ success ~ map:', map);
 
     map.setView(viewMap, 14);
     console.log('🚀 ~ file: Map.js:97 ~ useEffect ~ viewMap:', viewMap);
@@ -119,7 +118,7 @@ const Map = ({ isEdit, value, setValue, isDetail }) => {
 
   return (
     <div>
-      <div ref={refMap} id="map"></div>
+      <div ref={refMap} className='z-10' id="map"></div>
     </div>
   );
 };

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { InputText, InputTextReadOnly, UploadVideos } from '../../components';
-import { InputSelect } from '../../../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { UploadImages } from '../';
 import * as actions from '../../../../store/action';
-import { editMaxMin } from '../../../../ultils/common/editArray';
 import CurrencyInput from 'react-currency-input-field';
 import InputSelect2 from '../../../../components/InputSelect2';
 
@@ -27,7 +25,6 @@ const Overview = ({
     { code: 'female', value: 'Nữ' },
   ];
   const dispatch = useDispatch();
-  const { prices, areas } = useSelector((state) => state.app);
   const { categories } = useSelector((state) => state.app);
   const [category, setCategory] = useState();
   const [target, setTarget] = useState();
@@ -52,7 +49,7 @@ const Overview = ({
     const foundTarget =
       value.target.length > 0 &&
       doituongs?.find((item) => item.value === value?.target?.trim());
-    
+
     setTarget(
       foundTarget ? { value: foundTarget.code, label: foundTarget.value } : ''
     );
