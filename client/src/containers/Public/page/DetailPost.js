@@ -17,12 +17,16 @@ import {
 } from '../components/Detailpost';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import ItemSidebar from '../components/sidebar/ItemSidebar';
+import { apiGetAllLabel } from '../../../service';
 
 function DetailPost() {
   const dispatch = useDispatch();
   const location = useLocation();
   const { posts_detail } = useSelector((state) => state.post);
+  const { posts, new_post } = useSelector((state) => state.post);
   const [loading, setLoading] = useState(false);
+  const [listLabel, setListLabel] = useState([]);
 
   const img = JSON.parse(posts_detail[0]?.images?.image || '[]');
 
@@ -36,10 +40,19 @@ function DetailPost() {
           ],
         })
       );
+
       setLoading(true);
       window.scrollTo(0, 0);
     }, 1000);
   }, [dispatch, location.pathname]);
+
+  useEffect(() => {
+    const fetchLabel = async () => {
+      const res = await apiGetAllLabel();
+      setListLabel((prev) => [...prev, ...res.data.response]);
+    };
+    fetchLabel();
+  }, []);
 
   return (
     <>
@@ -83,6 +96,29 @@ function DetailPost() {
           </div>
           <aside className="w-1/3">
             <ContractUser info={posts_detail} />
+            <ItemSidebar
+              postDetailId={posts_detail[0]?.id}
+              listNew
+              listNewPostEff={`flex-row`}
+              header="Tin nổi bật"
+              content={posts}
+              isListPost
+            />
+            <ItemSidebar
+              postDetailId={posts_detail[0]?.id}
+              listNew
+              listNewPostEff={`flex-row`}
+              header="Tin mới đăng"
+              content={new_post}
+              isListPost
+            />
+            <ItemSidebar
+              postDetailId={posts_detail[0]?.labels.value}
+              length={listLabel?.length}
+              className={`hidden`}
+              header="Danh mục cho thuê"
+              content={listLabel}
+            />
           </aside>
           <PostFixBar />
         </div>

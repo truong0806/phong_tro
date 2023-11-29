@@ -9,12 +9,19 @@ import genarateDate from '../ultils/generateDate'
 import generateCode from '../ultils/generateCode'
 import { checkStatus } from '../ultils/checkStatus'
 //Get all post
-export const postService = () =>
+export const postService = ({ query }) =>
   new Promise(async (resolve, reject) => {
     try {
-      const response = await db.Post.findAndCountAll({
-        raw: true,
-        nest: true,
+      const queries = {}
+      console.log('🚀 ~ file: post.js:16 ~ newPromise ~ query:', query)
+
+      let order = [['star', 'DESC']] // Mặc định sắp xếp theo star giảm dần
+
+      if (query === 'tinmoi') {
+        order = [['createdAt', 'DESC']] // Nếu là 'tinmoi', thay đổi sắp xếp theo createdAt giảm dần
+      }
+
+      const response = await db.Post.findAll({
         include: [
           { model: db.Images, as: 'images', attributes: ['image'] },
           {
@@ -23,33 +30,25 @@ export const postService = () =>
             attributes: ['price', 'acreage', 'published', 'hashtag'],
           },
           {
-            model: db.User,
-            as: 'users',
-            attributes: ['name', 'phone', 'zalo'],
+            model: db.Overview,
+            as: 'overviews',
+            attributes: ['id', 'bonus', 'code', 'create', 'expire', 'target'],
           },
-          // {
-          //   model: db.Label,
-          //   as: 'label',
-          //   attributes: ['code', 'value'],
-          // },
         ],
-        attributes: [
-          'id',
-          'title',
-          'star',
-          'address',
-          'description',
-          'createdAt',
-        ],
-        distinct: true,
+        order: order, // Sử dụng order tùy thuộc vào giá trị của query
+        limit: query === 'tinmoi' ? 10 : 3, // Giới hạn số lượng bài đăng trả về
       })
+
       resolve({
+        err: response ? 0 : 1,
+        msg: response ? 'OK' : 'Failed to get post',
         response,
       })
     } catch (error) {
       reject(error)
     }
   })
+
 export const postLimitService = (
   page,
   query,

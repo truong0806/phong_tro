@@ -19,6 +19,8 @@ function Home() {
     setIsLoading(false);
     // dispatch(actions.getCategories());
     setTimeout(() => {
+      dispatch(actions.getPosts());
+      dispatch(actions.getNewPosts({ query: 'tinmoi' }));
       dispatch(actions.getPrices());
       dispatch(actions.getAreas());
       dispatch(actions.getProvince());

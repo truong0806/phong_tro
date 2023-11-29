@@ -2,6 +2,7 @@ import actionTypes from '../action/actionTypes';
 
 const initState = {
   posts: [],
+  new_post: [],
   posts_with_label: [],
   posts_detail: [],
   msg: '',
@@ -17,6 +18,12 @@ const postReducer = (state = initState, action) => {
       return {
         ...state,
         posts: action.posts || [],
+        msg: action.msg || '',
+      };
+    case actionTypes.GET_NEW_POSTS:
+      return {
+        ...state,
+        new_post: action.new_post || [],
         msg: action.msg || '',
       };
     case actionTypes.GET_POSTS_LIMIT:

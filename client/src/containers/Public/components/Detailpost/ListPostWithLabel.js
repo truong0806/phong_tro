@@ -10,16 +10,8 @@ const { RiHeartLine, RiHeartFill } = icons;
 const ListPostWithLabel = () => {
   const location = useLocation();
   const [listPostLabel, setListPostLabel] = useState([]);
-  console.log(
-    '🚀 ~ file: ListPostWithLabel.js:12 ~ ListPostWithLabel ~ listPostLabel:',
-    listPostLabel
-  );
   const [isHoverHeart, setIsHoverHeart] = useState(false);
   const { posts_detail } = useSelector((state) => state.post);
-  console.log(
-    '🚀 ~ file: ListPostWithLabel.js:18 ~ ListPostWithLabel ~ posts_detail:',
-    posts_detail
-  );
   useEffect(() => {
     setListPostLabel([]);
   }, [location.pathname]);
@@ -45,10 +37,6 @@ const ListPostWithLabel = () => {
         const res = await apiGetPostWithLabel({
           label: posts_detail[0]?.labels?.value,
         });
-        console.log(
-          '🚀 ~ file: ListPostWithLabel.js:40 ~ fetchData ~ res:',
-          res
-        );
         res.data.response.rows.map((post) => {
           if (post.id !== posts_detail[0]?.id) {
             setListPostLabel((prev) => [...prev, post]);
@@ -61,10 +49,6 @@ const ListPostWithLabel = () => {
 
     fetchData();
   }, [posts_detail]);
-  console.log(
-    '🚀 ~ file: ListPostWithLabel.js:12 ~ ListPostWithLabel ~ removeDuplicateItems:',
-    removeDuplicateItems(listPostLabel)
-  );
   return (
     <div>
       {removeDuplicateItems(listPostLabel).length > 0 && (
@@ -113,7 +97,7 @@ const ListPostWithLabel = () => {
                         <h3 className="text-[1rem] font-bold mb-[10px] whitespace-normal ">
                           <Link
                             to={`/chi-tiet/${slug(post?.title)}/${post?.id}`}
-                            className="text-[#055699] text-init"
+                            className="text-[#055699] text-init hover:underline"
                           >
                             {`${post.title}`}
                           </Link>

@@ -7,6 +7,7 @@ import areaRouter from './areas'
 import provinceRouter from './province'
 import userRouter from './user'
 import rechargeRouter from './rechange'
+import labelRouter from './label'
 import createHttpError from 'http-errors'
 const swaggerUI = require('swagger-ui-express')
 const docs = require('../../doc')
@@ -21,6 +22,7 @@ const initRoutes = (app) => {
   app.use('/api/v1/province', provinceRouter)
   app.use('/api/v1/user', userRouter)
   app.use('/api/v1/recharge', rechargeRouter)
+  app.use('/api/v1/label', labelRouter)
   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(docs))
   app.use((req, res, next) => {
     next(createHttpError.NotFound('This route does not exist'))

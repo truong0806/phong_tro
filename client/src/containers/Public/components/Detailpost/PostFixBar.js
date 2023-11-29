@@ -14,12 +14,12 @@ const PostFixBar = () => {
 
   useEffect(() => {
     const handleScroll = throttle(() => {
-      if (pageYOffset > 40) {
+      if (pageYOffset > 100) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
-    }, 200);
+    }, 100);
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);

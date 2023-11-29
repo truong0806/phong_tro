@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
-//import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../../store/action';
 import ItemSidebar from './ItemSidebar';
 
 function SlideBar({ setLoading, loading, handleLoading }) {
   const { categories, prices, areas } = useSelector((state) => state.app);
-  //const location = useLocation();
+  const location = useLocation();
+  console.log(
+    '🚀 ~ file: SlideBar.js:10 ~ SlideBar ~ location:',
+    location.pathname
+  );
   const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -14,11 +18,16 @@ function SlideBar({ setLoading, loading, handleLoading }) {
   }, [dispatch]);
   return (
     <div className="w-full">
-      <ItemSidebar
-        className={`hidden`}
-        header="Danh mục cho thuê"
-        content={categories}
-      />
+      {location.pathname === '/' ? (
+        <ItemSidebar
+          length={5}
+          className={`hidden`}
+          header="Danh mục cho thuê"
+          content={categories}
+        />
+      ) : (
+        ''
+      )}
       <ItemSidebar
         className={`hidden`}
         setLoading={setLoading}
@@ -36,7 +45,13 @@ function SlideBar({ setLoading, loading, handleLoading }) {
         content={areas}
         isDouble
       />
-      <ItemSidebar listNew listNewPostEff={`flex-row`} header="Tin mới đăng" content={posts} isListPost />
+      <ItemSidebar
+        listNew
+        listNewPostEff={`flex-row`}
+        header="Tin mới đăng"
+        content={posts}
+        isListPost
+      />
       <ItemSidebar header="Bài viết mới" />
       <ItemSidebar header="Có thể bạn quan tâm" />
     </div>

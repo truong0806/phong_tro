@@ -15,6 +15,8 @@ const { BsChevronRight } = icons;
 var slug = require('slug');
 
 const ItemSidebar = ({
+  length,
+  postDetailId,
   header,
   content,
   isDouble,
@@ -25,6 +27,7 @@ const ItemSidebar = ({
   listNewPostEff,
   listNew,
 }) => {
+  console.log('🚀 ~ file: ItemSidebar.js:28 ~ content:', content);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -66,7 +69,7 @@ const ItemSidebar = ({
             <div>
               {!isDouble &&
                 content?.length > 0 &&
-                content?.slice(0, 5).map((item) => {
+                content?.slice(0, `${length}`).map((item) => {
                   return (
                     <Link
                       to={`/${slug(item.value)}`}
@@ -76,10 +79,16 @@ const ItemSidebar = ({
                       <h2>
                         <span
                           href=""
-                          className="flex items-center justify-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm"
+                          className=" flex items-center justify-center gap-1 py-[5px] leading-[1.4rem] font-normal text-sm"
                         >
                           <BsChevronRight size={14} style={{ opacity: 0.3 }} />
-                          {item.value}
+                          <span
+                            className={`hover:text-[#f60] ${
+                              postDetailId === item.value ? 'text-[#f60]' : ''
+                            } `}
+                          >
+                            {item.value}
+                          </span>
                         </span>
                       </h2>
 
@@ -111,7 +120,9 @@ const ItemSidebar = ({
                                     size={14}
                                     style={{ opacity: 0.3 }}
                                   />
-                                  {item.left.value}
+                                  <span className="hover:text-[#f60]">
+                                    {item.left.value}
+                                  </span>
                                 </a>
                               </h2>
                             </li>
@@ -142,6 +153,7 @@ const ItemSidebar = ({
           )}
           {isListPost && (
             <RelatePostSideBar
+              postDetailId={postDetailId}
               listNewPostEff={listNewPostEff}
               listNew
               content={content}

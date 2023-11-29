@@ -1,27 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'lazysizes';
 import RelatePostItem from './RelatePostItem';
-const RelatePostSideBar = ({ content, listNewPostEff, listNew }) => {
-  return (
-    <div>
-      <li
-        className={`${
-          listNew && listNewPostEff
-        } overflow-hidden lg:max-w-[750px]  lg:w-full  gap-8 lg:gap-1  flex lg:flex-col items-center justify-between pb-[10px]`}
-        key={'a'}
-      >
-        {content.length > 0 &&
-          content.slice(0, 10).map((item, index) => {
-            // const has_video_Class =
-            //   ? 'sticky top-0 z-10 bg-secondary1 text-white'
-            //   : 'bg-secondary1 text-white'
+const RelatePostSideBar = ({
+  content,
+  listNewPostEff,
+  listNew,
+  postDetailId,
+}) => {
+  console.log(
+    '🚀 ~ file: RelatePostSideBar.js:10 ~ postDetailId:',
+    postDetailId
+  );
+  const [featuredPostsList, setFeaturedPostsList] = useState([]);
 
-            return <RelatePostItem 
-            listNewPostEff
-            listNew item={item} key={index} />;
-          })}
-      </li>
-    </div>
+  useEffect(() => {
+    setFeaturedPostsList([]);
+    if (content.length > 0) {
+      content.map((item) => {
+        if (item.id !== postDetailId) {
+          setFeaturedPostsList((prev) => [...prev, item]);
+        }
+      });
+    }
+  }, []);
+
+  return (
+    <>
+      {featuredPostsList?.length > 0 &&
+        featuredPostsList?.slice(0, 10).map((item, index) => {
+          // const has_video_Class =
+          //   ? 'sticky top-0 z-10 bg-secondary1 text-white'
+          //   : 'bg-secondary1 text-white'
+          return (
+            <li
+              className={`${
+                listNew && listNewPostEff
+              } flex py-[10px] border-b-[1px] border-[#eee]`}
+              key={'a'}
+            >
+              <RelatePostItem
+                postDetailId={postDetailId}
+                listNewPostEff
+                listNew
+                item={item}
+                key={index}
+              />
+            </li>
+          );
+        })}
+    </>
   );
 };
 export default RelatePostSideBar;

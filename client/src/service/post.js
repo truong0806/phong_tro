@@ -13,6 +13,19 @@ export const apiGetPosts = () =>
       reject(error);
     }
   });
+export const apiGetNewPosts = (query) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: 'get',
+        url: '/post/all',
+        params: query,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
 export const apiGetPostsLimit = (query) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -123,7 +136,7 @@ export const apiGetPostWithLabel = (query) =>
       const response = await axiosConfig({
         method: 'get',
         url: `/post/getpostwithlabel`,
-        params:  query ,
+        params: query,
       });
       resolve(response);
     } catch (error) {

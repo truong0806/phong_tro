@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import setStylePost from '../../../../ultils/setStylePost';
 
 const HeaderDetail = () => {
   const { posts_detail } = useSelector((state) => state.post);
+  const [textColor, setTextColor] = React.useState('');
 
   const handleStar = (star) => {
     const stars = [];
@@ -26,21 +28,26 @@ const HeaderDetail = () => {
       return moment().startOf(posts_detail[0]?.attributes?.published).fromNow();
     }
   };
+
+  useEffect(() => {
+    setStylePost(posts_detail[0]?.overviews.bonus, setTextColor, 'title');
+  }, [posts_detail]);
+
   return (
     <div>
       {' '}
       <header className="mb-[15px] pb-4">
-        <h1 className=" leading-9 font-bold text-[#E13427] text-[1.7rem] mb-[5px]">
-          <span className="float-left w-[120px] h-[20px] mr-[3px]">
-            {handleStar(5).length > 0
-              ? handleStar(5).map((item, index) => (
+        <h1 className={`leading-9 font-bold  text-[1.7rem] mb-[5px]`}>
+          <span className="float-left h-[20px] mr-[3px]">
+            {handleStar(posts_detail[0]?.star).length > 0
+              ? handleStar(posts_detail[0]?.star).map((item, index) => (
                   <div key={index} className="float-left">
                     {item}
                   </div>
                 ))
               : ''}
           </span>
-          <span className="">{posts_detail[0]?.title}</span>
+          <span className={`${textColor} `}>{posts_detail[0]?.title}</span>
         </h1>
         <p className="py-[14px]">
           Chuyên mục:{' '}

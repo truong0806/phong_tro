@@ -4,16 +4,16 @@ import {
   apiGetPosts,
   apiGetPostsLimit,
   apiGetPostsLimitAdmin,
+  apiGetNewPosts,
 } from '../../service/post';
 export const getPosts = () => async (dispatch) => {
   try {
     const response = await apiGetPosts();
+    console.log('🚀 ~ file: post.js:11 ~ getPosts ~ response:', response);
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_POSTS,
-        posts: response.data.response.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        ),
+        posts: response.data.response,
       });
     } else {
       dispatch({
@@ -25,6 +25,30 @@ export const getPosts = () => async (dispatch) => {
     dispatch({
       type: actionTypes.GET_POSTS,
       posts: null,
+    });
+  }
+};
+export const getNewPosts = (query) => async (dispatch) => {
+  try {
+    const response = await apiGetNewPosts(query);
+    console.log('🚀 ~ file: post.js:11 ~ getPosts ~ response:', response);
+    if (response?.data.err === 0) {
+      dispatch({
+        type: actionTypes.GET_NEW_POSTS,
+        new_post: response.data.response.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        ),
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_NEW_POSTS,
+        msg: response.data.msg,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_NEW_POSTS,
+      new_post: null,
     });
   }
 };

@@ -8,7 +8,7 @@ const ContractUser = ({ info }) => {
   console.log('🚀 ~ file: ContractUser.js:8 ~ ContractUser ~ info[0]:', info);
   return (
     <div>
-      <div className="p-4 bg-[#febb02] border-[#febb02] rounded-md">
+      <div className="mb-[20px] p-4 bg-[#febb02] border-[#febb02] rounded-md">
         <figure className="w-[80px] h-[80px] mx-auto mb-[10px] ">
           <img
             src="https://phongtro123.com/images/default-user.png"

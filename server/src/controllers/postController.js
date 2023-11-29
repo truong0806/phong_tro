@@ -1,10 +1,12 @@
 import * as service from '../service/post'
 
 export const getPost = async (req, res) => {
+  const { query } = req.query
+  console.log('🚀 ~ file: postController.js:5 ~ getPost ~ query:', query)
   try {
-    const response = await service.postService()
-    res.header('Access-Control-Expose-Headers', 'Content-Range')
-    res.header('Content-Range', `"all 0-5/${response.response.count}"`)
+    const response = await service.postService({ query })
+    // res.header('Access-Control-Expose-Headers', 'Content-Range')
+    // res.header('Content-Range', `"all 0-5/${response.response.count}"`)
     return res.status(200).json(response)
   } catch (error) {
     return res.status(500).json({
@@ -32,7 +34,10 @@ export const getPostLimit = async (req, res) => {
 }
 export const getPostWithLabel = async (req, res) => {
   const { label } = req.query
-  console.log("🚀 ~ file: postController.js:35 ~ getPostWithLabel ~ label:", label)
+  console.log(
+    '🚀 ~ file: postController.js:35 ~ getPostWithLabel ~ label:',
+    label,
+  )
   try {
     const response = await service.getPostWithLabelService(label)
     return res.status(200).json(response)
