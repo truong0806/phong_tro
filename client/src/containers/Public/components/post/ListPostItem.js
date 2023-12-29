@@ -1,8 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import icons from '../../../../ultils/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../../../store/action';
 import 'lazysizes';
+import setStylePost from '../../../../ultils/setStylePost';
 var slug = require('slug');
 const { BsBookmarkStarFill, RiHeartLine, RiHeartFill } = icons;
 const indexs = [0, 1, 2, 3];
@@ -15,23 +18,39 @@ const ListPostItem = ({
   address,
   star,
   id,
+  bonus,
 }) => {
+  console.log('🚀 ~ file: ListPostItem.js:21 ~ star:', star);
   const [isHoverHeart, setIsHoverHeart] = useState(false);
+  const [textColor, setTextColor] = React.useState('');
+  const [borderColor, setBorderColor] = React.useState('');
+  const dispatch = useDispatch();
+
   const handleStar = (star) => {
     const stars = [];
-    for (let i = 1; i < +star; i++) {
+    for (let i = 1; i <= +star; i++) {
       stars.push(
-        <div className="w-[14px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>
+        <div className="w-[13px] h-[17px] inline-block bg-[length:14px_14px] bg-repeat-x bg-center bg-star-bg"></div>
       );
     }
     return stars;
   };
+
+  useEffect(() => {
+    setStylePost(bonus, setTextColor, 'title');
+    setStylePost(bonus, setBorderColor, 'border');
+  }, []);
+
   return (
-    <div className="w-full flex flex-col md:px-[10px] md:mx-[-10px]  border-t border-red-500 py-4 md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-      {images?.length > 4 ? (
+    <div
+      className={`${+star == '5' ? 'bg-[#fff9f3]' : ''} ${
+        borderColor ? borderColor : ''
+      } w-full  flex flex-col md:px-[5px]  mx-[5px]  border-t py-2 md:flex-row hover:bg-gray-100 `}
+    >
+      {images?.length > 0 ? (
         <Link
           to={`chi-tiet/${slug(title)}/${id}`}
-          className="w-full md:w-2/5 h-[245px] md:gap-[2px] items-center justify-center relative cursor-pointerv "
+          className="w-full md:w-2/5 h-[240px] md:gap-[2px] items-center justify-center relative cursor-pointerv "
         >
           {
             images
@@ -39,10 +58,11 @@ const ListPostItem = ({
               ?.map((i, index) => {
                 return (
                   <img
+                    loading="lazy"
                     key={index}
                     src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
                     data-src={i}
-                    className="lazyload  lazy object-cover md:object-cover h-[245px]  w-full  "
+                    className="lazyload  lazy object-cover md:object-cover h-[240px]  w-full  "
                     //loading="lazy"
                   />
                 );
@@ -80,25 +100,29 @@ const ListPostItem = ({
         </Link>
       )}
       <div className="w-full md:w-3/5 md:ml-[15px] mt-2">
-        <h3 className="flex justify-between gap-4 text-base font-bold whitespace-normal mb-[5px] md:mb-[10px]">
-          <Link
-            to={`chi-tiet/${slug(title)}/${id}`}
-            href="#"
-            className="font-bold gap-1 text-[#E13427] hover:underline	"
-          >
-            {handleStar(+star).length > 0 &&
-              handleStar(+star)?.map((star, num) => {
-                return <span key={num}>{star}</span>;
-              })}
-            <span className="ml-[4px] text-justify">{title}</span>
-          </Link>
-          <div className="w-[10%] flex justify-end">
-            <BsBookmarkStarFill size={20} color="orange" />
-          </div>
-        </h3>
-        <div className="md:my-3 flex items-center justify-between gap-1 md:gap-5 flex-wrap">
+        <Link
+          to={`chi-tiet/${slug(title)}/${id}`}
+          className=" leading-[1.5rem] font-bold text-[#E13427] text-[1rem] mb-[10px]"
+        >
+          {handleStar(+star === null ? 0 : +star).length > 0 ? (
+            <span className="float-left h-[17px] mr-[5px]">
+              {handleStar(+star === null ? 0 : +star).map((item, index) => (
+                <div key={index} className="float-left">
+                  {item}
+                </div>
+              ))}
+            </span>
+          ) : (
+            ''
+          )}
+
+          <span className={`${textColor ? textColor : ''}`}>{title}</span>
+        </Link>
+        <div className="mb-[10px] mt-[10px] flex items-center justify-between gap-1 md:gap-5 flex-wrap">
           <span className="text-[1.2rem] text-[#16c784] font-bold">
-            {attributes.price}
+            {attributes?.price?.split(' ')[1] === 'đồng/tháng'
+              ? `${+attributes?.price?.split(' ')[0]}.000 đồng/tháng`
+              : attributes.price}
           </span>
           <span className="text-[#333] leading-normal md:leading-[19px] ">
             {attributes.acreage}
@@ -108,16 +132,16 @@ const ListPostItem = ({
               href="https://phongtro123.com/tinh-thanh/ho-chi-minh/quan-go-vap"
               title={address}
             >
-              {`${address.split(',')[address.split(',').length - 2]},${
-                address.split(',')[address.split(',').length - 1]
+              {`${address?.split(',')[address?.split(',').length - 2]},${
+                address?.split(',')[address?.split(',').length - 1]
               }`}
             </Link>
           </span>
         </div>
-        <p className="text-gray-500 hidden sm:block w-full md:h-[100px] h-[40px] text-ellipsis overflow-hidden text-justify">
-          {description}
+        <p className="text-gray-500 h-[100px] line-clamp-5 overflow-hidden my-[10px]">
+          {JSON.parse(description)}
         </p>
-        <div className="flex  items-center justify-between my-3 lg:flex-row xl:flex-row">
+        <div className="flex  items-center justify-between my-9 lg:flex-row xl:flex-row">
           <div className="sm:flex items-center hidden">
             <img
               src="https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png"
@@ -136,6 +160,9 @@ const ListPostItem = ({
               Gọi: {users.phone}
             </button>
             <button
+              onClick={() => {
+                window.location.href = `https://zalo.me/${users.zalo}`;
+              }}
               className={`${
                 users.zalo ? 'show' : 'hidden'
               } bg-white w-full   my-[3px] rounded-[5px] ml-[5px] py-[3px] px-[7px] text-[#1266dd] border-[#1266dd] border-solid border-[1px] cursor-pointer hover:bg-[#1266dd] hover:text-white`}

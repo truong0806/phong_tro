@@ -9,9 +9,7 @@ const searchItem = ({
   deleteIcon,
 }) => {
   const handleDelete = (event) => {
-    event.stopPropagation(); // Prevent the click event from bubbling to parent elements
-    // Logic to handle the delete icon click event
-    console.log('Delete icon clicked!');
+    event.stopPropagation(); 
   };
 
   return (

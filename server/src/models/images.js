@@ -8,10 +8,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Images.hasOne(models.Post, { foreignKey: 'imagesId', as: 'images' })
       Images.hasOne(models.Post, {
-        foreignKey: 'attributesId',
-        as: 'attributes',
+        foreignKey: 'imagesId',
+        unique: true,
       })
     }
   }
@@ -23,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: 'Images',
       charset: 'utf8',
-      collate: 'utf8_unicode_ci'
+      collate: 'utf8_unicode_ci',
     },
   )
   return Images

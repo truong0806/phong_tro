@@ -1,7 +1,6 @@
 import db from '../models'
-
 //Get all categories
-export const areasService = () =>
+export const  areasService = () =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await db.Area.findAll({

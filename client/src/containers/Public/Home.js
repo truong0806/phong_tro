@@ -1,53 +1,46 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index';
 import * as actions from '../../store/action';
 import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
-import { apiUser } from '../../service/user';
+import { useLocation } from 'react-router-dom';
+import { path } from '../../ultils/constains';
 
 function Home() {
-  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const linkRef = useRef();
-  const { categories } = useSelector((state) => state.app);
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { userData } = useSelector((state) => state.user);
-
-  useEffect(() => {
-    // const fetchUser = async () => {
-    //   const response = await apiUser();
-    //   console.log(
-    //     '🚀 ~ file: Home.js:19 ~ fetchUser ~ response:',
-    //     response.data.response
-    //   );
-    // };
-    
-  }, [isLoggedIn, dispatch]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [detail, setDetail] = useState(false);
+  const location = useLocation();
+  console.log('🚀 ~ file: Home.js:16 ~ location:', location.pathname);
 
   useEffect(() => {
     setIsLoading(false);
-    dispatch(actions.getCategories());
+    // dispatch(actions.getCategories());
     setTimeout(() => {
+      dispatch(actions.getPosts());
+      dispatch(actions.getNewPosts({ query: 'tinmoi' }));
       dispatch(actions.getPrices());
       dispatch(actions.getAreas());
       dispatch(actions.getProvince());
       setIsLoading(true);
     }, 1000);
-    // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
-  }, [dispatch]);
+
+    //linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
+  }, [dispatch, isLoggedIn, location.pathname]);
   return (
     <>
       {isLoading ? (
         <div className="w-full flex-col items-left  ">
-          <Header linkRef={linkRef} setLoading={setIsLoading} />
-          <Navigation categories={categories} />
-          <div className="w-5/6 flex flex-col justify-center items-center my-[10px] mx-auto">
-            <Search />
+          <Header setLoading={setIsLoading} loading={isLoading} />
+          <Navigation isAdmin={false} isDetail={detail} />
+          <div className="w-4/7 flex flex-col justify-center items-center my-[10px] mx-auto">
+            {location.pathname === `/` && <Search />}
             <Outlet />
             <WhyUs />
             <Support />
-            <ScrollTop />
+            {location.pathname !== `/${path.BANG_GIA_DICH_VU}` && <ScrollTop />}
           </div>
         </div>
       ) : (

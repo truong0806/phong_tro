@@ -1,4 +1,5 @@
 import { getNumbersArea, getNumbersPrice } from './getnumbers';
+
 export const getMaxMinPrice = (totals) => {
   let arr = [];
   return totals?.map((item) => {

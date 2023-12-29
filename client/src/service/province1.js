@@ -1,11 +1,44 @@
-import axiosConfig from '../axiosConfig';
+import axiosDefaults from 'axios';
 
-export const apiProvince1 = () =>
+export const apiLocation = () =>
   new Promise(async (resolve, reject) => {
     try {
-      const response = await axiosConfig({
+      const provinces = await axiosDefaults({
         method: 'get',
-        url: 'https://provinces.open-api.vn/api/p/',
+        url: 'https://provinces.open-api.vn/api/p/?depth=1',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      resolve(provinces);
+    } catch (error) {
+      reject(error);
+    }
+  });
+export const apiGetDistricts = (provinceCode) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosDefaults({
+        method: 'get',
+        url: `https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+export const apiGetWard = (districtCode) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosDefaults({
+        method: 'get',
+        url: `https://provinces.open-api.vn/api/d/${districtCode}?depth=2`,
+        headers: {
+          'Content-Type': 'application/json',
+        }
       });
       resolve(response);
     } catch (error) {

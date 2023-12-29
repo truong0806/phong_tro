@@ -20,3 +20,8 @@ export const getNumberFromStringV2 = (string) => {
     }
     return +number
 }
+export const generateHashtag = (string) => {
+    var min = Math.pow(10, 4); // số nhỏ nhất có 5 chữ số
+    var max = Math.pow(10, 8) - 1; // số lớn nhất có 8 chữ số
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

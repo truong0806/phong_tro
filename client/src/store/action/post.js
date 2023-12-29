@@ -1,18 +1,19 @@
 import actionTypes from './actionTypes';
 import {
+  apiGetDetailPost,
   apiGetPosts,
   apiGetPostsLimit,
-  apiGetPostsByCategory,
+  apiGetPostsLimitAdmin,
+  apiGetNewPosts,
 } from '../../service/post';
 export const getPosts = () => async (dispatch) => {
   try {
     const response = await apiGetPosts();
+    console.log('🚀 ~ file: post.js:11 ~ getPosts ~ response:', response);
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_POSTS,
-        posts: response.data.response.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        ),
+        posts: response.data.response,
       });
     } else {
       dispatch({
@@ -24,6 +25,30 @@ export const getPosts = () => async (dispatch) => {
     dispatch({
       type: actionTypes.GET_POSTS,
       posts: null,
+    });
+  }
+};
+export const getNewPosts = (query) => async (dispatch) => {
+  try {
+    const response = await apiGetNewPosts(query);
+    console.log('🚀 ~ file: post.js:11 ~ getPosts ~ response:', response);
+    if (response?.data.err === 0) {
+      dispatch({
+        type: actionTypes.GET_NEW_POSTS,
+        new_post: response.data.response.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        ),
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_NEW_POSTS,
+        msg: response.data.msg,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_NEW_POSTS,
+      new_post: null,
     });
   }
 };
@@ -49,6 +74,51 @@ export const GetPostsLimit = (query) => async (dispatch) => {
     });
   }
 };
+export const GetPostsDetail = (query) => async (dispatch) => {
+  try {
+    const response = await apiGetDetailPost(query);
+    console.log('🚀 ~ file: post.js:56 ~ GetPostsDetail ~ response:', response);
+    if (response?.data.err === 0) {
+      dispatch({
+        type: actionTypes.GET_POST_DETAIL,
+        posts_detail: response.data.response?.rows,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_POST_DETAIL,
+        msg: response.data.msg,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_POST_DETAIL,
+      posts_detail: null,
+    });
+  }
+};
+export const GetPostsLimitAdmin = (query) => async (dispatch) => {
+  try {
+    const response = await apiGetPostsLimitAdmin(query);
+    if (response?.data.err === 0) {
+      dispatch({
+        type: actionTypes.GET_POSTS_LIMIT_ADMIN,
+        posts_limit_admin: response.data.response?.rows,
+        count: response.data.response?.count,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_POSTS_LIMIT_ADMIN,
+        msg: response.data.msg,
+        posts_limit_admin: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_POSTS_LIMIT_ADMIN,
+      posts_limit_admin: null,
+    });
+  }
+};
 export const ClearPostsLimit = () => async (dispatch) => {
   try {
     dispatch({
@@ -63,27 +133,7 @@ export const ClearPostsLimit = () => async (dispatch) => {
     });
   }
 };
-export const getPostsByCategory = (categoryCode) => async (dispatch) => {
-  try {
-    const response = await apiGetPostsByCategory(categoryCode);
-    if (response?.data.err === 0) {
-      dispatch({
-        type: actionTypes.GET_POSTS_BY_CATEGORY,
-        posts_by_categories: response.data.response?.rows,
-        count: response.data.response?.count,
-      });
-    } else {
-      dispatch({
-        type: actionTypes.GET_POSTS_BY_CATEGORY,
-        msg: response.data.msg,
-        posts_by_categories: null,
-        count: null,
-      });
-    }
-  } catch (error) {
-    dispatch({
-      type: actionTypes.GET_POSTS_BY_CATEGORY,
-      posts_by_categories: null,
-    });
-  }
-};
+export const editPostsLimit = (dataEdit) => ({
+  type: actionTypes.EDIT_POST,
+  dataEdit,
+});

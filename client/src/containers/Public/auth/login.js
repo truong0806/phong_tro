@@ -7,17 +7,23 @@ import * as actions from '../../../store/action';
 import validate from '../../../ultils/validate';
 import { path } from '../../../ultils/constains';
 import { WhyUs, Support } from '../index';
+import { pressEnter } from '../../../ultils/pressEnter';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 function Login() {
   const navigate = useNavigate();
-  const { msg, update } = useSelector((state) => state.auth);
+  const [isCaptchaVerified, setCaptchaVerified] = useState(false);
+  const [noti, setNoti] = useState(false);
+
+  const { isLoggedIn, msgLogin, update, msgLoginSuccess } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
+  const [loginS, setLoginS] = useState([]);
   const [payload, setPayload] = useState({
     phone: '',
     password: '',
-    name: '',
-    comfirmPassword: '',
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,22 +32,49 @@ function Login() {
       [name]: value,
     }));
   };
+
   useEffect(() => {
-    msg && Swal.fire('Lỗi', msg, 'error');
-  }, [msg]);
+    isLoggedIn && navigate('/'); //
+  }, [isLoggedIn]);
+
+  useEffect(() => {}, [msgLogin, update]);
+
   useEffect(() => {
-    msg && Swal.fire('Oops !', msg, 'error');
-  }, [msg, update]);
+    msgLogin && Swal.fire('Oops !', 'Sai số điện thoại hoặc mật khẩu', 'error');
+    dispatch(actions.setMsgExpiredToken('login'));
+  }, [msgLogin, dispatch]);
+
+  useEffect(() => {
+    msgLoginSuccess &&
+      Swal.fire({
+        icon: 'success',
+        title: 'Đăng nhập thành công',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    dispatch(actions.clearMsgAuth());
+  }, [msgLoginSuccess, dispatch]);
+
   const handleSubmit = async () => {
     const finalinvalids = payload;
     const invalids = validate(finalinvalids, 'Đăng nhập', setInvalidFields);
-    console.log('🚀 ~ file: login.js:39 ~ handleSubmit ~ invalids:', invalids);
     if (invalids === 0) {
-      dispatch(actions.login(payload));
-      Swal.fire('Done', 'Đăng nhập thành công', 'success');
-      navigate('/');
+      if (isCaptchaVerified) {
+        dispatch(actions.login(payload));
+      } else {
+        setNoti(true);
+      }
     }
   };
+
+  useEffect(() => {
+    pressEnter(handleSubmit);
+  }, []);
+
+  const handleCaptchaChange = (value) => {
+    setCaptchaVerified(value !== null);
+  };
+
   return (
     <div className="w-full flex flex-col items-center ">
       <div className="items-center justify-center">
@@ -73,6 +106,17 @@ function Login() {
               styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[5px] mb-[5px]"
               type="password"
             />
+            <div className="mt-[10px]">
+              <ReCAPTCHA
+                sitekey="6LeapD8pAAAAACFymet0d3khUHxXfmil8t7SNlM5"
+                onChange={handleCaptchaChange}
+              />
+            </div>
+            {noti && (
+              <span className="text-red-600">
+                Vui lòng xác minh rằng bạn không phải là robot
+              </span>
+            )}
             <Button
               text="Đăng nhập"
               bgcolor="bg-[#3961fb]"
@@ -94,7 +138,7 @@ function Login() {
                         name: '',
                       });
                       setInvalidFields([]);
-                      navigate(`${path.AUTH}/${path.FORGOTPASSWORD}`);
+                      navigate(`/${path.FORGOTPASSWORD}`);
                     }}
                     className="hover:text-[red]  cursor-pointer"
                   >
@@ -108,7 +152,7 @@ function Login() {
                         name: '',
                       });
                       setInvalidFields([]);
-                      navigate(`${path.AUTH}/${path.REGISTER}`);
+                      navigate(`/${path.REGISTER}`);
                     }}
                     className="hover:text-[red]  cursor-pointer "
                   >

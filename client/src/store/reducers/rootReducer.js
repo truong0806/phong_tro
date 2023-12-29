@@ -10,7 +10,7 @@ import appReducer from './appReducer';
 const authConfig = {
   storage,
   key: 'auth',
-  whitelist: ['isLoggedIn', 'token'],
+  whitelist: ['isLoggedIn', 'accessToken', 'refreshToken'],
   stateReconciler: autoMergeLevel2,
 };
 

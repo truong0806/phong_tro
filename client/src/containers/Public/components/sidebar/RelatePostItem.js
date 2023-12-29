@@ -1,41 +1,72 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-const RelatePostItem = ({ item, listNewPostEff, listNew }) => {
+import { path } from '../../../../ultils/constains';
+import setStylePost from '../../../../ultils/setStylePost';
+import slug from 'slug';
+const RelatePostItem = ({ item, listNewPostEff, listNew, postDetailId }) => {
+  const [textColor, setTextColor] = React.useState('');
+
   const formatTime = () => {
-    moment.locale('vn');
+    moment.locale('VN');
     return moment(item.createdAt).fromNow();
   };
   const images = JSON.parse(item?.images?.image)?.shift();
+
+  const handleStar = (star) => {
+    const stars = [];
+    for (let i = 0; i < +star; i++) {
+      stars.push(
+        <div className="mx-[1px] w-[10px] h-[10px] inline-block bg-[length:11px_11px] bg-repeat-x bg-center bg-star-bg"></div>
+      );
+    }
+    return stars;
+  };
+
+  useEffect(() => {
+    setStylePost(item?.overviews?.bonus, setTextColor, 'title');
+  }, []);
+
   return (
-    <div className=" lg:w-full w-full flex flex-col lg:px-[10px] lg:mx-[-10px]  lg:py-2 lg:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <>
       <Link
-        href="#"
-        className="w-[150px] flex flex-col lg:flex-row lg:w-full h-[245px] lg:h-[70px] items-center justify-center relative cursor-pointerv "
+        href={`${path.DETAIL_POST_TITLE__POSTID}/${item.id}`}
+        className="flex cursor-pointer "
       >
-        <div className="w-full h-[120px] font-normal mb-3 lg:w-[65px] relative z-10 lg:h-[65px] items-center justify-center">
-          <img
-            className="lazyload  lazy object-cover h-full  w-full  "
-            data-src={images}
-            src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
-            alt={item.title}
-            loading="lazy"
-          ></img>
-          <span className="block bg-35px"></span>
-        </div>
-        <div className="w-full lg:w-4/5  relative mb-0 leading-5">
-          <p className="line-clamp-2 relative top-0 text-[1rem] font-normal   text-[#3763e0] mb-[10px]">
-            {item.title}
-          </p>
-          <div className="flex items-end relative  justify-between">
-            <span className="text-[#16c784] font-bold text-[.9rem]">
-              {item.attributes.price}
+        <figure className="w-[65px] h-[65px] relative ">
+          <img className="w-[100%] h-[100%]" src={images}></img>
+        </figure>
+        <div className="w-[70%] relative ml-[15px] ">
+          <h3 className="text-[1rem] font-bold mb-[10px] whitespace-normal ">
+            <Link
+              to={`/chi-tiet/${slug(item?.title)}/${item?.id}`}
+              className="text-[#055699] text-init"
+            >
+              <span className={`${textColor} line-clamp-2 whitespace-normal `}>
+                <span className="float-left h-[10px] mr-[3px] ">
+                  {handleStar(+item.star).length > 0
+                    ? handleStar(+item.star).map((item, index) => (
+                        <div key={index} className="float-left mb-[3px]">
+                          {item}
+                        </div>
+                      ))
+                    : ''}
+                </span>
+                <span className={`text-[1rem]`}>{item?.title}</span>
+              </span>
+            </Link>
+          </h3>
+          <div className="flex flex-row justify-between">
+            <span className="text-[1rem] text-[#16c784]">
+              {item?.attributes?.price}
             </span>
-            <time className="lg::block hidden font-[.9rem] text-[#aaa]">{formatTime()}</time>
+            <span className="text-[0.9rem] text-[#aaa]">
+              {item?.attributes?.published}
+            </span>
           </div>
         </div>
       </Link>
-    </div>
+    </>
   );
 };
 

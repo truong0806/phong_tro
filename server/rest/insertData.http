@@ -2,6 +2,14 @@
 
 @port = 3030
 @url = http://localhost
+@urlHost = http://20.227.165.226
+
+
+################################################################################################
+#                                                                                              #
+# USE LOCAL                                                                                    #
+#                                                                                              #
+################################################################################################
 
 ### Register
 POST {{url}}:{{port}}/api/v1/auth/register
@@ -18,7 +26,7 @@ POST {{url}}:{{port}}/api/v1/auth/login
 Content-Type: application/json
 
 {
-   "phone":"0938134357",
+   "phone":"0938334123",
     "password":"truong123"
 }
 
@@ -28,6 +36,93 @@ POST {{url}}:{{port}}/api/v1/insert
 ### Get user
 GET {{url}}:{{port}}/api/v1/user/getUserCurrent
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmMGI2MzMxLTJiNGMtNDNlMC05ZjNhLWNjZjg0OWZhNGIzYSIsInBob25lIjoiMDkzODMzNDEyMyIsImlhdCI6MTY5MDk4MDUzNSwiZXhwIjoxNjkxMTUzMzM1fQ.jZoXbA6moOrV3e0g39qMG2HMxm5vCjS5XKSeXTQ2rn4
+Authorization: bearer {{accesstoken}}
 
 
+
+
+################################################################################################
+#                                                                                              #
+# USE HOST                                                                                     #
+#                                                                                              #
+################################################################################################
+
+
+###Login host
+POST {{urlHost}}:{{port}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+   "phone":"0938334123",
+    "password":"truong123"
+}
+###LoginHost
+# @name loginHost
+POST {{url}}:{{port}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+   "phone":"0938334123",
+    "password":"truong123"
+}
+###
+@accesstoken = {{loginHost.response.body.accessToken}}
+
+###Get Use Info
+GET {{urlHost}}:{{port}}/api/v1/user/getUserCurrent
+Content-Type: application/json
+Authorization: bearer {{accesstoken}}
+##
+
+###Update user info
+POST {{urlHost}}:{{port}}/api/v1/user/edituserinfo
+Content-Type: application/json
+Authorization: bearer {{accesstoken}}
+
+{
+    "name": "Nguyễn Thanh Trường",
+    "zalo": "0938134092",
+    "fbUrl": "https://www.facebook.com/profile.php?id=100007829624293",
+    "avatar": "https://www.w3schools.com/w3images/avatar2.png",
+    "email": "thanhtruong090123@gmail.com"
+}
+
+### Insert
+POST {{urlHost}}:{{port}}/api/api/v1/insert
+
+################################################################################################
+#                                                                                              #
+# POST                                                                                  #
+#                                                                                              #
+################################################################################################
+###Get Post
+GET {{urlHost}}:{{port}}/api/v1/post/all?query=tinmoi
+Content-Type: application/json
+{
+   "phone":"0938334123",
+   "password":"truong123"
+}
+###Create Post
+# @name CreatePost
+POST {{urlHost}}:{{port}}/api/v1/post/create
+Content-Type: application/json
+Authorization: bearer {{accesstoken}}
+
+{
+    "title": "CHO THUÊ PHÒNG TRỌ MỚI CHÍNH CHỦ, GIẢM GIÁ, QUẬN TÂN PHÚ - GẦN BÊN TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THỰC PHẨM",
+    "description": "[\"️️️Giảm 500k cho tháng tiền phòng đầu tiên đối với các khách hàng ký hợp đồng trong tháng 4 /2023️️️\",\"Cách CV Hoàng Văn Thụ 150m\",\"Cách ĐH Tài Chính Marketing 300m\",\"Diện tích 20m2\",\"Mức giá: 4tr5\",\"Địa chỉ: Phạm Cự Lượng, P2, Tân Bình.\",\"Mô tả:\",\"- Có máy lạnh\",\"- Có kệ bếp và tủ bếp\",\"- Có gác\",\"- Toilet riêng\",\"- Có một bàn ăn 2 ghế.\",\"Ngoài ra còn có thang máy, hầm giữ xe, camera, quản lí và bảo vệ 24/7.\",\"Ra vào bằng cửa khóa vân tay.\",\"Anh chị liên hệ Phòng trọ Be Home để xem phòng nhé.\"]",
+    "categoryCode": "NCT",
+    "priceNumber": "30 triệu/tháng",
+    "areaNumber": "150m2",
+    "target":"nam",
+    "address": "50 Nguyễn Quý Yêm, An Lạc, Quận Bình Tân, Hồ Chí Minh",
+    "images": ["https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg","https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg","https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg","https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg","https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg"],
+    "label": "Cho thuê nhà quận Bình Tân",
+    "userId": "24714cd1-1c49-4149-9d97-ecc8fbfb580c",
+    "phoneContact": "0938134092",
+    "author": "Nguyen",
+    "lat":"10.897718231493357",
+    "lng":"106.77148958873619"
+}
+###
+@postId = {{CreatePost.response.body.data.id}}

@@ -23,12 +23,14 @@ module.exports = {
       fbUrl: {
         type: Sequelize.STRING,
       },
-      avatar: {
-        type: Sequelize.BLOB('long'),
+      email: {
+        type: Sequelize.STRING,
       },
-      publickey: {
-        type: Sequelize.TEXT,
-        allowNull: false,
+      avatar: {
+        type: Sequelize.STRING,
+      },
+      balance: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Post.belongsTo(models.Images, {
         foreignKey: 'imagesId',
-        targetKey: 'id',
+        onDelete: 'CASCADE',
         as: 'images',
       })
       Post.belongsTo(models.Attribute, {
@@ -18,16 +18,31 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'id',
         as: 'attributes',
       })
+      Post.belongsTo(models.Overview, {
+        foreignKey: 'overviewId',
+        targetKey: 'id',
+        as: 'overviews',
+      })
+      Post.belongsTo(models.Category, {
+        foreignKey: 'categoryCode',
+        targetKey: 'code',
+        as: 'categories',
+      })
+      Post.belongsTo(models.Label, {
+        foreignKey: 'labelCode',
+        targetKey: 'code',
+        as: 'labels',
+      })
       Post.belongsTo(models.User, {
         foreignKey: 'userId',
         targetKey: 'id',
         as: 'users',
       })
-      // Post.belongsTo(models.Label, {
-      //   foreignKey: 'labelCode',
-      //   targetKey: 'id',
-      //   as: 'label',
-      // })
+      Post.hasOne(models.Location, {
+        foreignKey: 'locationId',
+        targetKey: 'id',
+        as: 'locations',
+      })
     }
   }
   Post.init(
@@ -44,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.TEXT,
       userId: DataTypes.STRING,
       overviewId: DataTypes.STRING,
+      LocationId: DataTypes.STRING,
       imagesId: DataTypes.STRING,
       priceNumber: DataTypes.FLOAT,
       areaNumber: DataTypes.FLOAT,
@@ -53,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: 'Post',
       charset: 'utf8',
-      collate: 'utf8_unicode_ci'
+      collate: 'utf8_unicode_ci',
     },
   )
   return Post

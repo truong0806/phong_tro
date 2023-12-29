@@ -18,6 +18,7 @@ const SearchPopup = ({
   setSelectedValue,
   handleSubmit,
   defaultText,
+  title
 }) => {
   const [percent1, setPercent1] = useState(
     name === 'prices' && selectedValue?.prices.pricesNumber
@@ -135,14 +136,14 @@ const SearchPopup = ({
           onClick={(e) => {
             e.stopPropagation();
           }}
-          className="relative flex flex-col h-[500px]lg:flex-row w-[700px] left-0 right-0 bottom-0 my-0 mx-auto top-[60px]  bg-white border rounded-lg overflow-hidden"
+          className="relative flex flex-col h-[500px] w-[700px] left-0 right-0 bottom-0 my-0 mx-auto top-[60px]  bg-white border rounded-lg overflow-hidden"
         >
           <div
             className={`${
-              name === 'provinces' ? 'h-[45px]' : 'h-[45px]'
+              name === 'province' ? 'h-[45px]' : 'h-[45px]'
             }  relative flex items-center justify-center border-b border-solid`}
           >
-            <span className="uppercase font-bold">Chọn loại bất động sản</span>
+            <span className="uppercase font-bold">{title}</span>
             <div
               className=" cursor-pointer bg-left_arrow_bg absolute bg-center top-0 left-0 w-[45px] h-[45px] bg-50% bg-no-repeat "
               onClick={handleCloseClick}
@@ -150,18 +151,14 @@ const SearchPopup = ({
           </div>
           <div
             className={`relative py-[10px] px-[25px] h-full ${
-              name === 'provinces'
-                ? 'hover:overflow-auto hover:overflow-y-scroll '
-                : ''
+              name === 'province' ? 'overflow-auto overflow-y-scroll ' : ''
             } `}
           >
             <div className="">
-              {name === 'categories' ? (
+              {name === 'category' ? (
                 <ul className="list-none ">
                   <li
                     onClick={(e) => {
-                      console.log(defaultText);
-
                       setSelectedValue((prevState) => ({
                         ...prevState,
                         [`${removeSFromString(name)}Code`]: null,
@@ -170,7 +167,6 @@ const SearchPopup = ({
                           code: null,
                         },
                       }));
-                      console.log(selectedValue);
                       setShowPopup(false);
                     }}
                     className="hover:text-[#007aff] overflow-y-auto relative py-[12px] px-[10px] border-solid border-b cursor-pointer text-[1.1rem]"
@@ -238,7 +234,7 @@ const SearchPopup = ({
                     );
                   })}
                 </ul>
-              ) : name === 'provinces' ? (
+              ) : name === 'province' ? (
                 <ul className="list-none overflow-y-auto">
                   <li
                     onClick={(e) => {

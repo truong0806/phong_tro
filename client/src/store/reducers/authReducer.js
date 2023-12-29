@@ -2,39 +2,82 @@ import actionTypes from '../action/actionTypes';
 
 const initState = {
   isLoggedIn: false,
-  token: null,
+  accessToken: '',
+  refreshToken: '',
   phone: '',
-  msg: '',
+  msgLoginSuccess: '',
+  msgRegister: '',
+  msgRegisterSuccess: '',
   update: false,
 };
 
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case actionTypes.REGISTER_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        accessToken: action?.data?.accessToken,
+        refreshToken: action?.data?.refreshToken,
+        msgRegisterSuccess: action.data.msg || '',
+      };
     case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
-        token: action.data,
-        phone: action.data
+        accessToken: action?.data?.accessToken,
+        refreshToken: action?.data?.refreshToken,
+        msgLoginSuccess: action.data.msg || '',
       };
     case actionTypes.REGISTER_FAIL:
+      return {
+        ...state,
+        isLoggedIn: false,
+        msgRegister: action.data || '',
+        accessToken: null,
+        refreshToken: null,
+        update: !state.update,
+      };
     case actionTypes.LOGIN_FAIL:
       return {
         ...state,
         isLoggedIn: false,
-        msg: action.data,
-        token: null,
+        msgLogin: action.data || '',
+        accessToken: null,
+        refreshToken: null,
         update: !state.update,
       };
     case actionTypes.LOGOUT:
       return {
         ...state,
         isLoggedIn: false,
+        accessToken: null,
+        refreshToken: null,
         msg: '',
-        token: null,
       };
-
+    case actionTypes.REFRESH_TOKEN:
+      return {
+        ...state,
+        isLoggedIn: true,
+        accessToken: action.accessToken,
+        refreshToken: action.refreshToken,
+      };
+    case actionTypes.REFRESH_TOKEN_FAIL:
+      return {
+        ...state,
+        isLoggedIn: false,
+        accessToken: null,
+        refreshToken: null,
+        msg: action.msg,
+      };
+    case actionTypes.CLEAR_MSG_AUTH:
+      return {
+        ...state,
+        msgLogin: '',
+        msgRegister: '',
+        msgRegisterSuccess: '',
+        msgLoginSuccess: '',
+      };
     default:
       return state;
   }

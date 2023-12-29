@@ -3,8 +3,7 @@ import { useSelector } from 'react-redux';
 import { ListNumber } from '../../index';
 import { useSearchParams } from 'react-router-dom';
 
-function Pagination() {
-  const { count, posts_limit } = useSelector((state) => state.post);
+function Pagination({count, posts_limit}) {
   const [arrpage, setArrPage] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPage, setMaxPage] = useState(0);

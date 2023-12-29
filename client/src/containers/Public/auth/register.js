@@ -8,12 +8,23 @@ import validate from '../../../ultils/validate';
 import { path } from '../../../ultils/constains';
 // import { Loading } from '../../../components'
 import { WhyUs, Support } from '../index';
+import { pressEnter } from '../../../ultils/pressEnter';
+import {
+  checkCapsLock,
+  handleKeyDownCapLock,
+} from '../../../ultils/checkCapsLock';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 function Register() {
   const navigate = useNavigate();
-  const { msg, update } = useSelector((state) => state.auth);
+  const { isLoggedIn, msgRegister, msgRegisterSuccess } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
   const [invalidFields, setInvalidFields] = useState([]);
+  const [capslock, setCapslock] = useState(false);
+  const [isCaptchaVerified, setCaptchaVerified] = useState(false);
+  const [noti, setNoti] = useState(false);
   const [payload, setPayload] = useState({
     phone: '',
     password: '',
@@ -28,26 +39,65 @@ function Register() {
     }));
   };
   useEffect(() => {
-    msg && Swal.fire('Lỗi', msg, 'error');
-  }, [msg]);
+    isLoggedIn && navigate('/');
+  }, [isLoggedIn]);
+
   useEffect(() => {
-    msg && Swal.fire('Oops !', msg, 'error');
-  }, [msg, update]);
+    msgRegister && Swal.fire('Lỗi', 'Số điện thoại đã được sử dụng', 'error');
+    dispatch(actions.clearMsgAuth());dispatch(actions.setMsgExpiredToken('login'));
+  }, [msgRegister, dispatch]);
+
+  useEffect(() => {
+    msgRegisterSuccess &&
+      Swal.fire({
+        icon: 'success',
+        title: 'Đăng ký thành công',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    dispatch(actions.clearMsgAuth());
+  }, [msgRegisterSuccess, dispatch]);
+
   const handleSubmit = async () => {
     const finalinvalids = payload;
     const invalids = validate(finalinvalids, 'Đăng ký', setInvalidFields);
     if (invalids === 0) {
       dispatch(actions.register(payload));
-      Swal.fire('Done', 'Đăng ký thành công', 'success');
-      navigate('/');
     }
   };
+
+  // useEffect(() => {
+  //   checkCapsLock(setCapslock);
+  // });
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      // Check if the pressed key is an uppercase letter and Caps Lock is off
+      const isUppercase = event.key === event.key.toUpperCase();
+      setCapslock(!isUppercase);
+    };
+
+    // Add event listener when component mounts
+    document.addEventListener('keypress', handleKeyPress);
+
+    // Clean up the event listener when component unmounts
+    return () => {
+      document.removeEventListener('keypress', handleKeyPress);
+    };
+  }, []);
+  const handleCaptchaChange = (value) => {
+    setCaptchaVerified(value !== null);
+  };
+
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <div className="items-center justify-center">
         <div className="bg-white  border-[#dedede] border w-[600px] m-auto pt-[30px] px-[30px] pb-[100px] rounded-md shadow-sm ">
           <h3 className="font-bold text-3xl mb-[10px]">Tạo tài khoản mới</h3>
           <div className="w-full">
+            <div>
+              {/* Your component JSX */}
+              {capslock ? <p>Caps Lock is on!</p> : <p>Caps Lock is off.</p>}
+            </div>
             <InputForm
               name="name"
               stylleGroup="mt-[15px]"
@@ -74,6 +124,9 @@ function Register() {
               styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[10px] mb-[5px]"
             />
             <InputForm
+              onFocus={(event) => {
+                setInvalidFields([]);
+              }}
               name="password"
               stylleGroup="mt-[15px]"
               setInvalidFields={setInvalidFields}
@@ -86,6 +139,7 @@ function Register() {
               styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[5px] mb-[5px]"
               type="password"
             />
+            {capslock && <span className="">Đang bật CapsLock</span>}
             <InputForm
               name="comfirmPassword"
               stylleGroup="mt-[15px]"
@@ -99,6 +153,12 @@ function Register() {
               styleInput="font-bold text-2xl outline-none font-normal block bg-[#e8f0fe] p-2 rounded-md w-full h-[45px] px-[5px] mb-[5px]"
               type="password"
             />
+            <div className="mt-[10px]">
+              <ReCAPTCHA
+                sitekey="6LeTiBMpAAAAACAAQGAWdSoLr_MH_N7zNtYIerC9"
+                onChange={handleCaptchaChange}
+              />
+            </div>
             <Button
               text="Đăng ký"
               bgcolor="bg-[#3961fb]"
@@ -129,7 +189,7 @@ function Register() {
                       name: '',
                     });
                     setInvalidFields([]);
-                    navigate(`${path.AUTH}/${path.LOGIN}`);
+                    navigate(`/${path.LOGIN}`);
                   }}
                   className="text-blue-500 hover:underline cursor-pointer ml-[5px]"
                 >

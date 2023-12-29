@@ -15,16 +15,27 @@ function Button({
   height,
   margin,
   padding,
+  bfIcon,
+  After,
+  onKeyDown,
+  iconImgBefor,
 }) {
   return (
     <button
       type="button"
-      className={` px-2 ${margin}  ${padding} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md  lg:flex items-center justify-center gap-1`}
+      className={`cursor-pointer px-2 ${margin}  ${padding} ${bgcolor} ${textColor} ${fontW} ${width} ${height} outline-none rounded-md  lg:flex items-center justify-center gap-1`}
       onClick={onClick}
+      onKeyDown={onKeyDown}
     >
-      <span>{IcBefor && <IcBefor size={IcBeforSize} />}</span>
+      <span className={bfIcon}>
+        {iconImgBefor
+          ? iconImgBefor
+          : IcBefor && <IcBefor size={IcBeforSize} />}
+      </span>
       <span>{text}</span>
-      <span>{IcAfter && <IcAfter size={IcAfterSize} color={ColorIcon} />}</span>
+      <span>
+        {IcAfter ? <IcAfter size={IcAfterSize} color={ColorIcon} /> : After}
+      </span>
     </button>
   );
 }

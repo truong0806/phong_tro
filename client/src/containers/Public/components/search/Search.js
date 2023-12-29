@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { SearchItem } from '../../../../components';
 import { SearchPopup } from '../../index';
 import icons from '../../../../ultils/icons';
-import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../../../store/action';
+import { useSelector } from 'react-redux';
 
 import {
   getCodesArea,
@@ -25,38 +24,39 @@ const {
 
 function Search() {
   const location = useLocation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState({
-    categories: { name: 'Phòng trọ, nhà trọ', code: '' },
-    provinces: { name: 'Toàn quốc', code: 'abc' },
+    category: { name: 'Phòng trọ, nhà trọ', code: '' },
+    province: { name: 'Toàn quốc', code: 'abc' },
     prices: { name: 'Chọn giá', pricesNumber: [0, 15] },
     areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
   });
   const [showPopup, setShowPopup] = useState(false);
   const [content, setContent] = useState([]);
   const [defaultText, setDefaultText] = useState('');
+  const [title, setTitle] = useState('');
   const [name, setName] = useState([]);
   const { areas, prices, categories, provinces } = useSelector(
     (state) => state.app
   );
   useEffect(() => {
-    if (!location.pathname.includes(path.SEARCH)) {
+    if (!location?.pathname.includes(path.SEARCH)) {
       setSelectedValue({
-        categories: { name: 'Phòng trọ, nhà trọ', code: '' },
-        provinces: { name: 'Toàn quốc', code: 'abc' },
+        category: { name: 'Phòng trọ, nhà trọ', code: '' },
+        province: { name: 'Toàn quốc', code: 'abc' },
         prices: { name: 'Chọn giá', pricesNumber: [0, 15] },
         areas: { name: 'Chọn diện tích', areasNumber: [0, 90] },
       });
     }
-  }, []);
+  }, [location]);
 
-  const handShowPopup = (e, content, name, defaultText) => {
+  const handShowPopup = (e, content, name, defaultText, title) => {
     e.stopPropagation();
     setContent(content);
     setName(name);
     setShowPopup(true);
     setDefaultText(defaultText);
+    setTitle(title);
   };
   const handleDeleteTitle = (name, defaultText) => {
     setSelectedValue((prevState) => ({
@@ -113,16 +113,22 @@ function Search() {
         },
       }));
     },
-    [content]
+    []
   );
 
   const handleSearch = () => {
     const queryCode = Object.entries(selectedValue).filter((item) => {
-      return item[0].includes('Number');
+      return (
+        item[0].includes('Number') ||
+        item[0].includes('provinceCode') ||
+        item[0].includes('categoryCode')
+      );
     });
     let queryCodeObject = {};
     queryCode.forEach((item) => {
-      queryCodeObject[item[0]] = item[1];
+      if (item[1] != null) {
+        queryCodeObject[item[0]] = item[1];
+      }
     });
     const queryText = Object.entries(selectedValue).filter(
       (item) => !item[0].includes('Code') || !item[0].includes('Number')
@@ -131,14 +137,16 @@ function Search() {
     queryText.forEach((item) => {
       queryTextObj[item[0]] = item[1];
     });
+    const queryCodeObjectCopy = { ...queryCodeObject };
+
     let titleSearch = `${
-      queryTextObj.categories.name
-        ? queryTextObj.categories.name
+      queryTextObj.category.name
+        ? queryTextObj.category.name
         : 'Cho thuê tất cả'
     } ${
-      queryTextObj.provinces.name
-        ? `${queryTextObj.provinces.name === 'Toàn quốc' ? '' : 'tỉnh'} ${
-            queryTextObj.provinces.name
+      queryTextObj.province.name
+        ? `${queryTextObj.province.name === 'Toàn quốc' ? '' : 'tỉnh'} ${
+            queryTextObj.province.name
           }`
         : ''
     } ${
@@ -154,7 +162,7 @@ function Search() {
     navigate(
       {
         pathname: path.SEARCH,
-        search: createSearchParams(queryCodeObject).toString(),
+        search: createSearchParams(queryCodeObjectCopy).toString(),
       },
       { state: { titleSearch } }
     );
@@ -163,24 +171,30 @@ function Search() {
     <>
       <div
         tabIndex="-1"
-        className="mb-[15px] lg:w-full w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2"
+        className="mb-[15px] w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2"
       >
         <span
           onClick={(e) =>
-            handShowPopup(e, categories, 'categories', 'Tìm tất cả')
+            handShowPopup(
+              e,
+              categories,
+              'category',
+              'Tìm tất cả',
+              'Chọn loại bất động sản'
+            )
           }
-          className="cursor-pointer flex-1 md:w-full lg:w-full font-bold"
+          className="cursor-pointer flex-1 w-full font-bold"
         >
           <SearchItem
             defaultText={'Phòng trọ, nhà trọ'}
             fontWeight
             IconBefore={<MdOutlineHouseSiding />}
             IconAfter={<RiDeleteBack2Line />}
-            text={selectedValue.categories.name}
+            text={selectedValue.category.name}
             deleteIcon={
               <FiDelete
                 onClick={() =>
-                  handleDeleteTitle('categories', 'Phòng trọ, nhà trọ')
+                  handleDeleteTitle('category', 'Phòng trọ, nhà trọ')
                 }
               />
             }
@@ -188,7 +202,13 @@ function Search() {
         </span>
         <span
           onClick={(e) =>
-            handShowPopup(e, provinces, 'provinces', 'Tìm tất cả')
+            handShowPopup(
+              e,
+              provinces,
+              'province',
+              'Tìm tất cả',
+              'Chọn tỉnh thành'
+            )
           }
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
@@ -196,16 +216,18 @@ function Search() {
             defaultText={'Toàn quốc'}
             IconBefore={<HiOutlineLocationMarker />}
             IconAfter={<GrNext />}
-            text={selectedValue.provinces.name}
+            text={selectedValue.province.name}
             deleteIcon={
               <FiDelete
-                onClick={() => handleDeleteTitle('provinces', 'Toàn quốc')}
+                onClick={() => handleDeleteTitle('province', 'Toàn quốc')}
               />
             }
           />
         </span>
         <span
-          onClick={(e) => handShowPopup(e, prices, 'prices', 'Chọn giá ')}
+          onClick={(e) =>
+            handShowPopup(e, prices, 'prices', 'Chọn giá ', 'Chọn theo giá ')
+          }
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
@@ -215,13 +237,21 @@ function Search() {
             text={selectedValue.prices.name}
             deleteIcon={
               <FiDelete
-                onClick={() => handleDeleteTitle('prices', 'Chọn giá')}
+                onClick={() => handleDeleteTitle('prices', 'Chọn theo giá')}
               />
             }
           />
         </span>
         <span
-          onClick={(e) => handShowPopup(e, areas, 'areas', 'Chọn diện tích ')}
+          onClick={(e) =>
+            handShowPopup(
+              e,
+              areas,
+              'areas',
+              'Chọn diện tích ',
+              'Chọn diện tích '
+            )
+          }
           className="cursor-pointer flex-1 md:w-full lg:w-full"
         >
           <SearchItem
@@ -247,6 +277,7 @@ function Search() {
       </div>
       {showPopup && (
         <SearchPopup
+          title={title}
           defaultText={defaultText}
           selectedValue={selectedValue}
           content={content}

@@ -36,36 +36,41 @@ const ListPost = ({ categoryCode }) => {
   }, [searchParams, categoryCode, dispatch]);
 
   return (
-    <div className="m-[20px] ">
+    <div className="">
       <section className=" flex justify-between">
         <div className="">
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>
         </div>
         <span className="text-[14px] ">
-          Cập nhật: <time >{getDate()}</time>
+          Cập nhật: <time>{getDate()}</time>
         </span>
       </section>
       <div className="flex items-center text-[.95rem] gap-2 my-[10px] ">
         <span className="">Sắp xếp: </span>
         <FilterListPostBtn />
       </div>
-      <div className="px-5 mx-[-20px] py-4 ">
+      <div className="px-[20px] mx-[-20px] py-4 ">
         {loading ? (
           posts_limit.length > 0 ? (
-            posts_limit.map((item) => (
-              <ListPostItem
-                key={item.id}
-                attributes={item?.attributes}
-                description={JSON.parse(item?.description)}
-                users={item?.users}
-                images={JSON.parse(item?.images?.image)}
-                title={item?.title}
-                label={item?.label}
-                address={item?.address}
-                star={item?.star}
-                id={item?.id}
-              />
-            ))
+            posts_limit.map((item) => {
+              return (
+                <ListPostItem
+                  key={item.id}
+                  attributes={item?.attributes}
+                  description={item?.description}
+                  users={item?.users}
+                  images={
+                    item?.images?.image && JSON.parse(item?.images?.image)
+                  }
+                  title={item?.title}
+                  label={item?.label}
+                  address={item?.address}
+                  star={item?.star}
+                  bonus={item?.overviews?.bonus}
+                  id={item?.id}
+                />
+              );
+            })
           ) : (
             <p>Không có dữ liệu</p>
           )

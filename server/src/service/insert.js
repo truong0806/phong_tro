@@ -1,6 +1,6 @@
 import db from '../models'
 const moment = require('moment')
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { v4 as v4 } from 'uuid'
 import chothuematbang from '../../data/chothuematbang.json'
@@ -89,14 +89,8 @@ export const insertService = () => {
           let currentArea = getNumberFromString(
             item?.header?.attributes?.acreage,
           )
-          console.log(
-            `🚀 ~ file: insert.js:92 ~ cate.body.forEach ${item?.header?.attributes?.acreage} currentArea: ${currentArea}`,
-          )
           let currentPrice = getNumberFromString(
             item?.header?.attributes?.price,
-          )
-          console.log(
-            `🚀 ~ file: insert.js:95 ~ cate.body.forEach ${item?.header?.attributes?.price} currentPrice: ${currentPrice}`,
           )
           const dateString = item?.overview?.content.find(
             (i) => i.name === 'Ngày đăng:',
@@ -106,6 +100,17 @@ export const insertService = () => {
             'dddd, HH:mm DD/MM/YYYY',
             'vi',
           ).toDate()
+          await db.Images.create({
+            id: imagesId,
+            image: JSON.stringify(item?.images),
+          })
+          await db.Label.findOrCreate({
+            where: { code: labelCode },
+            defaults: {
+              code: labelCode,
+              value: item?.header?.class?.classType?.trim(),
+            },
+          })
           await db.Attribute.findOrCreate({
             where: { id: attributesId },
             defaults: {
@@ -116,27 +121,7 @@ export const insertService = () => {
               hashtag: item?.header?.attributes?.hashtag,
             },
           }),
-            await db.Images.findOrCreate({
-              where: { id: imagesId },
-              defaults: {
-                id: imagesId,
-                image: JSON.stringify(item?.images),
-              },
-            })
-          await db.Label.findOrCreate({
-            where: { code: labelCode },
-            defaults: {
-              code: labelCode,
-              value: item?.header.class.classType,
-            },
-          })
-
-          await db.Overview.findOrCreate({
-            where: {
-              id: item?.overview?.content.find((i) => i.name === 'Mã tin:')
-                ?.value,
-            },
-            defaults: {
+            await db.Overview.create({
               id: overviewId,
               code: item?.overview?.content.find((i) => i.name === 'Mã tin:')
                 ?.value,
@@ -150,12 +135,13 @@ export const insertService = () => {
               )?.value,
               bonus: item?.overview?.content.find((i) => i.name === 'Gói tin:')
                 ?.value,
-              created: dateCreate,
-              expired: item?.overview?.content.find(
+              create: item?.overview?.content.find(
+                (i) => i.name === 'Ngày đăng:',
+              )?.value,
+              expire: item?.overview?.content.find(
                 (i) => i.name === 'Ngày hết hạn:',
-              ).value,
-            },
-          })
+              )?.value,
+            })
 
           await db.User.findOrCreate({
             where: {
@@ -173,11 +159,11 @@ export const insertService = () => {
               )?.value,
               zalo: item?.contact?.content.find((i) => i.name === 'Zalo')
                 ?.value,
+              publickey: userId,
             },
           })
           await db.Post.findOrCreate({
             where: {
-              id: postId,
               title: item?.header?.title,
               address: item?.header?.address,
             },

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ListPost, Pagination, Province, SlideBar } from '../index';
@@ -10,7 +10,7 @@ function RentalApartment() {
   const [categoryCode, setcategoryCode] = useState('none');
   const [categoryCurrent, setCategoryCurrent] = useState({});
   const { categories, prices, areas } = useSelector((state) => state.app);
-  const linkRef = useRef();
+  const { count, posts_limit } = useSelector((state) => state.post);
 
   useState(() => {
     setLoading(false);
@@ -20,29 +20,29 @@ function RentalApartment() {
     setLoading(false);
 
     const category = categories?.find((item) => {
-      return `/${slug(item.value)}` === location.pathname;
+      return `/${slug(item.value)}` === location?.pathname;
     });
-    setCategoryCurrent(category);
-    if (category) {
-      setcategoryCode(category.code);
-    }
+    setTimeout(() => {
+      setCategoryCurrent(category);
+      if (category) {
+        setcategoryCode(category.code);
+      }
+      setLoading(true);
+    });
 
-    setLoading(true);
-
-    // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
+    //linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
   }, [location, categories, prices, areas]);
 
   return (
     <div>
       <Province categoryCurrent={categoryCurrent} />
-      <div className="w-full justify-center  flex flex-row gap-2 mb-3">
-        <div className="w-[100%] lg:w-[70%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
+      <div className="w-full justify-center flex-col flex lg:flex-row gap-2 mb-3">
+        <div className="w-[100%] p-5 lg:w-[70%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
           <ListPost
             loading={loading}
-            linkRef={linkRef}
             categoryCode={categoryCode}
           />
-          <Pagination />
+          <Pagination count={count} posts_limit={posts_limit} />
         </div>
         <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
           <SlideBar setLoading={setLoading} />

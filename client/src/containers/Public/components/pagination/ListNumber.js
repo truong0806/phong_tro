@@ -41,7 +41,7 @@ function ListNumber({ text, number, currentPage, setCurrentPage }) {
     if (+number !== '...') {
       setCurrentPage(+number);
       navigate({
-        pathname: location.pathname,
+        pathname: location?.pathname,
         search: createSearchParams(append(entries)).toString(),
       });
     }

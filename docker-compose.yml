@@ -1,16 +1,80 @@
-version: '3'
+version: '3.8'
+
+x-common-variables: &common-variables
+  MYSQL_DATABASE: phongtro
+  MYSQL_USER: thanhtruong
+  MYSQL_PASSWORD: truong911
+
 services:
-  db:
-    image: mysql:8.0
+  mysql_db:
+    platform: linux/x86_64
+    image: mysql
     restart: always
-    environment:
-      - MYSQL_DATABASE=phongtro123
-      - MYSQL_ROOT_PASSWORD=truong911
-    ports:
-      - '3306:3306'
+    cap_add:
+      - SYS_NICE
     volumes:
-      - db:/var/lib/mysql
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-volumes:
-  db:
-    driver: local
+      - "./setup.sql:/docker-entrypoint-initdb.d/setup.sql"
+    ports:
+      - "9906:3306"
+    environment:
+      <<: *common-variables
+      MYSQL_ROOT_PASSWORD: truong911
+      MYSQL_HOST: localhost
+
+  nginx:
+      image: phongtro123.azurecr.io/nginx
+      depends_on:
+        - api
+        - client
+      restart: always
+      build:
+        dockerfile: Dockerfile
+        context: ./nginx
+      links:
+      - client:client
+      - api:api
+      ports:
+        - "80:80"
+
+  api:
+    image: phongtro123.azurecr.io/api
+    build:
+      dockerfile: Dockerfile
+      context: "./server"
+    depends_on:
+      - mysql_db
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      <<: *common-variables
+      MYSQL_HOST_IP: mysql_db
+
+  client:
+    image: phongtro123.azurecr.io/client
+    depends_on:
+      - api
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+  
+  phpmyadmin:
+    depends_on:
+      - mysql_db
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: truong911
+
+
+
+
