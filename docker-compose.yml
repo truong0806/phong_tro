@@ -22,6 +22,7 @@ services:
       MYSQL_HOST: localhost
 
   nginx:
+      image: phongtro123.azurecr.io/nginx
       depends_on:
         - api
         - client
@@ -36,6 +37,7 @@ services:
         - "80:80"
 
   api:
+    image: phongtro123.azurecr.io/api
     build:
       dockerfile: Dockerfile
       context: "./server"
@@ -49,6 +51,7 @@ services:
       MYSQL_HOST_IP: mysql_db
 
   client:
+    image: phongtro123.azurecr.io/client
     depends_on:
       - api
     stdin_open: true
@@ -71,3 +74,7 @@ services:
     environment:
       PMA_HOST: mysql_db
       MYSQL_ROOT_PASSWORD: truong911
+
+
+
+
