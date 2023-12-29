@@ -1,6 +1,6 @@
 import db from '../models'
 const moment = require('moment')
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { v4 as v4 } from 'uuid'
 import chothuematbang from '../../data/chothuematbang.json'

@@ -1,7 +1,6 @@
-import { Navigate, Route, Routes, Redirect } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   Home,
-  Auth,
   HomePage,
   Register,
   Login,

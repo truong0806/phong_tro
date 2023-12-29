@@ -108,7 +108,7 @@ function Login() {
             />
             <div className="mt-[10px]">
               <ReCAPTCHA
-                sitekey="6LeTiBMpAAAAACAAQGAWdSoLr_MH_N7zNtYIerC9"
+                sitekey="6LeapD8pAAAAACFymet0d3khUHxXfmil8t7SNlM5"
                 onChange={handleCaptchaChange}
               />
             </div>

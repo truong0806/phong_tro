@@ -2,7 +2,7 @@ import db from '../models'
 import generateOtp from '../ultils/generateOtp'
 import moment from 'moment'
 import { Op } from 'sequelize'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 export const otpService = (phone, queries) =>
   new Promise(async (resolve, reject) => {

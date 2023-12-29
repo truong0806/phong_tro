@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -40,8 +41,9 @@ const Map = ({ isEdit, value, setValue, isDetail }) => {
       container._leaflet_id = null;
     }
 
+    let map;
     if (!map) {
-      var map = L.map(refMap.current).setView(viewMap, 14);
+      map = L.map(refMap.current).setView(viewMap, 14);
       var googleStreets = L.tileLayer(
         'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
         {
@@ -124,3 +126,4 @@ const Map = ({ isEdit, value, setValue, isDetail }) => {
 };
 
 export default Map;
+/* eslint-enable */

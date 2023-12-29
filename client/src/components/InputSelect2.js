@@ -5,15 +5,13 @@ const InputSelect2 = ({
   text,
   array,
   maxW,
-  isLoading,
   setValue,
   value,
-  category,
   name,
   invalidFields,
-  setInvalidFields,
-  codes,
+  setInvalidFields
 }) => {
+  //eslint-disable-next-line
   const [selected, setSelected] = useState(null);
   const newArray = array?.map((item) => {
     return {

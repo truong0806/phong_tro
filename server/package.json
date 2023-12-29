@@ -4,10 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "startServer": "nodemon --exec babel-node server.js",
+    "start": "npm run db:setup && nodemon --exec babel-node server.js",
     "sequelize": "npx sequelize db:migrate",
     "test": "jest ",
-    "doc": "nodemon Express.js"
+    "doc": "nodemon Express.js",
+    "db:create": "sequelize db:create",
+    "db:migrate": "sequelize db:migrate",
+    "db:setup": "npm run db:create && npm run db:migrate"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +18,7 @@
   "dependencies": {
     "async": "^3.2.4",
     "axios": "^1.4.0",
-    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "config": "^3.3.9",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",

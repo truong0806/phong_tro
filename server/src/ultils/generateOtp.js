@@ -1,5 +1,5 @@
 import otpGenerator from 'otp-generator'
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const generateOtp = async() => {
   const otp = otpGenerator.generate(6, {
