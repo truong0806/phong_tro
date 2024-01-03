@@ -70,10 +70,6 @@ const PriceList = () => {
               <tr className="h-3">
                 <th className="w-1/6  p-4"></th>
                 {priceListContent[1]?.columnsPriceList.map((item, index) => {
-                  console.log(
-                    '🚀 ~ file: PriceList.js:50 ~ {priceListContent[1]?.columnsPriceList.map ~ item:',
-                    item
-                  );
                   return (
                     <th
                       className={`w-1/6 mx-[10px] h-8 px-[15px] py-[10px] text-white font-bold ${item.style}`}
@@ -85,11 +81,7 @@ const PriceList = () => {
             </thead>
             <tbody>
               {priceListContent[1]?.pricesListData.map((item, index) => {
-                console.log(
-                  '🚀 ~ file: PriceList.js:50 ~ {priceListContent[1]?.columnsPriceList.map ~ item:',
-                  item
-                );
-                return (
+               return (
                   <tr className="">
                     <td
                       className={` py-[10px] ${item.styleRow} border-b-2 font-bold align-top`}

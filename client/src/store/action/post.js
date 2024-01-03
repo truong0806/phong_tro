@@ -9,7 +9,6 @@ import {
 export const getPosts = () => async (dispatch) => {
   try {
     const response = await apiGetPosts();
-    console.log('🚀 ~ file: post.js:11 ~ getPosts ~ response:', response);
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_POSTS,
@@ -31,7 +30,6 @@ export const getPosts = () => async (dispatch) => {
 export const getNewPosts = (query) => async (dispatch) => {
   try {
     const response = await apiGetNewPosts(query);
-    console.log('🚀 ~ file: post.js:11 ~ getPosts ~ response:', response);
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_NEW_POSTS,
@@ -77,7 +75,6 @@ export const GetPostsLimit = (query) => async (dispatch) => {
 export const GetPostsDetail = (query) => async (dispatch) => {
   try {
     const response = await apiGetDetailPost(query);
-    console.log('🚀 ~ file: post.js:56 ~ GetPostsDetail ~ response:', response);
     if (response?.data.err === 0) {
       dispatch({
         type: actionTypes.GET_POST_DETAIL,

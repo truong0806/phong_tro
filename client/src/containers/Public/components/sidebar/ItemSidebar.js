@@ -27,7 +27,6 @@ const ItemSidebar = ({
   listNewPostEff,
   listNew,
 }) => {
-  console.log('🚀 ~ file: ItemSidebar.js:28 ~ content:', content);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();

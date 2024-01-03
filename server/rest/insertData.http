@@ -98,6 +98,7 @@ POST {{urlHost}}:{{port}}/api/api/v1/insert
 ###Get Post
 GET {{urlHost}}:{{port}}/api/v1/post/all?query=tinmoi
 Content-Type: application/json
+
 {
    "phone":"0938334123",
    "password":"truong123"

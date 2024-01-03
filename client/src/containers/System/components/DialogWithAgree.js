@@ -11,10 +11,6 @@ import { useSelector } from 'react-redux';
 import CopyButton from '../../../components/CopyButton';
 
 export const DialogWithAgree = ({ setOpen, open, item }) => {
-  console.log(
-    '🚀 ~ file: DialogWithAgree.js:14 ~ DialogWithAgree ~ title:',
-    item.id
-  );
   const { userData } = useSelector((state) => state.user);
   const theme = useTheme();
 
@@ -28,20 +24,12 @@ export const DialogWithAgree = ({ setOpen, open, item }) => {
       : item.id === 4
       ? dataBank[1]?.columnsNameMomo
       : '';
-  console.log(
-    '🚀 ~ file: DialogWithAgree.js:26 ~ DialogWithAgree ~ rechargeMethodColumnsName:',
-    rechargeMethodColumnsName
-  );
   const rechargeMethodContent =
     item.id === 0
       ? dataBank[0]?.dataBank
       : item.id === 4
       ? dataBank[1]?.dataMomo
       : '';
-  console.log(
-    '🚀 ~ file: DialogWithAgree.js:32 ~ DialogWithAgree ~ rechargeMethodContent:',
-    rechargeMethodContent
-  );
   return (
     <div className="w-[400px]">
       <Dialog
@@ -62,11 +50,7 @@ export const DialogWithAgree = ({ setOpen, open, item }) => {
                   <tbody>
                     <tr className="border bg-title-table">
                       {rechargeMethodColumnsName.map((columnsName, index) => {
-                        console.log(
-                          '🚀 ~ file: DialogWithAgree.js:45 ~ DialogWithAgree ~ columnsName:',
-                          columnsName
-                        );
-                        return (
+                       return (
                           <td
                             key={index}
                             className="p-2 border-[1px] border-[#dee2e6] w-1/5 text-center"
@@ -78,10 +62,7 @@ export const DialogWithAgree = ({ setOpen, open, item }) => {
                     </tr>
 
                     {rechargeMethodContent?.map((content) => {
-                      console.log(
-                        '🚀 ~ file: DialogWithAgree.js:81 ~ {rechargeMethodContent?.map ~ content:',
-                        content
-                      );
+                      
                       return item.id === 0 ? (
                         <tr className="">
                           <td className="p-5 border-[1px] border-[#dee2e6]">

@@ -30,7 +30,6 @@ export const apiMap = (address) =>
 export const apiRefeshToken = (refreshToken) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('refreshToken', refreshToken);
       const response = await axiosConfig({
         method: 'post',
         url: '/auth/refreshtoken',
@@ -57,7 +56,6 @@ export const apiLogin = (payload) =>
 export const apiLogout = (refreshToken) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('refreshToken', refreshToken);
       const response = await axiosConfig({
         method: 'delete',
         url: '/auth/refreshtoken',

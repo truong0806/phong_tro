@@ -7,10 +7,6 @@ import ItemSidebar from './ItemSidebar';
 function SlideBar({ setLoading, loading, handleLoading }) {
   const { categories, prices, areas } = useSelector((state) => state.app);
   const location = useLocation();
-  console.log(
-    '🚀 ~ file: SlideBar.js:10 ~ SlideBar ~ location:',
-    location.pathname
-  );
   const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {

@@ -52,7 +52,6 @@ export const logout = () => async (dispatch) => {
 };
 export const refreshToken = (refreshToken) => async (dispatch) => {
   const response = await apiRefeshToken(refreshToken);
-  console.log('🚀 ~ file: auth.js:66 ~ refreshToken ~ response:', response);
   if (response?.data.err === 0) {
     dispatch({
       type: actionTypes.REFRESH_TOKEN,
