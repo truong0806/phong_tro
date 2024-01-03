@@ -5,7 +5,6 @@ import icons from '../../../../ultils/icons';
 const { RiHeartLine, IoCall } = icons;
 
 const ContractUser = ({ info }) => {
-  console.log('🚀 ~ file: ContractUser.js:8 ~ ContractUser ~ info[0]:', info);
   return (
     <div>
       <div className="mb-[20px] p-4 bg-[#febb02] border-[#febb02] rounded-md">

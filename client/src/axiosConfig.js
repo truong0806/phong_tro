@@ -39,8 +39,7 @@ instance.interceptors.response.use(
           const response = await instance.post('auth/refreshtoken', {
             refreshTokens: rs,
           });
-          console.log('🚀 ~ file: axiosConfig.js:41 ~ response:', response);
-          if (response?.data.err === 1) {
+         if (response?.data.err === 1) {
             Swal.fire(
               'Oop !',
               'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại',

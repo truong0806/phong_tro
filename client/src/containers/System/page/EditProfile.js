@@ -77,11 +77,6 @@ const EditProfile = () => {
           };
         }
       }
-      console.log(
-        '🚀 ~ file: EditProfile.js:76 ~ handleSubmit ~ finalPayload:',
-        finalPayload
-      );
-
       const result = await apiEditUserInfo(finalPayload);
       if (result.data.err === 0) {
         toast.update(idLoad, {

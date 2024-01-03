@@ -7,12 +7,7 @@ const RelatePostSideBar = ({
   listNew,
   postDetailId,
 }) => {
-  console.log(
-    '🚀 ~ file: RelatePostSideBar.js:10 ~ postDetailId:',
-    postDetailId
-  );
   const [featuredPostsList, setFeaturedPostsList] = useState([]);
-
   useEffect(() => {
     setFeaturedPostsList([]);
     if (content.length > 0) {

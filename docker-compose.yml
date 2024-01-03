@@ -13,7 +13,7 @@ services:
     cap_add:
       - SYS_NICE
     volumes:
-      - "./setup.sql:/docker-entrypoint-initdb.d/setup.sql"
+      - db_data:/var/lib/mysql
     ports:
       - "9906:3306"
     environment:
@@ -22,27 +22,36 @@ services:
       MYSQL_HOST: localhost
 
   nginx:
-      image: phongtro123.azurecr.io/nginx
-      depends_on:
-        - api
-        - client
-      restart: always
-      build:
-        dockerfile: Dockerfile
-        context: ./nginx
-      links:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/pma.conf:/etc/nginx/pma/pma.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    ports:
+      - 443:443
+      - 80:80
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    links:
       - client:client
       - api:api
-      ports:
-        - "80:80"
 
   api:
-    image: phongtro123.azurecr.io/api
+    # image: phongtro123.azurecr.io/api:latest
+    restart: always
     build:
       dockerfile: Dockerfile
       context: "./server"
     depends_on:
       - mysql_db
+    ports:
+      - 3030:3030
     volumes:
       - /app/node_modules
       - ./server:/app
@@ -51,12 +60,13 @@ services:
       MYSQL_HOST_IP: mysql_db
 
   client:
-    image: phongtro123.azurecr.io/client
+    # image: phongtro123.azurecr.io/client:latest
+    restart: always
     depends_on:
       - api
     stdin_open: true
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - 3000:3000
     build:
       dockerfile: Dockerfile
       context: ./client
@@ -70,11 +80,12 @@ services:
     image: phpmyadmin
     restart: always
     ports:
-      - "8090:80"
+      - 8080:80
     environment:
       PMA_HOST: mysql_db
       MYSQL_ROOT_PASSWORD: truong911
-
+volumes:
+  db_data:
 
 
 

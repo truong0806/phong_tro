@@ -56,11 +56,7 @@ const Map = ({ isEdit, value, setValue, isDetail }) => {
       map?.off();
       map?.remove();
     }
-
-
     map.setView(viewMap, 14);
-    console.log('🚀 ~ file: Map.js:97 ~ useEffect ~ viewMap:', viewMap);
-
     theMarker = L.marker(viewMap, { icon: customIcon }).addTo(map);
     theCircle = L.circle(viewMap, {
       radius: 50,
@@ -73,10 +69,6 @@ const Map = ({ isEdit, value, setValue, isDetail }) => {
       !isDetail
     ) {
       const fetchCoordinates = async () => {
-        console.log(
-          '🚀 ~ file: Map.js:29 ~ useEffect ~ finalAddres:',
-          finalAddress
-        );
         try {
           const response = await apiMap(finalAddress);
           const { lat, lng } = response.data.results[0].geometry;

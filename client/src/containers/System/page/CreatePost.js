@@ -16,8 +16,6 @@ import { usePathname } from '../../../ultils/common/usePathname';
 const CreatePost = ({ isEdit, setShowPopup }) => {
   const pageTitle = usePathname();
   const { dataEdit } = useSelector((state) => state.post);
-  console.log('🚀 ~ file: CreatePost.js:20 ~ CreatePost ~ dataEdit:', dataEdit);
-
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
   const [imagesFile, setImagesFile] = useState([]);
@@ -65,8 +63,6 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
   });
 
   useEffect(() => {
-    console.log('🚀 ~ file: CreatePost.js:21 ~ CreatePost ~ payload:', payload);
-
     if (isEdit) {
       let images =
         dataEdit?.images?.image &&
@@ -117,24 +113,11 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
 
   const handleSumit = async () => {
     const invalids = validate(payload, 'Create Post', setInvalidFields);
-    console.log(
-      '🚀 ~ file: CreatePost.js:103 ~ handleSumit ~ payload:',
-      payload
-    );
-    console.log(
-      '🚀 ~ file: CreatePost.js:103 ~ handleSumit ~ invalids:',
-      invalids
-    );
-
     if (payload.images === '') {
       setInvalidFields((prev) =>
         prev.filter((field) => field.name !== 'images')
       );
     }
-    console.log(
-      '🚀 ~ file: CreatePost.js:111 ~ handleSumit ~ invalidFields:',
-      invalidFields
-    );
     if (isEdit) payload.postId = dataEdit?.id;
     let res = separateUrlsIntoObjects(imagesFile);
     if (invalids === 0) {
@@ -209,7 +192,6 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
           }, 2000);
         } else {
           window.location.reload();
-          console.log('payload', payload);
         }
       } else {
         toast.update(idLoad, {

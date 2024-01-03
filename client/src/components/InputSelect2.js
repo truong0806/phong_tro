@@ -20,16 +20,12 @@ const InputSelect2 = ({
     };
   });
   const handleChange = (selectedOption) => {
-    console.log(
-      '🚀 ~ file: SelectAddress2.js:24 ~ handleTinhChange ~ selectedOption:',
-      selectedOption
-    );
+   
     setValue((prev) => ({
       ...prev,
       [name]: selectedOption.label,
     }));
     setSelected(selectedOption);
-    console.log('🚀 ~ file: SelectAddress2.js:16 ~ value:', value);
   };
 
   const handleSelectFocus = () => {

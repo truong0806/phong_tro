@@ -20,7 +20,6 @@ const ListPostItem = ({
   id,
   bonus,
 }) => {
-  console.log('🚀 ~ file: ListPostItem.js:21 ~ star:', star);
   const [isHoverHeart, setIsHoverHeart] = useState(false);
   const [textColor, setTextColor] = React.useState('');
   const [borderColor, setBorderColor] = React.useState('');

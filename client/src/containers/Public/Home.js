@@ -13,7 +13,6 @@ function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [detail, setDetail] = useState(false);
   const location = useLocation();
-  console.log('🚀 ~ file: Home.js:16 ~ location:', location.pathname);
 
   useEffect(() => {
     setIsLoading(false);

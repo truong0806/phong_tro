@@ -22,7 +22,6 @@ const PageRechargePage = () => {
       location.pathname.split('/')[location.pathname.split('/').length - 1]
     );
   });
-  console.log("🚀 ~ file: PageRechargePage.js:25 ~ dataPaymentMethod ~ dataPaymentMethod:", dataPaymentMethod)
   if (redirectUrl) {
     window.location.href = redirectUrl;
   }
@@ -38,10 +37,6 @@ const PageRechargePage = () => {
     if (respones.data.err === 0) {
       setRedirectUrl(respones.data.url);
     }
-    console.log(
-      '🚀 ~ file: PageRechargePage.js:31 ~ handleSubmit ~ respones:',
-      respones
-    );
   };
 
   return (

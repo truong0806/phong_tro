@@ -57,10 +57,6 @@ const Address = ({
     setWard(null);
     const fetchPublicWard = async () => {
       const response = await apiGetWard(district);
-      console.log(
-        '🚀 ~ file: Address.js:86 ~ fetchPublicWard ~ district:',
-        district
-      );
       if (response.status === 200) {
         setWards(response?.data?.wards);
       }
