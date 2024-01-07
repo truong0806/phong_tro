@@ -17,13 +17,15 @@ module.exports = (sequelize, DataTypes) => {
       area: DataTypes.STRING,
       type: DataTypes.STRING,
       target: DataTypes.STRING,
-      create: DataTypes.DATE,
-      expire: DataTypes.DATE,
+      create: DataTypes.STRING,
+      expire: DataTypes.STRING,
       bonus: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: 'Overview',
+      charset: 'utf8',
+      collate: 'utf8_unicode_ci'
     },
   )
   return Overview

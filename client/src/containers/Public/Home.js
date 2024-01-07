@@ -1,43 +1,54 @@
-import React, { useState, useEffect } from 'react'
-import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index'
-import { Outlet, useLocation } from 'react-router-dom'
-import { Province } from './components/Province'
-import { Loading } from '../../components'
+import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Header, Navigation, WhyUs, Support, Search, ScrollTop } from './index';
+import * as actions from '../../store/action';
+import { useDispatch, useSelector } from 'react-redux';
+import { PropagateLoader } from 'react-spinners';
+import { useLocation } from 'react-router-dom';
+import { path } from '../../ultils/constains';
 
-//import {  useSelector } from 'react-redux'
-const Home = () => {
-  //const { isLoggedIn } = useSelector(state => state.auth)
-  ///const location = useLocation()
-  //const [isRegister, setIsRegister] = useState(location.state?.flag)\
-  const [loading, setLoading] = useState(true)
+function Home() {
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const [isLoading, setIsLoading] = useState(false);
+  const [detail, setDetail] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false)
-    }, 1000)
+    setIsLoading(false);
+    // dispatch(actions.getCategories());
+    setTimeout(() => {
+      dispatch(actions.getPosts());
+      dispatch(actions.getNewPosts({ query: 'tinmoi' }));
+      dispatch(actions.getPrices());
+      dispatch(actions.getAreas());
+      dispatch(actions.getProvince());
+      setIsLoading(true);
+    }, 1000);
 
-    return () => clearTimeout(timeout)
-  }, [])
+    //linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
+  }, [dispatch, isLoggedIn, location.pathname]);
   return (
     <>
-      {loading ? (
-        <Loading loading={loading} />
-      ) : (
-        <div className="w-full flex-col items-center ">
-          <Header />
-          <Navigation />
-          <div className="w-full flex flex-col justify-center items-center my-[10px] mx-auto">
-            <Search />
-            <Province />
+      {isLoading ? (
+        <div className="w-full flex-col items-left  ">
+          <Header setLoading={setIsLoading} loading={isLoading} />
+          <Navigation isAdmin={false} isDetail={detail} />
+          <div className="w-4/7 flex flex-col justify-center items-center my-[10px] mx-auto">
+            {location.pathname === `/` && <Search />}
             <Outlet />
             <WhyUs />
             <Support />
-            <ScrollTop />
+            {location.pathname !== `/${path.BANG_GIA_DICH_VU}` && <ScrollTop />}
           </div>
+        </div>
+      ) : (
+        <div className="flex items-center justify-center h-screen">
+          <PropagateLoader color="#1266dd" size={12} />
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

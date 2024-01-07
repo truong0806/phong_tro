@@ -1,10 +1,83 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+}
 html {
   /* width: 480px; */
   scroll-behavior: smooth;
   font-size: 14px;
-  line-height: 1.15;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
 }
 
+.btn-prices-search {
+  background-color: rgb(37 99 235);
+}
+#react-select-2-input:focus,
+#react-select-3-input:focus,
+#react-select-4-input:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: #ffffff;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  box-shadow: 0;
+}
+
+.logo-header-admin {
+  background-size: contain;
+  margin-left: 10px;
+}
+h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+
+@layer utilities {
+  .center-xy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+}
+
+/* Add these styles to your CSS */
+.rc-anchor-normal {
+  display: inline-block;
+}
+
+/* If you're using reCAPTCHA v2, you may need to adjust the styling of the checkbox */
+.rc-anchor-checkbox {
+  display: inline-block;
+  margin-right: 10px; /* Adjust as needed */
+}
+#map {
+  height: 300px;
+}

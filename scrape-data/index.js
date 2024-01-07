@@ -1,7 +1,5 @@
+const startBrowser = require('./browser')
+const scrapeController = require('./scrapeController')
 
-const startBrowser = require("./browser");
-const scrapeController = require("./scrapeController");
-
-let browser = startBrowser();
-scrapeController(browser);
-
+let browser = startBrowser()
+scrapeController(browser)

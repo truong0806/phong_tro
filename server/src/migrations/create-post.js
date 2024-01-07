@@ -32,6 +32,9 @@ module.exports = {
       areaCode: {
         type: Sequelize.STRING,
       },
+      provinceCode: {
+        type: Sequelize.STRING,
+      },
       description: {
         type: Sequelize.TEXT,
       },
@@ -41,8 +44,17 @@ module.exports = {
       overviewId: {
         type: Sequelize.STRING,
       },
+      locationId: {
+        type: Sequelize.STRING,
+      },
       imagesId: {
         type: Sequelize.STRING,
+      },
+      priceNumber: {
+        type: Sequelize.FLOAT,
+      },
+      areaNumber: {
+        type: Sequelize.FLOAT,
       },
       createdAt: {
         allowNull: false,

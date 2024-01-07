@@ -5,7 +5,7 @@ const startBrowser = async () => {
     browser = await puppeteer.launch({
     //   executablePath:
     //     "C:\\Program Files (x86)\\Microsoft\\Edge Dev\\Application\\msedge.exe",
-      headless: true,
+      headless: false,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
       ignoreHTTPSErrors: true,
     });

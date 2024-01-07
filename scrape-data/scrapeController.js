@@ -1,17 +1,19 @@
 const scrapers = require('./scraper')
+const scrapers1 = require('./scraper_1')
 var fs = require('fs')
 
 const scrapeController = async (browserInstance) => {
   const url = 'https://phongtro123.com'
-  const indexs = [1, 2, 3, 4]
+  const indexs = [5]
   try {
     let browser = await browserInstance
+    await scrapers1.scraper(browser)
     const categories = await scrapers.scrapeCategory(browser, url)
     const selectedCategories = categories.filter((category, index) =>
       indexs.some((i) => i === index),
     )
     fs.writeFile(
-      `categorie.json`,
+      `categorie1.json`,
       JSON.stringify(selectedCategories),
       function (err) {
         if (err) {

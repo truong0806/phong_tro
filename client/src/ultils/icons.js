@@ -2,27 +2,42 @@ import {
   AiOutlineHeart,
   AiOutlineUserAdd,
   AiOutlinePlusCircle,
-} from 'react-icons/ai'
-import { BiLogIn } from 'react-icons/bi'
+  AiOutlineClose,
+} from 'react-icons/ai';
+import { BiLogIn } from 'react-icons/bi';
+import { FaRegCopy } from 'react-icons/fa';
 import {
   BsChevronRight,
   BsFillBookmarkStarFill,
   BsStarFill,
   BsBookmarkStarFill,
-} from 'react-icons/bs'
-import { FiSearch } from 'react-icons/fi'
-import { HiOutlineLocationMarker } from 'react-icons/hi'
-import { GrNext, GrStar } from 'react-icons/gr'
+} from 'react-icons/bs';
+import { FiSearch, FiDelete } from 'react-icons/fi';
+import { HiOutlineLocationMarker } from 'react-icons/hi';
+import { GrNext, GrStar } from 'react-icons/gr';
 import {
   RiCrop2Line,
   RiDeleteBack2Fill,
   RiDeleteBack2Line,
   RiHeartFill,
   RiHeartLine,
-} from 'react-icons/ri'
-import { TbReportMoney } from 'react-icons/tb'
-import { MdOutlineHouseSiding } from 'react-icons/md'
+  RiDeleteBin6Line,
+  RiEdit2Line,
+} from 'react-icons/ri';
+import { TbReportMoney, TbDiscount2 } from 'react-icons/tb';
+import { FaChevronRight } from 'react-icons/fa6';
+import { MdOutlineHouseSiding, MdOutlineChevronRight } from 'react-icons/md';
+import { LuLayoutDashboard } from 'react-icons/lu';
+import { IoCall } from 'react-icons/io5';
+
 const icon = {
+  IoCall,
+  MdOutlineChevronRight,
+  FaChevronRight,
+  AiOutlineClose,
+  RiDeleteBin6Line,
+  RiEdit2Line,
+  FaRegCopy,
   AiOutlineHeart,
   BsBookmarkStarFill,
   BsFillBookmarkStarFill,
@@ -42,6 +57,9 @@ const icon = {
   BsStarFill,
   RiHeartFill,
   RiHeartLine,
-}
+  FiDelete,
+  LuLayoutDashboard,
+  TbDiscount2,
+};
 
-export default icon
+export default icon;

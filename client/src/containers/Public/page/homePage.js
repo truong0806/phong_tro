@@ -1,36 +1,46 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from 'react'
-import { ListPost, Pagination } from '../index'
-import * as actions from '../../../store/action'
-import { useSearchParams } from 'react-router-dom'
-import { ItemSidebar } from '../../../components'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { ListPost, Pagination, Province, SlideBar } from '../index';
+import slug from 'slug';
 
-const HomePage = () => {
-  const { categories, prices } = useSelector((state) => state.app)
-  const [params] = useSearchParams()
-  const dispatch = useDispatch()
+function HomePage() {
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [categoryCurrent, setCategoryCurrent] = useState({});
+  const [categoryCode, setcategoryCode] = useState('none');
+  const { categories } = useSelector((state) => state.app);
+  const { count, posts_limit } = useSelector((state) => state.post);
+
   useEffect(() => {
-    dispatch(actions.getPrices())
-  }, [dispatch])
-  console.log(prices)
-  return (
-    <div className="w-[85%] justify-center flex gap-4 mb-5">
-      <div className="w-[100%] lg:w-[70%] md:w-full bg-white border border-[#dedede]  shadow-md rounded-md border-solid  ">
-        <ListPost page={params.get('page')} />
-        <Pagination page={params.get('page')} />
-      </div>
+    setLoading(false);
+    const category = categories?.find((item) => {
+      return `/${slug(item.value)}` === location?.pathname;
+    });
+    setCategoryCurrent(category);
+    if (category) {
+      setcategoryCode(category.code);
+    }
+    setLoading(true);
 
-      <div className="flex-col hidden sm:hidden xs:hidden md:hidden lg:block lg:w-[30%] ">
-        <ItemSidebar header={'Danh mục cho thuê'} content={categories} />
-        <ItemSidebar header={'Xem theo giá'} content={prices} isDouble={true} />
-        <ItemSidebar header={'Xem theo diện tích'} />
-        <div className=" border border-[#dedede] shadow-md rounded-md border-solid bg-white p-5 mb-5">
-          Silde Bar 2
+    // linkRef.current.scrollIntoView({ behivior: 'smooth', block: 'start' });
+  }, [location, categories]);
+
+  return (
+    <div className="">
+      <Province categoryCurrent={categoryCurrent} />
+      <div className=" justify-center flex-col flex lg:flex-row gap-2 mb-3">
+        <div className="w-[65%] p-5   bg-white border border-[#dedede] shadow-md rounded-md border-solid  ">
+          <ListPost loading={loading} categoryCode={categoryCode} />
+          {/* <Pagination /> */}
+          <Pagination count={count} posts_limit={posts_limit} />
+        </div>
+        <div className="  w-[25%]">
+          <SlideBar setLoading={setLoading} />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

@@ -1,5 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
+import Post from './post'
 module.exports = (sequelize, DataTypes) => {
   class Attribute extends Model {
     /**
@@ -24,6 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Attribute',
+      charset: 'utf8',
+      collate: 'utf8_unicode_ci',
     },
   )
   return Attribute

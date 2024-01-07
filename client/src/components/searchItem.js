@@ -1,6 +1,17 @@
-import React, { memo } from 'react'
+import React, { memo } from 'react';
+const searchItem = ({
+  IconBefore,
+  IconAfter,
+  text,
+  fontWeight,
+  onClick,
+  defaultText,
+  deleteIcon,
+}) => {
+  const handleDelete = (event) => {
+    event.stopPropagation(); 
+  };
 
-const searchItem = ({ IconBefore, IconAfter, text, fontWeight, onClick }) => {
   return (
     <div
       onClick={onClick}
@@ -10,15 +21,28 @@ const searchItem = ({ IconBefore, IconAfter, text, fontWeight, onClick }) => {
         {IconBefore}
         <span
           className={`${
-            fontWeight && 'font-bold text-[#007bff]  md:text-black text-base'
-          } w-[100%] overflow-hidden text-ellipsis whitespace-nowrap text-base`}
+            fontWeight
+              ? 'font-bold text-[#007bff]   md:text-black text-[.95rem] '
+              : ''
+          } ${
+            (text === defaultText) 
+              ? ''
+              : 'font-bold text-[#007bff]   md:text-black text-[.95rem] '
+          } w-[100%] overflow-hidden text-ellipsis whitespace-nowrap text-[.95rem] `}
         >
           {text}
         </span>
       </div>
-      <div className={fontWeight && 'font-bold text-black'}>{IconAfter}</div>
-    </div>
-  )
-}
+      <div className={text === defaultText ? '' : 'font-bold text-black'}>
+        {text === defaultText ? (
+          IconAfter
+        ) : (
+          <span onClick={handleDelete}>{deleteIcon}</span>
+        )}
+      </div>
 
-export default memo(searchItem)
+    </div>
+  );
+};
+
+export default memo(searchItem);
