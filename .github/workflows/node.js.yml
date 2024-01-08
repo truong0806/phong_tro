@@ -28,7 +28,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: |
-          if [ -d "/home/azureuser/product/.git" ]; then
+          if [ -d "/home/azureuser/product/phongtro/.git" ]; then
             sudo git -C /home/azureuser/product pull
           else
             sudo git clone -b product git@github.com:truong0806/phong_tro.git /home/azureuser/product
