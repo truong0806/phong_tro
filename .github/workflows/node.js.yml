@@ -28,13 +28,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: sudo cd /home/azureuser/product
+    - run: cd /home/azureuser/product
     - run: | 
         if [ -d "/home/azureuser/product/phongtro/.git" ]; then
           sudo git -C /home/azureuser/product pull
         else
           sudo git clone -b product git@github.com:truong0806/phong_tro.git /home/azureuser/product
         fi
-    - run: sudo cd phongtro
+    - run: cd phongtro
     - run: sudo docker compose down
     - run: sudo DOCKER_BUILDKIT=0 docker-compose up --build -d
