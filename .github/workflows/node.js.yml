@@ -20,7 +20,7 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - run: mkdir -p /home/azureuser/product
+    - run: sudo mkdir -p /home/azureuser/product
     - run: sudo chmod -R 777 /home/azureuser/product
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
