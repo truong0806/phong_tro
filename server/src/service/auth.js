@@ -123,13 +123,17 @@ export const loginService = ({ phone, password }) =>
 export const changePasswordService = (user, queries) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('id user', user.id)
-      console.log('queries', queries)
       const id = user.id
       const response = await db.User.findOne({
         where: { id },
         raw: true,
       })
+      if (queries.password.length > 6) {
+        resolve({
+          err: 1,
+          msg: 'Password must be at least 6 characters',
+        })
+      }
       if (response === null) {
         resolve({
           err: 1,
