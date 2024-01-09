@@ -27,6 +27,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: sudo git pull
+    - run: sudo git pull git@github.com:truong0806/phong_tro.git product
     - run: sudo docker compose down
     - run: sudo DOCKER_BUILDKIT=0 docker-compose up --build -d
