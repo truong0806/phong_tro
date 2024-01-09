@@ -42,7 +42,7 @@ build/Release
 terraform/
 node_modules/
 jspm_packages/
-
+actions-runner/
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
