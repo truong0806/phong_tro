@@ -5,9 +5,9 @@ name: Node.js CI/CD phongtro
 
 on:
   push:
-    branches: [ "product" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "product" ]
+    branches: [ "main" ]
  
 jobs:
   build:
