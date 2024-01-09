@@ -80,7 +80,7 @@ function Login() {
       <div className="items-center justify-center">
         <div className="bg-white  border-[#704f4f] border w-[600px] m-auto pt-[30px] px-[30px] pb-[100px] rounded-md shadow-sm ">
           <h3 className="font-bold text-3xl mb-[10px]">Đăng nhập</h3>
-          <div className='font-bold'>Test account</div>
+          <div className='font-bold'>Test Account</div>
           <div>0912345678</div>
           <div>admin1</div>
           <div className="w-full">
