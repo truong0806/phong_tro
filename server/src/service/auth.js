@@ -40,6 +40,12 @@ export const registerService = ({ phone, password, name }) =>
           // publickey: publicKey,
         },
       })
+      if (password < 6) {
+        resolve({
+          err: 1,
+          msg: 'Password must be at least 6 characters',
+        })
+      }
       const accessToken = response[1] && generateAccessToken(userId, phone)
       let refreshToken = await createToken(response[0].phone, response[0].id)
       resolve({
@@ -63,6 +69,12 @@ export const loginService = ({ phone, password }) =>
         where: { phone },
         raw: true,
       })
+      if (password < 6) {
+        resolve({
+          err: 1,
+          msg: 'Password must be at least 6 characters',
+        })
+      }
       if (response === null) {
         resolve({
           err: 2,
