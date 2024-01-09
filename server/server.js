@@ -24,7 +24,7 @@ import createHttpError from 'http-errors'
 // }
 // app.use(requireToken)
 app.use(morgan(':method :url :status :response-time ms - :res[content-length]'))
-const allowedOrigins = ['http://localhost:3000', 'https://sandbox.vnpayment.vn']
+const allowedOrigins = ['https://phongtro.truongnguyen869.click', 'https://truongnguyen869.click','https://sandbox.vnpayment.vn']
 app.use(
   cors({
     origin: function (origin, callback) {
