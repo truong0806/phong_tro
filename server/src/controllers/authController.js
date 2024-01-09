@@ -4,7 +4,6 @@ import {
   verifyExpiration,
   verifyRefreshToken,
 } from '../middleware/refreshToken'
-import jwt from 'jsonwebtoken'
 import { generateAccessToken } from '../middleware/jwt'
 
 export const register = async (req, res) => {
@@ -12,6 +11,12 @@ export const register = async (req, res) => {
   try {
     if (!phone || !password || !name)
       return res.status(400).json({ err: 1, msg: 'Missing input' })
+    if (password.length < 6) {
+      resolve({
+        err: 1,
+        msg: 'Password must be at least 6 characters',
+      })
+    }
     const isCorrectphones = /^-?[\d.]+(?:e-?\d+)?$/.test(phone)
     if (isCorrectphones) {
       if (phone.toString().length === 10) {
@@ -35,10 +40,16 @@ export const register = async (req, res) => {
 }
 export const login = async (req, res) => {
   const { phone, password } = req.body
-  console.log("🚀 ~ file: authController.js:38 ~ login ~ phone:", phone)
+  console.log('🚀 ~ file: authController.js:38 ~ login ~ phone:', phone)
   try {
     if (!phone || !password)
       return res.status(400).json({ err: 1, msg: 'Missing input' })
+    if (password.length < 6) {
+      resolve({
+        err: 1,
+        msg: 'Password must be at least 6 characters',
+      })
+    }
     const isCorrectphones = /^-?[\d.]+(?:e-?\d+)?$/.test(phone)
     if (isCorrectphones) {
       if (phone.toString().length === 10) {

@@ -30,12 +30,6 @@ export const registerService = ({ phone, password, name }) =>
   new Promise(async (resolve, reject) => {
     try {
       const userId = v4()
-      if (password < 6) {
-        resolve({
-          err: 1,
-          msg: 'Password must be at least 6 characters',
-        })
-      }
       const response = await db.User.findOrCreate({
         where: { phone },
         defaults: {
@@ -70,12 +64,6 @@ export const loginService = ({ phone, password }) =>
         where: { phone },
         raw: true,
       })
-      if (password < 6) {
-        resolve({
-          err: 1,
-          msg: 'Password must be at least 6 characters',
-        })
-      }
       if (response === null) {
         resolve({
           err: 2,
