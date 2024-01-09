@@ -82,7 +82,7 @@ function Login() {
           <h3 className="font-bold text-3xl mb-[10px]">Đăng nhập</h3>
           <div className='font-bold'>Test account</div>
           <div>0912345678</div>
-          <div>admin</div>
+          <div>admin1</div>
           <div className="w-full">
             <InputForm
               name="phone"
@@ -111,7 +111,7 @@ function Login() {
             />
             <div className="mt-[10px]">
               <ReCAPTCHA
-                sitekey="6LeapD8pAAAAACFymet0d3khUHxXfmil8t7SNlM5"
+                sitekey="6LeTiBMpAAAAACAAQGAWdSoLr_MH_N7zNtYIerC9"
                 onChange={handleCaptchaChange}
               />
             </div>
