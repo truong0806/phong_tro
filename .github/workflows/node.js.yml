@@ -21,10 +21,5 @@ jobs:
 
     steps:
     - run: sudo chmod -R 777 /home/azureuser/phong_tro
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - run: sudo docker compose down
     - run: sudo DOCKER_BUILDKIT=0 docker-compose up --build -d
