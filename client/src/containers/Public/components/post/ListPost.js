@@ -41,7 +41,7 @@ const ListPost = ({ categoryCode }) => {
         <div className="">
           <span className="text-[18.2px] font-bold">Danh sách tin đăng</span>
         </div>
-        <span className="text-[14px] ">
+        <span className="hidden lg:block text-[14px] ">
           Cập nhật: <time>{getDate()}</time>
         </span>
       </section>

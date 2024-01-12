@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import logo from '../../../assets/logoWithoutBg.png';
-import { Button, User } from '../../../components';
-import icons from '../../../ultils/icons';
-import { path } from '../../../ultils/constains';
-import * as actions from '../../../store/action';
-import menuManager from '../../../ultils/menuManager';
-import { apiLogout } from '../../../service';
-
+import logo from '../../../../assets/logoWithoutBg.png';
+import { Button, User } from '../../../../components';
+import icons from '../../../../ultils/icons';
+import { path } from '../../../../ultils/constains';
+import * as actions from '../../../../store/action';
+import menuManager from '../../../../ultils/menuManager';
+import { MobiMenu } from '../..';
 const {
   AiOutlineHeart,
   BiLogIn,
@@ -20,14 +19,10 @@ const {
 } = icons;
 
 function Header({ setLoading, loading }) {
-  const [isloading, setIsLoading] = useState(loading || false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isShowMenu, setIsShowMenu] = useState(false);
   const { isLoggedIn, refreshToken } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   handlLoad();
-  // }, []);
 
   const goRegister = useCallback(() => {
     handlLoad();
@@ -49,22 +44,19 @@ function Header({ setLoading, loading }) {
     }, 1000);
   };
   return (
-    <div className=" flex h-[70px]  relative items-center justify-between my-0">
+    <div className="w-full flex h-[50px] sm:h-[70px] top-0 z-30 fixed lg:relative items-center justify-between my-0 bg-white">
       <img
-        className="w-[240px]  ml-5 h-full cursor-pointer left-0 absolute bg-contain  object-contain "
+        className="sm:w-[240px] w-[200px] ml-5 h-full cursor-pointer left-0 absolute bg-contain  object-contain "
         src={logo}
         alt="logo"
         onClick={goHome}
       />
-      <div className=" flex items-center lg:hidden">
-        <div className="bg-menu h-[25px] w-[25px] bg-contain mr-[8px]" />
-        <span className="">Danh Mục</span>
-      </div>
-      <div className="w-3/4 h-full cursor-pointer absolute  right-5 flex items-center gap-1 ">
+      <MobiMenu/>
+      <div className="hidden  w-4/5 h-full cursor-pointer absolute  right-5 sm:flex items-center gap-1 ">
         {!isLoggedIn && (
-          <div className="cursor-pointer relative right-0 w-full flex items-center ">
+          <div className=" cursor-pointer relative right-0 w-full flex items-center ">
             <Button
-              margin="absolute right-[340px] py-[20px]"
+              margin="absolute right-[350px] py-[20px]"
               fontW="font-normal text-[14px] h-[40px] hidden"
               IcBefor={AiOutlineHeart}
               text="Yêu thích"
@@ -192,7 +184,7 @@ function Header({ setLoading, loading }) {
           </div>
         )}
         <Button
-          margin="py-[20px] absolute right-0 mt-[5px]"
+          margin="py-[20px] absolute right-0 "
           width="w-auto text-[14px] h-[40px] hidden"
           text="Đăng tin mới"
           textColor="text-white"

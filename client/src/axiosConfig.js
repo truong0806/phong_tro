@@ -8,7 +8,7 @@ import { path } from './ultils/constains';
 const { store } = reducStore();
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL,
+  baseURL: process.env.NODE_ENV === 'production' ? process.env.REACT_APP_SERVER_URL_PRO : process.env.REACT_APP_SERVER_URL_DEV,
 });
 
 instance.interceptors.request.use(

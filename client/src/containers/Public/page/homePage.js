@@ -29,13 +29,13 @@ function HomePage() {
   return (
     <div className="">
       <Province categoryCurrent={categoryCurrent} />
-      <div className=" justify-center flex-col flex lg:flex-row gap-2 mb-3">
-        <div className="w-[65%] p-5   bg-white border border-[#dedede] shadow-md rounded-md border-solid  ">
+      <div className="w-full justify-center flex-col flex lg:flex-row sm:gap-2 mb-3">
+        <div className="w-[100%] lg:w-[65%] p-5   bg-white border border-[#dedede] shadow-md rounded-md border-solid  ">
           <ListPost loading={loading} categoryCode={categoryCode} />
           {/* <Pagination /> */}
           <Pagination count={count} posts_limit={posts_limit} />
         </div>
-        <div className="  w-[25%]">
+        <div className="hidden sm:block  w-[25%]">
           <SlideBar setLoading={setLoading} />
         </div>
       </div>

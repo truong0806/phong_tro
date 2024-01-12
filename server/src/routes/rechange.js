@@ -1,11 +1,6 @@
 import * as rechangeController from '../controllers/rechangeController'
 import express from 'express'
 import requireToken from '../middleware/requireToken'
-import moment from 'moment'
-let config = require('config')
-import db from '../models'
-import { v4 as v4 } from 'uuid'
-import { randomSixDigitNumber } from '../ultils/generateId6'
 import { sortObjectVnpay } from '../ultils/sortObjectVnpay'
 
 const router = express.Router()

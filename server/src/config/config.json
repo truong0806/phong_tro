@@ -3,7 +3,8 @@
     "username": "thanhtruong",
     "password": "truong911",
     "database": "phongtro",
-    "host": "mysql_db",
+    "host": "localhost",
+    "port": 9906,
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
@@ -18,10 +19,12 @@
     "timezone": "+07:00"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "phongtro123",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "thanhtruong",
+    "password": "truong911",
+    "database": "phongtro",
+    "host": "mysql_db",
+    "dialect": "mysql",
+    "logging": false,
+    "timezone": "+07:00"
   }
 }

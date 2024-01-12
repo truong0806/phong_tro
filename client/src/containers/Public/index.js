@@ -1,9 +1,10 @@
 export { default as Home } from './Home';
 export { default as Auth } from './auth';
-export { default as Header } from './components/Header';
+export { default as Header } from './components/header/Header';
 export { default as WhyUs } from './components/WhyUs';
 export { default as Navigation } from './components/Navigation';
 export { default as Support } from './components/Support';
+export { default as MobiMenu } from './components/header/menuMobile';
 export { default as DetailPost } from './page/DetailPost';
 
 //auth
@@ -35,5 +36,5 @@ export { default as ListPostItem } from './components/post/ListPostItem';
 export { default as ListPost } from './components/post/ListPost';
 export { default as FilterListPostBtn } from './components/post/FilterListPostBtn';
 
-export {default as PriceList} from './components/info/PriceList';
-export {default as DemoList} from './components/info/DemoList';
+export { default as PriceList } from './components/info/PriceList';
+export { default as DemoList } from './components/info/DemoList';

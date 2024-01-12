@@ -102,13 +102,13 @@ export const loginService = ({ phone, password }) =>
             ? 'Password is wrong'
             : 'Phone number is not found',
           accessToken: accessToken || null,
-          refreshToken: refreshToken || null,
-          user: {
+          refreshToken: accessToken ?  refreshToken : null,
+          user: accessToken ? {
             id: response.id,
             name: response.name,
             phone: response.phone,
             zalo: response.zalo,
-          },
+          }: null,
         })
       }
     } catch (error) {
