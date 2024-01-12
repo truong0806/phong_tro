@@ -8,7 +8,7 @@ import { path } from './ultils/constains';
 const { store } = reducStore();
 
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? process.env.REACT_APP_SERVER_URL_PRO : process.env.REACT_APP_SERVER_URL_DEV,
+  baseURL: process.env.REACT_APP_SERVER_URL,
 });
 
 instance.interceptors.request.use(
@@ -39,7 +39,7 @@ instance.interceptors.response.use(
           const response = await instance.post('auth/refreshtoken', {
             refreshTokens: rs,
           });
-         if (response?.data.err === 1) {
+          if (response?.data.err === 1) {
             Swal.fire(
               'Oop !',
               'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại',

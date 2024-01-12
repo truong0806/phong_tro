@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production  npm run db:setup && nodemon --exec babel-node server.js",
+    "start": "npm run db:setup && nodemon --exec babel-node server.js",
     "dev": "NODE_ENV=development npm run db:setup && nodemon --exec babel-node server.js",
     "sequelize": "npx sequelize db:migrate",
     "test": "jest ",
