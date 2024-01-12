@@ -22,7 +22,8 @@
     "username": "thanhtruong",
     "password": "truong911",
     "database": "phongtro",
-    "host": "mysql_db",
+    "host": "localhost",
+    "port": 9906,
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"

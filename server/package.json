@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=production  npm run db:setup && nodemon --exec babel-node server.js",
-    "dev": "  npm run db:setup && nodemon --exec babel-node server.js",
+    "dev": "NODE_ENV=development npm run db:setup && nodemon --exec babel-node server.js",
     "sequelize": "npx sequelize db:migrate",
     "test": "jest ",
     "doc": "nodemon Express.js",
