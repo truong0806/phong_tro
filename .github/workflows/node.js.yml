@@ -29,4 +29,7 @@ jobs:
         cache: 'npm'    
     - run: cd  /home/azureuser/phong_tro
     - run: sudo docker compose down
+    - run: eval "$(ssh-agent -s)"
+    - run: ssh-add ~/.ssh/githubkey
+    - run: git clone -b product git@github.com:truong0806/phong_tro.git
     - run: sudo DOCKER_BUILDKIT=0 docker-compose up --build -d
