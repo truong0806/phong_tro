@@ -12,7 +12,6 @@ export const checkExpiredRefeshToken = () => {
         },
       },
     })
-    console.log('deleted')
   })
   next()
 }

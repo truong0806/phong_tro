@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { InputText, SelectAddress, InputTextReadOnly } from '../..';
+import { InputText, InputTextReadOnly } from '../..';
 import {
   apiGetDistricts,
   apiGetWard,
@@ -7,6 +8,7 @@ import {
 } from '../../../../../service';
 import SelectAddress2 from './SelectAddress2';
 const Address = ({
+  setDirty,
   address,
   setValue,
   invalidFields,
@@ -75,6 +77,7 @@ const Address = ({
       </div>
       <div className="flex flex-col">
         <InputText
+          setDirty={setDirty}
           value={address.apartmentNumber}
           name={'apartmentNumber'}
           invalidFields={invalidFields}

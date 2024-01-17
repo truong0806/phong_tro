@@ -40,7 +40,7 @@ export const registerService = ({ phone, password, name }) =>
           // publickey: publicKey,
         },
       })
-      console.log('🚀 ~ file: auth.js:43 ~ newPromise ~ response:', response)
+      
       const accessToken = response[1] && generateAccessToken(userId, phone)
       let refreshToken = await createToken(response[0].phone, response[0].id)
       resolve({
@@ -72,17 +72,13 @@ export const loginService = ({ phone, password }) =>
           refreshToken: null,
         })
       } else {
-        console.log('🚀 ~ file: auth.js:74 ~ newPromise ~ response:', response)
 
         const isCorrectPassword =
           response && bcrypt.compareSync(password, response.password)
 
         const accessToken =
           isCorrectPassword && generateAccessToken(response.id, response.phone)
-        console.log(
-          '🚀 ~ file: auth.js:84 ~ newPromise ~ accessToken:',
-          accessToken,
-        )
+      
 
         const refreshToken = await createToken(response.id, response.phone)
         await db.RefreshToken.destroy({
@@ -106,13 +102,13 @@ export const loginService = ({ phone, password }) =>
             ? 'Password is wrong'
             : 'Phone number is not found',
           accessToken: accessToken || null,
-          refreshToken: refreshToken || null,
-          user: {
+          refreshToken: accessToken ?  refreshToken : null,
+          user: accessToken ? {
             id: response.id,
             name: response.name,
             phone: response.phone,
             zalo: response.zalo,
-          },
+          }: null,
         })
       }
     } catch (error) {
@@ -123,13 +119,17 @@ export const loginService = ({ phone, password }) =>
 export const changePasswordService = (user, queries) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('id user', user.id)
-      console.log('queries', queries)
       const id = user.id
       const response = await db.User.findOne({
         where: { id },
         raw: true,
       })
+      if (queries.password.length < 6) {
+        resolve({
+          err: 1,
+          msg: 'Password must be at least 6 characters',
+        })
+      }
       if (response === null) {
         resolve({
           err: 1,
@@ -138,10 +138,7 @@ export const changePasswordService = (user, queries) =>
       } else {
         const isCorrectPassword =
           response && bcrypt.compareSync(queries.oldPassword, response.password)
-        console.log(
-          '🚀 ~ file: auth.js:140 ~ newPromise ~ isCorrectPassword:',
-          isCorrectPassword,
-        )
+        
         if (!isCorrectPassword) {
           resolve({
             err: 1,
@@ -155,10 +152,6 @@ export const changePasswordService = (user, queries) =>
             {
               where: { id },
             },
-          )
-          console.log(
-            '🚀 ~ file: auth.js:155 ~ newPromise ~ updatedRows:',
-            updatedRows,
           )
           resolve({
             err: updatedRows ? 0 : 1,

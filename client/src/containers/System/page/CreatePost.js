@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { text, luuY } from '../../../ultils/constains';
 import { Button, Map } from '../../../components';
@@ -15,6 +17,7 @@ import { usePathname } from '../../../ultils/common/usePathname';
 
 const CreatePost = ({ isEdit, setShowPopup }) => {
   const pageTitle = usePathname();
+  const [isDirty, setDirty] = useState(false);
   const { dataEdit } = useSelector((state) => state.post);
   const [invalidFields, setInvalidFields] = useState([]);
   const { userData } = useSelector((state) => state.user);
@@ -61,6 +64,18 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
     };
     return initData;
   });
+  const alertUser = (e) => {
+    if (isDirty) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('beforeunload', alertUser);
+    return () => {
+      window.removeEventListener('beforeunload', alertUser);
+    };
+  }, []);
 
   useEffect(() => {
     if (isEdit) {
@@ -224,6 +239,7 @@ const CreatePost = ({ isEdit, setShowPopup }) => {
         <div className=" flex flex-col md:flex-row md:gap-[3%] ">
           <div className="flex flex-col  text-[1rem] w-full md:max-w-[70%]     ">
             <Address
+              setDirty={setDirty}
               isEdit={isEdit}
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}

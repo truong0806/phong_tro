@@ -24,10 +24,6 @@ export const verifyExpiration = (token) => {
   } else {
     const now = moment()
     const expireDate = token.expire
-    console.log(
-      '🚀 ~ file: refreshToken.js:32 ~ verifyExpiration ~ expireDate:',
-      expireDate,
-    )
     if (now.isAfter(expireDate)) {
       return true
     } else {
@@ -38,7 +34,6 @@ export const verifyExpiration = (token) => {
 
 export const verifyRefreshToken = async (refreshToken) => {
   return new Promise(async (resolve, reject) => {
-    console.log('refreshToken', refreshToken)
     const userToken = await db.RefreshToken.findOne({
       where: { token: refreshToken },
     })

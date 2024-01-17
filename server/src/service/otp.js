@@ -7,18 +7,12 @@ import bcrypt from 'bcryptjs'
 export const otpService = (phone, queries) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('🚀 ~ file: otp.js:13 ~ newPromise ~ phone:', phone)
-      console.log(
-        '🚀 ~ file: otp.js:13 ~ newPromise ~ Newphone:',
-        queries?.newPhone,
-      )
       const expirationTime = moment().add(5, 'minutes')
       const user = await db.User.findOne({
         where: { phone },
         raw: true,
         attributes: { exclude: ['password'] },
       })
-      console.log('🚀 ~ file: user.js:30 ~ newPromise ~ user:', user)
       if (!user) {
         resolve({
           err: 1,
@@ -45,16 +39,17 @@ export const otpService = (phone, queries) =>
 export const verifyOtpService = (phone, otp) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('phone', phone)
-      console.log('otp', otp)
       const otpHolder = await db.Otp.findAll({
         raw: true,
         where: {
           phone: phone,
           expiresAt: {
             [Op.gt]: moment().toDate(),
+            [Op.lt]: moment().add(5, 'minutes').toDate(),
           },
         },
+        order: [['createdAt', 'DESC']],
+        limit: 1,
       })
 
       if (!otpHolder.length) {
@@ -75,8 +70,8 @@ export const verifyOtpService = (phone, otp) =>
       }
       if (isvalid && phone === lastOtp.phone) {
         resolve({
-          err: 0 ,
-          msg: 'Verify OTP successfully'
+          err: 0,
+          msg: 'Verify OTP successfully',
         })
       }
     } catch (error) {

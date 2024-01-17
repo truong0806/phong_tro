@@ -43,7 +43,10 @@ const EditProfile = () => {
   }, [userData]);
 
   useEffect(() => {
-    setImagesPreview(() => ({ files: 0, url: userData?.avatar }));
+    setImagesPreview(() => ({
+      files: 0,
+      url: userData?.avatar || 'https://www.w3schools.com/w3images/avatar2.png',
+    }));
   }, [userData]);
 
   const ImageChange = async (e) => {
@@ -149,7 +152,7 @@ const EditProfile = () => {
           </div>
           <div className="w-full h-full col-span-3 pt-5">
             <InputText
-              value={payload.name}
+              value={payload.name || userData?.name}
               name={'name'}
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
@@ -163,7 +166,7 @@ const EditProfile = () => {
           </div>
           <div className="w-full h-full col-span-3">
             <InputText
-              value={payload.email}
+              value={payload.email || userData?.email}
               name={'email'}
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
@@ -177,7 +180,7 @@ const EditProfile = () => {
           </div>
           <div className="w-full h-full col-span-3">
             <InputText
-              value={payload.zalo}
+              value={payload.zalo || userData?.zalo}
               name={'zalo'}
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
@@ -191,7 +194,7 @@ const EditProfile = () => {
           </div>
           <div className="w-full h-full col-span-3">
             <InputText
-              value={payload.fbUrl}
+              value={payload.fbUrl || userData?.fbUrl}
               name={'fbUrl'}
               invalidFields={invalidFields}
               setInvalidFields={setInvalidFields}
@@ -221,10 +224,7 @@ const EditProfile = () => {
                 <img
                   alt="avatar"
                   className="object-cover w-[140px] h-[140px]  rounded-full"
-                  src={
-                    imagesPreview.url ||
-                    'https://www.w3schools.com/w3images/avatar2.png'
-                  }
+                  src={imagesPreview.url}
                 ></img>
               ) : (
                 <Loading />

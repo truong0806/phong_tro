@@ -4,9 +4,11 @@ import TokenService from './service/token';
 import * as actions from './store/action';
 import Swal from 'sweetalert2';
 import { path } from './ultils/constains';
-
 const { store } = reducStore();
-
+// const isProduction = process.env.REACT_NODE_ENV === 'production';
+// const urlBase = isProduction
+//   ? process.env.REACT_APP_SERVER_URL_PRO
+//   : process.env.REACT_APP_SERVER_URL_DEV;
 const instance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
 });
@@ -39,7 +41,7 @@ instance.interceptors.response.use(
           const response = await instance.post('auth/refreshtoken', {
             refreshTokens: rs,
           });
-         if (response?.data.err === 1) {
+          if (response?.data.err === 1) {
             Swal.fire(
               'Oop !',
               'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại',

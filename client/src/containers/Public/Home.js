@@ -34,7 +34,7 @@ function Home() {
         <div className="w-full flex-col items-left  ">
           <Header setLoading={setIsLoading} loading={isLoading} />
           <Navigation isAdmin={false} isDetail={detail} />
-          <div className="w-4/7 flex flex-col justify-center items-center my-[10px] mx-auto">
+          <div className="w-full sm:w-4/7 flex flex-col justify-center items-center mb-[10px] sm:my-[10px] mx-auto">
             {location.pathname === `/` && <Search />}
             <Outlet />
             <WhyUs />

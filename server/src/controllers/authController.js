@@ -4,7 +4,6 @@ import {
   verifyExpiration,
   verifyRefreshToken,
 } from '../middleware/refreshToken'
-import jwt from 'jsonwebtoken'
 import { generateAccessToken } from '../middleware/jwt'
 
 export const register = async (req, res) => {
@@ -12,6 +11,11 @@ export const register = async (req, res) => {
   try {
     if (!phone || !password || !name)
       return res.status(400).json({ err: 1, msg: 'Missing input' })
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ err: 1, msg: 'Password must be at least 6 characters' })
+    }
     const isCorrectphones = /^-?[\d.]+(?:e-?\d+)?$/.test(phone)
     if (isCorrectphones) {
       if (phone.toString().length === 10) {
@@ -35,10 +39,14 @@ export const register = async (req, res) => {
 }
 export const login = async (req, res) => {
   const { phone, password } = req.body
-  console.log("🚀 ~ file: authController.js:38 ~ login ~ phone:", phone)
   try {
     if (!phone || !password)
       return res.status(400).json({ err: 1, msg: 'Missing input' })
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ err: 1, msg: 'Password must be at least 6 characters' })
+    }
     const isCorrectphones = /^-?[\d.]+(?:e-?\d+)?$/.test(phone)
     if (isCorrectphones) {
       if (phone.toString().length === 10) {
@@ -70,17 +78,9 @@ export const refreshToken = async (req, res) => {
   try {
     verifyRefreshToken(refreshTokens)
       .then(({ tokenDetails }) => {
-        console.log(
-          '🚀 ~ file: authController.js:86 ~ .then ~ tokenDetails:',
-          tokenDetails,
-        )
         const accessToken = generateAccessToken(
           tokenDetails.id,
           tokenDetails.phone,
-        )
-        console.log(
-          '🚀 ~ file: authController.js:77 ~ .then ~ NewaccessToken:',
-          accessToken,
         )
         res.status(200).json({
           err: 0,
@@ -118,7 +118,6 @@ export const refreshTokenDelete = async (req, res) => {
     })
     res.status(200).json({ error: 0, message: 'Logged Out Sucessfully' })
   } catch (err) {
-    console.log(err)
     res.status(500).json({ err: 1, msg: 'Internal Server Error' })
   }
 }
@@ -127,7 +126,6 @@ export const changePassword = async (req, res) => {
     const response = await authService.changePasswordService(req.user, req.body)
     return res.status(200).json(response)
   } catch (err) {
-    console.log(err)
     res.status(500).json({ err: 1, msg: 'Internal Server Error' })
   }
 }

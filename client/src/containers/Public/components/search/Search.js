@@ -171,7 +171,7 @@ function Search() {
     <>
       <div
         tabIndex="-1"
-        className="mb-[15px] w-full min-w-[320px] md:w-[85%] p-[10px] bg-[#dedede] md:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2"
+        className="mt-[50px] lg:pb-[10px] sm:mt-[70px] lg:mt-0 mx-auto mb-[15px] w-full min-w-[320px] sm:w-[95%] px-[10px] pt-[10px] bg-[#dedede] sm:bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2"
       >
         <span
           onClick={(e) =>
@@ -210,7 +210,7 @@ function Search() {
               'Chọn tỉnh thành'
             )
           }
-          className="cursor-pointer flex-1 md:w-full lg:w-full"
+          className="cursor-pointer flex-1 w-full lg:w-full"
         >
           <SearchItem
             defaultText={'Toàn quốc'}
@@ -228,7 +228,7 @@ function Search() {
           onClick={(e) =>
             handShowPopup(e, prices, 'prices', 'Chọn giá ', 'Chọn theo giá ')
           }
-          className="cursor-pointer flex-1 md:w-full lg:w-full"
+          className="cursor-pointer flex-1 w-full lg:w-full"
         >
           <SearchItem
             defaultText={'Chọn giá'}
@@ -252,7 +252,7 @@ function Search() {
               'Chọn diện tích '
             )
           }
-          className="cursor-pointer flex-1 md:w-full lg:w-full"
+          className="cursor-pointer flex-1 w-full lg:w-full"
         >
           <SearchItem
             defaultText={'Chọn diện tích'}
@@ -269,7 +269,7 @@ function Search() {
         <button
           type="button"
           onClick={handleSearch}
-          className="md:w-full lg:w-full outline-none py-2 px-4 rounded-md  bg-[#ffba00] font-bold md:bg-secondary1 text-[13px] flex-1 flex items-center justify-center gap-2 text-black md:text-white"
+          className="w-full lg:w-full outline-none py-2 px-4 rounded-md  bg-[#ffba00] font-bold sm:bg-secondary1 text-[13px] flex-1 flex items-center justify-center gap-2 text-black sm:text-white"
         >
           <FiSearch />
           Tìm kiếm

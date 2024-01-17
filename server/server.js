@@ -1,30 +1,24 @@
 import express from 'express'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
-const schedule = require('node-schedule')
 dotenv.config()
 const app = express()
-const port = process.env.PORT || 8888
-const swaggerUI = require('swagger-ui-express')
-const docs = require('./doc')
 import initRoutes from './src/routes'
-import requireToken from './src/middleware/requireToken'
-import checkExpiredRefeshToken from './src/middleware/checkExpiredRefeshToken'
-import updateCategoryCount from './src/ultils/updateCategoryCount'
-import generateDate from './src/ultils/generateDate'
 import { checkOtpExpiredRunEvery1min } from './src/middleware/checkOtpExpired'
 import morgan from 'morgan'
 import { checkRechargeExpiredRunEvery1min } from './src/middleware/checkRechargeExpired'
-import createHttpError from 'http-errors'
-// const options = {
-//   key: fs.readFileSync(path.join(__dirname, 'src/ultils/key', 'localhost.key')),
-//   cert: fs.readFileSync(
-//     path.join(__dirname, 'src/ultils/key', 'localhost.crt'),
-//   ),
-// }
-// app.use(requireToken)
-app.use(morgan(':method :url :status :response-time ms - :res[content-length]'))
-const allowedOrigins = ['http://localhost:3000', 'https://sandbox.vnpayment.vn']
+let port = process.env.PORT_PRO
+
+app.use(
+  process.env.NODE_ENV === 'production' ? morgan('combined') : morgan('dev'),
+)
+const allowedOrigins = [
+  process.env.NODE_ENV === 'production'
+    ? process.env.CLIENT_PRO
+    : process.env.CLIENT_DEV,
+  'https://truongnguyen869.click',
+  'https://sandbox.vnpayment.vn',
+]
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -48,17 +42,7 @@ app.use('/', (req, res) => {
   res.send('Server is up and running')
 })
 
-// app.listen(portApi, () => {
-//   console.log(`Server swaggerUi running on http://localhost:${portApi}`)
-// })
-// const server = https.createServer(options, (req, res) => {
-//   res.writeHead(200, { 'Content-Type': 'text/plain' })
-//   res.end('Hello, world!')
-// })
-// app.listen(3030, () => {
-//   console.log('Server running on port 443')
-// })
 app.listen(port, () => {
   console.log('Server: http://localhost:' + port)
-  console.log('Client: ' + process.env.CLIENT_URL)
+  console.log('Client: ' + process.env.CLIENT_PRO)
 })
