@@ -30,6 +30,6 @@ jobs:
       - run: sudo docker compose down
       - run: chmod 600 ~/.ssh/githubaction
       - run: eval $(ssh-agent -s)
-      - run: ssh-add ~/.ssh/githubaction
+      - run: sudo ssh-add ~/.ssh/githubaction
       - run: git clone -b product git@github.com:truong0806/phong_tro.git
       - run: sudo DOCKER_BUILDKIT=0 docker-compose up --build -d
