@@ -29,7 +29,6 @@ jobs:
       - run: cd  /home/azureuser/phong_tro
       - run: sudo docker compose down
       - run: eval $(ssh-agent -s)
-      - run: chmod +x pass.sh
       - run: ssh-add ~/.ssh/githubkey
       - run: echo "${{ secrets.SSH_KEY }}"
       - run: git clone -b product git@github.com:truong0806/phong_tro.git
