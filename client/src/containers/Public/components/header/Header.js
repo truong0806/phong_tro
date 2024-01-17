@@ -51,7 +51,7 @@ function Header({ setLoading, loading }) {
         alt="logo"
         onClick={goHome}
       />
-      <MobiMenu/>
+      <MobiMenu />
       <div className="hidden  w-4/5 h-full cursor-pointer absolute  right-5 sm:flex items-center gap-1 ">
         {!isLoggedIn && (
           <div className=" cursor-pointer relative right-0 w-full flex items-center ">
@@ -78,7 +78,7 @@ function Header({ setLoading, loading }) {
               margin="absolute right-[130px] py-[20px]"
               fontW="font-normal text-[14px] h-[40px] hidden"
               IcBefor={AiOutlineUserAdd}
-              text="Đăng ký"
+              text="Đăng ký 1"
               textColor="text-black"
               bgcolor="bg-[#f5f5f5]"
               IcBeforSize="20"

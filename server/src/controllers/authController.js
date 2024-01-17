@@ -39,7 +39,6 @@ export const register = async (req, res) => {
 }
 export const login = async (req, res) => {
   const { phone, password } = req.body
-  console.log('🚀 ~ file: authController.js:38 ~ login ~ phone:', phone)
   try {
     if (!phone || !password)
       return res.status(400).json({ err: 1, msg: 'Missing input' })
@@ -79,17 +78,9 @@ export const refreshToken = async (req, res) => {
   try {
     verifyRefreshToken(refreshTokens)
       .then(({ tokenDetails }) => {
-        console.log(
-          '🚀 ~ file: authController.js:86 ~ .then ~ tokenDetails:',
-          tokenDetails,
-        )
         const accessToken = generateAccessToken(
           tokenDetails.id,
           tokenDetails.phone,
-        )
-        console.log(
-          '🚀 ~ file: authController.js:77 ~ .then ~ NewaccessToken:',
-          accessToken,
         )
         res.status(200).json({
           err: 0,
@@ -127,7 +118,6 @@ export const refreshTokenDelete = async (req, res) => {
     })
     res.status(200).json({ error: 0, message: 'Logged Out Sucessfully' })
   } catch (err) {
-    console.log(err)
     res.status(500).json({ err: 1, msg: 'Internal Server Error' })
   }
 }
@@ -136,7 +126,6 @@ export const changePassword = async (req, res) => {
     const response = await authService.changePasswordService(req.user, req.body)
     return res.status(200).json(response)
   } catch (err) {
-    console.log(err)
     res.status(500).json({ err: 1, msg: 'Internal Server Error' })
   }
 }

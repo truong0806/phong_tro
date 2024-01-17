@@ -2,13 +2,8 @@ import * as service from '../service/recharge'
 
 export const createPayment = async (req, res) => {
   const { id } = req.user
-  console.log('🚀 ~ file: rechangeController.js:5 ~ createPayment ~ id:', id)
   try {
     const response = await service.createPaymentService(id, req, res)
-    console.log(
-      '🚀 ~ file: rechangeController.js:8 ~ createPayment ~ response:',
-      response,
-    )
     return res.status(200).json(response)
   } catch (error) {
     return res.status(500).json({

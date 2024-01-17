@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 
 const InputText = ({
@@ -10,7 +11,7 @@ const InputText = ({
   typeInput,
   invalidFields,
   setInvalidFields,
-  haveLabel,
+  setDirty,
 }) => {
   const [input, setInput] = useState(value);
   function lowerCaseFirstLetter(str) {
@@ -34,7 +35,10 @@ const InputText = ({
               prev.filter((field) => field.name !== name)
             )
           }
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            setInput(e.target.value);
+            setDirty(e.target.value.lenth > 0 ? true : false);
+          }}
           onBlur={(e) => {
             setValue((prev) => ({
               ...prev,

@@ -47,8 +47,8 @@ export const getHistoryRecharge = (id) =>
 export const createPaymentService = (id, req, res) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('🚀 ~ file: rechange.js:12 ~ idUser:', id)
-      console.log('🚀 ~ file: rechange.js:8 ~ req:', req.body)
+      
+      
       process.env.TZ = 'Asia/Ho_Chi_Minh'
 
       let date = new Date()
@@ -94,7 +94,7 @@ export const createPaymentService = (id, req, res) =>
 
       let querystring = require('qs')
       let signData = querystring.stringify(vnp_Params, { encode: false })
-      console.log('🚀 ~ file: order.js:81 ~ signData:', signData)
+      
 
       let crypto = require('crypto')
       let hmac = crypto.createHmac('sha512', secretKey)
@@ -116,7 +116,6 @@ export const createPaymentService = (id, req, res) =>
         },
       })
       if (order) {
-        console.log('🚀 ~ file: recharge.js:80 ~ newPromise ~ vnpUrl:', vnpUrl)
         resolve({ err: 0, url: vnpUrl })
       }
     } catch (error) {
@@ -128,7 +127,7 @@ export const paymentResults = (req, res) =>
   new Promise(async (resolve, reject) => {
     try {
       let vnp_Params = req.query
-      console.log('🚀 ~ file: rechange.js:120 ~ vnp_Params:', vnp_Params)
+      
       let secureHash = vnp_Params['vnp_SecureHash']
 
       let rspCode = vnp_Params['vnp_ResponseCode']
@@ -147,7 +146,7 @@ export const paymentResults = (req, res) =>
 
       let order = await db.Order.findOne({ where: { id: checkOrderId } }) // Giả sử '0' là trạng thái khởi tạo giao dịch, chưa có IPN. Trạng thái này được lưu khi yêu cầu thanh toán chuyển hướng sang Cổng thanh toán VNPAY tại đầu khởi tạo đơn hàng.
       //let paymentStatus = '1'; // Giả sử '1' là trạng thái thành công bạn cập nhật sau IPN được gọi và trả kết quả về nó
-      console.log('🚀 ~ file: rechange.js:141 ~ paymentStatus:', order)
+      
       //let paymentStatus = '2'; // Giả sử '2' là trạng thái thất bại bạn cập nhật sau IPN được gọi và trả kết quả về nó
 
       // Mã đơn hàng "giá trị của vnp_TxnRef" VNPAY phản hồi tồn tại trong CSDL của bạn
@@ -172,17 +171,13 @@ export const paymentResults = (req, res) =>
                     },
                   },
                 )
-                console.log('🚀 ~ file: rechange.js:165 ~ res:', res)
+                
                 if (updated) {
                   const user = await db.User.findOne({
                     where: { id: order.userId },
                   })
-                  console.log(
-                    '🚀 ~ file: rechange.js:169 ~ order.userId:',
-                    order.userId,
-                  )
                   const balance = +user.balance
-                  console.log('🚀 ~ file: rechange.js:168 ~ user:', user)
+                  
                   if (user) {
                     const res1 = await db.User.update(
                       {

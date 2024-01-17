@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "npm run db:setup && nodemon --exec babel-node server.js",
-    "dev": "NODE_ENV=development npm run db:setup && nodemon --exec babel-node server.js",
+    "start": "NODE_ENV=production PORT=3030 npm run db:setup && nodemon --exec babel-node server.js",
+    "dev": "NODE_ENV=development PORT=3031 npm run db:setup && nodemon --exec babel-node server.js",
     "sequelize": "npx sequelize db:migrate",
     "test": "jest ",
     "doc": "nodemon Express.js",

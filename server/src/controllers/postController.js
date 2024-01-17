@@ -2,7 +2,6 @@ import * as service from '../service/post'
 
 export const getPost = async (req, res) => {
   const { query } = req.query
-  console.log('🚀 ~ file: postController.js:5 ~ getPost ~ query:', query)
   try {
     const response = await service.postService({ query })
     // res.header('Access-Control-Expose-Headers', 'Content-Range')
@@ -17,7 +16,6 @@ export const getPost = async (req, res) => {
 }
 export const getPostLimit = async (req, res) => {
   const { page, priceNumber, areaNumber, label, ...query } = req.query
-  console.log('🚀 ~ file: postController.js:18 ~ getPostLimit ~ query:', query)
   try {
     const response = await service.postLimitService(page, query, {
       label,
@@ -34,10 +32,6 @@ export const getPostLimit = async (req, res) => {
 }
 export const getPostWithLabel = async (req, res) => {
   const { label } = req.query
-  console.log(
-    '🚀 ~ file: postController.js:35 ~ getPostWithLabel ~ label:',
-    label,
-  )
   try {
     const response = await service.getPostWithLabelService(label)
     return res.status(200).json(response)
@@ -51,7 +45,6 @@ export const getPostWithLabel = async (req, res) => {
 export const getPostLimitAdmin = async (req, res) => {
   const { page, bonus, ...query } = req.query
   const { id } = req.user
-  console.log('🚀 ~ file: postController.js:34 ~ getPostLimitAdmin ~ id:', id)
   try {
     if (!id) {
       return res.status(400).json({
@@ -93,20 +86,11 @@ export const createPost = async (req, res) => {
 }
 export const deletePost = async (req, res) => {
   const { postId } = req.query
-  console.log(
-    '🚀 ~ file: postController.js:77 ~ deletePost ~ req.query:',
-    req.query,
-  )
-  console.log('🚀 ~ file: postController.js:76 ~ deletePost ~ id:', postId)
   try {
     if (!postId) {
       return res.status(400).json({ err: 1, msg: 'Missing input' })
     } else {
       const deleted = await service.postDeleteService(postId)
-      console.log(
-        '🚀 ~ file: postController.js:82 ~ deletePost ~ response:',
-        deleted,
-      )
       return res.status(200).json(deleted)
     }
   } catch (error) {
@@ -117,28 +101,14 @@ export const deletePost = async (req, res) => {
   }
 }
 export const updatePost = async (req, res) => {
-  const { postId, categoryCode, title, description, priceNumber, areaNumber } =
+  const { postId, title, description, priceNumber, areaNumber } =
     req.body
-  console.log(
-    '🚀 ~ file: postController.js:97 ~ updatePost ~ categoryCode:',
-    categoryCode,
-  )
-
-  console.log(
-    '🚀 ~ file: postController.js:98 ~ updatePost ~  req.body:',
-    req.query,
-  )
-  console.log('🚀 ~ file: postController.js:76 ~ deletePost ~ id:', postId)
 
   try {
     if (!title || !description || !priceNumber || !areaNumber || !postId) {
       return res.status(400).json({ err: 1, msg: 'Missing input' })
     } else {
       const response = await service.postUpdateService(postId, req.body)
-      console.log(
-        '🚀 ~ file: postController.js:82 ~ UpdatePost ~ response:',
-        response,
-      )
       return res.status(200).json(response)
     }
   } catch (error) {

@@ -69,7 +69,9 @@ const PopupSupport = () => {
                         <a
                           className="hover:underline"
                           target="_blank"
-                          href="tel:0902657123"
+                          href="tel:0902657123" 
+                          rel="noreferrer"
+                          
                         >
                           0902657123
                         </a>
@@ -79,7 +81,7 @@ const PopupSupport = () => {
                         <a
                           className="hover:underline"
                           target="_blank"
-                          href="https://zalo.me/0902657123"
+                          href="https://zalo.me/0902657123" rel="noreferrer"
                         >
                           0902657123
                         </a>
@@ -97,7 +99,7 @@ const PopupSupport = () => {
                         <a
                           className="hover:underline"
                           target="_blank"
-                          href="tel:0917686101"
+                          href="tel:0917686101" rel="noreferrer"
                         >
                           0917686101
                         </a>
@@ -107,7 +109,7 @@ const PopupSupport = () => {
                         <a
                           className="hover:underline"
                           target="_blank"
-                          href="https://zalo.me/0917686101"
+                          href="https://zalo.me/0917686101" rel="noreferrer"
                         >
                           0917686101
                         </a>

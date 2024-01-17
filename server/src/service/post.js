@@ -13,8 +13,6 @@ export const postService = ({ query }) =>
   new Promise(async (resolve, reject) => {
     try {
       const queries = {}
-      console.log('🚀 ~ file: post.js:16 ~ newPromise ~ query:', query)
-
       let order = [['star', 'DESC']] // Mặc định sắp xếp theo star giảm dần
 
       if (query === 'tinmoi') {
@@ -56,7 +54,6 @@ export const postLimitService = (
 ) =>
   new Promise(async (resolve, reject) => {
     try {
-      console.log('🚀 ~ file: post.js:57 ~ label:', label)
       let offset = !page || +page <= 1 ? 0 : +page - 1
       const queries = {
         ...query,
@@ -92,7 +89,6 @@ export const postLimitService = (
         as: 'categories',
         attributes: ['id', 'code', 'value'],
       }
-      console.log('🚀 ~ file: post.js:93 ~ newPromise ~ queries:', queries)
       const response = await db.Post.findAndCountAll({
         where: queries,
         raw: true,
@@ -119,7 +115,6 @@ export const postLimitService = (
         attributes: ['id', 'title', 'star', 'address', 'description'],
         distinct: true,
       })
-      // console.log('🚀 ~ file: post.js:126 ~ newPromise ~ response:', response)
       resolve({
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to find post',
@@ -229,7 +224,6 @@ export const postLimitAdminService = (page, query, id, bonus) =>
         ],
         distinct: true,
       })
-      console.log('🚀 ~ file: post.js:164 ~ newPromise ~ response:', response)
       response.rows.forEach((row) => {
         row.overviews.status = checkStatus(
           row?.overviews?.expire?.split(' ')[3],
@@ -247,7 +241,6 @@ export const postLimitAdminService = (page, query, id, bonus) =>
 
 export const postCreateService = (queries) =>
   new Promise(async (resolve, reject) => {
-    console.log(queries)
     try {
       const hashtag = generateHashtag()
       let attributesId = v4()
@@ -289,15 +282,12 @@ export const postCreateService = (queries) =>
       })
         .then(([attribute, created]) => {
           if (!created) {
-            console.log('Attribute ID:', attribute.id)
             attributesId = attribute.id
-            console.log('Attribute after:', attributesId)
           }
         })
         .catch((error) => {
           console.error('Error:', error)
         })
-      console.log(1)
       await db.Overview.findOrCreate({
         where: { id: overviewId },
         defaults: {
@@ -311,7 +301,6 @@ export const postCreateService = (queries) =>
           expire: currentDate.expireDay,
         },
       })
-      console.log(2)
       await db.Label.findOrCreate({
         where: { code: labelCode },
         defaults: {
@@ -319,7 +308,6 @@ export const postCreateService = (queries) =>
           value: label,
         },
       })
-      console.log(3)
       await db.Province.findOrCreate({
         where: {
           [Op.or]: [
@@ -334,7 +322,6 @@ export const postCreateService = (queries) =>
             : queries?.province?.replace('Tỉnh ', ''),
         },
       })
-      console.log(4)
       await db.Images.findOrCreate({
         where: { id: imagesId },
         defaults: {
@@ -342,7 +329,6 @@ export const postCreateService = (queries) =>
           image: JSON.stringify(queries.images) || '',
         },
       })
-      console.log(5)
       await db.Location.findOrCreate({
         where: { id: locationId },
         defaults: {
@@ -350,15 +336,6 @@ export const postCreateService = (queries) =>
           lng: queries.lng || '',
         },
       })
-      console.log(
-        '🚀 ~ file: post.js:254 ~ newPromise ~ JSON.stringify(queries.images):',
-        JSON.stringify(queries.images),
-      )
-      console.log(
-        '🚀 ~ file: post.js:259 ~ newPromise ~ queries.images:',
-        queries.images,
-      )
-      console.log(6)
       await db.Post.findOrCreate({
         where: {
           [Op.or]: [
@@ -454,7 +431,6 @@ export const postUpdateService = (postId, queries) =>
   new Promise(async (resolve, reject) => {
     try {
       const post = await db.Post.findOne({ where: { id: postId } })
-      console.log('🚀 ~ file: post.js:362 ~ newPromise ~ post:', post)
       let attributesId = v4()
       let overviewId = v4()
       const imagesId = v4()
@@ -501,10 +477,6 @@ export const postUpdateService = (postId, queries) =>
         {
           where: { id: post.overviewId },
         },
-      )
-      console.log(
-        '🚀 ~ file: post.js:412 ~ newPromise ~ queries?.images:',
-        queries?.images,
       )
       await db.Images.update(
         {

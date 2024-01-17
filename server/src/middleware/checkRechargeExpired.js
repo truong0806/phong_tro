@@ -22,7 +22,6 @@ export const checkRechargeExpiredRunEvery1min = schedule.scheduleJob(
           const updated = await recharge.update({
             status: '2',
           })
-          console.log('Update recharge id:::', updated.id)
         }),
       )
     } catch (error) {
