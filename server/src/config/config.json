@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "thanhtruong",
-    "password": "truong911",
+    "password": "truong911@",
     "database": "phongtro",
-    "host": "mysql_db",
+    "host": "phongtro.mysql.rds.aliyuncs.com",
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
