@@ -6,20 +6,20 @@ x-common-variables: &common-variables
   MYSQL_PASSWORD: truong911
 
 services:
-  mysql_db:
-    platform: linux/x86_64
-    image: mysql
-    restart: always
-    cap_add:
-      - SYS_NICE
-    volumes:
-      - db_data:/var/lib/mysql
-    ports:
-      - "9906:3306"
-    environment:
-      <<: *common-variables
-      MYSQL_ROOT_PASSWORD: truong911
-      MYSQL_HOST: localhost
+  # mysql_db:
+  #   platform: linux/x86_64
+  #   image: mysql
+  #   restart: always
+  #   cap_add:
+  #     - SYS_NICE
+  #   volumes:
+  #     - db_data:/var/lib/mysql
+  #   ports:
+  #     - "9906:3306"
+  #   environment:
+  #     <<: *common-variables
+  #     MYSQL_ROOT_PASSWORD: truong911
+  #     MYSQL_HOST: localhost
 
   nginx:
     image: nginx
@@ -48,16 +48,18 @@ services:
     build:
       dockerfile: Dockerfile
       context: "./server"
-    depends_on:
-      - mysql_db
+    # depends_on:
+    #   - mysql_db
     ports:
       - 3030:3030
     volumes:
       - /app/node_modules
       - ./server:/app
     environment:
-      <<: *common-variables
-      MYSQL_HOST_IP: mysql_db
+      DEV_DB_USERNAME: thanhtruong
+      DEV_DB_PASSWORD: truong911@
+      DEV_DB_NAME: phongtro
+      DB_HOST: phongtro.mysql.rds.aliyuncs.com
 
   client:
     # image: phongtro123.azurecr.io/client:latest
@@ -74,18 +76,18 @@ services:
       - /app/node_modules
       - ./client:/app
   
-  phpmyadmin:
-    depends_on:
-      - mysql_db
-    image: phpmyadmin
-    restart: always
-    ports:
-      - 8080:80
-    environment:
-      PMA_HOST: mysql_db
-      MYSQL_ROOT_PASSWORD: truong911
-volumes:
-  db_data:
+#   phpmyadmin:
+#     depends_on:
+#       - mysql_db
+#     image: phpmyadmin
+#     restart: always
+#     ports:
+#       - 8080:80
+#     environment:
+#       PMA_HOST: mysql_db
+#       MYSQL_ROOT_PASSWORD: truong911
+# volumes:
+#   db_data:
 
 
 

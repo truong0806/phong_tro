@@ -19,7 +19,7 @@ export const checkOtpExpiredRunEvery1min = schedule.scheduleJob(
       expiredOtps.length > 0 &&
         console.log('Expired OTPs deleted:', expiredOtps.length)
     } catch (error) {
-      console.error('Error deleting expired OTPs:', error)
+      console.error('Not found expired OTP')
     }
   },
 )

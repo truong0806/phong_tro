@@ -24,7 +24,11 @@ import createHttpError from 'http-errors'
 // }
 // app.use(requireToken)
 app.use(morgan(':method :url :status :response-time ms - :res[content-length]'))
-const allowedOrigins = ['https://phongtro.truongnguyen869.click', 'https://truongnguyen869.click','https://sandbox.vnpayment.vn']
+const allowedOrigins = [
+  'https://phongtro.truongnguyen869.click',
+  'https://truongnguyen869.click',
+  'https://sandbox.vnpayment.vn',
+]
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -44,9 +48,6 @@ checkRechargeExpiredRunEvery1min.invoke()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 initRoutes(app)
-app.use('/', (req, res) => {
-  res.send('Server is up and running')
-})
 
 // app.listen(portApi, () => {
 //   console.log(`Server swaggerUi running on http://localhost:${portApi}`)

@@ -26,7 +26,7 @@ export const checkRechargeExpiredRunEvery1min = schedule.scheduleJob(
         }),
       )
     } catch (error) {
-      console.error('Error deleting expired recharge:', error)
+      console.error('Not found recharge expired')
     }
   },
 )
