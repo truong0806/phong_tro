@@ -47,8 +47,6 @@ export const getHistoryRecharge = (id) =>
 export const createPaymentService = (id, req, res) =>
   new Promise(async (resolve, reject) => {
     try {
-      
-      
       process.env.TZ = 'Asia/Ho_Chi_Minh'
 
       let date = new Date()
@@ -94,7 +92,6 @@ export const createPaymentService = (id, req, res) =>
 
       let querystring = require('qs')
       let signData = querystring.stringify(vnp_Params, { encode: false })
-      
 
       let crypto = require('crypto')
       let hmac = crypto.createHmac('sha512', secretKey)
@@ -127,7 +124,7 @@ export const paymentResults = (req, res) =>
   new Promise(async (resolve, reject) => {
     try {
       let vnp_Params = req.query
-      
+
       let secureHash = vnp_Params['vnp_SecureHash']
 
       let rspCode = vnp_Params['vnp_ResponseCode']
@@ -146,7 +143,7 @@ export const paymentResults = (req, res) =>
 
       let order = await db.Order.findOne({ where: { id: checkOrderId } }) // Giả sử '0' là trạng thái khởi tạo giao dịch, chưa có IPN. Trạng thái này được lưu khi yêu cầu thanh toán chuyển hướng sang Cổng thanh toán VNPAY tại đầu khởi tạo đơn hàng.
       //let paymentStatus = '1'; // Giả sử '1' là trạng thái thành công bạn cập nhật sau IPN được gọi và trả kết quả về nó
-      
+
       //let paymentStatus = '2'; // Giả sử '2' là trạng thái thất bại bạn cập nhật sau IPN được gọi và trả kết quả về nó
 
       // Mã đơn hàng "giá trị của vnp_TxnRef" VNPAY phản hồi tồn tại trong CSDL của bạn
@@ -171,13 +168,13 @@ export const paymentResults = (req, res) =>
                     },
                   },
                 )
-                
+
                 if (updated) {
                   const user = await db.User.findOne({
                     where: { id: order.userId },
                   })
                   const balance = +user.balance
-                  
+
                   if (user) {
                     const res1 = await db.User.update(
                       {
@@ -196,7 +193,9 @@ export const paymentResults = (req, res) =>
                       //   url: 'http://localhost:3000/quan-ly/nap-tien',
                       // })
                       resolve(
-                        res.redirect('http://localhost:3000/quan-ly/nap-tien'),
+                        res.redirect(
+                          `${process.env.CLIENT_PRO}/quan-ly/nap-tien`,
+                        ),
                       )
                     }
                   }

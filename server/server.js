@@ -13,9 +13,7 @@ app.use(
   process.env.NODE_ENV === 'production' ? morgan('combined') : morgan('dev'),
 )
 const allowedOrigins = [
-  process.env.NODE_ENV === 'production'
-    ? process.env.CLIENT_PRO
-    : process.env.CLIENT_DEV,
+  'https://phongtro.truongnguyen869.click',
   'https://truongnguyen869.click',
   'https://sandbox.vnpayment.vn',
 ]
@@ -24,13 +22,13 @@ app.use(
     origin: function (origin, callback) {
       // Check if the origin is in the allowed list, or if it's a non-browser request
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true)
+        callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'))
+        callback(new Error('Not allowed by CORS'));
       }
     },
-  }),
-)
+  })
+);
 
 checkOtpExpiredRunEvery1min.invoke()
 checkRechargeExpiredRunEvery1min.invoke()
