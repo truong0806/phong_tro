@@ -115,14 +115,13 @@ jobs:
   #     - name: Push Image to Docker Hub
   #       run: docker push $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER
 
-  Deploy:
+  deploy:
     runs-on: self-hosted
 
     strategy:
       matrix:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
       - run: sudo chmod -R 777 /home/azureuser/Deploy
       - uses: actions/checkout@v3
