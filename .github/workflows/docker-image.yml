@@ -132,4 +132,4 @@ jobs:
           cache: 'npm'
       - run: cd  /home/workspace/deploy
       - run: sudo docker compose down
-      - run: sudo DOCKER_BUILDKIT=0 docker-compose up --build -d
+      - run: sudo docker compose up -d
