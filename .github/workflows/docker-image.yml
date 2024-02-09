@@ -123,13 +123,13 @@ jobs:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
-      - run: sudo chmod -R 777 /home/azureuser/Deploy
+      - run: sudo chmod -R 777 /home/workspace/deploy
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: cd  /home/azureuser/Deploy
+      - run: cd  /home/workspace/deploy
       - run: sudo docker compose down
       - run: sudo DOCKER_BUILDKIT=0 docker-compose up --build -d
