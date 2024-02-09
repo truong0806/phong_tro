@@ -116,13 +116,28 @@ jobs:
         run: docker push $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [build-client, build-api, build-nginx-phongtro]
     strategy:
       matrix:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SSH into VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          script: |
+            echo "Hello, world!"
+            
+      - name: Docker Compose 
       - run: sudo chmod -R 777 /home/workspace/deploy
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
