@@ -124,6 +124,6 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
-      
+
       - name: Connect to server
-        run: ssh -i ${{ secrets.PRIVATE_KEY }} ${{ secrets.USERNAME xx@xxx secrets.HOST }}
+        run: ssh -i ${{ secrets.PRIVATE_KEY }} ${USERNAME}@${HOST}
