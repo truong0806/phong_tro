@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "thanhtruong",
+    "username": "hajnsfng_phongtro",
     "password": "truong911",
-    "database": "phongtro",
-    "host": "mysql_db",
+    "database": "hajnsfng_phongtro",
+    "host": "free02.123host.vn",
+    "port": 2222,
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
@@ -18,10 +19,11 @@
     "timezone": "+07:00"
   },
   "production": {
-    "username": "thanhtruong",
+    "username": "hajnsfng_phongtro",
     "password": "truong911",
-    "database": "phongtro",
-    "host": "mysql_db",
+    "database": "hajnsfng_phongtro",
+    "host": "free02.123host.vn",
+    "port": 2222,
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"

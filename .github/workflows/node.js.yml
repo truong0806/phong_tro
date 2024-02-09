@@ -1,13 +1,15 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI/CD phongtro
+name: Deploy App
 
 on:
-  push:
-    branches: ['product']
-  pull_request:
-    branches: ['product']
+  workflow_run:
+    workflows: ["Built and Push Docker Image"]
+    branches:
+      - product
+    types:
+      - completed
 
 jobs:
   build:
@@ -26,8 +28,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: cd  /home/azureuser/phong_tro
+      - run: cd  /home/azureuser
       - run: sudo docker compose down
-      - run: git fetch
-      - run: git pull
       - run: sudo DOCKER_BUILDKIT=0 docker-compose up --build -d
