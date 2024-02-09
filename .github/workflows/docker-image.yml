@@ -128,3 +128,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             echo "Hello, world!"
+            cd /home/workspace/deploy
+            docker-compose down
+            docker-compose up -d
