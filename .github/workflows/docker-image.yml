@@ -117,7 +117,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
-
+    needs: [build-client, build-api, build-nginx-phongtro]
     strategy:
       matrix:
         node-version: [18.x]
