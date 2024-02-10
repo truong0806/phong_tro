@@ -10,9 +10,9 @@ jobs:
   build-client:
     runs-on: ubuntu-latest
     env:
-      DOCKER_REPOSITORY: thanhtruong869 # name of Docker Hub ID
-      IMAGE_NAME: client-phongtro-app
-      IMAGE_TAG: ${{ github.run_number }} # $GITHUB_RUN_NUMBER
+        DOCKER_REPOSITORY: thanhtruong869 # name of Docker Hub ID
+        IMAGE_NAME: client-phongtro-app
+        IMAGE_TAG: ${{ github.run_number }} # $GITHUB_RUN_NUMBER
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -45,9 +45,9 @@ jobs:
   build-api:
     runs-on: ubuntu-latest
     env:
-      DOCKER_REPOSITORY: thanhtruong869 # name of Docker Hub ID
-      IMAGE_NAME: api-phongtro-app
-      IMAGE_TAG: ${{ github.run_number }} # $GITHUB_RUN_NUMBER
+        DOCKER_REPOSITORY: thanhtruong869 # name of Docker Hub ID
+        IMAGE_NAME: api-phongtro-app
+        IMAGE_TAG: ${{ github.run_number }} # $GITHUB_RUN_NUMBER
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -81,9 +81,9 @@ jobs:
   build-nginx-phongtro:
     runs-on: ubuntu-latest
     env:
-      DOCKER_REPOSITORY: thanhtruong869 # name of Docker Hub ID
-      IMAGE_NAME: nginx-phongtro-app
-      IMAGE_TAG: ${{ github.run_number }} # $GITHUB_RUN_NUMBER
+        DOCKER_REPOSITORY: thanhtruong869 # name of Docker Hub ID
+        IMAGE_NAME: nginx-phongtro-app
+        IMAGE_TAG: ${{ github.run_number }} # $GITHUB_RUN_NUMBER
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
