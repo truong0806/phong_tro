@@ -1,5 +1,4 @@
-version: '3.8'
-
+version: "3.8"
 x-common-variables: &common-variables
   MYSQL_DATABASE: phongtro
   MYSQL_USER: thanhtruong
@@ -26,7 +25,6 @@ services:
     container_name: nginx
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/pma.conf:/etc/nginx/pma/pma.conf
       - ./nginx/ssl:/etc/nginx/ssl
     ports:
       - 443:443
@@ -43,37 +41,22 @@ services:
       - api:api
 
   api:
-    # image: phongtro123.azurecr.io/api:latest
+    image: thanhtruong869/api-phongtro-app:latest
     restart: always
-    build:
-      dockerfile: Dockerfile
-      context: "./server"
-    depends_on:
-      - mysql_db
     ports:
       - 3030:3030
-    volumes:
-      - /app/node_modules
-      - ./server:/app
-    environment:
-      <<: *common-variables
-      MYSQL_HOST_IP: mysql_db
+    depends_on:
+      - mysql_db
 
   client:
-    # image: phongtro123.azurecr.io/client:latest
+    image: thanhtruong869/client-phongtro-app:latest
     restart: always
     depends_on:
       - api
     stdin_open: true
     ports:
       - 3000:3000
-    build:
-      dockerfile: Dockerfile
-      context: ./client
-    volumes:
-      - /app/node_modules
-      - ./client:/app
-  
+      
   phpmyadmin:
     depends_on:
       - mysql_db
@@ -86,6 +69,3 @@ services:
       MYSQL_ROOT_PASSWORD: truong911
 volumes:
   db_data:
-
-
-
