@@ -37,7 +37,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 initRoutes(app)
 app.use('/', (req, res) => {
-  res.send('Server is up and running')
+  res.send('Server is running')
 })
 
 app.listen(port, () => {
