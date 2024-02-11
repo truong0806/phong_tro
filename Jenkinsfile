@@ -6,26 +6,13 @@ pipeline {
                 git branch: 'product', credentialsId: 'ef5456f4-36c7-4d6c-a550-1c19048c0d9f', url: 'https://github.com/truong0806/phong_tro.git'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'pwd'
-            }
-        }
-    
         stage('Build and Push Docker Images') {
             steps {
-                script {
-                    // Build and push Docker images from client folder
-                    docker.withRegistry('https://registry.hub.docker.com', "docker-hub") {
-                        docker.build("thanhtruong869/api-phongtroclient:latest", "./client")
-                        docker.image("thanhtruong869/api-phongtroclient:latest").push()
-                    }
-
-                    // Build and push Docker images from server folder
-                    docker.withRegistry('https://registry.hub.docker.com', "docker-hub") {
-                        docker.build("thanhtruong869/api-phongtro-server:latest", "./server")
-                        docker.image("thanhtruong869/api-phongtro-server:latest").push()
-                    }
+                withDockerRegistry(credentialsId: 'docker-hub', url: 'https://registry.hub.docker.com') {
+                  sh "docker build ./client/ --file ./client/Dockerfile --tag thanhtruong869/client-phongtro-app:latest"
+                  sh "docker push thanhtruong869/client-phongtro-app:latest" 
+                  sh "docker build ./server/ --file ./server/Dockerfile --tag thanhtruong869/api-phongtro-app:latest"
+                  sh "docker push thanhtruong869/api-phongtro-app:latest"
                 }
             }
         }
