@@ -12,23 +12,23 @@ pipeline {
             }
         }
     
-        // stage('Build and Push Docker Images') {
-        //     steps {
-        //         script {
-        //             // Build and push Docker images from client folder
-        //             docker.withRegistry(thanhtruong869, "docker-hub") {
-        //                 docker.build("thanhtruong869/api-phongtroclient:latest", "./client")
-        //                 docker.image("thanhtruong869/api-phongtroclient:latest").push()
-        //             }
+        stage('Build and Push Docker Images') {
+            steps {
+                script {
+                    // Build and push Docker images from client folder
+                    docker.withRegistry('https://registry.hub.docker.com', "docker-hub") {
+                        docker.build("thanhtruong869/api-phongtroclient:latest", "./client")
+                        docker.image("thanhtruong869/api-phongtroclient:latest").push()
+                    }
 
-        //             // Build and push Docker images from server folder
-        //             docker.withRegistry(thanhtruong869, "docker-hub") {
-        //                 docker.build("thanhtruong869/api-phongtro-server:latest", "./server")
-        //                 docker.image("thanhtruong869/api-phongtro-server:latest").push()
-        //             }
-        //         }
-        //     }
-        // }
+                    // Build and push Docker images from server folder
+                    docker.withRegistry('https://registry.hub.docker.com', "docker-hub") {
+                        docker.build("thanhtruong869/api-phongtro-server:latest", "./server")
+                        docker.image("thanhtruong869/api-phongtro-server:latest").push()
+                    }
+                }
+            }
+        }
         
     }
 }
