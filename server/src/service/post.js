@@ -167,7 +167,7 @@ export const postLimitAdminService = (page, query, id, bonus) =>
       let offset = !page || +page <= 1 ? 0 : +page - 1
       const queries = {
         ...query,
-        userId: id,
+        // userId: id,
       }
       let overview = {
         model: db.Overview,
