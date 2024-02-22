@@ -1,5 +1,4 @@
 name: Built and Push Docker Image
-
 on:
   push:
     branches: ['product']
