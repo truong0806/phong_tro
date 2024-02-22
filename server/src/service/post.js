@@ -33,10 +33,9 @@ export const postService = ({ query }) =>
             attributes: ['id', 'bonus', 'code', 'create', 'expire', 'target'],
           },
         ],
-        order: order, // Sử dụng order tùy thuộc vào giá trị của query
-        limit: query === 'tinmoi' ? 10 : 3, // Giới hạn số lượng bài đăng trả về
+        order: order, 
+        limit: query === 'tinmoi' ? 10 : 3, 
       })
-
       resolve({
         err: response ? 0 : 1,
         msg: response ? 'OK' : 'Failed to get post',
