@@ -30,35 +30,8 @@ instance.interceptors.response.use(
     return res;
   },
   async (err) => {
-    const originalConfig = err.config;
-    if (originalConfig?.url !== '/auth/login' && err.response) {
-      if (err.response.status === 401 && !originalConfig._retry) {
-        originalConfig._retry = true;
-        try {
-          const rs = TokenService.getLocalRefreshToken();
-          const response = await instance.post('auth/refreshtoken', {
-            refreshTokens: rs,
-          });
-         if (response?.data.err === 1) {
-            Swal.fire(
-              'Oop !',
-              'Phiên đăng nhập đã hết hạn, hãy đăng nhập lại',
-              'info'
-            ).then(() => {
-              dispatch(actions.clearMsgUser());
-              dispatch(actions.logout());
-              window.location.href = `/${path.LOGIN}`;
-            });
-          } else {
-            dispatch(actions.setAuthTokens(response.data.accessToken, rs));
-          }
-
-          return instance(originalConfig);
-        } catch (_error) {
-          return Promise.reject(_error);
-        }
-      }
-    }
+ 
+   
     if (err) {
       if (err.response.status === 404) {
         // Xử lý lỗi 404: chuyển hướng đến trang 404

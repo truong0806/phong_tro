@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "thanhtruong",
-    "password": "truong911@",
+    "username": "root",
+    "password": "truong911",
     "database": "phongtro",
-    "host": "phongtro.mysql.rds.aliyuncs.com",
+    "host": "localhost",
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
@@ -18,10 +18,10 @@
     "timezone": "+07:00"
   },
   "production": {
-    "username": "thanhtruong",
-    "password": "truong911@",
+     "username": "root",
+    "password": "truong911",
     "database": "phongtro",
-    "host": "phongtro.mysql.rds.aliyuncs.com",
+    "host": "localhost",
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
