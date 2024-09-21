@@ -1,0 +1,1487 @@
+swagger: '2.0'
+info:
+  contact: {}
+  description: The backend was built using Node.js and Express, providing a RESTful API to support a frontend built with React and Redux. The platform allowed users to search for available properties, view and manage post detailed information, user authentication and authorization, edit profile, Integrated VNPay payment gateway to facilitate secure and convenient payment processing for customers
+  title: phongtro
+  version: 1.0.0
+host: phongtro.truongnguyen869.click
+basePath: /
+schemes:
+  - https
+paths:
+  /api/v1/auth/changepassword:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              oldPassword:
+                example: admin1
+                type: string
+              password:
+                example: admin
+                type: string
+            type: object
+      responses:
+        '200':
+          description: Change Password (Password must be at least 6 characters)
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 1
+                type: number
+              msg:
+                example: Password must be at least 6 characters
+                type: string
+            type: object
+      tags:
+        - Auth
+      description: Change Password
+      operationId: changePassword
+      summary: Change Password
+  /api/v1/auth/login:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: password
+          type: string
+        - in: formData
+          name: phone
+          type: string
+      responses:
+        '200':
+          description: login (Password is wrong)
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              accessToken:
+                example: null
+                x-nullable: true
+              err:
+                example: 2
+                type: number
+              msg:
+                example: Password is wrong
+                type: string
+              refreshToken:
+                example: null
+                x-nullable: true
+              user:
+                example: null
+                x-nullable: true
+            type: object
+        '400':
+          description: login (Missing input)
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Length:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 1
+                type: number
+              msg:
+                example: Missing input
+                type: string
+            type: object
+      tags:
+        - Auth
+      description: login
+      operationId: login
+      summary: login
+  /api/v1/auth/refreshtoken:
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - in: formData
+          name: refreshToken
+          type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Auth
+      description: Refresh token
+      operationId: refreshToken1
+      summary: Refresh token
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: refreshTokens
+          type: string
+      responses:
+        '200':
+          description: Refresh token (Token expired)
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Length:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 1
+                type: number
+              msg:
+                example: Token expired
+                type: string
+            type: object
+      tags:
+        - Auth
+      description: Refresh token
+      operationId: refreshToken
+      summary: Refresh token
+  /api/v1/auth/register:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - in: formData
+          name: name
+          type: string
+        - in: formData
+          name: password
+          type: string
+        - in: formData
+          name: phone
+          type: string
+      responses:
+        '200':
+          description: register (Phone number has been aldready used !)
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              accessToken:
+                example: null
+                x-nullable: true
+              err:
+                example: 2
+                type: number
+              msg:
+                example: Phone number has been aldready used !
+                type: string
+              refreshToken:
+                example: null
+                x-nullable: true
+            type: object
+        '400':
+          description: register (Password must be at least 6 characters)
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Length:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 1
+                type: number
+              msg:
+                example: Password must be at least 6 characters
+                type: string
+            type: object
+      tags:
+        - Auth
+      description: register
+      operationId: register
+      summary: register
+  /api/v1/category/all:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Get all category
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 0
+                type: number
+              msg:
+                example: OK
+                type: string
+              response:
+                example:
+                  - code: CTPT
+                    count: 0
+                    createdAt: '2024-01-03T11:07:03.000Z'
+                    header: Cho Thuê Phòng Trọ, Giá Rẻ, Tiện Nghi, Mới Nhất 2023
+                    id: 1
+                    subheader: Cho thuê phòng trọ - Kênh thông tin số 1 về phòng trọ giá rẻ, phòng trọ sinh viên, phòng trọ cao cấp mới nhất năm 2023. Tất cả nhà trọ cho thuê giá tốt nhất tại Việt Nam.
+                    updatedAt: '2024-01-03T11:07:03.000Z'
+                    value: Cho thuê phòng trọ
+                  - code: CTMB
+                    count: 0
+                    createdAt: '2024-01-03T11:07:03.000Z'
+                    header: Cho Thuê Mặt Bằng, Cửa Hàng + Kiot Giá Rẻ, Mới Nhất 2023
+                    id: 2
+                    subheader: Cho thuê mặt bằng - Kênh thông tin mặt bằng giá rẻ, cửa hàng, kiot số 1 Việt Nam. Tìm mặt bằng kinh doanh, buôn bán nhỏ, gần chợ tất cả có tại web phongtro123.com
+                    updatedAt: '2024-01-03T11:07:03.000Z'
+                    value: Cho thuê mặt bằng
+                  - code: CTCH
+                    count: 0
+                    createdAt: '2024-01-03T11:07:04.000Z'
+                    header: Cho Thuê Căn Hộ Chung Cư, Giá Rẻ, Mới Nhất 2023
+                    id: 3
+                    subheader: 'Cho thuê căn hộ - Kênh đăng tin cho thuê căn hộ số 1: giá rẻ, chính chủ, đầy đủ tiện nghi. Cho thuê chung cư với nhiều mức giá, diện tích cho thuê khác nhau.'
+                    updatedAt: '2024-01-03T11:07:04.000Z'
+                    value: Cho thuê căn hộ
+                  - code: NCT
+                    count: 0
+                    createdAt: '2024-01-03T11:07:04.000Z'
+                    header: Cho Thuê Nhà Nguyên Căn, Giá Rẻ, Chính Chủ, Mới Nhất 2023
+                    id: 4
+                    subheader: 'Cho thuê nhà nguyên căn - Kênh đăng tin cho thuê nhà số 1: giá rẻ, chính chủ, miễn trung gian, đầy đủ tiện nghi, mức giá, diện tích cho thuê khác nhau.'
+                    updatedAt: '2024-01-03T11:07:04.000Z'
+                    value: Nhà cho thuê
+                  - code: TNOG
+                    count: 0
+                    createdAt: '2024-01-03T11:07:04.000Z'
+                    header: Tìm Người Ở Ghép, Tìm Nam Ở Ghép, Tìm Nữ Ở Ghép, Mới Nhất 2023
+                    id: 5
+                    subheader: Tìm người ở ghép, tìm nam ở ghép, tìm nữ ở ghép, share phòng trọ, tìm chỗ ở ghép cùng, tìm bạn ở ghép, xin ở ghép mới nhất 2023. Đăng tin ở ghép hiệu quả, nhanh chóng nhất...
+                    updatedAt: '2024-01-03T11:07:04.000Z'
+                    value: Tìm người ở ghép
+                items:
+                  properties:
+                    code:
+                      example: CTPT
+                      type: string
+                    count:
+                      example: 0
+                      type: number
+                    createdAt:
+                      example: '2024-01-03T11:07:03.000Z'
+                      type: string
+                    header:
+                      example: Cho Thuê Phòng Trọ, Giá Rẻ, Tiện Nghi, Mới Nhất 2023
+                      type: string
+                    id:
+                      example: 1
+                      type: number
+                    subheader:
+                      example: Cho thuê phòng trọ - Kênh thông tin số 1 về phòng trọ giá rẻ, phòng trọ sinh viên, phòng trọ cao cấp mới nhất năm 2023. Tất cả nhà trọ cho thuê giá tốt nhất tại Việt Nam.
+                      type: string
+                    updatedAt:
+                      example: '2024-01-03T11:07:03.000Z'
+                      type: string
+                    value:
+                      example: Cho thuê phòng trọ
+                      type: string
+                  type: object
+                type: array
+            type: object
+      description: Get all category
+      operationId: getAllCategory
+      summary: Get all category
+  /api/v1/label/all:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Get label
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 0
+                type: number
+              msg:
+                example: OK
+                type: string
+              response:
+                example:
+                  - value: Cho thuê căn hộ dịch vụ Quận Tân Bình
+                  - value: Cho thuê căn hộ mini Quận Tân Bình
+                  - value: Cho thuê nhà Quận 11
+                  - value: Cho thuê căn hộ Quận 7
+                  - value: Cho thuê nhà Thị Xã Sơn Tây
+                  - value: Cho thuê phòng trọ Quận Tân Bình
+                  - value: Tìm người ở ghép Quận Tân Bình
+                  - value: Cho thuê mặt bằng Huyện Tân Thành
+                  - value: Tìm người ở ghép Quận Bình Thạnh
+                  - value: Cho thuê mặt bằng Quận Thanh Xuân
+                  - value: Cho thuê căn hộ dịch vụ Quận Phú Nhuận
+                  - value: Cho thuê nhà Quận Thủ Đức
+                  - value: Tìm người ở ghép Quận Gò Vấp
+                  - value: Tìm người ở ghép Quận 5
+                  - value: Cho thuê mặt bằng Quận Gò Vấp
+                  - value: Tìm người ở ghép Quận 12
+                  - value: Cho thuê nhà Quận 2
+                  - value: Cho thuê mặt bằng Quận Hà Đông
+                  - value: Cho thuê nhà Huyện Hóc Môn
+                  - value: Cho thuê mặt bằng Quận Đống Đa
+                  - value: Cho thuê căn hộ mini Quận Bình Thạnh
+                  - value: Cho thuê mặt bằng Quận Hải Châu
+                  - value: Cho thuê phòng trọ Quận Bình Thạnh
+                  - value: Cho thuê nhà Quận Hoàng Mai
+                  - value: Cho thuê mặt bằng Quận Bình Thạnh
+                  - value: Cho thuê nhà Huyện Nhà Bè
+                  - value: Cho thuê nhà Quận 10
+                  - value: Cho thuê mặt bằng Quận Thủ Đức
+                  - value: Cho thuê phòng trọ Quận Gò Vấp
+                  - value: Tìm người ở ghép Huyện Nhà Bè
+                  - value: Cho thuê mặt bằng Huyện Dĩ An
+                  - value: Cho thuê căn hộ Quận Gò Vấp
+                  - value: Tìm người ở ghép Quận Thủ Đức
+                  - value: Cho thuê mặt bằng Huyện Củ Chi
+                  - value: Cho thuê mặt bằng Quận 1
+                  - value: Cho thuê nhà Quận Bình Tân
+                  - value: Cho thuê nhà Huyện Thanh Trì
+                  - value: Cho thuê căn hộ Quận 1
+                  - value: Cho thuê phòng trọ Quận 10
+                  - value: Cho thuê phòng trọ Quận Phú Nhuận
+                  - value: Cho thuê nhà Quận Hoàn Kiếm
+                  - value: Cho thuê nhà Quận Hải Châu
+                  - value: Cho thuê phòng trọ Quận Thủ Đức
+                  - value: Cho thuê căn hộ mini Quận 7
+                  - value: Cho thuê phòng trọ Quận 7
+                  - value: Tìm người ở ghép Quận Bắc Từ Liêm
+                  - value: Cho thuê căn hộ Quận Tân Bình
+                  - value: Cho thuê căn hộ dịch vụ Quận 3
+                  - value: Cho thuê nhà Quận Bình Thạnh
+                  - value: Cho thuê mặt bằng Tỉnh Lạng Sơn
+                items:
+                  properties:
+                    value:
+                      example: Cho thuê căn hộ dịch vụ Quận Tân Bình
+                      type: string
+                  type: object
+                type: array
+            type: object
+      description: Get label
+      operationId: getLabel
+      summary: Get label
+  /api/v1/post/create:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              address:
+                example: 24 Đường Sơn Kỳ, Phường Sơn Kỳ, Quận Tân Phú, Hồ Chí Minh
+                type: string
+              areaNumber:
+                example: 150m2
+                type: string
+              categoryCode:
+                example: NCT
+                type: string
+              description:
+                example: abcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdefabcdef abcdef abcdef abcdef
+                type: string
+              images:
+                example:
+                  - https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg
+                  - https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg
+                  - https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg
+                  - https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg
+                  - https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg
+                items:
+                  example: https://res.cloudinary.com/dyafotrxw/image/upload/v1694267122/post/ns0vem723226xkcv1vtj.jpg
+                  type: string
+                type: array
+              label:
+                example: Cho thuê nhà quận Tân Phú
+                type: string
+              lat:
+                example: '10.897718231493357'
+                type: string
+              lng:
+                example: '106.77148958873619'
+                type: string
+              priceNumber:
+                example: 30 triệu/tháng
+                type: string
+              target:
+                example: nam
+                type: string
+              title:
+                example: CHO THUÊ PHÒNG TRỌ MỚI CHÍNH CHỦ, GIẢM GIÁ, QUẬN TÂN PHÚ - GẦN BÊN TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THỰC PHẨM
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Post
+      description: Create Post
+      operationId: createPost
+      summary: Create Post
+  /api/v1/post/delete:
+    delete:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: postId
+          type: string
+        - in: body
+          name: body
+          schema:
+            properties:
+              postId:
+                example: 08f9cc0f-28c3-457d-9630-3486fa2f7672
+                type: string
+            type: object
+      responses:
+        '200':
+          description: Delete Post
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              deleted:
+                example: 1
+                type: number
+              err:
+                example: 0
+                type: number
+              msg:
+                example: Delete post success
+                type: string
+            type: object
+      tags:
+        - Post
+      description: Delete Post
+      operationId: deletePost
+      summary: Delete Post
+  /api/v1/post/getpostwithlabel:
+    get:
+      consumes:
+        - text/plain
+      parameters:
+        - in: query
+          name: label
+          type: string
+        - in: body
+          name: body
+          schema:
+            format: binary
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Post
+      description: Get Post With Label
+      operationId: getPostWithLabel
+      summary: Get Post With Label
+  /api/v1/post/limit:
+    get:
+      consumes:
+        - text/plain
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: page
+          type: string
+        - in: body
+          name: body
+          schema:
+            format: binary
+            type: string
+      responses:
+        '200':
+          description: Get Post Limit
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 0
+                type: number
+              msg:
+                example: OK
+                type: string
+              response:
+                properties:
+                  count:
+                    example: 100
+                    type: number
+                  rows:
+                    example:
+                      - address: 'Địa chỉ: 101 Đường số 8, Phường Linh Đông, Quận Thủ Đức, Hồ Chí Minh'
+                        attributes:
+                          acreage: 30m2
+                          hashtag: '603516'
+                          price: 1.2 triệu/tháng
+                          published: Hôm nay
+                        categories:
+                          code: CTPT
+                          id: 1
+                          value: Cho thuê phòng trọ
+                        description: '["> Giá trọn gói, không phát sinh bất cứ khoản phí nào nữa.","*** Miễn phí :","- Để xe máy ( Để xe trong sân cực rộng và thoáng)","- Điện, nước.","- Wifi, rác, vệ sinh - Nước uống. ....","*** Nội thất gồm : - Giường, Chăn, Ga, Gối, Nệm, đèn đọc sách, bàn học, gương trang điểm, tủ quần áo ( mỗi người 2 tủ ), tủ tài chính, tất cả đều là hàng cao cấp ( các bạn xem hình là hiểu, hình thật 100% ). Có phòng nấu ăn và phòng sinh hoạt chung - Máy lạnh, máy giặt, tivi, tủ lạnh ( mỗi phòng 1 tủ để trong phòng ) không thiếu bất cứ thứ gì. - Khoá Vân tay 2 chiều. - Tolet riêng trong phòng ( có nước nóng năng lượng mặt trời ). ***** Đặc biệt: Dịch vụ vệ sinh miễn phí Tollet , phòng, hành lang 2 lần 1 tuần. Cảm ơn các bạn đã xem tin. Nếu xem phòng vui lòng call :","Mr Bình. 0936.456.678.","Địa chỉ : 101 Đường số 8, Phường Linh Đông. Q. Thủ Đức"]'
+                        id: 1fc532d5-f59a-4ca0-ad38-61c773e7f3be
+                        images:
+                          image: '["https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/507ce676-0681-4fe6-bac3-55a7eef70fc3_1656803285.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/f6480ee4-11fc-453b-882b-25f03a2bd77e_1656803279.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/1b8acfac-f2ef-40c1-962a-d3343d29aca6_1656803278.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/1af022b3-1701-4eae-9135-0c56a334a015_1656803279.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/e1eab3db-98f4-480c-9047-7fb50da53b9b_1656803280.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/80c5cde0-03f7-4b49-ad17-f6f00463154d_1656803280.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/8c08f95c-3ec2-438d-8099-701bf3790788_1656803281.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/f8974d57-4ac5-4e4f-b133-b333efbda094_1656803283.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/507ce676-0681-4fe6-bac3-55a7eef70fc3_1656803285.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/f6480ee4-11fc-453b-882b-25f03a2bd77e_1656803279.jpg"]'
+                        labels:
+                          value: Cho thuê phòng trọ Quận Thủ Đức
+                        overviews:
+                          area: Cho thuê phòng trọ Hồ Chí Minh
+                          bonus: Tin VIP nổi bật
+                          code: '#603516'
+                          create: Thứ 7, 10:40 25/03/2023
+                          expire: Chủ Nhật, 10:40 02/04/2023
+                          target: Tất cả
+                          type: Phòng trọ, nhà trọ
+                        star: '5'
+                        title: Cực phẩm KTX, Phòng trọ, Sang, Xịn, Mịn Giá siêu rẻ tại Thủ Đức
+                        users:
+                          name: Mr Bình
+                          phone: '0936456678'
+                          zalo: '0936456678'
+                      - address: 'Địa chỉ: 622 Đường Cộng Hòa, Phường 13, Quận Tân Bình, Hồ Chí Minh'
+                        attributes:
+                          acreage: 28m2
+                          hashtag: '615010'
+                          price: 3.7 triệu/tháng
+                          published: Hôm nay
+                        categories:
+                          code: CTPT
+                          id: 1
+                          value: Cho thuê phòng trọ
+                        description: '["Phòng trọ Tân Bình, View kính cửa sổ lớn thoáng mát","Địa chỉ: Cộng Hoà, F13, Tân Bình.","Gần Etown, gần trường Học Viện Hàng Không, Hufi, Cao đẳng Y Khoa Phạm Ngọc Thạch…","Phòng có sẵn máy lạnh (Nội thất Linh Hoạt)","Thang máy, hầm xe, khoá vân tay","Cho nuôi thú cưng,giờ giấc tự do.","Zalo/Call: 0937001068 gặp An để được hỗ trợ."]'
+                        id: 04a67d14-13a5-413b-9089-a0a3c4873e9e
+                        images:
+                          image: '["https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/ee760c62-23f2-4fc9-945f-f5930b73e0a7_1675815689.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/3f877f77-cc80-410d-abf9-7dbad47ac788_1675815679.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/bd60c386-1eab-4a7a-bc49-76667191c53b_1675815679.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/b8e6d3fe-7094-468b-aa0d-fdb041d7a602_1675815681.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/5e15e594-072e-4a51-a14f-ace08f759612_1675815681.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/bb8c0ef6-cbc6-4555-be75-7032ffc53f44_1675815683.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/cd5a0713-81bb-4811-9d8f-27ff6d548880_1675815683.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/90852f43-7128-4f42-8806-06188872072f_1675815685.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/c28fde1d-f6d6-4450-a79e-927172e27bc6_1675815685.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/8fcabd66-bc7e-46c1-9496-93549737b78e_1675815686.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/f36b9755-8f29-4ecd-9f17-a581c0cdb0bf_1675815687.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/ee760c62-23f2-4fc9-945f-f5930b73e0a7_1675815689.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/08/3f877f77-cc80-410d-abf9-7dbad47ac788_1675815679.jpg"]'
+                        labels:
+                          value: Cho thuê phòng trọ Quận Tân Bình
+                        overviews:
+                          area: Cho thuê phòng trọ Hồ Chí Minh
+                          bonus: Tin VIP nổi bật
+                          code: '#615010'
+                          create: Thứ 2, 08:27 27/03/2023
+                          expire: Thứ 2, 08:27 10/04/2023
+                          target: Tất cả
+                          type: Phòng trọ, nhà trọ
+                        star: '5'
+                        title: Phòng trọ Tân Bình - Gác cao 1m8 - View Sân bay
+                        users:
+                          name: Lư Bảo An
+                          phone: '0937001068'
+                          zalo: '0937001068'
+                      - address: 'Địa chỉ: 50 Đường Phạm Cự Lượng, Phường 2, Quận Tân Bình, Hồ Chí Minh'
+                        attributes:
+                          acreage: 20m2
+                          hashtag: '314706'
+                          price: 4.5 triệu/tháng
+                          published: Hôm nay
+                        categories:
+                          code: CTPT
+                          id: 1
+                          value: Cho thuê phòng trọ
+                        description: '["️️️Giảm 500k cho tháng tiền phòng đầu tiên đối với các khách hàng ký hợp đồng trong tháng 4 /2023️️️","Cách CV Hoàng Văn Thụ 150m","Cách ĐH Tài Chính Marketing 300m","Diện tích 20m2","Mức giá: 4tr5","Địa chỉ: Phạm Cự Lượng, P2, Tân Bình.","Mô tả:","- Có máy lạnh","- Có kệ bếp và tủ bếp","- Có gác","- Toilet riêng","- Có một bàn ăn 2 ghế.","Ngoài ra còn có thang máy, hầm giữ xe, camera, quản lí và bảo vệ 24/7.","Ra vào bằng cửa khóa vân tay.","Anh chị liên hệ Phòng trọ Be Home để xem phòng nhé."]'
+                        id: 54dfd9f3-867c-4546-afcd-9372df16385d
+                        images:
+                          image: '["https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/29143c07-17fe-49d5-abbb-335f03d7f70f_1676116623.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/11/18/photo-2020-06-20-10-52-15_1605671242.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/11/18/104018414-269897154235460-5378317653105971591-n_1605671251.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/58ccc7d0-3ccf-4c96-b2b2-b6ea115bf296_1676116615.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/56a71028-25ad-43ca-a65a-ca9ca3bcaf6b_1676116613.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/552111b0-5d36-4ebf-968a-2849f39e9bd5_1676116613.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/e66d1c0f-c577-40f5-a9e2-e52ad1e2fb5a_1676116615.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/3872fb09-e3e1-44ad-8a95-a1132649be66_1676116617.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/e37d6343-cade-4a52-b8c8-4953d2fd39fc_1676116618.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/c64cbfd6-fe5a-489b-8672-75561716c514_1676116620.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/c2ee0cd5-dc98-4be7-a5c6-2108ed157b7a_1676116620.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/14923175-99e2-49d4-9ce9-7398a5054b8a_1676116622.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/02/11/29143c07-17fe-49d5-abbb-335f03d7f70f_1676116623.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/11/18/photo-2020-06-20-10-52-15_1605671242.jpg"]'
+                        labels:
+                          value: Cho thuê phòng trọ Quận Tân Bình
+                        overviews:
+                          area: Cho thuê phòng trọ Hồ Chí Minh
+                          bonus: Tin VIP nổi bật
+                          code: '#314706'
+                          create: Thứ 4, 13:06 29/03/2023
+                          expire: Thứ 2, 13:06 03/04/2023
+                          target: Tất cả
+                          type: Phòng trọ, nhà trọ
+                        star: '5'
+                        title: Phòng cho thuê FULL Nội Thất, giờ giấc tự do ngay công viên Hoàng Văn Thụ. Siêu ưu đãi mùa dịch
+                        users:
+                          name: Be Home
+                          phone: '0899455299'
+                          zalo: '0899455299'
+                      - address: 'Địa chỉ: 17 30, Phường Tân Phong, Quận 7, Hồ Chí Minh'
+                        attributes:
+                          acreage: 35m2
+                          hashtag: '620272'
+                          price: 5.8 triệu/tháng
+                          published: 12 giờ trước
+                        categories:
+                          code: CTPT
+                          id: 1
+                          value: Cho thuê phòng trọ
+                        description: '["Phòng trọ được trang bị đầy đủ nội thất bao gồm: giường, tủ, bàn làm việc, tủ quần áo siêu rộng, máy lạnh, máy giặt, máy nước nóng, kệ bếp và phòng tắm riêng khép kín.","Vị trí phòng trọ tại số 17 đường số 30, phường Tân Phong, Quận 7, nằm trong khu vực đắc địa, dân trí cao và có thể di chuyển bằng ô tô vào tận cửa. Gần các tiện ích như công viên, siêu thị BHX, quán cafe Cộng và chỉ cách Lotte Mart 500m, Đại học Tôn Đức Thắng 0,7km, Đại học Nguyễn Tất Thành 1km và Đại học Marketing 2km. Từ địa điểm này, bạn có thể di chuyển đến các quận trung tâm như Quận 1, Quận 4, Quận 5... chỉ trong vòng 5 phút.","Liên hệ để được tư vấn và xem phòng chi tiết qua Zalo số 0832232232.","Địa chỉ: Số 17 đường số 30, phường Tân Phong, Quận 7."]'
+                        id: 1573491e-d400-4552-a8ef-5375f397cb2e
+                        images:
+                          image: '["https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/25/e810139d-a127-444f-9c4d-a27565ffd81a_1679704593.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/25/c27e736b-45a7-4b5e-aa66-0c953bb07c1b_1679704575.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/25/8061327b-d1ea-43b2-a6c4-ec9c4a172d21_1679704576.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/25/3be40c71-187a-4789-9724-4b3300775d7c_1679704581.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/25/28152273-6775-404e-837a-d74903762ac8_1679704586.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/25/e810139d-a127-444f-9c4d-a27565ffd81a_1679704593.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/25/c27e736b-45a7-4b5e-aa66-0c953bb07c1b_1679704575.jpg"]'
+                        labels:
+                          value: Cho thuê phòng trọ Quận 7
+                        overviews:
+                          area: Cho thuê phòng trọ Hồ Chí Minh
+                          bonus: Tin VIP nổi bật
+                          code: '#620272'
+                          create: Thứ 6, 04:09 31/03/2023
+                          expire: Thứ 4, 04:09 05/04/2023
+                          target: Tất cả
+                          type: Phòng trọ, nhà trọ
+                        star: '5'
+                        title: Phòng ban công 35m2 full nội thất cạnh Lotte Q7
+                        users:
+                          name: Phòng Trọ Đẹp Q7
+                          phone: '0832232232'
+                          zalo: '0832232232'
+                      - address: 'Địa chỉ: 54/37 Đường Bạch Đằng, Phường 2, Quận Tân Bình, Hồ Chí Minh'
+                        attributes:
+                          acreage: 18m2
+                          hashtag: '619880'
+                          price: 4.4 triệu/tháng
+                          published: Hôm nay
+                        categories:
+                          code: CTPT
+                          id: 1
+                          value: Cho thuê phòng trọ
+                        description: '["Vị trí đắc địa ngay trung tâm quận Tân Bình","Muốn có phòng đẹp như hình alo nhấc máy gọi liền 1900 5049","Đầy đủ các tiện ích: máy lạnh / máy nóng lạnh / kệ bếp / nước uống / máy giặt / cây xanh ghế đá …","Liên hệ thuê phòng: 0963.548.594 hoặc zalo 08.2737.2737"]'
+                        id: 414e78b6-031d-429a-9eb7-bd8d40b8b54f
+                        images:
+                          image: '["https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4199570082120-36b07ea78b26fc5be5a21ac3c89fad28_1679396364.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4173426408294-c534ad81dd94abb382aad2560ce2304a_1679396354.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4173426414905-8b9e9b02e515d3c4bddb649ce89a9f5b_1679396354.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4173426434190-7b00ad3db5c5daaf15a8b412b8f1660b_1679396356.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4173426471497-52fa33863e26c9aa97d90cd7080519e7_1679396356.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4173426494322-7801726c7506cb53d3fec901eedc7604_1679396358.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4173439666746-58dce2a57d2d609d9a3c06d8df6b195c_1679396358.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4173439677379-f3180ac4a433f5306cc55555ebc28bdc_1679396360.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4199570069673-4bb7ccf0e5281a523c5d4fe4daa42632_1679396360.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4199570071023-2856900f211301bb102c55f06a934f96_1679396362.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4199570071982-f13e26a6fbb2e47a13fb8baf4f588060_1679396362.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4199570081162-cbe6c291dd35a68330430fa832d0a1c5_1679396364.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4199570082120-36b07ea78b26fc5be5a21ac3c89fad28_1679396364.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2023/03/21/z4173426408294-c534ad81dd94abb382aad2560ce2304a_1679396354.jpg"]'
+                        labels:
+                          value: Cho thuê phòng trọ Quận Tân Bình
+                        overviews:
+                          area: Cho thuê phòng trọ Hồ Chí Minh
+                          bonus: Tin VIP nổi bật
+                          code: '#619880'
+                          create: Thứ 3, 18:00 21/03/2023
+                          expire: Thứ 5, 18:00 20/04/2023
+                          target: Tất cả
+                          type: Phòng trọ, nhà trọ
+                        star: '5'
+                        title: PHÒNG ĐẸP - GIÁ CỰC TỐT CHỈ TỪ 4TR4
+                        users:
+                          name: NHÀ TRỌ SẠCH SẼ
+                          phone: '0827372737'
+                          zalo: '0827372737'
+                      - address: 'Địa chỉ: Đường số 61, Phường Thạnh Mỹ Lợi, Quận 2, Hồ Chí Minh'
+                        attributes:
+                          acreage: 32m2
+                          hashtag: '315940'
+                          price: 5 triệu/tháng
+                          published: Hôm nay
+                        categories:
+                          code: CTPT
+                          id: 1
+                          value: Cho thuê phòng trọ
+                        description: '["Mình cần cho thuê phòng mới diện tích 32m2, giá 5tr/tháng có sẵn nội thất cơ bản","Địa chỉ: 17 Đường số 61, Phường Thạnh Mỹ Lợi, Quận 2, Hồ Chí Minh","- Giá cho thuê: 5tr/tháng","- Có sẵn nội thất cơ bản: Giường, Tủ, Máy lạnh","- Có chỗ nấu ăn","- Có hầm để xe miễn phí","- Có thang máy.","- Điện: 4k/kg, nước 20k/khối","- Internet free siêu mạnh."]'
+                        id: 3a0c7693-1b7b-4a5b-a56b-9e15a40ecb14
+                        images:
+                          image: '["https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/12/08/z2216753993358-ff7e2006d4cd4a467f857d6f5d213f4c_1607398735.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/12/08/z2216753992450-eb92e4fa0fc7f15a039bf4a9ea4a0856_1607398734.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/12/08/z2216753993029-a568cfe7e11d8abc207c55af1d00959e_1607398734.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/12/08/z2216753993030-b68a21b545652284e3e01ebbc16b0fea_1607398735.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/12/08/z2216753993031-a9610882a286070e5af48bf10e119696_1607398735.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/12/08/z2216753993358-ff7e2006d4cd4a467f857d6f5d213f4c_1607398735.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2020/12/08/z2216753992450-eb92e4fa0fc7f15a039bf4a9ea4a0856_1607398734.jpg"]'
+                        labels:
+                          value: Cho thuê phòng trọ Quận 7
+                        overviews:
+                          area: Cho thuê phòng trọ Hồ Chí Minh
+                          bonus: Tin VIP nổi bật
+                          code: '#315940'
+                          create: Thứ 3, 15:39 07/03/2023
+                          expire: Thứ 5, 15:39 06/04/2023
+                          target: Tất cả
+                          type: Phòng trọ, nhà trọ
+                        star: '5'
+                        title: Cho thuê phòng mới diện tích 32m2, giá 5tr/tháng có sẵn nội thất cơ bản
+                        users:
+                          name: Khánh
+                          phone: '0989997054'
+                          zalo: '0989997054'
+                    items:
+                      properties:
+                        address:
+                          example: 'Địa chỉ: 101 Đường số 8, Phường Linh Đông, Quận Thủ Đức, Hồ Chí Minh'
+                          type: string
+                        attributes:
+                          properties:
+                            acreage:
+                              example: 30m2
+                              type: string
+                            hashtag:
+                              example: '603516'
+                              type: string
+                            price:
+                              example: 1.2 triệu/tháng
+                              type: string
+                            published:
+                              example: Hôm nay
+                              type: string
+                          type: object
+                        categories:
+                          properties:
+                            code:
+                              example: CTPT
+                              type: string
+                            id:
+                              example: 1
+                              type: number
+                            value:
+                              example: Cho thuê phòng trọ
+                              type: string
+                          type: object
+                        description:
+                          example: '["> Giá trọn gói, không phát sinh bất cứ khoản phí nào nữa.","*** Miễn phí :","- Để xe máy ( Để xe trong sân cực rộng và thoáng)","- Điện, nước.","- Wifi, rác, vệ sinh - Nước uống. ....","*** Nội thất gồm : - Giường, Chăn, Ga, Gối, Nệm, đèn đọc sách, bàn học, gương trang điểm, tủ quần áo ( mỗi người 2 tủ ), tủ tài chính, tất cả đều là hàng cao cấp ( các bạn xem hình là hiểu, hình thật 100% ). Có phòng nấu ăn và phòng sinh hoạt chung - Máy lạnh, máy giặt, tivi, tủ lạnh ( mỗi phòng 1 tủ để trong phòng ) không thiếu bất cứ thứ gì. - Khoá Vân tay 2 chiều. - Tolet riêng trong phòng ( có nước nóng năng lượng mặt trời ). ***** Đặc biệt: Dịch vụ vệ sinh miễn phí Tollet , phòng, hành lang 2 lần 1 tuần. Cảm ơn các bạn đã xem tin. Nếu xem phòng vui lòng call :","Mr Bình. 0936.456.678.","Địa chỉ : 101 Đường số 8, Phường Linh Đông. Q. Thủ Đức"]'
+                          type: string
+                        id:
+                          example: 1fc532d5-f59a-4ca0-ad38-61c773e7f3be
+                          type: string
+                        images:
+                          properties:
+                            image:
+                              example: '["https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/507ce676-0681-4fe6-bac3-55a7eef70fc3_1656803285.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/f6480ee4-11fc-453b-882b-25f03a2bd77e_1656803279.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/1b8acfac-f2ef-40c1-962a-d3343d29aca6_1656803278.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/1af022b3-1701-4eae-9135-0c56a334a015_1656803279.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/e1eab3db-98f4-480c-9047-7fb50da53b9b_1656803280.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/80c5cde0-03f7-4b49-ad17-f6f00463154d_1656803280.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/8c08f95c-3ec2-438d-8099-701bf3790788_1656803281.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/f8974d57-4ac5-4e4f-b133-b333efbda094_1656803283.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/507ce676-0681-4fe6-bac3-55a7eef70fc3_1656803285.jpg","https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/07/03/f6480ee4-11fc-453b-882b-25f03a2bd77e_1656803279.jpg"]'
+                              type: string
+                          type: object
+                        labels:
+                          properties:
+                            value:
+                              example: Cho thuê phòng trọ Quận Thủ Đức
+                              type: string
+                          type: object
+                        overviews:
+                          properties:
+                            area:
+                              example: Cho thuê phòng trọ Hồ Chí Minh
+                              type: string
+                            bonus:
+                              example: Tin VIP nổi bật
+                              type: string
+                            code:
+                              example: '#603516'
+                              type: string
+                            create:
+                              example: Thứ 7, 10:40 25/03/2023
+                              type: string
+                            expire:
+                              example: Chủ Nhật, 10:40 02/04/2023
+                              type: string
+                            target:
+                              example: Tất cả
+                              type: string
+                            type:
+                              example: Phòng trọ, nhà trọ
+                              type: string
+                          type: object
+                        star:
+                          example: '5'
+                          type: string
+                        title:
+                          example: Cực phẩm KTX, Phòng trọ, Sang, Xịn, Mịn Giá siêu rẻ tại Thủ Đức
+                          type: string
+                        users:
+                          properties:
+                            name:
+                              example: Mr Bình
+                              type: string
+                            phone:
+                              example: '0936456678'
+                              type: string
+                            zalo:
+                              example: '0936456678'
+                              type: string
+                          type: object
+                      type: object
+                    type: array
+                type: object
+            type: object
+      tags:
+        - Post
+      description: Get Post Limit
+      operationId: getPostLimit
+      summary: Get Post Limit
+  /api/v1/post/limit-admin:
+    get:
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: label
+          type: string
+      responses:
+        '200':
+          description: Get Post Admin
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 0
+                type: number
+              msg:
+                example: OK
+                type: string
+              response:
+                properties:
+                  count:
+                    example: 0
+                    type: number
+                  rows:
+                    example: []
+                    items: {}
+                    type: array
+                type: object
+            type: object
+      tags:
+        - Post
+      description: Get Post Admin
+      operationId: getPostAdmin
+      summary: Get Post Admin
+  /api/v1/post/update:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              apartmentNumber:
+                example: 50/27/31
+                type: string
+              areaNumber:
+                example: '200'
+                type: string
+              categoryCode:
+                example: CTCH
+                type: string
+              categoryName:
+                example: Cho thuê mặt bằng
+                type: string
+              description:
+                example: Nhà cho thuế quận Bình Tân Nhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình TânNhà cho thuế quận Bình Tân
+                type: string
+              district:
+                example: Bình Tân
+                type: string
+              images:
+                example: ''
+                type: string
+              postId:
+                example: 02ce50da-f467-4871-a15e-75c4b80bb462
+                type: string
+              priceNumber:
+                example: '9000000'
+                type: string
+              province:
+                example: Tỉnh Lạng Sơn
+                type: string
+              street:
+                example: Nguyễn Quý Yêm 2
+                type: string
+              target:
+                example: Nữ
+                type: string
+              title:
+                example: Nhà cho thuế quận Bình Tân
+                type: string
+              ward:
+                example: An Lạc
+                type: string
+            type: object
+      responses:
+        '200':
+          description: Update Post
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Length:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 0
+                type: number
+              msg:
+                example: Update post success
+                type: string
+            type: object
+      tags:
+        - Post
+      description: Update Post
+      operationId: updatePost
+      summary: Update Post
+  /api/v1/price/all:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Get price
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 0
+                type: number
+              msg:
+                example: OK
+                type: string
+              response:
+                example:
+                  - code: OU1R
+                    value: Dưới 1 triệu
+                  - code: 1U2R
+                    value: Từ 1 - 2 triệu
+                  - code: 2U3R
+                    value: Từ 2 - 3 triệu
+                  - code: 3U5R
+                    value: Từ 3 - 5 triệu
+                  - code: 5U7R
+                    value: Từ 5 - 7 triệu
+                  - code: 7U0R
+                    value: Từ 7 - 10 triệu
+                  - code: 1E1R
+                    value: Từ 10 - 15 triệu
+                  - code: EU5R
+                    value: Trên 15 triệu
+                items:
+                  properties:
+                    code:
+                      example: OU1R
+                      type: string
+                    value:
+                      example: Dưới 1 triệu
+                      type: string
+                  type: object
+                type: array
+            type: object
+      description: Get price
+      operationId: getPrice
+      summary: Get price
+  /api/v1/recharge/historyrecharge:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: History Recharge
+      operationId: historyRecharge
+      summary: History Recharge
+  /api/v1/user/changephonenumber:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              newPhone:
+                example: '0938134094'
+                type: string
+              otp:
+                example: '234567'
+                type: string
+              phone:
+                example: '0938134092'
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: Change Phone Number
+      operationId: changePhoneNumber
+      summary: Change Phone Number
+  /api/v1/user/edituserinfo:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              avatar:
+                example: https://www.w3schools.com/w3images/avatar2.png
+                type: string
+              email:
+                example: thanhtruong090123@gmail.com
+                type: string
+              fbUrl:
+                example: https://www.facebook.com/profile.php?id=100007829624293
+                type: string
+              name:
+                example: Nguyễn Thanh Trường
+                type: string
+              zalo:
+                example: '0912345678'
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: Edit Profile
+      operationId: editProfile
+      summary: Edit Profile
+  /api/v1/user/getUserCurrent:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Get User
+          headers:
+            CF-Cache-Status:
+              type: string
+            CF-RAY:
+              type: string
+            Connection:
+              type: string
+            Content-Encoding:
+              type: string
+            Date:
+              type: string
+            ETag:
+              type: string
+            NEL:
+              type: string
+            Report-To:
+              type: string
+            Server:
+              type: string
+            Transfer-Encoding:
+              type: string
+            Vary:
+              type: string
+            X-Powered-By:
+              type: string
+            alt-svc:
+              type: string
+          schema:
+            properties:
+              err:
+                example: 0
+                type: number
+              msg:
+                example: OK
+                type: string
+              response:
+                properties:
+                  avatar:
+                    example: https://www.w3schools.com/w3images/avatar2.png
+                    type: string
+                  balance:
+                    example: null
+                    x-nullable: true
+                  email:
+                    example: thanhtruong090123@gmail.com
+                    type: string
+                  fbUrl:
+                    example: https://www.facebook.com/profile.php?id=100007829624293
+                    type: string
+                  id:
+                    example: 668c137d-75e4-4fa6-b191-3e7ba3ab0c9c
+                    type: string
+                  name:
+                    example: Nguyễn Thanh Trường
+                    type: string
+                  phone:
+                    example: '0912345678'
+                    type: string
+                  zalo:
+                    example: '0912345678'
+                    type: string
+                type: object
+            type: object
+      tags:
+        - Users
+      description: Get User
+      operationId: getUser
+      summary: Get User
+  /api/v1/user/sendotp:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              newPhone:
+                example: '0938134094'
+                type: string
+              phone:
+                example: '0912345678'
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: Send Otp
+      operationId: sendOtp
+      summary: Send Otp
+  /api/v1/user/verifyotp:
+    post:
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              otp:
+                example: '218297'
+                type: string
+              phone:
+                example: '0938134094'
+                type: string
+            type: object
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Users
+      description: Verify Otp
+      operationId: verifyOtp
+      summary: Verify Otp
+tags:
+  - name: Auth
+  - name: Post
+  - name: Users
